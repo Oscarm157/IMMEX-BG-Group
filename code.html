@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>BG Consulting x BMS | Foro IMMEX Cumplimiento 360°</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed": "#001c3b",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-variant": "#e0e3e6",
+                        "on-background": "#191c1e",
+                        "on-primary-fixed": "#071b37",
+                        "secondary-container": "#b6d0fd",
+                        "outline-variant": "#c5c6ce",
+                        "surface-dim": "#d8dadd",
+                        "on-tertiary-container": "#808e00",
+                        "tertiary": "#050700",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "surface": "#f7f9fc",
+                        "primary-container": "#0b1f3b",
+                        "on-tertiary-fixed-variant": "#434b00",
+                        "on-primary-fixed-variant": "#364765",
+                        "inverse-surface": "#2d3133",
+                        "on-surface-variant": "#44474d",
+                        "on-secondary-fixed-variant": "#2d476d",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#4d5f7e",
+                        "surface-container-high": "#e6e8eb",
+                        "primary": "#000616",
+                        "secondary": "#465f86",
+                        "secondary-fixed-dim": "#aec8f4",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#e6ff00",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#1a1e00",
+                        "tertiary-container": "#1d2100",
+                        "on-secondary-container": "#3f5980",
+                        "error": "#ba1a1a",
+                        "surface-container": "#eceef1",
+                        "surface-container-highest": "#e0e3e6",
+                        "outline": "#75777e",
+                        "tertiary-fixed-dim": "#bdd200",
+                        "background": "#f7f9fc",
+                        "on-primary-container": "#7587a9",
+                        "inverse-primary": "#b5c7eb",
+                        "on-surface": "#191c1e",
+                        "surface-container-low": "#f2f4f7",
+                        "primary-fixed-dim": "#b5c7eb",
+                        "surface-bright": "#f7f9fc",
+                        "inverse-on-surface": "#eff1f4",
+                        "on-primary": "#ffffff",
+                        "secondary-fixed": "#d5e3ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        body { font-family: 'Inter', sans-serif; background-color: #f7f9fc; }
+        .asymmetric-gradient {
+            background: linear-gradient(135deg, #000616 0%, #0b1f3b 100%);
+        }
+        .concentric-ring {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .concentric-ring:hover {
+            transform: scale(1.02);
+            filter: brightness(1.2);
+        }
+        .framework-shadow {
+            box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="text-on-surface selection:bg-tertiary-fixed selection:text-on-tertiary-fixed">
+<!-- Hero Section -->
+<header class="relative min-h-[921px] flex flex-col overflow-hidden asymmetric-gradient text-on-primary">
+<!-- Logo Area -->
+<div class="relative z-20 w-full px-8 py-12">
+<div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
+<div class="flex flex-wrap items-center justify-center md:justify-start gap-16">
+<img alt="BG Consulting Group" class="h-16 md:h-20 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0uhHfwg1NBDmJdQOEcu6I5eXse77jfWFpPZ4gNCFxDIA7E3KUvNGiMMW2wO-HPcP2aQJFqeHbKNwD6u1c9p26Fj1SzzP8LUbRG_R8CNzkdiwGUFISyAtIUJh59f_9Zz7bd6mzuBtuLdawfeZ19R1caIlDzrUoPWBf5ifQ7xclSUclC0SkryUc1X_tOb_OfGImb0U3V0YX1gvC1B_IWqAOpch6zq_EopFRYyRb2FBDkMlghY4VZZ6kH55bWlgrZMzOao6_qvTSH_ShhM"/>
+<div class="h-16 w-px bg-white/20 hidden md:block"></div>
+<img alt="BMS Software" class="h-14 md:h-16 object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugcQxuwRNIzWkQtNwJUAM0L7ZiZh63Fy3AWSz22_QLfn18szOXjsl3IASBGk4i0SJKRjwiU5lGIpYpjBmdwHylzuG8qg7MXJIv63T_UwwofGgtZ_YPLRU6jgOgPZ5sJ37iv4vjiru65zEGT0SiPHBuq4jWQAAlIkduwZSf0Yk3VQ4PZFgzCsHSwj__A327jc5rSM3UIqTSnaTgdV0NWhroFo5fGcAC-Jed3Pj_c6cpYb9J1QnR3YEm_LQipFtaMSFPbpj45tZaFM0o"/>
+</div>
+</div>
+</div>
+<div class="absolute inset-0 opacity-20 pointer-events-none">
+<img alt="" class="w-full h-full object-cover" data-alt="Modern architectural glass facade of a high-end corporate skyscraper with sharp geometric patterns and deep blue reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCVOv9eA8uOKvGpTr6bOi-q11FNxC95cw-TdIyGr7HaFOG2QhUIAOnYCnV3aK3Ze50_7uWsd_99dZtehTOGxBGT3Umhjrbw4rwyUNsi8mEH3fE-myBzLiH6lySkBqXcRkbbL4DuhkY0wetRQCGXP-p1aERXw-07gyaxyuN1gwOyp2kV-XQmifINDmwzssbqL3XGL8N_fXoi0dM3krsZt9dHdZLKQE-WCuOHYIwz-aNiVgyHZepxBXpRfBO7DaNVoADa2ckQv2wmiJR9"/>
+</div>
+<div class="container mx-auto px-8 relative z-10 flex-grow flex items-center">
+<div class="max-w-4xl space-y-8 py-24">
+<div class="flex items-center gap-6 mb-12">
+<div class="bg-white/10 backdrop-blur px-4 py-2 rounded-sm border-l-4 border-tertiary-fixed">
+<span class="text-sm font-bold tracking-[0.2em] uppercase text-tertiary-fixed">BG Consulting Group</span>
+</div>
+<div class="h-px w-8 bg-on-primary-container/30"></div>
+<div class="bg-white/10 backdrop-blur px-4 py-2 rounded-sm">
+<span class="text-sm font-bold tracking-[0.2em] uppercase text-white/70">BMS Software</span>
+</div>
+</div>
+<h1 class="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-tight">
+                ¿Asistes al <span class="text-tertiary-fixed">Foro IMMEX</span> Cumplimiento 360°?
+            </h1>
+<p class="text-xl md:text-2xl text-on-primary-container max-w-2xl font-light leading-relaxed">
+                Lleva el cumplimiento más allá del discurso: implementación real con respaldo legal y tecnología especializada.
+            </p>
+<div class="pt-8">
+<a class="inline-flex items-center gap-4 bg-tertiary-fixed text-on-tertiary-fixed px-10 py-5 rounded-sm font-extrabold text-lg transition-transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-tertiary-fixed/10" href="#contact">
+                    Solicitar diagnóstico sin costo
+                    <span class="material-symbols-outlined">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+</header>
+<!-- Partnership Section -->
+<section class="py-32 bg-surface text-on-surface" id="partnership">
+<div class="container mx-auto px-8">
+<div class="text-center mb-24 max-w-3xl mx-auto space-y-4">
+<span class="text-tertiary-fixed-dim font-bold tracking-[0.3em] uppercase text-sm">Sinergia Estratégica</span>
+<h2 class="text-4xl md:text-6xl font-black tracking-tight text-primary">Combinamos estrategia legal con ejecución tecnológica</h2>
+</div>
+<div class="grid md:grid-cols-2 gap-0 border-t border-outline-variant/15">
+<!-- BG Side -->
+<div class="p-12 md:p-20 bg-surface-container-lowest border-r border-outline-variant/15 hover:bg-primary-container transition-colors duration-500 group">
+<div class="mb-12 h-10">
+<img alt="BG Consulting Group" class="h-full object-contain group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/ADBb0uhHfwg1NBDmJdQOEcu6I5eXse77jfWFpPZ4gNCFxDIA7E3KUvNGiMMW2wO-HPcP2aQJFqeHbKNwD6u1c9p26Fj1SzzP8LUbRG_R8CNzkdiwGUFISyAtIUJh59f_9Zz7bd6mzuBtuLdawfeZ19R1caIlDzrUoPWBf5ifQ7xclSUclC0SkryUc1X_tOb_OfGImb0U3V0YX1gvC1B_IWqAOpch6zq_EopFRYyRb2FBDkMlghY4VZZ6kH55bWlgrZMzOao6_qvTSH_ShhM"/>
+</div>
+<h3 class="text-tertiary-fixed text-sm font-black tracking-[0.4em] uppercase mb-12">BG Consulting</h3>
+<ul class="space-y-8">
+<li class="flex items-start gap-6">
+<span class="material-symbols-outlined text-4xl group-hover:text-tertiary-fixed text-primary-container transition-colors">gavel</span>
+<div>
+<h4 class="text-2xl font-bold mb-2 group-hover:text-white">Defensa Fiscal</h4>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80">Protección legal integral ante autoridades fiscales y aduaneras.</p>
+</div>
+</li>
+<li class="flex items-start gap-6">
+<span class="material-symbols-outlined text-4xl group-hover:text-tertiary-fixed text-primary-container transition-colors">verified_user</span>
+<div>
+<h4 class="text-2xl font-bold mb-2 group-hover:text-white">Compliance Normativo</h4>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80">Estructuración de protocolos de cumplimiento bajo estándares internacionales.</p>
+</div>
+</li>
+<li class="flex items-start gap-6">
+<span class="material-symbols-outlined text-4xl group-hover:text-tertiary-fixed text-primary-container transition-colors">strategy</span>
+<div>
+<h4 class="text-2xl font-bold mb-2 group-hover:text-white">Estrategia Legal</h4>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80">Consultoría de alto nivel para blindar la operación corporativa.</p>
+</div>
+</li>
+</ul>
+</div>
+<!-- BMS Side -->
+<div class="p-12 md:p-20 bg-surface-container-low hover:bg-primary-container transition-colors duration-500 group">
+<div class="mb-12 h-10 items-center">
+<img alt="BMS Software" class="h-full object-contain group-hover:scale-105 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida/ADBb0ugcQxuwRNIzWkQtNwJUAM0L7ZiZh63Fy3AWSz22_QLfn18szOXjsl3IASBGk4i0SJKRjwiU5lGIpYpjBmdwHylzuG8qg7MXJIv63T_UwwofGgtZ_YPLRU6jgOgPZ5sJ37iv4vjiru65zEGT0SiPHBuq4jWQAAlIkduwZSf0Yk3VQ4PZFgzCsHSwj__A327jc5rSM3UIqTSnaTgdV0NWhroFo5fGcAC-Jed3Pj_c6cpYb9J1QnR3YEm_LQipFtaMSFPbpj45tZaFM0o"/>
+</div>
+<h3 class="text-tertiary-fixed text-sm font-black tracking-[0.4em] uppercase mb-12">BMS Software</h3>
+<ul class="space-y-8">
+<li class="flex items-start gap-6">
+<span class="material-symbols-outlined text-4xl group-hover:text-tertiary-fixed text-primary-container transition-colors">bolt</span>
+<div>
+<h4 class="text-2xl font-bold mb-2 group-hover:text-white">Automatización</h4>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80">Digitalización de flujos de trabajo complejos para reducir error humano.</p>
+</div>
+</li>
+<li class="flex items-start gap-6">
+<span class="material-symbols-outlined text-4xl group-hover:text-tertiary-fixed text-primary-container transition-colors">settings_input_component</span>
+<div>
+<h4 class="text-2xl font-bold mb-2 group-hover:text-white">Control de Operación</h4>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80">Monitoreo en tiempo real de cada variable en la cadena de suministro.</p>
+</div>
+</li>
+<li class="flex items-start gap-6">
+<span class="material-symbols-outlined text-4xl group-hover:text-tertiary-fixed text-primary-container transition-colors">database</span>
+<div>
+<h4 class="text-2xl font-bold mb-2 group-hover:text-white">Gestión de Datos</h4>
+<p class="text-on-surface-variant group-hover:text-on-primary-container/80">Inteligencia centralizada para la toma de decisiones basada en evidencia.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Framework Section -->
+<section class="bg-primary-container overflow-hidden" id="framework">
+<!-- Distinct Dark Banner -->
+<div class="bg-primary py-8 px-8 border-b border-white/5">
+<div class="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+<h3 class="text-2xl md:text-3xl font-black text-white tracking-tighter">
+                La Nueva Era del <span class="text-tertiary-fixed">Trade Governance MX</span>
+</h3>
+<div class="flex items-center gap-4">
+<img alt="BMS Software" class="h-10 object-contain brightness-0 invert" src="https://lh3.googleusercontent.com/aida/ADBb0ugC2QZ6mZXk7a8mbADQG-VM_462qrH1OcaLPc12SyZw4b5gqPgvIrEzHbTmq_MmQAAOh2M3J3nwM3axpQf89xQMvUIg8h6KupBp8B92nD_ULLky1yIzepHZu7A29LmavolgiYGvBNNl5CHym3WW5Pd8-7jdNdYJVyUEbefUWxAnGtJH7BvQS-s4ROYdgBVQdQ_WJobhM5ZkTxAFIiRapf8aN7rG0NIm_4ZPTBzwvHTfO_pj6j2JR_iztzVaCY3RCuFOvkRm4EjCeYo"/>
+</div>
+</div>
+</div>
+<div class="container mx-auto px-8 py-24">
+<div class="max-w-4xl mb-20 space-y-6">
+<h2 class="text-4xl md:text-6xl font-black tracking-tighter text-white">BMS Trade Governance Framework</h2>
+<p class="text-xl text-on-primary-container leading-relaxed">
+                Estructura integral para automatizar y controlar la operación de comercio exterior, fortalecida por el respaldo legal y cumplimiento 360°.
+            </p>
+</div>
+<!-- High-Fidelity Layered Infographic -->
+<div class="max-w-5xl mx-auto space-y-4">
+<!-- Layer: Datos y Operación -->
+<div class="grid grid-cols-12 items-center group">
+<div class="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
+<p class="text-on-primary-container text-sm font-medium transition-colors group-hover:text-white">Crean Registros en Anexo 24</p>
+</div>
+<div class="col-span-12 md:col-span-7 relative">
+<div class="bg-primary h-16 md:h-20 rounded-r-full flex items-center px-8 border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2">
+<div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rotate-45 bg-tertiary-fixed z-10 hidden md:block"></div>
+<span class="text-white font-bold text-lg md:text-xl tracking-tight">Datos y Operación</span>
+<p class="md:hidden ml-auto text-xs text-on-primary-container font-bold uppercase tracking-widest">Crean Registros</p>
+</div>
+</div>
+</div>
+<!-- Layer: Controles Internos -->
+<div class="grid grid-cols-12 items-center group">
+<div class="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
+<p class="text-on-primary-container text-sm font-medium transition-colors group-hover:text-white">Protegen Integridad de los Datos</p>
+</div>
+<div class="col-span-12 md:col-span-7 relative">
+<div class="bg-primary/80 h-16 md:h-20 rounded-r-full flex items-center px-12 border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2">
+<div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rotate-45 bg-tertiary-fixed/80 z-10 hidden md:block"></div>
+<span class="text-white/90 font-bold text-lg md:text-xl tracking-tight">Controles Internos</span>
+<p class="md:hidden ml-auto text-xs text-on-primary-container font-bold uppercase tracking-widest">Protección</p>
+</div>
+</div>
+</div>
+<!-- Layer: Automatización -->
+<div class="grid grid-cols-12 items-center group">
+<div class="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
+<p class="text-on-primary-container text-sm font-medium transition-colors group-hover:text-white">Escala la ejecución/Operación Anexo 24</p>
+</div>
+<div class="col-span-12 md:col-span-7 relative">
+<div class="bg-primary/60 h-16 md:h-20 rounded-r-full flex items-center px-16 border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2">
+<div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rotate-45 bg-tertiary-fixed/60 z-10 hidden md:block"></div>
+<span class="text-white/80 font-bold text-lg md:text-xl tracking-tight">Automatización</span>
+<p class="md:hidden ml-auto text-xs text-on-primary-container font-bold uppercase tracking-widest">Escalabilidad</p>
+</div>
+</div>
+</div>
+<!-- Layer: Auditoría Interna -->
+<div class="grid grid-cols-12 items-center group">
+<div class="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
+<p class="text-on-primary-container text-sm font-medium transition-colors group-hover:text-white">Valida el Cumplimiento</p>
+</div>
+<div class="col-span-12 md:col-span-7 relative">
+<div class="bg-primary/40 h-16 md:h-20 rounded-r-full flex items-center px-20 border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2">
+<div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rotate-45 bg-tertiary-fixed/40 z-10 hidden md:block"></div>
+<span class="text-white/70 font-bold text-lg md:text-xl tracking-tight">Auditoría Interna</span>
+<p class="md:hidden ml-auto text-xs text-on-primary-container font-bold uppercase tracking-widest">Validación</p>
+</div>
+</div>
+</div>
+<!-- Layer: Gobernanza -->
+<div class="grid grid-cols-12 items-center group">
+<div class="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
+<p class="text-on-primary-container text-sm font-medium transition-colors group-hover:text-white">Define Dirección Estratégica</p>
+</div>
+<div class="col-span-12 md:col-span-7 relative">
+<div class="bg-primary/30 h-16 md:h-20 rounded-r-full flex items-center px-24 border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2">
+<div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rotate-45 bg-tertiary-fixed/30 z-10 hidden md:block"></div>
+<span class="text-white/60 font-bold text-lg md:text-xl tracking-tight">Gobernanza</span>
+<p class="md:hidden ml-auto text-xs text-on-primary-container font-bold uppercase tracking-widest">Estrategia</p>
+</div>
+</div>
+</div>
+<!-- Layer: Analítica e IA -->
+<div class="grid grid-cols-12 items-center group">
+<div class="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
+<p class="text-on-primary-container text-sm font-medium transition-colors group-hover:text-white">Optimiza el desempeño</p>
+</div>
+<div class="col-span-12 md:col-span-7 relative">
+<div class="bg-primary/20 h-16 md:h-20 rounded-r-full flex items-center px-28 border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2">
+<div class="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rotate-45 bg-tertiary-fixed/20 z-10 hidden md:block"></div>
+<span class="text-white/50 font-bold text-lg md:text-xl tracking-tight">Analítica e IA</span>
+<p class="md:hidden ml-auto text-xs text-on-primary-container font-bold uppercase tracking-widest">Optimización</p>
+</div>
+</div>
+</div>
+<!-- Layer: Métricos, KPI y Trazabilidad (Highlighted/Result) -->
+<div class="grid grid-cols-12 items-center group pt-4">
+<div class="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
+<p class="text-tertiary-fixed text-sm font-black uppercase tracking-widest">Aseguran visibilidad y soporte de auditoría</p>
+</div>
+<div class="col-span-12 md:col-span-7">
+<div class="bg-tertiary-fixed h-20 md:h-24 rounded-full flex items-center px-32 shadow-[0_0_50px_rgba(230,255,0,0.2)] transform transition-all group-hover:scale-105">
+<span class="text-primary font-black text-xl md:text-2xl tracking-tighter uppercase">Métricos, KPI y Trazabilidad</span>
+<span class="material-symbols-outlined ml-auto text-primary text-3xl">insights</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="py-32 bg-surface-container-low">
+<div class="container mx-auto px-8">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<div class="bg-white p-10 space-y-6 hover:shadow-2xl hover:shadow-primary/5 transition-all group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container text-primary group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined">verified</span>
+</div>
+<h4 class="text-xl font-bold text-primary">Cumplimiento normativo sólido</h4>
+<p class="text-on-surface-variant text-sm">Cero discrepancias con la autoridad mediante validación jurídica constante.</p>
+</div>
+<div class="bg-white p-10 space-y-6 hover:shadow-2xl hover:shadow-primary/5 transition-all group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container text-primary group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined">shield_with_heart</span>
+</div>
+<h4 class="text-xl font-bold text-primary">Reducción de riesgos</h4>
+<p class="text-on-surface-variant text-sm">Identificación y mitigación temprana de vulnerabilidades aduaneras.</p>
+</div>
+<div class="bg-white p-10 space-y-6 hover:shadow-2xl hover:shadow-primary/5 transition-all group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container text-primary group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined">settings_suggest</span>
+</div>
+<h4 class="text-xl font-bold text-primary">Automatización de procesos</h4>
+<p class="text-on-surface-variant text-sm">Escalabilidad operativa sin incrementar la carga administrativa.</p>
+</div>
+<div class="bg-white p-10 space-y-6 hover:shadow-2xl hover:shadow-primary/5 transition-all group">
+<div class="w-12 h-12 flex items-center justify-center bg-surface-container text-primary group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed transition-colors">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<h4 class="text-xl font-bold text-primary">Visibilidad operativa</h4>
+<p class="text-on-surface-variant text-sm">Control total sobre los tiempos y costos de su operación IMMEX.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Lead Capture Form -->
+<section class="py-32 bg-primary" id="contact">
+<div class="container mx-auto px-8">
+<div class="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20">
+<div class="lg:w-1/2 space-y-8">
+<span class="text-tertiary-fixed font-black tracking-widest uppercase text-sm">Oportunidad Exclusiva</span>
+<h2 class="text-4xl md:text-6xl font-black tracking-tighter text-white">Diagnóstico sin costo para asistentes al foro</h2>
+<p class="text-xl text-on-primary-container font-light">
+                    Evaluamos el estado actual de tu operación IMMEX y te proponemos una ruta clara de cumplimiento y automatización.
+                </p>
+<div class="flex items-center gap-4 text-white/50 text-sm">
+<span class="material-symbols-outlined text-tertiary-fixed">info</span>
+                    Disponibilidad limitada según agenda técnica.
+                </div>
+</div>
+<div class="lg:w-1/2">
+<div class="bg-white p-10 md:p-14 shadow-2xl">
+<form class="space-y-8">
+<div class="space-y-6">
+<div class="group relative">
+<label class="block text-xs font-black uppercase tracking-widest text-on-surface-variant mb-2">Nombre Completo</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-0 px-4 py-4 text-primary transition-all" placeholder="Ej. Juan Pérez" type="text"/>
+<div class="absolute left-0 bottom-0 w-0 h-[2px] bg-tertiary-fixed transition-all group-focus-within:w-full"></div>
+</div>
+<div class="group relative">
+<label class="block text-xs font-black uppercase tracking-widest text-on-surface-variant mb-2">Empresa</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-0 px-4 py-4 text-primary transition-all" placeholder="Nombre de la compañía" type="text"/>
+<div class="absolute left-0 bottom-0 w-0 h-[2px] bg-tertiary-fixed transition-all group-focus-within:w-full"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="group relative">
+<label class="block text-xs font-black uppercase tracking-widest text-on-surface-variant mb-2">Email Corporativo</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-0 px-4 py-4 text-primary transition-all" placeholder="email@empresa.com" type="email"/>
+<div class="absolute left-0 bottom-0 w-0 h-[2px] bg-tertiary-fixed transition-all group-focus-within:w-full"></div>
+</div>
+<div class="group relative">
+<label class="block text-xs font-black uppercase tracking-widest text-on-surface-variant mb-2">Teléfono</label>
+<input class="w-full bg-surface-container-low border-none focus:ring-0 px-4 py-4 text-primary transition-all" placeholder="55 0000 0000" type="tel"/>
+<div class="absolute left-0 bottom-0 w-0 h-[2px] bg-tertiary-fixed transition-all group-focus-within:w-full"></div>
+</div>
+</div>
+</div>
+<button class="w-full bg-primary text-white py-5 font-black uppercase tracking-widest flex items-center justify-center gap-4 hover:bg-primary/90 transition-colors" type="submit">
+                            Solicitar asesoría
+                            <span class="material-symbols-outlined">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-slate-950 full-width py-12">
+<div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center border-t border-slate-800/50 pt-12">
+<div class="font-black text-slate-50 mb-8 md:mb-0">
+            BG Consulting x BMS
+        </div>
+<div class="flex flex-wrap justify-center gap-8 text-slate-500 font-inter text-sm uppercase tracking-widest mb-8 md:mb-0">
+<a class="hover:text-slate-100 transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-slate-100 transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-slate-100 transition-colors" href="#">Event Participant Portal</a>
+</div>
+<div class="text-slate-500 font-inter text-xs uppercase tracking-widest text-center md:text-right">
+            © 2024 BG Consulting Group &amp; BMS Software. All rights reserved.
+        </div>
+</div>
+</footer>
+</body></html>
