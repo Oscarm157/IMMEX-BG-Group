@@ -15,17 +15,17 @@ const partnershipBMS = [
 ];
 
 const frameworkLayers = [
-  { label: "Datos y Operación", caption: "Crean Registros en Anexo 24", opacity: 1, padding: "px-8" },
-  { label: "Controles Internos", caption: "Protegen Integridad de los Datos", opacity: 0.8, padding: "px-12" },
-  { label: "Automatización", caption: "Escala la ejecución/Operación Anexo 24", opacity: 0.6, padding: "px-16" },
-  { label: "Auditoría Interna", caption: "Valida el Cumplimiento", opacity: 0.4, padding: "px-20" },
-  { label: "Gobernanza", caption: "Define Dirección Estratégica", opacity: 0.3, padding: "px-24" },
-  { label: "Analítica e IA", caption: "Optimiza el desempeño", opacity: 0.2, padding: "px-28" },
+  { label: "Datos y Operación", caption: "Crean Registros en Anexo 24", opacity: 1, padding: "md:px-8" },
+  { label: "Controles Internos", caption: "Protegen Integridad de los Datos", opacity: 0.8, padding: "md:px-12" },
+  { label: "Automatización", caption: "Escala la ejecución/Operación Anexo 24", opacity: 0.6, padding: "md:px-16" },
+  { label: "Auditoría Interna", caption: "Valida el Cumplimiento", opacity: 0.4, padding: "md:px-20" },
+  { label: "Gobernanza", caption: "Define Dirección Estratégica", opacity: 0.3, padding: "md:px-24" },
+  { label: "Analítica e IA", caption: "Optimiza el desempeño", opacity: 0.2, padding: "md:px-28" },
 ];
 
 const benefits = [
   { icon: "verified", title: "Cumplimiento normativo sólido", desc: "Cero discrepancias con la autoridad mediante validación jurídica constante." },
-  { icon: "shield_with_heart", title: "Reducción de riesgos", desc: "Identificación y mitigación temprana de vulnerabilidades aduaneras." },
+  { icon: "shield", title: "Reducción de riesgos", desc: "Identificación y mitigación temprana de vulnerabilidades aduaneras." },
   { icon: "settings_suggest", title: "Automatización de procesos", desc: "Escalabilidad operativa sin incrementar la carga administrativa." },
   { icon: "visibility", title: "Visibilidad operativa", desc: "Control total sobre los tiempos y costos de su operación IMMEX." },
 ];
@@ -34,44 +34,54 @@ export default function Home() {
   return (
     <>
       {/* Hero */}
-      <header className="relative min-h-[921px] flex flex-col overflow-hidden asymmetric-gradient text-on-primary">
-        <div className="relative z-20 w-full px-8 py-12">
-          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-12">
+      <header className="relative min-h-screen md:min-h-[880px] flex flex-col overflow-hidden asymmetric-gradient text-on-primary">
+        <div className="hero-glow" aria-hidden />
+
+        <div className="relative z-20 w-full px-6 md:px-8 py-8 md:py-12">
+          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-8 md:gap-12">
               <Logo variant="bg" tone="light" size="md" />
-              <div className="h-10 w-px bg-white/20 hidden md:block" />
+              <div className="h-8 w-px bg-white/15 hidden md:block" />
               <Logo variant="bms" tone="light" size="md" />
             </div>
           </div>
         </div>
 
-        <div className="container mx-auto px-8 relative z-10 flex-grow flex items-center">
-          <div className="max-w-4xl space-y-8 py-24">
-            <div className="flex items-center gap-6 mb-12">
-              <div className="bg-white/10 backdrop-blur px-4 py-2 rounded-sm border-l-4 border-tertiary-fixed">
-                <span className="text-sm font-bold tracking-[0.2em] uppercase text-tertiary-fixed">BG Consulting Group</span>
-              </div>
-              <div className="h-px w-8 bg-on-primary-container/30" />
-              <div className="bg-white/10 backdrop-blur px-4 py-2 rounded-sm">
-                <span className="text-sm font-bold tracking-[0.2em] uppercase text-white/70">BMS Software</span>
-              </div>
+        <div className="container mx-auto px-6 md:px-8 relative z-10 flex-grow flex items-center">
+          <div className="max-w-4xl space-y-8 py-16 md:py-24">
+            <div className="flex items-center gap-4 md:gap-6">
+              <span className="h-px w-10 bg-tertiary-fixed" />
+              <span className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-tertiary-fixed">
+                Foro IMMEX · Cumplimiento 360°
+              </span>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-tight">
-              ¿Asistes al <span className="text-tertiary-fixed">Foro IMMEX</span> Cumplimiento 360°?
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.02]">
+              Cumplimiento que se <span className="text-tertiary-fixed">implementa</span>, no que se promete.
             </h1>
-            <p className="text-xl md:text-2xl text-on-primary-container max-w-2xl font-light leading-relaxed">
-              Lleva el cumplimiento más allá del discurso: implementación real con respaldo legal y tecnología especializada.
+            <p className="text-lg md:text-2xl text-on-primary-container max-w-2xl font-light leading-relaxed">
+              Diagnóstico previo para asistentes al Foro IMMEX. Respaldo legal y software especializado en una sola conversación.
             </p>
-            <div className="pt-8">
+            <div className="pt-4 md:pt-8 flex flex-wrap items-center gap-6">
               <a
                 href="#contact"
-                className="inline-flex items-center gap-4 bg-tertiary-fixed text-on-tertiary-fixed px-10 py-5 rounded-sm font-extrabold text-lg transition-transform hover:-translate-y-1 active:scale-95 shadow-xl shadow-tertiary-fixed/10"
+                className="inline-flex items-center gap-4 bg-tertiary-fixed text-on-tertiary-fixed px-8 md:px-10 py-4 md:py-5 rounded-sm font-extrabold text-base md:text-lg transition-transform hover:-translate-y-0.5 active:scale-[0.98] shadow-[0_20px_60px_-20px_rgba(230,255,0,0.45)]"
               >
                 Solicitar diagnóstico sin costo
                 <span className="material-symbols-outlined">arrow_forward</span>
               </a>
+              <a
+                href="#framework"
+                className="text-white/70 hover:text-white text-sm font-bold tracking-[0.2em] uppercase transition-colors"
+              >
+                Ver framework
+              </a>
             </div>
           </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-white/30 z-10">
+          <span className="text-[10px] tracking-[0.4em] uppercase">Scroll</span>
+          <span className="h-10 w-px bg-white/20" />
         </div>
       </header>
 
@@ -167,15 +177,15 @@ export default function Home() {
           <div className="max-w-5xl mx-auto space-y-4">
             {frameworkLayers.map((layer, i) => (
               <MotionItem key={layer.label} delay={i * 0.08}>
-                <div className="grid grid-cols-12 items-center group">
-                  <div className="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
-                    <p className="text-on-primary-container text-sm font-medium transition-colors group-hover:text-white">
+                <div className="grid grid-cols-12 items-center group gap-y-2">
+                  <div className="col-span-12 md:col-span-5 text-left md:text-right md:pr-12 order-2 md:order-1">
+                    <p className="text-on-primary-container text-xs md:text-sm font-medium transition-colors group-hover:text-white">
                       {layer.caption}
                     </p>
                   </div>
-                  <div className="col-span-12 md:col-span-7 relative">
+                  <div className="col-span-12 md:col-span-7 relative order-1 md:order-2">
                     <div
-                      className={`h-16 md:h-20 rounded-r-full flex items-center ${layer.padding} border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2`}
+                      className={`h-16 md:h-20 rounded-r-full flex items-center px-6 ${layer.padding} border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2`}
                       style={{ background: `rgba(0, 6, 22, ${layer.opacity})` }}
                     >
                       <div
@@ -183,7 +193,7 @@ export default function Home() {
                         style={{ background: `rgba(230, 255, 0, ${layer.opacity})` }}
                       />
                       <span
-                        className="font-bold text-lg md:text-xl tracking-tight"
+                        className="font-bold text-base md:text-xl tracking-tight"
                         style={{ color: `rgba(255, 255, 255, ${0.5 + layer.opacity * 0.5})` }}
                       >
                         {layer.label}
@@ -195,15 +205,15 @@ export default function Home() {
             ))}
 
             <MotionItem delay={frameworkLayers.length * 0.08 + 0.1}>
-              <div className="grid grid-cols-12 items-center group pt-4">
-                <div className="col-span-12 md:col-span-5 text-right pr-12 hidden md:block">
-                  <p className="text-tertiary-fixed text-sm font-black uppercase tracking-widest">
+              <div className="grid grid-cols-12 items-center group pt-4 gap-y-2">
+                <div className="col-span-12 md:col-span-5 text-left md:text-right md:pr-12 order-2 md:order-1">
+                  <p className="text-tertiary-fixed text-xs md:text-sm font-black uppercase tracking-widest">
                     Aseguran visibilidad y soporte de auditoría
                   </p>
                 </div>
-                <div className="col-span-12 md:col-span-7">
-                  <div className="bg-tertiary-fixed h-20 md:h-24 rounded-full flex items-center px-32 shadow-[0_0_50px_rgba(230,255,0,0.2)] transform transition-all group-hover:scale-105">
-                    <span className="text-primary font-black text-xl md:text-2xl tracking-tighter uppercase">
+                <div className="col-span-12 md:col-span-7 order-1 md:order-2">
+                  <div className="bg-tertiary-fixed h-20 md:h-24 rounded-full flex items-center px-8 md:px-12 shadow-[0_0_50px_rgba(230,255,0,0.2)] transform transition-all group-hover:scale-[1.02]">
+                    <span className="text-primary font-black text-base md:text-2xl tracking-tighter uppercase">
                       Métricos, KPI y Trazabilidad
                     </span>
                     <span className="material-symbols-outlined ml-auto text-primary text-3xl">insights</span>
@@ -216,19 +226,33 @@ export default function Home() {
       </section>
 
       {/* Benefits */}
-      <MotionSection className="py-32 bg-surface-container-low">
-        <div className="container mx-auto px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((b) => (
+      <MotionSection className="py-24 md:py-32 bg-surface-container-low">
+        <div className="container mx-auto px-6 md:px-8">
+          <div className="max-w-3xl mb-16 md:mb-20 space-y-4">
+            <span className="text-tertiary-fixed-dim font-bold tracking-[0.3em] uppercase text-xs md:text-sm">
+              Resultados medibles
+            </span>
+            <h2 className="text-3xl md:text-5xl font-black tracking-tight text-primary">
+              Cuatro frentes que se cubren al mismo tiempo
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-px bg-outline-variant/30">
+            {benefits.map((b, i) => (
               <div
                 key={b.title}
-                className="bg-white p-10 space-y-6 hover:shadow-2xl hover:shadow-primary/5 transition-all group"
+                className="bg-surface-container-lowest p-8 md:p-10 space-y-6 hover:bg-white transition-all group relative"
               >
-                <div className="w-12 h-12 flex items-center justify-center bg-surface-container text-primary group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed transition-colors">
-                  <span className="material-symbols-outlined">{b.icon}</span>
+                <div className="absolute top-0 left-0 h-px w-0 bg-tertiary-fixed transition-all duration-500 group-hover:w-full" />
+                <div className="flex items-start justify-between">
+                  <div className="w-12 h-12 flex items-center justify-center bg-surface-container text-primary group-hover:bg-tertiary-fixed group-hover:text-on-tertiary-fixed transition-colors">
+                    <span className="material-symbols-outlined">{b.icon}</span>
+                  </div>
+                  <span className="text-xs font-black tracking-[0.2em] text-on-surface-variant/40">
+                    0{i + 1}
+                  </span>
                 </div>
-                <h4 className="text-xl font-bold text-primary">{b.title}</h4>
-                <p className="text-on-surface-variant text-sm">{b.desc}</p>
+                <h4 className="text-lg md:text-xl font-bold text-primary leading-tight">{b.title}</h4>
+                <p className="text-on-surface-variant text-sm leading-relaxed">{b.desc}</p>
               </div>
             ))}
           </div>
@@ -265,15 +289,22 @@ export default function Home() {
       </MotionSection>
 
       {/* Footer */}
-      <footer className="bg-slate-950 py-12">
-        <div className="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center border-t border-slate-800/50 pt-12 gap-8">
-          <div className="font-black text-slate-50">BG Consulting x BMS</div>
-          <div className="flex flex-wrap justify-center gap-8 text-slate-500 text-sm uppercase tracking-widest">
-            <a href="#" className="hover:text-slate-100 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-slate-100 transition-colors">Terms of Service</a>
-            <a href="#" className="hover:text-slate-100 transition-colors">Event Participant Portal</a>
+      <footer className="bg-primary py-16">
+        <div className="container mx-auto px-8">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-12 border-b border-white/5">
+            <div className="flex flex-wrap items-center gap-10">
+              <Logo variant="bg" tone="light" size="sm" />
+              <div className="h-6 w-px bg-white/10" />
+              <Logo variant="bms" tone="light" size="sm" />
+            </div>
+            <a
+              href="#contact"
+              className="text-tertiary-fixed text-sm font-bold tracking-[0.25em] uppercase hover:text-white transition-colors"
+            >
+              Solicitar diagnóstico
+            </a>
           </div>
-          <div className="text-slate-500 text-xs uppercase tracking-widest text-center md:text-right">
+          <div className="pt-8 text-white/40 text-xs uppercase tracking-[0.25em]">
             © 2026 BG Consulting Group &amp; BMS Software
           </div>
         </div>

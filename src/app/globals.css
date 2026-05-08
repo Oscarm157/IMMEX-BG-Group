@@ -50,7 +50,22 @@ body {
 }
 
 .asymmetric-gradient {
-  background: linear-gradient(135deg, #000616 0%, #0b1f3b 100%);
+  background:
+    radial-gradient(ellipse 80% 60% at 85% 30%, rgba(230, 255, 0, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 10% 90%, rgba(70, 95, 134, 0.4) 0%, transparent 60%),
+    linear-gradient(135deg, #000616 0%, #0b1f3b 100%);
+}
+
+.hero-glow {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse 70% 50% at 50% 40%, black 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse 70% 50% at 50% 40%, black 0%, transparent 80%);
+  pointer-events: none;
 }
 
 .framework-shadow {
