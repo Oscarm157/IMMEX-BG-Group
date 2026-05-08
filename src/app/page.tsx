@@ -1,6 +1,7 @@
 import { Logo } from "@/components/Logo";
 import { LeadForm } from "@/components/LeadForm";
 import { MotionSection, MotionItem } from "@/components/MotionSection";
+import { FloatingCTA } from "@/components/FloatingCTA";
 
 const partnershipBG = [
   { icon: "gavel", title: "Defensa Fiscal", desc: "Protección legal integral ante autoridades fiscales y aduaneras." },
@@ -309,6 +310,8 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <FloatingCTA />
     </>
   );
 }
