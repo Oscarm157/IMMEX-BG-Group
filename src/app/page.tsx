@@ -203,8 +203,8 @@ export default function Home() {
       </MotionSection>
 
       {/* Framework */}
-      <section id="framework" className="bg-primary-container overflow-hidden">
-        <div className="bg-primary py-8 px-8 border-b border-white/5">
+      <section id="framework" className="bg-primary overflow-hidden">
+        <div className="bg-primary-container py-8 px-8 border-b border-white/5">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <h3 className="text-2xl md:text-3xl font-black text-white tracking-tighter">
               La Nueva Era del <span className="text-tertiary-fixed">Trade Governance MX</span>
@@ -242,7 +242,7 @@ export default function Home() {
                 </p>
                 <div className="grid grid-cols-2 gap-px bg-white/5">
                   {frameworkPillars.map((p) => (
-                    <div key={p.name} className="bg-primary p-5 space-y-2">
+                    <div key={p.name} className="bg-primary-container p-5 space-y-2">
                       <h4 className="text-tertiary-fixed font-black tracking-tight text-lg">{p.name}</h4>
                       <p className="text-white/70 text-xs leading-relaxed">{p.desc}</p>
                     </div>
