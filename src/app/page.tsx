@@ -52,22 +52,31 @@ export default function Home() {
   return (
     <>
       {/* Top bar */}
-      <div className="bg-white border-b border-outline-variant/20">
+      <div className="bg-white border-b border-outline-variant/30">
         <div className="container mx-auto px-6 md:px-8 py-5 md:py-6">
-          <div className="flex flex-wrap items-center justify-center md:justify-start gap-8 md:gap-12">
-            <Logo variant="bg" tone="dark" size="lg" />
-            <div className="h-10 w-px bg-outline-variant/40 hidden md:block" />
-            <Logo variant="bms" tone="dark" size="lg" />
+          <div className="flex flex-wrap items-center justify-between gap-6">
+            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
+              <Logo variant="bg" tone="dark" size="lg" />
+              <div className="h-10 w-px bg-outline-variant/40 hidden md:block" />
+              <Logo variant="bms" tone="dark" size="lg" />
+            </div>
+            <a
+              href="#contact"
+              className="hidden md:inline-flex items-center gap-2 text-primary text-sm font-bold tracking-[0.2em] uppercase hover:text-on-tertiary-fixed transition-colors"
+            >
+              Solicitar diagnóstico
+              <span className="material-symbols-outlined text-base">arrow_forward</span>
+            </a>
           </div>
         </div>
       </div>
 
       {/* Hero */}
-      <header className="relative min-h-screen md:min-h-[820px] flex flex-col overflow-hidden asymmetric-gradient text-on-primary">
+      <header className="relative min-h-[640px] md:min-h-[680px] flex flex-col overflow-hidden asymmetric-gradient text-on-primary">
         <div className="hero-glow" aria-hidden />
 
-        <div className="container mx-auto px-6 md:px-8 relative z-10 flex-grow flex items-center">
-          <div className="max-w-4xl space-y-8 py-16 md:py-24">
+        <div className="container mx-auto px-6 md:px-8 relative z-10 flex-grow grid lg:grid-cols-[1.4fr_0.6fr] gap-12 items-center py-16 md:py-20">
+          <div className="max-w-4xl space-y-8">
             <div className="flex items-center gap-4 md:gap-6">
               <span className="h-px w-10 bg-tertiary-fixed" />
               <span className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-tertiary-fixed">
@@ -90,17 +99,44 @@ export default function Home() {
               </a>
               <a
                 href="#framework"
-                className="text-white/70 hover:text-white text-sm font-bold tracking-[0.2em] uppercase transition-colors"
+                className="inline-flex items-center gap-2 text-white border-b border-white/30 hover:border-tertiary-fixed hover:text-tertiary-fixed pb-1 text-sm font-bold tracking-[0.2em] uppercase transition-colors"
               >
                 Ver framework
+                <span className="material-symbols-outlined text-base">arrow_downward</span>
               </a>
             </div>
           </div>
+
+          <aside className="hidden lg:block">
+            <div className="border-l border-white/15 pl-8 space-y-8">
+              <div>
+                <p className="text-tertiary-fixed text-[10px] font-black tracking-[0.3em] uppercase mb-2">
+                  Capa Legal · BG Consulting
+                </p>
+                <p className="text-on-primary-container text-sm leading-relaxed">
+                  Defensa fiscal, compliance normativo y estrategia legal para blindar la operación.
+                </p>
+              </div>
+              <div>
+                <p className="text-tertiary-fixed text-[10px] font-black tracking-[0.3em] uppercase mb-2">
+                  Capa Software · BMS
+                </p>
+                <p className="text-on-primary-container text-sm leading-relaxed">
+                  Automatización del Anexo 24, control de operación y gestión de datos en tiempo real.
+                </p>
+              </div>
+              <div className="pt-4 border-t border-white/10">
+                <p className="text-white/40 text-[10px] font-black tracking-[0.3em] uppercase">
+                  Una sola conversación
+                </p>
+              </div>
+            </div>
+          </aside>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-white/30 z-10">
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 hidden md:flex flex-col items-center gap-2 text-white/50 z-10">
           <span className="text-[10px] tracking-[0.4em] uppercase">Scroll</span>
-          <span className="h-10 w-px bg-white/20" />
+          <span className="h-8 w-px bg-tertiary-fixed/40" />
         </div>
       </header>
 
@@ -118,6 +154,9 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-0 border-t border-outline-variant/15">
             <div className="p-12 md:p-20 bg-surface-container-lowest border-r border-outline-variant/15 hover:bg-primary-container transition-colors duration-500 group">
+              <p className="text-tertiary-fixed-dim group-hover:text-tertiary-fixed text-[10px] font-black tracking-[0.4em] uppercase mb-6 transition-colors">
+                Capa Legal
+              </p>
               <div className="mb-14">
                 <Logo variant="bg" tone="dark" size="lg" swapOnHover />
               </div>
@@ -141,6 +180,9 @@ export default function Home() {
             </div>
 
             <div className="p-12 md:p-20 bg-surface-container-low hover:bg-primary-container transition-colors duration-500 group">
+              <p className="text-tertiary-fixed-dim group-hover:text-tertiary-fixed text-[10px] font-black tracking-[0.4em] uppercase mb-6 transition-colors">
+                Capa Software
+              </p>
               <div className="mb-14">
                 <Logo variant="bms" tone="dark" size="lg" swapOnHover />
               </div>
@@ -208,7 +250,7 @@ export default function Home() {
                   {frameworkPillars.map((p) => (
                     <div key={p.name} className="bg-primary p-5 space-y-2">
                       <h4 className="text-tertiary-fixed font-black tracking-tight text-lg">{p.name}</h4>
-                      <p className="text-on-primary-container text-xs leading-relaxed">{p.desc}</p>
+                      <p className="text-white/70 text-xs leading-relaxed">{p.desc}</p>
                     </div>
                   ))}
                 </div>
@@ -221,7 +263,7 @@ export default function Home() {
                       {d.label}
                     </p>
                     <h5 className="text-white font-bold mb-2">{d.title}</h5>
-                    <p className="text-on-primary-container text-sm leading-relaxed">
+                    <p className="text-white/75 text-sm leading-relaxed">
                       {d.items.join(" · ")}
                     </p>
                   </div>
@@ -297,22 +339,39 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="bg-primary py-16">
-        <div className="container mx-auto px-8">
-          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-8 pb-12 border-b border-white/5">
-            <div className="flex flex-wrap items-center gap-10">
-              <Logo variant="bg" tone="light" size="sm" />
-              <div className="h-6 w-px bg-white/10" />
-              <Logo variant="bms" tone="light" size="sm" />
+        <div className="container mx-auto px-6 md:px-8">
+          <div className="grid md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
+            <div className="space-y-4">
+              <Logo variant="bg" tone="light" size="md" />
+              <p className="text-on-primary-container text-sm leading-relaxed max-w-sm">
+                Defensa fiscal, compliance normativo y estrategia legal en operación aduanera.
+              </p>
             </div>
-            <a
-              href="#contact"
-              className="text-tertiary-fixed text-sm font-bold tracking-[0.25em] uppercase hover:text-white transition-colors"
-            >
-              Solicitar diagnóstico
-            </a>
+            <div className="space-y-4">
+              <Logo variant="bms" tone="light" size="md" />
+              <p className="text-on-primary-container text-sm leading-relaxed max-w-sm">
+                Software para automatización del Anexo 24, control operativo y trade governance.
+              </p>
+            </div>
+            <div className="space-y-4">
+              <p className="text-tertiary-fixed text-[10px] font-black tracking-[0.3em] uppercase">
+                Foro IMMEX
+              </p>
+              <p className="text-white text-base leading-relaxed">
+                Diagnóstico sin costo para asistentes.
+              </p>
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 text-tertiary-fixed text-sm font-bold tracking-[0.25em] uppercase hover:text-white transition-colors"
+              >
+                Solicitar
+                <span className="material-symbols-outlined text-base">arrow_forward</span>
+              </a>
+            </div>
           </div>
-          <div className="pt-8 text-white/40 text-xs uppercase tracking-[0.25em]">
-            © 2026 BG Consulting Group &amp; BMS Software
+          <div className="pt-8 flex flex-col md:flex-row justify-between gap-3 text-white/40 text-xs tracking-[0.2em] uppercase">
+            <span>© 2026 BG Consulting Group &amp; BMS Software</span>
+            <span>Cumplimiento 360°</span>
           </div>
         </div>
       </footer>
