@@ -80,7 +80,7 @@ export default function Home() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.05]">
               Cumplimiento que se <span className="text-tertiary-fixed">implementa</span>, no que se promete.
             </h1>
-            <p className="text-base md:text-lg text-on-primary-container max-w-xl font-light leading-relaxed">
+            <p className="text-base md:text-lg text-white/85 max-w-xl font-light leading-relaxed">
               Diagnóstico previo para asistentes al Foro IMMEX. Respaldo legal y software especializado en una sola conversación.
             </p>
             <div className="pt-4 md:pt-8 flex flex-wrap items-center gap-6">
@@ -107,7 +107,7 @@ export default function Home() {
                 <p className="text-tertiary-fixed text-[10px] font-black tracking-[0.3em] uppercase mb-2">
                   Capa Legal · BG Consulting
                 </p>
-                <p className="text-on-primary-container text-sm leading-relaxed">
+                <p className="text-white/85 text-sm leading-relaxed">
                   Defensa fiscal, compliance normativo y estrategia legal para blindar la operación.
                 </p>
               </div>
@@ -115,7 +115,7 @@ export default function Home() {
                 <p className="text-tertiary-fixed text-[10px] font-black tracking-[0.3em] uppercase mb-2">
                   Capa Software · BMS
                 </p>
-                <p className="text-on-primary-container text-sm leading-relaxed">
+                <p className="text-white/85 text-sm leading-relaxed">
                   Automatización del Anexo 24, control de operación y gestión de datos en tiempo real.
                 </p>
               </div>
@@ -164,7 +164,7 @@ export default function Home() {
                       <h4 className="text-2xl font-bold mb-2 text-primary group-hover:text-white transition-colors">
                         {item.title}
                       </h4>
-                      <p className="text-on-surface-variant group-hover:text-on-primary-container/80 transition-colors">
+                      <p className="text-on-surface-variant group-hover:text-white/80 transition-colors">
                         {item.desc}
                       </p>
                     </div>
@@ -190,7 +190,7 @@ export default function Home() {
                       <h4 className="text-2xl font-bold mb-2 text-primary group-hover:text-white transition-colors">
                         {item.title}
                       </h4>
-                      <p className="text-on-surface-variant group-hover:text-on-primary-container/80 transition-colors">
+                      <p className="text-on-surface-variant group-hover:text-white/80 transition-colors">
                         {item.desc}
                       </p>
                     </div>
@@ -218,7 +218,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white">
               BMS Trade Governance Framework
             </h2>
-            <p className="text-xl text-on-primary-container leading-relaxed">
+            <p className="text-xl text-white/85 leading-relaxed">
               Estructura integral para automatizar y controlar la operación de comercio exterior, fortalecida por el respaldo legal y cumplimiento 360°.
             </p>
           </div>
@@ -313,7 +313,7 @@ export default function Home() {
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white">
                 Diagnóstico sin costo para asistentes al foro
               </h2>
-              <p className="text-xl text-on-primary-container font-light">
+              <p className="text-xl text-white/85 font-light">
                 Evaluamos el estado actual de tu operación IMMEX y te proponemos una ruta clara de cumplimiento y automatización.
               </p>
               <div className="flex items-center gap-4 text-white/50 text-sm">
@@ -337,13 +337,13 @@ export default function Home() {
           <div className="grid md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
             <div className="space-y-4">
               <Logo variant="bg" tone="light" size="md" />
-              <p className="text-on-primary-container text-sm leading-relaxed max-w-sm">
+              <p className="text-white/85 text-sm leading-relaxed max-w-sm">
                 Defensa fiscal, compliance normativo y estrategia legal en operación aduanera.
               </p>
             </div>
             <div className="space-y-4">
               <Logo variant="bms" tone="light" size="md" />
-              <p className="text-on-primary-container text-sm leading-relaxed max-w-sm">
+              <p className="text-white/85 text-sm leading-relaxed max-w-sm">
                 Software para automatización del Anexo 24, control operativo y trade governance.
               </p>
             </div>
