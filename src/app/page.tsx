@@ -101,7 +101,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-0 border-t border-outline-variant/15">
             <div className="p-12 md:p-20 bg-surface-container-lowest border-r border-outline-variant/15 hover:bg-primary-container transition-colors duration-500 group">
               <div className="mb-12">
-                <Logo variant="bg" tone="dark" size="md" className="group-hover:[&_*]:text-white transition-colors duration-500" />
+                <Logo variant="bg" tone="dark" size="md" swapOnHover />
               </div>
               <h3 className="text-tertiary-fixed-dim group-hover:text-tertiary-fixed text-sm font-black tracking-[0.4em] uppercase mb-12 transition-colors">
                 BG Consulting
@@ -127,7 +127,7 @@ export default function Home() {
 
             <div className="p-12 md:p-20 bg-surface-container-low hover:bg-primary-container transition-colors duration-500 group">
               <div className="mb-12">
-                <Logo variant="bms" tone="dark" size="md" className="group-hover:[&_*]:text-white transition-colors duration-500" />
+                <Logo variant="bms" tone="dark" size="md" swapOnHover />
               </div>
               <h3 className="text-tertiary-fixed-dim group-hover:text-tertiary-fixed text-sm font-black tracking-[0.4em] uppercase mb-12 transition-colors">
                 BMS Software

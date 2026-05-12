@@ -1,49 +1,80 @@
+import Image from "next/image";
+
 type LogoVariant = "bg" | "bms";
 type LogoTone = "light" | "dark";
 type LogoSize = "sm" | "md" | "lg";
 
-const sizes: Record<LogoSize, string> = {
-  sm: "text-xs",
-  md: "text-sm md:text-base",
-  lg: "text-base md:text-lg",
+const sizes: Record<LogoSize, number> = {
+  sm: 36,
+  md: 56,
+  lg: 80,
+};
+
+const sources: Record<LogoVariant, { light: string; dark: string; alt: string }> = {
+  bg: {
+    light: "/BG_Logotipo_Blanco.png",
+    dark: "/BG_Logotipo.png",
+    alt: "BG Consulting Group",
+  },
+  bms: {
+    light: "/bms_Logotipo_blanco.png",
+    dark: "/Bms_Logotipo.png",
+    alt: "BMS Software",
+  },
 };
 
 export function Logo({
   variant,
   tone = "light",
   size = "md",
+  swapOnHover = false,
   className = "",
 }: {
   variant: LogoVariant;
   tone?: LogoTone;
   size?: LogoSize;
+  swapOnHover?: boolean;
   className?: string;
 }) {
-  const color = tone === "light" ? "text-white" : "text-primary";
-  const sub =
-    tone === "light" ? "text-on-primary-container" : "text-on-surface-variant";
+  const { light, dark, alt } = sources[variant];
+  const px = sizes[size];
+  const primary = tone === "light" ? light : dark;
+  const secondary = tone === "light" ? dark : light;
 
-  if (variant === "bg") {
+  if (swapOnHover) {
     return (
-      <div className={`flex items-baseline gap-3 ${className}`}>
-        <span className={`font-black tracking-tighter leading-none ${color} text-2xl md:text-3xl`}>
-          BG
-        </span>
-        <span className={`${sizes[size]} font-bold uppercase tracking-[0.25em] ${sub}`}>
-          Consulting Group
-        </span>
+      <div
+        className={`relative inline-block ${className}`}
+        style={{ width: px, height: px }}
+      >
+        <Image
+          src={primary}
+          alt={alt}
+          width={px}
+          height={px}
+          className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
+          priority
+        />
+        <Image
+          src={secondary}
+          alt=""
+          aria-hidden
+          width={px}
+          height={px}
+          className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+        />
       </div>
     );
   }
 
   return (
-    <div className={`flex items-baseline gap-3 ${className}`}>
-      <span className={`font-black tracking-tighter leading-none ${color} text-2xl md:text-3xl`}>
-        BMS
-      </span>
-      <span className={`${sizes[size]} font-bold uppercase tracking-[0.25em] ${sub}`}>
-        Software
-      </span>
-    </div>
+    <Image
+      src={primary}
+      alt={alt}
+      width={px}
+      height={px}
+      className={className}
+      priority
+    />
   );
 }
