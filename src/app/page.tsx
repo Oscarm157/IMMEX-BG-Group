@@ -52,23 +52,17 @@ export default function Home() {
   return (
     <>
       {/* Top bar */}
-      <div className="bg-white border-b border-outline-variant/30">
-        <div className="container mx-auto px-6 md:px-8 py-5 md:py-6">
-          <div className="flex flex-wrap items-center justify-between gap-6">
-            <div className="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-              <Logo variant="bg" tone="dark" size="lg" />
-              <div className="h-10 w-px bg-outline-variant/40 hidden md:block" />
-              <Logo variant="bms" tone="dark" size="lg" />
-            </div>
-            <a
-              href="#contact"
-              className="hidden md:inline-flex items-center gap-2 text-primary text-sm font-bold tracking-[0.2em] uppercase hover:text-on-tertiary-fixed transition-colors"
-            >
-              Solicitar diagnóstico
-              <span className="material-symbols-outlined text-base">arrow_forward</span>
-            </a>
+      <div className="bg-white">
+        <div className="container mx-auto px-6 md:px-8 py-6 md:py-8">
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-12">
+            <Logo variant="bg" tone="dark" size="lg" />
+            <span className="text-on-surface-variant/30 text-xl font-extralight select-none">
+              ×
+            </span>
+            <Logo variant="bms" tone="dark" size="lg" />
           </div>
         </div>
+        <div className="h-[3px] bg-tertiary-fixed" />
       </div>
 
       {/* Hero */}

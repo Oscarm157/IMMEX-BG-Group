@@ -5,9 +5,9 @@ type LogoTone = "light" | "dark";
 type LogoSize = "sm" | "md" | "lg";
 
 const heights: Record<LogoSize, number> = {
-  sm: 28,
-  md: 44,
-  lg: 64,
+  sm: 24,
+  md: 38,
+  lg: 54,
 };
 
 const ratios: Record<LogoVariant, number> = {
