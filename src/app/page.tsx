@@ -1,5 +1,5 @@
 import { Logo } from "@/components/Logo";
-import { LeadForm } from "@/components/LeadForm";
+import { TallyForm } from "@/components/TallyForm";
 import { MotionSection, MotionItem } from "@/components/MotionSection";
 import { FloatingCTA } from "@/components/FloatingCTA";
 
@@ -281,8 +281,8 @@ export default function Home() {
             </div>
 
             <div className="lg:w-1/2">
-              <div className="bg-white p-10 md:p-14 shadow-2xl">
-                <LeadForm />
+              <div className="bg-white p-6 md:p-10 shadow-2xl">
+                <TallyForm />
               </div>
             </div>
           </div>
