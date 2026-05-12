@@ -58,9 +58,9 @@ export default function Home() {
         <div className="relative z-20 w-full px-6 md:px-8 py-8 md:py-12">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-wrap items-center justify-center md:justify-start gap-8 md:gap-12">
-              <Logo variant="bg" tone="light" size="md" />
-              <div className="h-8 w-px bg-white/15 hidden md:block" />
-              <Logo variant="bms" tone="light" size="md" />
+              <Logo variant="bg" tone="light" size="lg" />
+              <div className="h-10 w-px bg-white/15 hidden md:block" />
+              <Logo variant="bms" tone="light" size="lg" />
             </div>
           </div>
         </div>
@@ -117,12 +117,9 @@ export default function Home() {
 
           <div className="grid md:grid-cols-2 gap-0 border-t border-outline-variant/15">
             <div className="p-12 md:p-20 bg-surface-container-lowest border-r border-outline-variant/15 hover:bg-primary-container transition-colors duration-500 group">
-              <div className="mb-12">
-                <Logo variant="bg" tone="dark" size="md" swapOnHover />
+              <div className="mb-14">
+                <Logo variant="bg" tone="dark" size="lg" swapOnHover />
               </div>
-              <h3 className="text-tertiary-fixed-dim group-hover:text-tertiary-fixed text-sm font-black tracking-[0.4em] uppercase mb-12 transition-colors">
-                BG Consulting
-              </h3>
               <ul className="space-y-8">
                 {partnershipBG.map((item) => (
                   <li key={item.title} className="flex items-start gap-6">
@@ -143,12 +140,9 @@ export default function Home() {
             </div>
 
             <div className="p-12 md:p-20 bg-surface-container-low hover:bg-primary-container transition-colors duration-500 group">
-              <div className="mb-12">
-                <Logo variant="bms" tone="dark" size="md" swapOnHover />
+              <div className="mb-14">
+                <Logo variant="bms" tone="dark" size="lg" swapOnHover />
               </div>
-              <h3 className="text-tertiary-fixed-dim group-hover:text-tertiary-fixed text-sm font-black tracking-[0.4em] uppercase mb-12 transition-colors">
-                BMS Software
-              </h3>
               <ul className="space-y-8">
                 {partnershipBMS.map((item) => (
                   <li key={item.title} className="flex items-start gap-6">
@@ -178,7 +172,7 @@ export default function Home() {
             <h3 className="text-2xl md:text-3xl font-black text-white tracking-tighter">
               La Nueva Era del <span className="text-tertiary-fixed">Trade Governance MX</span>
             </h3>
-            <Logo variant="bms" tone="light" size="sm" />
+            <Logo variant="bms" tone="light" size="md" />
           </div>
         </div>
 

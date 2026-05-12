@@ -4,10 +4,15 @@ type LogoVariant = "bg" | "bms";
 type LogoTone = "light" | "dark";
 type LogoSize = "sm" | "md" | "lg";
 
-const sizes: Record<LogoSize, number> = {
-  sm: 36,
-  md: 56,
-  lg: 80,
+const heights: Record<LogoSize, number> = {
+  sm: 28,
+  md: 44,
+  lg: 64,
+};
+
+const ratios: Record<LogoVariant, number> = {
+  bg: 3305 / 837,
+  bms: 2803 / 836,
 };
 
 const sources: Record<LogoVariant, { light: string; dark: string; alt: string }> = {
@@ -37,7 +42,8 @@ export function Logo({
   className?: string;
 }) {
   const { light, dark, alt } = sources[variant];
-  const px = sizes[size];
+  const h = heights[size];
+  const w = Math.round(h * ratios[variant]);
   const primary = tone === "light" ? light : dark;
   const secondary = tone === "light" ? dark : light;
 
@@ -45,13 +51,13 @@ export function Logo({
     return (
       <div
         className={`relative inline-block ${className}`}
-        style={{ width: px, height: px }}
+        style={{ width: w, height: h }}
       >
         <Image
           src={primary}
           alt={alt}
-          width={px}
-          height={px}
+          width={w}
+          height={h}
           className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0"
           priority
         />
@@ -59,8 +65,8 @@ export function Logo({
           src={secondary}
           alt=""
           aria-hidden
-          width={px}
-          height={px}
+          width={w}
+          height={h}
           className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
         />
       </div>
@@ -71,8 +77,8 @@ export function Logo({
     <Image
       src={primary}
       alt={alt}
-      width={px}
-      height={px}
+      width={w}
+      height={h}
       className={className}
       priority
     />
