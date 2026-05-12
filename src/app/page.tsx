@@ -74,10 +74,10 @@ export default function Home() {
                 Foro IMMEX · Cumplimiento 360°
               </span>
             </div>
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-black tracking-tighter leading-[1.02]">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.05]">
               Cumplimiento que se <span className="text-tertiary-fixed">implementa</span>, no que se promete.
             </h1>
-            <p className="text-lg md:text-2xl text-on-primary-container max-w-2xl font-light leading-relaxed">
+            <p className="text-base md:text-lg text-on-primary-container max-w-xl font-light leading-relaxed">
               Diagnóstico previo para asistentes al Foro IMMEX. Respaldo legal y software especializado en una sola conversación.
             </p>
             <div className="pt-4 md:pt-8 flex flex-wrap items-center gap-6">
