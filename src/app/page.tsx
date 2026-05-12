@@ -1,6 +1,7 @@
+import Image from "next/image";
 import { Logo } from "@/components/Logo";
 import { TallyForm } from "@/components/TallyForm";
-import { MotionSection, MotionItem } from "@/components/MotionSection";
+import { MotionSection } from "@/components/MotionSection";
 import { FloatingCTA } from "@/components/FloatingCTA";
 
 const partnershipBG = [
@@ -15,13 +16,29 @@ const partnershipBMS = [
   { icon: "database", title: "Gestión de Datos", desc: "Inteligencia centralizada para la toma de decisiones basada en evidencia." },
 ];
 
-const frameworkLayers = [
-  { label: "Datos y Operación", caption: "Crean Registros en Anexo 24", opacity: 1, padding: "md:px-8" },
-  { label: "Controles Internos", caption: "Protegen Integridad de los Datos", opacity: 0.8, padding: "md:px-12" },
-  { label: "Automatización", caption: "Escala la ejecución/Operación Anexo 24", opacity: 0.6, padding: "md:px-16" },
-  { label: "Auditoría Interna", caption: "Valida el Cumplimiento", opacity: 0.4, padding: "md:px-20" },
-  { label: "Gobernanza", caption: "Define Dirección Estratégica", opacity: 0.3, padding: "md:px-24" },
-  { label: "Analítica e IA", caption: "Optimiza el desempeño", opacity: 0.2, padding: "md:px-28" },
+const frameworkPillars = [
+  { name: "Cumplimiento", desc: "Operación alineada al marco normativo aduanero." },
+  { name: "Integridad", desc: "Datos consistentes entre sistemas y registros oficiales." },
+  { name: "Confiabilidad", desc: "Procesos repetibles y auditables en cada operación." },
+  { name: "Trazabilidad", desc: "Evidencia continua del ciclo completo de la operación." },
+];
+
+const frameworkDimensions = [
+  {
+    label: "Dimensión 1",
+    title: "Requerimientos del negocio",
+    items: ["Sistemas y aplicaciones", "Información y datos", "Infraestructura y ciberseguridad", "Personas y gobernanza"],
+  },
+  {
+    label: "Dimensión 2",
+    title: "Recursos de TI y comercio exterior",
+    items: ["Operación", "Controles internos", "Auditoría y monitoreo", "Inteligencia y mejora continua"],
+  },
+  {
+    label: "Dimensión 3",
+    title: "Modelo de operación, control y mejora continua",
+    items: ["Gobernanza transversal sobre las dos dimensiones anteriores."],
+  },
 ];
 
 const benefits = [
@@ -175,53 +192,47 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="max-w-5xl mx-auto space-y-4">
-            {frameworkLayers.map((layer, i) => (
-              <MotionItem key={layer.label} delay={i * 0.08}>
-                <div className="grid grid-cols-12 items-center group gap-y-2">
-                  <div className="col-span-12 md:col-span-5 text-left md:text-right md:pr-12 order-2 md:order-1">
-                    <p className="text-on-primary-container text-xs md:text-sm font-medium transition-colors group-hover:text-white">
-                      {layer.caption}
-                    </p>
-                  </div>
-                  <div className="col-span-12 md:col-span-7 relative order-1 md:order-2">
-                    <div
-                      className={`h-16 md:h-20 rounded-r-full flex items-center px-6 ${layer.padding} border border-white/5 framework-shadow transform transition-all group-hover:translate-x-2`}
-                      style={{ background: `rgba(0, 6, 22, ${layer.opacity})` }}
-                    >
-                      <div
-                        className="absolute -left-4 top-1/2 -translate-y-1/2 w-8 h-8 rotate-45 z-10 hidden md:block"
-                        style={{ background: `rgba(230, 255, 0, ${layer.opacity})` }}
-                      />
-                      <span
-                        className="font-bold text-base md:text-xl tracking-tight"
-                        style={{ color: `rgba(255, 255, 255, ${0.5 + layer.opacity * 0.5})` }}
-                      >
-                        {layer.label}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </MotionItem>
-            ))}
+          <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-12 lg:gap-20 items-center max-w-6xl mx-auto">
+            <div className="relative aspect-square w-full max-w-[640px] mx-auto">
+              <Image
+                src="/Framework.jpg"
+                alt="BMS Trade Governance Framework"
+                fill
+                className="object-contain"
+                sizes="(min-width: 1024px) 640px, 100vw"
+                priority
+              />
+            </div>
 
-            <MotionItem delay={frameworkLayers.length * 0.08 + 0.1}>
-              <div className="grid grid-cols-12 items-center group pt-4 gap-y-2">
-                <div className="col-span-12 md:col-span-5 text-left md:text-right md:pr-12 order-2 md:order-1">
-                  <p className="text-tertiary-fixed text-xs md:text-sm font-black uppercase tracking-widest">
-                    Aseguran visibilidad y soporte de auditoría
-                  </p>
-                </div>
-                <div className="col-span-12 md:col-span-7 order-1 md:order-2">
-                  <div className="bg-tertiary-fixed h-20 md:h-24 rounded-full flex items-center px-8 md:px-12 shadow-[0_0_50px_rgba(230,255,0,0.2)] transform transition-all group-hover:scale-[1.02]">
-                    <span className="text-primary font-black text-base md:text-2xl tracking-tighter uppercase">
-                      Métricos, KPI y Trazabilidad
-                    </span>
-                    <span className="material-symbols-outlined ml-auto text-primary text-3xl">insights</span>
-                  </div>
+            <div className="space-y-10">
+              <div>
+                <p className="text-tertiary-fixed text-xs font-black tracking-[0.3em] uppercase mb-4">
+                  Núcleo
+                </p>
+                <div className="grid grid-cols-2 gap-px bg-white/5">
+                  {frameworkPillars.map((p) => (
+                    <div key={p.name} className="bg-primary p-5 space-y-2">
+                      <h4 className="text-tertiary-fixed font-black tracking-tight text-lg">{p.name}</h4>
+                      <p className="text-on-primary-container text-xs leading-relaxed">{p.desc}</p>
+                    </div>
+                  ))}
                 </div>
               </div>
-            </MotionItem>
+
+              <div className="space-y-6">
+                {frameworkDimensions.map((d) => (
+                  <div key={d.label} className="border-l-2 border-tertiary-fixed/40 pl-5">
+                    <p className="text-tertiary-fixed/80 text-[10px] font-black tracking-[0.3em] uppercase mb-1">
+                      {d.label}
+                    </p>
+                    <h5 className="text-white font-bold mb-2">{d.title}</h5>
+                    <p className="text-on-primary-container text-sm leading-relaxed">
+                      {d.items.join(" · ")}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
