@@ -51,19 +51,20 @@ const benefits = [
 export default function Home() {
   return (
     <>
-      {/* Hero */}
-      <header className="relative min-h-screen md:min-h-[880px] flex flex-col overflow-hidden asymmetric-gradient text-on-primary">
-        <div className="hero-glow" aria-hidden />
-
-        <div className="relative z-20 w-full px-6 md:px-8 py-8 md:py-12">
-          <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-8 md:gap-12">
-              <Logo variant="bg" tone="light" size="lg" />
-              <div className="h-10 w-px bg-white/15 hidden md:block" />
-              <Logo variant="bms" tone="light" size="lg" />
-            </div>
+      {/* Top bar */}
+      <div className="bg-white border-b border-outline-variant/20">
+        <div className="container mx-auto px-6 md:px-8 py-5 md:py-6">
+          <div className="flex flex-wrap items-center justify-center md:justify-start gap-8 md:gap-12">
+            <Logo variant="bg" tone="dark" size="lg" />
+            <div className="h-10 w-px bg-outline-variant/40 hidden md:block" />
+            <Logo variant="bms" tone="dark" size="lg" />
           </div>
         </div>
+      </div>
+
+      {/* Hero */}
+      <header className="relative min-h-screen md:min-h-[820px] flex flex-col overflow-hidden asymmetric-gradient text-on-primary">
+        <div className="hero-glow" aria-hidden />
 
         <div className="container mx-auto px-6 md:px-8 relative z-10 flex-grow flex items-center">
           <div className="max-w-4xl space-y-8 py-16 md:py-24">
