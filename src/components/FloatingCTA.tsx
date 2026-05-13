@@ -8,7 +8,9 @@ export function FloatingCTA() {
 
   useEffect(() => {
     function onScroll() {
-      const past = window.scrollY > window.innerHeight * 0.9;
+      const isMobile = window.innerWidth < 768;
+      const threshold = isMobile ? 240 : window.innerHeight * 0.9;
+      const past = window.scrollY > threshold;
       const contact = document.getElementById("contact");
       const nearForm = contact
         ? contact.getBoundingClientRect().top < window.innerHeight * 0.6
