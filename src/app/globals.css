@@ -3,11 +3,11 @@
 @theme {
   /* ===== Sitio formal v2 — dark con profundidad por capas + acento BG ===== */
   /* Superficies dark: elevación por color-step, no por sombra (modelo Warp/Linear) */
-  --color-ink: #0b0c0e; /* canvas base */
-  --color-surface-1: #141619; /* superficie elevada */
+  --color-ink: #0e1012; /* canvas base (consola) */
+  --color-surface-1: #15171b; /* superficie elevada / panel */
   --color-surface-2: #1c1f24; /* cards */
-  --color-surface-3: #262a30; /* interactivo / hover */
-  --color-line: #2a2e34; /* borde hairline */
+  --color-surface-3: #23262d; /* interactivo / hover */
+  --color-line: #262a30; /* borde hairline */
   /* Superficies claras (interludios que cortan el dark) */
   --color-paper: #f6f6f3;
   --color-paper-2: #eceae4;
@@ -22,8 +22,9 @@
   --color-accent-ink: #2f7d4f; /* legible sobre superficies claras */
   --color-on-accent: #06140c;
 
-  --font-display: var(--font-geist), system-ui, sans-serif;
+  --font-display: var(--font-space-grotesk), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   /* ===== Tokens heredados (solo para /foro archivado) ===== */
   --color-primary: #000616;
@@ -67,6 +68,33 @@ html {
   box-shadow:
     rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset,
     rgba(0, 0, 0, 0.35) 0px 12px 30px -18px;
+}
+
+/* ===== Concepto instrumento: campo de grid + señal verde (Mapbox/Operate) ===== */
+.grid-field {
+  background-image:
+    linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+
+/* Desvanece el grid hacia los bordes para que no se sienta de tabla */
+.grid-fade {
+  -webkit-mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 0%, transparent 78%);
+  mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 0%, transparent 78%);
+}
+
+/* La señal (verde BG) brilla como instrumento sobre el near-black */
+.signal-glow {
+  box-shadow: 0 0 22px -4px rgba(112, 196, 139, 0.55);
+}
+.signal-text-glow {
+  text-shadow: 0 0 18px rgba(112, 196, 139, 0.35);
+}
+
+/* Panel de consola: borde hairline + inset, sin sombra pesada */
+.console-panel {
+  box-shadow: rgba(255, 255, 255, 0.04) 0px 0px 0px 1px inset;
 }
 
 /* Grano sutil fijo, no afecta scroll perf */

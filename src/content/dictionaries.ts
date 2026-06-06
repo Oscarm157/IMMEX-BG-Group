@@ -31,6 +31,15 @@ export const dictionaries = {
         { value: "180+", label: "empresas operan con BMS" },
       ],
     },
+    telemetry: {
+      header: "Estado de operación",
+      live: "En línea",
+      metrics: [
+        { value: "20+", label: "Años activos" },
+        { value: "180+", label: "Empresas" },
+        { value: "50K", label: "Operaciones / año" },
+      ],
+    },
     values: {
       eyebrow: "Principios",
       title: "Cuatro principios, sin excepciones.",
@@ -62,6 +71,9 @@ export const dictionaries = {
       eyebrow: "Servicios",
       title: "Ocho áreas, un mismo estándar.",
       cta: "Ver todos los servicios",
+      colIndex: "Índice",
+      colService: "Servicio",
+      colScope: "Alcance",
     },
     homeCta: {
       title: "Pongamos tu operación en orden.",
@@ -119,6 +131,7 @@ export const dictionaries = {
       eyebrow: "Cómo trabajamos",
       title: "Una operación, paso a paso.",
       lead: "Cada importación cruza las mismas etapas. BG sostiene el criterio legal y BMS deja el rastro. Avanza para recorrerlas.",
+      panel: "Flujo de operación · 5 etapas",
       stages: [
         { n: "01", name: "Origen", desc: "Se determina el origen de la mercancía y se arma el soporte documental." },
         { n: "02", name: "Clasificación", desc: "Clasificación arancelaria y criterio técnico que define aranceles y permisos." },
@@ -214,6 +227,15 @@ export const dictionaries = {
         { value: "180+", label: "companies run on BMS" },
       ],
     },
+    telemetry: {
+      header: "Operation status",
+      live: "Live",
+      metrics: [
+        { value: "20+", label: "Years active" },
+        { value: "180+", label: "Companies" },
+        { value: "50K", label: "Operations / yr" },
+      ],
+    },
     values: {
       eyebrow: "Principles",
       title: "Four principles, no exceptions.",
@@ -245,6 +267,9 @@ export const dictionaries = {
       eyebrow: "Services",
       title: "Eight areas, one standard.",
       cta: "View all services",
+      colIndex: "Index",
+      colService: "Service",
+      colScope: "Scope",
     },
     homeCta: {
       title: "Let's put your operation in order.",
@@ -302,6 +327,7 @@ export const dictionaries = {
       eyebrow: "How we work",
       title: "One operation, step by step.",
       lead: "Every import crosses the same stages. BG holds the legal judgment, BMS keeps the trail. Move through them.",
+      panel: "Operation flow · 5 stages",
       stages: [
         { n: "01", name: "Origin", desc: "The origin of the merchandise is determined and the supporting documents are built." },
         { n: "02", name: "Classification", desc: "Tariff classification and the criteria that set duties and permits." },

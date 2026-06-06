@@ -83,7 +83,7 @@ export function Nav({
           >
             {langSwitch.to}
           </Link>
-          <PillButton href={`/${lang}/contact`} variant="primary" className="px-5 py-2.5 text-sm">
+          <PillButton href={`/${lang}/contact`} variant="accent" className="px-5 py-2.5 text-sm">
             {dict.cta}
           </PillButton>
         </div>
