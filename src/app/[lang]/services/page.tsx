@@ -89,7 +89,7 @@ export default async function ServicesPage({
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-void/40" />
+        <div className="absolute inset-0 bg-ink/40" />
       </section>
 
       {/* Last four */}
@@ -101,13 +101,14 @@ export default async function ServicesPage({
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="mx-auto max-w-[1280px] px-5 py-28 sm:px-8 sm:py-36">
-        <Reveal className="flex flex-col items-start gap-7 border-t border-white/[0.08] pt-14">
-          <h2 className="max-w-2xl font-display text-[clamp(1.8rem,4.5vw,3rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
+      {/* CTA panel (light) */}
+      <section className="px-5 py-24 sm:px-8 sm:py-32">
+        <Reveal className="mx-auto flex max-w-[1280px] flex-col items-start gap-8 rounded-[18px] bg-paper px-8 py-16 sm:px-16 sm:py-24">
+          <h2 className="max-w-2xl font-display text-[clamp(2rem,5vw,3.4rem)] font-medium leading-[1.05] tracking-[-0.02em] text-ink">
             {d.homeCta.title}
           </h2>
-          <PillButton href={`/${lang}/contact`} variant="accent" arrow>
+          <p className="max-w-lg text-[17px] leading-relaxed text-ink/70">{d.homeCta.body}</p>
+          <PillButton href={`/${lang}/contact`} variant="inverted" arrow>
             {d.nav.cta}
           </PillButton>
         </Reveal>

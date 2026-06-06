@@ -29,17 +29,24 @@ function CountUp({ value }: { value: string }) {
 
 export function StatStrip({
   items,
+  tone = "dark",
 }: {
   items: readonly { value: string; label: string }[];
+  tone?: "dark" | "light";
 }) {
+  const light = tone === "light";
   return (
     <div className="grid grid-cols-2 gap-x-8 gap-y-12 lg:grid-cols-4">
       {items.map((s) => (
         <div key={s.label} className="flex flex-col gap-3">
-          <span className="font-display text-[clamp(2.8rem,6vw,4.5rem)] font-medium leading-none tracking-[-0.03em] text-chalk">
+          <span
+            className={`font-display text-[clamp(3rem,6.5vw,5rem)] font-medium leading-none tracking-[-0.035em] tabular-nums ${light ? "text-ink" : "text-chalk"}`}
+          >
             <CountUp value={s.value} />
           </span>
-          <span className="max-w-[18ch] text-[14px] leading-snug text-smoke">{s.label}</span>
+          <span className={`max-w-[18ch] text-[14px] leading-snug ${light ? "text-ink/55" : "text-smoke"}`}>
+            {s.label}
+          </span>
         </div>
       ))}
     </div>

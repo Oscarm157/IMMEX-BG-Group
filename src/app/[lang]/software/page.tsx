@@ -61,13 +61,13 @@ export default async function SoftwarePage({
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
       </section>
 
       {/* Slogan pull-quote */}
       <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
         <Reveal>
-          <p className="max-w-4xl font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-medium italic leading-[1.15] tracking-[-0.02em] text-bone">
+          <p className="max-w-4xl text-balance font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-medium leading-[1.15] tracking-[-0.02em] text-chalk">
             {s.slogan}
           </p>
         </Reveal>
@@ -91,26 +91,26 @@ export default async function SoftwarePage({
         </div>
       </section>
 
-      {/* Stats + modes on carbon */}
-      <section className="bg-carbon">
+      {/* Stats + modes (light band) */}
+      <section className="bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-28">
           <div className="grid gap-12 sm:grid-cols-3">
             {s.stats.map((stat) => (
               <Reveal key={stat.label} className="flex flex-col gap-3">
-                <span className="font-display text-[clamp(2.8rem,6vw,4.2rem)] font-medium leading-none tracking-[-0.03em] text-chalk">
+                <span className="font-display text-[clamp(3rem,6.5vw,4.6rem)] font-medium leading-none tracking-[-0.035em] tabular-nums text-ink">
                   {stat.value}
                 </span>
-                <span className="max-w-[20ch] text-[14px] leading-snug text-smoke">{stat.label}</span>
+                <span className="max-w-[20ch] text-[14px] leading-snug text-ink/55">{stat.label}</span>
               </Reveal>
             ))}
           </div>
 
-          <Reveal className="mt-16 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/[0.08] pt-8">
-            <span className="text-[13px] uppercase tracking-[0.14em] text-smoke">{s.modes.label}</span>
-            <div className="flex items-center gap-3 text-[15px] text-bone">
+          <Reveal className="mt-16 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-ink/10 pt-8">
+            <span className="text-[13px] uppercase tracking-[0.14em] text-ink/50">{s.modes.label}</span>
+            <div className="flex items-center gap-3 text-[15px] text-ink">
               {s.modes.items.map((m, i) => (
                 <span key={m} className="flex items-center gap-3">
-                  {i > 0 && <span className="h-1 w-1 rounded-full bg-accent/70" />}
+                  {i > 0 && <span className="h-1 w-1 rounded-full bg-accent-ink" />}
                   {m}
                 </span>
               ))}

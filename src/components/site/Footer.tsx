@@ -17,7 +17,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   ];
 
   return (
-    <footer className="border-t border-white/[0.08] bg-void">
+    <footer className="border-t border-white/[0.08] bg-ink">
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8">
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">

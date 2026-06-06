@@ -6,10 +6,10 @@ const base =
   "group inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-[15px] font-medium tracking-[-0.01em] transition-all duration-300 active:scale-[0.98] hover:-translate-y-px disabled:opacity-50 disabled:pointer-events-none";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-chalk text-void hover:bg-linen",
+  primary: "bg-chalk text-ink hover:bg-paper",
   ghost: "border border-chalk/30 text-chalk hover:border-chalk/70 hover:bg-chalk/[0.04]",
   accent: "bg-accent text-on-accent hover:bg-accent-dim",
-  inverted: "bg-void text-chalk hover:bg-graphite",
+  inverted: "bg-ink text-chalk hover:bg-surface-3",
 };
 
 function Arrow() {

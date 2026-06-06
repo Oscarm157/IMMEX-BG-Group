@@ -35,7 +35,7 @@ export function EditorialImageCard({
           priority={priority}
           className="object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-[1.04]"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-void via-void/40 to-void/5" />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/40 to-ink/5" />
 
         {badge && (
           <span className="absolute right-4 top-4 rounded-full bg-white/[0.08] px-3 py-1.5 text-[10.5px] font-medium uppercase tracking-[0.08em] text-chalk shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur-md">

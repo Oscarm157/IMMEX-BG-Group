@@ -55,7 +55,7 @@ export function Nav({
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${
         scrolled
-          ? "border-b border-white/[0.06] bg-void/80 backdrop-blur-xl"
+          ? "border-b border-white/[0.06] bg-ink/80 backdrop-blur-xl"
           : "border-b border-transparent bg-transparent"
       }`}
     >
@@ -111,7 +111,7 @@ export function Nav({
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden border-t border-white/[0.06] bg-void/95 backdrop-blur-xl md:hidden"
+            className="overflow-hidden border-t border-white/[0.06] bg-ink/95 backdrop-blur-xl md:hidden"
           >
             <div className="flex flex-col gap-1 px-5 py-6">
               {links.map((l) => (

@@ -1,24 +1,28 @@
 @import "tailwindcss";
 
 @theme {
-  /* ===== Sitio formal — sistema Sequel + acento BG (verde #70c48b) ===== */
-  /* Superficies acromáticas */
-  --color-void: #000000;
-  --color-carbon: #131313;
-  --color-graphite: #2a2a2a;
-  --color-line: #1f1f1f;
-  --color-linen: #f5f5f0;
+  /* ===== Sitio formal v2 — dark con profundidad por capas + acento BG ===== */
+  /* Superficies dark: elevación por color-step, no por sombra (modelo Warp/Linear) */
+  --color-ink: #0b0c0e; /* canvas base */
+  --color-surface-1: #141619; /* superficie elevada */
+  --color-surface-2: #1c1f24; /* cards */
+  --color-surface-3: #262a30; /* interactivo / hover */
+  --color-line: #2a2e34; /* borde hairline */
+  /* Superficies claras (interludios que cortan el dark) */
+  --color-paper: #f6f6f3;
+  --color-paper-2: #eceae4;
   /* Texto */
-  --color-chalk: #ffffff;
-  --color-bone: #c4c4c4;
-  --color-smoke: #8c8c8c;
-  --color-ash: #5a5a5a;
-  /* Acento único, del logo BG */
-  --color-accent: #70c48b;
-  --color-accent-dim: #4f9c6c;
+  --color-chalk: #f4f5f5; /* primario sobre dark / near-white */
+  --color-bone: #aeb2b8; /* secundario sobre dark */
+  --color-smoke: #7e838b; /* atenuado sobre dark */
+  --color-ash: #5a5f66; /* tenue */
+  /* Acento, del logo BG */
+  --color-accent: #70c48b; /* luminoso, sobre dark */
+  --color-accent-dim: #5aa876; /* hover */
+  --color-accent-ink: #2f7d4f; /* legible sobre superficies claras */
   --color-on-accent: #06140c;
 
-  --font-display: var(--font-newsreader), Georgia, serif;
+  --font-display: var(--font-geist), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
 
   /* ===== Tokens heredados (solo para /foro archivado) ===== */
@@ -41,10 +45,10 @@
 }
 
 body {
-  background: var(--color-void);
+  background: var(--color-ink);
   color: var(--color-chalk);
   font-family: var(--font-sans);
-  font-weight: 300;
+  font-weight: 400;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -58,11 +62,11 @@ html {
   color: var(--color-on-accent);
 }
 
-/* Sombra multicapa de las editorial image cards (Sequel) */
+/* Profundidad de cards: borde hairline + inset sutil, sin sombra pesada (modelo Warp/Linear) */
 .card-elev {
   box-shadow:
-    rgba(0, 0, 0, 0.55) 0px 18px 50px -12px,
-    rgba(255, 255, 255, 0.08) 0px 1px 0px 0px inset;
+    rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset,
+    rgba(0, 0, 0, 0.35) 0px 12px 30px -18px;
 }
 
 /* Grano sutil fijo, no afecta scroll perf */
@@ -71,7 +75,7 @@ html {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  opacity: 0.035;
+  opacity: 0.022;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 

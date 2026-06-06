@@ -16,18 +16,29 @@ export const dictionaries = {
     langSwitch: { to: "EN", aria: "Cambiar a inglés" },
     hero: {
       eyebrow: "Tijuana · San Diego",
-      title: "Cruzar la frontera",
-      titleAccent: "es la parte fácil.",
-      lead: "Lo complejo es el cumplimiento. BG lo resuelve entre México y Estados Unidos desde hace más de veinte años.",
+      title: "Comercio exterior y cumplimiento",
+      titleAccent: "entre México y Estados Unidos.",
+      lead: "Más de veinte años en aduanas, legal, compliance y fiscal para las empresas que operan entre Tijuana y San Diego.",
       ctaPrimary: "Hablemos",
       ctaSecondary: "Ver servicios",
     },
     stats: {
+      eyebrow: "En números",
       items: [
         { value: "20+", label: "años de práctica aduanera" },
         { value: "2", label: "países, una sola operación" },
         { value: "8", label: "áreas de especialidad" },
         { value: "180+", label: "empresas operan con BMS" },
+      ],
+    },
+    values: {
+      eyebrow: "Principios",
+      title: "Cuatro principios, sin excepciones.",
+      items: [
+        { name: "Constancia y disciplina", body: "Disponibilidad las 24 horas, los 7 días de la semana. La operación aduanera no se detiene y el acompañamiento tampoco." },
+        { name: "Confianza", body: "La base para que cliente y firma lleguen al mismo resultado. Se construye con cada operación resuelta." },
+        { name: "Integridad", body: "Decisiones consistentes y honestas frente a la autoridad y frente al cliente, aunque la respuesta correcta no sea la cómoda." },
+        { name: "Transparencia", body: "Cada criterio, cada riesgo y cada costo, expuestos de frente." },
       ],
     },
     synergy: {
@@ -120,7 +131,7 @@ export const dictionaries = {
       eyebrow: "BMS Software",
       title: "El cumplimiento, automatizado.",
       lead: "BMS Custom System es el ERP aduanero con el que opera BG y más de 180 empresas. Simplifica la gestión de tu operación de comercio exterior.",
-      slogan: "Simplificamos la gestión de tu operación de comercio exterior con tecnología de vanguardia.",
+      slogan: "Un solo sistema para el inventario IMMEX, los anexos 24 y 30, la conectividad EDI y la reportería. El mismo que opera BG todos los días.",
       capabilities: [
         { title: "Anexo 24 y Anexo 30", body: "Cumple los requisitos de control de inventarios IMMEX y deja cada movimiento registrado." },
         { title: "Conectividad EDI", body: "Intercambio electrónico de archivos con la autoridad a través de web services." },
@@ -188,18 +199,29 @@ export const dictionaries = {
     langSwitch: { to: "ES", aria: "Switch to Spanish" },
     hero: {
       eyebrow: "Tijuana · San Diego",
-      title: "Crossing the border",
-      titleAccent: "is the easy part.",
-      lead: "Compliance is the hard part. BG has handled it between Mexico and the United States for over twenty years.",
+      title: "Foreign trade and compliance",
+      titleAccent: "between Mexico and the United States.",
+      lead: "More than twenty years across customs, legal, compliance and tax for the companies that operate between Tijuana and San Diego.",
       ctaPrimary: "Let's talk",
       ctaSecondary: "View services",
     },
     stats: {
+      eyebrow: "By the numbers",
       items: [
         { value: "20+", label: "years in customs practice" },
         { value: "2", label: "countries, one operation" },
         { value: "8", label: "areas of expertise" },
         { value: "180+", label: "companies run on BMS" },
+      ],
+    },
+    values: {
+      eyebrow: "Principles",
+      title: "Four principles, no exceptions.",
+      items: [
+        { name: "Consistency and discipline", body: "Available 24 hours a day, 7 days a week. Customs operations never stop, and neither does the support." },
+        { name: "Trust", body: "The basis for client and firm to reach the same outcome. Built with every operation resolved." },
+        { name: "Integrity", body: "Consistent, honest decisions before the authority and before the client, even when the right answer is not the comfortable one." },
+        { name: "Transparency", body: "Every criterion, every risk and every cost, stated up front." },
       ],
     },
     synergy: {
@@ -292,7 +314,7 @@ export const dictionaries = {
       eyebrow: "BMS Software",
       title: "Compliance, automated.",
       lead: "BMS Custom System is the customs ERP that BG and more than 180 companies run on. It simplifies the management of your cross-border operation.",
-      slogan: "We simplify the management of your foreign trade operation with leading-edge technology.",
+      slogan: "One system for IMMEX inventory, Annex 24 and 30, EDI connectivity and reporting. The same one BG runs every day.",
       capabilities: [
         { title: "Annex 24 and Annex 30", body: "Meets IMMEX inventory control requirements and keeps every movement on record." },
         { title: "EDI connectivity", body: "Electronic file exchange with the authority through web services." },
