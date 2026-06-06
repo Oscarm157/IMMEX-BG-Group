@@ -34,11 +34,20 @@ export const dictionaries = {
     telemetry: {
       header: "Estado de operación",
       live: "En línea",
+      status: [
+        { k: "Anexo 24 / 30", v: "Activo" },
+        { k: "Conectividad EDI", v: "En línea" },
+        { k: "T-MEC / USMCA", v: "Vigente" },
+      ],
       metrics: [
         { value: "20+", label: "Años activos" },
         { value: "180+", label: "Empresas" },
         { value: "50K", label: "Operaciones / año" },
       ],
+    },
+    frameworks: {
+      label: "Operamos sobre",
+      items: ["Anexo 24", "Anexo 30", "IMMEX", "T-MEC / USMCA", "EDI", "NOM"],
     },
     values: {
       eyebrow: "Principios",
@@ -230,11 +239,20 @@ export const dictionaries = {
     telemetry: {
       header: "Operation status",
       live: "Live",
+      status: [
+        { k: "Annex 24 / 30", v: "Active" },
+        { k: "EDI connectivity", v: "Online" },
+        { k: "USMCA", v: "Current" },
+      ],
       metrics: [
         { value: "20+", label: "Years active" },
         { value: "180+", label: "Companies" },
         { value: "50K", label: "Operations / yr" },
       ],
+    },
+    frameworks: {
+      label: "We operate across",
+      items: ["Annex 24", "Annex 30", "IMMEX", "USMCA", "EDI", "NOM"],
     },
     values: {
       eyebrow: "Principles",

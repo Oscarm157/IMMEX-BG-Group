@@ -59,9 +59,9 @@ export function Nav({
           : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-[68px] max-w-[1280px] items-center justify-between px-5 sm:px-8">
+      <nav className="mx-auto flex h-20 max-w-[1280px] items-center justify-between px-5 sm:h-[100px] sm:px-8">
         <Link href={`/${lang}`} aria-label="BG Consulting Group" className="shrink-0">
-          <Logo variant="bg" tone="light" size="sm" />
+          <Logo variant="bg" tone="light" size="sm" className="h-12 w-auto sm:h-[72px]" />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">

@@ -21,8 +21,8 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8">
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">
-            <Logo variant="bg" tone="light" size="md" />
-            <p className="mt-6 text-[15px] leading-relaxed text-bone/70">{dict.footer.tagline}</p>
+            <Logo variant="bg" tone="light" size="md" className="h-14 w-auto sm:h-[76px]" />
+            <p className="mt-7 text-[15px] leading-relaxed text-bone/70">{dict.footer.tagline}</p>
             <a
               href={`mailto:${dict.contact.email}`}
               className="mt-6 inline-block text-[15px] text-chalk underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:text-accent"
@@ -86,7 +86,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
           <div className="flex items-center gap-3 text-[13px] text-ash">
             <span>{dict.footer.partner}</span>
             <a href="https://www.bmscustomsystem.com/" target="_blank" rel="noopener noreferrer" className="opacity-70 transition-opacity hover:opacity-100">
-              <Logo variant="bms" tone="light" size="sm" />
+              <Logo variant="bms" tone="light" size="sm" className="h-7 w-auto" />
             </a>
           </div>
         </div>

@@ -2,6 +2,7 @@ import { Reveal } from "./Reveal";
 
 export function SectionHeading({
   eyebrow,
+  index,
   title,
   lead,
   align = "left",
@@ -9,6 +10,7 @@ export function SectionHeading({
   className = "",
 }: {
   eyebrow?: string;
+  index?: string;
   title: React.ReactNode;
   lead?: string;
   align?: "left" | "center";
@@ -21,8 +23,9 @@ export function SectionHeading({
     <Reveal className={`flex max-w-3xl flex-col ${alignment} ${className}`}>
       {eyebrow && (
         <span
-          className={`mb-5 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] ${light ? "text-accent-ink" : "text-accent"}`}
+          className={`mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] ${light ? "text-accent-ink" : "text-accent"}`}
         >
+          {index && <span className="tabular-nums text-ash">{index}</span>}
           <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
           {eyebrow}
         </span>
