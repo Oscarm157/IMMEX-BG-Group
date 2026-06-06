@@ -11,13 +11,13 @@ const heights: Record<LogoSize, number> = {
 };
 
 const ratios: Record<LogoVariant, number> = {
-  bg: 3305 / 837,
+  bg: 1024 / 325,
   bms: 2803 / 836,
 };
 
 const sources: Record<LogoVariant, { light: string; dark: string; alt: string }> = {
   bg: {
-    light: "/BG_Logotipo_Blanco.png",
+    light: "/BG_Logo_Color.png",
     dark: "/BG_Logotipo.png",
     alt: "BG Consulting Group",
   },

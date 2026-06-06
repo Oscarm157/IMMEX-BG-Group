@@ -52,8 +52,8 @@ export function TelemetryPanel({
         <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="h-20 w-full" aria-hidden>
           <defs>
             <linearGradient id="tp-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#70c48b" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#70c48b" stopOpacity="0" />
+              <stop offset="0%" stopColor="#00e6a0" stopOpacity="0.22" />
+              <stop offset="100%" stopColor="#00e6a0" stopOpacity="0" />
             </linearGradient>
           </defs>
           <motion.path
@@ -66,7 +66,7 @@ export function TelemetryPanel({
           <motion.path
             d={linePath}
             fill="none"
-            stroke="#70c48b"
+            stroke="#00e6a0"
             strokeWidth="1"
             strokeLinecap="round"
             strokeLinejoin="round"

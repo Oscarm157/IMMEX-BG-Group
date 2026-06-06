@@ -3,24 +3,26 @@
 @theme {
   /* ===== Sitio formal v2 — dark con profundidad por capas + acento BG ===== */
   /* Superficies dark: elevación por color-step, no por sombra (modelo Warp/Linear) */
-  --color-ink: #0e1012; /* canvas base (consola) */
-  --color-surface-1: #15171b; /* superficie elevada / panel */
-  --color-surface-2: #1c1f24; /* cards */
-  --color-surface-3: #23262d; /* interactivo / hover */
-  --color-line: #262a30; /* borde hairline */
+  /* Consola teñida con el navy de marca (#284068 / #102848 del logo) */
+  --color-ink: #0a0e15; /* canvas base near-black navy */
+  --color-surface-1: #11161f; /* superficie elevada / panel */
+  --color-surface-2: #161c28; /* cards */
+  --color-surface-3: #202736; /* interactivo / hover */
+  --color-line: #28303f; /* borde hairline */
+  --color-navy: #284068; /* navy de marca para acentos puntuales */
   /* Superficies claras (interludios que cortan el dark) */
   --color-paper: #f6f6f3;
   --color-paper-2: #eceae4;
-  /* Texto */
-  --color-chalk: #f4f5f5; /* primario sobre dark / near-white */
-  --color-bone: #aeb2b8; /* secundario sobre dark */
-  --color-smoke: #7e838b; /* atenuado sobre dark */
-  --color-ash: #5a5f66; /* tenue */
-  /* Acento, del logo BG */
-  --color-accent: #70c48b; /* luminoso, sobre dark */
-  --color-accent-dim: #5aa876; /* hover */
-  --color-accent-ink: #2f7d4f; /* legible sobre superficies claras */
-  --color-on-accent: #06140c;
+  /* Texto (gris azulado para armonizar con el navy) */
+  --color-chalk: #f4f6f7; /* primario sobre dark / near-white */
+  --color-bone: #aab2c0; /* secundario sobre dark */
+  --color-smoke: #7b8494; /* atenuado sobre dark */
+  --color-ash: #58616f; /* tenue */
+  /* Mint de marca (verde exacto del logo BG; el #70c48b previo era erróneo) */
+  --color-accent: #00e6a0; /* señal luminosa, sobre dark */
+  --color-accent-dim: #00c489; /* hover */
+  --color-accent-ink: #0b7d5a; /* legible sobre superficies claras */
+  --color-on-accent: #04231a;
 
   --font-display: var(--font-space-grotesk), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -84,12 +86,12 @@ html {
   mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 0%, transparent 78%);
 }
 
-/* La señal (verde BG) brilla como instrumento sobre el near-black */
+/* La señal (mint de marca) brilla como instrumento sobre el near-black */
 .signal-glow {
-  box-shadow: 0 0 22px -4px rgba(112, 196, 139, 0.55);
+  box-shadow: 0 0 22px -4px rgba(0, 230, 160, 0.55);
 }
 .signal-text-glow {
-  text-shadow: 0 0 18px rgba(112, 196, 139, 0.35);
+  text-shadow: 0 0 18px rgba(0, 230, 160, 0.35);
 }
 
 /* Panel de consola: borde hairline + inset, sin sombra pesada */
