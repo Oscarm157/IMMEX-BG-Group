@@ -1,0 +1,358 @@
+export const locales = ["es", "en"] as const;
+export type Locale = (typeof locales)[number];
+
+export function isLocale(value: string): value is Locale {
+  return (locales as readonly string[]).includes(value);
+}
+
+export const dictionaries = {
+  es: {
+    nav: {
+      services: "Servicios",
+      software: "Software",
+      contact: "Contacto",
+      cta: "Hablemos",
+    },
+    langSwitch: { to: "EN", aria: "Cambiar a inglés" },
+    hero: {
+      eyebrow: "Tijuana · San Diego",
+      title: "Cruzar la frontera",
+      titleAccent: "es la parte fácil.",
+      lead: "Lo complejo es el cumplimiento. BG lo resuelve entre México y Estados Unidos desde hace más de veinte años.",
+      ctaPrimary: "Hablemos",
+      ctaSecondary: "Ver servicios",
+    },
+    stats: {
+      items: [
+        { value: "20+", label: "años de práctica aduanera" },
+        { value: "2", label: "países, una sola operación" },
+        { value: "8", label: "áreas de especialidad" },
+        { value: "180+", label: "empresas operan con BMS" },
+      ],
+    },
+    synergy: {
+      eyebrow: "BG + BMS",
+      title: "Dos frentes, una operación.",
+      lead: "La asesoría legal y el software aduanero trabajan sobre la misma realidad: tu operación de comercio exterior. BG y BMS la cubren de extremo a extremo.",
+      bg: {
+        kicker: "BG Consulting Group",
+        title: "La asesoría",
+        body: "Defensa legal, cumplimiento y comercio exterior. El criterio que sostiene cada pedimento ante la autoridad.",
+        points: ["Legal y litigio aduanero", "Compliance y auditoría", "Valor en aduana y origen"],
+      },
+      bms: {
+        kicker: "BMS Software",
+        title: "El software",
+        body: "El sistema que automatiza el cumplimiento: Anexo 24, Anexo 30 y la trazabilidad de cada operación.",
+        points: ["Anexo 24 y Anexo 30", "EDI y +100 reportes", "Hasta 150 usuarios"],
+      },
+    },
+    servicesPreview: {
+      eyebrow: "Servicios",
+      title: "Ocho áreas, un mismo estándar.",
+      cta: "Ver todos los servicios",
+    },
+    homeCta: {
+      title: "Pongamos tu operación en orden.",
+      body: "Una conversación con el equipo legal de BG aclara dónde está el riesgo y qué se puede corregir.",
+      cta: "Hablemos",
+    },
+    services: {
+      eyebrow: "Servicios",
+      title: "Lo que hacemos",
+      lead: "Comercio exterior, aduanas, legal, compliance y fiscal. Cada área resuelve una parte concreta de tu operación.",
+      items: [
+        {
+          name: "Consultoría legal",
+          summary: "Defensa y representación ante la autoridad aduanera y fiscal.",
+          points: ["Recursos administrativos", "Juicio de amparo", "Tribunal Federal de Justicia Administrativa", "Acuerdos conclusivos"],
+        },
+        {
+          name: "Compliance y aseguramiento",
+          summary: "Estructuras para identificar y controlar el riesgo antes de que llegue la revisión.",
+          points: ["Evaluación de riesgos de comercio exterior", "NAFTA 303", "Auditorías preventivas", "Análisis de control interno"],
+        },
+        {
+          name: "Comercio exterior",
+          summary: "El criterio técnico detrás de cada operación de importación y exportación.",
+          points: ["Valor en aduana", "Criterios de valoración", "Correcta presentación de pedimentos", "Análisis de riesgo aduanero"],
+        },
+        {
+          name: "Expertos en comercio internacional",
+          summary: "Clasificación, origen y avalúo resueltos con respaldo técnico.",
+          points: ["Clasificación arancelaria", "Origen de la mercancía", "Criterios aduaneros", "Avalúos"],
+        },
+        {
+          name: "Tecnología de la información",
+          summary: "El soporte logístico y de monitoreo que ordena la operación física.",
+          points: ["Logística", "Almacenaje", "Distribución", "Monitoreo"],
+        },
+        {
+          name: "Servicios fiscales",
+          summary: "Recuperación de IVA y gestión de devoluciones ante el SAT.",
+          points: ["Revisión del IVA", "Solicitud de devolución"],
+        },
+        {
+          name: "Acuerdos comerciales",
+          summary: "Origen y certificación gestionados de proveedor a aduana.",
+          points: ["Registros de origen", "Diseño de formatos para solicitudes", "Gestión con proveedores nacionales", "Auditoría de certificación de origen"],
+        },
+        {
+          name: "Servicios de importación",
+          summary: "La operación de importación cubierta de permiso a despacho.",
+          points: ["Almacén", "Normas específicas (NOM)", "Gestión de permisos", "Agente aduanal"],
+        },
+      ],
+    },
+    flow: {
+      eyebrow: "Cómo trabajamos",
+      title: "Una operación, paso a paso.",
+      lead: "Cada importación cruza las mismas etapas. BG sostiene el criterio legal y BMS deja el rastro. Avanza para recorrerlas.",
+      stages: [
+        { n: "01", name: "Origen", desc: "Se determina el origen de la mercancía y se arma el soporte documental." },
+        { n: "02", name: "Clasificación", desc: "Clasificación arancelaria y criterio técnico que define aranceles y permisos." },
+        { n: "03", name: "Valor en aduana", desc: "Valoración correcta de la mercancía bajo los criterios de la autoridad." },
+        { n: "04", name: "Pedimento", desc: "Presentación del pedimento y despacho a través del agente aduanal." },
+        { n: "05", name: "Cumplimiento", desc: "Anexo 24 y Anexo 30: trazabilidad y reporte de cada operación en BMS." },
+      ],
+    },
+    software: {
+      eyebrow: "BMS Software",
+      title: "El cumplimiento, automatizado.",
+      lead: "BMS Custom System es el ERP aduanero con el que opera BG y más de 180 empresas. Simplifica la gestión de tu operación de comercio exterior.",
+      slogan: "Simplificamos la gestión de tu operación de comercio exterior con tecnología de vanguardia.",
+      capabilities: [
+        { title: "Anexo 24 y Anexo 30", body: "Cumple los requisitos de control de inventarios IMMEX y deja cada movimiento registrado." },
+        { title: "Conectividad EDI", body: "Intercambio electrónico de archivos con la autoridad a través de web services." },
+        { title: "Más de 100 reportes", body: "Reportería operativa y Crystal Report para el análisis a detalle." },
+        { title: "Integración MRP y ERP", body: "Se conecta con tu sistema con transacciones automáticas, sin doble captura." },
+        { title: "Certificados de origen", body: "Gestión, auditoría y trazabilidad de la documentación de origen." },
+        { title: "TLCAN / T-MEC", body: "Módulo de cumplimiento para los requisitos de la aduana estadounidense." },
+      ],
+      stats: [
+        { value: "180+", label: "empresas confían en BMS" },
+        { value: "50K", label: "operaciones import-export" },
+        { value: "1–150", label: "usuarios por licencia" },
+      ],
+      modes: { label: "Disponible en", items: ["Escritorio", "Web", "App"] },
+      cta: "Ver BMS Custom System",
+      ctaHref: "https://www.bmscustomsystem.com/",
+    },
+    contact: {
+      eyebrow: "Contacto",
+      title: "Hablemos de tu operación.",
+      lead: "Escríbenos o visítanos en cualquiera de las dos oficinas. Respondemos en español o inglés.",
+      offices: [
+        {
+          country: "México",
+          company: "BG Consulting Group",
+          address: "Miguel Alemán 3231 B, Col. Gabilondo, Tijuana, B.C. 22044",
+          phone: "+52 (664) 607 9642",
+          toll: "01 (800) 788 0232",
+        },
+        {
+          country: "Estados Unidos",
+          company: "BG Group & Broker LLC",
+          address: "7577 Airway Road, Suite 106, San Diego, CA 92154",
+          phone: "(619) 638-2168",
+          toll: "+1 (855) 755 0641",
+        },
+      ],
+      email: "contacto@bgc.mx",
+      form: {
+        name: "Nombre",
+        email: "Correo",
+        company: "Empresa",
+        message: "¿En qué te ayudamos?",
+        submit: "Enviar",
+        note: "Te respondemos en menos de un día hábil.",
+        sent: "Gracias. Te contactamos pronto.",
+      },
+    },
+    footer: {
+      tagline: "Comercio exterior, aduanas y cumplimiento entre Tijuana y San Diego.",
+      rights: "Todos los derechos reservados.",
+      nav: "Navegación",
+      offices: "Oficinas",
+      partner: "Software socio",
+    },
+  },
+
+  en: {
+    nav: {
+      services: "Services",
+      software: "Software",
+      contact: "Contact",
+      cta: "Let's talk",
+    },
+    langSwitch: { to: "ES", aria: "Switch to Spanish" },
+    hero: {
+      eyebrow: "Tijuana · San Diego",
+      title: "Crossing the border",
+      titleAccent: "is the easy part.",
+      lead: "Compliance is the hard part. BG has handled it between Mexico and the United States for over twenty years.",
+      ctaPrimary: "Let's talk",
+      ctaSecondary: "View services",
+    },
+    stats: {
+      items: [
+        { value: "20+", label: "years in customs practice" },
+        { value: "2", label: "countries, one operation" },
+        { value: "8", label: "areas of expertise" },
+        { value: "180+", label: "companies run on BMS" },
+      ],
+    },
+    synergy: {
+      eyebrow: "BG + BMS",
+      title: "Two fronts, one operation.",
+      lead: "Legal counsel and customs software work on the same reality: your cross-border operation. BG and BMS cover it end to end.",
+      bg: {
+        kicker: "BG Consulting Group",
+        title: "The counsel",
+        body: "Legal defense, compliance and foreign trade. The judgment behind every entry filed before the authority.",
+        points: ["Customs legal and litigation", "Compliance and audit", "Customs value and origin"],
+      },
+      bms: {
+        kicker: "BMS Software",
+        title: "The software",
+        body: "The system that automates compliance: Annex 24, Annex 30 and full traceability of every operation.",
+        points: ["Annex 24 and Annex 30", "EDI and 100+ reports", "Up to 150 users"],
+      },
+    },
+    servicesPreview: {
+      eyebrow: "Services",
+      title: "Eight areas, one standard.",
+      cta: "View all services",
+    },
+    homeCta: {
+      title: "Let's put your operation in order.",
+      body: "One conversation with BG's legal team makes clear where the risk is and what can be fixed.",
+      cta: "Let's talk",
+    },
+    services: {
+      eyebrow: "Services",
+      title: "What we do",
+      lead: "Foreign trade, customs, legal, compliance and tax. Each area solves a concrete part of your operation.",
+      items: [
+        {
+          name: "Legal consulting",
+          summary: "Defense and representation before the customs and tax authority.",
+          points: ["Administrative resources", "Writ of amparo", "Federal Court of Administrative Justice", "Conclusive agreements"],
+        },
+        {
+          name: "Assurance and compliance",
+          summary: "Structures to find and control risk before the review arrives.",
+          points: ["Foreign trade risk evaluation", "NAFTA 303", "Preventive audits", "Internal control analysis"],
+        },
+        {
+          name: "Foreign trade",
+          summary: "The technical judgment behind every import and export.",
+          points: ["Customs value", "Valuation criteria", "Correct filing of entries", "Customs risk analysis"],
+        },
+        {
+          name: "International trade experts",
+          summary: "Classification, origin and appraisal resolved with technical backing.",
+          points: ["Tariff classification", "Origin of merchandise", "Customs criteria", "Appraisals"],
+        },
+        {
+          name: "Information technology",
+          summary: "The logistics and monitoring layer that orders the physical operation.",
+          points: ["Logistics", "Storage", "Distribution", "Monitoring"],
+        },
+        {
+          name: "Tax services",
+          summary: "VAT recovery and refund management before the tax authority.",
+          points: ["VAT review", "Refund request"],
+        },
+        {
+          name: "Trade agreements",
+          summary: "Origin and certification managed from supplier to customs.",
+          points: ["Origin records", "Request format design", "Domestic supplier management", "Origin certification audit"],
+        },
+        {
+          name: "Import services",
+          summary: "The import operation covered from permit to clearance.",
+          points: ["Warehouse", "Specific standards (NOM)", "Permit management", "Customs broker"],
+        },
+      ],
+    },
+    flow: {
+      eyebrow: "How we work",
+      title: "One operation, step by step.",
+      lead: "Every import crosses the same stages. BG holds the legal judgment, BMS keeps the trail. Move through them.",
+      stages: [
+        { n: "01", name: "Origin", desc: "The origin of the merchandise is determined and the supporting documents are built." },
+        { n: "02", name: "Classification", desc: "Tariff classification and the criteria that set duties and permits." },
+        { n: "03", name: "Customs value", desc: "Correct valuation of the merchandise under the authority's criteria." },
+        { n: "04", name: "Entry", desc: "Filing of the entry and clearance through the customs broker." },
+        { n: "05", name: "Compliance", desc: "Annex 24 and Annex 30: traceability and reporting of every operation in BMS." },
+      ],
+    },
+    software: {
+      eyebrow: "BMS Software",
+      title: "Compliance, automated.",
+      lead: "BMS Custom System is the customs ERP that BG and more than 180 companies run on. It simplifies the management of your cross-border operation.",
+      slogan: "We simplify the management of your foreign trade operation with leading-edge technology.",
+      capabilities: [
+        { title: "Annex 24 and Annex 30", body: "Meets IMMEX inventory control requirements and keeps every movement on record." },
+        { title: "EDI connectivity", body: "Electronic file exchange with the authority through web services." },
+        { title: "Over 100 reports", body: "Operational reporting and Crystal Report for detailed analysis." },
+        { title: "MRP and ERP integration", body: "Connects to your system with automatic transactions, no double entry." },
+        { title: "Origin certificates", body: "Management, audit and traceability of origin documentation." },
+        { title: "NAFTA / USMCA", body: "Compliance module for U.S. customs requirements." },
+      ],
+      stats: [
+        { value: "180+", label: "companies trust BMS" },
+        { value: "50K", label: "import-export operations" },
+        { value: "1–150", label: "users per license" },
+      ],
+      modes: { label: "Available on", items: ["Desktop", "Web", "App"] },
+      cta: "Visit BMS Custom System",
+      ctaHref: "https://www.bmscustomsystem.com/",
+    },
+    contact: {
+      eyebrow: "Contact",
+      title: "Let's talk about your operation.",
+      lead: "Write to us or visit either office. We answer in English or Spanish.",
+      offices: [
+        {
+          country: "Mexico",
+          company: "BG Consulting Group",
+          address: "Miguel Alemán 3231 B, Col. Gabilondo, Tijuana, B.C. 22044",
+          phone: "+52 (664) 607 9642",
+          toll: "01 (800) 788 0232",
+        },
+        {
+          country: "United States",
+          company: "BG Group & Broker LLC",
+          address: "7577 Airway Road, Suite 106, San Diego, CA 92154",
+          phone: "(619) 638-2168",
+          toll: "+1 (855) 755 0641",
+        },
+      ],
+      email: "contacto@bgc.mx",
+      form: {
+        name: "Name",
+        email: "Email",
+        company: "Company",
+        message: "How can we help?",
+        submit: "Send",
+        note: "We reply within one business day.",
+        sent: "Thanks. We'll be in touch soon.",
+      },
+    },
+    footer: {
+      tagline: "Foreign trade, customs and compliance between Tijuana and San Diego.",
+      rights: "All rights reserved.",
+      nav: "Navigation",
+      offices: "Offices",
+      partner: "Partner software",
+    },
+  },
+} as const;
+
+export type Dictionary = (typeof dictionaries)["es"];
+
+export function getDictionary(locale: Locale): Dictionary {
+  return dictionaries[locale] as Dictionary;
+}
