@@ -1,4 +1,5 @@
-// Genera el video del hero con Kling (Replicate). Cinematográfico, a tono BG (no stock, no gente).
+// Genera el video del hero con Kling (Replicate).
+// Image-to-video desde la foto real de la garita de Tijuana (public/aduana-tijuana.jpg).
 // Uso: node --env-file=.env.local scripts/gen-video.mjs
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -9,19 +10,21 @@ if (!TOKEN) {
   process.exit(1);
 }
 
-const MODEL = "kwaivgi/kling-v1.6-standard";
+const MODEL = "kwaivgi/kling-v3-video";
 const OUT = path.resolve("public/video/hero.mp4");
+const START_IMAGE = path.resolve("public/aduana-tijuana.jpg");
+
+const imgBuf = await fs.readFile(START_IMAGE);
+const dataUri = `data:image/jpeg;base64,${imgBuf.toString("base64")}`;
 
 const input = {
+  start_image: dataUri,
+  mode: "pro",
+  generate_audio: false,
   prompt:
-    "Cinematic aerial drone shot slowly drifting over a cross-border highway and port terminal at dusk, " +
-    "long-exposure streaming headlight and taillight trails along the road, distant illuminated city skyline, " +
-    "stacked shipping containers, calm moody atmosphere, deep navy-blue tones with subtle warm amber lights, " +
-    "premium cinematic film look, smooth slow camera motion.",
-  negative_prompt: "people, faces, text, watermark, logo, distorted, glitch, warped, low quality",
+    "Cinematic aerial hyperlapse over a busy border customs truck crossing: brisk smooth lateral camera drift, cargo trucks and vehicles moving steadily through the inspection lanes, subtle long-exposure light streaks on the road, crisp clear air, the entire crossing stays fully visible. Teal-and-amber cinematic color grade, slight motion blur, premium film look, fine grain. Photorealistic, trucks keep their solid rigid shape.",
+  negative_prompt: "deforming trucks, morphing vehicles, warping, melting, rubbery shapes, fog, smoke, heavy clouds, haze covering the scene, white-out, glitch, cartoon, low quality, text",
   duration: 5,
-  aspect_ratio: "16:9",
-  cfg_scale: 0.5,
 };
 
 const res = await fetch(`https://api.replicate.com/v1/models/${MODEL}/predictions`, {
