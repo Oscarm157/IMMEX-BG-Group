@@ -16,8 +16,8 @@ export const dictionaries = {
     langSwitch: { to: "EN", aria: "Cambiar a inglés" },
     hero: {
       eyebrow: "Tijuana · San Diego",
-      title: "Comercio exterior y cumplimiento",
-      titleAccent: "entre México y Estados Unidos.",
+      title: "Comercio exterior y",
+      titleAccent: "cumplimiento aduanero.",
       lead: "Más de veinte años en aduanas, legal, compliance y fiscal para las empresas que operan entre Tijuana y San Diego.",
       ctaPrimary: "Hablemos",
       ctaSecondary: "Ver servicios",
@@ -223,8 +223,8 @@ export const dictionaries = {
     langSwitch: { to: "ES", aria: "Switch to Spanish" },
     hero: {
       eyebrow: "Tijuana · San Diego",
-      title: "Foreign trade and compliance",
-      titleAccent: "between Mexico and the United States.",
+      title: "Foreign trade and",
+      titleAccent: "customs compliance.",
       lead: "More than twenty years across customs, legal, compliance and tax for the companies that operate between Tijuana and San Diego.",
       ctaPrimary: "Let's talk",
       ctaSecondary: "View services",
