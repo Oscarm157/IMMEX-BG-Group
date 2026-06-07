@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { getDictionary, isLocale } from "@/content/dictionaries";
 import { SERVICE_SLUGS } from "@/content/service-slugs";
+import { SERVICE_DETAIL } from "@/content/services-detail";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 
@@ -38,6 +39,7 @@ export default async function ServiceDetailPage({
 
   const d = getDictionary(lang);
   const s = d.services.items[idx];
+  const detail = SERVICE_DETAIL[lang][idx];
   const total = SERVICE_SLUGS.length;
   const prevIdx = (idx - 1 + total) % total;
   const nextIdx = (idx + 1) % total;
@@ -87,7 +89,7 @@ export default async function ServiceDetailPage({
                 height={832}
                 className="h-full max-h-[360px] w-full object-cover"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" />
             </div>
           </Reveal>
         </div>
@@ -96,10 +98,13 @@ export default async function ServiceDetailPage({
       {/* Alcance — sub-puntos como módulos */}
       <section className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-28">
         <Reveal>
-          <span className="mb-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+          <span className="mb-6 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
             <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
             {d.servicesPreview.colScope}
           </span>
+        </Reveal>
+        <Reveal delay={0.06}>
+          <p className="mb-10 max-w-2xl text-[18px] leading-relaxed text-bone/90">{detail}</p>
         </Reveal>
         <div className="grid gap-4 sm:grid-cols-2">
           {s.points.map((pt, i) => (

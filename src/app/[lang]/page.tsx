@@ -77,7 +77,7 @@ export default async function HomePage({
             {d.frameworks.items.map((f) => (
               <span
                 key={f}
-                className="rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-bone/80"
+                className="rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-bone/90"
               >
                 {f}
               </span>
@@ -113,7 +113,7 @@ export default async function HomePage({
                   <h3 className="font-display text-3xl font-medium tracking-[-0.02em] text-chalk sm:text-4xl">
                     {p.title}
                   </h3>
-                  <p className="mt-4 max-w-md text-[15px] leading-relaxed text-bone/80">{p.body}</p>
+                  <p className="mt-4 max-w-md text-[15px] leading-relaxed text-bone/90">{p.body}</p>
                   <ul className="mt-7 flex flex-col gap-3 border-t border-line pt-6">
                     {p.points.map((pt) => (
                       <li key={pt} className="flex items-center gap-3 font-mono text-[13px] text-bone/85">
@@ -145,9 +145,9 @@ export default async function HomePage({
           alt="Corredor comercial Tijuana San Diego renderizado como datos"
           className="h-[44vh] min-h-[300px] w-full"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-ink/20 to-ink" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/60 via-transparent to-ink/70" />
         <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-10">
-          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-bone/70">
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-chalk/90">
             {d.hero.eyebrow} · {d.flow.eyebrow}
           </span>
         </div>
@@ -175,7 +175,7 @@ export default async function HomePage({
               <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-chalk sm:text-xl">
                 {s.name}
               </h3>
-              <p className="text-[14px] leading-relaxed text-bone/70">{s.summary}</p>
+              <p className="text-[14px] leading-relaxed text-bone/90">{s.summary}</p>
             </Reveal>
           ))}
         </div>
@@ -200,7 +200,7 @@ export default async function HomePage({
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-chalk">{v.name}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-bone/75">{v.body}</p>
+              <p className="mt-3 text-[14px] leading-relaxed text-bone/90">{v.body}</p>
             </Reveal>
           ))}
         </div>
@@ -224,7 +224,7 @@ export default async function HomePage({
           <h2 className="relative z-10 max-w-2xl font-display text-[clamp(2rem,5vw,3.4rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>
-          <p className="relative z-10 max-w-lg text-[17px] leading-relaxed text-bone/75">{d.homeCta.body}</p>
+          <p className="relative z-10 max-w-lg text-[17px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
           <Link
             href={`/${lang}/contact`}
             className="group relative z-10 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-[15px] font-medium tracking-[-0.01em] text-on-accent transition-all duration-300 hover:-translate-y-px hover:bg-accent-dim active:scale-[0.98]"

@@ -110,7 +110,7 @@ export function CustomsFlow({
                 <h3 className="font-display text-[clamp(1.7rem,3.5vw,2.6rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
                   {stages[active].name}
                 </h3>
-                <p className="mt-4 text-[16px] leading-relaxed text-bone/80">{stages[active].desc}</p>
+                <p className="mt-4 text-[16px] leading-relaxed text-bone/90">{stages[active].desc}</p>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -150,7 +150,7 @@ function Header({ eyebrow, title, lead }: { eyebrow: string; title: string; lead
       <h2 className="font-display text-[clamp(2rem,5vw,3.6rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
         {title}
       </h2>
-      <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-bone/80">{lead}</p>
+      <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-bone/90">{lead}</p>
     </div>
   );
 }

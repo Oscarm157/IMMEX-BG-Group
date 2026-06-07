@@ -52,7 +52,7 @@ export function EditorialImageCard({
           <h3 className="font-display text-3xl font-medium tracking-[-0.02em] text-chalk sm:text-4xl">
             {title}
           </h3>
-          {body && <p className="mt-3 max-w-md text-[15px] leading-relaxed text-bone/80">{body}</p>}
+          {body && <p className="mt-3 max-w-md text-[15px] leading-relaxed text-bone/90">{body}</p>}
           {points && (
             <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-1.5">
               {points.map((p) => (

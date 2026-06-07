@@ -36,7 +36,7 @@ export function SectionHeading({
         {title}
       </h2>
       {lead && (
-        <p className={`mt-6 max-w-xl text-[17px] leading-relaxed ${light ? "text-ink/65" : "text-bone/80"}`}>
+        <p className={`mt-6 max-w-xl text-[17px] leading-relaxed ${light ? "text-ink/65" : "text-bone/90"}`}>
           {lead}
         </p>
       )}

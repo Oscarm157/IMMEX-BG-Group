@@ -44,7 +44,7 @@ export default async function ServicesPage({
                 height={768}
                 className="h-full max-h-[320px] w-full object-cover"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-transparent to-transparent" />
+              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" />
             </div>
           </Reveal>
         </div>
@@ -71,7 +71,7 @@ export default async function ServicesPage({
                 <h2 className="font-display text-lg font-medium tracking-[-0.01em] text-chalk sm:text-xl">
                   {s.name}
                 </h2>
-                <p className="text-[14px] leading-relaxed text-bone/70">{s.summary}</p>
+                <p className="text-[14px] leading-relaxed text-bone/90">{s.summary}</p>
                 <span
                   aria-hidden
                   className="hidden self-center text-right text-accent transition-transform duration-300 group-hover:translate-x-1 sm:block"
@@ -90,7 +90,7 @@ export default async function ServicesPage({
           <h2 className="relative z-10 max-w-2xl font-display text-[clamp(2rem,5vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>
-          <p className="relative z-10 max-w-lg text-[17px] leading-relaxed text-bone/75">{d.homeCta.body}</p>
+          <p className="relative z-10 max-w-lg text-[17px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
           <PillButton href={`/${lang}/contact`} variant="accent" arrow>
             {d.nav.cta}
           </PillButton>

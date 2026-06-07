@@ -70,7 +70,7 @@ export function Nav({
               key={l.href}
               href={l.href}
               className={`text-[15px] tracking-[-0.01em] transition-colors ${
-                isActive(l.href) ? "text-chalk" : "text-bone/70 hover:text-chalk"
+                isActive(l.href) ? "text-chalk" : "text-bone/90 hover:text-chalk"
               }`}
             >
               {l.label}

@@ -90,7 +90,7 @@ export default async function SoftwarePage({
                 {String(i + 1).padStart(2, "0")}
               </span>
               <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-chalk">{c.title}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-bone/75">{c.body}</p>
+              <p className="mt-3 text-[14px] leading-relaxed text-bone/90">{c.body}</p>
             </Reveal>
           ))}
         </div>

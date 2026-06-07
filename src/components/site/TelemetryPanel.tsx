@@ -95,7 +95,7 @@ export function TelemetryPanel({
                   animate={inView ? { scale: 1, opacity: 1 } : {}}
                   transition={{ duration: 0.4, delay: 0.3 + i * 0.16 }}
                 />
-                <span className="mt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-bone/80">
+                <span className="mt-3 font-mono text-[10px] uppercase tracking-[0.1em] text-bone/90">
                   {s.name}
                 </span>
               </li>
@@ -114,7 +114,7 @@ export function TelemetryPanel({
             animate={inView ? { opacity: 1 } : {}}
             transition={{ duration: 0.4, delay: 0.9 + i * 0.12 }}
           >
-            <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-bone/70">{row.k}</span>
+            <span className="font-mono text-[11px] uppercase tracking-[0.1em] text-bone/90">{row.k}</span>
             <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.1em] text-accent">
               {row.v}
               <svg width="11" height="11" viewBox="0 0 12 12" fill="none" aria-hidden>

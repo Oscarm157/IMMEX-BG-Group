@@ -52,8 +52,8 @@ export default async function ContactPage({
                   <h2 className="font-display text-xl text-chalk">{o.country}</h2>
                   <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-accent">{o.company}</span>
                 </div>
-                <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-bone/70">{o.address}</p>
-                <div className="mt-4 flex flex-col gap-1 font-mono text-[14px] text-bone/80">
+                <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-bone/90">{o.address}</p>
+                <div className="mt-4 flex flex-col gap-1 font-mono text-[14px] text-bone/90">
                   <a href={`tel:${o.phone.replace(/[^+\d]/g, "")}`} className="transition-colors hover:text-accent">
                     {o.phone}
                   </a>

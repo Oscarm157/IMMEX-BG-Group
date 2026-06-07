@@ -22,7 +22,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">
             <Logo variant="bg" tone="light" size="md" className="h-14 w-auto sm:h-[76px]" />
-            <p className="mt-7 text-[15px] leading-relaxed text-bone/70">{dict.footer.tagline}</p>
+            <p className="mt-7 text-[15px] leading-relaxed text-bone/90">{dict.footer.tagline}</p>
             <a
               href={`mailto:${dict.contact.email}`}
               className="mt-6 inline-block text-[15px] text-chalk underline decoration-accent decoration-2 underline-offset-4 transition-colors hover:text-accent"
@@ -38,14 +38,14 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             <ul className="mt-5 space-y-3">
               {links.map((l) => (
                 <li key={l.href}>
-                  <Link href={l.href} className="text-[15px] text-bone/80 transition-colors hover:text-chalk">
+                  <Link href={l.href} className="text-[15px] text-bone/90 transition-colors hover:text-chalk">
                     {l.label}
                   </Link>
                 </li>
               ))}
               {socials.map((s) => (
                 <li key={s.label} className="lg:hidden">
-                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="text-[15px] text-bone/80 transition-colors hover:text-chalk">
+                  <a href={s.href} target="_blank" rel="noopener noreferrer" className="text-[15px] text-bone/90 transition-colors hover:text-chalk">
                     {s.label}
                   </a>
                 </li>
@@ -59,7 +59,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
             </h3>
             <ul className="mt-5 space-y-5">
               {dict.contact.offices.map((o) => (
-                <li key={o.country} className="text-[14px] leading-relaxed text-bone/70">
+                <li key={o.country} className="text-[14px] leading-relaxed text-bone/90">
                   <span className="block text-chalk">{o.country}</span>
                   {o.address}
                   <br />
