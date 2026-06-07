@@ -44,7 +44,6 @@ export default async function ServicesPage({
                 height={768}
                 className="h-full max-h-[320px] w-full object-cover"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" />
             </div>
           </Reveal>
         </div>

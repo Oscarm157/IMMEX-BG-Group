@@ -22,48 +22,36 @@ export default async function HomePage({
 
   return (
     <>
-      {/* Hero — consola con atmósfera */}
-      <section className="hero-aura grid-field grid-fade relative overflow-hidden">
-        <div className="relative z-10 mx-auto grid max-w-[1280px] items-center gap-16 px-5 pb-20 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-28">
-          <div>
+      {/* Hero — video full-bleed (layout Sequel) */}
+      <section className="relative h-[100svh] min-h-[600px] w-full overflow-hidden">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/video/hero-poster.jpg"
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/video/hero.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-ink/45" />
+
+        <div className="relative z-10 mx-auto flex h-full max-w-[1280px] flex-col justify-end px-5 pb-14 sm:px-8 sm:pb-16">
+          <div className="grid gap-8 sm:grid-cols-[1.5fr_1fr] sm:items-end">
             <Reveal>
-              <span className="flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.2em] text-accent">
-                <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
-                {d.hero.eyebrow}
-              </span>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <h1 className="mt-6 max-w-2xl text-balance font-display text-[clamp(2.9rem,6.5vw,5.6rem)] font-medium leading-[0.98] tracking-[-0.035em] text-chalk">
+              <h1 className="font-display text-[clamp(2.8rem,7.5vw,6rem)] font-medium leading-[0.95] tracking-[-0.03em] text-chalk">
                 {d.hero.title}{" "}
-                <span className="text-bone">{d.hero.titleAccent}</span>
+                <span className="font-serif font-normal italic text-bone">{d.hero.titleAccent}</span>
               </h1>
             </Reveal>
-            <Reveal delay={0.16}>
-              <p className="mt-7 max-w-md text-[17px] leading-relaxed text-bone/85 sm:text-[18px]">
-                {d.hero.lead}
-              </p>
-            </Reveal>
-            <Reveal delay={0.24}>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
-                <PillButton href={`/${lang}/contact`} variant="accent" arrow>
-                  {d.hero.ctaPrimary}
-                </PillButton>
-                <PillButton href={`/${lang}/services`} variant="ghost">
-                  {d.hero.ctaSecondary}
-                </PillButton>
-              </div>
+            <Reveal delay={0.1} className="flex flex-col items-start gap-5 sm:items-end sm:text-right">
+              <p className="max-w-xs text-[15px] leading-relaxed text-chalk/90">{d.hero.lead}</p>
+              <PillButton href={`/${lang}/services`} variant="ghost" arrow>
+                {d.hero.ctaSecondary}
+              </PillButton>
             </Reveal>
           </div>
-
-          <Reveal delay={0.18}>
-            <TelemetryPanel
-              header={d.telemetry.header}
-              live={d.telemetry.live}
-              status={d.telemetry.status}
-              stages={d.flow.stages}
-              metrics={d.telemetry.metrics}
-            />
-          </Reveal>
         </div>
       </section>
 
@@ -86,11 +74,30 @@ export default async function HomePage({
         </div>
       </section>
 
+      {/* Telemetría — la consola (bajó del hero) */}
+      <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-28">
+        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:items-center lg:gap-16">
+          <SectionHeading
+            index="01"
+            eyebrow={d.telemetry.header}
+            title={d.telemetry.title}
+            lead={d.telemetry.lead}
+          />
+          <TelemetryPanel
+            header={d.telemetry.header}
+            live={d.telemetry.live}
+            status={d.telemetry.status}
+            stages={d.flow.stages}
+            metrics={d.telemetry.metrics}
+          />
+        </div>
+      </section>
+
       {/* Sinergia BG + BMS — 2-col asimétrico */}
       <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
         <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <SectionHeading
-            index="01"
+            index="02"
             eyebrow={d.synergy.eyebrow}
             title={d.synergy.title}
             lead={d.synergy.lead}
@@ -145,9 +152,8 @@ export default async function HomePage({
           alt="Corredor comercial Tijuana San Diego renderizado como datos"
           className="h-[44vh] min-h-[300px] w-full"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink/60 via-transparent to-ink/70" />
-        <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-10">
-          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-chalk/90">
+        <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-8">
+          <span className="rounded-full border border-line bg-ink/70 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.3em] text-chalk/90 backdrop-blur-sm">
             {d.hero.eyebrow} · {d.flow.eyebrow}
           </span>
         </div>
@@ -155,7 +161,7 @@ export default async function HomePage({
 
       {/* Servicios — ledger */}
       <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
-        <SectionHeading index="02" eyebrow={d.servicesPreview.eyebrow} title={d.servicesPreview.title} className="mb-12" />
+        <SectionHeading index="03" eyebrow={d.servicesPreview.eyebrow} title={d.servicesPreview.title} className="mb-12" />
         <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
           {/* Encabezado del ledger */}
           <div className="hidden grid-cols-[3rem_1fr_1.4fr] gap-6 border-b border-line px-7 py-3.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ash sm:grid">
@@ -188,7 +194,7 @@ export default async function HomePage({
 
       {/* Valores — registros */}
       <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-32">
-        <SectionHeading index="03" eyebrow={d.values.eyebrow} title={d.values.title} className="mb-12" />
+        <SectionHeading index="04" eyebrow={d.values.eyebrow} title={d.values.title} className="mb-12" />
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {d.values.items.map((v, i) => (
             <Reveal

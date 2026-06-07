@@ -33,6 +33,8 @@ export const dictionaries = {
     },
     telemetry: {
       header: "Estado de operación",
+      title: "La operación, en una sola consola.",
+      lead: "Cada etapa del cruce, los anexos y la reportería en un mismo sistema: BG sostiene el criterio legal y BMS deja el rastro de cada movimiento.",
       live: "En línea",
       status: [
         { k: "Anexo 24 / 30", v: "Activo" },
@@ -238,6 +240,8 @@ export const dictionaries = {
     },
     telemetry: {
       header: "Operation status",
+      title: "The operation, in one console.",
+      lead: "Every stage of the crossing, the annexes and the reporting in a single system: BG holds the legal judgment, BMS keeps the trail of every move.",
       live: "Live",
       status: [
         { k: "Annex 24 / 30", v: "Active" },

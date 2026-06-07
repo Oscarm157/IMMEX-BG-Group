@@ -73,7 +73,6 @@ export function TelemetryPanel({
           sizes="(max-width: 1024px) 100vw, 45vw"
           className="object-cover"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-1 via-surface-1/10 to-transparent" />
       </div>
 
       {/* Corredor: nodos + línea de progreso */}

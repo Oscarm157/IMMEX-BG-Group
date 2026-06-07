@@ -3,12 +3,12 @@
 @theme {
   /* ===== Sitio formal v2 — dark con profundidad por capas + acento BG ===== */
   /* Superficies dark: elevación por color-step, no por sombra (modelo Warp/Linear) */
-  /* Consola teñida con el navy de marca (#284068 / #102848 del logo) */
-  --color-ink: #0a0e15; /* canvas base near-black navy */
-  --color-surface-1: #11161f; /* superficie elevada / panel */
-  --color-surface-2: #161c28; /* cards */
-  --color-surface-3: #202736; /* interactivo / hover */
-  --color-line: #28303f; /* borde hairline */
+  /* Consola navy de marca (#284068), tono subido para no sentirse negro plano */
+  --color-ink: #0f1521; /* canvas base navy charcoal */
+  --color-surface-1: #18202e; /* superficie elevada / panel */
+  --color-surface-2: #1f2838; /* cards */
+  --color-surface-3: #283246; /* interactivo / hover */
+  --color-line: #313c4f; /* borde hairline */
   --color-navy: #284068; /* navy de marca para acentos puntuales */
   /* Superficies claras (interludios que cortan el dark) */
   --color-paper: #f6f6f3;
@@ -27,6 +27,7 @@
   --font-display: var(--font-space-grotesk), system-ui, sans-serif;
   --font-sans: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+  --font-serif: var(--font-instrument), Georgia, serif;
 
   /* ===== Tokens heredados (solo para /foro archivado) ===== */
   --color-primary: #000616;

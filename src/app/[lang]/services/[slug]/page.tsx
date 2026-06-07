@@ -89,7 +89,6 @@ export default async function ServiceDetailPage({
                 height={832}
                 className="h-full max-h-[360px] w-full object-cover"
               />
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/35 via-transparent to-transparent" />
             </div>
           </Reveal>
         </div>

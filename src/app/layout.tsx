@@ -1,6 +1,14 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Inter, Space_Grotesk, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
+
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-instrument",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 const inter = Inter({
   variable: "--font-inter",
@@ -40,7 +48,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${inter.variable} ${spaceGrotesk.variable} ${plexMono.variable} antialiased`}
+      className={`${inter.variable} ${spaceGrotesk.variable} ${plexMono.variable} ${instrumentSerif.variable} antialiased`}
     >
       <head>
         {/* Solo para /foro (landing de evento archivada) */}
