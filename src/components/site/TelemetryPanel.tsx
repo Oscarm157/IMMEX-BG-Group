@@ -1,19 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { animate, motion, useInView, useReducedMotion } from "motion/react";
 
 type Stage = { n: string; name: string };
 type Metric = { value: string; label: string };
 type Status = { k: string; v: string };
-
-// Waveform de "throughput" (valores y en un viewBox 0..100 x 0..40; menor = más alto)
-const WAVE = [34, 30, 33, 24, 27, 18, 22, 14, 19, 11, 16, 8, 12, 6];
-
-function buildPath(points: number[]) {
-  const step = 100 / (points.length - 1);
-  return points.map((y, i) => `${i === 0 ? "M" : "L"} ${(i * step).toFixed(2)} ${y}`).join(" ");
-}
 
 function CountUp({ value, run }: { value: string; run: boolean }) {
   const reduce = useReducedMotion();
@@ -53,8 +46,6 @@ export function TelemetryPanel({
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-80px" });
   const reduce = useReducedMotion();
-  const linePath = buildPath(WAVE);
-  const areaPath = `${linePath} L 100 40 L 0 40 Z`;
 
   return (
     <div ref={ref} className="console-panel relative overflow-hidden rounded-[16px] bg-surface-1/80 backdrop-blur-sm">
@@ -72,35 +63,17 @@ export function TelemetryPanel({
         </span>
       </div>
 
-      {/* Waveform */}
-      <div className="px-5 pt-5">
-        <svg viewBox="0 0 100 40" preserveAspectRatio="none" className="h-24 w-full" aria-hidden>
-          <defs>
-            <linearGradient id="tp-fill" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#00e6a0" stopOpacity="0.22" />
-              <stop offset="100%" stopColor="#00e6a0" stopOpacity="0" />
-            </linearGradient>
-          </defs>
-          <motion.path
-            d={areaPath}
-            fill="url(#tp-fill)"
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : {}}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
-          <motion.path
-            d={linePath}
-            fill="none"
-            stroke="#00e6a0"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            vectorEffect="non-scaling-stroke"
-            initial={{ pathLength: reduce ? 1 : 0 }}
-            animate={inView ? { pathLength: 1 } : {}}
-            transition={{ duration: 1.3, ease: [0.16, 1, 0.3, 1] }}
-          />
-        </svg>
+      {/* Mapa del corredor (imagen generada) */}
+      <div className="relative h-40 overflow-hidden border-b border-line sm:h-48">
+        <Image
+          src="/img/gen/corridor.webp"
+          alt="Corredor de datos transfronterizo Tijuana San Diego"
+          fill
+          priority
+          sizes="(max-width: 1024px) 100vw, 45vw"
+          className="object-cover"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-surface-1 via-surface-1/10 to-transparent" />
       </div>
 
       {/* Corredor: nodos + línea de progreso */}

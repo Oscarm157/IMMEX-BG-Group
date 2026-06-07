@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDictionary, isLocale } from "@/content/dictionaries";
@@ -6,6 +7,7 @@ import { PillButton } from "@/components/site/PillButton";
 import { TelemetryPanel } from "@/components/site/TelemetryPanel";
 import { CustomsFlow } from "@/components/site/CustomsFlow";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ParallaxMedia } from "@/components/site/ParallaxMedia";
 
 export default async function HomePage({
   params,
@@ -136,6 +138,21 @@ export default async function HomePage({
         panelLabel={d.flow.panel}
       />
 
+      {/* Banda corredor full-bleed (parallax) */}
+      <section className="relative border-y border-line">
+        <ParallaxMedia
+          src="/img/gen/corridor-wide.webp"
+          alt="Corredor comercial Tijuana San Diego renderizado como datos"
+          className="h-[44vh] min-h-[300px] w-full"
+        />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-ink via-ink/20 to-ink" />
+        <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-10">
+          <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-bone/70">
+            {d.hero.eyebrow} · {d.flow.eyebrow}
+          </span>
+        </div>
+      </section>
+
       {/* Servicios — ledger */}
       <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
         <SectionHeading index="02" eyebrow={d.servicesPreview.eyebrow} title={d.servicesPreview.title} className="mb-12" />
@@ -192,6 +209,14 @@ export default async function HomePage({
       {/* CTA — panel de consola con aura */}
       <section className="px-5 pb-24 sm:px-8 sm:pb-32">
         <Reveal className="console-panel hero-aura relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
+          <Image
+            src="/img/gen/core.webp"
+            alt=""
+            aria-hidden
+            width={460}
+            height={460}
+            className="pointer-events-none absolute -right-12 -top-16 z-0 w-[240px] opacity-50 mix-blend-screen sm:w-[420px]"
+          />
           <span className="relative z-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
             {d.nav.contact}

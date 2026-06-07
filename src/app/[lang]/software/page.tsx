@@ -28,104 +28,108 @@ export default async function SoftwarePage({
 
   return (
     <>
-      {/* Hero */}
-      <section className="mx-auto max-w-[1280px] px-5 pt-40 pb-16 sm:px-8 sm:pt-48">
-        <Reveal>
-          <span className="text-[12px] font-medium uppercase tracking-[0.18em] text-accent">
-            {s.eyebrow}
-          </span>
-        </Reveal>
-        <Reveal delay={0.06}>
-          <h1 className="mt-6 max-w-3xl font-display text-[clamp(2.8rem,7vw,5.5rem)] font-medium leading-[0.98] tracking-[-0.03em] text-chalk">
-            {s.title}
-          </h1>
-        </Reveal>
-        <Reveal delay={0.12}>
-          <p className="mt-7 max-w-xl text-[18px] leading-relaxed text-bone/80">{s.lead}</p>
-        </Reveal>
-        <Reveal delay={0.18}>
-          <div className="mt-9">
-            <PillButton href={s.ctaHref} external variant="primary" arrow>
-              {s.cta}
-            </PillButton>
+      {/* Hero — núcleo BMS */}
+      <section className="hero-aura grid-field grid-fade relative overflow-hidden">
+        <div className="relative z-10 mx-auto grid max-w-[1280px] items-center gap-12 px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24">
+          <div>
+            <Reveal>
+              <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+                <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
+                {s.eyebrow}
+              </span>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h1 className="mt-6 max-w-2xl text-balance font-display text-[clamp(2.6rem,6vw,5rem)] font-medium leading-[1.0] tracking-[-0.03em] text-chalk">
+                {s.title}
+              </h1>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <p className="mt-7 max-w-md text-[17px] leading-relaxed text-bone/85">{s.lead}</p>
+            </Reveal>
+            <Reveal delay={0.24}>
+              <div className="mt-8">
+                <PillButton href={s.ctaHref} external variant="accent" arrow>
+                  {s.cta}
+                </PillButton>
+              </div>
+            </Reveal>
           </div>
-        </Reveal>
-      </section>
 
-      {/* Image band */}
-      <section className="relative h-[50vh] min-h-[340px] w-full overflow-hidden sm:h-[64vh]">
-        <Image
-          src="/img/software-office.webp"
-          alt="Operación nocturna en oficina de cristal"
-          fill
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/20 to-transparent" />
+          <Reveal delay={0.18} className="relative flex items-center justify-center">
+            <Image
+              src="/img/gen/core.webp"
+              alt="Núcleo del sistema BMS"
+              width={520}
+              height={520}
+              priority
+              className="w-[78%] max-w-[440px] drop-shadow-[0_0_60px_rgba(0,230,160,0.18)]"
+            />
+          </Reveal>
+        </div>
       </section>
 
       {/* Slogan pull-quote */}
-      <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
+      <section className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>
-          <p className="max-w-4xl text-balance font-display text-[clamp(1.8rem,4.5vw,3.2rem)] font-medium leading-[1.15] tracking-[-0.02em] text-chalk">
+          <p className="max-w-4xl text-balance font-display text-[clamp(1.7rem,4vw,3rem)] font-medium leading-[1.15] tracking-[-0.02em] text-chalk">
             {s.slogan}
           </p>
         </Reveal>
       </section>
 
-      {/* Capabilities */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-32">
-        <div className="grid gap-x-12 gap-y-12 md:grid-cols-3">
+      {/* Capabilities — módulos de consola */}
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+        <div className="grid gap-4 md:grid-cols-3">
           {s.capabilities.map((c, i) => (
             <Reveal
               key={c.title}
               delay={(i % 3) * 0.06}
-              className="border-t border-white/[0.08] pt-7"
+              className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7"
             >
-              <h3 className="font-display text-xl font-medium tracking-[-0.01em] text-chalk sm:text-[1.4rem]">
-                {c.title}
-              </h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-smoke">{c.body}</p>
+              <span className="font-mono text-[12px] tabular-nums text-accent">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-chalk">{c.title}</h3>
+              <p className="mt-3 text-[14px] leading-relaxed text-bone/75">{c.body}</p>
             </Reveal>
           ))}
         </div>
       </section>
 
-      {/* Stats + modes (light band) */}
-      <section className="bg-paper">
-        <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-28">
-          <div className="grid gap-12 sm:grid-cols-3">
-            {s.stats.map((stat) => (
-              <Reveal key={stat.label} className="flex flex-col gap-3">
-                <span className="font-display text-[clamp(3rem,6.5vw,4.6rem)] font-medium leading-none tracking-[-0.035em] tabular-nums text-ink">
+      {/* Readouts BMS */}
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+        <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
+          <div className="grid grid-cols-1 sm:grid-cols-3">
+            {s.stats.map((stat, i) => (
+              <div key={stat.label} className={`px-7 py-8 ${i > 0 ? "border-t border-line sm:border-l sm:border-t-0" : ""}`}>
+                <span className="block font-display text-[clamp(2.4rem,5vw,3.4rem)] font-medium leading-none tracking-[-0.035em] tabular-nums text-chalk">
                   {stat.value}
                 </span>
-                <span className="max-w-[20ch] text-[14px] leading-snug text-ink/55">{stat.label}</span>
-              </Reveal>
+                <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.1em] text-ash">{stat.label}</span>
+              </div>
             ))}
           </div>
-
-          <Reveal className="mt-16 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-ink/10 pt-8">
-            <span className="text-[13px] uppercase tracking-[0.14em] text-ink/50">{s.modes.label}</span>
-            <div className="flex items-center gap-3 text-[15px] text-ink">
+          <div className="flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-line px-7 py-4">
+            <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ash">{s.modes.label}</span>
+            <div className="flex items-center gap-3 font-mono text-[13px] text-bone">
               {s.modes.items.map((m, i) => (
                 <span key={m} className="flex items-center gap-3">
-                  {i > 0 && <span className="h-1 w-1 rounded-full bg-accent-ink" />}
+                  {i > 0 && <span className="h-1 w-1 rounded-full bg-accent" />}
                   {m}
                 </span>
               ))}
             </div>
-          </Reveal>
+          </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-[1280px] px-5 py-28 sm:px-8 sm:py-36">
-        <Reveal className="flex flex-col items-start gap-7">
-          <h2 className="max-w-2xl font-display text-[clamp(1.8rem,4.5vw,3rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
+      <section className="px-5 pb-24 sm:px-8 sm:pb-32">
+        <Reveal className="console-panel hero-aura relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
+          <h2 className="relative z-10 max-w-2xl font-display text-[clamp(2rem,5vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>
-          <div className="flex flex-wrap gap-4">
+          <div className="relative z-10 flex flex-wrap gap-4">
             <PillButton href={`/${lang}/contact`} variant="accent" arrow>
               {d.nav.cta}
             </PillButton>
