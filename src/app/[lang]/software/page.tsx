@@ -4,6 +4,8 @@ import type { Metadata } from "next";
 import { getDictionary, isLocale } from "@/content/dictionaries";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
+import { SectionHeading } from "@/components/site/SectionHeading";
+import { Faq } from "@/components/site/Faq";
 
 export async function generateMetadata({
   params,
@@ -79,6 +81,7 @@ export default async function SoftwarePage({
 
       {/* Capabilities — módulos de consola */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+        <SectionHeading eyebrow={s.eyebrow} title={s.capsTitle} className="mb-12" />
         <div className="grid gap-4 md:grid-cols-3">
           {s.capabilities.map((c, i) => (
             <Reveal
@@ -139,6 +142,12 @@ export default async function SoftwarePage({
             </div>
           </div>
         </div>
+      </section>
+
+      {/* FAQ */}
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+        <SectionHeading eyebrow={d.serviceSection.faqEyebrow} title={s.faqTitle} className="mb-10" />
+        <Faq items={s.faq} />
       </section>
 
       {/* CTA */}
