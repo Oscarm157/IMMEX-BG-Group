@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
@@ -8,6 +7,8 @@ import { SERVICE_DETAIL } from "@/content/services-detail";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { SignalLine } from "@/components/site/SignalLine";
+import { ServiceInstrument, DrawCheck } from "@/components/site/ServiceInstrument";
 import { Faq } from "@/components/site/Faq";
 
 export const dynamicParams = false;
@@ -82,9 +83,7 @@ export default async function ServiceDetailPage({
             </Reveal>
           </div>
           <Reveal delay={0.18}>
-            <div className="console-panel relative overflow-hidden rounded-[16px]">
-              <Image src="/img/gen/field.webp" alt="" aria-hidden width={1216} height={832} className="h-full max-h-[360px] w-full object-cover" />
-            </div>
+            <ServiceInstrument slug={slug} lang={lang} />
           </Reveal>
         </div>
       </section>
@@ -108,8 +107,11 @@ export default async function ServiceDetailPage({
         <SectionHeading title={sec.doTitle} className="mb-12" />
         <div className="grid gap-4 md:grid-cols-2">
           {c.whatWeDo.map((w, i) => (
-            <Reveal key={w.title} delay={(i % 2) * 0.06} className="console-panel flex gap-5 rounded-[14px] bg-surface-1 p-7">
-              <span className="mt-1 font-mono text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
+            <Reveal key={w.title} delay={(i % 2) * 0.06} className="console-panel flex flex-col gap-4 rounded-[14px] bg-surface-1 p-7">
+              <div className="flex items-center gap-4">
+                <span className="font-mono text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <SignalLine className="w-10" />
+              </div>
               <div>
                 <h3 className="font-display text-xl font-medium tracking-[-0.01em] text-chalk">{w.title}</h3>
                 <p className="mt-2.5 text-[15px] leading-relaxed text-bone/90">{w.desc}</p>
@@ -125,9 +127,7 @@ export default async function ServiceDetailPage({
         <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
           {c.outcomes.map((o, i) => (
             <Reveal key={i} delay={Math.min(i, 4) * 0.05} className="flex items-start gap-4 border-b border-line px-7 py-6 last:border-b-0">
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden className="mt-0.5 shrink-0">
-                <path d="M3.5 9.2 L7.2 13 L14.5 5" stroke="#00e6a0" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <DrawCheck size={18} delay={0.1 + Math.min(i, 6) * 0.12} className="mt-0.5 shrink-0" />
               <span className="text-[16px] leading-snug text-chalk">{o}</span>
             </Reveal>
           ))}
