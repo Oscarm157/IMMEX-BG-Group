@@ -6,6 +6,7 @@ import { TEAM } from "@/content/team";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { MediaFrame } from "@/components/site/MediaFrame";
 
 export async function generateMetadata({
   params,
@@ -82,6 +83,11 @@ export default async function AboutPage({
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* Banda visual: oficinas (placeholder por ahora) */}
+      <section className="relative mb-16 border-y border-line sm:mb-20">
+        <MediaFrame ratio="21/9" panel={false} caption="Foto · Oficinas Tijuana y San Diego" className="!rounded-none" />
       </section>
 
       {/* Valores */}

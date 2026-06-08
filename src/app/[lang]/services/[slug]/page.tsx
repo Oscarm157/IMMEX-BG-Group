@@ -9,6 +9,7 @@ import { PillButton } from "@/components/site/PillButton";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { SignalLine } from "@/components/site/SignalLine";
 import { ServiceInstrument, DrawCheck } from "@/components/site/ServiceInstrument";
+import { MediaFrame } from "@/components/site/MediaFrame";
 import { Faq } from "@/components/site/Faq";
 
 export const dynamicParams = false;
@@ -132,6 +133,16 @@ export default async function ServiceDetailPage({
             </Reveal>
           ))}
         </div>
+      </section>
+
+      {/* Banda visual del dominio (estilo Andercore, placeholder por ahora) */}
+      <section className="relative mb-20 border-y border-line sm:mb-24">
+        <MediaFrame
+          ratio="21/9"
+          panel={false}
+          caption={`Foto · ${s.name} · cruce Tijuana–San Diego`}
+          className="!rounded-none"
+        />
       </section>
 
       {/* FAQ */}
