@@ -35,18 +35,17 @@ export default async function HomePage({
         >
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-t from-ink via-ink/25 to-ink/45" />
 
         <div className="relative z-10 mx-auto flex h-full max-w-[1280px] flex-col justify-end px-5 pb-14 sm:px-8 sm:pb-16">
           <div className="grid gap-8 sm:grid-cols-[1.5fr_1fr] sm:items-end">
             <Reveal>
-              <h1 className="font-display text-[clamp(2.8rem,7.5vw,6rem)] font-medium leading-[0.95] tracking-[-0.03em] text-chalk">
+              <h1 className="font-display text-[clamp(2.8rem,7.5vw,6rem)] font-medium leading-[0.95] tracking-[-0.03em] text-chalk [text-shadow:0_2px_24px_rgba(0,0,0,0.55)]">
                 {d.hero.title}{" "}
                 <span className="font-serif font-normal italic text-bone">{d.hero.titleAccent}</span>
               </h1>
             </Reveal>
             <Reveal delay={0.1} className="flex flex-col items-start gap-5 sm:items-end sm:text-right">
-              <p className="max-w-xs text-[15px] leading-relaxed text-chalk/90">{d.hero.lead}</p>
+              <p className="max-w-xs text-[15px] leading-relaxed text-chalk [text-shadow:0_1px_12px_rgba(0,0,0,0.7)]">{d.hero.lead}</p>
               <PillButton href={`/${lang}/services`} variant="ghost" arrow>
                 {d.hero.ctaSecondary}
               </PillButton>
@@ -214,7 +213,7 @@ export default async function HomePage({
 
       {/* CTA — panel de consola con aura */}
       <section className="px-5 pb-24 sm:px-8 sm:pb-32">
-        <Reveal className="console-panel hero-aura relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
+        <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
           <Image
             src="/img/gen/core.webp"
             alt=""

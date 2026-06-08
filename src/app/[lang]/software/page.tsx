@@ -29,7 +29,7 @@ export default async function SoftwarePage({
   return (
     <>
       {/* Hero — núcleo BMS */}
-      <section className="hero-aura grid-field grid-fade relative overflow-hidden">
+      <section className="grid-field grid-fade relative overflow-hidden">
         <div className="relative z-10 mx-auto grid max-w-[1280px] items-center gap-12 px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24">
           <div>
             <Reveal>
@@ -125,7 +125,7 @@ export default async function SoftwarePage({
 
       {/* CTA */}
       <section className="px-5 pb-24 sm:px-8 sm:pb-32">
-        <Reveal className="console-panel hero-aura relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
+        <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
           <h2 className="relative z-10 max-w-2xl font-display text-[clamp(2rem,5vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>

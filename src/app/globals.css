@@ -87,18 +87,7 @@ html {
   mask-image: radial-gradient(ellipse 75% 70% at 50% 38%, #000 0%, transparent 78%);
 }
 
-/* Aura atmosférica del hero: glow mint muy sutil (HashiCorp/Apollo/Ameba) */
-.hero-aura::before {
-  content: "";
-  position: absolute;
-  inset: -10% -10% auto -10%;
-  height: 70%;
-  background:
-    radial-gradient(55% 65% at 75% 12%, rgba(0, 230, 160, 0.08), transparent 62%),
-    radial-gradient(50% 55% at 18% 0%, rgba(40, 64, 104, 0.16), transparent 68%);
-  pointer-events: none;
-  z-index: 0;
-}
+/* (Aura del hero eliminada: heroes sin overlay) */
 
 /* La señal (mint de marca) brilla como instrumento sobre el near-black */
 .signal-glow {

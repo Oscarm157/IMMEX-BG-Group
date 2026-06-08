@@ -47,7 +47,7 @@ export default async function ServiceDetailPage({
   return (
     <>
       {/* Hero del servicio */}
-      <section className="hero-aura grid-field grid-fade relative overflow-hidden">
+      <section className="grid-field grid-fade relative overflow-hidden">
         <div className="relative z-10 mx-auto grid max-w-[1280px] items-center gap-12 px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pb-24">
           <div>
             <Reveal>
@@ -65,7 +65,7 @@ export default async function ServiceDetailPage({
               </h1>
             </Reveal>
             <Reveal delay={0.16}>
-              <p className="mt-6 max-w-md text-[17px] leading-relaxed text-bone/85">{s.summary}</p>
+              <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-bone/90">{detail.intro}</p>
             </Reveal>
             <Reveal delay={0.24}>
               <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -102,23 +102,26 @@ export default async function ServiceDetailPage({
             {d.servicesPreview.colScope}
           </span>
         </Reveal>
-        <Reveal delay={0.06}>
-          <p className="mb-10 max-w-2xl text-[18px] leading-relaxed text-bone/90">{detail}</p>
-        </Reveal>
         <div className="grid gap-4 sm:grid-cols-2">
-          {s.points.map((pt, i) => (
+          {detail.points.map((pt, i) => (
             <Reveal
-              key={pt}
+              key={pt.title}
               delay={(i % 2) * 0.06}
-              className="console-panel flex items-start gap-4 rounded-[14px] bg-surface-1 px-6 py-6"
+              className="console-panel flex flex-col rounded-[14px] bg-surface-1 px-6 py-6"
             >
-              <span className="mt-0.5 font-mono text-[12px] tabular-nums text-accent">
+              <span className="font-mono text-[12px] tabular-nums text-accent">
                 {String(i + 1).padStart(2, "0")}
               </span>
-              <span className="text-[16px] leading-snug text-chalk">{pt}</span>
+              <h2 className="mt-3 font-display text-lg font-medium tracking-[-0.01em] text-chalk">{pt.title}</h2>
+              <p className="mt-2 text-[14px] leading-relaxed text-bone/90">{pt.desc}</p>
             </Reveal>
           ))}
         </div>
+        <Reveal delay={0.1}>
+          <p className="mt-10 max-w-2xl font-display text-[clamp(1.3rem,2.6vw,1.9rem)] font-medium leading-snug tracking-[-0.01em] text-chalk">
+            {detail.close}
+          </p>
+        </Reveal>
       </section>
 
       {/* Prev / next + CTA */}
