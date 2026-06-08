@@ -102,6 +102,9 @@ export default async function ServiceDetailPage({
             {d.servicesPreview.colScope}
           </span>
         </Reveal>
+        <Reveal delay={0.04}>
+          <p className="mb-12 max-w-2xl text-[18px] leading-relaxed text-bone/90">{detail.context}</p>
+        </Reveal>
         <div className="grid gap-4 sm:grid-cols-2">
           {detail.points.map((pt, i) => (
             <Reveal
@@ -124,7 +127,20 @@ export default async function ServiceDetailPage({
         </Reveal>
       </section>
 
-      {/* Prev / next + CTA */}
+      {/* CTA */}
+      <section className="px-5 pb-16 sm:px-8 sm:pb-20">
+        <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-6 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-14 sm:px-14 sm:py-16">
+          <h2 className="max-w-2xl font-display text-[clamp(1.7rem,4vw,2.8rem)] font-medium leading-[1.06] tracking-[-0.02em] text-chalk">
+            {d.homeCta.title}
+          </h2>
+          <p className="max-w-lg text-[16px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
+          <PillButton href={`/${lang}/contact`} variant="accent" arrow>
+            {d.nav.cta}
+          </PillButton>
+        </Reveal>
+      </section>
+
+      {/* Prev / next */}
       <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-32">
         <div className="grid gap-4 border-t border-line pt-8 sm:grid-cols-2">
           <Link
