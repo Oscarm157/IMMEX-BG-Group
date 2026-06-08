@@ -12,6 +12,9 @@ export const dictionaries = {
       software: "Software",
       contact: "Contacto",
       cta: "Hablemos",
+      megaTitle: "Ocho áreas, un mismo estándar.",
+      megaLead: "Comercio exterior, aduanas, legal, compliance y fiscal en una sola firma.",
+      groups: ["Legal y cumplimiento", "Operación aduanera", "Origen y logística"],
     },
     langSwitch: { to: "EN", aria: "Cambiar a inglés" },
     hero: {
@@ -219,6 +222,9 @@ export const dictionaries = {
       software: "Software",
       contact: "Contact",
       cta: "Let's talk",
+      megaTitle: "Eight areas, one standard.",
+      megaLead: "Foreign trade, customs, legal, compliance and tax in one firm.",
+      groups: ["Legal & compliance", "Customs operation", "Origin & logistics"],
     },
     langSwitch: { to: "ES", aria: "Switch to Spanish" },
     hero: {

@@ -4,6 +4,7 @@ import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { LangSetter } from "@/components/site/LangSetter";
 import { getDictionary, isLocale, locales } from "@/content/dictionaries";
+import { SERVICE_SLUGS } from "@/content/service-slugs";
 
 export const dynamicParams = false;
 
@@ -48,7 +49,14 @@ export default async function LangLayout({
     <>
       <LangSetter lang={lang} />
       <div className="grain" aria-hidden />
-      <Nav lang={lang} dict={dict.nav} langSwitch={dict.langSwitch} />
+      <Nav
+        lang={lang}
+        dict={dict.nav}
+        langSwitch={dict.langSwitch}
+        services={dict.services.items}
+        slugs={SERVICE_SLUGS}
+        servicesCta={dict.servicesPreview.cta}
+      />
       <main>{children}</main>
       <Footer lang={lang} dict={dict} />
     </>
