@@ -22,7 +22,7 @@ import {
   signSession,
 } from "@/lib/crm-auth";
 import { requireUser, requireAdmin, requireLeadAccess } from "@/lib/crm-session";
-import { canViewDashboard, normalizeRole, isReadOnly } from "@/lib/crm-permissions";
+import { canViewDashboard, normalizeRole, isReadOnly, isClient } from "@/lib/crm-permissions";
 import { STATUS_LABELS, STATUS_ORDER } from "@/lib/crm-status";
 
 const SOURCES: LeadSource[] = ["bot", "form", "manual"];
@@ -72,7 +72,8 @@ export async function login(formData: FormData) {
     path: "/",
     maxAge: 60 * 60 * 24 * 30,
   });
-  const home = canViewDashboard(normalizeRole(u.role)) ? "/admin/dashboard" : "/admin";
+  const r = normalizeRole(u.role);
+  const home = isClient(r) ? "/admin/ads" : canViewDashboard(r) ? "/admin/dashboard" : "/admin";
   redirect(u.mustChangePassword ? "/admin/change-password" : home);
 }
 

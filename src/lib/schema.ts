@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, timestamp, jsonb, integer, boolean } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, timestamp, jsonb, integer, boolean, date } from "drizzle-orm/pg-core";
 
 export type LeadQualification = {
   service?: string;
@@ -14,7 +14,10 @@ export type TranscriptMessage = { role: string; content: string };
 
 export type LeadSource = "bot" | "form" | "manual";
 
-export type UserRole = "admin" | "agent" | "viewer";
+export type UserRole = "admin" | "agent" | "viewer" | "client";
+
+export type AdPlatform = "meta" | "google" | "tiktok" | "linkedin" | "otro";
+export type AdStatus = "draft" | "active" | "paused" | "ended";
 
 export type LeadStatus =
   | "new"
@@ -26,6 +29,15 @@ export type LeadStatus =
 
 export type ArticleStatus = "draft" | "scheduled" | "published";
 
+// Cuentas de cliente (para la vista read-only del módulo Ads).
+export const clients = pgTable("clients", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  slug: text("slug").notNull().unique(),
+  active: boolean("active").default(true).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
+
 export const users = pgTable("users", {
   id: uuid("id").primaryKey().defaultRandom(),
   email: text("email").notNull().unique(),
@@ -34,7 +46,32 @@ export const users = pgTable("users", {
   role: text("role").$type<UserRole>().default("agent").notNull(),
   active: boolean("active").default(true).notNull(),
   mustChangePassword: boolean("must_change_password").default(true).notNull(),
+  // Solo para usuarios con rol "client": acota su vista a este cliente.
+  clientId: uuid("client_id").references(() => clients.id, { onDelete: "set null" }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
+
+// Anuncios / campañas (captura manual v1).
+export const ads = pgTable("ads", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  clientId: uuid("client_id").references(() => clients.id, { onDelete: "set null" }),
+  name: text("name").notNull(),
+  platform: text("platform").$type<AdPlatform>().default("meta").notNull(),
+  status: text("status").$type<AdStatus>().default("draft").notNull(),
+  objective: text("objective"),
+  budget: integer("budget"),
+  spend: integer("spend"),
+  startDate: date("start_date"),
+  endDate: date("end_date"),
+  impressions: integer("impressions"),
+  clicks: integer("clicks"),
+  creativeUrl: text("creative_url"),
+  creativePathname: text("creative_pathname"),
+  // Código para atribución automática: si un lead trae utm_campaign igual, se enlaza.
+  utmCampaign: text("utm_campaign"),
+  notes: text("notes"),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });
 
 export const leads = pgTable("leads", {
@@ -50,6 +87,11 @@ export const leads = pgTable("leads", {
   summary: text("summary"),
   source: text("source").$type<LeadSource>().default("bot").notNull(),
   status: text("status").$type<LeadStatus>().default("new").notNull(),
+  // Atribución a un anuncio (manual o por UTM).
+  adId: uuid("ad_id").references(() => ads.id, { onDelete: "set null" }),
+  utmSource: text("utm_source"),
+  utmCampaign: text("utm_campaign"),
+  utmMedium: text("utm_medium"),
   assignedTo: uuid("assigned_to").references(() => users.id, { onDelete: "set null" }),
   valueAmount: integer("value_amount"),
   closedAt: timestamp("closed_at", { withTimezone: true }),

@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { Resend } from 'resend';
 import { and, eq, gt } from 'drizzle-orm';
 import { db } from '@/lib/db';
-import { leads, leadComments, leadEvents } from '@/lib/schema';
+import { leads, leadComments, leadEvents, ads } from '@/lib/schema';
 import { leadRecipient, mailFrom } from '@/lib/site-config';
 
 const QUAL_KEYS = [
@@ -130,6 +130,20 @@ export async function POST(req: Request) {
 
   const message = cap(body.message, 2000);
 
+  // Atribución: UTM crudo + auto-enlace a un anuncio si utm_campaign coincide.
+  const utmSource = cap(body.utmSource, 120);
+  const utmCampaign = cap(body.utmCampaign, 120);
+  const utmMedium = cap(body.utmMedium, 120);
+  let adId: string | null = null;
+  if (utmCampaign) {
+    try {
+      const m = await db.select({ id: ads.id }).from(ads).where(eq(ads.utmCampaign, utmCampaign)).limit(1);
+      adId = m[0]?.id ?? null;
+    } catch {
+      /* sin atribución si falla */
+    }
+  }
+
   // Drop duplicate submissions: same email within a short window (double-submit,
   // refresh, or spam). Skips the insert, the summary call, and the notification.
   if (email) {
@@ -158,6 +172,10 @@ export async function POST(req: Request) {
         qualification: qual,
         transcript: rawMessages.length ? rawMessages : null,
         summary,
+        adId,
+        utmSource,
+        utmCampaign,
+        utmMedium,
       })
       .returning({ id: leads.id });
     newLeadId = inserted[0]?.id;

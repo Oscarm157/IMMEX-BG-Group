@@ -7,7 +7,7 @@ import { users, type UserRole } from "@/lib/schema";
 import { hashPassword } from "@/lib/crm-auth";
 import { requireAdmin } from "@/lib/crm-session";
 
-const ROLES: UserRole[] = ["admin", "agent", "viewer"];
+const ROLES: UserRole[] = ["admin", "agent", "viewer", "client"];
 
 const CHARS = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
@@ -50,26 +50,28 @@ export async function createUser(
 
 export async function updateUser(
   userId: string,
-  data: { name: string; email: string; role: UserRole }
+  data: { name: string; email: string; role: UserRole; clientId?: string | null }
 ): Promise<{ error?: string }> {
   const me = await requireAdmin();
   const name = data.name.trim();
   const email = data.email.trim().toLowerCase();
-  if (!name || !email) return { error: "Name and email are required." };
-  if (!ROLES.includes(data.role)) return { error: "Invalid role." };
+  if (!name || !email) return { error: "Nombre y correo son obligatorios." };
+  if (!ROLES.includes(data.role)) return { error: "Rol inválido." };
   const role = data.role;
 
   if (userId === me.id && role !== "admin") {
-    return { error: "You can't remove your own admin role." };
+    return { error: "No puedes quitarte tu propio rol de admin." };
   }
 
   const existing = await db
     .select({ id: users.id })
     .from(users)
     .where(and(eq(users.email, email), ne(users.id, userId)));
-  if (existing.length > 0) return { error: "A user with that email already exists." };
+  if (existing.length > 0) return { error: "Ya existe un usuario con ese correo." };
 
-  await db.update(users).set({ name, email, role }).where(eq(users.id, userId));
+  // El cliente asignado solo aplica al rol "client".
+  const clientId = role === "client" ? data.clientId || null : null;
+  await db.update(users).set({ name, email, role, clientId }).where(eq(users.id, userId));
   revalidatePath("/admin/users");
   return {};
 }
