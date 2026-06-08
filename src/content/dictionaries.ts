@@ -52,6 +52,7 @@ export const dictionaries = {
         { value: "50K", label: "Operaciones / año" },
       ],
     },
+    bandCta: { title: "Opera sin sorpresas." },
     operationViz: {
       eyebrow: "En operación",
       title: "El cruce, en orden.",
@@ -307,6 +308,7 @@ export const dictionaries = {
         { value: "50K", label: "Operations / yr" },
       ],
     },
+    bandCta: { title: "Operate without surprises." },
     operationViz: {
       eyebrow: "In operation",
       title: "The crossing, in order.",

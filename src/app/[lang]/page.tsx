@@ -137,6 +137,29 @@ export default async function HomePage({
         </div>
       </section>
 
+      {/* Banda de video del corredor MX-US (antes de "cómo trabajamos") */}
+      <section className="relative h-[70vh] min-h-[440px] w-full overflow-hidden border-y border-line">
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/video/banda-poster.jpg"
+          aria-hidden
+          className="absolute inset-0 h-full w-full object-cover"
+        >
+          <source src="/video/banda.mp4" type="video/mp4" />
+        </video>
+        <div className="pointer-events-none absolute inset-0 bg-ink/55" />
+        <div className="relative z-10 flex h-full items-center justify-center px-5 text-center">
+          <Reveal>
+            <h2 className="max-w-4xl text-balance font-display text-[clamp(2.4rem,6vw,5rem)] font-medium leading-[1.02] tracking-[-0.03em] text-chalk [text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
+              {d.bandCta.title}
+            </h2>
+          </Reveal>
+        </div>
+      </section>
+
       {/* Flujo aduanal — instrumento interactivo */}
       <CustomsFlow
         eyebrow={d.flow.eyebrow}
