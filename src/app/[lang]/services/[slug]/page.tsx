@@ -102,29 +102,27 @@ export default async function ServiceDetailPage({
             {d.servicesPreview.colScope}
           </span>
         </Reveal>
-        <Reveal delay={0.04}>
-          <p className="mb-12 max-w-2xl text-[18px] leading-relaxed text-bone/90">{detail.context}</p>
-        </Reveal>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {detail.points.map((pt, i) => (
-            <Reveal
-              key={pt.title}
-              delay={(i % 2) * 0.06}
-              className="console-panel flex flex-col rounded-[14px] bg-surface-1 px-6 py-6"
-            >
-              <span className="font-mono text-[12px] tabular-nums text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h2 className="mt-3 font-display text-lg font-medium tracking-[-0.01em] text-chalk">{pt.title}</h2>
-              <p className="mt-2 text-[14px] leading-relaxed text-bone/90">{pt.desc}</p>
-            </Reveal>
-          ))}
+        {detail.body && (
+          <Reveal delay={0.04}>
+            <p className="mb-10 max-w-2xl text-[17px] leading-relaxed text-bone/90">{detail.body}</p>
+          </Reveal>
+        )}
+        <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
+          <ul className="grid sm:grid-cols-2">
+            {detail.points.map((pt, i) => (
+              <Reveal
+                key={pt}
+                delay={Math.min(i, 6) * 0.03}
+                className="flex items-start gap-4 border-b border-line px-6 py-5 sm:odd:border-r"
+              >
+                <span className="mt-0.5 font-mono text-[12px] tabular-nums text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span className="text-[15px] leading-snug text-chalk">{pt}</span>
+              </Reveal>
+            ))}
+          </ul>
         </div>
-        <Reveal delay={0.1}>
-          <p className="mt-10 max-w-2xl font-display text-[clamp(1.3rem,2.6vw,1.9rem)] font-medium leading-snug tracking-[-0.01em] text-chalk">
-            {detail.close}
-          </p>
-        </Reveal>
       </section>
 
       {/* CTA */}

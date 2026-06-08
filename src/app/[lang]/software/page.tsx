@@ -96,6 +96,24 @@ export default async function SoftwarePage({
         </div>
       </section>
 
+      {/* Ediciones */}
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+        <Reveal className="console-panel rounded-[16px] bg-surface-1 px-8 py-10 sm:px-12 sm:py-12">
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">{s.editionsLabel}</span>
+          <h2 className="mt-4 max-w-2xl font-display text-[clamp(1.6rem,3.5vw,2.4rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
+            {s.editionsTitle}
+          </h2>
+          <div className="mt-7 flex flex-wrap gap-2.5">
+            {s.editions.map((e) => (
+              <span key={e} className="rounded-md border border-line px-4 py-2 font-mono text-[13px] tracking-[0.02em] text-chalk">
+                {e}
+              </span>
+            ))}
+          </div>
+          <p className="mt-6 max-w-xl text-[14px] leading-relaxed text-bone/90">{s.editionsNote}</p>
+        </Reveal>
+      </section>
+
       {/* Readouts BMS */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
         <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">

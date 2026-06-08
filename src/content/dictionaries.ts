@@ -9,12 +9,14 @@ export const dictionaries = {
   es: {
     nav: {
       services: "Servicios",
+      about: "Nosotros",
       software: "Software",
       contact: "Contacto",
       cta: "Hablemos",
       megaTitle: "Ocho áreas, un mismo estándar.",
       megaLead: "Comercio exterior, aduanas, legal, compliance y fiscal en una sola firma.",
       groups: ["Legal y cumplimiento", "Operación aduanera", "Origen y logística"],
+      softwareBlurb: "BMS Custom System: ERP aduanero con Anexo 24/30, EDI, MRP/ERP y reportería en una plataforma.",
     },
     langSwitch: { to: "EN", aria: "Cambiar a inglés" },
     hero: {
@@ -53,6 +55,21 @@ export const dictionaries = {
     frameworks: {
       label: "Operamos sobre",
       items: ["Anexo 24", "Anexo 30", "IMMEX", "T-MEC / USMCA", "EDI", "NOM"],
+    },
+    about: {
+      eyebrow: "Nosotros",
+      title: "Veinte años en aduanas, fiscal y TI.",
+      intro:
+        "Somos una firma de consultoría legal especializada en comercio exterior. Entre nuestros socios se acumulan, en promedio, veinte años de experiencia en materia fiscal, aduanera y de tecnologías de la información.",
+      paragraphs: [
+        "Nos enfocamos en dar la asesoría y el soporte necesarios para asegurar a nuestros clientes una relación sana con las autoridades.",
+        "Contamos con un equipo de profesionales en las distintas áreas del comercio exterior, con conocimiento y experiencia en buen gobierno, mejores prácticas, responsabilidad social y cumplimiento regulatorio.",
+        "El valor que ofrecemos es la posibilidad de blindar las operaciones de comercio exterior: control del riesgo regulatorio y normativo, su revisión permanente y su mitigación, adecuados a la actividad y el entorno de cada cliente.",
+        "Adaptamos el plan de cumplimiento a los distintos entornos culturales y a la diversidad de cada plantilla, para que el mensaje de cumplimiento se entienda en todos los mercados donde el cliente opera.",
+      ],
+      teamEyebrow: "Equipo",
+      teamTitle: "Un equipo multidisciplinario.",
+      teamLead: "Legal, trade compliance, TI, contabilidad, OEA/CTPAT, 3PL y BMS, bajo una misma operación.",
     },
     values: {
       eyebrow: "Principios",
@@ -157,7 +174,7 @@ export const dictionaries = {
     software: {
       eyebrow: "BMS Software",
       title: "El cumplimiento, automatizado.",
-      lead: "BMS Custom System es el ERP aduanero con el que opera BG y más de 180 empresas. Simplifica la gestión de tu operación de comercio exterior.",
+      lead: "BMS Custom System es el ERP aduanero con el que opera BG y más de 180 empresas. Ordena el control de inventarios, los anexos y la reportería de tu operación de comercio exterior.",
       slogan: "Un solo sistema para el inventario IMMEX, los anexos 24 y 30, la conectividad EDI y la reportería. El mismo que opera BG todos los días.",
       capabilities: [
         { title: "Anexo 24 y Anexo 30", body: "Cumple los requisitos de control de inventarios IMMEX y deja cada movimiento registrado." },
@@ -173,6 +190,10 @@ export const dictionaries = {
         { value: "1–150", label: "usuarios por licencia" },
       ],
       modes: { label: "Disponible en", items: ["Escritorio", "Web", "App"] },
+      editionsLabel: "Ediciones",
+      editionsTitle: "Una suite, varias ediciones.",
+      editions: ["BMS Suite", "BMS A24", "BMS A24C", "BMS A30", "BMS ONE"],
+      editionsNote: "Disponibles en escritorio, web y app. Licencias de 1 a 150 usuarios, multi-base por RFC.",
       cta: "Ver BMS Custom System",
       ctaHref: "https://www.bmscustomsystem.com/",
     },
@@ -219,12 +240,14 @@ export const dictionaries = {
   en: {
     nav: {
       services: "Services",
+      about: "About",
       software: "Software",
       contact: "Contact",
       cta: "Let's talk",
       megaTitle: "Eight areas, one standard.",
       megaLead: "Foreign trade, customs, legal, compliance and tax in one firm.",
       groups: ["Legal & compliance", "Customs operation", "Origin & logistics"],
+      softwareBlurb: "BMS Custom System: a customs ERP with Annex 24/30, EDI, MRP/ERP and reporting in one platform.",
     },
     langSwitch: { to: "ES", aria: "Switch to Spanish" },
     hero: {
@@ -263,6 +286,21 @@ export const dictionaries = {
     frameworks: {
       label: "We operate across",
       items: ["Annex 24", "Annex 30", "IMMEX", "USMCA", "EDI", "NOM"],
+    },
+    about: {
+      eyebrow: "About",
+      title: "Twenty years in customs, tax and IT.",
+      intro:
+        "We are a legal consulting firm specialized in foreign trade. Our partners have accumulated, on average, twenty years of experience in tax, customs and information technology matters.",
+      paragraphs: [
+        "We focus on providing the advice and support needed to ensure our clients a healthy relationship with the authorities.",
+        "We have a team of professionals across the different areas of foreign trade, with knowledge and experience in good governance, best practices, social responsibility and regulatory compliance.",
+        "The value we offer is the ability to shield our clients' foreign trade operations: control of regulatory and normative risk, its ongoing review and its mitigation, suited to each client's activity and environment.",
+        "We adapt the compliance plan to the different cultural environments and to the diversity of each workforce, so the compliance message is understood in every market where the client operates.",
+      ],
+      teamEyebrow: "Team",
+      teamTitle: "A multidisciplinary team.",
+      teamLead: "Legal, trade compliance, IT, accounting, OEA/CTPAT, 3PL and BMS, under one operation.",
     },
     values: {
       eyebrow: "Principles",
@@ -367,7 +405,7 @@ export const dictionaries = {
     software: {
       eyebrow: "BMS Software",
       title: "Compliance, automated.",
-      lead: "BMS Custom System is the customs ERP that BG and more than 180 companies run on. It simplifies the management of your cross-border operation.",
+      lead: "BMS Custom System is the customs ERP that BG and more than 180 companies run on. It orders the inventory control, the annexes and the reporting of your cross-border operation.",
       slogan: "One system for IMMEX inventory, Annex 24 and 30, EDI connectivity and reporting. The same one BG runs every day.",
       capabilities: [
         { title: "Annex 24 and Annex 30", body: "Meets IMMEX inventory control requirements and keeps every movement on record." },
@@ -383,6 +421,10 @@ export const dictionaries = {
         { value: "1–150", label: "users per license" },
       ],
       modes: { label: "Available on", items: ["Desktop", "Web", "App"] },
+      editionsLabel: "Editions",
+      editionsTitle: "One suite, several editions.",
+      editions: ["BMS Suite", "BMS A24", "BMS A24C", "BMS A30", "BMS ONE"],
+      editionsNote: "Available on desktop, web and app. Licenses from 1 to 150 users, multi-database per Tax ID.",
       cta: "Visit BMS Custom System",
       ctaHref: "https://www.bmscustomsystem.com/",
     },

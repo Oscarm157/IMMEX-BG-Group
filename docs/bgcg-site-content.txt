@@ -1,0 +1,324 @@
+# BG Consulting Group — Contenido del sitio web
+**URL:** https://bgconsultingroup.com  
+**Idioma:** English
+
+---
+
+## HOME
+
+**Tagline:** Business Made Easy.  
+More than 20 years of experience helping businesses find comprehensive solutions.
+
+> "At BG Group we focus on providing, among other things, the advice and support necessary to ensure our clients a healthy relationship with government authorities."
+
+### Services Overview
+- **Foreign Trade** — We provide a quality service aimed at risk management in the transnational operations of your products.
+- **Legal** — The comprehensive vision of BG Group allows us to provide a technical advisory service.
+- **Compliance** — We design and implement solid structures that help identify and evaluate areas of opportunity.
+- **Fiscal Services** — Review of the Value Added Tax and the presentation of the request for refund.
+
+### Our Values
+- **Constancy and discipline** — 24 hours a day, 7 days a week, a fundamental part of our success.
+- **Confidence** — Essential for both parties to achieve positive results.
+- **Integrity** — We act honestly, consistently in our decisions and actions.
+- **Transparency** — In everything we do related to our work and committed to clients.
+
+---
+
+## ABOUT US
+**URL:** /about-us/
+
+20 years of experience in tax, customs and IT matters.
+
+We are a legal consultancy firm specialized in Foreign Trade, within which its partners have accumulated an average of 20 years of experience in tax, customs and IT matters. We focus on providing, among other things, the necessary advice and support to ensure our clients a healthy relationship with government authorities.
+
+BG Group® has a team of professionals in the various areas of Foreign Trade, providing knowledge and experience in issues such as good governance, best practices, social responsibility and regulatory compliance, all with a vision of strategy and business development.
+
+The implementation of policies adapted to the business environment, the monitoring and inspection of processes, the risk analysis system, communication and comprehensive training are factors that guarantee the continuous improvement of an efficient strategic compliance plan, adding a competitive advantage: "The control of regulatory and normative risk, its immutable review and its mitigation, appropriate to its activity and its environment".
+
+The added value that we offer our clients is the possibility of shielding their foreign trade operations, as well as all the products and services that BG Group® offers, are thought of as effective solutions to real problems, without excluding the human side of the labor relationship.
+
+Adapting a regulatory compliance plan to the different cultural environments in which we operate and to the diversity of our workforce is essential to facilitate the involvement of all company resources towards a true culture of compliance.
+
+Our experience and technical knowledge allow us to offer multinational clients specific cultural adaptation services, ethical codes linguistics, codes of conduct, compliance policies, training and communication plans, in order to ensure that your compliance message is perfectly understood by its employees, strategic partners, suppliers and customers in all the markets where it operates.
+
+### Team
+- Mario A. Cortés — Co-CEO
+- Edgardo Romero — Co-CEO
+- Luis Mateo — COO
+- Hugo Garcia — CIO
+- Rogelio Viloria Beltran — Co CEO & CFO
+- Diana Galicia Matuz — Legal Area Leader
+- Brenda Borboa — Trade Compliance Sr.
+- Angelica Rodriguez — Trade Compliance Jr.
+- Jonathan Morales — Trade Compliance Jr.
+- Kevin García — Trade Compliance Jr.
+- Dayanna Aldaz — Lawyer
+- Valeria Fernandez — Lawyer
+- Azucena García — Desktop Developer
+- Alfredo Perez — Web Developer
+- Jose Muro — IT Supervisor
+- Edgar Aguilar — IT Support
+- Arturo Alvarado — BMS Consulting
+- Roman Elizalde — BMS Consulting
+- Karla Gonzalez — BMS Consulting
+- Paulina Gonzalez — Trade Compliance Jr.
+- Sandra Ornelas — Import - Export Specialist
+- Roberto Morales — Trade Compliance Jr.
+- Osiris Gomez — Accounting Advisor
+- Yaridt Rodriguez — Accounting Advisor
+- Maydeleni Roblero — Accounting Advisor
+- Emilia Varela — Legal Advisor
+- Sergio Romero — 3PL & Logistics
+- Leonardo Arroyo Gomez — OEA/CTPAT Specialist
+- Aylin Gil — Project Management Jr.
+- Giselle Garcia — Trade Compliance Jr.
+- Jocelyn Vazquez — Trade Compliance Jr.
+- Mireya Cisneros — Trade Compliance Jr.
+- Lineth Alapisco — Trade Compliance Jr.
+
+---
+
+## SERVICES
+**URL:** /services/
+
+Our experience and technical knowledge allow us to offer multinational clients specific services for cultural adaptation, linguistics of ethical codes, codes of conduct, compliance policies, training, and communication plans, in order to ensure that your message on compliance is perfectly understood by its employees, strategic partners, suppliers, and customers in all markets where it operates.
+
+We provide a quality service aimed at risk management in the transnational operations of its products, we design and implement solid compliance structures that help the company to identify and evaluate areas of opportunity, in order to achieve greater transparency in its business environment.
+
+---
+
+### SERVICE: Legal Consulting
+**URL:** /legal-consulting/
+
+Given the complexity of the legislation to which Foreign Trade companies are subject, it is essential to have legal advisors with qualified experience in tax matters who monitor the compliance to which they are obliged, as well as the legal advice regarding the strategic decisions of your business or main activity.
+
+As part of our services in this area, specialized defense is included, from the notification of the administrative act to the total conclusion of the matter, including defense, through the processing and substantiation of the ordinary and alternative means, provided for in the legislation, among others:
+
+- Human rights
+- Administrative Resources
+- Writ of amparo
+- Federal Court of Administrative Justice
+- Conclusive Agreements
+- International Commercial Arbitration
+- Mediation
+- Experts Judicial Branch of the Federation
+- Experts Court of Administrative Justice
+
+---
+
+### SERVICE: Compliance and Assurance
+**URL:** /compliance-and-assurance/
+
+The manufacturing program of the Maquila Industry and Export Services (IMMEX) is undoubtedly one of the most important. The operation of this in a company is not only reflected in the benefits but also, thorough compliance with the operating requirements, to ensure the permanence of the authorization and not lose the export privileges that are granted to the companies.
+
+The benefit of putting into practice the development of internal and external audit programs in Foreign Trade and Customs, has the purpose of validating the legal certainty of the operations carried out within the framework of their authorizations and avoiding legal consequences, due to non-compliance in payment of contributions or operations that could be negatively interpreted by an authority in case of review.
+
+- Evaluation of the risks of Foreign Trade
+- NAFTA 303
+- Preventive audits in foreign trade matters
+- Internal control analysis
+- Inventory risk analysis
+- Reengineering of the different departments
+- Reengineering of the Import-Export Department
+- Reconstruction of pediment balances (Fixed Assets & Raw Materials)
+- Capital goods and accessories
+- Annual continuous assurance plan
+- Annual plan for specialized advice
+
+---
+
+### SERVICE: Foreign Trade
+**URL:** /foreign-trade/
+
+Foreign Trade is very dynamic, therefore, the National and International Legislation that regulates it is also complex and changing. At BG Group®, we offer a comprehensive strategic consulting service in Foreign Trade, aimed at facilitating the understanding of the legal content of the various modifications that current regulations undergo.
+
+Our advisors have qualified experience in tax and customs matters, which allows them to guide each client in a personalized way, towards an optimal level of legal compliance and, at the same time, enhance the tax-customs benefits derived from the Customs and Foreign Trade Legislation signed by Mexico internationally:
+
+- Customs value of the merchandise
+- Customs valuation criteria
+- Correct filling of motions
+- Risk analysis in customs matters
+- Origin of the merchandise
+- Compliance with non-tariff restrictions and regulations
+- Inventory control system (annex 24)
+- Annex 31 validation system
+- System for obtaining Data Stage
+- IMMEX program
+- Previous permits – Ministry of Economy
+- Taxes devolution
+- DrawBack
+- PROSEC
+- Export promotion
+- Free trade agreements
+
+---
+
+### SERVICE: International Trade Experts
+**URL:** /international-trade-experts/
+
+Our clients can count on expert support, to substantiate and support the grievances that are presented in the legal defense before the corresponding authorities, regarding the matters of Foreign Trade and Customs Operations; as well as for those cases in which the client requires the support of an expert opinion for reasons of legal certainty:
+
+- Tariff classification
+- Origin of goods
+- Customs criteria
+- Appraisals
+- Annex 24
+
+---
+
+### SERVICE: Information Technology
+**URL:** /information-technology/
+
+As an essential part of our offer of real solutions, we have information technologies capable of managing a large-scale operation; the work tools that we develop to comply with the provisions of customs regulations, help our clients to achieve an optimal level of compliance or mitigate the findings in real time.
+
+**International, Land, and Maritime Logistics Service:**
+- Logistics
+- Storage
+- Distribution
+- Monitoring
+
+---
+
+### SERVICE: Fiscal Services
+**URL:** /fiscal-services/
+
+Review of the Value Added Tax and presentation of the Refund Request.
+
+The traditional approach is limited to the review of the determination and request of the balance in favor of the value-added tax, this is supported by the operations carried out by the company so that it complies with all the guidelines and requirements established by the tax authority.
+
+Services and activities:
+- Review of operations that comply with their accounting records, that are in the corresponding period, and comply with the corresponding accounting regulations.
+- Review of operations that meet current tax requirements.
+- Review of the determination of the balance in favor of the value-added tax.
+- Review the informative statement of operations with third parties represented by the company, and that matches what is presented in the corresponding monthly statement, submitted to the SAT on its portal.
+- Submit the request for the corresponding balance in favor of the months indicated by the company.
+- Follow up until we get a response from the authority.
+
+All the above points will be reviewed and verified based on the Financial Information Standards and tax requirements that are currently in place.
+
+---
+
+### SERVICE: Trade Agreements
+**URL:** /trade-agreements/
+
+Mexico is one of the countries with the most openness in the international commercial sphere and, proof of this is the various trade treaties and agreements signed with different countries of the world. Each of them has the purpose of offering Mexican entrepreneurs preferential import and export opportunities, thus promoting the competitiveness with which they operate in global supply chains.
+
+At BGC, we are specialists in providing specialized consulting for the implementation and management of the different commercial treaties and agreements, guaranteeing their legal compliance and enhancing the benefits they represent in the operation of each of our clients.
+
+- Review and creation of records of the origin of the merchandise
+- Design of formats for origin requests
+- Management of origin requests for national suppliers
+- Audit of origin determination and certification processes
+- Review and analysis of compliance with rules of origin
+- Management of registration of eligible products and obtaining certificates of origin
+- Feasibility analysis and identification of preferential tariffs
+- Correlation of tariff fractions with regional nomenclatures (ALADI)
+- Advice on customs procedures to obtain tariff preferences
+- Request for advance resolutions
+- Resolution of verifications of origin
+
+---
+
+### SERVICE: Import Services
+**URL:** /import-services/
+
+BG Group offers logistics solutions for the importation of your products to Mexico, tailored to your needs.
+
+- Warehouse
+- Specific standards
+- Permission management
+- Customs Broker
+- Transportation
+- Door-to-door service
+
+---
+
+## BMS CUSTOMS SYSTEM
+**URL:** /bms-customs-system/
+
+**ERP – Annex 24 – Annex 30 – Consulting**
+
+Our objective is to achieve the automation of Foreign Trade processes and operations.
+
+Under the new global environment of economic acceleration, multinational companies are obliged to align the basic principles to eliminate potential operating risks associated with foreign trade, related to increasing efficiency, ensuring transparency, and minimizing risks to compliance. The correct linking of information technologies to customs areas and global customs compliance processes is essential.
+
+BMS offers its customers a variety of tools (BMS Suite), in desktop, web, and app mode, user-friendly and high performance in its processes in the different products, which at some point are associated with compliance objectives. Our technologies continue to evolve and adapt new business models that, with the experience of our consultants, we manage to implement the best work environment to align ourselves with the objectives of each client.
+
+BMS is a leader in Global Trade and Customs Compliance Software solutions that ensures the efficient management of Compliance within the legal framework. Additionally, this is supported and facilitated by our team and partners on global compliance issues.
+
+BMS is a specialist in integrating a global customs and trade compliance system, meeting regional and national requirements. BMS offers customizable software solutions for operation and compliance with customs regulations, which supports both multinational and multiregional clients.
+
+### Features
+- **Customs Compliance and Risk Control Software** — Complies with Annex 24. For each and every one of the modules described within the customs regulations, BMS offers all its modules so that you can exploit all its resources and not fall into non-compliance.
+- **EDI Files** — Stay connected at all times with your business associates for the dispatch of merchandise. The electronic connection is no longer an option and BMS is ready to transmit each operation through web services.
+- **Operations Reports & Crystal Report** — Keep up to date with the system's more than 100 reports and the ease of using Crystal report, which has helped companies become self-sufficient when making a business decision.
+- **MRP/ERP Integration** — BMS Software® has the capacity to integrate at least 10 automatic transactions to optimize communication and minimize capture errors.
+- **Complies with Annex 30** — BMS facilitates the creation of electronic documents for the fulfillment and validation of your operations. Do not stop complying with your CIVA.
+- **NAFTA-TLCAN-TMEC Module** — Comply at all times with any CF28 requirement by American customs through the historical data warehouse in the different catalogs within the system.
+- **BMS Licenses** — Multiple licensing models available: on-demand, 1 user, or up to 150 users with multiple databases.
+
+### Success Stories
+- +150 users, electronic communication, warehouse electronic alerts
+- +35 databases per Tax ID, +50K Import-Export Operations
+- +15 million lines in backflush logs
+
+---
+
+## CONTACT US
+**URL:** /contact-us/
+
+**Email:** contacto@bgc.mx
+
+### Mexico
+Miguel Alemán 3231 B Col. Gabilondo  
+Tijuana, Baja California, Mexico 22044  
+Tel: +52 (664) 607 9642  
+Toll-free: 01 (800) 788 0232
+
+### USA
+BG GROUP & BROKER LLC  
+7577 Airway Road, Suite 106  
+San Diego, CA 92154 USA  
+Tel: (619) 638-2168  
+Toll-free: +1 (855) 755 0641
+
+---
+
+## SOCIAL MEDIA
+- Twitter/X: https://twitter.com/BGC_MX
+- Facebook: https://www.facebook.com/bgconsulting/
+- LinkedIn: https://www.linkedin.com/company/bgconsultingroup/
+- Instagram: https://www.instagram.com/bgconsultingroup/
+
+
+
+## FULFILLMENT SOLUTIONS
+**URL:** /fulfillment-solutions/
+
+At BG GROUP, our fulfillment solutions allow you to gain greater control of product selection, inventory management, and customer service, while maintaining critical speed-to-market. With our technologies on integration with all e-commerce platforms, fulfillment center expertise, and strategically located fulfillment warehouses.
+
+**Services offered:**
+- Fulfillment
+- Trade Compliance Assessment
+- BMS Software
+- 3PL & Logistics
+- Consulting Services
+
+---
+
+## PRIVACY POLICY
+**URL:** /privacy-policy/
+
+BG Consulting Group, with address at Miguel Aleman # 3231 B Col. Gabilondo Tijuana, Baja California, Mexico, CP 22044, is responsible for the treatment, confidentiality and security of your personal data, in accordance with the ISO 27001 standard.
+
+Your data (commercial name, company name, fiscal address, telephone numbers, business database, contact emails, FTP routes, reports and inventories) will not be transferred to third parties.
+
+**Your data will be used to:**
+- Provide the service of annexes 22, 24, and 31.
+- Comply with obligations contracted with you.
+- Report changes to our services.
+
+You have the right to access, rectify or revoke consent for your data by sending a request to contacto@bgc.mx (response within 2 business days).
+
+Contact: 01 (800) 788 0232 | contacto@bgc.mx

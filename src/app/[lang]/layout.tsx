@@ -56,6 +56,11 @@ export default async function LangLayout({
         services={dict.services.items}
         slugs={SERVICE_SLUGS}
         servicesCta={dict.servicesPreview.cta}
+        software={{
+          items: dict.software.capabilities.map((c) => c.title),
+          cta: dict.software.cta,
+          external: dict.software.ctaHref,
+        }}
       />
       <main>{children}</main>
       <Footer lang={lang} dict={dict} />
