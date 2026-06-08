@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import { SignalLine } from "./SignalLine";
 
 export function SectionHeading({
   eyebrow,
@@ -7,6 +8,7 @@ export function SectionHeading({
   lead,
   align = "left",
   tone = "dark",
+  rule = true,
   className = "",
 }: {
   eyebrow?: string;
@@ -15,6 +17,7 @@ export function SectionHeading({
   lead?: string;
   align?: "left" | "center";
   tone?: "dark" | "light";
+  rule?: boolean;
   className?: string;
 }) {
   const alignment = align === "center" ? "items-center text-center mx-auto" : "items-start text-left";
@@ -40,6 +43,7 @@ export function SectionHeading({
           {lead}
         </p>
       )}
+      {rule && !light && <SignalLine className="mt-7 w-16" />}
     </Reveal>
   );
 }

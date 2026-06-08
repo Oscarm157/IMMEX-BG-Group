@@ -52,6 +52,16 @@ export const dictionaries = {
         { value: "50K", label: "Operaciones / año" },
       ],
     },
+    operationViz: {
+      eyebrow: "En operación",
+      title: "El cruce, en orden.",
+      intro: "Cada operación pasa por las mismas etapas. BG sostiene el criterio legal y BMS deja el rastro de cada movimiento, de la mercancía al cumplimiento.",
+      opLabel: "Operación",
+      opId: "PEDIMENTO",
+      statusLabel: "En regla",
+      statusNote: "Cumplimiento",
+      barLabel: "Trazabilidad",
+    },
     frameworks: {
       label: "Operamos sobre",
       items: ["Anexo 24", "Anexo 30", "IMMEX", "T-MEC / USMCA", "EDI", "NOM"],
@@ -296,6 +306,16 @@ export const dictionaries = {
         { value: "180+", label: "Companies" },
         { value: "50K", label: "Operations / yr" },
       ],
+    },
+    operationViz: {
+      eyebrow: "In operation",
+      title: "The crossing, in order.",
+      intro: "Every operation goes through the same stages. BG holds the legal criteria and BMS keeps the trail of each movement, from the goods to compliance.",
+      opLabel: "Operation",
+      opId: "ENTRY",
+      statusLabel: "On record",
+      statusNote: "Compliance",
+      barLabel: "Traceability",
     },
     frameworks: {
       label: "We operate across",

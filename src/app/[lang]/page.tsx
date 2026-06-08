@@ -7,7 +7,7 @@ import { PillButton } from "@/components/site/PillButton";
 import { TelemetryPanel } from "@/components/site/TelemetryPanel";
 import { CustomsFlow } from "@/components/site/CustomsFlow";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { ParallaxMedia } from "@/components/site/ParallaxMedia";
+import { OperationViz } from "@/components/site/OperationViz";
 
 export default async function HomePage({
   params,
@@ -146,19 +146,19 @@ export default async function HomePage({
         panelLabel={d.flow.panel}
       />
 
-      {/* Banda corredor full-bleed (parallax) */}
-      <section className="relative border-y border-line">
-        <ParallaxMedia
-          src="/img/gen/corridor-wide.webp"
-          alt="Corredor comercial Tijuana San Diego renderizado como datos"
-          className="h-[44vh] min-h-[300px] w-full"
-        />
-        <div className="pointer-events-none absolute inset-0 flex items-end justify-center pb-8">
-          <span className="rounded-full border border-line bg-ink/70 px-4 py-2 font-mono text-[11px] uppercase tracking-[0.3em] text-chalk/90 backdrop-blur-sm">
-            {d.hero.eyebrow} · {d.flow.eyebrow}
-          </span>
-        </div>
-      </section>
+      {/* Operación — diagrama animado (SVG) */}
+      <OperationViz
+        eyebrow={d.operationViz.eyebrow}
+        title={d.operationViz.title}
+        intro={d.operationViz.intro}
+        opLabel={d.operationViz.opLabel}
+        opId={d.operationViz.opId}
+        statusLabel={d.operationViz.statusLabel}
+        statusNote={d.operationViz.statusNote}
+        barLabel={d.operationViz.barLabel}
+        stages={d.flow.stages.map((s) => s.name)}
+        metrics={d.telemetry.metrics}
+      />
 
       {/* Servicios — ledger */}
       <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
