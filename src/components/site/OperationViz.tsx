@@ -105,7 +105,7 @@ export function OperationViz({
             </motion.g>
 
             {/* FLUJO — guía + nodos + partículas */}
-            <line x1="290" y1={Y} x2="730" y2={Y} stroke="rgba(204,210,220,0.14)" strokeWidth="1.5" strokeDasharray="2 8" strokeLinecap="round" />
+            <line x1="320" y1={Y} x2="720" y2={Y} stroke="rgba(204,210,220,0.14)" strokeWidth="1.5" strokeDasharray="2 8" strokeLinecap="round" />
 
             {!reduce &&
               PARTICLES.map((p, i) => (
@@ -114,8 +114,8 @@ export function OperationViz({
                   r="3.5"
                   cy={Y + p.cy}
                   fill="url(#ov-part)"
-                  initial={{ cx: 296, opacity: 0 }}
-                  animate={{ cx: [296, 724], opacity: [0, 1, 1, 0] }}
+                  initial={{ cx: 320, opacity: 0 }}
+                  animate={{ cx: [320, 720], opacity: [0, 1, 1, 0] }}
                   transition={{ duration: 2.6, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
                 />
               ))}
@@ -145,13 +145,13 @@ export function OperationViz({
 
             {!reduce && (
               <motion.circle
-                cx="730"
+                cx="720"
                 cy={Y}
                 r="6"
                 fill="#00e6a0"
                 animate={{ scale: [1, 1.6, 1], opacity: [0.9, 0.25, 0.9] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-                style={{ transformOrigin: `730px ${Y}px` }}
+                style={{ transformOrigin: `720px ${Y}px` }}
               />
             )}
 
