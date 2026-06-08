@@ -12,6 +12,7 @@ type NavDict = {
   services: string;
   about: string;
   software: string;
+  blog: string;
   contact: string;
   cta: string;
   megaTitle: string;
@@ -99,6 +100,7 @@ export function Nav({
   const servicesActive = pathname.startsWith(`/${lang}/services`);
   const softwareActive = pathname.startsWith(`/${lang}/software`);
   const aboutActive = pathname.startsWith(`/${lang}/about`);
+  const blogActive = pathname.startsWith(`/${lang}/blog`);
 
   const triggerCls = (active: boolean) =>
     `flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[15px] tracking-[-0.01em] transition-colors ${
@@ -146,6 +148,14 @@ export function Nav({
           >
             {dict.software}
             <Chevron open={menu === "software"} />
+          </Link>
+
+          <Link
+            href={`/${lang}/blog`}
+            onMouseEnter={scheduleClose}
+            className={`px-3 py-1.5 text-[15px] tracking-[-0.01em] transition-colors ${blogActive ? "text-chalk" : "text-bone/90 hover:text-chalk"}`}
+          >
+            {dict.blog}
           </Link>
 
           <Link
@@ -276,6 +286,7 @@ export function Nav({
                 { href: `/${lang}/services`, label: dict.services },
                 { href: `/${lang}/about`, label: dict.about },
                 { href: `/${lang}/software`, label: dict.software },
+                { href: `/${lang}/blog`, label: dict.blog },
                 { href: `/${lang}/contact`, label: dict.contact },
               ].map((l) => (
                 <Link key={l.href} href={l.href} className="py-3 text-2xl font-display tracking-tight text-chalk">

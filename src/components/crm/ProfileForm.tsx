@@ -39,7 +39,7 @@ export function ProfileForm({ name, email }: { name: string; email: string }) {
       <div className="flex items-center gap-3 pt-1">
         <button type="submit" disabled={pending} className="crm-btn crm-btn-primary">
           {pending && <Loader2 className="size-3.5 animate-spin" />}
-          {pending ? "Saving…" : "Save changes"}
+          {pending ? "Saving…" : "Guardar cambios"}
         </button>
         <AnimatePresence>
           {saved && (

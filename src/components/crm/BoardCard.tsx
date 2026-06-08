@@ -82,7 +82,7 @@ export function BoardCard({
         {ownerName ? (
           <OwnerChip name={ownerName} id={lead.assignedTo ?? ownerName} />
         ) : (
-          <span className="text-[11px] text-[var(--crm-ink-mute)]">Unassigned</span>
+          <span className="text-[11px] text-[var(--crm-ink-mute)]">Sin asignar</span>
         )}
         <span className="text-[11px] text-[var(--crm-ink-mute)]">{fmtDate(lead.createdAt)}</span>
       </div>

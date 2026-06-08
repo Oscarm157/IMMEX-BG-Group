@@ -191,7 +191,7 @@ export default async function LeadsList({
                       {owner ? (
                         <OwnerChip name={owner.name} id={owner.id} />
                       ) : (
-                        <span className="text-[12px] text-[var(--crm-ink-mute)]">Unassigned</span>
+                        <span className="text-[12px] text-[var(--crm-ink-mute)]">Sin asignar</span>
                       )}
                       <span className="ml-auto text-[12px] text-[var(--crm-ink-mute)]">{fmtDate(lead.createdAt)}</span>
                     </div>
@@ -253,7 +253,7 @@ export default async function LeadsList({
                         ) : (
                           <span className="inline-flex items-center gap-1.5 text-[12.5px] text-[var(--crm-ink-mute)]">
                             <span className="size-1.5 rounded-full bg-[var(--crm-line-strong)]" />
-                            Unassigned
+                            Sin asignar
                           </span>
                         )}
                       </td>

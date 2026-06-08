@@ -28,10 +28,10 @@ export function NewLeadModal() {
     <>
       <button onClick={() => setOpen(true)} className="crm-btn crm-btn-primary">
         <Plus className="size-[15px]" strokeWidth={2.1} />
-        New lead
+        Nuevo lead
       </button>
 
-      <Modal open={open} onClose={() => setOpen(false)} title="New lead" maxWidth={400}>
+      <Modal open={open} onClose={() => setOpen(false)} title="Nuevo lead" maxWidth={400}>
         <form action={createLead} className="space-y-3.5">
           <div>
             <label className={labelCls} htmlFor="nl-name">Name</label>

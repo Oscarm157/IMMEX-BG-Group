@@ -9,6 +9,7 @@ import {
   ListFilter,
   UserRound,
   LayoutDashboard,
+  Newspaper,
   LogOut,
   Menu,
   X,
@@ -18,8 +19,8 @@ type NavItem = { href: string; label: string; icon: typeof Users };
 
 const roleLabels: Record<string, string> = {
   admin: "Admin",
-  agent: "Agent",
-  viewer: "Viewer",
+  agent: "Agente",
+  viewer: "Lector",
 };
 
 function isActive(pathname: string, href: string) {
@@ -31,22 +32,25 @@ export function PanelNav({
   user,
   showUsers,
   showDashboard,
+  showBlog,
   logoutAction,
 }: {
   user: { name: string; role: string };
   showUsers: boolean;
   showDashboard: boolean;
+  showBlog: boolean;
   logoutAction: () => void;
 }) {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
   const items: NavItem[] = [];
-  if (showDashboard) items.push({ href: "/admin/dashboard", label: "Dashboard", icon: LayoutDashboard });
+  if (showDashboard) items.push({ href: "/admin/dashboard", label: "Resumen", icon: LayoutDashboard });
   items.push({ href: "/admin", label: "Leads", icon: ListFilter });
-  items.push({ href: "/admin/board", label: "Board", icon: KanbanSquare });
-  items.push({ href: "/admin/profile", label: "Profile", icon: UserRound });
-  if (showUsers) items.push({ href: "/admin/users", label: "Users", icon: Users });
+  items.push({ href: "/admin/board", label: "Tablero", icon: KanbanSquare });
+  if (showBlog) items.push({ href: "/admin/blog", label: "Noticias", icon: Newspaper });
+  items.push({ href: "/admin/profile", label: "Perfil", icon: UserRound });
+  if (showUsers) items.push({ href: "/admin/users", label: "Usuarios", icon: Users });
 
   const roleLabel = roleLabels[user.role] ?? user.role;
 
@@ -87,16 +91,16 @@ export function PanelNav({
             <span className="crm-badge crm-badge-wine">{roleLabel}</span>
           </div>
           <form action={logoutAction} className="hidden md:block">
-            <button type="submit" className="crm-btn crm-btn-ghost crm-btn-sm" aria-label="Sign out">
+            <button type="submit" className="crm-btn crm-btn-ghost crm-btn-sm" aria-label="Salir">
               <LogOut className="size-[15px]" strokeWidth={1.9} />
-              Sign out
+              Salir
             </button>
           </form>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
             className="crm-btn crm-btn-ghost crm-btn-sm !px-2 md:hidden"
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={open}
             aria-controls="crm-mobile-nav"
           >
@@ -133,7 +137,7 @@ export function PanelNav({
             <form action={logoutAction} className="mt-2.5 border-t border-[var(--crm-line)] pt-2.5">
               <button type="submit" className="crm-btn crm-btn-ghost crm-btn-sm !h-11 !w-full !justify-start !text-[14px]">
                 <LogOut className="size-[17px]" strokeWidth={1.9} />
-                Sign out
+                Salir
               </button>
             </form>
           </div>

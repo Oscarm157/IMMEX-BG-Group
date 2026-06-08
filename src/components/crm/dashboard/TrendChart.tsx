@@ -56,10 +56,10 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
   return (
     <div className="crm-card p-5">
       <h2 className="font-serif text-[18px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
-        Lead trend
+        Tendencia de leads
       </h2>
       <p className="mt-0.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
-        New leads per week
+        Nuevos leads por semana
       </p>
 
       {!geo ? (
@@ -75,7 +75,7 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
             viewBox={`0 0 ${W} ${H}`}
             className="h-auto w-full"
             role="img"
-            aria-label="Lead trend per week"
+            aria-label="Tendencia de leads por semana"
             onMouseMove={onMove}
             onMouseLeave={() => setHover(null)}
           >

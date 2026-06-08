@@ -12,10 +12,10 @@ export const STATUS_ORDER: LeadStatus[] = [
 ];
 
 export const STATUS_LABELS: Record<LeadStatus, string> = {
-  new: "New",
-  contacted: "Contacted",
-  following_up: "Following up",
-  proposal: "Proposal sent",
-  won: "Won",
-  lost: "Lost",
+  new: "Nuevo",
+  contacted: "Contactado",
+  following_up: "En seguimiento",
+  proposal: "Propuesta enviada",
+  won: "Ganado",
+  lost: "Perdido",
 };
