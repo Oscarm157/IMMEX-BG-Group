@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  serverExternalPackages: ["pdf-parse"],
   async redirects() {
     return [
       // El panel vive en /admin (no bajo el prefijo de idioma). Alias por memoria muscular.

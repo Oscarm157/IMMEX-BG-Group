@@ -35,6 +35,11 @@ export function canManageBlog(role: UserRole): boolean {
   return role === "admin";
 }
 
+// Solo admin usa el generador de posts (redes).
+export function canManagePosts(role: UserRole): boolean {
+  return role === "admin";
+}
+
 // Ads: el equipo gestiona; todos pueden ver (el cliente solo lo suyo, read-only).
 export function canManageAds(role: UserRole): boolean {
   return role === "admin" || role === "agent";
