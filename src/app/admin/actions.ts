@@ -191,7 +191,7 @@ export async function updateLeadStatus(id: string, status: LeadStatus) {
 
 export async function assignLead(id: string, userId: string | null) {
   const me = await requireAdmin();
-  let label = "Unassigned";
+  let label = "Sin asignar";
   let assignee: string | null = null;
   if (userId) {
     const u = await db

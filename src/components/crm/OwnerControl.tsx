@@ -29,7 +29,7 @@ export function OwnerControl({
     return (
       <span className="inline-flex w-full items-center gap-2 rounded-lg border border-[var(--crm-line)] bg-[var(--crm-surface-2)] px-3 py-2 text-[13px] text-[var(--crm-ink)] sm:w-[170px]">
         <UserCircle2 className="size-3.5 shrink-0 text-[var(--crm-ink-mute)]" strokeWidth={1.75} />
-        <span className="truncate">{ownerName ?? "Unassigned"}</span>
+        <span className="truncate">{ownerName ?? "Sin asignar"}</span>
       </span>
     );
   }
@@ -52,7 +52,7 @@ export function OwnerControl({
         }}
         className="w-full cursor-pointer appearance-none bg-transparent pr-5 outline-none"
       >
-        <option value="">Unassigned</option>
+        <option value="">Sin asignar</option>
         {users.map((u) => (
           <option key={u.id} value={u.id}>
             {u.name}

@@ -8,15 +8,15 @@ import { ChevronDown } from "lucide-react";
 type Agent = { id: string; name: string };
 
 const RANGES = [
-  { value: "month", label: "This month" },
-  { value: "30d", label: "30 days" },
-  { value: "90d", label: "90 days" },
-  { value: "year", label: "Year" },
-  { value: "all", label: "All" },
+  { value: "month", label: "Este mes" },
+  { value: "30d", label: "30 días" },
+  { value: "90d", label: "90 días" },
+  { value: "year", label: "Año" },
+  { value: "all", label: "Todo" },
 ] as const;
 
 const SOURCES = [
-  { value: "", label: "All sources" },
+  { value: "", label: "Todas las fuentes" },
   { value: "bot", label: "Chatbot" },
   { value: "form", label: "Form" },
   { value: "manual", label: "Manual" },
@@ -82,7 +82,7 @@ export function DashboardFilters({
           ariaLabel="Agent"
           value={owner}
           onChange={(v) => setParam("owner", v)}
-          options={[{ value: "", label: "All agents" }, ...agents.map((a) => ({ value: a.id, label: a.name }))]}
+          options={[{ value: "", label: "Todos los agentes" }, ...agents.map((a) => ({ value: a.id, label: a.name }))]}
         />
       )}
 

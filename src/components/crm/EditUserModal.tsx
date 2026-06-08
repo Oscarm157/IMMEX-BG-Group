@@ -97,7 +97,7 @@ export function EditUserModal({
           {error && <p className="text-[12.5px] text-[var(--crm-wine)]">{error}</p>}
           <div className="flex items-center gap-2 pt-1">
             <button type="submit" disabled={pending} className="crm-btn crm-btn-primary flex-1">
-              {pending ? "Saving…" : "Save changes"}
+              {pending ? "Saving…" : "Guardar cambios"}
             </button>
             <button type="button" onClick={close} className="crm-btn crm-btn-secondary">Cancel</button>
           </div>

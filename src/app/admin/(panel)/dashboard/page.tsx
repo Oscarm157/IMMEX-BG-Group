@@ -19,8 +19,8 @@ const RANGES: Range[] = ["month", "30d", "90d", "year", "all"];
 
 const RANGE_COPY: Record<Range, string> = {
   month: "this month",
-  "30d": "the last 30 days",
-  "90d": "the last 90 days",
+  "30d": "the last 30 días",
+  "90d": "the last 90 días",
   year: "the year so far",
   all: "all time",
 };

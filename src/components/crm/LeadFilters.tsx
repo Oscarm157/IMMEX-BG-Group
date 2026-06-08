@@ -8,7 +8,7 @@ import { Search, X, SlidersHorizontal, ChevronDown } from "lucide-react";
 type Owner = { id: string; name: string };
 
 const SOURCES = [
-  { value: "", label: "All sources" },
+  { value: "", label: "Todas las fuentes" },
   { value: "bot", label: "Chatbot" },
   { value: "form", label: "Form" },
   { value: "manual", label: "Manual" },
@@ -138,7 +138,7 @@ export function LeadFilters({
             }`}
           >
             <span className={`size-1.5 rounded-full ${unassigned ? "bg-[var(--crm-wine)]" : "bg-[var(--crm-ink-mute)]"}`} />
-            Unassigned
+            Sin asignar
           </button>
         )}
 

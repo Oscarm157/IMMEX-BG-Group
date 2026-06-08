@@ -72,7 +72,7 @@ function Header() {
   return (
     <div>
       <h2 className="font-serif text-[18px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
-        Funnel by stage
+        Embudo por etapa
       </h2>
       <p className="mt-0.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
         Leads created in the period, by their current stage
