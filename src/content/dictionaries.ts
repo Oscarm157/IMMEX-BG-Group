@@ -107,10 +107,10 @@ export const dictionaries = {
       colScope: "Alcance",
     },
     serviceSection: {
-      painsTitle: "Cuándo conviene actuar.",
-      doTitle: "Nuestro enfoque.",
-      outcomesTitle: "El resultado.",
-      faqTitle: "Preguntas frecuentes.",
+      painsTitle: "Situaciones que atendemos",
+      doTitle: "Alcance del servicio",
+      outcomesTitle: "Beneficios",
+      faqTitle: "Preguntas frecuentes",
     },
     homeCta: {
       title: "Pongamos tu operación en orden.",
@@ -352,10 +352,10 @@ export const dictionaries = {
       colScope: "Scope",
     },
     serviceSection: {
-      painsTitle: "When it pays to act.",
-      doTitle: "Our approach.",
-      outcomesTitle: "The outcome.",
-      faqTitle: "Frequently asked.",
+      painsTitle: "Situations we handle",
+      doTitle: "Scope of the service",
+      outcomesTitle: "Benefits",
+      faqTitle: "Frequently asked questions",
     },
     homeCta: {
       title: "Let's put your operation in order.",
