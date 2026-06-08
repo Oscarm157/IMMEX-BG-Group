@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Users, KanbanSquare, ListFilter, UserRound, LayoutDashboard, Newspaper,
-  Megaphone, Building2, LogOut, Menu, X, ChevronDown,
+  Megaphone, Building2, Share2, LogOut, Menu, X, ChevronDown,
 } from "lucide-react";
 
 type Item = { href: string; label: string; icon: typeof Users };
@@ -19,12 +19,13 @@ function isActive(pathname: string, href: string) {
 }
 
 export function PanelNav({
-  user, showUsers, showDashboard, showBlog, showAds, showClients, clientOnly, logoutAction,
+  user, showUsers, showDashboard, showBlog, showPosts, showAds, showClients, clientOnly, logoutAction,
 }: {
   user: { name: string; role: string };
   showUsers: boolean;
   showDashboard: boolean;
   showBlog: boolean;
+  showPosts: boolean;
   showAds: boolean;
   showClients: boolean;
   clientOnly: boolean;
@@ -49,6 +50,7 @@ export function PanelNav({
 
   const contenido: Item[] = [];
   if (showBlog) contenido.push({ href: "/admin/blog", label: "Noticias", icon: Newspaper });
+  if (showPosts) contenido.push({ href: "/admin/posts", label: "Generador de posts", icon: Share2 });
 
   const cuenta: Item[] = [];
   if (showClients) cuenta.push({ href: "/admin/clients", label: "Clientes", icon: Building2 });
