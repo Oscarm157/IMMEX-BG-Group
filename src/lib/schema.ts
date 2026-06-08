@@ -4,8 +4,9 @@ export type LeadQualification = {
   service?: string;
   company?: string;
   industry?: string;
-  operation?: string; // import | export | both
-  volume?: string;
+  monthlyVolume?: string;
+  paymentTerms?: string;
+  timeInBusiness?: string;
   urgency?: string;
 };
 

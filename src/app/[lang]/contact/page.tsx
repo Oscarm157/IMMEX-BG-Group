@@ -73,7 +73,7 @@ export default async function ContactPage({
 
           {/* Formulario en panel */}
           <Reveal delay={0.1} className="console-panel rounded-[16px] bg-surface-1 px-7 py-8 sm:px-9 sm:py-10">
-            <ContactForm dict={c.form} to={c.email} />
+            <ContactForm dict={c.form} locale={lang} />
           </Reveal>
         </div>
       </div>
