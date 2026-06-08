@@ -7,20 +7,6 @@ import { CountUp } from "./CountUp";
 
 type Metric = { value: string; label: string };
 
-// Stream fijo (no random) para que el SSR coincida con el cliente.
-const PARTICLES = [
-  { cy: 0, delay: 0 },
-  { cy: -10, delay: 0.22 },
-  { cy: 8, delay: 0.44 },
-  { cy: -6, delay: 0.66 },
-  { cy: 12, delay: 0.88 },
-  { cy: -12, delay: 1.1 },
-  { cy: 4, delay: 1.32 },
-  { cy: -4, delay: 1.54 },
-  { cy: 10, delay: 1.76 },
-  { cy: -8, delay: 1.98 },
-];
-
 const NODES_X = [320, 420, 520, 620, 720];
 const Y = 140;
 
@@ -107,18 +93,16 @@ export function OperationViz({
             {/* FLUJO — guía + nodos + partículas */}
             <line x1="320" y1={Y} x2="720" y2={Y} stroke="rgba(204,210,220,0.14)" strokeWidth="1.5" strokeDasharray="2 8" strokeLinecap="round" />
 
-            {!reduce &&
-              PARTICLES.map((p, i) => (
-                <motion.circle
-                  key={i}
-                  r="3.5"
-                  cy={Y + p.cy}
-                  fill="url(#ov-part)"
-                  initial={{ cx: 320, opacity: 0 }}
-                  animate={{ cx: [320, 720], opacity: [0, 1, 1, 0] }}
-                  transition={{ duration: 2.6, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
-                />
-              ))}
+            {!reduce && (
+              <motion.circle
+                r="4.5"
+                cy={Y}
+                fill="url(#ov-part)"
+                initial={{ cx: 320, opacity: 0 }}
+                animate={{ cx: [320, 720], opacity: [0, 1, 1, 0] }}
+                transition={{ duration: 2.8, repeat: Infinity, repeatDelay: 0.5, ease: "easeInOut" }}
+              />
+            )}
 
             {NODES_X.map((x, i) => (
               <g key={x}>

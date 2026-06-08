@@ -145,22 +145,22 @@ function Dictamen({ l, reduce }: { l: InstrumentLabels; reduce: boolean }) {
           transition={{ duration: 1.4, delay: 0.3, ease: "easeInOut" }}
         />
       )}
-      <line x1="220" y1="150" x2="300" y2="150" stroke={GUIDE} strokeWidth="1.5" strokeDasharray="2 7" strokeLinecap="round" />
-      <circle cx="350" cy="112" r="26" fill="rgba(0,230,160,0.1)" stroke={ACCENT} strokeWidth="1.3" />
-      <g transform="translate(335,98)"><DrawCheck size={30} delay={0.9} /></g>
+      <line x1="220" y1="150" x2="324" y2="150" stroke={GUIDE} strokeWidth="1.5" strokeDasharray="2 7" strokeLinecap="round" />
+      <circle cx="348" cy="150" r="22" fill="rgba(0,230,160,0.1)" stroke={ACCENT} strokeWidth="1.3" />
+      <g transform="translate(333,135)"><DrawCheck size={30} delay={0.9} /></g>
       {/* balanza */}
       <motion.g
         initial={{ opacity: reduce ? 1 : 0, y: reduce ? 0 : 8 }} whileInView={{ opacity: 1, y: 0 }} viewport={vp}
         transition={{ duration: 0.6, delay: 1.1, ease: editorialEase }}
         stroke={ACCENT} strokeWidth="1.6" fill="none" strokeLinecap="round"
       >
-        <path d="M350 170 V 226" />
-        <path d="M322 188 H 378" />
-        <path d="M322 188 q -7 16 -14 0 Z" />
-        <path d="M378 188 q -7 16 -14 0 Z" />
-        <path d="M338 226 H 362" />
+        <path d="M348 182 V 226" />
+        <path d="M324 196 H 372" />
+        <path d="M324 196 q -7 16 -14 0 Z" />
+        <path d="M372 196 q -7 16 -14 0 Z" />
+        <path d="M336 226 H 360" />
       </motion.g>
-      {label(350, 252, l.status[1], "middle", ACCENT)}
+      {label(348, 250, l.status[1], "middle", ACCENT)}
     </Frame>
   );
 }
@@ -286,10 +286,10 @@ function Sync({ l, reduce }: { l: InstrumentLabels; reduce: boolean }) {
 
 function Ledger({ l, reduce }: { l: InstrumentLabels; reduce: boolean }) {
   const heights = [150, 100, 130];
-  const baseY = 222, bw = 70, gap = 40, x0 = 96;
+  const baseY = 222, bw = 70, gap = 40, x0 = 85;
   return (
     <Frame>
-      <line x1="60" y1={baseY} x2="400" y2={baseY} stroke={LINE} strokeWidth="1.4" />
+      <line x1="70" y1={baseY} x2="390" y2={baseY} stroke={LINE} strokeWidth="1.4" />
       {heights.map((h, i) => {
         const x = x0 + i * (bw + gap);
         return (
@@ -305,8 +305,6 @@ function Ledger({ l, reduce }: { l: InstrumentLabels; reduce: boolean }) {
           </g>
         );
       })}
-      <g transform="translate(360,40)"><DrawCheck size={30} delay={1.0} /></g>
-      {label(384, 56, l.status[1], "end", ACCENT)}
     </Frame>
   );
 }
