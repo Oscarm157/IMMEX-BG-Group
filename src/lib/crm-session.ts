@@ -11,6 +11,7 @@ export type CurrentUser = {
   name: string;
   email: string;
   role: UserRole;
+  clientId: string | null;
   mustChangePassword: boolean;
 };
 
@@ -26,6 +27,7 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
     name: u.name,
     email: u.email,
     role: normalizeRole(u.role),
+    clientId: u.clientId ?? null,
     mustChangePassword: u.mustChangePassword,
   };
 }

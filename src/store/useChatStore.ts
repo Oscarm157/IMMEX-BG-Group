@@ -114,10 +114,14 @@ export const useChatStore = create<ChatState>((set, get) => {
             const alreadySaved = get().leadSaved;
             if (!alreadySaved && updatedLead.name && (updatedLead.email || updatedLead.phone)) {
               set({ leadSaved: true });
+              const utm = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
               fetch('/api/leads', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...updatedLead, source: 'bot', qualification: get().qualification, locale: get().locale, sourceUrl, messages: apiMessages }),
+                body: JSON.stringify({
+                  ...updatedLead, source: 'bot', qualification: get().qualification, locale: get().locale, sourceUrl, messages: apiMessages,
+                  utmSource: utm.get('utm_source') || '', utmCampaign: utm.get('utm_campaign') || '', utmMedium: utm.get('utm_medium') || '',
+                }),
               }).catch(console.error);
             }
           }

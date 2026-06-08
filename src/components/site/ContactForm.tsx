@@ -23,6 +23,7 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
     if (status === "sending") return;
     const form = e.currentTarget;
     const data = new FormData(form);
+    const utm = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
     setStatus("sending");
     try {
       const res = await fetch("/api/leads", {
@@ -36,6 +37,9 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
           company: String(data.get("company") || ""),
           message: String(data.get("message") || ""),
           sourceUrl: typeof window !== "undefined" ? window.location.href : "",
+          utmSource: utm.get("utm_source") || "",
+          utmCampaign: utm.get("utm_campaign") || "",
+          utmMedium: utm.get("utm_medium") || "",
         }),
       });
       if (!res.ok) throw new Error("request failed");

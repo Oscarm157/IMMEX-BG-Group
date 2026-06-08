@@ -2,7 +2,7 @@ import type { UserRole } from "./schema";
 
 // Cualquier rol desconocido (datos viejos) se trata como "agent".
 export function normalizeRole(role: string): UserRole {
-  return role === "admin" || role === "viewer" ? role : "agent";
+  return role === "admin" || role === "viewer" || role === "client" ? role : "agent";
 }
 
 export function canViewAllLeads(role: UserRole): boolean {
@@ -35,6 +35,20 @@ export function canManageBlog(role: UserRole): boolean {
   return role === "admin";
 }
 
+// Ads: el equipo gestiona; todos pueden ver (el cliente solo lo suyo, read-only).
+export function canManageAds(role: UserRole): boolean {
+  return role === "admin" || role === "agent";
+}
+
+export function canViewAds(role: UserRole): boolean {
+  return role === "admin" || role === "agent" || role === "viewer" || role === "client";
+}
+
+// El rol "client" solo ve el módulo Ads de su propio cliente, en lectura.
+export function isClient(role: UserRole): boolean {
+  return role === "client";
+}
+
 export function isReadOnly(role: UserRole): boolean {
-  return role === "viewer";
+  return role === "viewer" || role === "client";
 }
