@@ -7,7 +7,7 @@ import { db } from "@/lib/db";
 import { articles } from "@/lib/schema";
 import { requireUser } from "@/lib/crm-session";
 import { canManageBlog } from "@/lib/crm-permissions";
-import { draftFromSource } from "@/lib/blog/draft";
+import { draftFromSource, type ArticleDraft } from "@/lib/blog/draft";
 
 async function ensureAdmin() {
   const me = await requireUser();
@@ -46,7 +46,7 @@ export async function draftArticle(formData: FormData) {
   const sourceDate = String(formData.get("sourceDate") ?? "").trim() || null;
   const category = String(formData.get("category") ?? "").trim() || null;
 
-  let d;
+  let d: ArticleDraft;
   try {
     d = await draftFromSource({ source, sourceName: sourceName ?? undefined, category: category ?? undefined });
   } catch {

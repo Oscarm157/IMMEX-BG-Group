@@ -99,7 +99,7 @@ export function EditUserModal({
             <button type="submit" disabled={pending} className="crm-btn crm-btn-primary flex-1">
               {pending ? "Saving…" : "Guardar cambios"}
             </button>
-            <button type="button" onClick={close} className="crm-btn crm-btn-secondary">Cancel</button>
+            <button type="button" onClick={close} className="crm-btn crm-btn-secondary">Cancelar</button>
           </div>
         </form>
       </Modal>

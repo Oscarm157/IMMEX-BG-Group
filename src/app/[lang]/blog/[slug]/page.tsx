@@ -11,7 +11,7 @@ import { Markdown } from "@/components/site/Markdown";
 export const dynamic = "force-dynamic";
 
 const COPY = {
-  es: { back: "Todas las noticias", recommendations: "Recomendaciones de BG", source: "Fuente", cta: "¿Te afecta este cambio? Hablemos." },
+  es: { back: "Todas las noticias", recommendations: "Recomendaciones de BG", source: "Fuente", cta: "¿Le afecta este cambio? Hablemos." },
   en: { back: "All news", recommendations: "BG recommendations", source: "Source", cta: "Does this change affect you? Let's talk." },
 };
 
