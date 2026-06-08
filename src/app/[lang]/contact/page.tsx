@@ -26,7 +26,7 @@ export default async function ContactPage({
   const c = d.contact;
 
   return (
-    <section className="grid-field grid-fade relative overflow-hidden">
+    <section className="grid-field relative overflow-hidden">
       <div className="relative z-10 mx-auto max-w-[1280px] px-5 pb-28 pt-36 sm:px-8 sm:pb-36 sm:pt-44">
         <Reveal>
           <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">

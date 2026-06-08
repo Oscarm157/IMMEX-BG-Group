@@ -29,7 +29,7 @@ export default async function SoftwarePage({
   return (
     <>
       {/* Hero — núcleo BMS */}
-      <section className="grid-field grid-fade relative overflow-hidden">
+      <section className="grid-field relative overflow-hidden">
         <div className="relative z-10 mx-auto grid max-w-[1280px] items-center gap-12 px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16 lg:pb-24">
           <div>
             <Reveal>

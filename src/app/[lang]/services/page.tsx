@@ -31,7 +31,7 @@ export default async function ServicesPage({
   return (
     <>
       {/* Hero */}
-      <section className="grid-field grid-fade relative overflow-hidden">
+      <section className="grid-field relative overflow-hidden">
         <div className="relative z-10 mx-auto grid max-w-[1280px] items-center gap-12 px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pb-20">
           <SectionHeading eyebrow={d.services.eyebrow} title={d.services.title} lead={d.services.lead} />
           <Reveal delay={0.16}>
