@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Nav } from "@/components/site/Nav";
 import { Footer } from "@/components/site/Footer";
 import { LangSetter } from "@/components/site/LangSetter";
+import { ChatWidget } from "@/components/site/ChatWidget";
 import { getDictionary, isLocale, locales } from "@/content/dictionaries";
 import { SERVICE_SLUGS } from "@/content/service-slugs";
 
@@ -64,6 +65,7 @@ export default async function LangLayout({
       />
       <main>{children}</main>
       <Footer lang={lang} dict={dict} />
+      <ChatWidget />
     </>
   );
 }
