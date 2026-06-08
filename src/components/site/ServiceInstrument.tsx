@@ -276,7 +276,7 @@ function Sync({ l, reduce }: { l: InstrumentLabels; reduce: boolean }) {
           <motion.g initial={{ opacity: reduce ? 1 : 0 }} whileInView={{ opacity: 1 }} viewport={vp} transition={{ duration: 0.4, delay: 0.5 + i * 0.18 }}>
             <rect x="120" y={158 + i * 34} width="220" height="26" rx="6" fill="rgba(255,255,255,0.015)" stroke={LINE} strokeWidth="1" />
             <text x="136" y={175 + i * 34} fontFamily={MONO} fontSize="12" fill="#cfd5dd">{it}</text>
-            <g transform={`translate(308,${163 + i * 34})`}><DrawCheck size={30} delay={0.7 + i * 0.18} /></g>
+            <g transform={`translate(308,${162 + i * 34})`}><DrawCheck size={18} delay={0.7 + i * 0.18} /></g>
           </motion.g>
         </g>
       ))}
@@ -324,7 +324,7 @@ function Origin({ l, reduce }: { l: InstrumentLabels; reduce: boolean }) {
       {nodes.map((n, i) => (
         <g key={i}>
           {node(n.x, n.y, i, reduce)}
-          <text x={n.x + 16} y={n.y + 5} fontFamily={MONO} fontSize="13" fill="#dfe4ea">{l.items[i]}</text>
+          <text x={n.x} y={n.y - 16} textAnchor="middle" fontFamily={MONO} fontSize="12" fill="#dfe4ea">{l.items[i]}</text>
         </g>
       ))}
       <motion.rect
