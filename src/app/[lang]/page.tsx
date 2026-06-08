@@ -31,10 +31,12 @@ export default async function HomePage({
           playsInline
           poster="/video/hero-poster.jpg"
           aria-hidden
-          className="absolute inset-0 h-full w-full object-cover"
+          className="absolute inset-0 h-full w-full scale-[1.04] object-cover blur-[2px]"
         >
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
+        {/* Overlay ligero para legibilidad (más fuerte abajo, donde va el texto) */}
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/20 to-ink/30" />
 
         <div className="relative z-10 mx-auto flex h-full max-w-[1280px] flex-col justify-end px-5 pb-14 sm:px-8 sm:pb-16">
           <div className="grid gap-8 sm:grid-cols-[1.5fr_1fr] sm:items-end">

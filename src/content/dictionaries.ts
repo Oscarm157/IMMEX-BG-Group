@@ -106,6 +106,16 @@ export const dictionaries = {
       colService: "Servicio",
       colScope: "Alcance",
     },
+    serviceSection: {
+      painsEyebrow: "El problema",
+      painsTitle: "Cuándo nos buscan.",
+      doEyebrow: "El servicio",
+      doTitle: "Qué hacemos.",
+      outcomesEyebrow: "Resultado",
+      outcomesTitle: "Qué obtienes.",
+      faqEyebrow: "Dudas",
+      faqTitle: "Preguntas frecuentes.",
+    },
     homeCta: {
       title: "Pongamos tu operación en orden.",
       body: "Una conversación con el equipo legal de BG aclara dónde está el riesgo y qué se puede corregir.",
@@ -336,6 +346,16 @@ export const dictionaries = {
       colIndex: "Index",
       colService: "Service",
       colScope: "Scope",
+    },
+    serviceSection: {
+      painsEyebrow: "The problem",
+      painsTitle: "When companies come to us.",
+      doEyebrow: "The service",
+      doTitle: "What we do.",
+      outcomesEyebrow: "Outcome",
+      outcomesTitle: "What you get.",
+      faqEyebrow: "Questions",
+      faqTitle: "Frequently asked.",
     },
     homeCta: {
       title: "Let's put your operation in order.",
