@@ -107,13 +107,9 @@ export const dictionaries = {
       colScope: "Alcance",
     },
     serviceSection: {
-      painsEyebrow: "El problema",
-      painsTitle: "Cuándo nos buscan.",
-      doEyebrow: "El servicio",
-      doTitle: "Qué hacemos.",
-      outcomesEyebrow: "Resultado",
-      outcomesTitle: "Qué obtienes.",
-      faqEyebrow: "Dudas",
+      painsTitle: "Cuándo conviene actuar.",
+      doTitle: "Nuestro enfoque.",
+      outcomesTitle: "El resultado.",
       faqTitle: "Preguntas frecuentes.",
     },
     homeCta: {
@@ -356,13 +352,9 @@ export const dictionaries = {
       colScope: "Scope",
     },
     serviceSection: {
-      painsEyebrow: "The problem",
-      painsTitle: "When companies come to us.",
-      doEyebrow: "The service",
-      doTitle: "What we do.",
-      outcomesEyebrow: "Outcome",
-      outcomesTitle: "What you get.",
-      faqEyebrow: "Questions",
+      painsTitle: "When it pays to act.",
+      doTitle: "Our approach.",
+      outcomesTitle: "The outcome.",
       faqTitle: "Frequently asked.",
     },
     homeCta: {

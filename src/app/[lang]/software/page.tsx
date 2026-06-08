@@ -146,7 +146,7 @@ export default async function SoftwarePage({
 
       {/* FAQ */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
-        <SectionHeading eyebrow={d.serviceSection.faqEyebrow} title={s.faqTitle} className="mb-10" />
+        <SectionHeading title={s.faqTitle} className="mb-10" />
         <Faq items={s.faq} />
       </section>
 

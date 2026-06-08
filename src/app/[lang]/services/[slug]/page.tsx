@@ -91,7 +91,7 @@ export default async function ServiceDetailPage({
 
       {/* Cuándo nos buscan (dolores) */}
       <section className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
-        <SectionHeading eyebrow={sec.painsEyebrow} title={sec.painsTitle} className="mb-12" />
+        <SectionHeading title={sec.painsTitle} className="mb-12" />
         <div className="grid gap-4 sm:grid-cols-2">
           {c.pains.map((p, i) => (
             <Reveal key={p.title} delay={(i % 2) * 0.06} className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7">
@@ -105,7 +105,7 @@ export default async function ServiceDetailPage({
 
       {/* Qué hacemos (alcance expandido) */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
-        <SectionHeading eyebrow={sec.doEyebrow} title={sec.doTitle} className="mb-12" />
+        <SectionHeading title={sec.doTitle} className="mb-12" />
         <div className="grid gap-4 md:grid-cols-2">
           {c.whatWeDo.map((w, i) => (
             <Reveal key={w.title} delay={(i % 2) * 0.06} className="console-panel flex gap-5 rounded-[14px] bg-surface-1 p-7">
@@ -121,7 +121,7 @@ export default async function ServiceDetailPage({
 
       {/* Qué obtienes (outcomes) */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
-        <SectionHeading eyebrow={sec.outcomesEyebrow} title={sec.outcomesTitle} className="mb-10" />
+        <SectionHeading title={sec.outcomesTitle} className="mb-10" />
         <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
           {c.outcomes.map((o, i) => (
             <Reveal key={i} delay={Math.min(i, 4) * 0.05} className="flex items-start gap-4 border-b border-line px-7 py-6 last:border-b-0">
@@ -136,7 +136,7 @@ export default async function ServiceDetailPage({
 
       {/* FAQ */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
-        <SectionHeading eyebrow={sec.faqEyebrow} title={sec.faqTitle} className="mb-10" />
+        <SectionHeading title={sec.faqTitle} className="mb-10" />
         <Faq items={c.faq} />
       </section>
 

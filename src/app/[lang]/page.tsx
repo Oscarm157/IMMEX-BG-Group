@@ -31,7 +31,7 @@ export default async function HomePage({
           playsInline
           poster="/video/hero-poster.jpg"
           aria-hidden
-          className="absolute inset-0 h-full w-full scale-[1.08] object-cover blur-[6px]"
+          className="absolute inset-0 h-full w-full scale-[1.06] object-cover blur-[4px]"
         >
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
