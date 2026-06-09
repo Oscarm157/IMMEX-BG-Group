@@ -45,7 +45,7 @@ export function NewLeadModal() {
             <label className={labelCls} htmlFor="nl-phone">Phone</label>
             <input id="nl-phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="crm-input" placeholder="+1 555 000 0000" />
           </div>
-          <p className="text-[11.5px] text-[var(--crm-ink-mute)]">Name and at least one contact detail.</p>
+          <p className="text-[12.5px] text-[var(--crm-ink-mute)]">Name and at least one contact detail.</p>
           <CreateButton disabled={!valid} />
         </form>
       </Modal>

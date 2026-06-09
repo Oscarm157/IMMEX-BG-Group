@@ -21,7 +21,7 @@ export function StatusBadge({ status }: { status: LeadStatus }) {
   const meta = STATUS_META[status] ?? STATUS_META.new;
   return (
     <span
-      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[11.5px] font-medium shadow-[0_1px_2px_rgba(20,18,14,0.04)] ${meta.badge}`}
+      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2.5 py-0.5 text-[12.5px] font-medium shadow-[0_1px_2px_rgba(20,18,14,0.04)] ${meta.badge}`}
     >
       <span className={`size-1.5 rounded-full shadow-[0_0_0_2px_var(--crm-surface)] ${meta.dot}`} />
       {meta.label}
@@ -39,7 +39,7 @@ export function SourceBadge({ source, onDark = false }: { source: LeadSource; on
   const m = SOURCE_META[source] ?? SOURCE_META.manual;
   return (
     <span
-      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2 py-0.5 text-[11px] font-medium ${
+      className={`inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border px-2 py-0.5 text-[12px] font-medium ${
         onDark ? "border-white/30 bg-white/15 text-white" : m.cls
       }`}
     >

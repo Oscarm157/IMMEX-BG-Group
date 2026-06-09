@@ -32,7 +32,7 @@ export function PostVariantCard({ index, variant, networks }: Props) {
       <header className="flex items-start gap-4 px-6 pb-5 pt-6">
         <span className="font-serif text-4xl font-semibold leading-none" style={{ color: "var(--crm-wine)" }}>0{index + 1}</span>
         <div>
-          <p className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Variante</p>
+          <p className="text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Variante</p>
           <h3 className="mt-1.5 font-serif text-[17px] font-semibold leading-tight text-[var(--crm-ink)]">{variant.enfoque}</h3>
         </div>
       </header>
@@ -58,7 +58,7 @@ export function PostVariantCard({ index, variant, networks }: Props) {
           <div className="space-y-5">
             <TextBlock label="Caption" text={variant.instagram.caption} />
             <div>
-              <p className="mb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Slides del carrusel</p>
+              <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Slides del carrusel</p>
               <CarouselSlides slides={variant.instagram.slides} />
               <CopyButton text={variant.instagram.slides.map((s, i) => `Slide ${i + 1} — ${s.title}\n${s.body}`).join("\n\n")} label="Copiar todos los slides" className="mt-4" />
             </div>
@@ -73,7 +73,7 @@ function TextBlock({ label, text }: { label: string; text: string }) {
   return (
     <div>
       <div className="mb-2.5 flex items-center justify-between">
-        <span className="text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">
+        <span className="text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">
           {label}<span className="mx-2" style={{ color: "var(--crm-wine)" }}>·</span>{text.length} caracteres
         </span>
         <CopyButton text={text} label="Copiar" />
@@ -89,7 +89,7 @@ function CopyButton({ text, label, className = "" }: { text: string; label: stri
     <motion.button
       type="button" whileTap={{ scale: 0.95 }}
       onClick={async () => { await navigator.clipboard.writeText(text); setCopied(true); setTimeout(() => setCopied(false), 1500); }}
-      className={`rounded-lg px-2.5 py-1 text-[11px] font-medium tracking-wide transition ${className}`}
+      className={`rounded-lg px-2.5 py-1 text-[12px] font-medium tracking-wide transition ${className}`}
       style={copied ? { background: "var(--crm-wine)", color: "var(--crm-on-accent)" } : { background: "var(--crm-surface-2)", color: "var(--crm-ink-soft)" }}
     >
       {copied ? "¡Copiado!" : label}

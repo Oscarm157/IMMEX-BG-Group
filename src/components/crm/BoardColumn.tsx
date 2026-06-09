@@ -59,9 +59,9 @@ export function BoardColumn({
       <div className="mb-2 flex items-center justify-between px-0.5">
         <div className="flex items-center gap-1.5">
           <span className={`size-2 rounded-full ${meta.dot}`} />
-          <span className="text-[12.5px] font-semibold tracking-tight text-[var(--crm-ink)]">{meta.label}</span>
+          <span className="text-[13.5px] font-semibold tracking-tight text-[var(--crm-ink)]">{meta.label}</span>
         </div>
-        <span className="rounded-md bg-[var(--crm-surface-2)] px-1.5 py-0.5 text-[11px] font-medium tabular-nums text-[var(--crm-ink-soft)]">
+        <span className="rounded-md bg-[var(--crm-surface-2)] px-1.5 py-0.5 text-[12px] font-medium tabular-nums text-[var(--crm-ink-soft)]">
           {leads.length}
         </span>
       </div>
@@ -86,7 +86,7 @@ export function BoardColumn({
         </AnimatePresence>
 
         {leads.length === 0 && (
-          <div className="flex flex-1 items-center justify-center py-6 text-center text-[11.5px] text-[var(--crm-ink-mute)]">
+          <div className="flex flex-1 items-center justify-center py-6 text-center text-[13px] text-[var(--crm-ink-mute)]">
             No leads
           </div>
         )}

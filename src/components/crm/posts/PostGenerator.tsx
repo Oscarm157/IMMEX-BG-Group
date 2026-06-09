@@ -126,7 +126,7 @@ export function PostGenerator() {
         {result && (
           <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 200, damping: 26 }} className="mt-12">
             <div className="mb-5">
-              <p className="text-[11px] font-medium uppercase tracking-[0.18em]" style={{ color: "var(--crm-wine)" }}>03 · Resultado</p>
+              <p className="text-[12px] font-medium uppercase tracking-[0.18em]" style={{ color: "var(--crm-wine)" }}>03 · Resultado</p>
               <h2 className="mt-2 font-serif text-2xl font-semibold tracking-tight text-[var(--crm-ink)]">Variantes generadas</h2>
             </div>
             <div className="grid gap-5 lg:grid-cols-3">

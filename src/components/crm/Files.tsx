@@ -63,13 +63,13 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
             />
             <UploadButton />
           </form>
-          <p className="mt-1.5 text-[11.5px] text-[var(--crm-ink-mute)]">Any file type, up to 10MB.</p>
-          {error && <p className="mt-1.5 text-[12px] text-[var(--crm-wine)]">{error}</p>}
+          <p className="mt-1.5 text-[13px] text-[var(--crm-ink-mute)]">Any file type, up to 10MB.</p>
+          {error && <p className="mt-1.5 text-[13px] text-[var(--crm-wine)]">{error}</p>}
         </>
       )}
 
       {files.length === 0 && !editable && (
-        <p className="text-[13px] text-[var(--crm-ink-mute)]">No files yet.</p>
+        <p className="text-[13.5px] text-[var(--crm-ink-mute)]">No files yet.</p>
       )}
 
       {files.length > 0 && (
@@ -84,8 +84,8 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
                 )}
               </span>
               <div className="min-w-0 flex-1">
-                <p className="truncate text-[13px] font-medium text-[var(--crm-ink)]">{f.name}</p>
-                {f.size != null && <p className="text-[11.5px] text-[var(--crm-ink-mute)]">{fmtSize(f.size)}</p>}
+                <p className="truncate text-[14px] font-medium text-[var(--crm-ink)]">{f.name}</p>
+                {f.size != null && <p className="text-[12.5px] text-[var(--crm-ink-mute)]">{fmtSize(f.size)}</p>}
               </div>
               <div className="flex shrink-0 items-center gap-1">
                 {canPreview(f.contentType) && (

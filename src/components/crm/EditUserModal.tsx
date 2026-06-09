@@ -86,7 +86,7 @@ export function EditUserModal({
                     <Icon className={`mt-0.5 size-4 shrink-0 ${sel ? "text-[var(--crm-wine)]" : "text-[var(--crm-ink-mute)]"}`} strokeWidth={1.8} />
                     <span className="min-w-0">
                       <span className={`block text-[13px] font-medium ${sel ? "text-[var(--crm-wine)]" : "text-[var(--crm-ink)]"}`}>{opt.label}</span>
-                      <span className="block text-[11.5px] text-[var(--crm-ink-mute)]">{opt.hint}</span>
+                      <span className="block text-[12.5px] text-[var(--crm-ink-mute)]">{opt.hint}</span>
                     </span>
                   </button>
                 );

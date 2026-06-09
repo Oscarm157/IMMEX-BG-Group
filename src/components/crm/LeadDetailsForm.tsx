@@ -28,9 +28,9 @@ const QUAL_FIELDS: { key: keyof LeadQualification; label: string }[] = [
   { key: "urgency", label: "Urgency" },
 ];
 
-const inputCls = "crm-input h-auto py-2 text-[13.5px]";
-const labelCls = "mb-1 block text-[11.5px] text-[var(--crm-ink-soft)]";
-const legendCls = "mb-2.5 text-[13px] font-semibold tracking-tight text-[var(--crm-ink)]";
+const inputCls = "crm-input h-auto py-2 text-[14.5px]";
+const labelCls = "mb-1 block text-[13px] font-medium text-[var(--crm-ink-soft)]";
+const legendCls = "mb-2.5 text-[14px] font-semibold tracking-tight text-[var(--crm-ink)]";
 
 const LOCALE_LABEL: Record<string, string> = { en: "English", es: "Spanish" };
 const SOURCE_LABEL: Record<LeadSource, string> = { bot: "Chatbot", form: "Form", manual: "Manual" };
@@ -51,7 +51,7 @@ function ReadField({ label, value, span }: { label: string; value: string | null
   return (
     <div className={span ? "sm:col-span-2" : ""}>
       <dt className={labelCls}>{label}</dt>
-      <dd className="text-[13.5px] text-[var(--crm-ink-soft)]">{value && value.trim() ? value : <span className="text-[var(--crm-ink-mute)]">–</span>}</dd>
+      <dd className="text-[14.5px] text-[var(--crm-ink-soft)]">{value && value.trim() ? value : <span className="text-[var(--crm-ink-mute)]">–</span>}</dd>
     </div>
   );
 }

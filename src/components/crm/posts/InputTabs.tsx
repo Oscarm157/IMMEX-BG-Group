@@ -22,7 +22,7 @@ const TABS: { id: InputMode; label: string }[] = [
   { id: "text", label: "Texto" },
 ];
 
-const stepBadge = "grid h-6 w-6 place-items-center rounded-md text-[11px] font-semibold";
+const stepBadge = "grid h-6 w-6 place-items-center rounded-md text-[12px] font-semibold";
 
 export function InputTabs({ mode, setMode, file, setFile, url, setUrl, text, setText }: Props) {
   const inputRef = useRef<HTMLInputElement>(null);
@@ -32,7 +32,7 @@ export function InputTabs({ mode, setMode, file, setFile, url, setUrl, text, set
     <section className="crm-card p-6">
       <div className="mb-5 flex items-center gap-3">
         <span className={stepBadge} style={{ background: "var(--crm-wine-tint)", color: "var(--crm-wine)" }}>01</span>
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Fuente</h2>
+        <h2 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Fuente</h2>
       </div>
 
       <div className="mb-6 flex gap-1 rounded-xl border border-[var(--crm-line)] bg-[var(--crm-surface-2)] p-1">
@@ -65,7 +65,7 @@ export function InputTabs({ mode, setMode, file, setFile, url, setUrl, text, set
                 <>
                   <p className="font-medium text-[var(--crm-ink)]">{file.name}</p>
                   <p className="mt-1 text-sm text-[var(--crm-ink-mute)]">{(file.size / 1024).toFixed(1)} KB</p>
-                  <button type="button" onClick={(e) => { e.stopPropagation(); setFile(null); }} className="mt-4 text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--crm-wine)]">Quitar archivo</button>
+                  <button type="button" onClick={(e) => { e.stopPropagation(); setFile(null); }} className="mt-4 text-[12px] font-medium uppercase tracking-[0.2em] text-[var(--crm-wine)]">Quitar archivo</button>
                 </>
               ) : (
                 <>
@@ -82,7 +82,7 @@ export function InputTabs({ mode, setMode, file, setFile, url, setUrl, text, set
 
         {mode === "url" && (
           <motion.div key="url" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
-            <label className="mb-2 block text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">URL fuente</label>
+            <label className="mb-2 block text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">URL fuente</label>
             <input type="url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://www.dof.gob.mx/..." className="crm-input" />
             <p className="mt-3 text-[13px] text-[var(--crm-ink-mute)]">Portales oficiales, blogs y comunicados. No funciona con contenido JS-renderizado.</p>
           </motion.div>
@@ -90,7 +90,7 @@ export function InputTabs({ mode, setMode, file, setFile, url, setUrl, text, set
 
         {mode === "text" && (
           <motion.div key="text" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} transition={{ duration: 0.2 }}>
-            <label className="mb-2 flex items-center justify-between text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">
+            <label className="mb-2 flex items-center justify-between text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">
               <span>Texto fuente</span>
               <span>{text.length.toLocaleString()} caracteres</span>
             </label>

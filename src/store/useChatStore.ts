@@ -83,6 +83,41 @@ export const useChatStore = create<ChatState>((set, get) => {
       let accumulated = '';
       let buf = '';
 
+      // Render typewriter: el SSE llega a borbotones, así que en vez de pintar
+      // cada chunk de golpe acumulamos el texto objetivo y lo drenamos a cadencia
+      // pareja (~30ms/tick) hacia el mensaje. Se ve fluido a costa de ~1s extra.
+      let rendered = 0;
+      const setContent = (text: string) =>
+        set((s) => ({
+          messages: s.messages.map((m) =>
+            m.id === assistantId ? { ...m, content: text } : m
+          ),
+        }));
+      const tick = () => {
+        if (rendered >= accumulated.length) return;
+        const remaining = accumulated.length - rendered;
+        const step = Math.max(2, Math.ceil(remaining * 0.12));
+        rendered = Math.min(accumulated.length, rendered + step);
+        setContent(accumulated.slice(0, rendered));
+      };
+      const timer = setInterval(tick, 30);
+      const finishRender = () =>
+        new Promise<void>((resolve) => {
+          clearInterval(timer);
+          const drain = setInterval(() => {
+            if (rendered >= accumulated.length) {
+              clearInterval(drain);
+              setContent(accumulated);
+              resolve();
+              return;
+            }
+            const remaining = accumulated.length - rendered;
+            const step = Math.max(4, Math.ceil(remaining * 0.2));
+            rendered = Math.min(accumulated.length, rendered + step);
+            setContent(accumulated.slice(0, rendered));
+          }, 30);
+        });
+
       const processLine = (line: string): boolean => {
         if (!line.startsWith('data: ')) return false;
         const raw = line.slice(6).trim();
@@ -91,11 +126,6 @@ export const useChatStore = create<ChatState>((set, get) => {
           const evt = JSON.parse(raw);
           if (evt.type === 'text') {
             accumulated += evt.text;
-            set((s) => ({
-              messages: s.messages.map((m) =>
-                m.id === assistantId ? { ...m, content: accumulated } : m
-              ),
-            }));
           }
           if (evt.type === 'tool_call' && evt.tool === 'suggest_replies') {
             set({ suggestedReplies: evt.input.options ?? [] });
@@ -129,17 +159,22 @@ export const useChatStore = create<ChatState>((set, get) => {
         return false;
       };
 
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-        buf += decoder.decode(value, { stream: true });
-        const lines = buf.split('\n');
-        buf = lines.pop() ?? '';
-        for (const line of lines) {
-          if (processLine(line)) { reader.cancel(); return accumulated; }
+      try {
+        let done = false;
+        while (!done) {
+          const { done: streamDone, value } = await reader.read();
+          if (streamDone) break;
+          buf += decoder.decode(value, { stream: true });
+          const lines = buf.split('\n');
+          buf = lines.pop() ?? '';
+          for (const line of lines) {
+            if (processLine(line)) { reader.cancel(); done = true; break; }
+          }
         }
+        if (!done && buf.trim()) processLine(buf);
+      } finally {
+        await finishRender();
       }
-      if (buf.trim()) processLine(buf);
       return accumulated;
     };
 

@@ -25,7 +25,7 @@ export function Activity({ events }: { events: Event[] }) {
   const reduce = useReducedMotion();
 
   if (events.length === 0) {
-    return <p className="text-[13px] text-[var(--crm-ink-mute)]">No activity yet.</p>;
+    return <p className="text-[13.5px] text-[var(--crm-ink-mute)]">No activity yet.</p>;
   }
 
   return (
@@ -49,8 +49,8 @@ export function Activity({ events }: { events: Event[] }) {
               <Icon className="size-3" strokeWidth={2} />
             </span>
             <div className="min-w-0 flex-1">
-              <p className="text-[13px] text-[var(--crm-ink-soft)]">{e.detail}</p>
-              <p className="text-[11.5px] text-[var(--crm-ink-mute)]">
+              <p className="text-[14px] text-[var(--crm-ink-soft)]">{e.detail}</p>
+              <p className="text-[12.5px] text-[var(--crm-ink-mute)]">
                 {e.authorName ?? "System"} · {fmtDateTime(e.createdAt)}
               </p>
             </div>

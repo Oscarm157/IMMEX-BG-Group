@@ -82,7 +82,7 @@ export function AddUserModal() {
             <div>
               <label className={labelCls} htmlFor="u-password">Temporary password</label>
               <input id="u-password" name="password" minLength={8} className="crm-input" placeholder="Leave blank to auto-generate" />
-              <p className="mt-1 text-[11.5px] text-[var(--crm-ink-mute)]">Blank generates a random one. At least 8 characters.</p>
+              <p className="mt-1 text-[12.5px] text-[var(--crm-ink-mute)]">Blank generates a random one. At least 8 characters.</p>
             </div>
 
             <fieldset>
@@ -106,7 +106,7 @@ export function AddUserModal() {
                       <Icon className={`mt-0.5 size-4 shrink-0 ${sel ? "text-[var(--crm-wine)]" : "text-[var(--crm-ink-mute)]"}`} strokeWidth={1.8} />
                       <span className="min-w-0">
                         <span className={`block text-[13px] font-medium ${sel ? "text-[var(--crm-wine)]" : "text-[var(--crm-ink)]"}`}>{opt.label}</span>
-                        <span className="block text-[11.5px] text-[var(--crm-ink-mute)]">{opt.hint}</span>
+                        <span className="block text-[12.5px] text-[var(--crm-ink-mute)]">{opt.hint}</span>
                       </span>
                     </button>
                   );

@@ -33,7 +33,7 @@ export function ProfileForm({ name, email }: { name: string; email: string }) {
       <div>
         <label className={labelCls} htmlFor="p-email">Email</label>
         <input id="p-email" value={email} disabled className="crm-input cursor-not-allowed opacity-60" />
-        <p className="mt-1 text-[11.5px] text-[var(--crm-ink-mute)]">An admin changes your email from Users.</p>
+        <p className="mt-1 text-[12.5px] text-[var(--crm-ink-mute)]">An admin changes your email from Users.</p>
       </div>
 
       <div className="flex items-center gap-3 pt-1">

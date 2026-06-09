@@ -23,12 +23,12 @@ export function ConfigPanel({ networks, toggleNetwork, approaches, setApproach, 
   return (
     <section className="crm-card p-6">
       <div className="mb-5 flex items-center gap-3">
-        <span className="grid h-6 w-6 place-items-center rounded-md text-[11px] font-semibold" style={{ background: "var(--crm-wine-tint)", color: "var(--crm-wine)" }}>02</span>
-        <h2 className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Configuración</h2>
+        <span className="grid h-6 w-6 place-items-center rounded-md text-[12px] font-semibold" style={{ background: "var(--crm-wine-tint)", color: "var(--crm-wine)" }}>02</span>
+        <h2 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Configuración</h2>
       </div>
 
       <div className="mb-6">
-        <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Redes destino</p>
+        <p className="mb-3 text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Redes destino</p>
         <div className="grid grid-cols-3 gap-2">
           {NETWORKS.map((n) => {
             const active = networks.includes(n.id);
@@ -55,11 +55,11 @@ export function ConfigPanel({ networks, toggleNetwork, approaches, setApproach, 
       </div>
 
       <div className="mb-6">
-        <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Enfoques (3 variantes)</p>
+        <p className="mb-3 text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Enfoques (3 variantes)</p>
         <div className="grid gap-3 sm:grid-cols-3">
           {[0, 1, 2].map((i) => (
             <div key={i}>
-              <label className="mb-1.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-[var(--crm-ink-mute)]">Variante {i + 1}</label>
+              <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--crm-ink-mute)]">Variante {i + 1}</label>
               <select value={approaches[i]} onChange={(e) => setApproach(i as 0 | 1 | 2, e.target.value)} className="crm-select !h-11 text-[13px]">
                 {ENFOQUES.map((enf) => <option key={enf} value={enf}>{enf}</option>)}
               </select>
@@ -81,7 +81,7 @@ export function ConfigPanel({ networks, toggleNetwork, approaches, setApproach, 
           </>
         )}
       </button>
-      <p className="mt-3 text-center text-[11px] text-[var(--crm-ink-mute)]">Usa Claude Sonnet 4.6 · contextualizado para México</p>
+      <p className="mt-3 text-center text-[12px] text-[var(--crm-ink-mute)]">Usa Claude Sonnet 4.6 · contextualizado para México</p>
     </section>
   );
 }

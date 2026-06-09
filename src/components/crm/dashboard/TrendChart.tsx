@@ -151,7 +151,7 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
                 borderColor: "var(--crm-line)",
               }}
             >
-              <p className="text-[11px] font-medium" style={{ color: "var(--crm-ink-mute)" }}>
+              <p className="text-[12px] font-medium" style={{ color: "var(--crm-ink-mute)" }}>
                 Week of {fmtWeek(active.period)}
               </p>
               <p className="font-serif text-[16px] leading-tight tabular-nums" style={{ color: "var(--crm-wine)" }}>

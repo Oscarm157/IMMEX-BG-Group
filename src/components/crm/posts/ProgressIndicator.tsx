@@ -37,7 +37,7 @@ export function ProgressIndicator({ phase }: Props) {
           </span>
           <span className="text-[14px] font-medium tracking-tight text-[var(--crm-ink)]">{PHASE_LABEL[phase]}</span>
         </div>
-        <span className="tabular-nums text-[11px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">{elapsed.toFixed(1)}s</span>
+        <span className="tabular-nums text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">{elapsed.toFixed(1)}s</span>
       </div>
 
       <div className="relative mt-4 h-1.5 w-full overflow-hidden rounded-full bg-[var(--crm-surface-2)]">

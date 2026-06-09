@@ -144,7 +144,7 @@ export async function POST(req: Request) {
 
         const stream = anthropic.messages.stream({
           model: 'claude-sonnet-4-6',
-          max_tokens: 1024,
+          max_tokens: 400,
           system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
           messages: trimmed,
           tools: TOOLS,
@@ -187,7 +187,7 @@ export async function POST(req: Request) {
 
           const followUp = anthropic.messages.stream({
             model: 'claude-sonnet-4-6',
-            max_tokens: 512,
+            max_tokens: 400,
             system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
             messages: followUpMessages,
             tools: TOOLS,
@@ -198,37 +198,9 @@ export async function POST(req: Request) {
               emitText(event.delta.text);
             }
           }
-        }
 
-        const lead = currentLead ?? {};
-        const leadComplete = Boolean(lead.name && (lead.email || lead.phone));
-        if (!nudge && !leadComplete && fullText && !fullText.includes('?')) {
-          const advanceNote =
-            (locale ?? 'es') === 'en'
-              ? '(Internal note: your previous reply did not end with a question. Reply with ONLY the next question, a single sentence: the next qualifying question, or the ask for the visitor\'s name and contact. No acknowledgment, no greeting, no preamble, and do not restate anything you already said.)'
-              : '(Nota interna: tu respuesta anterior no terminó con una pregunta. Responde SOLO con la siguiente pregunta, una sola oración: la siguiente pregunta de calificación, o pedir el nombre y contacto del visitante. Nada de acuse, saludo ni preámbulo, y no repitas lo que ya dijiste.)';
-
-          const cont = anthropic.messages.stream({
-            model: 'claude-sonnet-4-6',
-            max_tokens: 256,
-            system: [{ type: 'text', text: systemPrompt, cache_control: { type: 'ephemeral' } }],
-            messages: [
-              ...trimmed,
-              { role: 'assistant' as const, content: fullText },
-              { role: 'user' as const, content: advanceNote },
-            ],
-            tools: TOOLS,
-          });
-
-          let contStarted = false;
-          for await (const event of cont) {
-            if (event.type === 'content_block_delta' && event.delta.type === 'text_delta') {
-              if (!contStarted) { emitText('\n\n'); contStarted = true; }
-              emitText(event.delta.text);
-            }
-          }
-          const contFinal = await cont.finalMessage();
-          for (const block of contFinal.content) {
+          const followUpFinal = await followUp.finalMessage();
+          for (const block of followUpFinal.content) {
             if (block.type === 'tool_use') {
               emit({ type: 'tool_call', tool: block.name, input: block.input });
             }

@@ -33,7 +33,7 @@ export function UserRoleSelect({
 
   if (locked) {
     return (
-      <span className={`inline-flex rounded-full border px-2 py-0.5 text-[11px] font-medium ${ROLE_CHIP[value]}`}>
+      <span className={`inline-flex rounded-full border px-2 py-0.5 text-[12px] font-medium ${ROLE_CHIP[value]}`}>
         {ROLE_LABELS[value]}
       </span>
     );
@@ -49,7 +49,7 @@ export function UserRoleSelect({
           setValue(next);
           startTransition(() => updateUserRole(userId, next));
         }}
-        className={`cursor-pointer appearance-none rounded-full border py-0.5 pl-2.5 pr-6 text-[11px] font-medium outline-none transition-[box-shadow,border-color] focus:shadow-[0_0_0_3px_var(--crm-wine-ring)] disabled:opacity-60 ${ROLE_CHIP[value]}`}
+        className={`cursor-pointer appearance-none rounded-full border py-0.5 pl-2.5 pr-6 text-[12px] font-medium outline-none transition-[box-shadow,border-color] focus:shadow-[0_0_0_3px_var(--crm-wine-ring)] disabled:opacity-60 ${ROLE_CHIP[value]}`}
       >
         {(Object.keys(ROLE_LABELS) as UserRole[]).map((r) => (
           <option key={r} value={r}>{ROLE_LABELS[r]}</option>

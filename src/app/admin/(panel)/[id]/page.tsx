@@ -73,7 +73,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
                   </span>
                 )}
               </div>
-              <dl className="mt-3.5 flex flex-wrap gap-x-5 gap-y-2 text-[13px] text-white/85">
+              <dl className="mt-3.5 flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-white/95">
                 {lead.email && (
                   <Meta icon={Mail} href={`mailto:${lead.email}`}>{lead.email}</Meta>
                 )}
@@ -147,21 +147,21 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
               <ul className={`space-y-2.5 ${editable ? "mt-5" : ""}`}>
                 {comments.map((c) => (
                   <li key={c.id} className="rounded-lg border border-[var(--crm-line)] bg-[var(--crm-surface-2)] px-3.5 py-3">
-                    <p className="whitespace-pre-wrap text-[13.5px] leading-relaxed text-[var(--crm-ink-soft)]">{c.body}</p>
-                    <p className="mt-1.5 text-[11.5px] text-[var(--crm-ink-mute)]">
+                    <p className="whitespace-pre-wrap text-[14.5px] leading-relaxed text-[var(--crm-ink-soft)]">{c.body}</p>
+                    <p className="mt-1.5 text-[12.5px] text-[var(--crm-ink-mute)]">
                       {(c.authorName ?? "System")} · {fmtDateTime(c.createdAt)}
                     </p>
                   </li>
                 ))}
               </ul>
             ) : (
-              !editable && <p className="text-[13px] text-[var(--crm-ink-mute)]">No notes yet.</p>
+              !editable && <p className="text-[13.5px] text-[var(--crm-ink-mute)]">No notes yet.</p>
             )}
           </Section>
 
           <Section title="Source">
-            <div className="flex items-start gap-2 text-[12.5px] text-[var(--crm-ink-soft)]">
-              <Link2 className="mt-0.5 size-3.5 shrink-0 text-[var(--crm-ink-mute)]" strokeWidth={1.75} />
+            <div className="flex items-start gap-2 text-[13.5px] text-[var(--crm-ink-soft)]">
+              <Link2 className="mt-0.5 size-4 shrink-0 text-[var(--crm-ink-mute)]" strokeWidth={1.75} />
               {lead.sourceUrl ? (
                 <span className="break-all">{lead.sourceUrl}</span>
               ) : (
@@ -190,7 +190,7 @@ function Meta({
 }) {
   const inner = (
     <>
-      <Icon className="size-3.5 shrink-0 text-white/60" strokeWidth={1.75} />
+      <Icon className="size-4 shrink-0 text-white/80" strokeWidth={1.75} />
       <span className="truncate">{children}</span>
     </>
   );
@@ -218,11 +218,11 @@ function Section({
   return (
     <section className="crm-card p-5">
       <h2
-        className={`mb-4 flex items-center gap-1.5 text-[14px] font-semibold tracking-tight ${
+        className={`mb-4 flex items-center gap-1.5 text-[15px] font-semibold tracking-tight ${
           accent ? "text-[var(--crm-wine)]" : "text-[var(--crm-ink)]"
         }`}
       >
-        {Icon && <Icon className="size-3.5" strokeWidth={2} />}
+        {Icon && <Icon className="size-4" strokeWidth={2} />}
         {title}
       </h2>
       {children}

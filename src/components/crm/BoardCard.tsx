@@ -49,7 +49,7 @@ export function BoardCard({
         <Link
           href={`/admin/${lead.id}`}
           draggable={false}
-          className="text-[13.5px] font-semibold leading-tight text-[var(--crm-ink)] hover:text-[var(--crm-wine)] before:absolute before:inset-0 before:content-['']"
+          className="text-[14.5px] font-semibold leading-tight text-[var(--crm-ink)] hover:text-[var(--crm-wine)] before:absolute before:inset-0 before:content-['']"
         >
           {lead.name ?? "No name"}
         </Link>
@@ -57,7 +57,7 @@ export function BoardCard({
       </div>
 
       {(lead.email || lead.phone) && (
-        <div className="mt-1 flex flex-col gap-0.5 text-[11.5px] leading-tight text-[var(--crm-ink-soft)]">
+        <div className="mt-1 flex flex-col gap-0.5 text-[13px] leading-tight text-[var(--crm-ink-soft)]">
           {lead.email && <span className="truncate">{lead.email}</span>}
           {lead.phone && <span>{lead.phone}</span>}
         </div>
@@ -66,12 +66,12 @@ export function BoardCard({
       {(interest || volume) && (
         <div className="relative z-[1] mt-2 flex flex-wrap gap-1">
           {interest && (
-            <span className="rounded-md bg-[var(--crm-surface-2)] px-1.5 py-0.5 text-[11px] text-[var(--crm-ink-soft)]">
+            <span className="rounded-md bg-[var(--crm-surface-2)] px-1.5 py-0.5 text-[12px] text-[var(--crm-ink-soft)]">
               {interest}
             </span>
           )}
           {volume && (
-            <span className="rounded-md border border-[var(--crm-wine-ring)] bg-[var(--crm-wine-tint)] px-1.5 py-0.5 text-[11px] text-[var(--crm-wine)]">
+            <span className="rounded-md border border-[var(--crm-wine-ring)] bg-[var(--crm-wine-tint)] px-1.5 py-0.5 text-[12px] text-[var(--crm-wine)]">
               {volume}
             </span>
           )}
@@ -82,9 +82,9 @@ export function BoardCard({
         {ownerName ? (
           <OwnerChip name={ownerName} id={lead.assignedTo ?? ownerName} />
         ) : (
-          <span className="text-[11px] text-[var(--crm-ink-mute)]">Sin asignar</span>
+          <span className="text-[12px] text-[var(--crm-ink-mute)]">Sin asignar</span>
         )}
-        <span className="text-[11px] text-[var(--crm-ink-mute)]">{fmtDate(lead.createdAt)}</span>
+        <span className="text-[12px] text-[var(--crm-ink-mute)]">{fmtDate(lead.createdAt)}</span>
       </div>
     </motion.div>
   );

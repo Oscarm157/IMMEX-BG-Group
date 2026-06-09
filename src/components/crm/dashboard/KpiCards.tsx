@@ -111,7 +111,7 @@ export function KpiCards({ totals }: { totals: DashboardMetrics["totals"] }) {
             <p className="text-[12.5px] font-medium" style={{ color: "var(--crm-ink)" }}>
               {c.label}
             </p>
-            <p className="text-[11px] leading-snug" style={{ color: "var(--crm-ink-mute)" }}>
+            <p className="text-[12px] leading-snug" style={{ color: "var(--crm-ink-mute)" }}>
               {c.context}
             </p>
           </div>
