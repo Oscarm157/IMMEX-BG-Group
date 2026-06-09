@@ -87,6 +87,9 @@ export const useChatStore = create<ChatState>((set, get) => {
       // cada chunk de golpe acumulamos el texto objetivo y lo drenamos a cadencia
       // pareja (~30ms/tick) hacia el mensaje. Se ve fluido a costa de ~1s extra.
       let rendered = 0;
+      // Cuando el lead se completa en este turno (nombre + un contacto), el cierre
+      // se garantiza aquí: si el modelo se queda en un acuse seco, lo anexamos.
+      let leadJustCompleted = false;
       const setContent = (text: string) =>
         set((s) => ({
           messages: s.messages.map((m) =>
@@ -144,6 +147,7 @@ export const useChatStore = create<ChatState>((set, get) => {
             const alreadySaved = get().leadSaved;
             if (!alreadySaved && updatedLead.name && (updatedLead.email || updatedLead.phone)) {
               set({ leadSaved: true });
+              leadJustCompleted = true;
               const utm = typeof window !== 'undefined' ? new URLSearchParams(window.location.search) : new URLSearchParams();
               fetch('/api/leads', {
                 method: 'POST',
@@ -172,6 +176,17 @@ export const useChatStore = create<ChatState>((set, get) => {
           }
         }
         if (!done && buf.trim()) processLine(buf);
+
+        // Cierre garantizado al completarse el lead: si el modelo no cerró
+        // (no menciona la línea ni el correo), anexamos el cierre y el
+        // typewriter lo escribe junto con el resto.
+        if (leadJustCompleted && !/607\s*9642|contacto@bgc\.mx|contactar/i.test(accumulated)) {
+          const close =
+            locale === 'en'
+              ? `Your details are saved. A BG Consulting Group advisor will contact you shortly. For immediate help, call ${FALLBACK_PHONE} or write to contacto@bgc.mx.`
+              : `Sus datos quedaron registrados. Un asesor de BG Consulting Group lo contactará a la brevedad. Si necesita atención inmediata, puede llamar al ${FALLBACK_PHONE} o escribir a contacto@bgc.mx.`;
+          accumulated += (accumulated.trim() ? '\n\n' : '') + close;
+        }
       } finally {
         await finishRender();
       }
