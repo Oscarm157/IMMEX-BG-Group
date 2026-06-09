@@ -1,7 +1,7 @@
 import { Slide } from "../Slide";
 import { meta } from "../data";
 
-export function S10Cierre() {
+export function S06Cierre() {
   return (
     <Slide centered>
       <div className="relative">
@@ -9,19 +9,19 @@ export function S10Cierre() {
 
         <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
           <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
-          Resumen
+          En resumen
         </span>
 
         <h2 className="mt-7 max-w-3xl font-display text-[clamp(2.2rem,6vw,4.4rem)] font-medium leading-[1.0] tracking-[-0.03em] text-chalk">
-          Sitio nuevo, panel propio,{" "}
-          <span className="font-serif font-normal italic text-bone">IA operando.</span>
+          Sitio a la medida, panel propio,{" "}
+          <span className="font-serif font-normal italic text-bone">atención con IA.</span>
         </h2>
 
         <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
           {[
             { k: "Sitio", v: "6 páginas ES / EN" },
             { k: "Panel", v: "7 módulos de gestión" },
-            { k: "IA", v: "2 puntos activos" },
+            { k: "IA", v: "Atiende y genera contenido" },
           ].map((s) => (
             <div key={s.k} className="rounded-[12px] border border-line bg-surface-1 p-5">
               <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-smoke">{s.k}</div>
@@ -31,12 +31,13 @@ export function S10Cierre() {
         </div>
 
         <div className="mt-10 max-w-xl rounded-[14px] border border-dashed border-line bg-surface-1/50 p-6">
-          <span className="font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
-            Próximos pasos
+          <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-accent">
+            <span aria-hidden className="material-symbols-outlined" style={{ fontSize: 15 }}>draft</span>
+            Es una propuesta
           </span>
-          <p className="mt-3 text-[14px] leading-relaxed text-bone/80">
-            Esta sección queda abierta para lo que sigue: fotos reales del cliente, métricas en vivo
-            y los siguientes módulos. Se irá completando.
+          <p className="mt-3 text-[14px] leading-relaxed text-bone/85">
+            Lo que se muestra es un borrador para revisión, no la versión final. Falta pulir detalles,
+            sumar las fotos reales de la firma y los siguientes módulos. Se irá completando.
           </p>
         </div>
 

@@ -1,34 +1,34 @@
 import { Slide } from "../Slide";
 import { SlideHead } from "../ui";
 
-export function S02PuntoDePartida() {
+export function S02DeWordpressACodigo() {
   return (
     <Slide centered>
       <SlideHead
         index="01"
-        eyebrow="El punto de partida"
-        title="De una landing de evento a una plataforma."
-        lead="El sitio anterior era una página única para el Foro IMMEX: servía para un evento, no para la firma. La renovación lo convierte en la cara digital de BG Consulting Group y en una herramienta de trabajo para el equipo."
+        eyebrow="El porqué"
+        title="De WordPress a código a la medida."
+        lead="El sitio actual está hecho en WordPress. Cumple, pero está atado a una plantilla y a plugins de terceros. La propuesta es un sitio desarrollado a la medida, con un grado de control y personalización mucho mayor."
       />
 
       <div className="mt-12 grid gap-4 sm:grid-cols-2">
         <div className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7">
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-smoke">Antes</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-smoke">Hoy</span>
           <h3 className="mt-4 font-display text-2xl font-medium tracking-[-0.01em] text-bone">
-            Landing de un solo uso
+            WordPress
           </h3>
           <ul className="mt-5 flex flex-col gap-3 border-t border-line pt-5 text-[14px] text-bone/80">
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-smoke" />
-              Una sola página, atada al Foro IMMEX
+              Atado a una plantilla y a plugins de terceros
             </li>
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-smoke" />
-              Sin SEO ni contenido propio
+              Personalizar a fondo es costoso y limitado
             </li>
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-smoke" />
-              Nada que el equipo pudiera editar
+              El desempeño depende de los plugins instalados
             </li>
           </ul>
         </div>
@@ -36,31 +36,27 @@ export function S02PuntoDePartida() {
         <div className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7">
           <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
             <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
-            Ahora
+            La propuesta
           </span>
           <h3 className="mt-4 font-display text-2xl font-medium tracking-[-0.01em] text-chalk">
-            Sitio de firma + panel
+            Código a la medida
           </h3>
           <ul className="mt-5 flex flex-col gap-3 border-t border-line pt-5 text-[14px] text-bone/90">
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-              Seis páginas bilingües ES / EN
+              Desarrollado a mano, control total del sitio
             </li>
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-              SEO, velocidad y blog propio
+              Se ajusta cualquier detalle, sin límites de plantilla
             </li>
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-2 h-1 w-1 shrink-0 rounded-full bg-accent" />
-              Panel de gestión comercial y de contenido
+              Más rápido y con un panel de gestión propio
             </li>
           </ul>
         </div>
       </div>
-
-      <p className="mt-6 font-mono text-[11px] text-ash">
-        El Foro IMMEX queda archivado en /foro, no se borró.
-      </p>
     </Slide>
   );
 }

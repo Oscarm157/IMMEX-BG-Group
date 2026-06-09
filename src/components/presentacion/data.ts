@@ -8,39 +8,46 @@ export const meta = {
   domain: "bgconsultingroup.com",
 };
 
-/* Los cinco frentes del cambio (el porqué de la renovación). */
+/* Qué mejora (el porqué de la renovación), en lenguaje claro. */
 export const frentes = [
   {
     n: "01",
-    title: "Sitio renovado y bilingüe",
-    body: "Pasamos de una landing de evento a un sitio formal de la firma, en español e inglés, con páginas reales: inicio, servicios, software, nosotros, blog y contacto.",
-    icon: "language",
-  },
-  {
-    n: "02",
-    title: "SEO",
-    body: "Estructura pensada para buscar: metadatos por idioma, rutas limpias /es y /en, Open Graph y contenido editorial en el blog para ganar posición en Google.",
-    icon: "search",
-  },
-  {
-    n: "03",
-    title: "Velocidad de carga",
-    body: "Render estático donde se puede, imágenes en WebP optimizadas y fuentes servidas localmente. El sitio abre rápido, no pesa.",
-    icon: "bolt",
-  },
-  {
-    n: "04",
-    title: "Mayor personalización",
-    body: "Todo el contenido vive en el panel: servicios, blog y campañas se editan sin tocar código. El sitio se adapta a la operación, no al revés.",
+    title: "Personalización total",
+    body: "Código desarrollado a la medida, no una plantilla. Permite ajustar cualquier elemento del sitio sin las limitaciones de los temas y plugins de terceros.",
     icon: "tune",
   },
   {
-    n: "05",
-    title: "Integración con IA",
-    body: "Un asistente conversacional en el sitio que califica visitantes, y un generador de contenido para redes dentro del panel. La IA trabaja, no decora.",
-    icon: "neurology",
+    n: "02",
+    title: "Bilingüe español e inglés",
+    body: "El sitio completo en ambos idiomas, con cambio en un clic. Pensado para clientes de los dos lados de la frontera.",
+    icon: "language",
+  },
+  {
+    n: "03",
+    title: "Posicionamiento en buscadores",
+    body: "Estructura orientada a SEO, con un blog propio que aporta contenido y posiciona a la firma en sus áreas de especialidad.",
+    icon: "search",
+  },
+  {
+    n: "04",
+    title: "Carga rápida",
+    body: "Tiempos de carga reducidos. El desempeño deja de depender de la acumulación de plugins propia de WordPress.",
+    icon: "bolt",
   },
 ];
+
+/* Chatbot del sitio: primera atención automatizada. */
+export const chatbot = {
+  title: "Atención inicial automatizada",
+  body: "El sitio incorpora un asistente con inteligencia artificial que recibe a cada visitante desde el primer momento.",
+  puntos: [
+    "Atiende a cada visitante de inmediato, sin horarios ni tiempos de espera",
+    "La respuesta inmediata incrementa la conversión de visitantes en prospectos",
+    "Resuelve dudas frecuentes y orienta hacia el servicio adecuado",
+    "Refuerza la imagen profesional de la firma",
+    "Registra el contacto como prospecto en el panel",
+  ],
+};
 
 /* Módulos reales del panel admin, agrupados como en la navegación. */
 export const modulos = {
@@ -66,6 +73,7 @@ export const shots = {
   software: { src: "/presentacion/software.png", url: "bgconsultingroup.com/es/software" },
   blog: { src: "/presentacion/blog.png", url: "bgconsultingroup.com/es/blog" },
   contact: { src: "/presentacion/contact.png", url: "bgconsultingroup.com/es/contact" },
+  chatbot: { src: "/presentacion/chatbot.png", url: "bgconsultingroup.com/es" },
   panelResumen: { src: "/presentacion/panel-resumen.png", url: "bgconsultingroup.com/admin/dashboard" },
   panelLeads: { src: "/presentacion/panel-leads.png", url: "bgconsultingroup.com/admin" },
   panelPipeline: { src: "/presentacion/panel-pipeline.png", url: "bgconsultingroup.com/admin/board" },

@@ -7,9 +7,9 @@ export function S03Frentes() {
     <Slide centered={false}>
       <SlideHead
         index="02"
-        eyebrow="Por qué renovamos"
-        title="Cinco frentes."
-        lead="La renovación no fue un cambio de imagen. Atacó cinco cosas concretas que la landing anterior no resolvía."
+        eyebrow="Qué mejora"
+        title="Lo que aporta el cambio."
+        lead="Cuatro ventajas concretas de pasar a un sitio desarrollado a la medida."
         className="mb-10"
       />
 
@@ -33,12 +33,6 @@ export function S03Frentes() {
             </div>
           </div>
         ))}
-
-        <div className="hidden items-center justify-center rounded-[14px] border border-dashed border-line p-7 md:flex">
-          <p className="max-w-[16rem] text-center font-mono text-[12px] leading-relaxed text-ash">
-            Cada frente se traduce en algo que el equipo y los clientes ven todos los días.
-          </p>
-        </div>
       </div>
     </Slide>
   );

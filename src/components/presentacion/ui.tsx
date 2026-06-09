@@ -68,3 +68,36 @@ export function BrowserMock({
     </figure>
   );
 }
+
+/* Captura con título e intro encima, para las slides scrollables. */
+export function ShotRow({
+  index,
+  title,
+  desc,
+  src,
+  url,
+  priority = false,
+}: {
+  index: string;
+  title: string;
+  desc: string;
+  src: string;
+  url: string;
+  priority?: boolean;
+}) {
+  return (
+    <div className="grid gap-5 lg:grid-cols-[0.62fr_1fr] lg:items-center">
+      <div>
+        <div className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+          <span className="tabular-nums">{index}</span>
+          <span aria-hidden className="h-px w-6 bg-accent/40" />
+        </div>
+        <h3 className="mt-3 font-display text-2xl font-medium tracking-[-0.015em] text-chalk sm:text-[28px]">
+          {title}
+        </h3>
+        <p className="mt-3 max-w-md text-[14px] leading-relaxed text-bone/85">{desc}</p>
+      </div>
+      <BrowserMock src={src} url={url} priority={priority} />
+    </div>
+  );
+}
