@@ -45,7 +45,7 @@ export function PanelNav({
   const comercial: Item[] = [];
   if (showDashboard) comercial.push({ href: "/admin/dashboard", label: "Resumen", icon: LayoutDashboard });
   comercial.push({ href: "/admin", label: "Leads", icon: ListFilter });
-  comercial.push({ href: "/admin/board", label: "Tablero", icon: KanbanSquare });
+  comercial.push({ href: "/admin/board", label: "Pipeline", icon: KanbanSquare });
   if (showAds) comercial.push({ href: "/admin/ads", label: "Anuncios", icon: Megaphone });
 
   const contenido: Item[] = [];

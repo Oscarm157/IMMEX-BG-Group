@@ -5,7 +5,7 @@ import { isClient } from "@/lib/crm-permissions";
 import { BoardView, type BoardLead } from "@/components/crm/BoardView";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Tablero", robots: { index: false } };
+export const metadata = { title: "Pipeline", robots: { index: false } };
 
 export default async function BoardPage() {
   const me = await getCurrentUser();
