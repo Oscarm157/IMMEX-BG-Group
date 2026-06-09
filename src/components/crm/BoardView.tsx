@@ -107,7 +107,7 @@ export function BoardView({
     <div>
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-baseline gap-3">
-          <h1 className="font-serif text-[30px] tracking-tight text-[var(--crm-ink)]">Board</h1>
+          <h1 className="font-serif text-[30px] tracking-tight text-[var(--crm-ink)]">Pipeline</h1>
           <span className="text-[13px] tabular-nums text-[var(--crm-ink-soft)]">{items.length} total</span>
         </div>
         <div className="inline-flex items-center rounded-full border border-[var(--crm-line)] bg-[var(--crm-surface)] p-0.5">
@@ -116,19 +116,19 @@ export function BoardView({
             className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] text-[var(--crm-ink-soft)] transition-colors hover:text-[var(--crm-ink)]"
           >
             <List className="size-3.5" strokeWidth={1.75} />
-            List
+            Lista
           </Link>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--crm-wine)] px-3 py-1.5 text-[13px] font-medium text-white">
+          <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--crm-wine)] px-3 py-1.5 text-[13px] font-medium text-[var(--crm-on-accent)]">
             <LayoutGrid className="size-3.5" strokeWidth={1.75} />
-            Board
+            Pipeline
           </span>
         </div>
       </div>
 
       <p className="mt-2 text-[12.5px] text-[var(--crm-ink-soft)]">
         {viewer.role === "viewer"
-          ? "Read-only view of the board."
-          : "Drag a lead to another column to change its status."}
+          ? "Vista de solo lectura del pipeline."
+          : "Arrastra un lead a otra columna para cambiar su estado."}
       </p>
 
       <div
@@ -137,7 +137,7 @@ export function BoardView({
         onMouseMove={onPanMove}
         onMouseUp={onPanEnd}
         onMouseLeave={onPanEnd}
-        className="mt-5 -mx-5 cursor-grab overflow-x-auto px-5 pb-3 sm:mx-0 sm:px-0"
+        className="scrollbar-hide mt-5 -mx-5 cursor-grab overflow-x-auto px-5 pb-3 sm:mx-0 sm:px-0"
       >
         <div className="flex snap-x items-start gap-3">
           {STATUS_ORDER.map((status) => {

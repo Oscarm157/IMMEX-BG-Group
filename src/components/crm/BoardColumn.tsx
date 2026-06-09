@@ -69,7 +69,7 @@ export function BoardColumn({
       <div
         data-accepts={accepts}
         data-over={over && accepts}
-        className="crm-dropzone flex max-h-[calc(100dvh-230px)] min-h-[120px] flex-1 flex-col gap-2 overflow-y-auto p-2"
+        className="crm-dropzone scrollbar-hide flex max-h-[calc(100dvh-230px)] min-h-[120px] flex-1 flex-col gap-2 overflow-y-auto p-2"
       >
         <AnimatePresence initial={false}>
           {leads.map((lead) => (
