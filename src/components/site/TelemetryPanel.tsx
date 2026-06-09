@@ -45,8 +45,8 @@ export function TelemetryPanel({
       {/* Mapa del corredor (imagen generada) */}
       <div className="relative h-40 overflow-hidden border-b border-line sm:h-48">
         <Image
-          src="/img/gen/corridor.webp"
-          alt="Corredor de datos transfronterizo Tijuana San Diego"
+          src="/img/gen/corridor-map.webp"
+          alt="Corredor de comercio exterior México Estados Unidos"
           fill
           priority
           sizes="(max-width: 1024px) 100vw, 45vw"

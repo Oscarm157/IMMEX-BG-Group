@@ -89,11 +89,13 @@ export const pauta = {
     body: "Búsqueda en español. Captura a quien ya tiene el problema y lo busca: una revisión, un saldo de IVA atorado, un sistema para Anexo 24.",
     keywords: {
       bg: [
-        "abogado aduanero",
+        "reglas de origen T-MEC",
         "auditoría IMMEX",
         "devolución IVA SAT",
         "recurso de revocación SAT",
         "clasificación arancelaria",
+        "VUCEM",
+        "Portal ADUANAS SAT",
       ],
       bms: [
         "software anexo 24",
@@ -132,9 +134,9 @@ export const pauta = {
       icon: "mail",
     },
     {
-      title: "Conectar canales",
-      body: "Correo, seguido de un toque en LinkedIn al mismo contacto y una llamada cuando hay señal de interés. Aquí se cruzan email, LinkedIn y pauta.",
-      icon: "hub",
+      title: "Del correo a la llamada",
+      body: "Cuando un contacto abre varios correos o visita el sitio, es señal para llamar. El correo abre la puerta; la persona cierra.",
+      icon: "call",
     },
   ],
 };

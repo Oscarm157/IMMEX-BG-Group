@@ -14,7 +14,7 @@ export function S08Cierre() {
 
         <h2 className="mt-7 max-w-3xl font-display text-[clamp(2.2rem,6vw,4.4rem)] font-medium leading-[1.0] tracking-[-0.03em] text-chalk">
           Sitio a la medida, panel propio,{" "}
-          <span className="font-serif font-normal italic text-bone">y un plan para atraer.</span>
+          <span className="font-serif font-normal italic text-bone">y un plan para atraer clientes.</span>
         </h2>
 
         <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
