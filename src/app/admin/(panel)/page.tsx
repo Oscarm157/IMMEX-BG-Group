@@ -74,7 +74,7 @@ export default async function LeadsList({
 
   const active = (status ?? "all") as "all" | LeadStatus;
   const tabs: { key: "all" | LeadStatus; label: string }[] = [
-    { key: "all", label: "All" },
+    { key: "all", label: "Todos" },
     ...STATUS_ORDER.map((s) => ({ key: s, label: STATUS_META[s].label })),
   ];
 
@@ -147,12 +147,12 @@ export default async function LeadsList({
             <Inbox className="size-6 text-[var(--crm-wine)]" strokeWidth={1.5} />
           </div>
           <p className="mt-4 text-[15px] font-medium text-[var(--crm-ink)]">
-            {opts.search || opts.owner || opts.source || status || unassigned ? "No matches" : "No leads yet"}
+            {opts.search || opts.owner || opts.source || status || unassigned ? "Sin coincidencias" : "Aún no hay leads"}
           </p>
           <p className="mt-1 max-w-xs text-[13px] text-[var(--crm-ink-soft)]">
             {opts.search || opts.owner || opts.source || status || unassigned
-              ? "Clear the search or filters to widen the results."
-              : "Leads from the site chat and forms show up here, along with any you add."}
+              ? "Quita la búsqueda o los filtros para ampliar los resultados."
+              : "Los leads del chat del sitio y de los formularios aparecen aquí, junto con los que agregues."}
           </p>
         </div>
       ) : (
@@ -170,7 +170,7 @@ export default async function LeadsList({
                     className="crm-card block p-4 transition-colors active:bg-[var(--crm-surface-2)]"
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <span className="text-[15px] font-semibold text-[var(--crm-ink)]">{lead.name ?? "No name"}</span>
+                      <span className="text-[15px] font-semibold text-[var(--crm-ink)]">{lead.name ?? "Sin nombre"}</span>
                       <StatusBadge status={lead.status} />
                     </div>
                     <div className="mt-1 flex flex-col gap-0.5 text-[12.5px] text-[var(--crm-ink-soft)]">
@@ -206,14 +206,14 @@ export default async function LeadsList({
             <table className="crm-table min-w-[860px]">
               <thead className="crm-thead">
                 <tr className="border-b border-[var(--crm-line)]">
-                  <th className="crm-th">Name</th>
-                  <th className="crm-th">Contact</th>
-                  <th className="crm-th">Source</th>
-                  <th className="crm-th">Owner</th>
-                  <th className="crm-th">Interest</th>
-                  <th className="crm-th">Volume</th>
-                  <th className="crm-th">Status</th>
-                  <th className="crm-th">Received</th>
+                  <th className="crm-th">Nombre</th>
+                  <th className="crm-th">Contacto</th>
+                  <th className="crm-th">Origen</th>
+                  <th className="crm-th">Responsable</th>
+                  <th className="crm-th">Interés</th>
+                  <th className="crm-th">Volumen</th>
+                  <th className="crm-th">Estado</th>
+                  <th className="crm-th">Recibido</th>
                 </tr>
               </thead>
               <tbody>
@@ -231,7 +231,7 @@ export default async function LeadsList({
                           className="group inline-flex items-center gap-1.5 before:absolute before:inset-0 before:content-['']"
                         >
                           <span className="text-[14px] font-semibold text-[var(--crm-ink)] group-hover:text-[var(--crm-wine)]">
-                            {lead.name ?? "No name"}
+                            {lead.name ?? "Sin nombre"}
                           </span>
                           <span className="rounded border border-[var(--crm-line-strong)] px-1 py-0.5 text-[9px] font-medium uppercase text-[var(--crm-ink-mute)]">
                             {lead.locale === "es" ? "ES" : "EN"}
@@ -273,26 +273,26 @@ export default async function LeadsList({
           {/* Pagination */}
           <div className="mt-4 flex items-center justify-between gap-3">
             <span className="text-[12.5px] tabular-nums text-[var(--crm-ink-soft)]">
-              {firstShown}–{lastShown} of {total}
+              {firstShown}–{lastShown} de {total}
             </span>
             {totalPages > 1 && (
               <div className="flex items-center gap-1.5">
                 {page > 1 ? (
                   <Link href={pageHref(page - 1)} scroll={false} className="crm-btn crm-btn-secondary crm-btn-sm">
-                    Prev
+                    Anterior
                   </Link>
                 ) : (
-                  <span className="crm-btn crm-btn-secondary crm-btn-sm opacity-45">Prev</span>
+                  <span className="crm-btn crm-btn-secondary crm-btn-sm opacity-45">Anterior</span>
                 )}
                 <span className="px-1.5 text-[12.5px] tabular-nums text-[var(--crm-ink-soft)]">
                   {page} / {totalPages}
                 </span>
                 {page < totalPages ? (
                   <Link href={pageHref(page + 1)} scroll={false} className="crm-btn crm-btn-secondary crm-btn-sm">
-                    Next
+                    Siguiente
                   </Link>
                 ) : (
-                  <span className="crm-btn crm-btn-secondary crm-btn-sm opacity-45">Next</span>
+                  <span className="crm-btn crm-btn-secondary crm-btn-sm opacity-45">Siguiente</span>
                 )}
               </div>
             )}

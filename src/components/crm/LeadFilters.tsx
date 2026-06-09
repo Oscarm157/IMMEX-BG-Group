@@ -8,16 +8,16 @@ import { Search, X, SlidersHorizontal, ChevronDown } from "lucide-react";
 type Owner = { id: string; name: string };
 
 const SOURCES = [
-  { value: "", label: "Todas las fuentes" },
+  { value: "", label: "Todos los orígenes" },
   { value: "bot", label: "Chatbot" },
-  { value: "form", label: "Form" },
+  { value: "form", label: "Formulario" },
   { value: "manual", label: "Manual" },
 ];
 
 const SORTS = [
-  { value: "recent", label: "Most recent" },
-  { value: "name", label: "Name A–Z" },
-  { value: "status", label: "Pipeline stage" },
+  { value: "recent", label: "Más recientes" },
+  { value: "name", label: "Nombre A–Z" },
+  { value: "status", label: "Etapa del pipeline" },
 ];
 
 const selectCls = "crm-select h-9 appearance-none !pl-3 !pr-8 text-[13px]";
@@ -102,7 +102,7 @@ export function LeadFilters({
   }, [search]);
 
   const ownerOptions = [
-    { value: "", label: "All owners" },
+    { value: "", label: "Todos los responsables" },
     ...owners.map((o) => ({ value: o.id, label: o.name })),
   ];
 
@@ -114,13 +114,13 @@ export function LeadFilters({
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search name, email, phone, company…"
+            placeholder="Buscar nombre, correo, teléfono, empresa…"
             className="crm-input h-10 !pl-10 !pr-9"
           />
           {search && (
             <button
               onClick={() => setSearch("")}
-              aria-label="Clear search"
+              aria-label="Limpiar búsqueda"
               className="absolute right-2 top-1/2 -translate-y-1/2 rounded-md p-1 text-[var(--crm-ink-mute)] transition-colors hover:bg-[var(--crm-surface-2)] hover:text-[var(--crm-ink)]"
             >
               <X className="size-3.5" />
@@ -151,7 +151,7 @@ export function LeadFilters({
           }`}
         >
           <SlidersHorizontal className="size-3.5" />
-          Filters
+          Filtros
         </button>
       </div>
 

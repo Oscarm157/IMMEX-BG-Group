@@ -27,7 +27,7 @@ function UploadButton() {
       className="crm-btn crm-btn-primary"
     >
       <Upload className="size-3.5" strokeWidth={1.75} />
-      {pending ? "Uploading…" : "Upload"}
+      {pending ? "Subiendo…" : "Subir archivo"}
     </button>
   );
 }
@@ -50,7 +50,7 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
                 await uploadLeadFile(leadId, fd);
                 formRef.current?.reset();
               } catch {
-                setError("Upload failed. Check the file (max 10MB) and try again.");
+                setError("No se pudo subir. Revisa el archivo (máx. 10MB) e inténtalo de nuevo.");
               }
             }}
             className="flex items-center gap-2"
@@ -63,13 +63,13 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
             />
             <UploadButton />
           </form>
-          <p className="mt-1.5 text-[13px] text-[var(--crm-ink-mute)]">Any file type, up to 10MB.</p>
+          <p className="mt-1.5 text-[13px] text-[var(--crm-ink-mute)]">Cualquier tipo de archivo, hasta 10MB.</p>
           {error && <p className="mt-1.5 text-[13px] text-[var(--crm-wine)]">{error}</p>}
         </>
       )}
 
       {files.length === 0 && !editable && (
-        <p className="text-[13.5px] text-[var(--crm-ink-mute)]">No files yet.</p>
+        <p className="text-[13.5px] text-[var(--crm-ink-mute)]">Aún no hay archivos.</p>
       )}
 
       {files.length > 0 && (
@@ -92,7 +92,7 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
                   <button
                     type="button"
                     onClick={() => setPreview(f)}
-                    title="Preview"
+                    title="Vista previa"
                     className="rounded-md p-1.5 text-[var(--crm-ink-soft)] transition-colors hover:bg-[var(--crm-surface-2)] hover:text-[var(--crm-ink)]"
                   >
                     <Eye className="size-4" strokeWidth={1.7} />
@@ -100,7 +100,7 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
                 )}
                 <a
                   href={fileHref(f.id, true)}
-                  title="Download"
+                  title="Descargar"
                   className="rounded-md p-1.5 text-[var(--crm-ink-soft)] transition-colors hover:bg-[var(--crm-surface-2)] hover:text-[var(--crm-ink)]"
                 >
                   <Download className="size-4" strokeWidth={1.7} />
@@ -109,10 +109,10 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
                   <button
                     type="button"
                     onClick={() => {
-                      if (confirm(`Delete ${f.name}?`))
+                      if (confirm(`¿Eliminar ${f.name}?`))
                         startTransition(() => deleteLeadFile(f.id, leadId));
                     }}
-                    title="Delete"
+                    title="Eliminar"
                     className="rounded-md p-1.5 text-[var(--crm-ink-soft)] transition-colors hover:bg-[var(--crm-wine-tint)] hover:text-[var(--crm-wine)]"
                   >
                     <Trash2 className="size-4" strokeWidth={1.7} />

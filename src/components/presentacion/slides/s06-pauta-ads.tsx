@@ -64,7 +64,7 @@ export function S06PautaAds() {
             </li>
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />
-              Empuja a quien decide: dirección y comercio exterior
+              Llega a quien decide: dirección y comercio exterior
             </li>
             <li className="flex items-start gap-3">
               <span aria-hidden className="mt-1.5 h-1 w-1 shrink-0 rounded-full bg-accent" />

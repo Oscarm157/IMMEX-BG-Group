@@ -106,7 +106,7 @@ export const pauta = {
   },
   linkedin: {
     rol: "En ráfagas, no continuo",
-    body: "El único canal que segmenta por cargo, empresa e industria. Se enciende por fases para empujes concretos: lanzar BMS ante directores de comercio exterior, mover un contenido de autoridad.",
+    body: "El único canal que segmenta por cargo, empresa e industria. Se enciende por fases, para objetivos concretos: lanzar BMS ante directores de comercio exterior, mover un contenido de autoridad.",
   },
   presupuesto: {
     rango: "$5,000 a $10,000 MXN al mes",

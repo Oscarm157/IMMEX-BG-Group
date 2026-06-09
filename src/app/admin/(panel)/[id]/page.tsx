@@ -18,7 +18,7 @@ import { addLeadComment, updateLeadDetails } from "../../actions";
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Lead", robots: { index: false } };
 
-const LOCALE_LABEL: Record<string, string> = { en: "English", es: "Spanish" };
+const LOCALE_LABEL: Record<string, string> = { en: "Inglés", es: "Español" };
 
 export default async function LeadDetail({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -49,7 +49,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
     if (owner) ownerUsers = [...usersList, owner];
   }
   const ownerName = lead.assignedTo
-    ? ownerUsers.find((u) => u.id === lead.assignedTo)?.name ?? "Assigned"
+    ? ownerUsers.find((u) => u.id === lead.assignedTo)?.name ?? "Asignado"
     : null;
 
   return (
@@ -58,22 +58,22 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
 
       {/* Header card */}
       <header className="crm-card mt-4 overflow-hidden">
-        <div className="bg-[var(--crm-wine)] px-5 py-5 text-white sm:px-7">
+        <div className="border-t-2 border-[var(--crm-wine)] border-b border-[var(--crm-line)] bg-[var(--crm-surface)] px-5 py-5 sm:px-7">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:justify-between">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2.5">
-                <h1 className="font-serif text-[26px] leading-none tracking-tight text-white sm:text-[30px]">
-                  {lead.name ?? "No name"}
+                <h1 className="font-serif text-[26px] leading-none tracking-tight text-[var(--crm-ink)] sm:text-[30px]">
+                  {lead.name ?? "Sin nombre"}
                 </h1>
-                <SourceBadge source={lead.source} onDark />
+                <SourceBadge source={lead.source} />
                 {!editable && (
-                  <span className="inline-flex items-center gap-1 rounded-full border border-white/30 bg-white/10 px-2 py-0.5 text-[11px] font-medium text-white">
+                  <span className="inline-flex items-center gap-1 rounded-full border border-[var(--crm-line)] bg-[var(--crm-surface-2)] px-2 py-0.5 text-[12px] font-medium text-[var(--crm-ink-soft)]">
                     <Lock className="size-3" strokeWidth={2} />
-                    Read only
+                    Solo lectura
                   </span>
                 )}
               </div>
-              <dl className="mt-3.5 flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-white/95">
+              <dl className="mt-3.5 flex flex-wrap gap-x-5 gap-y-2 text-[14px] text-[var(--crm-ink-soft)]">
                 {lead.email && (
                   <Meta icon={Mail} href={`mailto:${lead.email}`}>{lead.email}</Meta>
                 )}
@@ -83,7 +83,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
                 {lead.locale && (
                   <Meta icon={Globe}>{LOCALE_LABEL[lead.locale] ?? lead.locale}</Meta>
                 )}
-                <Meta icon={CalendarClock}>Received {fmtDateTime(lead.createdAt)}</Meta>
+                <Meta icon={CalendarClock}>Recibido {fmtDateTime(lead.createdAt)}</Meta>
               </dl>
             </div>
 
@@ -95,7 +95,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
                 viewerRole={viewer.role}
                 ownerName={ownerName}
               />
-              <StatusControl leadId={lead.id} status={lead.status} editable={editable} onDark />
+              <StatusControl leadId={lead.id} status={lead.status} editable={editable} />
               {viewer.role === "admin" && <DeleteLeadButton id={lead.id} />}
             </div>
           </div>
@@ -106,14 +106,14 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
         {/* Main column */}
         <div className="flex flex-col gap-5">
           {lead.summary && (
-            <Section title="AI summary" accent>
+            <Section title="Resumen con IA" accent>
               <p className="whitespace-pre-wrap text-[14px] leading-relaxed text-[var(--crm-ink-soft)]">
                 {lead.summary}
               </p>
             </Section>
           )}
 
-          <Section title="Qualification">
+          <Section title="Calificación">
             <LeadDetailsForm
               action={saveDetails}
               editable={editable}
@@ -133,7 +133,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
 
         {/* Side column */}
         <div className="flex flex-col gap-5">
-          <Section title="Files">
+          <Section title="Archivos">
             <Files
               leadId={lead.id}
               editable={editable}
@@ -141,7 +141,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
             />
           </Section>
 
-          <Section title="Notes">
+          <Section title="Notas">
             {editable && <CommentForm action={addComment} />}
             {comments.length > 0 ? (
               <ul className={`space-y-2.5 ${editable ? "mt-5" : ""}`}>
@@ -149,28 +149,28 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
                   <li key={c.id} className="rounded-lg border border-[var(--crm-line)] bg-[var(--crm-surface-2)] px-3.5 py-3">
                     <p className="whitespace-pre-wrap text-[14.5px] leading-relaxed text-[var(--crm-ink-soft)]">{c.body}</p>
                     <p className="mt-1.5 text-[12.5px] text-[var(--crm-ink-mute)]">
-                      {(c.authorName ?? "System")} · {fmtDateTime(c.createdAt)}
+                      {(c.authorName ?? "Sistema")} · {fmtDateTime(c.createdAt)}
                     </p>
                   </li>
                 ))}
               </ul>
             ) : (
-              !editable && <p className="text-[13.5px] text-[var(--crm-ink-mute)]">No notes yet.</p>
+              !editable && <p className="text-[13.5px] text-[var(--crm-ink-mute)]">Aún no hay notas.</p>
             )}
           </Section>
 
-          <Section title="Source">
+          <Section title="Origen">
             <div className="flex items-start gap-2 text-[13.5px] text-[var(--crm-ink-soft)]">
               <Link2 className="mt-0.5 size-4 shrink-0 text-[var(--crm-ink-mute)]" strokeWidth={1.75} />
               {lead.sourceUrl ? (
                 <span className="break-all">{lead.sourceUrl}</span>
               ) : (
-                <span>Added manually</span>
+                <span>Agregado manualmente</span>
               )}
             </div>
           </Section>
 
-          <Section title="Activity">
+          <Section title="Actividad">
             <Activity events={events} />
           </Section>
         </div>
@@ -190,13 +190,13 @@ function Meta({
 }) {
   const inner = (
     <>
-      <Icon className="size-4 shrink-0 text-white/80" strokeWidth={1.75} />
+      <Icon className="size-4 shrink-0 text-[var(--crm-ink-mute)]" strokeWidth={1.75} />
       <span className="truncate">{children}</span>
     </>
   );
   if (href) {
     return (
-      <a href={href} className="inline-flex items-center gap-1.5 transition-colors hover:text-white">
+      <a href={href} className="inline-flex items-center gap-1.5 transition-colors hover:text-[var(--crm-ink)]">
         {inner}
       </a>
     );

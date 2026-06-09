@@ -182,6 +182,7 @@ export const useChatStore = create<ChatState>((set, get) => {
       set((s) => ({
         isTyping: false,
         isStreaming: true,
+        suggestedReplies: [],
         messages: [
           ...s.messages,
           { id: assistantId, role: 'assistant', content: '', timestamp: new Date() },

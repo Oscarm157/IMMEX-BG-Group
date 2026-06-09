@@ -75,7 +75,7 @@ function Header() {
         Embudo por etapa
       </h2>
       <p className="mt-0.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
-        Leads created in the period, by their current stage
+        Leads creados en el periodo, por su etapa actual
       </p>
     </div>
   );
@@ -140,7 +140,7 @@ function Bar({
 function EmptyState() {
   return (
     <p className="mt-6 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
-      No data in this period.
+      Sin datos en este periodo.
     </p>
   );
 }

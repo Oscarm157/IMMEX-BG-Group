@@ -5,9 +5,9 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { changePassword } from "../actions";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Password", robots: { index: false, follow: false } };
+export const metadata = { title: "Contraseña", robots: { index: false, follow: false } };
 
-const RULES = ["At least 8 characters", "Different from the temporary one"];
+const RULES = ["Al menos 8 caracteres", "Distinta a la temporal"];
 
 export default async function ChangePassword({
   searchParams,
@@ -33,7 +33,7 @@ export default async function ChangePassword({
             className="mb-5 inline-flex items-center gap-1.5 text-[12.5px] text-[var(--crm-ink-mute)] transition-colors hover:text-[var(--crm-ink)]"
           >
             <ArrowLeft className="size-3.5" strokeWidth={1.8} />
-            Back to profile
+            Volver al perfil
           </Link>
         )}
 
@@ -43,15 +43,15 @@ export default async function ChangePassword({
           </span>
           <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--crm-wine)]">BG Consulting Group</p>
           <h1 className="mt-1.5 font-serif text-[25px] tracking-tight text-[var(--crm-ink)]">
-            {forced ? "Set a password" : "Change password"}
+            {forced ? "Define una contraseña" : "Cambiar contraseña"}
           </h1>
           {forced && (
-            <p className="mt-1.5 text-[13px] text-[var(--crm-ink-mute)]">First sign-in: choose a password only you know.</p>
+            <p className="mt-1.5 text-[13px] text-[var(--crm-ink-mute)]">Primer inicio de sesión: elige una contraseña que solo tú conozcas.</p>
           )}
         </div>
 
         <form action={changePassword} className="crm-card p-6 shadow-[0_12px_40px_rgba(20,18,14,0.07)]">
-          <label htmlFor="password" className="mb-1.5 block text-[13px] font-medium text-[var(--crm-ink)]">New password</label>
+          <label htmlFor="password" className="mb-1.5 block text-[13px] font-medium text-[var(--crm-ink)]">Nueva contraseña</label>
           <input
             id="password"
             name="password"
@@ -61,9 +61,9 @@ export default async function ChangePassword({
             autoFocus
             autoComplete="new-password"
             className="crm-input !h-10 !text-[15px]"
-            placeholder="At least 8 characters"
+            placeholder="Al menos 8 caracteres"
           />
-          {error && <p className="mt-2.5 text-[12.5px] text-[var(--crm-wine)]">The password must be at least 8 characters.</p>}
+          {error && <p className="mt-2.5 text-[12.5px] text-[var(--crm-wine)]">La contraseña debe tener al menos 8 caracteres.</p>}
 
           <ul className="mt-3 space-y-1">
             {RULES.map((r) => (
@@ -75,7 +75,7 @@ export default async function ChangePassword({
           </ul>
 
           <button type="submit" className="crm-btn crm-btn-primary mt-5 w-full">
-            {forced ? "Save and continue" : "Update password"}
+            {forced ? "Guardar y continuar" : "Actualizar contraseña"}
           </button>
         </form>
       </div>

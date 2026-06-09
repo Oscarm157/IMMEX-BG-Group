@@ -9,9 +9,9 @@ import { Modal } from "@/components/crm/Modal";
 const labelCls = "mb-1 block text-[12.5px] font-medium text-[var(--crm-ink)]";
 
 const ROLE_OPTIONS: { value: UserRole; label: string; hint: string; icon: typeof ShieldCheck }[] = [
-  { value: "agent", label: "Agente", hint: "Solo sus leads asignados", icon: UserCog },
-  { value: "admin", label: "Admin", hint: "Todo, incluida gestión de usuarios", icon: ShieldCheck },
-  { value: "viewer", label: "Lector", hint: "Ve todo, no edita", icon: Eye },
+  { value: "agent", label: "Agente", hint: "Solo trabaja los leads que tiene asignados", icon: UserCog },
+  { value: "admin", label: "Administrador", hint: "Todo, incluida la gestión de usuarios", icon: ShieldCheck },
+  { value: "viewer", label: "Lector", hint: "Ve todos los leads, no puede editar", icon: Eye },
 ];
 
 export function EditUserModal({
@@ -35,13 +35,13 @@ export function EditUserModal({
     <>
       <button
         onClick={openModal}
-        title="Edit user"
+        title="Editar usuario"
         className="rounded-md p-1.5 text-[var(--crm-ink-mute)] transition-colors hover:bg-[var(--crm-wine-tint)] hover:text-[var(--crm-wine)]"
       >
         <Pencil className="size-4" strokeWidth={1.7} />
       </button>
 
-      <Modal open={open} onClose={close} title="Edit user" maxWidth={420}>
+      <Modal open={open} onClose={close} title="Editar usuario" maxWidth={420}>
         <form
           action={(fd) =>
             startTransition(async () => {
@@ -58,16 +58,16 @@ export function EditUserModal({
           className="space-y-3.5"
         >
           <div>
-            <label className={labelCls} htmlFor="e-name">Name</label>
-            <input id="e-name" name="name" required defaultValue={user.name} className="crm-input" placeholder="Full name" />
+            <label className={labelCls} htmlFor="e-name">Nombre</label>
+            <input id="e-name" name="name" required defaultValue={user.name} className="crm-input" placeholder="Nombre completo" />
           </div>
           <div>
-            <label className={labelCls} htmlFor="e-email">Email</label>
-            <input id="e-email" name="email" type="email" required defaultValue={user.email} className="crm-input" placeholder="name@bgc.mx" />
+            <label className={labelCls} htmlFor="e-email">Correo</label>
+            <input id="e-email" name="email" type="email" required defaultValue={user.email} className="crm-input" placeholder="nombre@bgc.mx" />
           </div>
 
           <fieldset>
-            <span className={labelCls}>Role</span>
+            <span className={labelCls}>Rol</span>
             <div className="space-y-1.5">
               {ROLE_OPTIONS.map((opt) => {
                 const Icon = opt.icon;
@@ -97,7 +97,7 @@ export function EditUserModal({
           {error && <p className="text-[12.5px] text-[var(--crm-wine)]">{error}</p>}
           <div className="flex items-center gap-2 pt-1">
             <button type="submit" disabled={pending} className="crm-btn crm-btn-primary flex-1">
-              {pending ? "Saving…" : "Guardar cambios"}
+              {pending ? "Guardando…" : "Guardar cambios"}
             </button>
             <button type="button" onClick={close} className="crm-btn crm-btn-secondary">Cancelar</button>
           </div>

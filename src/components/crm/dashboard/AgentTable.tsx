@@ -15,27 +15,27 @@ export function AgentTable({ byAgent }: { byAgent: DashboardMetrics["byAgent"] }
     <div className="crm-card overflow-hidden p-0">
       <div className="p-5 pb-3">
         <h2 className="font-serif text-[18px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
-          By agent
+          Por agente
         </h2>
         <p className="mt-0.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
-          Assigned leads and closes in the period
+          Leads asignados y cierres del periodo
         </p>
       </div>
 
       {rows.length === 0 ? (
         <p className="px-5 pb-6 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
-          No data in this period.
+          Sin datos en este periodo.
         </p>
       ) : (
         <div className="overflow-x-auto">
           <table className="w-full min-w-[520px] text-left">
             <thead>
               <tr style={{ background: "var(--crm-surface-2)", color: "var(--crm-ink-mute)" }}>
-                <th className={TH}>Agent</th>
+                <th className={TH}>Agente</th>
                 <th className={`${TH} text-right`}>Leads</th>
-                <th className={`${TH} text-right`}>Won</th>
-                <th className={`${TH} text-right`}>Conversion</th>
-                <th className={`${TH} text-right`}>Value</th>
+                <th className={`${TH} text-right`}>Ganado</th>
+                <th className={`${TH} text-right`}>Conversión</th>
+                <th className={`${TH} text-right`}>Valor</th>
               </tr>
             </thead>
             <tbody>

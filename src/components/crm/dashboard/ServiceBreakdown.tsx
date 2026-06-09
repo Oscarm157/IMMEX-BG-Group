@@ -9,10 +9,10 @@ export function ServiceBreakdown({ byService }: { byService: DashboardMetrics["b
 
   return (
     <Breakdown
-      title="By service"
-      subtitle="Stated interest on each lead"
+      title="Por servicio"
+      subtitle="Interés declarado en cada lead"
       rows={rows}
-      emptyCopy="No data in this period."
+      emptyCopy="Sin datos en este periodo."
     />
   );
 }

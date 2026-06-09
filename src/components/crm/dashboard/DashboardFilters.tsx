@@ -18,7 +18,7 @@ const RANGES = [
 const SOURCES = [
   { value: "", label: "Todas las fuentes" },
   { value: "bot", label: "Chatbot" },
-  { value: "form", label: "Form" },
+  { value: "form", label: "Formulario" },
   { value: "manual", label: "Manual" },
 ];
 
@@ -79,7 +79,7 @@ export function DashboardFilters({
 
       {showAgent && (
         <SelectField
-          ariaLabel="Agent"
+          ariaLabel="Agente"
           value={owner}
           onChange={(v) => setParam("owner", v)}
           options={[{ value: "", label: "Todos los agentes" }, ...agents.map((a) => ({ value: a.id, label: a.name }))]}
@@ -87,7 +87,7 @@ export function DashboardFilters({
       )}
 
       <SelectField
-        ariaLabel="Source"
+        ariaLabel="Origen"
         value={source}
         onChange={(v) => setParam("source", v)}
         options={SOURCES}

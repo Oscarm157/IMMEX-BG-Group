@@ -124,7 +124,7 @@ export async function createLead(formData: FormData) {
       assignedTo: me.id,
     })
     .returning({ id: leads.id });
-  await logEvent(rows[0].id, me.id, "created", "Lead created manually");
+  await logEvent(rows[0].id, me.id, "created", "Lead creado manualmente");
   revalidatePath("/admin");
   redirect(`/admin/${rows[0].id}`);
 }
@@ -173,7 +173,7 @@ export async function updateLeadDetails(id: string, formData: FormData) {
       updatedAt: new Date(),
     })
     .where(eq(leads.id, id));
-  await logEvent(id, me.id, "edit", "Details updated");
+  await logEvent(id, me.id, "edit", "Detalles actualizados");
   revalidatePath(`/admin/${id}`);
   revalidatePath("/admin");
 }
@@ -183,7 +183,7 @@ export async function updateLeadStatus(id: string, status: LeadStatus) {
   if (!STATUS_ORDER.includes(status)) return;
   const closedAt = status === "won" || status === "lost" ? new Date() : null;
   await db.update(leads).set({ status, closedAt, updatedAt: new Date() }).where(eq(leads.id, id));
-  await logEvent(id, me.id, "status", `Status changed to ${STATUS_LABELS[status]}`);
+  await logEvent(id, me.id, "status", `Estado cambiado a ${STATUS_LABELS[status]}`);
   revalidatePath(`/admin/${id}`);
   revalidatePath("/admin");
   revalidatePath("/admin/board");
@@ -200,7 +200,7 @@ export async function assignLead(id: string, userId: string | null) {
       .where(and(eq(users.id, userId), eq(users.active, true)));
     if (!u[0]) return; // ignore unknown/inactive user
     assignee = userId;
-    label = `Assigned to ${u[0].name}`;
+    label = `Asignado a ${u[0].name}`;
   }
   await db.update(leads).set({ assignedTo: assignee, updatedAt: new Date() }).where(eq(leads.id, id));
   await logEvent(id, me.id, "assign", label);
@@ -213,7 +213,7 @@ export async function addLeadComment(id: string, formData: FormData) {
   const body = String(formData.get("body") ?? "").trim();
   if (!body) return;
   await db.insert(leadComments).values({ leadId: id, userId: me.id, body });
-  await logEvent(id, me.id, "note", "Note added");
+  await logEvent(id, me.id, "note", "Nota agregada");
   revalidatePath(`/admin/${id}`);
 }
 
@@ -221,7 +221,7 @@ export async function uploadLeadFile(id: string, formData: FormData) {
   const { user: me } = await requireLeadAccess(id);
   const file = formData.get("file");
   if (!(file instanceof File) || file.size === 0) return;
-  if (file.size > MAX_FILE_BYTES) throw new Error("File exceeds 10MB");
+  if (file.size > MAX_FILE_BYTES) throw new Error("El archivo supera 10MB");
 
   const blob = await put(`leads/${id}/${file.name}`, file, {
     access: "public",
@@ -235,7 +235,7 @@ export async function uploadLeadFile(id: string, formData: FormData) {
     contentType: file.type || null,
     size: file.size,
   });
-  await logEvent(id, me.id, "file", `File uploaded: ${file.name}`);
+  await logEvent(id, me.id, "file", `Archivo subido: ${file.name}`);
   revalidatePath(`/admin/${id}`);
 }
 
@@ -253,7 +253,7 @@ export async function deleteLeadFile(fileId: string, leadId: string) {
       /* blob may already be gone */
     }
     await db.delete(leadFiles).where(eq(leadFiles.id, fileId));
-    await logEvent(leadId, me.id, "file", `File deleted: ${f.name}`);
+    await logEvent(leadId, me.id, "file", `Archivo eliminado: ${f.name}`);
   }
   revalidatePath(`/admin/${leadId}`);
 }

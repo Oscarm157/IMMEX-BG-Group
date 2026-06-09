@@ -25,7 +25,7 @@ export function Activity({ events }: { events: Event[] }) {
   const reduce = useReducedMotion();
 
   if (events.length === 0) {
-    return <p className="text-[13.5px] text-[var(--crm-ink-mute)]">No activity yet.</p>;
+    return <p className="text-[13.5px] text-[var(--crm-ink-mute)]">Aún no hay actividad.</p>;
   }
 
   return (
@@ -51,7 +51,7 @@ export function Activity({ events }: { events: Event[] }) {
             <div className="min-w-0 flex-1">
               <p className="text-[14px] text-[var(--crm-ink-soft)]">{e.detail}</p>
               <p className="text-[12.5px] text-[var(--crm-ink-mute)]">
-                {e.authorName ?? "System"} · {fmtDateTime(e.createdAt)}
+                {e.authorName ?? "Sistema"} · {fmtDateTime(e.createdAt)}
               </p>
             </div>
           </motion.li>

@@ -7,7 +7,7 @@ import type { UserRole } from "@/lib/schema";
 import { EditUserModal } from "@/components/crm/EditUserModal";
 
 export const ROLE_LABELS: Record<UserRole, string> = {
-  admin: "Admin",
+  admin: "Administrador",
   agent: "Agente",
   viewer: "Lector",
 };
@@ -89,7 +89,7 @@ export function UserRowActions({
               setCopied(true);
             }}
             className="text-[var(--crm-wine)] transition-colors hover:opacity-80"
-            title="Copy"
+            title="Copiar"
           >
             {copied ? <Check className="size-3.5" /> : <Copy className="size-3.5" />}
           </button>
@@ -103,7 +103,7 @@ export function UserRowActions({
               setTemp(res.tempPassword);
             })
           }
-          title="Reset password"
+          title="Restablecer contraseña"
           className="rounded-md p-1.5 text-[var(--crm-ink-mute)] transition-colors hover:bg-[var(--crm-wine-tint)] hover:text-[var(--crm-wine)] disabled:opacity-50"
         >
           {pending && !temp ? <Loader2 className="size-4 animate-spin" /> : <KeyRound className="size-4" strokeWidth={1.7} />}
@@ -114,7 +114,7 @@ export function UserRowActions({
         <button
           disabled={pending}
           onClick={() => startTransition(() => setUserActive(userId, !active))}
-          title={active ? "Deactivate" : "Reactivate"}
+          title={active ? "Desactivar" : "Reactivar"}
           className={`rounded-md p-1.5 transition-colors disabled:opacity-50 ${
             active
               ? "text-[var(--crm-ink-mute)] hover:bg-[var(--crm-wine-tint)] hover:text-[var(--crm-wine)]"

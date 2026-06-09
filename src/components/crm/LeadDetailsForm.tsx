@@ -19,30 +19,30 @@ type Values = {
 };
 
 const QUAL_FIELDS: { key: keyof LeadQualification; label: string }[] = [
-  { key: "service", label: "Service" },
-  { key: "company", label: "Company" },
-  { key: "industry", label: "Industry" },
-  { key: "monthlyVolume", label: "Monthly volume" },
-  { key: "paymentTerms", label: "Payment terms" },
-  { key: "timeInBusiness", label: "Time in business" },
-  { key: "urgency", label: "Urgency" },
+  { key: "service", label: "Servicio" },
+  { key: "company", label: "Empresa" },
+  { key: "industry", label: "Sector" },
+  { key: "monthlyVolume", label: "Volumen mensual" },
+  { key: "paymentTerms", label: "Tipo de operación" },
+  { key: "timeInBusiness", label: "Antigüedad operando" },
+  { key: "urgency", label: "Urgencia" },
 ];
 
 const inputCls = "crm-input h-auto py-2 text-[14.5px]";
 const labelCls = "mb-1 block text-[13px] font-medium text-[var(--crm-ink-soft)]";
 const legendCls = "mb-2.5 text-[14px] font-semibold tracking-tight text-[var(--crm-ink)]";
 
-const LOCALE_LABEL: Record<string, string> = { en: "English", es: "Spanish" };
-const SOURCE_LABEL: Record<LeadSource, string> = { bot: "Chatbot", form: "Form", manual: "Manual" };
+const LOCALE_LABEL: Record<string, string> = { en: "Inglés", es: "Español" };
+const SOURCE_LABEL: Record<LeadSource, string> = { bot: "Chatbot", form: "Formulario", manual: "Manual" };
 
-const usd = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
+const usd = new Intl.NumberFormat("es-MX", { style: "currency", currency: "USD", maximumFractionDigits: 0 });
 
 function SaveButton() {
   const { pending } = useFormStatus();
   return (
     <button type="submit" disabled={pending} className="crm-btn crm-btn-primary crm-btn-sm">
       {pending ? <Loader2 className="size-3.5 animate-spin" strokeWidth={2} /> : <Check className="size-3.5" strokeWidth={2} />}
-      {pending ? "Saving…" : "Save details"}
+      {pending ? "Guardando…" : "Guardar cambios"}
     </button>
   );
 }
@@ -71,18 +71,18 @@ export function LeadDetailsForm({
     return (
       <div className="space-y-5">
         <div>
-          <p className={legendCls}>Contact</p>
+          <p className={legendCls}>Contacto</p>
           <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <ReadField label="Name" value={lead.name} span />
-            <ReadField label="Email" value={lead.email} />
-            <ReadField label="Phone" value={lead.phone} />
-            <ReadField label="Language" value={lead.locale ? LOCALE_LABEL[lead.locale] ?? lead.locale : null} />
-            <ReadField label="Source" value={SOURCE_LABEL[lead.source]} />
-            <ReadField label="Estimated value" value={lead.valueAmount != null ? usd.format(lead.valueAmount) : null} />
+            <ReadField label="Nombre" value={lead.name} span />
+            <ReadField label="Correo" value={lead.email} />
+            <ReadField label="Teléfono" value={lead.phone} />
+            <ReadField label="Idioma" value={lead.locale ? LOCALE_LABEL[lead.locale] ?? lead.locale : null} />
+            <ReadField label="Origen" value={SOURCE_LABEL[lead.source]} />
+            <ReadField label="Valor estimado" value={lead.valueAmount != null ? usd.format(lead.valueAmount) : null} />
           </dl>
         </div>
         <div>
-          <p className={legendCls}>Qualification</p>
+          <p className={legendCls}>Calificación</p>
           <dl className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             {QUAL_FIELDS.map((f) => (
               <ReadField
@@ -101,40 +101,40 @@ export function LeadDetailsForm({
   return (
     <form action={action} className="space-y-5">
       <fieldset className="space-y-3">
-        <legend className={legendCls}>Contact</legend>
+        <legend className={legendCls}>Contacto</legend>
         <div>
-          <label className={labelCls} htmlFor="ld-name">Name</label>
+          <label className={labelCls} htmlFor="ld-name">Nombre</label>
           <input id="ld-name" name="name" defaultValue={lead.name ?? ""} className={inputCls} />
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
-            <label className={labelCls} htmlFor="ld-email">Email</label>
+            <label className={labelCls} htmlFor="ld-email">Correo</label>
             <input id="ld-email" name="email" type="email" defaultValue={lead.email ?? ""} className={inputCls} />
           </div>
           <div>
-            <label className={labelCls} htmlFor="ld-phone">Phone</label>
+            <label className={labelCls} htmlFor="ld-phone">Teléfono</label>
             <input id="ld-phone" name="phone" defaultValue={lead.phone ?? ""} className={inputCls} />
           </div>
         </div>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           <div>
-            <label className={labelCls} htmlFor="ld-locale">Language</label>
+            <label className={labelCls} htmlFor="ld-locale">Idioma</label>
             <select id="ld-locale" name="locale" defaultValue={lead.locale ?? "en"} className={inputCls}>
-              <option value="en">English</option>
-              <option value="es">Spanish</option>
+              <option value="en">Inglés</option>
+              <option value="es">Español</option>
             </select>
           </div>
           <div>
-            <label className={labelCls} htmlFor="ld-source">Source</label>
+            <label className={labelCls} htmlFor="ld-source">Origen</label>
             <select id="ld-source" name="source" defaultValue={lead.source} className={inputCls}>
               <option value="bot">Chatbot</option>
-              <option value="form">Form</option>
+              <option value="form">Formulario</option>
               <option value="manual">Manual</option>
             </select>
           </div>
         </div>
         <div className="sm:max-w-[50%] sm:pr-1.5">
-          <label className={labelCls} htmlFor="ld-value">Estimated value (USD)</label>
+          <label className={labelCls} htmlFor="ld-value">Valor estimado (USD)</label>
           <input
             id="ld-value"
             name="valueAmount"
@@ -147,24 +147,24 @@ export function LeadDetailsForm({
       </fieldset>
 
       <fieldset className="space-y-3">
-        <legend className={legendCls}>Qualification</legend>
+        <legend className={legendCls}>Calificación</legend>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
           {QUAL_FIELDS.map((f) => {
             if (f.key === "service") {
               const current = q.service ?? "";
-              const extra = current && !SERVICE_NAMES.includes(current) && current !== "Not sure" ? [current] : [];
+              const extra = current && !SERVICE_NAMES.includes(current) && current !== "Not sure" && current !== "No estoy seguro" ? [current] : [];
               return (
                 <div key={f.key} className="sm:col-span-2">
                   <label className={labelCls} htmlFor="ld-service">{f.label}</label>
                   <select id="ld-service" name="service" defaultValue={current} className={inputCls}>
-                    <option value="">Not set</option>
+                    <option value="">Sin definir</option>
                     {SERVICE_NAMES.map((n) => (
                       <option key={n} value={n}>{n}</option>
                     ))}
                     {extra.map((n) => (
                       <option key={n} value={n}>{n}</option>
                     ))}
-                    <option value="Not sure">Not sure</option>
+                    <option value="Not sure">No estoy seguro</option>
                   </select>
                 </div>
               );
@@ -180,8 +180,8 @@ export function LeadDetailsForm({
       </fieldset>
 
       <fieldset>
-        <legend className={legendCls}>Summary</legend>
-        <textarea name="summary" rows={4} defaultValue={lead.summary ?? ""} className={`${inputCls} resize-y leading-relaxed`} placeholder="Brief summary of the lead's situation." />
+        <legend className={legendCls}>Resumen</legend>
+        <textarea name="summary" rows={4} defaultValue={lead.summary ?? ""} className={`${inputCls} resize-y leading-relaxed`} placeholder="Resumen breve de la situación del lead." />
       </fieldset>
 
       <SaveButton />

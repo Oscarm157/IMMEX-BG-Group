@@ -13,7 +13,7 @@ function SubmitButton() {
       className="crm-btn crm-btn-primary self-end"
     >
       {pending ? <Loader2 className="size-3.5 animate-spin" strokeWidth={2} /> : <Send className="size-3.5" strokeWidth={1.75} />}
-      {pending ? "Saving…" : "Add note"}
+      {pending ? "Guardando…" : "Agregar nota"}
     </button>
   );
 }
@@ -38,7 +38,7 @@ export function CommentForm({
         name="body"
         required
         rows={3}
-        placeholder="Log a call, an agreement, a next step…"
+        placeholder="Registra una llamada, un acuerdo, un siguiente paso…"
         className="crm-textarea resize-y leading-relaxed"
       />
       <SubmitButton />

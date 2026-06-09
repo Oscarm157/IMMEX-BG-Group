@@ -18,11 +18,11 @@ type Range = "month" | "30d" | "90d" | "year" | "all";
 const RANGES: Range[] = ["month", "30d", "90d", "year", "all"];
 
 const RANGE_COPY: Record<Range, string> = {
-  month: "this month",
-  "30d": "the last 30 días",
-  "90d": "the last 90 días",
-  year: "the year so far",
-  all: "all time",
+  month: "este mes",
+  "30d": "los últimos 30 días",
+  "90d": "los últimos 90 días",
+  year: "lo que va del año",
+  all: "todo el historial",
 };
 
 // Calcula la ventana [from, to] a partir del rango seleccionado.
@@ -72,10 +72,10 @@ export default async function DashboardPage({
             <h1 className="font-serif text-[30px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
               Dashboard
             </h1>
-            {readOnly && <span className="crm-badge">Read only</span>}
+            {readOnly && <span className="crm-badge">Solo lectura</span>}
           </div>
           <p className="mt-1 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
-            Lead activity over {RANGE_COPY[range]}.
+            Actividad de leads en {RANGE_COPY[range]}.
           </p>
         </div>
 

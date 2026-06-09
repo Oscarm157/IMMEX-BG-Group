@@ -9,9 +9,9 @@ const H = 224;
 const PAD = { top: 16, right: 16, bottom: 30, left: 34 };
 
 function fmtWeek(period: string): string {
-  // period = 'YYYY-MM-DD' (Monday). Show "May 12".
+  // period = 'YYYY-MM-DD' (Monday). Muestra "12 may".
   const d = new Date(`${period}T00:00:00`);
-  return d.toLocaleDateString("en-US", { day: "numeric", month: "short" });
+  return d.toLocaleDateString("es-MX", { day: "numeric", month: "short" });
 }
 
 const clamp = (n: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, n));
@@ -65,8 +65,8 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
       {!geo ? (
         <p className="mt-6 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
           {trend.length === 0
-            ? "No data in this period."
-            : "At least two weeks with data are needed to plot the trend."}
+            ? "Sin datos en este periodo."
+            : "Se necesitan al menos dos semanas con datos para trazar la tendencia."}
         </p>
       ) : (
         <div className="relative mt-4">
@@ -152,7 +152,7 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
               }}
             >
               <p className="text-[12px] font-medium" style={{ color: "var(--crm-ink-mute)" }}>
-                Week of {fmtWeek(active.period)}
+                Semana del {fmtWeek(active.period)}
               </p>
               <p className="font-serif text-[16px] leading-tight tabular-nums" style={{ color: "var(--crm-wine)" }}>
                 {active.count} {active.count === 1 ? "lead" : "leads"}

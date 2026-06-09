@@ -26,20 +26,20 @@ export function ProfileForm({ name, email }: { name: string; email: string }) {
       className="space-y-4"
     >
       <div>
-        <label className={labelCls} htmlFor="p-name">Name</label>
-        <input id="p-name" name="name" required defaultValue={current} className="crm-input" placeholder="Your name" />
+        <label className={labelCls} htmlFor="p-name">Nombre</label>
+        <input id="p-name" name="name" required defaultValue={current} className="crm-input" placeholder="Tu nombre" />
       </div>
 
       <div>
-        <label className={labelCls} htmlFor="p-email">Email</label>
+        <label className={labelCls} htmlFor="p-email">Correo</label>
         <input id="p-email" value={email} disabled className="crm-input cursor-not-allowed opacity-60" />
-        <p className="mt-1 text-[12.5px] text-[var(--crm-ink-mute)]">An admin changes your email from Users.</p>
+        <p className="mt-1 text-[12.5px] text-[var(--crm-ink-mute)]">Un administrador cambia tu correo desde Usuarios.</p>
       </div>
 
       <div className="flex items-center gap-3 pt-1">
         <button type="submit" disabled={pending} className="crm-btn crm-btn-primary">
           {pending && <Loader2 className="size-3.5 animate-spin" />}
-          {pending ? "Saving…" : "Guardar cambios"}
+          {pending ? "Guardando…" : "Guardar cambios"}
         </button>
         <AnimatePresence>
           {saved && (
@@ -49,7 +49,7 @@ export function ProfileForm({ name, email }: { name: string; email: string }) {
               exit={{ opacity: 0 }}
               className="inline-flex items-center gap-1 text-[12.5px] text-emerald-700"
             >
-              <Check className="size-3.5" /> Saved
+              <Check className="size-3.5" /> Guardado
             </motion.span>
           )}
         </AnimatePresence>

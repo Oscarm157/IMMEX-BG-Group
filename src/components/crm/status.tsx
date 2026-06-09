@@ -31,7 +31,7 @@ export function StatusBadge({ status }: { status: LeadStatus }) {
 
 const SOURCE_META: Record<LeadSource, { label: string; cls: string; dot: string }> = {
   bot: { label: "Chatbot", cls: "bg-violet-500/8 text-violet-700 border-violet-600/18", dot: "bg-violet-500" },
-  form: { label: "Form", cls: "bg-teal-500/8 text-teal-700 border-teal-600/18", dot: "bg-teal-500" },
+  form: { label: "Formulario", cls: "bg-teal-500/8 text-teal-700 border-teal-600/18", dot: "bg-teal-500" },
   manual: { label: "Manual", cls: "bg-[var(--crm-surface-2)] text-[var(--crm-ink-mute)] border-[var(--crm-line-strong)]", dot: "bg-[var(--crm-ink-mute)]" },
 };
 

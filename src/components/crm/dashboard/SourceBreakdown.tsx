@@ -5,7 +5,7 @@ import { Breakdown } from "./Breakdown";
 
 const SOURCE_LABELS: Record<string, string> = {
   bot: "Chatbot",
-  form: "Form",
+  form: "Formulario",
   manual: "Manual",
 };
 
@@ -17,10 +17,10 @@ export function SourceBreakdown({ bySource }: { bySource: DashboardMetrics["bySo
 
   return (
     <Breakdown
-      title="By source"
-      subtitle="Where the period's leads come from"
+      title="Por origen"
+      subtitle="De dónde vienen los leads del periodo"
       rows={rows}
-      emptyCopy="No data in this period."
+      emptyCopy="Sin datos en este periodo."
     />
   );
 }

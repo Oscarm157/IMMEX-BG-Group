@@ -7,12 +7,12 @@ import { ROLE_LABELS } from "@/components/crm/UserRowActions";
 import { Breadcrumb } from "@/components/crm/Breadcrumb";
 
 export const dynamic = "force-dynamic";
-export const metadata = { title: "Profile", robots: { index: false } };
+export const metadata = { title: "Perfil", robots: { index: false } };
 
 const ROLE_NOTE: Record<string, string> = {
-  admin: "Full access, including user management.",
-  agent: "You only work the leads assigned to you.",
-  viewer: "You see all leads in read-only mode, no editing.",
+  admin: "Acceso total, incluida la gestión de usuarios.",
+  agent: "Solo trabajas los leads que tienes asignados.",
+  viewer: "Ves todos los leads en modo lectura, sin poder editar.",
 };
 
 export default async function ProfilePage() {
@@ -21,11 +21,11 @@ export default async function ProfilePage() {
 
   return (
     <div className="crm-fade">
-      <Breadcrumb items={[{ label: "Leads", href: "/admin" }, { label: "Profile" }]} />
+      <Breadcrumb items={[{ label: "Leads", href: "/admin" }, { label: "Perfil" }]} />
 
       <div className="mt-4">
-        <h1 className="font-serif text-[28px] tracking-tight text-[var(--crm-ink)]">Your profile</h1>
-        <p className="mt-0.5 text-[13px] text-[var(--crm-ink-mute)]">Edit your name and manage your password.</p>
+        <h1 className="font-serif text-[28px] tracking-tight text-[var(--crm-ink)]">Tu perfil</h1>
+        <p className="mt-0.5 text-[13px] text-[var(--crm-ink-mute)]">Edita tu nombre y administra tu contraseña.</p>
       </div>
 
       <div className="mt-6 grid gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
@@ -35,7 +35,7 @@ export default async function ProfilePage() {
 
         <aside className="space-y-4">
           <div className="crm-card p-5">
-            <p className="text-[11px] uppercase tracking-[0.1em] text-[var(--crm-ink-mute)]">Role</p>
+            <p className="text-[11px] uppercase tracking-[0.1em] text-[var(--crm-ink-mute)]">Rol</p>
             <p className="mt-1.5 font-serif text-[18px] tracking-tight text-[var(--crm-ink)]">{ROLE_LABELS[me.role]}</p>
             <p className="mt-1 text-[12.5px] leading-relaxed text-[var(--crm-ink-soft)]">{ROLE_NOTE[me.role]}</p>
           </div>
@@ -49,8 +49,8 @@ export default async function ProfilePage() {
                 <KeyRound className="size-4" strokeWidth={1.8} />
               </span>
               <span>
-                <span className="block text-[13.5px] font-medium text-[var(--crm-ink)]">Change password</span>
-                <span className="block text-[12px] text-[var(--crm-ink-mute)]">Set a new one whenever you want</span>
+                <span className="block text-[13.5px] font-medium text-[var(--crm-ink)]">Cambiar contraseña</span>
+                <span className="block text-[12px] text-[var(--crm-ink-mute)]">Define una nueva cuando quieras</span>
               </span>
             </span>
             <ArrowRight className="size-4 text-[var(--crm-ink-mute)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--crm-wine)]" strokeWidth={1.8} />

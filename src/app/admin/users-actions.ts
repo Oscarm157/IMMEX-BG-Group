@@ -26,10 +26,10 @@ export async function createUser(
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const roleRaw = String(formData.get("role") ?? "agent");
   const role: UserRole = ROLES.includes(roleRaw as UserRole) ? (roleRaw as UserRole) : "agent";
-  if (!name || !email) return { error: "Name and email are required." };
+  if (!name || !email) return { error: "Nombre y correo son obligatorios." };
 
   const existing = await db.select({ id: users.id }).from(users).where(eq(users.email, email));
-  if (existing.length > 0) return { error: "A user with that email already exists." };
+  if (existing.length > 0) return { error: "Ya existe un usuario con ese correo." };
 
   const provided = String(formData.get("password") ?? "").trim();
   const tempPassword = provided.length >= 8 ? provided : genTempPassword();
