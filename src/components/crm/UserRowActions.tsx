@@ -10,14 +10,12 @@ export const ROLE_LABELS: Record<UserRole, string> = {
   admin: "Admin",
   agent: "Agente",
   viewer: "Lector",
-  client: "Cliente",
 };
 
 const ROLE_CHIP: Record<UserRole, string> = {
   admin: "border-transparent bg-[var(--crm-wine-tint)] text-[var(--crm-wine)]",
   agent: "border-[var(--crm-line-strong)] bg-[var(--crm-surface-2)] text-[var(--crm-ink-soft)]",
   viewer: "border-[var(--crm-line-strong)] bg-[var(--crm-surface-2)] text-[var(--crm-ink-soft)]",
-  client: "border-[var(--crm-line-strong)] bg-[var(--crm-surface-2)] text-[var(--crm-ink-soft)]",
 };
 
 /** Role chip + inline selector. Locked for the acting admin on their own row. */
@@ -68,12 +66,10 @@ export function UserRowActions({
   user,
   active,
   isSelf,
-  clients,
 }: {
-  user: { id: string; name: string; email: string; role: UserRole; clientId?: string | null };
+  user: { id: string; name: string; email: string; role: UserRole };
   active: boolean;
   isSelf: boolean;
-  clients: { id: string; name: string }[];
 }) {
   const userId = user.id;
   const [pending, startTransition] = useTransition();
@@ -82,7 +78,7 @@ export function UserRowActions({
 
   return (
     <div className="flex items-center justify-end gap-1.5">
-      <EditUserModal user={user} clients={clients} />
+      <EditUserModal user={user} />
 
       {temp ? (
         <span className="inline-flex items-center gap-2 rounded-md border border-[var(--crm-line)] bg-[var(--crm-surface-2)] px-2 py-1">

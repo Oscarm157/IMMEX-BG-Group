@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/crm-session";
 import { getAllUsers } from "@/lib/crm-data";
-import { getActiveClients } from "@/lib/ads-data";
 import { canManageUsers } from "@/lib/crm-permissions";
 import { fmtDate } from "@/lib/crm-format";
 import { AddUserModal } from "@/components/crm/AddUserModal";
@@ -17,7 +16,6 @@ export default async function UsersPage() {
   if (!canManageUsers(me.role)) redirect("/admin");
 
   const all = await getAllUsers();
-  const clients = await getActiveClients();
 
   return (
     <div className="crm-fade">
@@ -70,10 +68,9 @@ export default async function UsersPage() {
                   <td className="px-4 py-3 text-[12.5px] text-[var(--crm-ink-mute)]">{fmtDate(u.createdAt)}</td>
                   <td className="px-4 py-3">
                     <UserRowActions
-                      user={{ id: u.id, name: u.name, email: u.email, role: u.role, clientId: u.clientId }}
+                      user={{ id: u.id, name: u.name, email: u.email, role: u.role }}
                       active={u.active}
                       isSelf={isSelf}
-                      clients={clients}
                     />
                   </td>
                 </tr>

@@ -4,7 +4,7 @@ import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import { eq } from "drizzle-orm";
 import { db } from "@/lib/db";
-import { ads, clients, type AdPlatform, type AdStatus } from "@/lib/schema";
+import { ads, type AdPlatform, type AdStatus } from "@/lib/schema";
 import { requireUser } from "@/lib/crm-session";
 import { canManageAds } from "@/lib/crm-permissions";
 
@@ -70,37 +70,4 @@ export async function deleteAd(id: string) {
   await db.delete(ads).where(eq(ads.id, id));
   revalidatePath("/admin/ads");
   redirect("/admin/ads");
-}
-
-// ---- Clientes ----
-
-const slugify = (s: string) =>
-  s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .replace(/[^a-z0-9\s-]/g, "")
-    .replace(/\s+/g, "-")
-    .replace(/-+/g, "-")
-    .replace(/^-|-$/g, "")
-    .slice(0, 60) || "cliente";
-
-export async function createClient(formData: FormData) {
-  const me = await requireUser();
-  if (me.role !== "admin") throw new Error("forbidden");
-  const name = String(formData.get("name") ?? "").trim();
-  if (!name) redirect("/admin/clients?error=name");
-  let slug = slugify(name);
-  const exists = await db.select({ id: clients.id }).from(clients).where(eq(clients.slug, slug));
-  if (exists.length) slug = `${slug}-${Math.floor(Date.now() / 1000) % 10000}`;
-  await db.insert(clients).values({ name, slug });
-  revalidatePath("/admin/clients");
-  redirect("/admin/clients");
-}
-
-export async function setClientActive(id: string, active: boolean) {
-  const me = await requireUser();
-  if (me.role !== "admin") throw new Error("forbidden");
-  await db.update(clients).set({ active }).where(eq(clients.id, id));
-  revalidatePath("/admin/clients");
 }

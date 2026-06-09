@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { Inbox } from "lucide-react";
 import { getLeads, getUsersBasic, getActiveUsers } from "@/lib/crm-data";
-import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/crm-session";
-import { canViewAllLeads, isReadOnly, isClient } from "@/lib/crm-permissions";
+import { canViewAllLeads, isReadOnly } from "@/lib/crm-permissions";
 import type { LeadStatus } from "@/lib/schema";
 import { fmtDate } from "@/lib/crm-format";
 import { StatusBadge, SourceBadge, OwnerChip, STATUS_META, STATUS_ORDER } from "@/components/crm/status";
@@ -33,7 +32,6 @@ export default async function LeadsList({
   const sp = await searchParams;
   const me = await getCurrentUser();
   if (!me) return null;
-  if (isClient(me.role)) redirect("/admin/ads");
 
   const canSeeAll = canViewAllLeads(me.role);
   const readOnly = isReadOnly(me.role);

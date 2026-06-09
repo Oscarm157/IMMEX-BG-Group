@@ -7,7 +7,7 @@ import { users, type UserRole } from "@/lib/schema";
 import { hashPassword } from "@/lib/crm-auth";
 import { requireAdmin } from "@/lib/crm-session";
 
-const ROLES: UserRole[] = ["admin", "agent", "viewer", "client"];
+const ROLES: UserRole[] = ["admin", "agent", "viewer"];
 
 const CHARS = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789";
 
@@ -50,7 +50,7 @@ export async function createUser(
 
 export async function updateUser(
   userId: string,
-  data: { name: string; email: string; role: UserRole; clientId?: string | null }
+  data: { name: string; email: string; role: UserRole }
 ): Promise<{ error?: string }> {
   const me = await requireAdmin();
   const name = data.name.trim();
@@ -69,9 +69,7 @@ export async function updateUser(
     .where(and(eq(users.email, email), ne(users.id, userId)));
   if (existing.length > 0) return { error: "Ya existe un usuario con ese correo." };
 
-  // El cliente asignado solo aplica al rol "client".
-  const clientId = role === "client" ? data.clientId || null : null;
-  await db.update(users).set({ name, email, role, clientId }).where(eq(users.id, userId));
+  await db.update(users).set({ name, email, role }).where(eq(users.id, userId));
   revalidatePath("/admin/users");
   return {};
 }
