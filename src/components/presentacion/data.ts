@@ -18,9 +18,9 @@ export const frentes = [
   },
   {
     n: "02",
-    title: "Bilingüe español e inglés",
-    body: "El sitio completo en ambos idiomas, con cambio en un clic. Pensado para clientes de los dos lados de la frontera.",
-    icon: "language",
+    title: "Mayor visibilidad y trazabilidad del área comercial",
+    body: "Cada prospecto queda registrado y trazado, de su origen al cierre. Con un panel propio de KPIs y embudo, el área comercial gana visibilidad y control que antes no existía.",
+    icon: "monitoring",
   },
   {
     n: "03",
