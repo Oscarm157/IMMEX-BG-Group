@@ -81,3 +81,60 @@ export const shots = {
   panelBlog: { src: "/presentacion/panel-blog.png", url: "bgconsultingroup.com/admin/blog" },
   panelContenido: { src: "/presentacion/panel-contenido.png", url: "bgconsultingroup.com/admin/posts" },
 };
+
+/* Pauta digital (siguiente paso). Destilado de docs/investigacion-pauta-digital.md. */
+export const pauta = {
+  google: {
+    rol: "Base siempre encendida",
+    body: "Búsqueda en español. Captura a quien ya tiene el problema y lo busca: una revisión, un saldo de IVA atorado, un sistema para Anexo 24.",
+    keywords: {
+      bg: [
+        "abogado aduanero",
+        "auditoría IMMEX",
+        "devolución IVA SAT",
+        "recurso de revocación SAT",
+        "clasificación arancelaria",
+      ],
+      bms: [
+        "software anexo 24",
+        "software anexo 30",
+        "sistema control inventarios IMMEX",
+        "ERP aduanero",
+      ],
+    },
+  },
+  linkedin: {
+    rol: "En ráfagas, no continuo",
+    body: "El único canal que segmenta por cargo, empresa e industria. Se enciende por fases para empujes concretos: lanzar BMS ante directores de comercio exterior, mover un contenido de autoridad.",
+  },
+  presupuesto: {
+    rango: "$5,000 a $10,000 MXN al mes",
+    nota: "A este nivel, Google de base y LinkedIn concentrado en una ráfaga por trimestre, en vez de diluir los dos.",
+    estimados: [
+      { monto: "~$5,000 MXN", out: "3 a 5 prospectos / mes" },
+      { monto: "~$10,000 MXN", out: "6 a 10 prospectos / mes" },
+    ],
+  },
+  email: [
+    {
+      title: "Arrancar con valor",
+      body: "Una invitación con un recurso útil (una guía de auditoría IMMEX, un diagnóstico) para activar a la lista del evento.",
+      icon: "redeem",
+    },
+    {
+      title: "Segmentar por oferta",
+      body: "Perfil legal y compliance hacia el ángulo BG (defensa, auditoría, riesgo IMMEX). Perfil operativo y sistemas hacia BMS (inventarios, Anexo 24/30, reportería).",
+      icon: "splitscreen",
+    },
+    {
+      title: "Secuencia de seguimiento",
+      body: "Cinco correos en cerca de 28 días: presentación, problema concreto, prueba (20+ años, 180+ empresas), oferta blanda y cierre. Sin saturar; el ciclo de venta del giro es de meses.",
+      icon: "mail",
+    },
+    {
+      title: "Conectar canales",
+      body: "Correo, seguido de un toque en LinkedIn al mismo contacto y una llamada cuando hay señal de interés. Aquí se cruzan email, LinkedIn y pauta.",
+      icon: "hub",
+    },
+  ],
+};

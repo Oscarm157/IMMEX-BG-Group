@@ -1,7 +1,7 @@
 import { Slide } from "../Slide";
 import { meta } from "../data";
 
-export function S06Cierre() {
+export function S08Cierre() {
   return (
     <Slide centered>
       <div className="relative">
@@ -14,14 +14,15 @@ export function S06Cierre() {
 
         <h2 className="mt-7 max-w-3xl font-display text-[clamp(2.2rem,6vw,4.4rem)] font-medium leading-[1.0] tracking-[-0.03em] text-chalk">
           Sitio a la medida, panel propio,{" "}
-          <span className="font-serif font-normal italic text-bone">atención con IA.</span>
+          <span className="font-serif font-normal italic text-bone">y un plan para atraer.</span>
         </h2>
 
-        <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
+        <div className="mt-10 grid max-w-3xl gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { k: "Sitio", v: "6 páginas ES / EN" },
             { k: "Panel", v: "7 módulos de gestión" },
             { k: "IA", v: "Atiende y genera contenido" },
+            { k: "Pauta", v: "Google, LinkedIn y email" },
           ].map((s) => (
             <div key={s.k} className="rounded-[12px] border border-line bg-surface-1 p-5">
               <div className="font-mono text-[11px] uppercase tracking-[0.14em] text-smoke">{s.k}</div>
