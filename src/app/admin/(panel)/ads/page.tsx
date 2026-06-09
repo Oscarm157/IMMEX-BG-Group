@@ -37,7 +37,7 @@ export default async function AdsPage() {
     <div className="mx-auto max-w-[1200px] px-4 py-8 sm:px-7">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <h1 className="font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Anuncios</h1>
+          <h1 className="font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Campañas</h1>
           <p className="mt-1 text-[13px] text-[var(--crm-ink-mute)]">
             {client ? "Tus campañas y su rendimiento." : "Campañas, presupuesto y trazabilidad a leads."}
           </p>

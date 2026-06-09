@@ -16,7 +16,7 @@ export default async function NewAd() {
 
   return (
     <div className="mx-auto max-w-[820px] px-4 py-8 sm:px-7">
-      <Link href="/admin/ads" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Anuncios</Link>
+      <Link href="/admin/ads" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Campañas</Link>
       <h1 className="mb-6 mt-4 font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Nuevo anuncio</h1>
       <AdForm clients={clients} action={createAd} submitLabel="Crear anuncio" />
     </div>

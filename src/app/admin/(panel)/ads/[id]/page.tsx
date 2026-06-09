@@ -45,7 +45,7 @@ export default async function AdDetail({ params }: { params: Promise<{ id: strin
   return (
     <div className="mx-auto max-w-[900px] px-4 py-8 sm:px-7">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <Link href="/admin/ads" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Anuncios</Link>
+        <Link href="/admin/ads" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Campañas</Link>
         {editable && (
           <form action={deleteAd.bind(null, ad.id)}>
             <button className="crm-btn crm-btn-ghost crm-btn-sm text-[var(--crm-wine)]">Borrar</button>

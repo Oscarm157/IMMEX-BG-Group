@@ -24,7 +24,7 @@ export default async function AdminBlog() {
     <div className="mx-auto max-w-[1200px] px-4 py-8 sm:px-7">
       <div className="mb-6 flex items-center justify-between gap-4">
         <div>
-          <h1 className="font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Noticias</h1>
+          <h1 className="font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Blog</h1>
           <p className="mt-1 text-[13px] text-[var(--crm-ink-mute)]">Notas del blog público, asistidas por IA.</p>
         </div>
         <Link href="/admin/blog/new" className="crm-btn crm-btn-primary">Nueva nota</Link>
