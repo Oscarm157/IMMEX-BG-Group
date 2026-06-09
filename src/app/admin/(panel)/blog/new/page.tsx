@@ -12,7 +12,7 @@ export default async function NewArticle({ searchParams }: { searchParams: Promi
 
   return (
     <div className="mx-auto max-w-[760px] px-4 py-8 sm:px-7">
-      <Link href="/admin/blog" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Noticias</Link>
+      <Link href="/admin/blog" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Blog</Link>
       <h1 className="mt-4 font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Nueva nota desde fuente</h1>
       <p className="mt-1 text-[13px] text-[var(--crm-ink-mute)]">
         Pega el texto fuente (noticia, boletín, cambio normativo). La IA redacta el borrador en español e inglés, con las recomendaciones de BG. Luego lo revisas antes de publicar.

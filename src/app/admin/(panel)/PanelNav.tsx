@@ -46,10 +46,10 @@ export function PanelNav({
   if (showDashboard) comercial.push({ href: "/admin/dashboard", label: "Resumen", icon: LayoutDashboard });
   comercial.push({ href: "/admin", label: "Leads", icon: ListFilter });
   comercial.push({ href: "/admin/board", label: "Pipeline", icon: KanbanSquare });
-  if (showAds) comercial.push({ href: "/admin/ads", label: "Anuncios", icon: Megaphone });
+  if (showAds) comercial.push({ href: "/admin/ads", label: "Campañas", icon: Megaphone });
 
   const contenido: Item[] = [];
-  if (showBlog) contenido.push({ href: "/admin/blog", label: "Noticias", icon: Newspaper });
+  if (showBlog) contenido.push({ href: "/admin/blog", label: "Blog", icon: Newspaper });
   if (showPosts) contenido.push({ href: "/admin/posts", label: "Generador de posts", icon: Share2 });
 
   const cuenta: Item[] = [];
@@ -64,7 +64,7 @@ export function PanelNav({
   ].filter((g) => g.items.length > 0);
 
   const allItems = clientOnly
-    ? [{ href: "/admin/ads", label: "Anuncios", icon: Megaphone }]
+    ? [{ href: "/admin/ads", label: "Campañas", icon: Megaphone }]
     : groups.flatMap((g) => g.items);
 
   const groupActive = (g: Group) => g.items.some((i) => isActive(pathname, i.href));
@@ -81,7 +81,7 @@ export function PanelNav({
           <nav className="hidden items-center gap-0.5 md:flex">
             {clientOnly ? (
               <Link href="/admin/ads" className="crm-nav-link" data-active={isActive(pathname, "/admin/ads")}>
-                <Megaphone className="size-[15px]" strokeWidth={1.9} /> Anuncios
+                <Megaphone className="size-[15px]" strokeWidth={1.9} /> Campañas
               </Link>
             ) : (
               groups.map((g) => (

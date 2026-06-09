@@ -29,7 +29,7 @@ export default async function EditArticle({ params }: { params: Promise<{ id: st
   return (
     <div className="mx-auto max-w-[860px] px-4 py-8 sm:px-7">
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <Link href="/admin/blog" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Noticias</Link>
+        <Link href="/admin/blog" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Blog</Link>
         <div className="flex items-center gap-2">
           {isPublished && (
             <Link href={`/es/blog/${a.slug}`} target="_blank" className="crm-btn crm-btn-ghost crm-btn-sm">Ver publicada ↗</Link>
