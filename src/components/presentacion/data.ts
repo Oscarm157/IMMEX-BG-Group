@@ -89,7 +89,6 @@ export const pauta = {
     body: "Búsqueda en español. Captura a quien ya tiene el problema y lo busca: una revisión, un saldo de IVA atorado, un sistema para Anexo 24.",
     keywords: {
       bg: [
-        "reglas de origen T-MEC",
         "auditoría IMMEX",
         "devolución IVA SAT",
         "recurso de revocación SAT",
