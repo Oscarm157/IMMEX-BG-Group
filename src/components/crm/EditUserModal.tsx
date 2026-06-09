@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Pencil, ShieldCheck, UserCog, Eye, Building2 } from "lucide-react";
+import { Pencil, ShieldCheck, UserCog, Eye } from "lucide-react";
 import { updateUser } from "@/app/admin/users-actions";
 import type { UserRole } from "@/lib/schema";
 import { Modal } from "@/components/crm/Modal";
@@ -12,25 +12,20 @@ const ROLE_OPTIONS: { value: UserRole; label: string; hint: string; icon: typeof
   { value: "agent", label: "Agente", hint: "Solo sus leads asignados", icon: UserCog },
   { value: "admin", label: "Admin", hint: "Todo, incluida gestión de usuarios", icon: ShieldCheck },
   { value: "viewer", label: "Lector", hint: "Ve todo, no edita", icon: Eye },
-  { value: "client", label: "Cliente", hint: "Solo ve los anuncios de su cliente (lectura)", icon: Building2 },
 ];
 
 export function EditUserModal({
   user,
-  clients,
 }: {
-  user: { id: string; name: string; email: string; role: UserRole; clientId?: string | null };
-  clients: { id: string; name: string }[];
+  user: { id: string; name: string; email: string; role: UserRole };
 }) {
   const [open, setOpen] = useState(false);
   const [role, setRole] = useState<UserRole>(user.role);
-  const [clientId, setClientId] = useState<string>(user.clientId ?? "");
   const [pending, startTransition] = useTransition();
   const [error, setError] = useState<string | null>(null);
 
   const openModal = () => {
     setRole(user.role);
-    setClientId(user.clientId ?? "");
     setError(null);
     setOpen(true);
   };
@@ -55,7 +50,6 @@ export function EditUserModal({
                 name: String(fd.get("name") ?? ""),
                 email: String(fd.get("email") ?? ""),
                 role,
-                clientId: role === "client" ? clientId || null : null,
               });
               if (res.error) setError(res.error);
               else close();
@@ -99,16 +93,6 @@ export function EditUserModal({
               })}
             </div>
           </fieldset>
-
-          {role === "client" && (
-            <div>
-              <label className={labelCls} htmlFor="e-client">Cliente asignado</label>
-              <select id="e-client" value={clientId} onChange={(e) => setClientId(e.target.value)} className="crm-select">
-                <option value="">Selecciona un cliente</option>
-                {clients.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-              </select>
-            </div>
-          )}
 
           {error && <p className="text-[12.5px] text-[var(--crm-wine)]">{error}</p>}
           <div className="flex items-center gap-2 pt-1">

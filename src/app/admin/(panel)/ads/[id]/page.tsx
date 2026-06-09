@@ -1,8 +1,8 @@
 import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/crm-session";
-import { canManageAds, canViewAds, isClient } from "@/lib/crm-permissions";
-import { getAdById, leadsForAd, getActiveClients } from "@/lib/ads-data";
+import { canManageAds, canViewAds } from "@/lib/crm-permissions";
+import { getAdById, leadsForAd } from "@/lib/ads-data";
 import { adMetrics } from "@/lib/ads-metrics";
 import { updateAd, deleteAd } from "@/app/admin/ads-actions";
 import { AdForm } from "@/components/crm/ads/AdForm";
@@ -24,14 +24,11 @@ export default async function AdDetail({ params }: { params: Promise<{ id: strin
   const { id } = await params;
   const ad = await getAdById(id);
   if (!ad) notFound();
-  const client = isClient(me.role);
-  if (client && ad.clientId !== me.clientId) redirect("/admin/ads");
 
   const leads = await leadsForAd(id);
   const wonCount = leads.filter((l) => l.status === "won").length;
   const m = adMetrics(ad, leads.length, wonCount);
   const editable = canManageAds(me.role);
-  const clients = editable ? await getActiveClients() : [];
 
   const kpis = [
     { label: "Inversión", value: money(m.spend) },
@@ -84,10 +81,9 @@ export default async function AdDetail({ params }: { params: Promise<{ id: strin
         </div>
       </div>
 
-      {/* Leads atribuidos (no visible para cliente) */}
-      {!client && (
-        <div className="mt-8">
-          <h2 className="mb-3 font-serif text-lg text-[var(--crm-ink)]">Leads atribuidos ({leads.length})</h2>
+      {/* Leads atribuidos */}
+      <div className="mt-8">
+        <h2 className="mb-3 font-serif text-lg text-[var(--crm-ink)]">Leads atribuidos ({leads.length})</h2>
           {leads.length === 0 ? (
             <div className="crm-card p-6 text-[13px] text-[var(--crm-ink-mute)]">
               Aún no hay leads atribuidos. Se enlazan por UTM (utm_campaign = {ad.utmCampaign || "sin código"}) o manualmente desde el lead.
@@ -109,14 +105,13 @@ export default async function AdDetail({ params }: { params: Promise<{ id: strin
               </table>
             </div>
           )}
-        </div>
-      )}
+      </div>
 
       {/* Editor (equipo) */}
       {editable && (
         <div className="mt-10">
-          <h2 className="mb-4 font-serif text-lg text-[var(--crm-ink)]">Editar anuncio</h2>
-          <AdForm ad={ad} clients={clients} action={updateAd.bind(null, ad.id)} submitLabel="Guardar cambios" />
+          <h2 className="mb-4 font-serif text-lg text-[var(--crm-ink)]">Editar campaña</h2>
+          <AdForm ad={ad} action={updateAd.bind(null, ad.id)} submitLabel="Guardar cambios" />
         </div>
       )}
     </div>

@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/crm-session";
-import { canManageUsers, canViewDashboard, canManageBlog, canManagePosts, canViewAds, isClient } from "@/lib/crm-permissions";
+import { canManageUsers, canViewDashboard, canManageBlog, canManagePosts, canViewAds } from "@/lib/crm-permissions";
 import { logout } from "../actions";
 import { PanelNav } from "./PanelNav";
 
@@ -18,8 +18,6 @@ export default async function PanelLayout({ children }: { children: React.ReactN
         showBlog={canManageBlog(me.role)}
         showPosts={canManagePosts(me.role)}
         showAds={canViewAds(me.role)}
-        showClients={me.role === "admin"}
-        clientOnly={isClient(me.role)}
         logoutAction={logout}
       />
       <main className="mx-auto max-w-[1200px] px-4 py-7 sm:px-7 sm:py-8">{children}</main>

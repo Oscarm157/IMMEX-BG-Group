@@ -14,7 +14,7 @@ export type TranscriptMessage = { role: string; content: string };
 
 export type LeadSource = "bot" | "form" | "manual";
 
-export type UserRole = "admin" | "agent" | "viewer" | "client";
+export type UserRole = "admin" | "agent" | "viewer";
 
 export type AdPlatform = "meta" | "google" | "tiktok" | "linkedin" | "otro";
 export type AdStatus = "draft" | "active" | "paused" | "ended";

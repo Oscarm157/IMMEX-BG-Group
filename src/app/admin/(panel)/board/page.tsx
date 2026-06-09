@@ -1,7 +1,6 @@
 import { redirect } from "next/navigation";
 import { getLeads, getUsersBasic } from "@/lib/crm-data";
 import { getCurrentUser } from "@/lib/crm-session";
-import { isClient } from "@/lib/crm-permissions";
 import { BoardView, type BoardLead } from "@/components/crm/BoardView";
 
 export const dynamic = "force-dynamic";
@@ -10,7 +9,6 @@ export const metadata = { title: "Pipeline", robots: { index: false } };
 export default async function BoardPage() {
   const me = await getCurrentUser();
   if (!me) redirect("/admin/login");
-  if (isClient(me.role)) redirect("/admin/ads");
 
   const viewer = { id: me.id, role: me.role };
   const [{ rows }, usersList] = await Promise.all([

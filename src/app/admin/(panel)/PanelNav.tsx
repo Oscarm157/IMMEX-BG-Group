@@ -5,13 +5,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   Users, KanbanSquare, ListFilter, UserRound, LayoutDashboard, Newspaper,
-  Megaphone, Building2, Share2, LogOut, Menu, X, ChevronDown,
+  Megaphone, Share2, LogOut, Menu, X, ChevronDown,
 } from "lucide-react";
 
 type Item = { href: string; label: string; icon: typeof Users };
 type Group = { label: string; items: Item[] };
 
-const roleLabels: Record<string, string> = { admin: "Admin", agent: "Agente", viewer: "Lector", client: "Cliente" };
+const roleLabels: Record<string, string> = { admin: "Admin", agent: "Agente", viewer: "Lector" };
 
 function isActive(pathname: string, href: string) {
   if (href === "/admin") return pathname === "/admin";
@@ -19,7 +19,7 @@ function isActive(pathname: string, href: string) {
 }
 
 export function PanelNav({
-  user, showUsers, showDashboard, showBlog, showPosts, showAds, showClients, clientOnly, logoutAction,
+  user, showUsers, showDashboard, showBlog, showPosts, showAds, logoutAction,
 }: {
   user: { name: string; role: string };
   showUsers: boolean;
@@ -27,8 +27,6 @@ export function PanelNav({
   showBlog: boolean;
   showPosts: boolean;
   showAds: boolean;
-  showClients: boolean;
-  clientOnly: boolean;
   logoutAction: () => void;
 }) {
   const pathname = usePathname();
@@ -53,7 +51,6 @@ export function PanelNav({
   if (showPosts) contenido.push({ href: "/admin/posts", label: "Generador de posts", icon: Share2 });
 
   const cuenta: Item[] = [];
-  if (showClients) cuenta.push({ href: "/admin/clients", label: "Clientes", icon: Building2 });
   if (showUsers) cuenta.push({ href: "/admin/users", label: "Usuarios", icon: Users });
   cuenta.push({ href: "/admin/profile", label: "Perfil", icon: UserRound });
 
@@ -63,45 +60,36 @@ export function PanelNav({
     { label: "Cuenta", items: cuenta },
   ].filter((g) => g.items.length > 0);
 
-  const allItems = clientOnly
-    ? [{ href: "/admin/ads", label: "Campañas", icon: Megaphone }]
-    : groups.flatMap((g) => g.items);
-
+  const allItems = groups.flatMap((g) => g.items);
   const groupActive = (g: Group) => g.items.some((i) => isActive(pathname, i.href));
 
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--crm-line)] bg-[var(--crm-surface)]/90 backdrop-blur-md" onMouseLeave={() => setMenu(null)}>
       <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between gap-4 px-4 sm:px-7">
         <div className="flex items-center gap-1.5">
-          <Link href={clientOnly ? "/admin/ads" : "/admin"} className="mr-2 flex items-baseline gap-2 sm:mr-3">
+          <Link href="/admin" className="mr-2 flex items-baseline gap-2 sm:mr-3">
             <span className="font-serif text-[18px] leading-none tracking-tight text-[var(--crm-ink)]">BG Consulting Group</span>
             <span className="hidden text-[10px] font-medium uppercase tracking-[0.18em] text-[var(--crm-wine)] sm:inline">Panel</span>
           </Link>
 
           <nav className="hidden items-center gap-0.5 md:flex">
-            {clientOnly ? (
-              <Link href="/admin/ads" className="crm-nav-link" data-active={isActive(pathname, "/admin/ads")}>
-                <Megaphone className="size-[15px]" strokeWidth={1.9} /> Campañas
-              </Link>
-            ) : (
-              groups.map((g) => (
-                <div key={g.label} className="relative" onMouseEnter={() => setMenu(g.label)}>
-                  <button className="crm-nav-link" data-active={groupActive(g)} onClick={() => setMenu(menu === g.label ? null : g.label)}>
-                    {g.label}
-                    <ChevronDown className={`size-3 transition-transform ${menu === g.label ? "rotate-180" : ""}`} strokeWidth={2} />
-                  </button>
-                  {menu === g.label && (
-                    <div className="absolute left-0 top-full min-w-[200px] rounded-xl border border-[var(--crm-line)] bg-[var(--crm-surface)] p-1.5 shadow-[0_18px_40px_rgba(0,0,0,0.4)]">
-                      {g.items.map(({ href, label, icon: Icon }) => (
-                        <Link key={href} href={href} className="crm-nav-link !w-full !justify-start" data-active={isActive(pathname, href)}>
-                          <Icon className="size-[15px]" strokeWidth={1.9} /> {label}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              ))
-            )}
+            {groups.map((g) => (
+              <div key={g.label} className="relative" onMouseEnter={() => setMenu(g.label)}>
+                <button className="crm-nav-link" data-active={groupActive(g)} onClick={() => setMenu(menu === g.label ? null : g.label)}>
+                  {g.label}
+                  <ChevronDown className={`size-3 transition-transform ${menu === g.label ? "rotate-180" : ""}`} strokeWidth={2} />
+                </button>
+                {menu === g.label && (
+                  <div className="absolute left-0 top-full min-w-[200px] rounded-xl border border-[var(--crm-line)] bg-[var(--crm-surface)] p-1.5 shadow-[0_18px_40px_rgba(0,0,0,0.4)]">
+                    {g.items.map(({ href, label, icon: Icon }) => (
+                      <Link key={href} href={href} className="crm-nav-link !w-full !justify-start" data-active={isActive(pathname, href)}>
+                        <Icon className="size-[15px]" strokeWidth={1.9} /> {label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            ))}
           </nav>
         </div>
 

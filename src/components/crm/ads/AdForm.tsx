@@ -1,4 +1,4 @@
-import type { Ad, Client } from "@/lib/ads-data";
+import type { Ad } from "@/lib/ads-data";
 
 const label = "mb-1.5 block text-[12px] font-medium uppercase tracking-[0.08em] text-[var(--crm-ink-mute)]";
 const PLATFORMS = [["meta", "Meta"], ["google", "Google"], ["tiktok", "TikTok"], ["linkedin", "LinkedIn"], ["otro", "Otro"]] as const;
@@ -6,12 +6,10 @@ const STATUSES = [["draft", "Borrador"], ["active", "Activo"], ["paused", "Pausa
 
 export function AdForm({
   ad,
-  clients,
   action,
   submitLabel,
 }: {
   ad?: Ad;
-  clients: Client[];
   action: (formData: FormData) => void;
   submitLabel: string;
 }) {
@@ -22,13 +20,6 @@ export function AdForm({
         <div className="sm:col-span-2">
           <label className={label} htmlFor="name">Nombre del anuncio / campaña</label>
           <input id="name" name="name" required defaultValue={v?.name ?? ""} className="crm-input" />
-        </div>
-        <div>
-          <label className={label} htmlFor="clientId">Cliente</label>
-          <select id="clientId" name="clientId" defaultValue={v?.clientId ?? ""} className="crm-select">
-            <option value="">Sin cliente</option>
-            {clients.map((c) => <option key={c.id} value={c.id}>{c.name}</option>)}
-          </select>
         </div>
         <div>
           <label className={label} htmlFor="platform">Plataforma</label>
