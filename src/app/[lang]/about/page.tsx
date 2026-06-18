@@ -75,7 +75,7 @@ export default async function AboutPage({
       </section>
 
       {/* Narrativa — interludio claro */}
-      <section className="bg-paper">
+      <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 sm:py-20">
           <div className="grid gap-x-16 gap-y-5 border-t border-line-soft pt-12 md:grid-cols-2">
             {a.paragraphs.map((p, i) => (
@@ -99,7 +99,7 @@ export default async function AboutPage({
       </section>
 
       {/* Valores — interludio claro */}
-      <section className="bg-paper">
+      <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 sm:py-20">
           <SectionHeading eyebrow={d.values.eyebrow} title={d.values.title} tone="light" className="mb-10" />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -143,8 +143,8 @@ export default async function AboutPage({
       </section>
 
       {/* CTA */}
-      <section className="px-5 pb-24 sm:px-8 sm:pb-32">
-        <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-24 pt-16 sm:px-8 sm:pb-32 sm:pt-20">
+        <Reveal className="console-panel relative flex flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
           <h2 className="max-w-2xl font-display text-[clamp(2rem,5vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>

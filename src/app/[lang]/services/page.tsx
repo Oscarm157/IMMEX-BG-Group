@@ -50,7 +50,7 @@ export default async function ServicesPage({
       </section>
 
       {/* Ledger de servicios (enlazados) — interludio claro */}
-      <section className="bg-paper">
+      <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-28">
           <div className="card-light overflow-hidden rounded-[14px]">
             <div className="hidden grid-cols-[3rem_1fr_1.4fr_2rem] gap-6 border-b border-line-soft px-7 py-3.5 font-mono text-[10px] uppercase tracking-[0.16em] text-graphite/60 sm:grid">

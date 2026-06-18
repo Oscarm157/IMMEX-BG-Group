@@ -10,11 +10,11 @@
   --color-surface-3: #283246; /* interactivo / hover */
   --color-line: #313c4f; /* borde hairline */
   --color-navy: #284068; /* navy de marca para acentos puntuales */
-  /* Superficies claras (interludios que cortan el dark) */
-  --color-paper: #f6f6f3;
-  --color-paper-2: #eceae4;
-  --color-graphite: #46506b; /* texto body sobre superficies claras */
-  --color-line-soft: #e3e1d9; /* hairline sobre paper */
+  /* Superficies claras (interludios que cortan el dark) — slate frío, cohesivo con el navy */
+  --color-paper: #eef1f6;
+  --color-paper-2: #e4e9f1;
+  --color-graphite: #46506b; /* texto body sobre superficies claras (slate) */
+  --color-line-soft: #d8dee8; /* hairline frío sobre paper */
   /* Texto (subido de contraste para legibilidad de día) */
   --color-chalk: #f6f8fa; /* primario sobre dark / near-white */
   --color-bone: #ccd2dc; /* secundario sobre dark (más claro) */
@@ -107,13 +107,20 @@ html {
 }
 
 /* ===== Superficies claras: interludios que cortan el dark (modelo Empower/Orderful) ===== */
-/* Card sobre claro: hairline + sombra muy sutil (depth ligera, no pesada) */
+/* Card sobre claro: hairline + lift sutil. Blanco puro resalta sobre el paper slate. */
 .card-light {
   background: #ffffff;
   border: 1px solid var(--color-line-soft);
   box-shadow:
-    rgba(15, 21, 33, 0.05) 0px 1px 3px 0px,
-    rgba(15, 21, 33, 0.04) 0px 1px 2px -1px;
+    rgba(15, 21, 33, 0.06) 0px 1px 2px 0px,
+    rgba(15, 21, 33, 0.1) 0px 8px 20px -14px;
+}
+/* Mismo motivo de grid "instrumento", en tinta navy sobre claro (da cuerpo al fondo) */
+.grid-field-light {
+  background-image:
+    linear-gradient(to right, rgba(40, 64, 104, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(40, 64, 104, 0.05) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
 /* Disuelve el borde inferior de un panel-media en el canvas (Mapbox) */

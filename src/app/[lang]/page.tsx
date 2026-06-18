@@ -57,16 +57,16 @@ export default async function HomePage({
       </section>
 
       {/* Rail de frameworks reales (en vez de logos inventados) */}
-      <section className="border-y border-line-soft bg-paper-2">
+      <section className="border-y border-line bg-surface-1/40">
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-x-6 gap-y-3 px-5 py-6 sm:px-8">
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-graphite/70">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ash">
             {d.frameworks.label}
           </span>
           <div className="flex flex-wrap items-center gap-2.5">
             {d.frameworks.items.map((f) => (
               <span
                 key={f}
-                className="rounded-md border border-line-soft bg-white px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-ink/75"
+                className="rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-bone/90"
               >
                 {f}
               </span>
@@ -95,7 +95,7 @@ export default async function HomePage({
       </section>
 
       {/* Sinergia BG + BMS — 2-col asimétrico (interludio claro) */}
-      <section className="bg-paper">
+      <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
           <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <SectionHeading
@@ -187,7 +187,7 @@ export default async function HomePage({
       />
 
       {/* Servicios + Valores — capítulo claro */}
-      <section className="bg-paper">
+      <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
           <SectionHeading index="03" eyebrow={d.servicesPreview.eyebrow} title={d.servicesPreview.title} tone="light" className="mb-12" />
           <div className="card-light overflow-hidden rounded-[14px]">

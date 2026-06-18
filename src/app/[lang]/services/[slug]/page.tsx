@@ -90,7 +90,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Cuándo nos buscan (dolores) — interludio claro */}
-      <section className="bg-paper">
+      <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
           <SectionHeading title={sec.painsTitle} tone="light" className="mb-12" />
           <div className="grid gap-4 sm:grid-cols-2">
@@ -125,7 +125,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Qué obtienes (outcomes) */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20">
         <SectionHeading title={sec.outcomesTitle} className="mb-10" />
         <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
           {c.outcomes.map((o, i) => (
@@ -155,8 +155,8 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* CTA */}
-      <section className="px-5 pb-16 sm:px-8 sm:pb-20">
-        <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-6 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-14 sm:px-14 sm:py-16">
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20">
+        <Reveal className="console-panel relative flex flex-col items-start gap-6 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-14 sm:px-14 sm:py-16">
           <h2 className="max-w-2xl font-display text-[clamp(1.7rem,4vw,2.8rem)] font-medium leading-[1.06] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>

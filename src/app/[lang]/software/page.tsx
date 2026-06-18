@@ -71,7 +71,7 @@ export default async function SoftwarePage({
       </section>
 
       {/* Slogan pull-quote */}
-      <section className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 py-20 sm:px-8 sm:py-24">
         <Reveal>
           <p className="max-w-4xl text-balance font-display text-[clamp(1.7rem,4vw,3rem)] font-medium leading-[1.15] tracking-[-0.02em] text-chalk">
             {s.slogan}
@@ -80,7 +80,7 @@ export default async function SoftwarePage({
       </section>
 
       {/* Capabilities — módulos (interludio claro) */}
-      <section className="bg-paper">
+      <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
           <SectionHeading eyebrow={s.eyebrow} title={s.capsTitle} tone="light" className="mb-12" />
           <div className="grid gap-4 md:grid-cols-3">
@@ -120,7 +120,7 @@ export default async function SoftwarePage({
       </section>
 
       {/* Readouts BMS */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20">
         <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
           <div className="grid grid-cols-1 sm:grid-cols-3">
             {s.stats.map((stat, i) => (
@@ -147,14 +147,14 @@ export default async function SoftwarePage({
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20">
         <SectionHeading title={s.faqTitle} className="mb-10" />
         <Faq items={s.faq} />
       </section>
 
       {/* CTA */}
-      <section className="px-5 pb-24 sm:px-8 sm:pb-32">
-        <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-24 pt-16 sm:px-8 sm:pb-32 sm:pt-20">
+        <Reveal className="console-panel relative flex flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
           <h2 className="relative z-10 max-w-2xl font-display text-[clamp(2rem,5vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>
