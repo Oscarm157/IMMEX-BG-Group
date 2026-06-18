@@ -13,6 +13,8 @@
   /* Superficies claras (interludios que cortan el dark) */
   --color-paper: #f6f6f3;
   --color-paper-2: #eceae4;
+  --color-graphite: #46506b; /* texto body sobre superficies claras */
+  --color-line-soft: #e3e1d9; /* hairline sobre paper */
   /* Texto (subido de contraste para legibilidad de día) */
   --color-chalk: #f6f8fa; /* primario sobre dark / near-white */
   --color-bone: #ccd2dc; /* secundario sobre dark (más claro) */
@@ -102,6 +104,16 @@ html {
   box-shadow:
     rgba(255, 255, 255, 0.045) 0px 0px 0px 1px inset,
     rgba(255, 255, 255, 0.06) 0px 1px 0px 0px inset;
+}
+
+/* ===== Superficies claras: interludios que cortan el dark (modelo Empower/Orderful) ===== */
+/* Card sobre claro: hairline + sombra muy sutil (depth ligera, no pesada) */
+.card-light {
+  background: #ffffff;
+  border: 1px solid var(--color-line-soft);
+  box-shadow:
+    rgba(15, 21, 33, 0.05) 0px 1px 3px 0px,
+    rgba(15, 21, 33, 0.04) 0px 1px 2px -1px;
 }
 
 /* Disuelve el borde inferior de un panel-media en el canvas (Mapbox) */

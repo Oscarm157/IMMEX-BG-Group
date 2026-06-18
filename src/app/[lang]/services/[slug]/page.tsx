@@ -89,17 +89,19 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Cuándo nos buscan (dolores) */}
-      <section className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
-        <SectionHeading title={sec.painsTitle} className="mb-12" />
-        <div className="grid gap-4 sm:grid-cols-2">
-          {c.pains.map((p, i) => (
-            <Reveal key={p.title} delay={(i % 2) * 0.06} className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7">
-              <span className="font-mono text-[12px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-4 font-display text-xl font-medium tracking-[-0.01em] text-chalk">{p.title}</h3>
-              <p className="mt-3 text-[15px] leading-relaxed text-bone/90">{p.desc}</p>
-            </Reveal>
-          ))}
+      {/* Cuándo nos buscan (dolores) — interludio claro */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
+          <SectionHeading title={sec.painsTitle} tone="light" className="mb-12" />
+          <div className="grid gap-4 sm:grid-cols-2">
+            {c.pains.map((p, i) => (
+              <Reveal key={p.title} delay={(i % 2) * 0.06} className="card-light flex flex-col rounded-[14px] p-7">
+                <span className="font-mono text-[12px] tabular-nums text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-4 font-display text-xl font-medium tracking-[-0.01em] text-ink">{p.title}</h3>
+                <p className="mt-3 text-[15px] leading-relaxed text-graphite">{p.desc}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -135,12 +137,13 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Banda visual del dominio (estilo Andercore, placeholder por ahora) */}
+      {/* Banda visual del dominio (estilo Andercore) */}
       <section className="relative mb-20 border-y border-line sm:mb-24">
         <MediaFrame
+          src="/img/gen/border-crossing.webp"
           ratio="21/9"
           panel={false}
-          caption={`Foto · ${s.name} · cruce Tijuana–San Diego`}
+          caption={`${s.name} · cruce Tijuana–San Diego`}
           className="!rounded-none"
         />
       </section>

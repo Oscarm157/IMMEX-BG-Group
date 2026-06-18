@@ -74,33 +74,43 @@ export default async function AboutPage({
         </div>
       </section>
 
-      {/* Narrativa */}
-      <section className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 sm:py-20">
-        <div className="grid gap-x-16 gap-y-5 border-t border-line pt-12 md:grid-cols-2">
-          {a.paragraphs.map((p, i) => (
-            <Reveal key={i} delay={(i % 2) * 0.06}>
-              <p className="text-[16px] leading-relaxed text-bone/90">{p}</p>
-            </Reveal>
-          ))}
+      {/* Narrativa — interludio claro */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 sm:py-20">
+          <div className="grid gap-x-16 gap-y-5 border-t border-line-soft pt-12 md:grid-cols-2">
+            {a.paragraphs.map((p, i) => (
+              <Reveal key={i} delay={(i % 2) * 0.06}>
+                <p className="text-[16px] leading-relaxed text-graphite">{p}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* Banda visual: oficinas (placeholder por ahora) */}
-      <section className="relative mb-16 border-y border-line sm:mb-20">
-        <MediaFrame ratio="21/9" panel={false} caption="Foto · Oficinas Tijuana y San Diego" className="!rounded-none" />
+      {/* Banda visual: oficinas */}
+      <section className="relative border-y border-line-soft">
+        <MediaFrame
+          src="/img/gen/offices.webp"
+          ratio="21/9"
+          panel={false}
+          caption="Oficinas Tijuana y San Diego"
+          className="!rounded-none"
+        />
       </section>
 
-      {/* Valores */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-16 sm:px-8 sm:pb-20">
-        <SectionHeading eyebrow={d.values.eyebrow} title={d.values.title} className="mb-10" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {d.values.items.map((v, i) => (
-            <Reveal key={v.name} delay={(i % 4) * 0.06} className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7">
-              <span className="font-mono text-[12px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
-              <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-chalk">{v.name}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-bone/90">{v.body}</p>
-            </Reveal>
-          ))}
+      {/* Valores — interludio claro */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1280px] px-5 py-16 sm:px-8 sm:py-20">
+          <SectionHeading eyebrow={d.values.eyebrow} title={d.values.title} tone="light" className="mb-10" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {d.values.items.map((v, i) => (
+              <Reveal key={v.name} delay={(i % 4) * 0.06} className="card-light flex flex-col rounded-[14px] p-7">
+                <span className="font-mono text-[12px] tabular-nums text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-ink">{v.name}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed text-graphite">{v.body}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -49,37 +49,39 @@ export default async function ServicesPage({
         </div>
       </section>
 
-      {/* Ledger de servicios (enlazados) */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-28">
-        <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
-          <div className="hidden grid-cols-[3rem_1fr_1.4fr_2rem] gap-6 border-b border-line px-7 py-3.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ash sm:grid">
-            <span>{d.servicesPreview.colIndex}</span>
-            <span>{d.servicesPreview.colService}</span>
-            <span>{d.servicesPreview.colScope}</span>
-            <span />
-          </div>
-          {d.services.items.map((s, i) => (
-            <Reveal key={s.name} delay={Math.min(i, 4) * 0.04}>
-              <Link
-                href={`/${lang}/services/${SERVICE_SLUGS[i]}`}
-                className="group grid grid-cols-1 gap-2 border-b border-line px-7 py-6 transition-colors last:border-b-0 hover:bg-surface-2/60 sm:grid-cols-[3rem_1fr_1.4fr_2rem] sm:items-baseline sm:gap-6"
-              >
-                <span className="font-mono text-[13px] tabular-nums text-accent">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h2 className="font-display text-lg font-medium tracking-[-0.01em] text-chalk sm:text-xl">
-                  {s.name}
-                </h2>
-                <p className="text-[14px] leading-relaxed text-bone/90">{s.summary}</p>
-                <span
-                  aria-hidden
-                  className="hidden self-center text-right text-accent transition-transform duration-300 group-hover:translate-x-1 sm:block"
+      {/* Ledger de servicios (enlazados) — interludio claro */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-28">
+          <div className="card-light overflow-hidden rounded-[14px]">
+            <div className="hidden grid-cols-[3rem_1fr_1.4fr_2rem] gap-6 border-b border-line-soft px-7 py-3.5 font-mono text-[10px] uppercase tracking-[0.16em] text-graphite/60 sm:grid">
+              <span>{d.servicesPreview.colIndex}</span>
+              <span>{d.servicesPreview.colService}</span>
+              <span>{d.servicesPreview.colScope}</span>
+              <span />
+            </div>
+            {d.services.items.map((s, i) => (
+              <Reveal key={s.name} delay={Math.min(i, 4) * 0.04}>
+                <Link
+                  href={`/${lang}/services/${SERVICE_SLUGS[i]}`}
+                  className="group grid grid-cols-1 gap-2 border-b border-line-soft px-7 py-6 transition-colors last:border-b-0 hover:bg-paper-2/70 sm:grid-cols-[3rem_1fr_1.4fr_2rem] sm:items-baseline sm:gap-6"
                 >
-                  &rarr;
-                </span>
-              </Link>
-            </Reveal>
-          ))}
+                  <span className="font-mono text-[13px] tabular-nums text-accent-ink">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h2 className="font-display text-lg font-medium tracking-[-0.01em] text-ink sm:text-xl">
+                    {s.name}
+                  </h2>
+                  <p className="text-[14px] leading-relaxed text-graphite">{s.summary}</p>
+                  <span
+                    aria-hidden
+                    className="hidden self-center text-right text-accent-ink transition-transform duration-300 group-hover:translate-x-1 sm:block"
+                  >
+                    &rarr;
+                  </span>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

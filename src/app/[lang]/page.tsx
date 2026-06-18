@@ -57,16 +57,16 @@ export default async function HomePage({
       </section>
 
       {/* Rail de frameworks reales (en vez de logos inventados) */}
-      <section className="border-y border-line bg-surface-1/40">
+      <section className="border-y border-line-soft bg-paper-2">
         <div className="mx-auto flex max-w-[1280px] flex-wrap items-center gap-x-6 gap-y-3 px-5 py-6 sm:px-8">
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ash">
+          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-graphite/70">
             {d.frameworks.label}
           </span>
           <div className="flex flex-wrap items-center gap-2.5">
             {d.frameworks.items.map((f) => (
               <span
                 key={f}
-                className="rounded-md border border-line px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-bone/90"
+                className="rounded-md border border-line-soft bg-white px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-ink/75"
               >
                 {f}
               </span>
@@ -94,45 +94,48 @@ export default async function HomePage({
         </div>
       </section>
 
-      {/* Sinergia BG + BMS — 2-col asimétrico */}
-      <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
-        <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <SectionHeading
-            index="02"
-            eyebrow={d.synergy.eyebrow}
-            title={d.synergy.title}
-            lead={d.synergy.lead}
-            className="lg:sticky lg:top-32 lg:self-start"
-          />
-          <div className="flex flex-col gap-5">
-            {synergyPanels.map((p, i) => (
-              <Reveal
-                key={p.kicker}
-                delay={i * 0.1}
-                className="console-panel flex flex-col rounded-[14px] bg-surface-1"
-              >
-                <div className="flex items-center justify-between border-b border-line px-7 py-3.5">
-                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{p.kicker}</span>
-                  <span aria-hidden className="font-mono text-[11px] tabular-nums text-ash">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
-                <div className="px-7 py-8">
-                  <h3 className="font-display text-3xl font-medium tracking-[-0.02em] text-chalk sm:text-4xl">
-                    {p.title}
-                  </h3>
-                  <p className="mt-4 max-w-md text-[15px] leading-relaxed text-bone/90">{p.body}</p>
-                  <ul className="mt-7 flex flex-col gap-3 border-t border-line pt-6">
-                    {p.points.map((pt) => (
-                      <li key={pt} className="flex items-center gap-3 font-mono text-[13px] text-bone/85">
-                        <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-accent" />
-                        {pt}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </Reveal>
-            ))}
+      {/* Sinergia BG + BMS — 2-col asimétrico (interludio claro) */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
+          <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+            <SectionHeading
+              index="02"
+              eyebrow={d.synergy.eyebrow}
+              title={d.synergy.title}
+              lead={d.synergy.lead}
+              tone="light"
+              className="lg:sticky lg:top-32 lg:self-start"
+            />
+            <div className="flex flex-col gap-5">
+              {synergyPanels.map((p, i) => (
+                <Reveal
+                  key={p.kicker}
+                  delay={i * 0.1}
+                  className="card-light flex flex-col rounded-[14px]"
+                >
+                  <div className="flex items-center justify-between border-b border-line-soft px-7 py-3.5">
+                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-ink">{p.kicker}</span>
+                    <span aria-hidden className="font-mono text-[11px] tabular-nums text-graphite/60">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+                  <div className="px-7 py-8">
+                    <h3 className="font-display text-3xl font-medium tracking-[-0.02em] text-ink sm:text-4xl">
+                      {p.title}
+                    </h3>
+                    <p className="mt-4 max-w-md text-[15px] leading-relaxed text-graphite">{p.body}</p>
+                    <ul className="mt-7 flex flex-col gap-3 border-t border-line-soft pt-6">
+                      {p.points.map((pt) => (
+                        <li key={pt} className="flex items-center gap-3 font-mono text-[13px] text-graphite">
+                          <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-accent-ink" />
+                          {pt}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -183,56 +186,56 @@ export default async function HomePage({
         metrics={d.telemetry.metrics}
       />
 
-      {/* Servicios — ledger */}
-      <section className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
-        <SectionHeading index="03" eyebrow={d.servicesPreview.eyebrow} title={d.servicesPreview.title} className="mb-12" />
-        <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
-          {/* Encabezado del ledger */}
-          <div className="hidden grid-cols-[3rem_1fr_1.4fr] gap-6 border-b border-line px-7 py-3.5 font-mono text-[10px] uppercase tracking-[0.16em] text-ash sm:grid">
-            <span>{d.servicesPreview.colIndex}</span>
-            <span>{d.servicesPreview.colService}</span>
-            <span>{d.servicesPreview.colScope}</span>
+      {/* Servicios + Valores — capítulo claro */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1280px] px-5 py-24 sm:px-8 sm:py-32">
+          <SectionHeading index="03" eyebrow={d.servicesPreview.eyebrow} title={d.servicesPreview.title} tone="light" className="mb-12" />
+          <div className="card-light overflow-hidden rounded-[14px]">
+            {/* Encabezado del ledger */}
+            <div className="hidden grid-cols-[3rem_1fr_1.4fr] gap-6 border-b border-line-soft px-7 py-3.5 font-mono text-[10px] uppercase tracking-[0.16em] text-graphite/60 sm:grid">
+              <span>{d.servicesPreview.colIndex}</span>
+              <span>{d.servicesPreview.colService}</span>
+              <span>{d.servicesPreview.colScope}</span>
+            </div>
+            {d.services.items.map((s, i) => (
+              <Reveal
+                key={s.name}
+                delay={Math.min(i, 4) * 0.04}
+                className="grid grid-cols-1 gap-2 border-b border-line-soft px-7 py-6 transition-colors last:border-b-0 hover:bg-paper-2/70 sm:grid-cols-[3rem_1fr_1.4fr] sm:items-baseline sm:gap-6"
+              >
+                <span className="font-mono text-[13px] tabular-nums text-accent-ink">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-ink sm:text-xl">
+                  {s.name}
+                </h3>
+                <p className="text-[14px] leading-relaxed text-graphite">{s.summary}</p>
+              </Reveal>
+            ))}
           </div>
-          {d.services.items.map((s, i) => (
-            <Reveal
-              key={s.name}
-              delay={Math.min(i, 4) * 0.04}
-              className="grid grid-cols-1 gap-2 border-b border-line px-7 py-6 transition-colors last:border-b-0 hover:bg-surface-2/60 sm:grid-cols-[3rem_1fr_1.4fr] sm:items-baseline sm:gap-6"
-            >
-              <span className="font-mono text-[13px] tabular-nums text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-chalk sm:text-xl">
-                {s.name}
-              </h3>
-              <p className="text-[14px] leading-relaxed text-bone/90">{s.summary}</p>
-            </Reveal>
-          ))}
-        </div>
-        <Reveal className="mt-10">
-          <PillButton href={`/${lang}/services`} variant="ghost" arrow>
-            {d.servicesPreview.cta}
-          </PillButton>
-        </Reveal>
-      </section>
+          <Reveal className="mt-10">
+            <PillButton href={`/${lang}/services`} variant="ghost" arrow tone="light">
+              {d.servicesPreview.cta}
+            </PillButton>
+          </Reveal>
 
-      {/* Valores — registros */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-32">
-        <SectionHeading index="04" eyebrow={d.values.eyebrow} title={d.values.title} className="mb-12" />
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {d.values.items.map((v, i) => (
-            <Reveal
-              key={v.name}
-              delay={(i % 4) * 0.06}
-              className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7"
-            >
-              <span className="font-mono text-[12px] tabular-nums text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-chalk">{v.name}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-bone/90">{v.body}</p>
-            </Reveal>
-          ))}
+          {/* Valores — registros */}
+          <SectionHeading index="04" eyebrow={d.values.eyebrow} title={d.values.title} tone="light" className="mb-12 mt-24 sm:mt-32" />
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {d.values.items.map((v, i) => (
+              <Reveal
+                key={v.name}
+                delay={(i % 4) * 0.06}
+                className="card-light flex flex-col rounded-[14px] p-7"
+              >
+                <span className="font-mono text-[12px] tabular-nums text-accent-ink">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-ink">{v.name}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed text-graphite">{v.body}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

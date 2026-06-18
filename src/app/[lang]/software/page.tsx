@@ -79,23 +79,25 @@ export default async function SoftwarePage({
         </Reveal>
       </section>
 
-      {/* Capabilities — módulos de consola */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
-        <SectionHeading eyebrow={s.eyebrow} title={s.capsTitle} className="mb-12" />
-        <div className="grid gap-4 md:grid-cols-3">
-          {s.capabilities.map((c, i) => (
-            <Reveal
-              key={c.title}
-              delay={(i % 3) * 0.06}
-              className="console-panel flex flex-col rounded-[14px] bg-surface-1 p-7"
-            >
-              <span className="font-mono text-[12px] tabular-nums text-accent">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-chalk">{c.title}</h3>
-              <p className="mt-3 text-[14px] leading-relaxed text-bone/90">{c.body}</p>
-            </Reveal>
-          ))}
+      {/* Capabilities — módulos (interludio claro) */}
+      <section className="bg-paper">
+        <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
+          <SectionHeading eyebrow={s.eyebrow} title={s.capsTitle} tone="light" className="mb-12" />
+          <div className="grid gap-4 md:grid-cols-3">
+            {s.capabilities.map((c, i) => (
+              <Reveal
+                key={c.title}
+                delay={(i % 3) * 0.06}
+                className="card-light flex flex-col rounded-[14px] p-7"
+              >
+                <span className="font-mono text-[12px] tabular-nums text-accent-ink">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-ink">{c.title}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed text-graphite">{c.body}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 

@@ -28,7 +28,7 @@ export function SectionHeading({
         <span
           className={`mb-5 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.18em] ${light ? "text-accent-ink" : "text-accent"}`}
         >
-          {index && <span className="tabular-nums text-ash">{index}</span>}
+          {index && <span className={`tabular-nums ${light ? "text-graphite/55" : "text-ash"}`}>{index}</span>}
           <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-current" />
           {eyebrow}
         </span>

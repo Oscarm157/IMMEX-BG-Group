@@ -12,6 +12,13 @@ const variants: Record<Variant, string> = {
   inverted: "bg-ink text-chalk hover:bg-surface-3",
 };
 
+// Ghost legible sobre superficies claras (interludios light)
+const ghostLight = "border border-ink/20 text-ink hover:border-ink/45 hover:bg-ink/[0.04]";
+
+function variantClass(variant: Variant, tone: "dark" | "light") {
+  return tone === "light" && variant === "ghost" ? ghostLight : variants[variant];
+}
+
 function Arrow() {
   return (
     <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
@@ -22,6 +29,7 @@ function Arrow() {
 
 type CommonProps = {
   variant?: Variant;
+  tone?: "dark" | "light";
   arrow?: boolean;
   className?: string;
   children: React.ReactNode;
@@ -31,6 +39,7 @@ export function PillButton({
   href,
   external,
   variant = "primary",
+  tone = "dark",
   arrow = false,
   className = "",
   children,
@@ -39,7 +48,7 @@ export function PillButton({
   href: string;
   external?: boolean;
 } & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
-  const cls = `${base} ${variants[variant]} ${className}`;
+  const cls = `${base} ${variantClass(variant, tone)} ${className}`;
   if (external) {
     return (
       <a href={href} target="_blank" rel="noopener noreferrer" className={cls} {...rest}>
@@ -58,13 +67,14 @@ export function PillButton({
 
 export function SubmitPill({
   variant = "accent",
+  tone = "dark",
   arrow = false,
   className = "",
   children,
   ...rest
 }: CommonProps & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   return (
-    <button className={`${base} ${variants[variant]} ${className}`} {...rest}>
+    <button className={`${base} ${variantClass(variant, tone)} ${className}`} {...rest}>
       {children}
       {arrow && <Arrow />}
     </button>
