@@ -4,36 +4,18 @@ import { getAllUsers } from "@/lib/crm-data";
 import { canManageUsers } from "@/lib/crm-permissions";
 import { fmtDate } from "@/lib/crm-format";
 import { AddUserModal } from "@/components/crm/AddUserModal";
-import { UserRowActions, UserRoleSelect } from "@/components/crm/UserRowActions";
+import {
+  UserRowActions,
+  UserRoleSelect,
+  ROLE_LABELS,
+} from "@/components/crm/UserRowActions";
 import { Breadcrumb } from "@/components/crm/Breadcrumb";
 import { PageHeader } from "@/components/crm/PageShell";
+import { KeyFacts } from "@/components/crm/KeyFacts";
+import { initials, avatarClass } from "@/components/crm/avatar";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Usuarios", robots: { index: false } };
-
-// Misma paleta y hashing que OwnerChip en status.tsx: el mismo usuario conserva
-// su color en todas las vistas del panel.
-const AVATAR_COLORS = [
-  "bg-rose-500",
-  "bg-amber-500",
-  "bg-emerald-500",
-  "bg-blue-500",
-  "bg-violet-500",
-  "bg-teal-500",
-  "bg-orange-500",
-  "bg-indigo-500",
-];
-
-function initials(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  return ((parts[0]?.[0] ?? "") + (parts[1]?.[0] ?? "")).toUpperCase() || "?";
-}
-
-function colorFor(seed: string): string {
-  let h = 0;
-  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
-  return AVATAR_COLORS[h % AVATAR_COLORS.length];
-}
 
 export default async function UsersPage() {
   const me = await getCurrentUser();
@@ -42,25 +24,44 @@ export default async function UsersPage() {
 
   const all = await getAllUsers();
   const activeCount = all.filter((u) => u.active).length;
+  const adminCount = all.filter((u) => u.role === "admin").length;
+  const agentCount = all.filter((u) => u.role === "agent").length;
+  const viewerCount = all.filter((u) => u.role === "viewer").length;
+
+  const num = (n: number) => <span className="crm-num">{n}</span>;
 
   return (
-    <div className="crm-fade">
+    <div className="crm-fade mx-auto max-w-[1280px]">
       <Breadcrumb items={[{ label: "Leads", href: "/admin" }, { label: "Usuarios" }]} />
 
       <div className="mt-4">
-        <PageHeader eyebrow="Equipo" title="Usuarios" actions={<AddUserModal />}>
-          <div className="mt-2 flex items-center gap-2 text-[13px] text-[var(--crm-ink-soft)]">
-            <span>
-              <span className="crm-num font-medium text-[var(--crm-ink)]">{all.length}</span>{" "}
-              {all.length === 1 ? "persona" : "personas"}
-            </span>
-            <span className="text-[var(--crm-ink-faint)]">·</span>
-            <span className="inline-flex items-center gap-1.5">
-              <span className="size-1.5 rounded-full bg-[var(--crm-accent)] shadow-[0_0_0_2px_var(--crm-bg)]" />
-              <span className="crm-num font-medium text-[var(--crm-ink)]">{activeCount}</span> activas
-            </span>
-          </div>
-        </PageHeader>
+        <PageHeader
+          eyebrow="Equipo"
+          title="Usuarios"
+          description="Da de alta cuentas, asigna roles y controla quién accede al panel."
+          actions={<AddUserModal />}
+        />
+      </div>
+
+      <div className="mb-5">
+        <KeyFacts
+          items={[
+            { label: "Personas", value: num(all.length) },
+            {
+              label: "Activas",
+              value: (
+                <span className="inline-flex items-center gap-1.5">
+                  <span className="size-1.5 rounded-full bg-[var(--crm-accent)] shadow-[0_0_0_2px_var(--crm-surface)]" />
+                  {num(activeCount)}
+                </span>
+              ),
+            },
+            { label: "Inactivas", value: num(all.length - activeCount) },
+            { label: ROLE_LABELS.admin, value: num(adminCount) },
+            { label: ROLE_LABELS.agent, value: num(agentCount) },
+            { label: ROLE_LABELS.viewer, value: num(viewerCount) },
+          ]}
+        />
       </div>
 
       <div className="overflow-hidden rounded-[var(--crm-r-lg)] border border-[var(--crm-line)]">
@@ -88,7 +89,7 @@ export default async function UsersPage() {
                     <td className="crm-td">
                       <div className="flex items-center gap-2.5">
                         <span
-                          className={`grid size-8 shrink-0 place-items-center rounded-full text-[11px] font-semibold text-white shadow-[0_0_0_1.5px_var(--crm-surface)] ${colorFor(u.id)}`}
+                          className={`grid size-8 shrink-0 place-items-center rounded-full text-[11px] font-semibold shadow-[0_0_0_1.5px_var(--crm-surface)] ${avatarClass(u.id)}`}
                         >
                           {initials(u.name)}
                         </span>

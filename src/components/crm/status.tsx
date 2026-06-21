@@ -1,5 +1,6 @@
 import type { LeadStatus, LeadSource } from "@/lib/schema";
 import { STATUS_LABELS, STATUS_ORDER } from "@/lib/crm-status";
+import { avatarClass, initials } from "./avatar";
 
 export { STATUS_ORDER };
 
@@ -50,33 +51,11 @@ export function SourceBadge({ source, onDark = false }: { source: LeadSource; on
   );
 }
 
-const AVATAR_COLORS = [
-  "bg-rose-500",
-  "bg-amber-500",
-  "bg-emerald-500",
-  "bg-blue-500",
-  "bg-violet-500",
-  "bg-teal-500",
-  "bg-orange-500",
-  "bg-indigo-500",
-];
-
-function initials(name: string): string {
-  const parts = name.trim().split(/\s+/);
-  return ((parts[0]?.[0] ?? "") + (parts[1]?.[0] ?? "")).toUpperCase() || "?";
-}
-
-function colorFor(seed: string): string {
-  let h = 0;
-  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
-  return AVATAR_COLORS[h % AVATAR_COLORS.length];
-}
-
 export function OwnerChip({ name, id }: { name: string; id: string }) {
   return (
     <span className="inline-flex items-center gap-1.5">
       <span
-        className={`inline-flex size-5 items-center justify-center rounded-full text-[9px] font-semibold text-white shadow-[0_0_0_1.5px_var(--crm-surface),0_1px_2px_rgba(20,18,14,0.12)] ${colorFor(id)}`}
+        className={`inline-flex size-5 items-center justify-center rounded-full text-[9px] font-semibold shadow-[0_0_0_1.5px_var(--crm-surface)] ${avatarClass(id)}`}
       >
         {initials(name)}
       </span>

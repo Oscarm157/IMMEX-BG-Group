@@ -4,6 +4,9 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { canManageBlog } from "@/lib/crm-permissions";
 import { draftArticle } from "@/app/admin/blog-actions";
 import { PageHeader, SectionHeader } from "@/components/crm/PageShell";
+import { GenerateDraftButton } from "@/components/crm/blog/GenerateDraftButton";
+
+export const dynamic = "force-dynamic";
 
 const label = "mb-1.5 block text-[12.5px] font-medium text-[var(--crm-ink-soft)]";
 
@@ -14,7 +17,7 @@ export default async function NewArticle({ searchParams }: { searchParams: Promi
   const { error } = await searchParams;
 
   return (
-    <div className="crm-fade mx-auto max-w-[780px] px-4 py-8 sm:px-7">
+    <div className="crm-fade mx-auto max-w-[960px] px-4 py-8 sm:px-7">
       <Link
         href="/admin/blog"
         className="mb-4 inline-flex items-center gap-1.5 text-[13px] text-[var(--crm-ink-mute)] transition-colors hover:text-[var(--crm-ink)]"
@@ -59,10 +62,7 @@ export default async function NewArticle({ searchParams }: { searchParams: Promi
             <input id="sourceDate" name="sourceDate" className="crm-input crm-num" placeholder="08/12/2022" />
           </div>
         </div>
-        <div className="flex items-center gap-3 border-t border-[var(--crm-line)] pt-4">
-          <button type="submit" className="crm-btn crm-btn-primary">Generar borrador</button>
-          <span className="text-[12px] text-[var(--crm-ink-mute)]">Tarda unos segundos.</span>
-        </div>
+        <GenerateDraftButton />
       </form>
     </div>
   );

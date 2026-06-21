@@ -6,6 +6,7 @@ import { ProfileForm } from "@/components/crm/ProfileForm";
 import { ROLE_LABELS } from "@/components/crm/UserRowActions";
 import { Breadcrumb } from "@/components/crm/Breadcrumb";
 import { PageHeader } from "@/components/crm/PageShell";
+import { initials, avatarClass } from "@/components/crm/avatar";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Perfil", robots: { index: false } };
@@ -34,8 +35,18 @@ export default async function ProfilePage() {
 
       <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_300px]">
         <section className="crm-card p-6">
-          <h2 className="crm-h2 mb-4">Datos personales</h2>
-          <div className="crm-hairline mb-5" />
+          <div className="flex items-center gap-4">
+            <span
+              className={`grid size-14 shrink-0 place-items-center rounded-full text-[18px] font-semibold shadow-[0_0_0_1.5px_var(--crm-surface)] ${avatarClass(me.id)}`}
+            >
+              {initials(me.name)}
+            </span>
+            <div className="min-w-0">
+              <h2 className="crm-h2 truncate">{me.name}</h2>
+              <p className="mt-0.5 truncate text-[13px] text-[var(--crm-ink-soft)]">{me.email}</p>
+            </div>
+          </div>
+          <div className="crm-hairline my-5" />
           <ProfileForm name={me.name} email={me.email} />
         </section>
 
