@@ -113,7 +113,7 @@ export function BlogIndex({ articles }: { articles: BlogRow[] }) {
 
   return (
     <div>
-      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
+      <div className="mb-4 flex flex-col gap-3 lg:flex-row lg:flex-wrap lg:items-center lg:justify-between">
         {/* Filtro de estado */}
         <div className="inline-flex items-center gap-0.5 self-start rounded-[var(--crm-r-md)] border border-[var(--crm-line)] bg-[var(--crm-surface-2)] p-0.5">
           {TABS.map((t) => {
