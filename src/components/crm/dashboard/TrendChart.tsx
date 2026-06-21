@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 import type { DashboardMetrics } from "@/lib/crm-metrics";
 
 const W = 640;
-const H = 224;
+const H = 280;
 const PAD = { top: 16, right: 16, bottom: 30, left: 34 };
 
 function fmtWeek(period: string): string {
@@ -52,15 +52,27 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
   }
 
   const active = hover != null && geo ? geo.pts[hover] : null;
+  const total = trend.reduce((s, t) => s + t.count, 0);
+  const lastIdx = trend.length - 1;
 
   return (
-    <div className="crm-card p-5">
-      <h2 className="font-serif text-[18px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
-        Tendencia de leads
-      </h2>
-      <p className="mt-0.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
-        Nuevos leads por semana
-      </p>
+    <div className="crm-card flex h-full flex-col p-6">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <h2 className="crm-h2">Tendencia de leads</h2>
+          <div className="mt-2 flex items-baseline gap-2">
+            <span
+              className="crm-num font-semibold text-[32px] leading-none tracking-[-0.025em]"
+              style={{ color: "var(--crm-ink)" }}
+            >
+              {total}
+            </span>
+            <span className="text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
+              nuevos leads, por semana
+            </span>
+          </div>
+        </div>
+      </div>
 
       {!geo ? (
         <p className="mt-6 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
@@ -69,7 +81,7 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
             : "Se necesitan al menos dos semanas con datos para trazar la tendencia."}
         </p>
       ) : (
-        <div className="relative mt-4">
+        <div className="relative mt-5 flex-1">
           <svg
             ref={svgRef}
             viewBox={`0 0 ${W} ${H}`}
@@ -118,18 +130,23 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
               <line x1={active.x} y1={PAD.top} x2={active.x} y2={geo.baseY} stroke="var(--crm-wine)" strokeWidth="1" strokeOpacity="0.35" />
             )}
 
-            {/* points */}
-            {geo.pts.map((p, i) => (
-              <circle
-                key={i}
-                cx={p.x}
-                cy={p.y}
-                r={hover === i ? 5 : 3}
-                fill={hover === i ? "var(--crm-wine)" : "var(--crm-surface)"}
-                stroke="var(--crm-wine)"
-                strokeWidth="1.8"
-              />
-            ))}
+            {/* marcador del punto actual (último) + punto en hover; el resto limpio */}
+            {geo.pts.map((p, i) => {
+              const isHover = hover === i;
+              const isLast = i === lastIdx;
+              if (!isHover && !isLast) return null;
+              return (
+                <circle
+                  key={i}
+                  cx={p.x}
+                  cy={p.y}
+                  r={isHover ? 5 : 3.5}
+                  fill={isHover ? "var(--crm-wine)" : "var(--crm-surface)"}
+                  stroke="var(--crm-wine)"
+                  strokeWidth="1.8"
+                />
+              );
+            })}
 
             {/* X labels */}
             {geo.pts.filter((_, i) => i % Math.ceil(trend.length / 5) === 0 || i === trend.length - 1).map((t, i) => (
@@ -139,22 +156,27 @@ export function TrendChart({ trend }: { trend: DashboardMetrics["trend"] }) {
             ))}
           </svg>
 
-          {/* tooltip */}
+          {/* tooltip anclado, con clamp para no salirse por los bordes */}
           {active && (
             <div
-              className="pointer-events-none absolute z-10 -translate-x-1/2 -translate-y-full rounded-lg border px-2.5 py-1.5 text-center shadow-[0_8px_24px_rgba(20,18,14,0.14)]"
+              className="pointer-events-none absolute z-10 rounded-[var(--crm-r-md)] border px-2.5 py-1.5 text-center"
               style={{
-                left: `${(active.x / W) * 100}%`,
+                left: `${clamp((active.x / W) * 100, 12, 88)}%`,
                 top: `${(active.y / H) * 100}%`,
-                marginTop: "-10px",
-                background: "var(--crm-surface)",
-                borderColor: "var(--crm-line)",
+                transform: "translate(-50%, -100%)",
+                marginTop: "-12px",
+                background: "var(--crm-surface-3)",
+                borderColor: "var(--crm-line-strong)",
+                boxShadow: "var(--crm-shadow-pop)",
               }}
             >
-              <p className="text-[12px] font-medium" style={{ color: "var(--crm-ink-mute)" }}>
+              <p className="text-[11.5px] font-medium" style={{ color: "var(--crm-ink-mute)" }}>
                 Semana del {fmtWeek(active.period)}
               </p>
-              <p className="font-serif text-[16px] leading-tight tabular-nums" style={{ color: "var(--crm-wine)" }}>
+              <p
+                className="crm-num font-semibold text-[16px] leading-tight"
+                style={{ color: "var(--crm-accent-strong)" }}
+              >
                 {active.count} {active.count === 1 ? "lead" : "leads"}
               </p>
             </div>

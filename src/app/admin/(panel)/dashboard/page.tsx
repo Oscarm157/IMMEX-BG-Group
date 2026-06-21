@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { canViewDashboard, isReadOnly } from "@/lib/crm-permissions";
 import { getDashboardMetrics } from "@/lib/crm-metrics";
 import { getActiveUsers } from "@/lib/crm-data";
+import { PageHeader } from "@/components/crm/PageShell";
 import { DashboardFilters } from "@/components/crm/dashboard/DashboardFilters";
 import { KpiCards } from "@/components/crm/dashboard/KpiCards";
 import { Funnel } from "@/components/crm/dashboard/Funnel";
@@ -65,31 +66,28 @@ export default async function DashboardPage({
   const readOnly = isReadOnly(me.role);
 
   return (
-    <div className="space-y-6">
-      <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <div className="flex items-center gap-2.5">
-            <h1 className="font-serif text-[30px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
-              Dashboard
-            </h1>
-            {readOnly && <span className="crm-badge">Solo lectura</span>}
-          </div>
-          <p className="mt-1 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
-            Actividad de leads en {RANGE_COPY[range]}.
-          </p>
-        </div>
-
-        <DashboardFilters agents={agents} showAgent />
-      </header>
+    <div className="space-y-5">
+      <PageHeader
+        eyebrow="Comercial"
+        title="Dashboard"
+        description={`Actividad de leads en ${RANGE_COPY[range]}.`}
+        actions={<DashboardFilters agents={agents} showAgent />}
+      >
+        {readOnly && (
+          <span className="crm-badge mt-2.5 inline-flex">Solo lectura</span>
+        )}
+      </PageHeader>
 
       <KpiCards totals={metrics.totals} />
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-5 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <TrendChart trend={metrics.trend} />
+        </div>
         <Funnel funnel={metrics.funnel} />
-        <TrendChart trend={metrics.trend} />
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid gap-5 sm:grid-cols-2">
         <SourceBreakdown bySource={metrics.bySource} />
         <ServiceBreakdown byService={metrics.byService} />
       </div>

@@ -19,128 +19,146 @@ export function Funnel({ funnel }: { funnel: DashboardMetrics["funnel"] }) {
   const lost = map.get("lost") ?? { status: "lost" as const, ...EMPTY };
 
   const maxCount = Math.max(1, ...stages.map((s) => s.count), won.count, lost.count);
-  const totalIn = stages.reduce((a, s) => a + s.count, 0) + won.count + lost.count;
+  const openTotal = stages.reduce((a, s) => a + s.count, 0);
+  const totalIn = openTotal + won.count + lost.count;
 
   return (
-    <div className="crm-card p-5">
-      <Header />
+    <div className="crm-card flex h-full flex-col p-5">
+      <div>
+        <h2 className="crm-h2">Embudo por etapa</h2>
+        <p className="mt-1 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
+          Leads creados en el periodo, por su etapa actual
+        </p>
+      </div>
 
       {totalIn === 0 ? (
-        <EmptyState />
+        <p className="mt-6 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
+          Sin datos en este periodo.
+        </p>
       ) : (
-        <div className="mt-4 space-y-2.5">
-          {stages.map((s, i) => (
-            <Bar
-              key={s.status}
-              label={STATUS_LABELS[s.status]}
-              count={s.count}
-              value={s.value}
-              width={(s.count / maxCount) * 100}
-              delay={i * 0.06}
-              reduce={!!reduce}
-              tone="open"
-            />
-          ))}
+        <>
+          <div className="mt-5 space-y-2">
+            {stages.map((s, i) => (
+              <Segment
+                key={s.status}
+                label={STATUS_LABELS[s.status]}
+                count={s.count}
+                value={s.value}
+                pct={openTotal > 0 ? Math.round((s.count / openTotal) * 100) : 0}
+                width={(s.count / maxCount) * 100}
+                delay={i * 0.07}
+                reduce={!!reduce}
+              />
+            ))}
+          </div>
 
-          <div className="my-1 h-px" style={{ background: "var(--crm-line)" }} />
+          <div className="my-4 h-px" style={{ background: "var(--crm-line)" }} />
 
-          <Bar
-            label={STATUS_LABELS.won}
-            count={won.count}
-            value={won.value}
-            width={(won.count / maxCount) * 100}
-            delay={STAGE_ORDER.length * 0.06}
-            reduce={!!reduce}
-            tone="won"
-          />
-          <Bar
-            label={STATUS_LABELS.lost}
-            count={lost.count}
-            value={lost.value}
-            width={(lost.count / maxCount) * 100}
-            delay={(STAGE_ORDER.length + 1) * 0.06}
-            reduce={!!reduce}
-            tone="lost"
-          />
-        </div>
+          <div className="grid grid-cols-2 gap-2">
+            <Result label={STATUS_LABELS.won} count={won.count} value={won.value} tone="won" />
+            <Result label={STATUS_LABELS.lost} count={lost.count} value={lost.value} tone="lost" />
+          </div>
+        </>
       )}
     </div>
   );
 }
 
-function Header() {
+// Segmento centrado: el ancho proporcional al máximo dibuja la silueta de embudo.
+function Segment({
+  label,
+  count,
+  value,
+  pct,
+  width,
+  delay,
+  reduce,
+}: {
+  label: string;
+  count: number;
+  value: number;
+  pct: number;
+  width: number;
+  delay: number;
+  reduce: boolean;
+}) {
   return (
-    <div>
-      <h2 className="font-serif text-[18px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
-        Embudo por etapa
-      </h2>
-      <p className="mt-0.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
-        Leads creados en el periodo, por su etapa actual
-      </p>
+    <div className="group" title={`${label}: ${count}${value > 0 ? ` · ${fmtMoney(value)}` : ""}`}>
+      <div className="flex items-baseline justify-between gap-3 text-[12.5px]">
+        <span className="font-medium" style={{ color: "var(--crm-ink-soft)" }}>
+          {label}
+        </span>
+        <span className="crm-num flex items-baseline gap-1.5">
+          <span className="font-medium" style={{ color: "var(--crm-ink)" }}>
+            {count}
+          </span>
+          <span style={{ color: "var(--crm-ink-mute)" }}>{pct}%</span>
+        </span>
+      </div>
+      <div className="mt-1.5 flex justify-center">
+        <motion.div
+          className="flex h-8 items-center justify-center rounded-md"
+          style={{
+            background: "var(--crm-accent-tint)",
+            border: "1px solid var(--crm-accent-ring)",
+            width: `${count === 0 ? 6 : Math.max(14, width)}%`,
+          }}
+          initial={{ scaleX: reduce ? 1 : 0.4, opacity: reduce ? 1 : 0 }}
+          animate={{ scaleX: 1, opacity: 1 }}
+          transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+        >
+          {value > 0 && (
+            <span
+              className="crm-num truncate px-2 text-[11.5px] font-semibold"
+              style={{ color: "var(--crm-accent-strong)" }}
+            >
+              {fmtMoney(value)}
+            </span>
+          )}
+        </motion.div>
+      </div>
     </div>
   );
 }
 
-function Bar({
+function Result({
   label,
   count,
   value,
-  width,
-  delay,
-  reduce,
   tone,
 }: {
   label: string;
   count: number;
   value: number;
-  width: number;
-  delay: number;
-  reduce: boolean;
-  tone: "open" | "won" | "lost";
+  tone: "won" | "lost";
 }) {
-  const fill =
-    tone === "won"
-      ? "var(--crm-wine)"
-      : tone === "lost"
-      ? "var(--crm-line-strong)"
-      : "var(--crm-wine-soft)";
-  const labelColor = tone === "lost" ? "var(--crm-ink-mute)" : "var(--crm-ink)";
-
+  const accent = tone === "won";
   return (
-    <div className="group" title={`${label}: ${count}${value > 0 ? ` · ${fmtMoney(value)}` : ""}`}>
-      <div className="flex items-baseline justify-between gap-3 text-[12.5px]">
-        <span className="font-medium" style={{ color: labelColor }}>
+    <div
+      className="rounded-[var(--crm-r-md)] p-3"
+      style={{
+        background: "var(--crm-surface)",
+        border: "1px solid var(--crm-line)",
+      }}
+    >
+      <div className="flex items-center gap-1.5">
+        <span
+          className="size-1.5 rounded-full"
+          style={{ background: accent ? "var(--crm-accent)" : "var(--crm-ink-faint)" }}
+        />
+        <span className="text-[12px] font-medium" style={{ color: "var(--crm-ink-soft)" }}>
           {label}
         </span>
-        <span className="flex items-baseline gap-2 tabular-nums">
-          <span className="font-medium" style={{ color: "var(--crm-ink)" }}>
-            {count}
-          </span>
-          {value > 0 && (
-            <span style={{ color: "var(--crm-ink-mute)" }}>{fmtMoney(value)}</span>
-          )}
-        </span>
       </div>
-      <div
-        className="mt-1 h-2 overflow-hidden rounded-full"
-        style={{ background: "var(--crm-surface-2)", border: "1px solid var(--crm-line)" }}
+      <p
+        className="crm-num mt-2 text-[20px] font-semibold leading-none"
+        style={{ color: "var(--crm-ink)" }}
       >
-        <motion.div
-          className="h-full rounded-full transition-[filter] group-hover:brightness-110"
-          style={{ background: fill, width: `${count === 0 ? 0 : Math.max(4, width)}%` }}
-          initial={{ scaleX: reduce ? 1 : 0, transformOrigin: "left center" }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }}
-        />
-      </div>
+        {count}
+      </p>
+      <p className="crm-num mt-1.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
+        {value > 0 ? fmtMoney(value) : "Sin valor"}
+      </p>
     </div>
-  );
-}
-
-function EmptyState() {
-  return (
-    <p className="mt-6 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
-      Sin datos en este periodo.
-    </p>
   );
 }

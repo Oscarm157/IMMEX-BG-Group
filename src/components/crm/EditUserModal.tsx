@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Pencil, ShieldCheck, UserCog, Eye } from "lucide-react";
+import { motion } from "motion/react";
+import { Pencil, Check, ShieldCheck, UserCog, Eye } from "lucide-react";
 import { updateUser } from "@/app/admin/users-actions";
 import type { UserRole } from "@/lib/schema";
 import { Modal } from "@/components/crm/Modal";
@@ -36,7 +37,7 @@ export function EditUserModal({
       <button
         onClick={openModal}
         title="Editar usuario"
-        className="rounded-md p-1.5 text-[var(--crm-ink-mute)] transition-colors hover:bg-[var(--crm-wine-tint)] hover:text-[var(--crm-wine)]"
+        className="rounded-md p-1.5 text-[var(--crm-ink-mute)] transition-colors hover:bg-[var(--crm-accent-tint)] hover:text-[var(--crm-accent-strong)]"
       >
         <Pencil className="size-4" strokeWidth={1.7} />
       </button>
@@ -77,24 +78,34 @@ export function EditUserModal({
                     type="button"
                     key={opt.value}
                     onClick={() => setRole(opt.value)}
-                    className={`flex w-full items-start gap-2.5 rounded-lg border px-3 py-2.5 text-left transition-colors ${
+                    className={`flex w-full items-center gap-2.5 rounded-lg border px-3 py-2.5 text-left transition-colors ${
                       sel
-                        ? "border-[var(--crm-wine-soft)] bg-[var(--crm-wine-tint)]"
-                        : "border-[var(--crm-line)] bg-[var(--crm-surface-2)] hover:border-[var(--crm-line-strong)]"
+                        ? "border-[var(--crm-accent-ring)] bg-[var(--crm-accent-tint)]"
+                        : "border-[var(--crm-line)] bg-[var(--crm-surface)] hover:border-[var(--crm-line-strong)]"
                     }`}
                   >
-                    <Icon className={`mt-0.5 size-4 shrink-0 ${sel ? "text-[var(--crm-wine)]" : "text-[var(--crm-ink-mute)]"}`} strokeWidth={1.8} />
-                    <span className="min-w-0">
-                      <span className={`block text-[13px] font-medium ${sel ? "text-[var(--crm-wine)]" : "text-[var(--crm-ink)]"}`}>{opt.label}</span>
+                    <Icon className={`size-4 shrink-0 ${sel ? "text-[var(--crm-accent-strong)]" : "text-[var(--crm-ink-mute)]"}`} strokeWidth={1.8} />
+                    <span className="min-w-0 flex-1">
+                      <span className={`block text-[13px] font-medium ${sel ? "text-[var(--crm-accent-strong)]" : "text-[var(--crm-ink)]"}`}>{opt.label}</span>
                       <span className="block text-[12.5px] text-[var(--crm-ink-mute)]">{opt.hint}</span>
                     </span>
+                    {sel && (
+                      <motion.span
+                        initial={{ scale: 0.6, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                        className="grid size-4 shrink-0 place-items-center rounded-full bg-[var(--crm-accent)] text-[var(--crm-on-accent)]"
+                      >
+                        <Check className="size-3" strokeWidth={3} />
+                      </motion.span>
+                    )}
                   </button>
                 );
               })}
             </div>
           </fieldset>
 
-          {error && <p className="text-[12.5px] text-[var(--crm-wine)]">{error}</p>}
+          {error && <p className="text-[12.5px] text-[var(--destructive)]">{error}</p>}
           <div className="flex items-center gap-2 pt-1">
             <button type="submit" disabled={pending} className="crm-btn crm-btn-primary flex-1">
               {pending ? "Guardando…" : "Guardar cambios"}

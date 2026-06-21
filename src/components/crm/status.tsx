@@ -3,12 +3,13 @@ import { STATUS_LABELS, STATUS_ORDER } from "@/lib/crm-status";
 
 export { STATUS_ORDER };
 
+// Paleta curada para tema oscuro: tinte suave + texto claro legible (300/400), no -700.
 const STATUS_STYLE: Record<LeadStatus, { badge: string; dot: string }> = {
   new: { badge: "bg-[var(--crm-wine-tint)] text-[var(--crm-wine)] border-[var(--crm-wine-ring)]", dot: "bg-[var(--crm-wine)]" },
-  contacted: { badge: "bg-blue-500/10 text-blue-700 border-blue-600/20", dot: "bg-blue-500" },
-  following_up: { badge: "bg-amber-500/12 text-amber-700 border-amber-600/25", dot: "bg-amber-500" },
-  proposal: { badge: "bg-indigo-500/10 text-indigo-700 border-indigo-600/20", dot: "bg-indigo-500" },
-  won: { badge: "bg-emerald-600/10 text-emerald-700 border-emerald-700/20", dot: "bg-emerald-600" },
+  contacted: { badge: "bg-sky-400/12 text-sky-300 border-sky-400/25", dot: "bg-sky-400" },
+  following_up: { badge: "bg-amber-400/12 text-amber-300 border-amber-400/25", dot: "bg-amber-400" },
+  proposal: { badge: "bg-violet-400/12 text-violet-300 border-violet-400/25", dot: "bg-violet-400" },
+  won: { badge: "bg-emerald-400/12 text-emerald-300 border-emerald-400/25", dot: "bg-emerald-400" },
   lost: { badge: "bg-[var(--crm-surface-2)] text-[var(--crm-ink-mute)] border-[var(--crm-line-strong)]", dot: "bg-[var(--crm-ink-mute)]" },
 };
 
@@ -30,8 +31,8 @@ export function StatusBadge({ status }: { status: LeadStatus }) {
 }
 
 const SOURCE_META: Record<LeadSource, { label: string; cls: string; dot: string }> = {
-  bot: { label: "Chatbot", cls: "bg-violet-500/8 text-violet-700 border-violet-600/18", dot: "bg-violet-500" },
-  form: { label: "Formulario", cls: "bg-teal-500/8 text-teal-700 border-teal-600/18", dot: "bg-teal-500" },
+  bot: { label: "Chatbot", cls: "bg-violet-400/12 text-violet-300 border-violet-400/22", dot: "bg-violet-400" },
+  form: { label: "Formulario", cls: "bg-teal-400/12 text-teal-300 border-teal-400/22", dot: "bg-teal-400" },
   manual: { label: "Manual", cls: "bg-[var(--crm-surface-2)] text-[var(--crm-ink-mute)] border-[var(--crm-line-strong)]", dot: "bg-[var(--crm-ink-mute)]" },
 };
 

@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { canManageAds } from "@/lib/crm-permissions";
 import { createAd } from "@/app/admin/ads-actions";
 import { AdForm } from "@/components/crm/ads/AdForm";
+import { PageHeader } from "@/components/crm/PageShell";
 
 export const dynamic = "force-dynamic";
 
@@ -14,8 +15,13 @@ export default async function NewAd() {
 
   return (
     <div className="mx-auto max-w-[820px] px-4 py-8 sm:px-7">
-      <Link href="/admin/ads" className="font-mono text-[11px] uppercase tracking-[0.14em] text-[var(--crm-wine)]">&larr; Campañas</Link>
-      <h1 className="mb-6 mt-4 font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Nueva campaña</h1>
+      <Link
+        href="/admin/ads"
+        className="mb-4 inline-flex items-center gap-1.5 text-[12.5px] text-[var(--crm-ink-mute)] transition-colors hover:text-[var(--crm-ink)]"
+      >
+        <span aria-hidden>&larr;</span> Campañas
+      </Link>
+      <PageHeader eyebrow="Marketing" title="Nueva campaña" description="Registra una campaña para dar seguimiento a su presupuesto y atribución de leads." />
       <AdForm action={createAd} submitLabel="Crear campaña" />
     </div>
   );

@@ -3,7 +3,7 @@
 import { useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
-import { ChevronDown } from "lucide-react";
+import { Select } from "@/components/crm/ui/Select";
 
 type Agent = { id: string; name: string };
 
@@ -15,8 +15,9 @@ const RANGES = [
   { value: "all", label: "Todo" },
 ] as const;
 
+// "all" = centinela (Radix Select no admite value vacío); se mapea a "" al setear.
 const SOURCES = [
-  { value: "", label: "Todas las fuentes" },
+  { value: "all", label: "Todas las fuentes" },
   { value: "bot", label: "Chatbot" },
   { value: "form", label: "Formulario" },
   { value: "manual", label: "Manual" },
@@ -61,13 +62,13 @@ export function DashboardFilters({
               key={r.value}
               onClick={() => setParam("range", r.value === "30d" ? "" : r.value)}
               className="relative h-8 rounded-md px-3 text-[12.5px] font-medium transition-colors"
-              style={{ color: on ? "#fff" : "var(--crm-ink-soft)" }}
+              style={{ color: on ? "var(--crm-on-accent)" : "var(--crm-ink-soft)" }}
             >
               {on && (
                 <motion.span
                   layoutId="crm-range-pill"
                   className="absolute inset-0 rounded-md"
-                  style={{ background: "var(--crm-wine)", boxShadow: "0 1px 3px rgba(125,17,30,0.35)" }}
+                  style={{ background: "var(--crm-accent)" }}
                   transition={{ type: "spring", stiffness: 420, damping: 34 }}
                 />
               )}
@@ -78,53 +79,26 @@ export function DashboardFilters({
       </div>
 
       {showAgent && (
-        <SelectField
-          ariaLabel="Agente"
-          value={owner}
-          onChange={(v) => setParam("owner", v)}
-          options={[{ value: "", label: "Todos los agentes" }, ...agents.map((a) => ({ value: a.id, label: a.name }))]}
-        />
+        <div className="w-[170px]">
+          <Select
+            ariaLabel="Agente"
+            size="sm"
+            value={owner || "all"}
+            onValueChange={(v) => setParam("owner", v === "all" ? "" : v)}
+            options={[{ value: "all", label: "Todos los agentes" }, ...agents.map((a) => ({ value: a.id, label: a.name }))]}
+          />
+        </div>
       )}
 
-      <SelectField
-        ariaLabel="Origen"
-        value={source}
-        onChange={(v) => setParam("source", v)}
-        options={SOURCES}
-      />
-    </div>
-  );
-}
-
-function SelectField({
-  ariaLabel,
-  value,
-  options,
-  onChange,
-}: {
-  ariaLabel: string;
-  value: string;
-  options: { value: string; label: string }[];
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div className="relative">
-      <select
-        aria-label={ariaLabel}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className="crm-select h-9 appearance-none !pr-8"
-      >
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
-      <ChevronDown
-        className="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2"
-        style={{ color: "var(--crm-ink-mute)" }}
-      />
+      <div className="w-[160px]">
+        <Select
+          ariaLabel="Origen"
+          size="sm"
+          value={source || "all"}
+          onValueChange={(v) => setParam("source", v === "all" ? "" : v)}
+          options={SOURCES}
+        />
+      </div>
     </div>
   );
 }

@@ -3,12 +3,14 @@
 import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "motion/react";
-import { Search, X, SlidersHorizontal, ChevronDown } from "lucide-react";
+import { Search, X, SlidersHorizontal } from "lucide-react";
+import { Select } from "@/components/crm/ui/Select";
 
 type Owner = { id: string; name: string };
 
+// "all" = centinela (Radix Select no admite value vacío); se mapea a "" al setear el filtro.
 const SOURCES = [
-  { value: "", label: "Todos los orígenes" },
+  { value: "all", label: "Todos los orígenes" },
   { value: "bot", label: "Chatbot" },
   { value: "form", label: "Formulario" },
   { value: "manual", label: "Manual" },
@@ -19,38 +21,6 @@ const SORTS = [
   { value: "name", label: "Nombre A–Z" },
   { value: "status", label: "Etapa del pipeline" },
 ];
-
-const selectCls = "crm-select h-9 appearance-none !pl-3 !pr-8 text-[13px]";
-
-function Select({
-  name,
-  value,
-  options,
-  onChange,
-}: {
-  name: string;
-  value: string;
-  options: { value: string; label: string }[];
-  onChange: (v: string) => void;
-}) {
-  return (
-    <div className="relative">
-      <select
-        aria-label={name}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        className={selectCls}
-      >
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
-      <ChevronDown className="pointer-events-none absolute right-2.5 top-1/2 size-3.5 -translate-y-1/2 text-[var(--crm-ink-mute)]" />
-    </div>
-  );
-}
 
 export function LeadFilters({
   owners,
@@ -102,7 +72,7 @@ export function LeadFilters({
   }, [search]);
 
   const ownerOptions = [
-    { value: "", label: "Todos los responsables" },
+    { value: "all", label: "Todos los responsables" },
     ...owners.map((o) => ({ value: o.id, label: o.name })),
   ];
 
@@ -110,7 +80,7 @@ export function LeadFilters({
     <div className="mt-5 space-y-3">
       <div className="flex flex-wrap items-center gap-2">
         <div className="group relative min-w-0 flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[var(--crm-ink-mute)] transition-colors group-focus-within:text-[var(--crm-wine)]" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[var(--crm-ink-mute)] transition-colors group-focus-within:text-[var(--crm-accent-strong)]" />
           <input
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -133,11 +103,11 @@ export function LeadFilters({
             onClick={() => setParam("unassigned", unassigned ? "" : "1")}
             className={`inline-flex h-10 shrink-0 items-center gap-1.5 rounded-lg border px-3 text-[13px] font-medium transition-colors ${
               unassigned
-                ? "border-[var(--crm-wine-ring)] bg-[var(--crm-wine-tint)] text-[var(--crm-wine)]"
+                ? "border-[var(--crm-accent-ring)] bg-[var(--crm-accent-tint)] text-[var(--crm-accent-strong)]"
                 : "border-[var(--crm-line-strong)] bg-[var(--crm-surface)] text-[var(--crm-ink-soft)] hover:border-[var(--crm-ink-mute)] hover:text-[var(--crm-ink)]"
             }`}
           >
-            <span className={`size-1.5 rounded-full ${unassigned ? "bg-[var(--crm-wine)]" : "bg-[var(--crm-ink-mute)]"}`} />
+            <span className={`size-1.5 rounded-full ${unassigned ? "bg-[var(--crm-accent)]" : "bg-[var(--crm-ink-mute)]"}`} />
             Sin asignar
           </button>
         )}
@@ -164,10 +134,25 @@ export function LeadFilters({
         >
           <div className="grid grid-cols-2 gap-2 pt-0.5 sm:grid-cols-3">
             {showOwner && (
-              <Select name="owner" value={owner} options={ownerOptions} onChange={(v) => setParam("owner", v)} />
+              <Select
+                ariaLabel="Responsable"
+                value={owner || "all"}
+                options={ownerOptions}
+                onValueChange={(v) => setParam("owner", v === "all" ? "" : v)}
+              />
             )}
-            <Select name="source" value={source} options={SOURCES} onChange={(v) => setParam("source", v)} />
-            <Select name="sort" value={sort} options={SORTS} onChange={(v) => setParam("sort", v === "recent" ? "" : v)} />
+            <Select
+              ariaLabel="Origen"
+              value={source || "all"}
+              options={SOURCES}
+              onValueChange={(v) => setParam("source", v === "all" ? "" : v)}
+            />
+            <Select
+              ariaLabel="Orden"
+              value={sort}
+              options={SORTS}
+              onValueChange={(v) => setParam("sort", v === "recent" ? "" : v)}
+            />
           </div>
         </motion.div>
       )}

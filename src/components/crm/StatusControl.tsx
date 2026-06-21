@@ -1,7 +1,8 @@
 "use client";
 
 import { useOptimistic, useTransition } from "react";
-import { ChevronDown, Loader2 } from "lucide-react";
+import * as RS from "@radix-ui/react-select";
+import { ChevronDown, Loader2, Check } from "lucide-react";
 import type { LeadStatus } from "@/lib/schema";
 import { updateLeadStatus } from "@/app/admin/actions";
 import { STATUS_META, STATUS_ORDER } from "./status";
@@ -36,35 +37,52 @@ export function StatusControl({
   }
 
   return (
-    <label
-      className={`relative inline-flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-[13px] font-medium transition-colors sm:w-[170px] ${wrap}`}
+    <RS.Root
+      value={optimistic}
+      onValueChange={(v) =>
+        startTransition(() => {
+          setOptimistic(v as LeadStatus);
+          updateLeadStatus(leadId, v as LeadStatus);
+        })
+      }
     >
-      {pending ? (
-        <Loader2 className={`size-3.5 shrink-0 animate-spin ${meta.dot.replace("bg-", "text-")}`} strokeWidth={2} />
-      ) : (
-        <span className={`size-1.5 shrink-0 rounded-full ${meta.dot}`} />
-      )}
-      <select
-        value={optimistic}
-        onChange={(e) => {
-          const next = e.target.value as LeadStatus;
-          startTransition(() => {
-            setOptimistic(next);
-            updateLeadStatus(leadId, next);
-          });
-        }}
-        className="w-full cursor-pointer appearance-none bg-transparent pr-5 outline-none"
+      <RS.Trigger
+        aria-label="Cambiar estado"
+        className={`relative inline-flex w-full items-center gap-2 rounded-lg border px-3 py-2 text-[13px] font-medium outline-none transition-colors focus-visible:shadow-[0_0_0_3px_var(--crm-wine-ring)] sm:w-[170px] ${wrap}`}
       >
-        {STATUS_ORDER.map((s) => (
-          <option key={s} value={s} className="bg-[var(--crm-surface)] text-[var(--crm-ink)]">
-            {STATUS_META[s].label}
-          </option>
-        ))}
-      </select>
-      <ChevronDown
-        className="pointer-events-none absolute right-2.5 size-3.5 opacity-60"
-        strokeWidth={2}
-      />
-    </label>
+        {pending ? (
+          <Loader2 className={`size-3.5 shrink-0 animate-spin ${meta.dot.replace("bg-", "text-")}`} strokeWidth={2} />
+        ) : (
+          <span className={`size-1.5 shrink-0 rounded-full ${meta.dot}`} />
+        )}
+        <RS.Value />
+        <RS.Icon className="ml-auto">
+          <ChevronDown className="size-3.5 opacity-60" strokeWidth={2} />
+        </RS.Icon>
+      </RS.Trigger>
+      <RS.Portal>
+        <RS.Content
+          position="popper"
+          sideOffset={6}
+          className="z-50 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-lg border border-[var(--crm-line)] bg-[var(--crm-surface)] shadow-[0_12px_40px_-12px_rgba(0,0,0,0.7)]"
+        >
+          <RS.Viewport className="p-1">
+            {STATUS_ORDER.map((s) => (
+              <RS.Item
+                key={s}
+                value={s}
+                className="relative flex cursor-pointer select-none items-center gap-2 rounded-md py-1.5 pl-2.5 pr-8 text-[13px] text-[var(--crm-ink-soft)] outline-none data-[highlighted]:bg-[var(--crm-surface-2)] data-[highlighted]:text-[var(--crm-ink)]"
+              >
+                <span className={`size-1.5 shrink-0 rounded-full ${STATUS_META[s].dot}`} />
+                <RS.ItemText>{STATUS_META[s].label}</RS.ItemText>
+                <RS.ItemIndicator className="absolute right-2.5">
+                  <Check className="size-3.5 text-[var(--crm-wine)]" />
+                </RS.ItemIndicator>
+              </RS.Item>
+            ))}
+          </RS.Viewport>
+        </RS.Content>
+      </RS.Portal>
+    </RS.Root>
   );
 }

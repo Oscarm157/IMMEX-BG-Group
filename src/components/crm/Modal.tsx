@@ -63,7 +63,7 @@ export function Modal({
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.15 }}
-          style={{ background: "rgba(20,18,14,0.42)" }}
+          style={{ background: "rgba(4,6,10,0.62)" }}
           className="crm-root fixed inset-0 z-50 overflow-y-auto overscroll-contain backdrop-blur-sm"
           onMouseDown={(e) => {
             if (e.target === e.currentTarget) onClose();
@@ -80,12 +80,12 @@ export function Modal({
               exit={{ opacity: 0, y: 8, scale: 0.985 }}
               transition={{ type: "spring", stiffness: 360, damping: 30 }}
               style={{ maxWidth }}
-              className="crm-card w-full p-6 shadow-[0_24px_64px_rgba(20,18,14,0.18)]"
+              className="crm-card w-full p-6 shadow-[var(--crm-shadow-pop)]"
               onMouseDown={(e) => e.stopPropagation()}
             >
               {title && (
                 <div className="mb-4 flex items-center justify-between gap-4">
-                  <h2 className="font-serif text-[20px] tracking-tight text-[var(--crm-ink)]">{title}</h2>
+                  <h2 className="font-semibold text-[20px] tracking-tight text-[var(--crm-ink)]">{title}</h2>
                   <button
                     type="button"
                     onClick={onClose}

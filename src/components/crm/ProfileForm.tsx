@@ -47,7 +47,7 @@ export function ProfileForm({ name, email }: { name: string; email: string }) {
               initial={{ opacity: 0, x: -6 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0 }}
-              className="inline-flex items-center gap-1 text-[12.5px] text-emerald-700"
+              className="inline-flex items-center gap-1 text-[12.5px] text-[var(--crm-accent-strong)]"
             >
               <Check className="size-3.5" /> Guardado
             </motion.span>

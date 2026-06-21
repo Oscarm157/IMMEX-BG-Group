@@ -42,7 +42,7 @@ export default async function ChangePassword({
             <KeyRound className="size-5" strokeWidth={1.7} />
           </span>
           <p className="text-[11px] uppercase tracking-[0.2em] text-[var(--crm-wine)]">BG Consulting Group</p>
-          <h1 className="mt-1.5 font-serif text-[25px] tracking-tight text-[var(--crm-ink)]">
+          <h1 className="mt-1.5 font-semibold text-[25px] tracking-tight text-[var(--crm-ink)]">
             {forced ? "Define una contraseña" : "Cambiar contraseña"}
           </h1>
           {forced && (

@@ -21,30 +21,34 @@ const NETWORKS: { id: Red; label: string }[] = [
 
 export function ConfigPanel({ networks, toggleNetwork, approaches, setApproach, onGenerate, loading, canGenerate }: Props) {
   return (
-    <section className="crm-card p-6">
-      <div className="mb-5 flex items-center gap-3">
-        <span className="grid h-6 w-6 place-items-center rounded-md text-[12px] font-semibold" style={{ background: "var(--crm-wine-tint)", color: "var(--crm-wine)" }}>02</span>
-        <h2 className="text-[12px] font-semibold uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Configuración</h2>
+    <section className="crm-card flex flex-col p-5">
+      <div className="mb-4 flex items-baseline gap-2.5">
+        <span className="crm-eyebrow">Paso 2</span>
+        <h2 className="crm-h2">Configuración</h2>
       </div>
 
-      <div className="mb-6">
-        <p className="mb-3 text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Redes destino</p>
+      <div className="mb-5">
+        <p className="mb-2.5 text-[13px] font-medium text-[var(--crm-ink-soft)]">Redes destino</p>
         <div className="grid grid-cols-3 gap-2">
           {NETWORKS.map((n) => {
             const active = networks.includes(n.id);
             return (
               <motion.button
                 key={n.id} type="button" whileHover={{ y: -2 }} whileTap={{ scale: 0.97 }} onClick={() => toggleNetwork(n.id)}
-                className="relative flex h-[72px] flex-col items-start justify-between rounded-xl border p-3 text-left transition"
-                style={{ borderColor: active ? "var(--crm-wine-soft)" : "var(--crm-line)", background: active ? "var(--crm-wine-tint)" : "var(--crm-surface-2)" }}
+                aria-pressed={active}
+                className="relative flex h-[70px] flex-col items-start justify-between rounded-[var(--crm-r-md)] border p-3 text-left transition-colors"
+                style={{
+                  borderColor: active ? "var(--crm-accent-ring)" : "var(--crm-line)",
+                  background: active ? "var(--crm-accent-tint)" : "var(--crm-surface)",
+                }}
               >
                 <NetworkGlyph id={n.id} active={active} />
                 <span className="text-[13px] font-medium" style={{ color: active ? "var(--crm-ink)" : "var(--crm-ink-soft)" }}>{n.label}</span>
                 <AnimatePresence>
                   {active && (
                     <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} transition={{ type: "spring", stiffness: 500, damping: 22 }}
-                      className="absolute right-2.5 top-2.5 grid h-5 w-5 place-items-center rounded-full" style={{ background: "var(--crm-wine)", color: "var(--crm-on-accent)" }}>
-                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none"><path d="m5 12 5 5 9-10" stroke="currentColor" strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                      className="absolute right-2.5 top-2.5 grid h-[18px] w-[18px] place-items-center rounded-full" style={{ background: "var(--crm-accent)", color: "var(--crm-on-accent)" }}>
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="none"><path d="m5 12 5 5 9-10" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" /></svg>
                     </motion.span>
                   )}
                 </AnimatePresence>
@@ -54,13 +58,13 @@ export function ConfigPanel({ networks, toggleNetwork, approaches, setApproach, 
         </div>
       </div>
 
-      <div className="mb-6">
-        <p className="mb-3 text-[12px] font-medium uppercase tracking-[0.18em] text-[var(--crm-ink-mute)]">Enfoques (3 variantes)</p>
-        <div className="grid gap-3 sm:grid-cols-3">
+      <div className="mb-5">
+        <p className="mb-2.5 text-[13px] font-medium text-[var(--crm-ink-soft)]">Enfoques de las 3 variantes</p>
+        <div className="grid gap-2.5 sm:grid-cols-3">
           {[0, 1, 2].map((i) => (
             <div key={i}>
-              <label className="mb-1.5 block text-[11px] font-medium uppercase tracking-[0.16em] text-[var(--crm-ink-mute)]">Variante {i + 1}</label>
-              <select value={approaches[i]} onChange={(e) => setApproach(i as 0 | 1 | 2, e.target.value)} className="crm-select !h-11 text-[13px]">
+              <label className="crm-num mb-1.5 block text-[12px] text-[var(--crm-ink-mute)]">Variante {i + 1}</label>
+              <select value={approaches[i]} onChange={(e) => setApproach(i as 0 | 1 | 2, e.target.value)} className="crm-select !h-10 text-[13px]">
                 {ENFOQUES.map((enf) => <option key={enf} value={enf}>{enf}</option>)}
               </select>
             </div>
@@ -68,26 +72,28 @@ export function ConfigPanel({ networks, toggleNetwork, approaches, setApproach, 
         </div>
       </div>
 
-      <button type="button" onClick={onGenerate} disabled={!canGenerate || loading} className="crm-btn crm-btn-primary h-12 w-full">
-        {loading ? (
-          <>
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" className="animate-spin"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.2" strokeOpacity="0.3" /><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
-            <span>Generando…</span>
-          </>
-        ) : (
-          <>
-            <span>Generar 3 variantes</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-          </>
-        )}
-      </button>
-      <p className="mt-3 text-center text-[12px] text-[var(--crm-ink-mute)]">Usa Claude Sonnet 4.6 · contextualizado para México</p>
+      <div className="mt-auto pt-1">
+        <button type="button" onClick={onGenerate} disabled={!canGenerate || loading} className="crm-btn crm-btn-primary h-11 w-full">
+          {loading ? (
+            <>
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" className="animate-spin"><circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="2.2" strokeOpacity="0.3" /><path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /></svg>
+              <span>Generando…</span>
+            </>
+          ) : (
+            <>
+              <span>Generar 3 variantes</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M5 12h14m0 0-5-5m5 5-5 5" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </>
+          )}
+        </button>
+        <p className="mt-2.5 text-center text-[12px] text-[var(--crm-ink-mute)]">Claude Sonnet 4.6, contextualizado para México</p>
+      </div>
     </section>
   );
 }
 
 function NetworkGlyph({ id, active }: { id: Red; active: boolean }) {
-  const color = active ? "var(--crm-wine)" : "var(--crm-ink-mute)";
+  const color = active ? "var(--crm-accent-strong)" : "var(--crm-ink-mute)";
   const common = { width: 18, height: 18, viewBox: "0 0 24 24", fill: "none" } as const;
   if (id === "linkedin") {
     return <svg {...common}><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5ZM3 9.5h4V21H3V9.5ZM9 9.5h3.84v1.57h.05a4.2 4.2 0 0 1 3.78-2.08C20 9 21 11 21 14v7h-4v-6.2c0-1.47 0-3.38-2.06-3.38-2.06 0-2.37 1.61-2.37 3.27V21H9V9.5Z" fill={color} /></svg>;

@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
 
 @theme {
   /* ===== Sitio formal v2 — dark con profundidad por capas + acento BG ===== */
@@ -21,7 +24,7 @@
   --color-smoke: #a6adbb; /* atenuado, para labels */
   --color-ash: #818996; /* tenue, solo micro-labels */
   /* Mint de marca (verde exacto del logo BG; el #70c48b previo era erróneo) */
-  --color-accent: #00e6a0; /* señal luminosa, sobre dark */
+  /* --color-accent se enruta vía @theme inline → var(--accent) para coexistir con shadcn */
   --color-accent-dim: #00c489; /* hover */
   --color-accent-ink: #0b7d5a; /* legible sobre superficies claras */
   --color-on-accent: #04231a;
@@ -32,11 +35,10 @@
   --font-serif: var(--font-instrument), Georgia, serif;
 
   /* ===== Tokens heredados (solo para /foro archivado) ===== */
-  --color-primary: #000616;
+  /* --color-primary y --color-secondary se enrutan vía @theme inline → var(--primary/--secondary) */
   --color-primary-container: #0b1f3b;
   --color-on-primary: #ffffff;
   --color-on-primary-container: #7587a9;
-  --color-secondary: #465f86;
   --color-tertiary-fixed: #e6ff00;
   --color-tertiary-fixed-dim: #bdd200;
   --color-on-tertiary-fixed: #1a1e00;
@@ -48,6 +50,55 @@
   --color-on-surface: #191c1e;
   --color-on-surface-variant: #44474d;
   --color-outline-variant: #c5c6ce;
+}
+
+/* ===== Puente shadcn/ui =====
+   shadcn tematiza por variables (--primary, --background, etc.). Tres nombres
+   chocan con el @theme público: accent (mint, usado en la landing), primary y
+   secondary (solo /foro). Se definen aquí con los valores PÚBLICOS y se
+   sobrescriben bajo .crm-root con el palette dark+mint del panel. El resto de
+   tokens shadcn solo se consumen dentro de .crm-root. */
+:root {
+  --primary: #000616;
+  --primary-foreground: #ffffff;
+  --secondary: #465f86;
+  --secondary-foreground: #ffffff;
+  --accent: #00e6a0;
+  --accent-foreground: #04231a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
 body {
@@ -186,35 +237,125 @@ html {
    Todo bajo .crm-root para no filtrar al sitio público.
    ============================================================ */
 .crm-root {
-  --crm-bg: #0f1521;
-  --crm-surface: #18202e;
-  --crm-surface-2: #1f2838;
-  --crm-ink: #f6f8fa;
-  --crm-ink-soft: #d6dbe3;
-  --crm-ink-mute: #aeb6c2;
-  --crm-line: #313c4f;
-  --crm-line-strong: #3a4760;
-  --crm-wine: #00e6a0;
-  --crm-wine-soft: #00c489;
-  --crm-wine-tint: rgba(0, 230, 160, 0.10);
-  --crm-wine-ring: rgba(0, 230, 160, 0.28);
+  /* ===== Scaffold neutro casi-negro frío (familia Linear/Rox) =====
+     Elevación por capa de color + hairline, NO por sombra. Re-marcable:
+     toda la identidad vive en --crm-accent; el resto es neutro. */
+  --crm-bg: #0a0d13;          /* canvas */
+  --crm-surface: #11151d;     /* panel base */
+  --crm-surface-2: #161b25;   /* card */
+  --crm-surface-3: #1d2330;   /* raised / hover / activo */
+  --crm-ink: #f5f7fa;         /* texto primario */
+  --crm-ink-soft: #c4cad6;    /* secundario */
+  --crm-ink-mute: #828b9b;    /* labels / headers de tabla */
+  --crm-ink-faint: #59616f;   /* micro-labels, placeholders */
+  --crm-line: #222a36;        /* hairline */
+  --crm-line-strong: #2e3847; /* borde de input / divisor fuerte */
+
+  /* Acento de marca — ÚNICA variable a cambiar para re-marcar (BG = mint) */
+  --crm-accent: #00e6a0;
+  --crm-accent-soft: #19c98e;       /* hover sobre relleno */
+  --crm-accent-strong: #5cf4c2;     /* texto/realce sobre dark */
+  --crm-accent-tint: rgba(0, 230, 160, 0.10);
+  --crm-accent-tint-2: rgba(0, 230, 160, 0.16);
+  --crm-accent-ring: rgba(0, 230, 160, 0.30);
   --crm-on-accent: #04231a;
+  --crm-brand-navy: #284068;        /* toque de marca BG puntual */
+
+  /* Radios (más apretados, tipo Linear) */
+  --crm-r-sm: 6px;
+  --crm-r-md: 8px;
+  --crm-r-lg: 10px;
+  --crm-r-xl: 14px;
+
+  /* Sombra SOLO para overlays (popover/modal/dropdown) */
+  --crm-shadow-pop: 0 16px 48px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--crm-line);
+
+  /* ===== Alias legacy --crm-wine* → --crm-accent* (no romper componentes) ===== */
+  --crm-wine: var(--crm-accent);
+  --crm-wine-soft: var(--crm-accent-soft);
+  --crm-wine-tint: var(--crm-accent-tint);
+  --crm-wine-ring: var(--crm-accent-ring);
+
+  /* Tokens shadcn aliasados al palette del panel (dark + mint). */
+  --background: var(--crm-bg);
+  --foreground: var(--crm-ink);
+  --card: var(--crm-surface-2);
+  --card-foreground: var(--crm-ink);
+  --popover: var(--crm-surface-2);
+  --popover-foreground: var(--crm-ink);
+  --primary: var(--crm-accent);
+  --primary-foreground: var(--crm-on-accent);
+  --secondary: var(--crm-surface-3);
+  --secondary-foreground: var(--crm-ink);
+  --muted: var(--crm-surface-2);
+  --muted-foreground: var(--crm-ink-mute);
+  --accent: var(--crm-surface-3);
+  --accent-foreground: var(--crm-ink);
+  --destructive: #f0503f;
+  --destructive-foreground: #ffffff;
+  --border: var(--crm-line);
+  --input: var(--crm-line-strong);
+  --ring: var(--crm-accent-ring);
+  --radius: 0.5rem;
+  --sidebar: var(--crm-surface);
+  --sidebar-foreground: var(--crm-ink-soft);
+  --sidebar-primary: var(--crm-accent);
+  --sidebar-primary-foreground: var(--crm-on-accent);
+  --sidebar-accent: var(--crm-accent-tint);
+  --sidebar-accent-foreground: var(--crm-accent-strong);
+  --sidebar-border: var(--crm-line);
+  --sidebar-ring: var(--crm-accent-ring);
 
   background: var(--crm-bg);
   color: var(--crm-ink);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
+/* Reset base de shadcn, SCOPEADO al panel (no global, para no tocar la landing).
+   En @layer base para que cualquier utilidad border-* explícita lo sobrescriba. */
+@layer base {
+  .crm-root *,
+  .crm-root ::after,
+  .crm-root ::before {
+    border-color: var(--border);
+  }
+}
+
+/* ===== Escala tipográfica del panel (Inter, tracking apretado tipo Linear) ===== */
+.crm-h1 {
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1.18;
+  letter-spacing: -0.022em;
+  color: var(--crm-ink);
+}
+.crm-h2 {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 1.3;
+  letter-spacing: -0.014em;
+  color: var(--crm-ink);
+}
+.crm-eyebrow {
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--crm-ink-mute);
+}
+/* Toda métrica, moneda, fecha y contador: números tabulares */
+.crm-num { font-variant-numeric: tabular-nums; font-feature-settings: "tnum" 1; }
+
 .crm-card {
-  background: var(--crm-surface);
+  background: var(--crm-surface-2);
   border: 1px solid var(--crm-line);
-  border-radius: 12px;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+  border-radius: var(--crm-r-lg);
 }
 .crm-card-flat {
   background: var(--crm-surface);
   border: 1px solid var(--crm-line);
-  border-radius: 10px;
+  border-radius: var(--crm-r-lg);
 }
 .crm-hairline { height: 1px; background: var(--crm-line); border: 0; }
 .crm-rule { border-color: var(--crm-line); }
@@ -239,20 +380,20 @@ html {
 .crm-btn:disabled { opacity: 0.5; pointer-events: none; }
 
 .crm-btn-primary {
-  background: var(--crm-wine);
+  background: var(--crm-accent);
   color: var(--crm-on-accent);
-  border: 1px solid var(--crm-wine);
-  box-shadow: 0 1px 12px rgba(0, 230, 160, 0.18);
+  border: 1px solid transparent;
   font-weight: 600;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.18);
 }
-.crm-btn-primary:hover { background: var(--crm-wine-soft); border-color: var(--crm-wine-soft); }
+.crm-btn-primary:hover { background: var(--crm-accent-soft); }
 
 .crm-btn-secondary {
-  background: var(--crm-surface);
+  background: var(--crm-surface-2);
   color: var(--crm-ink);
   border: 1px solid var(--crm-line-strong);
 }
-.crm-btn-secondary:hover { background: var(--crm-surface-2); border-color: var(--crm-ink-mute); }
+.crm-btn-secondary:hover { background: var(--crm-surface-3); border-color: var(--crm-ink-faint); }
 
 .crm-btn-ghost {
   background: transparent;
@@ -269,7 +410,7 @@ html {
   width: 100%;
   background: var(--crm-surface);
   border: 1px solid var(--crm-line-strong);
-  border-radius: 8px;
+  border-radius: var(--crm-r-md);
   padding: 0 0.7rem;
   height: 36px;
   font-size: 14px;
@@ -327,49 +468,56 @@ html {
 }
 
 .crm-table { width: 100%; text-align: left; border-collapse: collapse; }
+/* Headers sentence-case, NO uppercase (lo más dated del sistema previo) */
 .crm-th {
-  padding: 0.6rem 1rem;
-  font-size: 11px;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
+  padding: 0.5rem 1rem;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0;
   color: var(--crm-ink-mute);
   white-space: nowrap;
 }
-.crm-td { padding: 0.75rem 1rem; vertical-align: middle; }
-.crm-thead { background: var(--crm-wine-tint); }
-.crm-thead .crm-th { color: var(--crm-wine); }
-.crm-row { background: var(--crm-surface); transition: background-color 0.14s ease; }
-.crm-row:hover { background: var(--crm-surface-2); }
+/* Orden: header clickable con afford. de flecha */
+.crm-th-sort { cursor: pointer; user-select: none; transition: color 0.15s ease; }
+.crm-th-sort:hover { color: var(--crm-ink-soft); }
+.crm-td { padding: 0.7rem 1rem; vertical-align: middle; }
+/* Header silencioso, sticky-ready, separado por hairline */
+.crm-thead { background: var(--crm-surface); border-bottom: 1px solid var(--crm-line); }
+.crm-thead .crm-th { color: var(--crm-ink-mute); }
+.crm-row { background: transparent; transition: background-color 0.14s ease; }
+.crm-row:hover { background: var(--crm-surface-3); }
+.crm-row + .crm-row { border-top: 1px solid var(--crm-line); }
 
 .crm-tab {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  border-radius: 999px;
-  border: 1px solid var(--crm-line);
-  background: var(--crm-surface);
-  padding: 0.34rem 0.75rem;
+  border-radius: var(--crm-r-md);
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0.32rem 0.7rem;
   font-size: 13px;
+  font-weight: 500;
   color: var(--crm-ink-soft);
   transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
-.crm-tab:hover { border-color: var(--crm-line-strong); color: var(--crm-ink); }
+.crm-tab:hover { background: var(--crm-surface-2); color: var(--crm-ink); }
 .crm-tab[data-active="true"] {
-  border-color: var(--crm-wine);
-  background: var(--crm-wine);
-  color: var(--crm-on-accent);
+  border-color: var(--crm-line-strong);
+  background: var(--crm-surface-3);
+  color: var(--crm-ink);
   font-weight: 600;
 }
+.crm-tab[data-active="true"] .crm-tab-count { color: var(--crm-accent-strong); }
 
 .crm-empty {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px dashed var(--crm-line-strong);
-  border-radius: 16px;
-  background: var(--crm-surface-2);
+  border: 1px solid var(--crm-line);
+  border-radius: 10px;
+  background: var(--crm-surface);
   text-align: center;
 }
 
@@ -401,4 +549,26 @@ html {
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
+}
+
+/* Scrollbar fino para las áreas con scroll interno del CRM (notas, form de edición). */
+.crm-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--crm-line-strong) transparent;
+}
+.crm-scroll::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+.crm-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.crm-scroll::-webkit-scrollbar-thumb {
+  background: var(--crm-line-strong);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+.crm-scroll::-webkit-scrollbar-thumb:hover {
+  background: var(--crm-ink-faint);
 }

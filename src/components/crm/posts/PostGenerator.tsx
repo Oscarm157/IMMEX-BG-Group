@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import { PageHeader } from "@/components/crm/PageShell";
 import { InputTabs, type InputMode } from "./InputTabs";
 import { ConfigPanel } from "./ConfigPanel";
 import { PostVariantCard } from "./PostVariantCard";
@@ -84,13 +85,14 @@ export function PostGenerator() {
   };
 
   return (
-    <div className="mx-auto max-w-[1100px] px-4 py-8 sm:px-7">
-      <h1 className="font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">Generador de posts</h1>
-      <p className="mt-1 max-w-2xl text-[13px] text-[var(--crm-ink-mute)]">
-        Sube un PDF, pega una URL de portal oficial o pega texto. La IA lo contextualiza para México y devuelve 3 variantes de post por red.
-      </p>
+    <div className="mx-auto max-w-[1100px] px-4 py-7 sm:px-7 sm:py-9">
+      <PageHeader
+        eyebrow="Contenido"
+        title="Generador de posts"
+        description="Sube un PDF, pega una URL de portal oficial o pega texto. La IA lo contextualiza para México y devuelve 3 variantes de post por red."
+      />
 
-      <div className="mt-6 grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-4 lg:grid-cols-2">
         <InputTabs mode={mode} setMode={setMode} file={file} setFile={setFile} url={url} setUrl={setUrl} text={text} setText={setText} />
         <ConfigPanel networks={networks} toggleNetwork={toggleNetwork} approaches={approaches} setApproach={setApproach} onGenerate={onGenerate} loading={loading || extracting} canGenerate={canGenerate} />
       </div>
@@ -98,19 +100,21 @@ export function PostGenerator() {
       <AnimatePresence>
         {error && (
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-            className="mt-6 flex items-start gap-3 rounded-xl border border-[var(--crm-wine)]/25 bg-[var(--crm-wine-tint)] p-4">
-            <span className="mt-1.5 inline-block h-1.5 w-1.5 rounded-full" style={{ background: "var(--crm-wine)" }} />
-            <p className="text-sm leading-relaxed text-[var(--crm-wine)]">{error}</p>
+            className="mt-4 flex items-start gap-3 rounded-[var(--crm-r-lg)] border border-[var(--crm-line-strong)] bg-[var(--crm-surface-2)] p-4">
+            <span aria-hidden className="mt-[7px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-[#ef6f6f]" />
+            <p className="text-[13px] leading-relaxed text-[var(--crm-ink-soft)]">{error}</p>
           </motion.div>
         )}
       </AnimatePresence>
 
       {extractedText && !loading && (
-        <details className="crm-card mt-6 p-5">
-          <summary className="cursor-pointer text-[13px] font-medium text-[var(--crm-ink)]">
-            Texto fuente extraído <span className="ml-2 text-[var(--crm-ink-mute)]">({extractedText.length.toLocaleString()} caracteres)</span>
+        <details className="crm-card mt-4 p-5">
+          <summary className="flex cursor-pointer items-center gap-2 text-[13px] font-medium text-[var(--crm-ink)] [&::-webkit-details-marker]:hidden">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" className="text-[var(--crm-ink-mute)] transition-transform"><path d="m9 6 6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            Texto fuente extraído
+            <span className="crm-num ml-1 text-[var(--crm-ink-mute)]">{extractedText.length.toLocaleString()} caracteres</span>
           </summary>
-          <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap break-words rounded-xl bg-[var(--crm-surface-2)] p-4 text-[13px] leading-relaxed text-[var(--crm-ink-soft)]">{extractedText}</pre>
+          <pre className="mt-4 max-h-64 overflow-auto whitespace-pre-wrap break-words rounded-[var(--crm-r-md)] border border-[var(--crm-line)] bg-[var(--crm-surface)] p-4 text-[13px] leading-relaxed text-[var(--crm-ink-soft)]">{extractedText}</pre>
         </details>
       )}
 
@@ -124,12 +128,15 @@ export function PostGenerator() {
 
       <AnimatePresence>
         {result && (
-          <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 200, damping: 26 }} className="mt-12">
-            <div className="mb-5">
-              <p className="text-[12px] font-medium uppercase tracking-[0.18em]" style={{ color: "var(--crm-wine)" }}>03 · Resultado</p>
-              <h2 className="mt-2 font-serif text-2xl font-semibold tracking-tight text-[var(--crm-ink)]">Variantes generadas</h2>
+          <motion.section initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ type: "spring", stiffness: 200, damping: 26 }} className="mt-10">
+            <div className="mb-5 flex items-end justify-between gap-4">
+              <div>
+                <p className="crm-eyebrow mb-2">Resultado</p>
+                <h2 className="crm-h1">Variantes generadas</h2>
+              </div>
+              <span className="crm-num hidden shrink-0 text-[13px] text-[var(--crm-ink-mute)] sm:block">{result.variants.length} variantes · {networks.length} redes</span>
             </div>
-            <div className="grid gap-5 lg:grid-cols-3">
+            <div className="grid gap-4 lg:grid-cols-3">
               {result.variants.map((v, i) => <PostVariantCard key={i} index={i} variant={v} networks={networks} />)}
             </div>
           </motion.section>

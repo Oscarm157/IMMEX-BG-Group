@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { AnimatePresence } from "motion/react";
+import { Inbox, CornerDownRight } from "lucide-react";
 import type { LeadStatus } from "@/lib/schema";
 import { STATUS_META } from "./status";
 import { BoardCard } from "./BoardCard";
@@ -54,14 +55,14 @@ export function BoardColumn({
         const id = e.dataTransfer.getData("text/plain");
         if (id) onDropInColumn(id, status);
       }}
-      className={`flex shrink-0 snap-start flex-col ${closed ? "w-[248px]" : "w-[300px]"}`}
+      className={`flex shrink-0 snap-start flex-col ${closed ? "w-[252px]" : "w-[300px]"}`}
     >
-      <div className="mb-2 flex items-center justify-between px-0.5">
-        <div className="flex items-center gap-1.5">
-          <span className={`size-2 rounded-full ${meta.dot}`} />
+      <div className="mb-2 flex items-center justify-between px-1">
+        <div className="flex items-center gap-2">
+          <span className={`size-2 rounded-full ${meta.dot} shadow-[0_0_0_3px_var(--crm-bg)]`} />
           <span className="text-[13.5px] font-semibold tracking-tight text-[var(--crm-ink)]">{meta.label}</span>
         </div>
-        <span className="rounded-md bg-[var(--crm-surface-2)] px-1.5 py-0.5 text-[12px] font-medium tabular-nums text-[var(--crm-ink-soft)]">
+        <span className="crm-num min-w-5 rounded-md border border-[var(--crm-line)] bg-[var(--crm-surface-2)] px-1.5 py-0.5 text-center text-[12px] font-medium text-[var(--crm-ink-soft)]">
           {leads.length}
         </span>
       </div>
@@ -69,13 +70,14 @@ export function BoardColumn({
       <div
         data-accepts={accepts}
         data-over={over && accepts}
-        className="crm-dropzone scrollbar-hide flex max-h-[calc(100dvh-230px)] min-h-[120px] flex-1 flex-col gap-2 overflow-y-auto p-2"
+        className="crm-dropzone scrollbar-hide flex max-h-[calc(100dvh-238px)] min-h-[140px] flex-1 flex-col gap-2 overflow-y-auto p-2"
       >
         <AnimatePresence initial={false}>
-          {leads.map((lead) => (
+          {leads.map((lead, i) => (
             <BoardCard
               key={lead.id}
               lead={lead}
+              index={i}
               ownerName={ownerName(lead)}
               draggable={canDragCard(lead)}
               dragging={draggingId === lead.id}
@@ -85,11 +87,20 @@ export function BoardColumn({
           ))}
         </AnimatePresence>
 
-        {leads.length === 0 && (
-          <div className="flex flex-1 items-center justify-center py-6 text-center text-[13px] text-[var(--crm-ink-mute)]">
-            No leads
-          </div>
-        )}
+        {leads.length === 0 &&
+          (accepts ? (
+            <div className="flex flex-1 flex-col items-center justify-center gap-1.5 py-8 text-center">
+              <CornerDownRight className="size-4 text-[var(--crm-accent)]" strokeWidth={1.75} />
+              <span className="text-[12.5px] font-medium text-[var(--crm-accent-strong)]">
+                Suelta para {meta.label.toLowerCase()}
+              </span>
+            </div>
+          ) : (
+            <div className="flex flex-1 flex-col items-center justify-center gap-1.5 py-8 text-center">
+              <Inbox className="size-4 text-[var(--crm-ink-faint)]" strokeWidth={1.75} />
+              <span className="text-[12.5px] text-[var(--crm-ink-mute)]">Sin leads</span>
+            </div>
+          ))}
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { login } from "../actions";
 
 export const metadata = { title: "Acceso", robots: { index: false, follow: false } };
@@ -13,10 +14,15 @@ export default async function CrmLogin({
     <div className="flex min-h-[100dvh] items-center justify-center px-5 py-10">
       <div className="crm-fade w-full max-w-[368px]">
         <div className="mb-6 text-center">
-          <p className="text-[11px] font-medium uppercase tracking-[0.2em] text-[var(--crm-wine)]">
-            BG Consulting Group
-          </p>
-          <h1 className="mt-2 font-serif text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">
+          <Image
+            src="/bgg-logo-dark.png"
+            alt="BG Consulting Group"
+            width={189}
+            height={60}
+            priority
+            className="mx-auto h-[46px] w-auto"
+          />
+          <h1 className="mt-5 font-semibold text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">
             Acceso al panel
           </h1>
           <p className="mt-1.5 text-[13px] text-[var(--crm-ink-mute)]">

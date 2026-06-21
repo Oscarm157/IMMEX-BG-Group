@@ -7,6 +7,7 @@ import type { LeadStatus, LeadSource, LeadQualification } from "@/lib/schema";
 import type { UserRole } from "@/lib/schema";
 import { canEditLead } from "@/lib/crm-permissions";
 import { updateLeadStatus } from "@/app/admin/actions";
+import { PageHeader } from "./PageShell";
 import { STATUS_ORDER } from "./status";
 import { BoardColumn } from "./BoardColumn";
 
@@ -105,31 +106,37 @@ export function BoardView({
 
   return (
     <div>
-      <div className="flex items-center justify-between gap-4">
-        <div className="flex items-baseline gap-3">
-          <h1 className="font-serif text-[30px] tracking-tight text-[var(--crm-ink)]">Pipeline</h1>
-          <span className="text-[13px] tabular-nums text-[var(--crm-ink-soft)]">{items.length} total</span>
-        </div>
-        <div className="inline-flex items-center rounded-full border border-[var(--crm-line)] bg-[var(--crm-surface)] p-0.5">
-          <Link
-            href="/admin"
-            className="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13px] text-[var(--crm-ink-soft)] transition-colors hover:text-[var(--crm-ink)]"
-          >
-            <List className="size-3.5" strokeWidth={1.75} />
-            Lista
-          </Link>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-[var(--crm-wine)] px-3 py-1.5 text-[13px] font-medium text-[var(--crm-on-accent)]">
-            <LayoutGrid className="size-3.5" strokeWidth={1.75} />
+      <PageHeader
+        eyebrow="Comercial"
+        title={
+          <span className="flex items-baseline gap-2.5">
             Pipeline
+            <span className="crm-num text-[13px] font-normal text-[var(--crm-ink-mute)]">
+              {items.length}
+            </span>
           </span>
-        </div>
-      </div>
-
-      <p className="mt-2 text-[12.5px] text-[var(--crm-ink-soft)]">
-        {viewer.role === "viewer"
-          ? "Vista de solo lectura del pipeline."
-          : "Arrastra un lead a otra columna para cambiar su estado."}
-      </p>
+        }
+        description={
+          viewer.role === "viewer"
+            ? "Vista de solo lectura del pipeline."
+            : "Arrastra un lead a otra columna para cambiar su estado."
+        }
+        actions={
+          <div className="inline-flex items-center rounded-lg border border-[var(--crm-line)] bg-[var(--crm-surface)] p-0.5">
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 text-[13px] font-medium text-[var(--crm-ink-soft)] transition-colors hover:text-[var(--crm-ink)]"
+            >
+              <List className="size-3.5" strokeWidth={1.75} />
+              Lista
+            </Link>
+            <span className="inline-flex items-center gap-1.5 rounded-md bg-[var(--crm-surface-3)] px-2.5 py-1.5 text-[13px] font-medium text-[var(--crm-ink)] shadow-[inset_0_1px_0_rgba(255,255,255,0.04)]">
+              <LayoutGrid className="size-3.5 text-[var(--crm-accent)]" strokeWidth={2} />
+              Pipeline
+            </span>
+          </div>
+        }
+      />
 
       <div
         ref={scrollRef}
@@ -137,7 +144,7 @@ export function BoardView({
         onMouseMove={onPanMove}
         onMouseUp={onPanEnd}
         onMouseLeave={onPanEnd}
-        className="scrollbar-hide mt-5 -mx-5 cursor-grab overflow-x-auto px-5 pb-3 sm:mx-0 sm:px-0"
+        className="scrollbar-hide -mx-5 cursor-grab overflow-x-auto px-5 pb-3 sm:mx-0 sm:px-0"
       >
         <div className="flex snap-x items-start gap-3">
           {STATUS_ORDER.map((status) => {
@@ -149,7 +156,13 @@ export function BoardView({
               <Fragment key={status}>
                 {/* won/lost van como "cerrados", separados del pipeline activo */}
                 {status === "won" && (
-                  <div className="mx-1 w-px shrink-0 self-stretch bg-[var(--crm-line)]" aria-hidden />
+                  <div className="mx-1.5 flex shrink-0 flex-col items-center gap-2 self-stretch py-1">
+                    <div className="w-px flex-1 bg-gradient-to-b from-transparent via-[var(--crm-line)] to-transparent" aria-hidden />
+                    <span className="crm-eyebrow rotate-180 [writing-mode:vertical-rl] text-[var(--crm-ink-faint)]">
+                      Cerrados
+                    </span>
+                    <div className="w-px flex-1 bg-gradient-to-b from-transparent via-[var(--crm-line)] to-transparent" aria-hidden />
+                  </div>
                 )}
                 <BoardColumn
                   status={status}

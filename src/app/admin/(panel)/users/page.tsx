@@ -6,9 +6,34 @@ import { fmtDate } from "@/lib/crm-format";
 import { AddUserModal } from "@/components/crm/AddUserModal";
 import { UserRowActions, UserRoleSelect } from "@/components/crm/UserRowActions";
 import { Breadcrumb } from "@/components/crm/Breadcrumb";
+import { PageHeader } from "@/components/crm/PageShell";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Usuarios", robots: { index: false } };
+
+// Misma paleta y hashing que OwnerChip en status.tsx: el mismo usuario conserva
+// su color en todas las vistas del panel.
+const AVATAR_COLORS = [
+  "bg-rose-500",
+  "bg-amber-500",
+  "bg-emerald-500",
+  "bg-blue-500",
+  "bg-violet-500",
+  "bg-teal-500",
+  "bg-orange-500",
+  "bg-indigo-500",
+];
+
+function initials(name: string): string {
+  const parts = name.trim().split(/\s+/);
+  return ((parts[0]?.[0] ?? "") + (parts[1]?.[0] ?? "")).toUpperCase() || "?";
+}
+
+function colorFor(seed: string): string {
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  return AVATAR_COLORS[h % AVATAR_COLORS.length];
+}
 
 export default async function UsersPage() {
   const me = await getCurrentUser();
@@ -16,68 +41,105 @@ export default async function UsersPage() {
   if (!canManageUsers(me.role)) redirect("/admin");
 
   const all = await getAllUsers();
+  const activeCount = all.filter((u) => u.active).length;
 
   return (
     <div className="crm-fade">
       <Breadcrumb items={[{ label: "Leads", href: "/admin" }, { label: "Usuarios" }]} />
-      <div className="mt-4 flex items-end justify-between gap-4">
-        <div>
-          <h1 className="font-serif text-[28px] tracking-tight text-[var(--crm-ink)]">Usuarios</h1>
-          <p className="mt-0.5 text-[13px] text-[var(--crm-ink-mute)]">
-            {all.length} en total · roles y accesos del equipo
-          </p>
-        </div>
-        <AddUserModal />
+
+      <div className="mt-4">
+        <PageHeader eyebrow="Equipo" title="Usuarios" actions={<AddUserModal />}>
+          <div className="mt-2 flex items-center gap-2 text-[13px] text-[var(--crm-ink-soft)]">
+            <span>
+              <span className="crm-num font-medium text-[var(--crm-ink)]">{all.length}</span>{" "}
+              {all.length === 1 ? "persona" : "personas"}
+            </span>
+            <span className="text-[var(--crm-ink-faint)]">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="size-1.5 rounded-full bg-[var(--crm-accent)] shadow-[0_0_0_2px_var(--crm-bg)]" />
+              <span className="crm-num font-medium text-[var(--crm-ink)]">{activeCount}</span> activas
+            </span>
+          </div>
+        </PageHeader>
       </div>
 
-      <div className="crm-card mt-6 overflow-x-auto p-0">
-        <table className="w-full min-w-[680px] text-left">
-          <thead className="border-b border-[var(--crm-line)] bg-[var(--crm-surface-2)] text-[11px] uppercase tracking-[0.08em] text-[var(--crm-ink-mute)]">
-            <tr>
-              <th className="px-4 py-2.5 font-medium">Nombre</th>
-              <th className="px-4 py-2.5 font-medium">Correo</th>
-              <th className="px-4 py-2.5 font-medium">Rol</th>
-              <th className="px-4 py-2.5 font-medium">Estado</th>
-              <th className="px-4 py-2.5 font-medium">Alta</th>
-              <th className="px-4 py-2.5" />
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--crm-line)]">
-            {all.map((u) => {
-              const isSelf = u.id === me.id;
-              return (
-                <tr key={u.id} className="transition-colors hover:bg-[var(--crm-wine-tint)]">
-                  <td className="px-4 py-3 text-[13.5px] font-medium text-[var(--crm-ink)]">
-                    {u.name}
-                    {isSelf && <span className="ml-2 text-[11px] text-[var(--crm-ink-mute)]">tú</span>}
-                  </td>
-                  <td className="px-4 py-3 text-[13px] text-[var(--crm-ink-soft)]">{u.email}</td>
-                  <td className="px-4 py-3">
-                    <UserRoleSelect
-                      userId={u.id}
-                      role={u.role}
-                      locked={isSelf && u.role === "admin"}
-                    />
-                  </td>
-                  <td className="px-4 py-3">
-                    <span className={`inline-flex items-center gap-1.5 text-[12.5px] ${u.active ? "text-emerald-700" : "text-[var(--crm-ink-mute)]"}`}>
-                      <span className={`size-1.5 rounded-full ${u.active ? "bg-emerald-500" : "bg-stone-400"}`} />
-                      {u.active ? "Activo" : "Inactivo"}
-                    </span>
-                  </td>
-                  <td className="px-4 py-3 text-[12.5px] text-[var(--crm-ink-mute)]">{fmtDate(u.createdAt)}</td>
-                  <td className="px-4 py-3">
-                    <UserRowActions
-                      user={{ id: u.id, name: u.name, email: u.email, role: u.role }}
-                      active={u.active}
-                      isSelf={isSelf}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+      <div className="overflow-hidden rounded-[var(--crm-r-lg)] border border-[var(--crm-line)]">
+        <div className="overflow-x-auto">
+          <table className="crm-table min-w-[720px]">
+            <thead className="crm-thead">
+              <tr>
+                <th className="crm-th">Nombre</th>
+                <th className="crm-th">Correo</th>
+                <th className="crm-th">Rol</th>
+                <th className="crm-th">Estado</th>
+                <th className="crm-th">Alta</th>
+                <th className="crm-th w-10" aria-hidden />
+              </tr>
+            </thead>
+            <tbody>
+              {all.map((u, i) => {
+                const isSelf = u.id === me.id;
+                return (
+                  <tr
+                    key={u.id}
+                    className="crm-row crm-fade group"
+                    style={{ animationDelay: `${Math.min(i, 14) * 22}ms` }}
+                  >
+                    <td className="crm-td">
+                      <div className="flex items-center gap-2.5">
+                        <span
+                          className={`grid size-8 shrink-0 place-items-center rounded-full text-[11px] font-semibold text-white shadow-[0_0_0_1.5px_var(--crm-surface)] ${colorFor(u.id)}`}
+                        >
+                          {initials(u.name)}
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="text-[13.5px] font-semibold text-[var(--crm-ink)]">{u.name}</span>
+                          {isSelf && (
+                            <span className="rounded border border-[var(--crm-line-strong)] px-1 py-px text-[10px] font-medium text-[var(--crm-ink-mute)]">
+                              tú
+                            </span>
+                          )}
+                        </span>
+                      </div>
+                    </td>
+                    <td className="crm-td text-[13px] text-[var(--crm-ink-soft)]">{u.email}</td>
+                    <td className="crm-td">
+                      <UserRoleSelect
+                        userId={u.id}
+                        role={u.role}
+                        locked={isSelf && u.role === "admin"}
+                      />
+                    </td>
+                    <td className="crm-td">
+                      <span
+                        className={`inline-flex items-center gap-1.5 text-[12.5px] ${
+                          u.active ? "text-[var(--crm-ink-soft)]" : "text-[var(--crm-ink-mute)]"
+                        }`}
+                      >
+                        <span
+                          className={`size-1.5 rounded-full shadow-[0_0_0_2px_var(--crm-surface)] ${
+                            u.active ? "bg-[var(--crm-accent)]" : "bg-[var(--crm-ink-faint)]"
+                          }`}
+                        />
+                        {u.active ? "Activo" : "Inactivo"}
+                      </span>
+                    </td>
+                    <td className="crm-td crm-num whitespace-nowrap text-[12px] text-[var(--crm-ink-mute)]">
+                      {fmtDate(u.createdAt)}
+                    </td>
+                    <td className="crm-td w-10 pr-4">
+                      <UserRowActions
+                        user={{ id: u.id, name: u.name, email: u.email, role: u.role }}
+                        active={u.active}
+                        isSelf={isSelf}
+                      />
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );

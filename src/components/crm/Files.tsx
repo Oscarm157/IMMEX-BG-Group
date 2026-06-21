@@ -53,13 +53,13 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
                 setError("No se pudo subir. Revisa el archivo (máx. 10MB) e inténtalo de nuevo.");
               }
             }}
-            className="flex items-center gap-2"
+            className="flex items-center gap-2 rounded-[var(--crm-r-md)] border border-dashed border-[var(--crm-line-strong)] bg-[var(--crm-surface)] p-2.5"
           >
             <input
               type="file"
               name="file"
               required
-              className="block w-full text-[13px] text-[var(--crm-ink-soft)] file:mr-3 file:rounded-md file:border-0 file:bg-[var(--crm-surface-2)] file:px-3 file:py-1.5 file:text-[12.5px] file:font-medium file:text-[var(--crm-ink)] hover:file:bg-[var(--crm-line)]"
+              className="block w-full text-[13px] text-[var(--crm-ink-soft)] file:mr-3 file:rounded-md file:border-0 file:bg-[var(--crm-surface-3)] file:px-3 file:py-1.5 file:text-[12.5px] file:font-medium file:text-[var(--crm-ink)] hover:file:bg-[var(--crm-line)]"
             />
             <UploadButton />
           </form>
@@ -75,7 +75,7 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
       {files.length > 0 && (
         <ul className={`${editable ? "mt-4" : ""} divide-y divide-[var(--crm-line)] overflow-hidden rounded-lg border border-[var(--crm-line)]`}>
           {files.map((f) => (
-            <li key={f.id} className="flex items-center gap-3 bg-[var(--crm-surface)] px-3.5 py-2.5">
+            <li key={f.id} className="flex items-center gap-3 bg-[var(--crm-surface)] px-3.5 py-2.5 transition-colors hover:bg-[var(--crm-surface-3)]">
               <span className="text-[var(--crm-ink-mute)]">
                 {isImage(f.contentType) ? (
                   <ImageIcon className="size-4" strokeWidth={1.6} />
@@ -85,7 +85,7 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
               </span>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-[14px] font-medium text-[var(--crm-ink)]">{f.name}</p>
-                {f.size != null && <p className="text-[12.5px] text-[var(--crm-ink-mute)]">{fmtSize(f.size)}</p>}
+                {f.size != null && <p className="crm-num text-[12.5px] text-[var(--crm-ink-mute)]">{fmtSize(f.size)}</p>}
               </div>
               <div className="flex shrink-0 items-center gap-1">
                 {canPreview(f.contentType) && (

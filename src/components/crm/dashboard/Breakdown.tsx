@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "motion/react";
 export type BreakdownRow = { label: string; count: number };
 
 // Barras horizontales reutilizables para fuente y servicio.
+// Acento con disciplina: solo la fila líder lleva mint, el resto es neutro.
 export function Breakdown({
   title,
   subtitle,
@@ -21,48 +22,71 @@ export function Breakdown({
   const total = rows.reduce((a, r) => a + r.count, 0);
 
   return (
-    <div className="crm-card p-5">
-      <h2 className="font-serif text-[18px] tracking-tight" style={{ color: "var(--crm-ink)" }}>
-        {title}
-      </h2>
-      <p className="mt-0.5 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
-        {subtitle}
-      </p>
+    <div className="crm-card flex h-full flex-col p-5">
+      <div>
+        <h2 className="crm-h2">{title}</h2>
+        <p className="mt-1 text-[12px]" style={{ color: "var(--crm-ink-mute)" }}>
+          {subtitle}
+        </p>
+      </div>
 
       {total === 0 ? (
         <p className="mt-6 text-[13px]" style={{ color: "var(--crm-ink-mute)" }}>
           {emptyCopy}
         </p>
       ) : (
-        <ul className="mt-4 space-y-3">
-          {rows.map((r, i) => (
-            <li key={r.label} className="group" title={`${r.label}: ${r.count} (${Math.round((r.count / total) * 100)}%)`}>
-              <div className="flex items-baseline justify-between gap-3 text-[12.5px]">
-                <span className="truncate font-medium transition-colors group-hover:text-[var(--crm-wine)]" style={{ color: "var(--crm-ink)" }}>
-                  {r.label}
-                </span>
-                <span className="tabular-nums" style={{ color: "var(--crm-ink-soft)" }}>
-                  {r.count}
-                  <span className="ml-1.5" style={{ color: "var(--crm-ink-mute)" }}>
-                    {Math.round((r.count / total) * 100)}%
-                  </span>
-                </span>
-              </div>
-              <div
-                className="mt-1 h-2 overflow-hidden rounded-full"
-                style={{ background: "var(--crm-surface-2)", border: "1px solid var(--crm-line)" }}
-              >
-                <motion.div
-                  className="h-full rounded-full transition-[filter] group-hover:brightness-110"
-                  style={{ background: "var(--crm-wine-soft)", width: `${Math.max(4, (r.count / max) * 100)}%` }}
-                  initial={{ scaleX: reduce ? 1 : 0, transformOrigin: "left center" }}
-                  animate={{ scaleX: 1 }}
-                  transition={{ duration: 0.7, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="mt-5 space-y-3.5">
+            {rows.map((r, i) => {
+              const lead = r.count === max;
+              const pct = Math.round((r.count / total) * 100);
+              return (
+                <li key={r.label} className="group" title={`${r.label}: ${r.count} (${pct}%)`}>
+                  <div className="flex items-baseline justify-between gap-3 text-[12.5px]">
+                    <span
+                      className="truncate font-medium"
+                      style={{ color: lead ? "var(--crm-ink)" : "var(--crm-ink-soft)" }}
+                    >
+                      {r.label}
+                    </span>
+                    <span className="crm-num shrink-0" style={{ color: "var(--crm-ink-soft)" }}>
+                      {r.count}
+                      <span className="ml-1.5" style={{ color: "var(--crm-ink-mute)" }}>
+                        {pct}%
+                      </span>
+                    </span>
+                  </div>
+                  <div
+                    className="mt-1.5 h-1.5 overflow-hidden rounded-full"
+                    style={{ background: "var(--crm-surface)" }}
+                  >
+                    <motion.div
+                      className="h-full rounded-full"
+                      style={{
+                        background: lead ? "var(--crm-accent)" : "var(--crm-line-strong)",
+                        width: `${Math.max(4, (r.count / max) * 100)}%`,
+                        transformOrigin: "left center",
+                      }}
+                      initial={{ scaleX: reduce ? 1 : 0 }}
+                      animate={{ scaleX: 1 }}
+                      transition={{ duration: 0.65, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    />
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          <div
+            className="mt-auto flex items-baseline justify-between gap-3 pt-4 text-[12px]"
+            style={{ borderTop: "1px solid var(--crm-line)" }}
+          >
+            <span style={{ color: "var(--crm-ink-mute)" }}>Total</span>
+            <span className="crm-num font-medium" style={{ color: "var(--crm-ink)" }}>
+              {total}
+            </span>
+          </div>
+        </>
       )}
     </div>
   );
