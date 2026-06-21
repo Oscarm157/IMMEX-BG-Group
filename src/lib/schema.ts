@@ -133,6 +133,19 @@ export const leadFiles = pgTable("lead_files", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
 });
 
+// Perfiles de director para marca personal en el generador de posts.
+// Standalone: sin FK a users; el admin llena expertise/voice/avoid.
+export const directorProfiles = pgTable("director_profiles", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  name: text("name").notNull(),
+  title: text("title"),
+  expertise: text("expertise"),
+  voice: text("voice"),
+  avoid: text("avoid"),
+  active: boolean("active").default(true).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
+
 // Blog / noticias — bilingüe (es/en). Cuerpo en Markdown.
 export const articles = pgTable("articles", {
   id: uuid("id").primaryKey().defaultRandom(),

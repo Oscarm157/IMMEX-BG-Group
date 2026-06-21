@@ -1,6 +1,6 @@
 import Anthropic from "@anthropic-ai/sdk";
 import { SYSTEM_PROMPT, buildUserPrompt } from "./prompts";
-import type { GenerateRequest, GenerateResponse } from "./types";
+import type { GenerateRequest, GenerateResponse, Persona } from "./types";
 
 const client = new Anthropic({
   apiKey: process.env.ANTHROPIC_API_KEY,
@@ -12,9 +12,16 @@ export const DEFAULT_MODEL = "claude-sonnet-4-6";
 
 export async function generatePosts(
   req: GenerateRequest,
+  persona: Persona,
   model: string = DEFAULT_MODEL
 ): Promise<GenerateResponse> {
-  const userPrompt = buildUserPrompt(req);
+  const userPrompt = buildUserPrompt({
+    text: req.text,
+    networks: req.networks,
+    approaches: req.approaches,
+    persona,
+    mode: req.mode,
+  });
 
   const response = await client.messages.create({
     model,

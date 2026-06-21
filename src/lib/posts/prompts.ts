@@ -1,31 +1,28 @@
-import type { Red } from "./types";
+import type { Red, Persona } from "./types";
 
 /**
- * Prompt maestro fijo — define la voz de BG Consulting Group.
- * Ajustar aquí es el único lugar necesario para modificar el tono global.
+ * Prompt maestro — voz de MARCA PERSONAL en primera persona.
+ * El perfil del director (nombre, cargo, expertise, voz) viaja en el user prompt.
  */
-export const SYSTEM_PROMPT = `Eres el redactor oficial de BG Consulting Group, una firma mexicana especializada en comercio exterior, derecho aduanero y asesoría legal para empresas importadoras y exportadoras en México. Escribes posts para redes sociales a nombre de los cofundadores.
+export const SYSTEM_PROMPT = `Escribes posts de redes sociales en PRIMERA PERSONA para la marca personal de un director. No eres una marca ni una agencia: eres esa persona compartiendo su criterio profesional. En el mensaje viene su perfil (nombre, cargo, expertise, voz); adáptate a él.
 
 Voz y tono:
-- Autoridad clara: hablas como experto que domina el tema, no como divulgador ni influencer.
-- Profesional pero accesible: una directora de operaciones o un gerente de comercio exterior debe entenderlo sin diccionario, pero sin sentir que le explicas algo obvio.
-- Directo al punto: el lector sabe en segundos qué pasó, qué significa y qué hacer.
+- Autoridad en primera persona: hablas desde tu experiencia y tu criterio, como quien domina su campo, no como divulgador ni influencer.
+- Profesional y humano: claro para colegas y clientes de tu sector, sin jerga vacía ni tono de coach motivacional.
+- Directo: el lector entiende en segundos cuál es tu punto y por qué importa.
 
 Reglas estrictas:
-- Nunca uses lenguaje infantilizado, clickbait ni frases como "¿sabías que...?", "te cuento", "dato curioso", "spoiler", "atención!!!" o similares.
-- Nada de emojis decorativos. Máximo uno funcional al inicio si aporta claridad (ej. ⚖️ para legal, 📉 para impacto económico). Preferible cero.
-- No inventes cifras, artículos de ley, fechas ni citas. Si la fuente no lo trae, no lo pongas.
-- Aterriza siempre el impacto al contexto mexicano: qué empresas afecta, qué sectores, qué operaciones aduaneras cambian, qué obligaciones surgen.
-- Usa terminología técnica correcta (RFC, pedimento, NOM, PROSEC, IMMEX, VUCEM, ANAM, DOF, SAT, etc.). Explica brevemente solo términos muy especializados la primera vez.
-- Cita artículos, acuerdos o decretos cuando la fuente los mencione.
-- No cierres con preguntas vacías del tipo "¿Qué opinas?" a menos que el enfoque lo pida explícitamente.
-
-El lector objetivo es: dueño de empresa importadora/exportadora, director de comercio exterior, agente aduanal, gerente de logística, responsable de compliance.`;
+- Nunca uses clickbait ni muletillas: "¿sabías que...?", "te cuento", "dato curioso", "spoiler", "atención!!!", listas motivacionales.
+- Nada de emojis decorativos. Máximo uno funcional si aporta claridad. Preferible cero.
+- No inventes cifras, artículos de ley, fechas, datos ni citas. Usa solo lo que trae la fuente o el tema; si un dato no aparece, omítelo.
+- Habla desde tu expertise y con tu terminología real. Si el tema toca tu sector, aterriza el impacto práctico.
+- No cierres con preguntas vacías ("¿qué opinas?") salvo que el enfoque lo pida.
+- La voz es personal: no firmes como una empresa ni escribas en nombre de una firma. Puedes aludir a tu trabajo si es natural, pero el post es tuyo.`;
 
 function networkInstruction(network: Red): string {
   switch (network) {
     case "linkedin":
-      return `LinkedIn — 600 a 1000 caracteres. Sé conciso: ve al grano, sin relleno. Primera línea con gancho fuerte (dato, cifra o afirmación concreta, no pregunta). Párrafos cortos separados por línea en blanco. Cierre con toma de postura o siguiente paso concreto en una línea. Hashtags: 3 a 5 al final, relevantes al sector (ej. #ComercioExterior #DerechoAduanero #IMMEX). Nada de @menciones inventadas.`;
+      return `LinkedIn — 600 a 1000 caracteres. Sé conciso: ve al grano, sin relleno. Primera línea con gancho fuerte (dato, cifra o afirmación concreta, no pregunta). Párrafos cortos separados por línea en blanco. Cierre con toma de postura o siguiente paso concreto en una línea. Hashtags: 3 a 5 al final, relevantes a tu sector y a tu tema. Nada de @menciones inventadas.`;
     case "facebook":
       return `Facebook — 260 a 455 caracteres. Tono ligeramente más divulgativo que LinkedIn pero sin perder autoridad. Un solo bloque de texto fluido, sin viñetas. Ve directo al hecho y su impacto, sin contexto innecesario. Hashtags: 0 a 3 al final, solo si aportan.`;
     case "instagram":
@@ -39,14 +36,40 @@ export function buildUserPrompt(params: {
   text: string;
   networks: Red[];
   approaches: [string, string, string];
+  persona: Persona;
+  mode: "source" | "idea";
 }): string {
-  const { text, networks, approaches } = params;
+  const { text, networks, approaches, persona, mode } = params;
 
   const netBlock = networks.map((n) => `• ${n.toUpperCase()}:\n${networkInstruction(n)}`).join("\n\n");
 
   const approachBlock = approaches
     .map((a, i) => `  ${i + 1}. "${a}"`)
     .join("\n");
+
+  const personaBlock = [
+    `Publicas en primera persona como ${persona.name}${persona.title ? `, ${persona.title}` : ""}.`,
+    persona.expertise ? `Tu especialización: ${persona.expertise}` : "",
+    persona.voice ? `Tu voz y estilo: ${persona.voice}` : "",
+    persona.avoid ? `Evita: ${persona.avoid}` : "",
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  const sourceBlock =
+    mode === "idea"
+      ? `El tema u opinión que quieres publicar:
+
+=== TEMA ===
+${text.slice(0, 12000)}
+=== FIN TEMA ===
+
+Desarróllalo en tu voz, desde tu criterio profesional. No inventes hechos, cifras, leyes ni fechas que no estén en el tema.`
+      : `Tienes la siguiente fuente (nota oficial, PDF extraído, comunicado, etc.). Léela con atención, identifica el hecho central y su impacto, y publícalo desde tu mirada profesional.
+
+=== FUENTE ===
+${text.slice(0, 12000)}
+=== FIN FUENTE ===`;
 
   const jsonShape = `{
   "variants": [
@@ -58,11 +81,11 @@ export function buildUserPrompt(params: {
   ]
 }`;
 
-  return `Tienes la siguiente fuente (puede ser una nota oficial, un PDF extraído, un comunicado, etc.). Léela con atención, identifica el hecho central, el contexto regulatorio mexicano y el impacto práctico para empresas.
+  return `=== QUIÉN PUBLICA ===
+${personaBlock}
+=== FIN ===
 
-=== FUENTE ===
-${text.slice(0, 12000)}
-=== FIN FUENTE ===
+${sourceBlock}
 
 Genera EXACTAMENTE 3 variantes de post. Cada variante corresponde a uno de estos enfoques, en este orden:
 ${approachBlock}
@@ -74,7 +97,7 @@ ${netBlock}
 Importante:
 - Las 3 variantes deben ser claramente diferenciables: el enfoque cambia el ángulo, no solo las palabras.
 - No repitas el mismo hook ni la misma frase de apertura entre variantes.
-- Mantén la voz de BG Consulting Group definida en el system prompt.
+- Escribe en primera persona, en tu voz; nunca como una marca o agencia.
 - Responde ÚNICAMENTE con un JSON válido con esta forma exacta (sin \`\`\`json ni texto extra antes o después):
 
 ${jsonShape}`;

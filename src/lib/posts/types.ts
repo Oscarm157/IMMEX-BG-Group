@@ -25,10 +25,22 @@ export interface Variante {
   instagram?: InstagramContent;
 }
 
+export interface Persona {
+  name: string;
+  title: string | null;
+  expertise: string | null;
+  voice: string | null;
+  avoid: string | null;
+}
+
+export type SourceMode = "source" | "idea";
+
 export interface GenerateRequest {
   text: string;
   networks: Red[];
   approaches: [string, string, string];
+  profileId: string;
+  mode: SourceMode;
 }
 
 export interface GenerateResponse {

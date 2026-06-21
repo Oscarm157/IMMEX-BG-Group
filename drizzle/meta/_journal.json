@@ -15,6 +15,13 @@
       "when": 1780958726790,
       "tag": "0001_abandoned_nico_minoru",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1782058630658,
+      "tag": "0002_black_mystique",
+      "breakpoints": true
     }
   ]
 }

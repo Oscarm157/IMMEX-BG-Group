@@ -1,19 +1,31 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
 import { PageHeader } from "@/components/crm/PageShell";
 import { InputTabs, type InputMode } from "./InputTabs";
 import { ConfigPanel } from "./ConfigPanel";
 import { PostVariantCard } from "./PostVariantCard";
 import { ProgressIndicator } from "./ProgressIndicator";
-import type { GenerateResponse, Red } from "@/lib/posts/types";
+import type { GenerateResponse, Red, SourceMode } from "@/lib/posts/types";
 
-export function PostGenerator() {
+type DirectorOption = { id: string; name: string; title: string | null };
+
+const SOURCE_MODES: { id: SourceMode; label: string }[] = [
+  { id: "source", label: "Desde fuente" },
+  { id: "idea", label: "Desde idea" },
+];
+
+export function PostGenerator({ profiles }: { profiles: DirectorOption[] }) {
+  const [profileId, setProfileId] = useState("");
+  const [sourceMode, setSourceMode] = useState<SourceMode>("source");
+
   const [mode, setMode] = useState<InputMode>("text");
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState("");
   const [text, setText] = useState("");
+  const [idea, setIdea] = useState("");
 
   const [extractedText, setExtractedText] = useState<string | null>(null);
   const [extracting, setExtracting] = useState(false);
@@ -26,11 +38,13 @@ export function PostGenerator() {
   const [error, setError] = useState<string | null>(null);
 
   const canGenerate = useMemo(() => {
+    if (!profileId) return false;
     if (networks.length === 0) return false;
+    if (sourceMode === "idea") return idea.trim().length > 12;
     if (mode === "pdf") return !!file;
     if (mode === "url") return url.trim().length > 5;
     return text.trim().length > 30;
-  }, [mode, file, url, text, networks]);
+  }, [profileId, sourceMode, idea, mode, file, url, text, networks]);
 
   const toggleNetwork = (n: Red) => setNetworks((p) => (p.includes(n) ? p.filter((x) => x !== n) : [...p, n]));
   const setApproach = (index: 0 | 1 | 2, value: string) =>
@@ -64,12 +78,18 @@ export function PostGenerator() {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 110_000);
     try {
-      const sourceText = await extract();
-      setExtractedText(sourceText);
+      let sourceText: string;
+      if (sourceMode === "idea") {
+        sourceText = idea.trim();
+        setExtractedText(null);
+      } else {
+        sourceText = await extract();
+        setExtractedText(sourceText);
+      }
       const res = await fetch("/admin/posts/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: sourceText, networks, approaches }),
+        body: JSON.stringify({ text: sourceText, networks, approaches, profileId, mode: sourceMode }),
         signal: controller.signal,
       });
       const data = await res.json().catch(() => ({}));
@@ -89,11 +109,75 @@ export function PostGenerator() {
       <PageHeader
         eyebrow="Contenido"
         title="Generador de posts"
-        description="Sube un PDF, pega una URL de portal oficial o pega texto. La IA lo contextualiza para México y devuelve 3 variantes de post por red."
+        description="Genera contenido para la marca personal de los directores, en su voz, para revisar y publicar."
       />
 
+      <section className="crm-card mb-4 p-5">
+        <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-3">
+          <div className="min-w-0 flex-1">
+            <div className="mb-2.5 flex items-baseline gap-2.5">
+              <span className="crm-eyebrow">Paso 0</span>
+              <h2 className="crm-h2">¿Quién publica?</h2>
+            </div>
+            {profiles.length === 0 ? (
+              <div className="flex flex-wrap items-center gap-3 rounded-[var(--crm-r-md)] border border-[var(--crm-wine-ring)] bg-[var(--crm-wine-tint)] px-3.5 py-3">
+                <p className="text-[13px] text-[var(--crm-ink-soft)]">No hay directores activos. Configura un director primero para poder generar.</p>
+                <Link href="/admin/posts/directores" className="crm-btn crm-btn-secondary crm-btn-sm shrink-0">Configurar director</Link>
+              </div>
+            ) : (
+              <select
+                value={profileId}
+                onChange={(e) => setProfileId(e.target.value)}
+                className="crm-select !h-10 max-w-sm text-[13px]"
+                aria-label="Director que publica"
+              >
+                <option value="">Selecciona un director</option>
+                {profiles.map((p) => (
+                  <option key={p.id} value={p.id}>{p.title ? `${p.name} · ${p.title}` : p.name}</option>
+                ))}
+              </select>
+            )}
+          </div>
+          <Link href="/admin/posts/directores" className="shrink-0 text-[12.5px] font-medium text-[var(--crm-ink-mute)] transition-colors hover:text-[var(--crm-accent-strong)]">
+            Gestionar directores
+          </Link>
+        </div>
+      </section>
+
       <div className="grid gap-4 lg:grid-cols-2">
-        <InputTabs mode={mode} setMode={setMode} file={file} setFile={setFile} url={url} setUrl={setUrl} text={text} setText={setText} />
+        <div className="flex flex-col gap-3">
+          <div className="flex gap-1 rounded-[var(--crm-r-md)] border border-[var(--crm-line)] bg-[var(--crm-surface)] p-1">
+            {SOURCE_MODES.map((m) => {
+              const active = sourceMode === m.id;
+              return (
+                <button key={m.id} type="button" onClick={() => setSourceMode(m.id)} className="relative flex-1 rounded-[6px] px-4 py-2 text-[13px] font-medium transition-colors">
+                  {active && (
+                    <motion.span layoutId="post-source-mode" transition={{ type: "spring", stiffness: 400, damping: 32 }} className="absolute inset-0 rounded-[6px] border border-[var(--crm-line-strong)] bg-[var(--crm-surface-3)]" />
+                  )}
+                  <span className="relative z-10" style={{ color: active ? "var(--crm-ink)" : "var(--crm-ink-mute)" }}>{m.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
+          {sourceMode === "source" ? (
+            <InputTabs mode={mode} setMode={setMode} file={file} setFile={setFile} url={url} setUrl={setUrl} text={text} setText={setText} />
+          ) : (
+            <section className="crm-card flex flex-1 flex-col p-5">
+              <div className="mb-4 flex items-baseline gap-2.5">
+                <span className="crm-eyebrow">Paso 1</span>
+                <h2 className="crm-h2">Idea</h2>
+              </div>
+              <label className="mb-2 flex items-center justify-between text-[13px] font-medium text-[var(--crm-ink-soft)]">
+                <span>¿De qué quieres hablar? Tu ángulo u opinión</span>
+                <span className="crm-num text-[12px] text-[var(--crm-ink-mute)]">{idea.length.toLocaleString()} caracteres</span>
+              </label>
+              <textarea value={idea} onChange={(e) => setIdea(e.target.value)} placeholder="Ej. Mi postura sobre el nuevo esquema de validación en aduanas y qué deberían revisar los importadores este trimestre." rows={10} className="crm-textarea min-h-[220px] flex-1 resize-y" />
+              <p className="mt-3 text-[13px] leading-relaxed text-[var(--crm-ink-mute)]">Se desarrolla en tu voz, sin inventar cifras, leyes ni fechas. No se procesa ninguna fuente externa.</p>
+            </section>
+          )}
+        </div>
+
         <ConfigPanel networks={networks} toggleNetwork={toggleNetwork} approaches={approaches} setApproach={setApproach} onGenerate={onGenerate} loading={loading || extracting} canGenerate={canGenerate} />
       </div>
 
