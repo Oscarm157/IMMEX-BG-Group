@@ -36,6 +36,7 @@ export function PostGenerator({ profiles }: { profiles: DirectorOption[] }) {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<GenerateResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [activeVariant, setActiveVariant] = useState(0);
 
   const canGenerate = useMemo(() => {
     if (!profileId) return false;
@@ -74,6 +75,7 @@ export function PostGenerator({ profiles }: { profiles: DirectorOption[] }) {
   const onGenerate = async () => {
     setError(null);
     setResult(null);
+    setActiveVariant(0);
     setLoading(true);
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 110_000);
@@ -218,10 +220,56 @@ export function PostGenerator({ profiles }: { profiles: DirectorOption[] }) {
                 <p className="crm-eyebrow mb-2">Resultado</p>
                 <h2 className="crm-h1">Variantes generadas</h2>
               </div>
-              <span className="crm-num hidden shrink-0 text-[13px] text-[var(--crm-ink-mute)] sm:block">{result.variants.length} variantes · {networks.length} redes</span>
+              <span className="crm-num hidden shrink-0 text-[13px] text-[var(--crm-ink-mute)] sm:block">
+                Variante {activeVariant + 1} de {result.variants.length} · {networks.length} {networks.length === 1 ? "red" : "redes"}
+              </span>
             </div>
-            <div className="grid gap-4 lg:grid-cols-3">
-              {result.variants.map((v, i) => <PostVariantCard key={i} index={i} variant={v} networks={networks} />)}
+
+            {/* Navegación de variantes: una a la vez, tipo slide */}
+            <div className="mb-4 flex flex-wrap items-center gap-2">
+              {result.variants.map((v, i) => {
+                const active = i === activeVariant;
+                return (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setActiveVariant(i)}
+                    className="inline-flex items-center gap-2 rounded-full border px-3 py-1.5 text-[12.5px] font-medium transition-colors"
+                    style={
+                      active
+                        ? { borderColor: "var(--crm-accent-ring)", background: "var(--crm-accent-tint)", color: "var(--crm-accent-strong)" }
+                        : { borderColor: "var(--crm-line)", background: "var(--crm-surface-2)", color: "var(--crm-ink-mute)" }
+                    }
+                  >
+                    <span className="crm-num">{i + 1}</span>
+                    {v.enfoque}
+                  </button>
+                );
+              })}
+              <div className="ml-auto flex items-center gap-1.5">
+                <button
+                  type="button"
+                  onClick={() => setActiveVariant((i) => Math.max(0, i - 1))}
+                  disabled={activeVariant === 0}
+                  aria-label="Variante anterior"
+                  className="grid size-8 place-items-center rounded-full border border-[var(--crm-line-strong)] bg-[var(--crm-surface-2)] text-[var(--crm-ink-soft)] transition-colors hover:bg-[var(--crm-surface-3)] disabled:opacity-40"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m15 6-6 6 6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setActiveVariant((i) => Math.min(result.variants.length - 1, i + 1))}
+                  disabled={activeVariant >= result.variants.length - 1}
+                  aria-label="Variante siguiente"
+                  className="grid size-8 place-items-center rounded-full border border-[var(--crm-line-strong)] bg-[var(--crm-surface-2)] text-[var(--crm-ink-soft)] transition-colors hover:bg-[var(--crm-surface-3)] disabled:opacity-40"
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="m9 6 6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </button>
+              </div>
+            </div>
+
+            <div className="mx-auto max-w-[720px]">
+              <PostVariantCard key={activeVariant} index={activeVariant} variant={result.variants[activeVariant]} networks={networks} />
             </div>
           </motion.section>
         )}
