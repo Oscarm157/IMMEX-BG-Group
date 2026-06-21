@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound, redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canManageBlog } from "@/lib/crm-permissions";
-import { getArticleById } from "@/lib/blog/data";
+import { getArticleById, getDistinctCategories } from "@/lib/blog/data";
 import { updateArticle, publishArticle, unpublishArticle, deleteArticle } from "@/app/admin/blog-actions";
 import { PageHeader } from "@/components/crm/PageShell";
 import { ArticleEditor } from "@/components/crm/blog/ArticleEditor";
@@ -18,6 +18,8 @@ export default async function EditArticle({ params }: { params: Promise<{ id: st
   const { id } = await params;
   const a = await getArticleById(id);
   if (!a) notFound();
+
+  const categories = await getDistinctCategories();
 
   const save = updateArticle.bind(null, a.id);
   const publish = publishArticle.bind(null, a.id);
@@ -71,7 +73,7 @@ export default async function EditArticle({ params }: { params: Promise<{ id: st
         </div>
       </PageHeader>
 
-      <ArticleEditor action={save} article={a} />
+      <ArticleEditor action={save} article={a} categories={categories} />
     </div>
   );
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/content/dictionaries";
-import { getPublishedArticleBySlug, localize, type Locale } from "@/lib/blog/data";
+import { getPublishedArticleBySlug, localize, fmtArticleDate, type Locale } from "@/lib/blog/data";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 import { MediaFrame } from "@/components/site/MediaFrame";
@@ -42,7 +42,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
 
       <Reveal delay={0.06}>
         <span className="mt-8 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ash">
-          {[a.category, a.sourceDate].filter(Boolean).join(" · ")}
+          {[a.category, fmtArticleDate(a, lang as Locale)].filter(Boolean).join(" · ")}
         </span>
         <h1 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.4rem)] font-medium leading-[1.04] tracking-[-0.03em] text-chalk">
           {l.title}

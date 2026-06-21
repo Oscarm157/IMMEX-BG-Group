@@ -40,11 +40,15 @@ export async function draftFromSource(input: {
   source: string;
   sourceName?: string;
   category?: string;
+  guidance?: string;
 }): Promise<ArticleDraft> {
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const meta = [input.sourceName ? `Fuente: ${input.sourceName}` : "", input.category ? `Categoría: ${input.category}` : ""]
     .filter(Boolean)
     .join(" · ");
+  const angle = input.guidance
+    ? `Enfoque pedido por el editor (síguelo sin inventar datos ni salirte de la fuente): ${input.guidance}\n\n`
+    : "";
   const res = await anthropic.messages.create({
     model: "claude-sonnet-4-6",
     max_tokens: 2400,
@@ -54,7 +58,7 @@ export async function draftFromSource(input: {
     messages: [
       {
         role: "user",
-        content: `${meta ? meta + "\n\n" : ""}Texto fuente:\n"""\n${input.source}\n"""\n\nRedacta la nota siguiendo las reglas de voz. Devuelve la herramienta emit_article.`,
+        content: `${meta ? meta + "\n\n" : ""}${angle}Texto fuente:\n"""\n${input.source}\n"""\n\nRedacta la nota siguiendo las reglas de voz. Devuelve la herramienta emit_article.`,
       },
     ],
   });

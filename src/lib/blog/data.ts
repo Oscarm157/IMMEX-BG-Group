@@ -1,4 +1,4 @@
-import { and, desc, eq } from "drizzle-orm";
+import { and, asc, desc, eq, isNotNull } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { articles } from "@/lib/schema";
 
@@ -13,6 +13,27 @@ export function localize(a: Article, locale: Locale) {
     body: es ? a.bodyEs : a.bodyEn,
     recommendations: es ? a.recommendationsEs : a.recommendationsEn,
   };
+}
+
+// Fecha que ve el lector público: la de publicación (no la de la fuente).
+export function fmtArticleDate(a: Article, locale: Locale): string {
+  const d = a.publishedAt ?? a.createdAt;
+  if (!d) return "";
+  return new Intl.DateTimeFormat(locale === "es" ? "es-MX" : "en-US", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  }).format(new Date(d));
+}
+
+// Categorías ya usadas, para el combobox del compositor/editor.
+export async function getDistinctCategories(): Promise<string[]> {
+  const rows = await db
+    .selectDistinct({ category: articles.category })
+    .from(articles)
+    .where(isNotNull(articles.category))
+    .orderBy(asc(articles.category));
+  return rows.map((r) => r.category).filter((c): c is string => !!c && c.trim() !== "");
 }
 
 export async function getPublishedArticles(): Promise<Article[]> {

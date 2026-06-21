@@ -2,7 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { isLocale } from "@/content/dictionaries";
-import { getPublishedArticles, localize, type Locale } from "@/lib/blog/data";
+import { getPublishedArticles, localize, fmtArticleDate, type Locale } from "@/lib/blog/data";
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { MediaFrame } from "@/components/site/MediaFrame";
@@ -49,7 +49,7 @@ export default async function BlogIndex({ params }: { params: Promise<{ lang: st
                 />
                 <div>
                   <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-                    {[featured.category, featured.sourceDate].filter(Boolean).join(" · ")}
+                    {[featured.category, fmtArticleDate(featured, lang as Locale)].filter(Boolean).join(" · ")}
                   </span>
                   <h2 className="mt-4 font-display text-[clamp(1.6rem,3vw,2.4rem)] font-medium leading-tight tracking-[-0.02em] text-chalk transition-colors group-hover:text-accent">
                     {localize(featured, lang as Locale).title}
@@ -73,7 +73,7 @@ export default async function BlogIndex({ params }: { params: Promise<{ lang: st
                       <MediaFrame src={a.coverUrl ?? undefined} ratio="3/2" caption={a.category ?? t.eyebrow} />
                       <div>
                         <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">
-                          {[a.category, a.sourceDate].filter(Boolean).join(" · ")}
+                          {[a.category, fmtArticleDate(a, lang as Locale)].filter(Boolean).join(" · ")}
                         </span>
                         <h3 className="mt-2 font-display text-lg font-medium leading-snug tracking-[-0.01em] text-chalk transition-colors group-hover:text-accent">
                           {l.title}

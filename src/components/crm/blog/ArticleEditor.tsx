@@ -5,6 +5,8 @@ import { useFormStatus } from "react-dom";
 import { Eye, Pencil } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { MarkdownPreview } from "./MarkdownPreview";
+import { CategoryCombobox } from "./CategoryCombobox";
+import { CoverImageInput } from "./CoverImageInput";
 
 type Lang = "es" | "en";
 
@@ -13,8 +15,8 @@ type EditorArticle = {
   category: string | null;
   sourceName: string | null;
   sourceUrl: string | null;
-  sourceDate: string | null;
   coverUrl: string | null;
+  coverPathname: string | null;
   featured: boolean;
   titleEs: string;
   excerptEs: string | null;
@@ -162,9 +164,11 @@ function SaveBar({ count }: { count: number }) {
 export function ArticleEditor({
   action,
   article,
+  categories,
 }: {
   action: (formData: FormData) => Promise<void>;
   article: EditorArticle;
+  categories: string[];
 }) {
   const [lang, setLang] = useState<Lang>("es");
   const [bodyLen, setBodyLen] = useState({
@@ -226,8 +230,8 @@ export function ArticleEditor({
                 <input id="slug" name="slug" defaultValue={article.slug} className="crm-input" />
               </div>
               <div>
-                <label className={metaLabel} htmlFor="category">Categoría</label>
-                <input id="category" name="category" defaultValue={article.category ?? ""} className="crm-input" placeholder="Aduanas, Fiscal…" />
+                <label className={metaLabel}>Categoría</label>
+                <CategoryCombobox name="category" defaultValue={article.category ?? ""} categories={categories} />
               </div>
               <div>
                 <label className={metaLabel} htmlFor="sourceName">Fuente</label>
@@ -238,12 +242,8 @@ export function ArticleEditor({
                 <input id="sourceUrl" name="sourceUrl" defaultValue={article.sourceUrl ?? ""} className="crm-input" />
               </div>
               <div>
-                <label className={metaLabel} htmlFor="sourceDate">Fecha de la fuente</label>
-                <input id="sourceDate" name="sourceDate" defaultValue={article.sourceDate ?? ""} className="crm-input crm-num" placeholder="08/12/2022" />
-              </div>
-              <div>
-                <label className={metaLabel} htmlFor="coverUrl">URL de portada</label>
-                <input id="coverUrl" name="coverUrl" defaultValue={article.coverUrl ?? ""} className="crm-input" placeholder="Déjalo vacío para usar imagen genérica" />
+                <label className={metaLabel}>Portada</label>
+                <CoverImageInput defaultUrl={article.coverUrl ?? ""} defaultPathname={article.coverPathname ?? ""} />
               </div>
               <label className="flex items-start gap-2.5 rounded-[var(--crm-r-md)] border border-[var(--crm-line)] bg-[var(--crm-surface)] px-3 py-2.5 text-[12.5px] leading-snug text-[var(--crm-ink-soft)]">
                 <input type="checkbox" name="featured" defaultChecked={article.featured} className="mt-0.5 size-4 shrink-0 accent-[var(--crm-accent)]" />
