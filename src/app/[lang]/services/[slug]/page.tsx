@@ -11,6 +11,8 @@ import { SignalLine } from "@/components/site/SignalLine";
 import { ServiceInstrument, DrawCheck } from "@/components/site/ServiceInstrument";
 import { MediaFrame } from "@/components/site/MediaFrame";
 import { Faq } from "@/components/site/Faq";
+import { ServiceDiagnostic } from "@/components/site/ServiceDiagnostic";
+import { ServiceProcessFlow } from "@/components/site/ServiceProcessFlow";
 
 export const dynamicParams = false;
 
@@ -89,38 +91,56 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Cuándo nos buscan (dolores) — interludio claro */}
+      {/* Cuándo nos buscan (dolores) — filas editoriales con divisores */}
       <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
           <SectionHeading title={sec.painsTitle} tone="light" className="mb-12" />
-          <div className="grid gap-4 sm:grid-cols-2">
+          <div className="border-t border-ash/20">
             {c.pains.map((p, i) => (
-              <Reveal key={p.title} delay={(i % 2) * 0.06} className="card-light flex flex-col rounded-[14px] p-7">
-                <span className="font-mono text-[12px] tabular-nums text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-4 font-display text-xl font-medium tracking-[-0.01em] text-ink">{p.title}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-graphite">{p.desc}</p>
+              <Reveal
+                key={p.title}
+                delay={i * 0.07}
+                className="grid grid-cols-[2.5rem_1fr] items-baseline gap-x-6 gap-y-2 border-b border-ash/20 py-8 sm:grid-cols-[2.5rem_5fr_8fr] sm:gap-x-10 sm:py-10"
+              >
+                <span className="font-mono text-[11px] tabular-nums text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="font-display text-lg font-medium leading-snug tracking-[-0.02em] text-ink sm:text-xl">{p.title}</h3>
+                <p className="col-start-2 mt-1 text-[15px] leading-relaxed text-graphite sm:col-start-3 sm:mt-0">{p.desc}</p>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Qué hacemos (alcance expandido) */}
+      {/* Qué hacemos — bento asimétrico 3 cols, zigzag wide/narrow */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
         <SectionHeading title={sec.doTitle} className="mb-12" />
-        <div className="grid gap-4 md:grid-cols-2">
-          {c.whatWeDo.map((w, i) => (
-            <Reveal key={w.title} delay={(i % 2) * 0.06} className="console-panel flex flex-col gap-4 rounded-[14px] bg-surface-1 p-7">
-              <div className="flex items-center gap-4">
-                <span className="font-mono text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
-                <SignalLine className="w-10" />
-              </div>
-              <div>
-                <h3 className="font-display text-xl font-medium tracking-[-0.01em] text-chalk">{w.title}</h3>
-                <p className="mt-2.5 text-[15px] leading-relaxed text-bone/90">{w.desc}</p>
-              </div>
-            </Reveal>
-          ))}
+        <div className="grid gap-4 lg:grid-cols-3">
+          {c.whatWeDo.map((w, i) => {
+            const isWide = [0, 3, 4].includes(i);
+            return (
+              <Reveal
+                key={w.title}
+                delay={(i % 3) * 0.06}
+                className={`console-panel rounded-[14px] bg-surface-1 p-7 ${isWide ? "lg:col-span-2" : "lg:col-span-1"}`}
+              >
+                <div className="mb-5 flex items-center gap-4">
+                  <span className="font-mono text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
+                  <SignalLine className="w-8" />
+                </div>
+                {isWide ? (
+                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
+                    <h3 className="font-display text-xl font-medium leading-snug tracking-[-0.01em] text-chalk">{w.title}</h3>
+                    <p className="text-[15px] leading-relaxed text-bone/80">{w.desc}</p>
+                  </div>
+                ) : (
+                  <>
+                    <h3 className="font-display text-xl font-medium leading-snug tracking-[-0.01em] text-chalk">{w.title}</h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-bone/80">{w.desc}</p>
+                  </>
+                )}
+              </Reveal>
+            );
+          })}
         </div>
       </section>
 
@@ -137,7 +157,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Banda visual del dominio (estilo Andercore) */}
+      {/* Banda visual del dominio */}
       <section className="relative mb-20 border-y border-line sm:mb-24">
         <MediaFrame
           src="/img/gen/border-crossing.webp"
@@ -147,6 +167,10 @@ export default async function ServiceDetailPage({
           className="!rounded-none"
         />
       </section>
+
+      {/* Flujo del proceso + diagnóstico — solo servicios con data */}
+      {c.flow && <ServiceProcessFlow slug={slug} lang={lang} />}
+      {c.diagnostic && <ServiceDiagnostic slug={slug} lang={lang} />}
 
       {/* FAQ */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">

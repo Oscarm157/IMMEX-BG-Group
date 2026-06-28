@@ -2,12 +2,342 @@
 // multi-agente a partir del contenido real del sitio (docs/bgcg-site-content.txt) + dominio
 // aduanero/fiscal. Factual, sin invenciones, sin vende-humos. Orden = SERVICE_SLUGS.
 
+type DiagnosticForm = {
+  heading: string;
+  namePlaceholder: string;
+  emailPlaceholder: string;
+  phonePlaceholder: string;
+  submit: string;
+  sending: string;
+  successTitle: string;
+  successBody: string;
+  errorMsg: string;
+  nameRequired: string;
+  emailRequired: string;
+  emailInvalid: string;
+};
+
+export type DiagnosticLang = {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  restart: string;
+  questions: readonly { text: string; opts: readonly string[] }[];
+  results: Record<string, { title: string; body: string; cta: string }>;
+  contactTJ: string;
+  contactSD: string;
+  contactEmail: string;
+  of: string;
+  progress: string;
+  form: DiagnosticForm;
+};
+
+export type DiagnosticData = {
+  es: DiagnosticLang;
+  en: DiagnosticLang;
+  getResult: (answers: number[]) => string;
+  resultTag: Record<string, { es: string; en: string }>;
+  stageForResult: Record<string, number>;
+};
+
+export type FlowStage = { n: string; name: string; desc: string };
+
+export type FlowLang = {
+  eyebrow: string;
+  title: string;
+  lead: string;
+  panel: string;
+  stages: readonly FlowStage[];
+};
+
+export type FlowData = {
+  es: FlowLang;
+  en: FlowLang;
+};
+
 export type ServiceDetail = {
   overview: string;
   pains: { title: string; desc: string }[];
   whatWeDo: { title: string; desc: string }[];
   outcomes: string[];
   faq: { q: string; a: string }[];
+  diagnostic?: DiagnosticData;
+  flow?: FlowData;
+};
+
+const FT_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Por dónde empieza tu caso?",
+    lead: "Cuatro preguntas para orientarte hacia el área correcta.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Me llegó una notificación: auditoría, PAMA, multa o crédito fiscal",
+          "Tengo una revisión en curso y necesito responder con sustento técnico",
+          "Quiero revisar mi cumplimiento antes de que llegue una auditoría",
+          "Tengo una decisión de negocio con impacto aduanero que evaluar",
+        ],
+      },
+      {
+        text: "¿Tu empresa opera bajo programa IMMEX?",
+        opts: [
+          "Sí, y tenemos dudas sobre si cumplimos todos los requisitos",
+          "Sí, pero queremos una revisión periódica para mantenerlo en orden",
+          "No, pero estamos evaluando obtenerlo",
+          "No, nuestra operación no requiere IMMEX",
+        ],
+      },
+      {
+        text: "¿Hay plazos que ya están corriendo?",
+        opts: [
+          "Sí, tengo días o pocas semanas para actuar",
+          "Sí, pero tengo uno a tres meses de margen",
+          "No hay plazos inmediatos, es planeación",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es el corredor principal de tu operación?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce fronterizo en la zona norte",
+          "Operación marítima, aérea o interior",
+          "Aún no tenemos operaciones activas",
+        ],
+      },
+    ],
+    results: {
+      HIGH_DEFENSE: {
+        title: "Defensa con plazos corriendo",
+        body: "Los medios de defensa tienen fechas límite que arrancan con la notificación del acto. Revisamos el alcance, construimos los agravios y presentamos el recurso o la demanda dentro de los plazos del procedimiento.",
+        cta: "Hablar con el equipo",
+      },
+      DEFENSE: {
+        title: "Defensa técnica ante la autoridad",
+        body: "Revisamos el acto, el soporte documental de las operaciones y construimos la postura técnica. La defensa se conduce desde la notificación hasta su conclusión por la vía que conviene al caso.",
+        cta: "Hablar con el equipo",
+      },
+      COMPLIANCE_IMMEX: {
+        title: "Auditoría preventiva IMMEX",
+        body: "Identificamos las contingencias antes de que las encuentre la autoridad: clasificación, valoración, Anexo 24, soporte documental y control de inventarios. El diagnóstico precede a cualquier revisión.",
+        cta: "Programar revisión",
+      },
+      ADVISORY: {
+        title: "Asesoría antes de actuar",
+        body: "Cada decisión con efecto aduanero o fiscal conviene evaluarla antes de ejecutarla. Analizamos el caso, fijamos la contingencia y orientamos la decisión con criterio técnico.",
+        cta: "Consultar",
+      },
+      GENERAL: {
+        title: "Diagnóstico de la operación",
+        body: "Revisamos el punto de partida y orientamos el trabajo hacia lo que la operación necesita, sin presuposiciones sobre el área ni la urgencia.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your case start?",
+    lead: "Four questions to point you toward the right area.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "I received a notice: audit, PAMA, fine, or tax assessment",
+          "A review is underway and I need to respond with technical support",
+          "I want to check my compliance before an audit arrives",
+          "I have a business decision with customs or tax impact to evaluate",
+        ],
+      },
+      {
+        text: "Does your company operate under an IMMEX program?",
+        opts: [
+          "Yes, and we have doubts about whether we meet all the requirements",
+          "Yes, we run it but want a periodic review to keep it in order",
+          "No, but we are evaluating whether to obtain it",
+          "No, our operation does not require IMMEX",
+        ],
+      },
+      {
+        text: "Are deadlines already running?",
+        opts: [
+          "Yes, I have days or a few weeks to act",
+          "Yes, but I have one to three months of room",
+          "No immediate deadlines, this is planning",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "What is the main corridor for your operation?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another border crossing in the northern zone",
+          "Maritime, air, or inland operation",
+          "No active cross-border operations yet",
+        ],
+      },
+    ],
+    results: {
+      HIGH_DEFENSE: {
+        title: "Defense with deadlines running",
+        body: "Defense remedies carry deadlines that start at notification. We review the act, build the grievances, and file the appeal or lawsuit within the procedural deadlines.",
+        cta: "Talk to the team",
+      },
+      DEFENSE: {
+        title: "Technical defense before the authority",
+        body: "We review the act, the supporting documentation, and build the technical position. The defense is handled from notification through to conclusion by the route that fits the case.",
+        cta: "Talk to the team",
+      },
+      COMPLIANCE_IMMEX: {
+        title: "Preventive IMMEX audit",
+        body: "We identify contingencies before the authority does: classification, valuation, Annex 24, documentary support, and inventory control. The diagnosis comes before any review.",
+        cta: "Schedule a review",
+      },
+      ADVISORY: {
+        title: "Advisory before acting",
+        body: "Every decision with customs or tax effect is worth evaluating before execution. We analyze the case, fix the exposure, and orient the decision with technical criteria.",
+        cta: "Consult",
+      },
+      GENERAL: {
+        title: "Operation diagnostic",
+        body: "We review the starting point and direct the work to what the operation needs, without assumptions about the area or the urgency.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2, q3] = answers;
+    if ((q1 === 0 || q1 === 1) && q3 === 0) return "HIGH_DEFENSE";
+    if (q1 === 0 || q1 === 1) return "DEFENSE";
+    if (q1 === 2 && (q2 === 0 || q2 === 1)) return "COMPLIANCE_IMMEX";
+    if (q2 === 0 || q2 === 2) return "COMPLIANCE_IMMEX";
+    if (q1 === 3) return "ADVISORY";
+    return "GENERAL";
+  },
+  resultTag: {
+    HIGH_DEFENSE: { es: "Defensa inmediata", en: "Immediate defense" },
+    DEFENSE: { es: "Defensa técnica", en: "Technical defense" },
+    COMPLIANCE_IMMEX: { es: "Cumplimiento IMMEX", en: "IMMEX compliance" },
+    ADVISORY: { es: "Asesoría", en: "Advisory" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    HIGH_DEFENSE: 4,
+    DEFENSE: 4,
+    COMPLIANCE_IMMEX: 3,
+    ADVISORY: 0,
+    GENERAL: 2,
+  },
+};
+
+const FT_FLOW: FlowData = {
+  es: {
+    eyebrow: "Ciclo del pedimento",
+    title: "De la clasificación al cierre del asunto.",
+    lead: "Cada operación recorre las mismas etapas. Cuando la autoridad interviene, BG conduce la defensa desde la notificación hasta la resolución.",
+    panel: "Flujo aduanal · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Clasificación",
+        desc: "Se determina la fracción arancelaria de la mercancía con las Reglas Generales de Interpretación. Un error en la fracción define el arancel, las regulaciones y los permisos que se activan, y es el punto de partida de la mayoría de las controversias.",
+      },
+      {
+        n: "02",
+        name: "Valoración",
+        desc: "El valor en aduana se fija conforme al Acuerdo de Valoración de la OMC: valor de transacción más los ajustes incrementables que correspondan. Cuando hay vinculación entre partes o el método principal no aplica, se acude a los métodos secundarios en el orden que marca la ley.",
+      },
+      {
+        n: "03",
+        name: "Pedimento",
+        desc: "El pedimento concentra toda la información de la operación: fracción, valor, origen, contribuciones y regulaciones no arancelarias. El agente aduanal lo transmite ante el mecanismo de selección automatizado, que determina si la mercancía pasa a reconocimiento.",
+      },
+      {
+        n: "04",
+        name: "Cumplimiento",
+        desc: "Una vez liberada la mercancía, el cumplimiento continúa: Anexo 24 para el control de inventarios IMMEX, validación Anexo 31 y registro de retornos en plazo. Sin estos controles, los impuestos diferidos se causan y el programa queda en riesgo.",
+      },
+      {
+        n: "05",
+        name: "Defensa",
+        desc: "Si la autoridad observa la operación, los plazos para defenderse arrancan con la notificación. BG revisa el acto, construye los agravios con sustento técnico y conduce el asunto por la vía que corresponda: recurso, juicio ante el TFJA, amparo o acuerdo conclusivo.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Customs cycle",
+    title: "From classification to case closure.",
+    lead: "Every operation moves through the same stages. When the authority steps in, BG handles the defense from notification through to resolution.",
+    panel: "Customs flow · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Classification",
+        desc: "The tariff code is determined under the General Rules of Interpretation. An error in the classification drives the duty rate, the non-tariff regulations, and the permits that apply, and is where most disputes begin.",
+      },
+      {
+        n: "02",
+        name: "Valuation",
+        desc: "Customs value is set under the WTO Valuation Agreement: transaction value plus the applicable dutiable additions. When buyer and seller are related or the primary method does not apply, the law moves to secondary methods in a fixed order.",
+      },
+      {
+        n: "03",
+        name: "Entry",
+        desc: "The customs entry captures everything: tariff code, value, origin, duties, and non-tariff regulations. The customs broker transmits it to the automated selection system, which determines whether the shipment goes to inspection.",
+      },
+      {
+        n: "04",
+        name: "Compliance",
+        desc: "After release, compliance continues: Annex 24 for IMMEX inventory control, Annex 31 validation, and on-time return records. Without these controls, deferred duties come due and the program is at risk.",
+      },
+      {
+        n: "05",
+        name: "Defense",
+        desc: "If the authority challenges the operation, defense deadlines run from notification. BG reviews the act, builds the grievances with technical support, and handles the matter by whichever route fits: appeal, TFJA litigation, amparo, or conclusive agreement.",
+      },
+    ],
+  },
 };
 
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
@@ -223,7 +553,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Por qué importa tanto el control de inventarios bajo IMMEX?",
           "a": "Porque es lo que acredita que la mercancía importada temporalmente se retornó, se transfirió o cambió de régimen en tiempo. El Anexo 24 es el sistema de control de inventarios obligatorio, el Anexo 31 valida saldos ante la autoridad y Data Stage respalda el manejo de la información. Si estos sistemas no cuadran con las operaciones, la autoridad presume que la mercancía permaneció en el país y determina las contribuciones que se difirieron."
         }
-      ]
+      ],
+      diagnostic: FT_DIAGNOSTIC,
+      flow: FT_FLOW,
     },
     {
       "overview": "Cuando una autoridad aduanera o fiscal cuestiona la clasificación arancelaria, el origen o el valor de una mercancía, lo que está en juego es la determinación de un crédito fiscal y, con frecuencia, la viabilidad de la operación. BG Consulting Group sustenta los agravios de la defensa legal con dictámenes técnicos en materia de comercio exterior y aduanas, y emite opinión pericial cuando el asunto exige certeza jurídica ante la autoridad correspondiente.",
@@ -789,7 +1121,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Why does inventory control matter so much under IMMEX?",
           "a": "Because it is what proves that temporarily imported merchandise was returned, transferred, or changed regime on time. Annex 24 is the mandatory inventory control system, Annex 31 validates balances before the authority, and Data Stage supports the information handling. If these systems do not match the operations, the authority presumes the goods stayed in the country and assesses the duties that were deferred."
         }
-      ]
+      ],
+      diagnostic: FT_DIAGNOSTIC,
+      flow: FT_FLOW,
     },
     {
       "overview": "When customs or tax authorities challenge the tariff classification, origin, or value of your goods, what is at stake is a tax assessment and often the viability of the operation itself. BG Consulting Group substantiates the grievances raised in legal defense with technical opinions in foreign trade and customs matters, and issues expert opinions when a case requires legal certainty before the corresponding authority.",
