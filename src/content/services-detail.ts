@@ -1479,6 +1479,279 @@ const INFORMATION_TECHNOLOGY_FLOW: FlowData = {
   },
 };
 
+const FISCAL_SERVICES_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Por dónde empieza tu trámite de IVA?",
+    lead: "Cuatro preguntas para orientarte hacia el paso correcto.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación con el IVA hoy?",
+        opts: [
+          "Tengo saldo a favor acumulado que no he solicitado en devolución",
+          "Presenté una solicitud de devolución y fue rechazada o está detenida",
+          "Tengo dudas sobre si mis acreditamientos están bien sustentados",
+          "Recibí un requerimiento de información del SAT durante una revisión",
+        ],
+      },
+      {
+        text: "¿Cuál es el origen principal de tu saldo a favor?",
+        opts: [
+          "Exportaciones o ventas a tasa 0% que superan el IVA que traslado",
+          "Inversiones en activo fijo con IVA pagado pendiente de recuperar",
+          "Operación mixta con varias actividades o tasas",
+          "No identifico con claridad el origen del saldo",
+        ],
+      },
+      {
+        text: "¿Has conciliado la DIOT contra tu declaración mensual?",
+        opts: [
+          "No, y sospecho que hay diferencias entre lo informado y lo declarado",
+          "Sí, pero tengo diferencias que no he resuelto",
+          "Sí, está conciliada y consistente",
+          "No presentamos DIOT o no aplica a nuestra operación",
+        ],
+      },
+      {
+        text: "¿Qué tan urgente es el trámite?",
+        opts: [
+          "Hay una revisión del SAT o un requerimiento activo que atender",
+          "El capital inmovilizado afecta el flujo de operaciones",
+          "Queremos ordenar el soporte antes de presentar la solicitud",
+          "Sin urgencia inmediata, es trabajo previo de planeación",
+        ],
+      },
+    ],
+    results: {
+      REQUIREMENTS: {
+        title: "Atención a requerimiento del SAT",
+        body: "Cuando la autoridad emite un requerimiento durante la revisión, la respuesta debe llegar con el soporte de las operaciones ya integrado. Revisamos el alcance del requerimiento, ordenamos la documentación y atendemos la solicitud dentro del plazo.",
+        cta: "Hablar con el equipo",
+      },
+      REJECTED: {
+        title: "Solicitud rechazada o detenida",
+        body: "Un rechazo o una devolución parcial indica que la determinación o el soporte no satisficieron los requisitos de la autoridad. Revisamos la determinación del saldo, identificamos la observación y preparamos la respuesta o una nueva solicitud con soporte reforzado.",
+        cta: "Hablar con el equipo",
+      },
+      DIOT_MISMATCH: {
+        title: "Conciliación DIOT y declaración mensual",
+        body: "Diferencias entre lo informado en la DIOT y lo declarado en el periodo son una causa frecuente de observación. Conciliamos ambas fuentes, identificamos las diferencias y las resolvemos antes de presentar, para que el acreditamiento no quede cuestionado desde el inicio.",
+        cta: "Hablar con el equipo",
+      },
+      ACCUMULATED: {
+        title: "Solicitud de devolución de IVA",
+        body: "Revisamos la determinación del saldo a favor, verificamos que las operaciones cumplan los requisitos fiscales para el acreditamiento y presentamos la solicitud con el soporte ordenado. Damos seguimiento hasta que la autoridad resuelve.",
+        cta: "Hablar con el equipo",
+      },
+      GENERAL: {
+        title: "Diagnóstico del saldo a favor",
+        body: "Revisamos el punto de partida: la determinación del saldo, el estado de la conciliación y el soporte de las operaciones. Orientamos el trabajo hacia lo que el trámite necesita.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your VAT refund process start?",
+    lead: "Four questions to point you toward the right step.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation with VAT today?",
+        opts: [
+          "I have an accumulated credit balance I have not yet requested as a refund",
+          "I filed a refund request and it was rejected or is stalled",
+          "I have doubts about whether my creditable amounts are properly supported",
+          "I received an information request from the SAT during a review",
+        ],
+      },
+      {
+        text: "What is the main source of your credit balance?",
+        opts: [
+          "Exports or 0% rate sales that exceed the VAT I charge",
+          "Fixed asset investments with VAT paid and pending recovery",
+          "Mixed operations with various activities or rates",
+          "I cannot clearly identify the source of the balance",
+        ],
+      },
+      {
+        text: "Have you reconciled the DIOT against your monthly statement?",
+        opts: [
+          "No, and I suspect there are differences between what was reported and what was filed",
+          "Yes, but there are differences I have not resolved",
+          "Yes, it is reconciled and consistent",
+          "We do not file a DIOT or it does not apply to our operation",
+        ],
+      },
+      {
+        text: "How urgent is the process?",
+        opts: [
+          "There is an active SAT review or information request to address",
+          "The tied-up capital is affecting operational cash flow",
+          "We want to organize the support before filing the request",
+          "No immediate urgency, this is advance planning",
+        ],
+      },
+    ],
+    results: {
+      REQUIREMENTS: {
+        title: "Responding to a SAT information request",
+        body: "When the authority issues a requirement during its review, the response must arrive with operational support already in place. We review the scope of the requirement, organize the documentation, and address it within the deadline.",
+        cta: "Talk to the team",
+      },
+      REJECTED: {
+        title: "Rejected or stalled refund request",
+        body: "A rejection or partial refund indicates that the determination or the support did not satisfy the authority's requirements. We review the balance determination, identify the observation, and prepare the response or a new request with stronger backing.",
+        cta: "Talk to the team",
+      },
+      DIOT_MISMATCH: {
+        title: "Reconciling the DIOT and the monthly statement",
+        body: "Differences between what was reported in the DIOT and what was declared in the period are a frequent source of observations. We reconcile both sources, identify the differences, and resolve them before filing, so the credit is not questioned from the outset.",
+        cta: "Talk to the team",
+      },
+      ACCUMULATED: {
+        title: "VAT refund request",
+        body: "We review the credit balance determination, verify that the operations meet the tax requirements for the credit, and file the request with organized support. We follow up until the authority responds.",
+        cta: "Talk to the team",
+      },
+      GENERAL: {
+        title: "Credit balance diagnostic",
+        body: "We review the starting point: the balance determination, the reconciliation status, and the operational support. We direct the work toward what the process needs.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, , q3, q4] = answers;
+    if (q4 === 0) return "REQUIREMENTS";
+    if (q1 === 1) return "REJECTED";
+    if (q3 === 0 || q3 === 1) return "DIOT_MISMATCH";
+    if (q1 === 0 || q1 === 2) return "ACCUMULATED";
+    return "GENERAL";
+  },
+  resultTag: {
+    REQUIREMENTS: { es: "Requerimiento SAT", en: "SAT requirement" },
+    REJECTED: { es: "Solicitud rechazada", en: "Rejected request" },
+    DIOT_MISMATCH: { es: "Conciliación DIOT", en: "DIOT reconciliation" },
+    ACCUMULATED: { es: "Devolución de IVA", en: "VAT refund" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    REQUIREMENTS: 4,
+    REJECTED: 3,
+    DIOT_MISMATCH: 1,
+    ACCUMULATED: 0,
+  },
+};
+
+const FISCAL_SERVICES_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de devolución",
+    title: "De la revisión de operaciones a la resolución del SAT.",
+    lead: "Cada solicitud de devolución de IVA recorre las mismas etapas. BG Consulting ordena el soporte desde el inicio y da seguimiento hasta que la autoridad resuelve.",
+    panel: "Flujo de devolución · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Revisión de operaciones y registros",
+        desc: "Cotejamos las operaciones del periodo contra los registros contables y la normatividad contable aplicable. La base que la autoridad espera encontrar es que cada partida que sustenta el IVA acreditable esté efectivamente asentada y cumpla los requisitos fiscales vigentes.",
+      },
+      {
+        n: "02",
+        name: "Conciliación DIOT y declaración mensual",
+        desc: "Confrontamos la Declaración Informativa de Operaciones con Terceros contra la declaración mensual presentada al SAT. Las diferencias entre lo informado y lo declarado son una causa frecuente de observación; resolverlas antes de presentar evita que detengan o reduzcan la devolución.",
+      },
+      {
+        n: "03",
+        name: "Determinación del saldo a favor",
+        desc: "Analizamos la mecánica de determinación del saldo: impuesto trasladado, IVA acreditable y el cálculo que arroja la cifra solicitada. Una determinación correcta es lo que sostiene el monto frente a una revisión.",
+      },
+      {
+        n: "04",
+        name: "Presentación de la solicitud",
+        desc: "Integramos y presentamos la solicitud de devolución con la determinación y el soporte de operaciones ordenados conforme a lo que requiere la autoridad. Una solicitud bien armada llega con el respaldo listo desde el primer momento.",
+      },
+      {
+        n: "05",
+        name: "Seguimiento hasta la resolución",
+        desc: "Damos seguimiento al trámite y atendemos los requerimientos de información que la autoridad emita durante la revisión. El proceso no termina al presentar: la atención a requerimientos es donde muchas devoluciones se ganan o se pierden.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Refund process",
+    title: "From operations review to the SAT resolution.",
+    lead: "Every VAT refund request moves through the same stages. BG Consulting organizes the support from the start and follows up until the authority responds.",
+    panel: "Refund flow · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Operations and records review",
+        desc: "We match the period's operations against the accounting records and applicable accounting standards. The foundation the authority expects to find is that every item supporting creditable VAT is booked and meets current tax requirements.",
+      },
+      {
+        n: "02",
+        name: "DIOT and monthly statement reconciliation",
+        desc: "We compare the Informative Statement of Third-Party Operations against the monthly statement filed with the SAT. Differences between what was reported and what was declared are a frequent source of observations; resolving them before filing prevents them from stalling or reducing the refund.",
+      },
+      {
+        n: "03",
+        name: "Credit balance determination",
+        desc: "We analyze the determination mechanics: VAT charged, creditable VAT, and the calculation that produces the amount requested. A correct determination is what holds the amount up under review.",
+      },
+      {
+        n: "04",
+        name: "Filing the refund request",
+        desc: "We assemble and file the refund request with the determination and operational support organized as the authority requires. A well-built request arrives with its backing ready from day one.",
+      },
+      {
+        n: "05",
+        name: "Follow-up until the resolution",
+        desc: "We follow the process and address the information requirements the authority issues during its review. The work does not end at filing: handling requirements is where many refunds are won or lost.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -1917,7 +2190,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Bajo qué marco se realiza la revisión?",
           "a": "La revisión se realiza conforme a las Normas de Información Financiera y a los requisitos fiscales vigentes, contrastando las operaciones contra los registros contables del periodo. Sobre esa base se determina y soporta el saldo a favor que se solicita en devolución."
         }
-      ]
+      ],
+      diagnostic: FISCAL_SERVICES_DIAGNOSTIC,
+      flow: FISCAL_SERVICES_FLOW,
     },
     {
       "overview": "México mantiene una de las redes de tratados comerciales más amplias del mundo, y cada acuerdo abre acceso preferencial siempre que la mercancía cumpla las reglas de origen y la documentación resista una verificación. El problema rara vez es la tarifa preferencial en sí, sino acreditarla: registros incompletos, certificados mal sustentados y proveedores que no documentan su aporte regional. BG Consulting Group estructura la determinación y certificación de origen para que el beneficio arancelario se aplique con respaldo y se sostenga frente a la autoridad.",
@@ -2495,7 +2770,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Under what framework is the review performed?",
           "a": "The review is performed under Financial Information Standards and current tax requirements, contrasting operations against the period's accounting records. On that basis the credit balance to be refunded is determined and supported."
         }
-      ]
+      ],
+      diagnostic: FISCAL_SERVICES_DIAGNOSTIC,
+      flow: FISCAL_SERVICES_FLOW,
     },
     {
       "overview": "Mexico holds one of the widest networks of trade agreements in the world, and each one opens preferential access as long as the goods meet the rules of origin and the paperwork survives a verification. The hard part is rarely the preferential rate itself, it is proving entitlement to it: incomplete records, weakly supported certificates, and suppliers who never document their regional content. BG Consulting Group structures origin determination and certification so the tariff benefit is applied with backing and holds up before the authority.",
