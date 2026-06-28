@@ -8,8 +8,8 @@ import { DrawCheck } from "@/components/site/ServiceInstrument";
  * Visual por etapa del ciclo del pedimento. Reusa el lenguaje de
  * ServiceInstrument (mint #00e6a0, líneas frías, draw-on) y se anima al montar,
  * porque cambia con la etapa activa (no on-scroll). Respeta reduced-motion
- * mostrando el estado final. Lo consumen ForeignTradeFlow y, mapeado por
- * resultado, ForeignTradeDiagnostic.
+ * mostrando el estado final. Lo consumen ServiceProcessFlow y, mapeado por
+ * resultado, ServiceDiagnostic.
  */
 
 const ACCENT = "#00e6a0";
