@@ -2345,27 +2345,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Asesoría fiscal y aduanera continua",
-          "desc": "Seguimiento del cumplimiento al que la empresa está obligada y acompañamiento en las decisiones de negocio con efecto fiscal o aduanero: clasificación, valoración, regímenes aduaneros, operaciones de comercio exterior. El propósito es identificar la contingencia antes de que se convierta en un crédito o una sanción."
+          "desc": "Seguimiento del cumplimiento obligado y asesoría en decisiones de negocio con efecto fiscal o aduanero."
         },
         {
           "title": "Recursos administrativos",
-          "desc": "Interposición del recurso de revocación y demás medios de defensa en sede administrativa frente a actos de la autoridad aduanera y fiscal. Es la primera instancia para controvertir un acto sin acudir todavía al tribunal, y en muchos asuntos define el resultado."
+          "desc": "Interposición del recurso de revocación y demás medios en sede administrativa frente a la autoridad aduanera y fiscal."
         },
         {
           "title": "Litigio ante el Tribunal Federal de Justicia Administrativa",
-          "desc": "Promoción y seguimiento del juicio contencioso administrativo contra resoluciones definitivas: créditos fiscales, multas y determinaciones en materia aduanera. Se elige la vía ordinaria o sumaria según la cuantía y la naturaleza del asunto."
+          "desc": "Juicio contencioso administrativo contra resoluciones definitivas: créditos fiscales, multas y determinaciones aduaneras."
         },
         {
           "title": "Juicio de amparo y derechos humanos",
-          "desc": "Promoción del amparo indirecto y directo cuando el acto de autoridad vulnera derechos fundamentales o cuando se ha agotado la instancia previa. Los derechos humanos reconocidos en la Constitución y en los tratados sirven como base de defensa frente a la actuación de la autoridad."
+          "desc": "Amparo indirecto y directo cuando el acto vulnera derechos fundamentales o se ha agotado la instancia previa."
         },
         {
           "title": "Acuerdos conclusivos, arbitraje y mediación",
-          "desc": "Acuerdos conclusivos ante PRODECON para resolver diferencias con la autoridad durante el ejercicio de sus facultades de comprobación, arbitraje comercial internacional para controversias entre particulares en operaciones transfronterizas y mediación. Son vías para cerrar un asunto sin necesidad de agotar todo el litigio."
+          "desc": "Acuerdos conclusivos ante PRODECON, arbitraje comercial internacional y mediación: vías alternativas al litigio."
         },
         {
           "title": "Peritajes ante tribunales",
-          "desc": "Intervención como peritos ante el Poder Judicial de la Federación y ante el Tribunal Federal de Justicia Administrativa. El dictamen pericial aporta el sustento técnico en materia aduanera y fiscal que el juzgador requiere para resolver."
+          "desc": "Dictámenes periciales ante el Poder Judicial y el TFJA que aportan sustento técnico aduanero y fiscal al juzgador."
         }
       ],
       "outcomes": [
@@ -2420,27 +2420,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Evaluación y análisis de riesgos en comercio exterior",
-          "desc": "Identificamos los puntos donde la operación se aparta del marco autorizado: clasificación, valoración, origen, control de inventarios y soporte documental. Es el diagnóstico que define dónde está expuesta la empresa antes de que lo encuentre la autoridad."
+          "desc": "Identificamos desviaciones en clasificación, valoración, origen, inventarios y soporte documental antes de que actúe la autoridad."
         },
         {
           "title": "Auditorías preventivas y planes anuales de aseguramiento",
-          "desc": "Realizamos auditorías preventivas de comercio exterior y estructuramos un plan anual continuo de aseguramiento y un plan anual de asesoría especializada. La revisión recurrente detecta desviaciones a tiempo y mantiene la operación dentro de los límites de la autorización."
+          "desc": "Auditorías preventivas de comercio exterior y plan anual de aseguramiento para mantener la operación dentro de la autorización."
         },
         {
           "title": "Reconstrucción de saldos de pedimentos",
-          "desc": "Reconstruimos los saldos de pedimentos de activo fijo y materia prima, además de bienes de capital y accesorios. Cuadrar estos saldos con el inventario físico es la base para sostener la legal estancia de la mercancía importada temporalmente."
+          "desc": "Reconstrucción y conciliación de saldos de pedimentos de activo fijo y materia prima contra el inventario físico."
         },
         {
           "title": "Análisis de control interno y de inventarios",
-          "desc": "Analizamos los controles internos y el riesgo de inventario para verificar que el sistema de control de inventarios, en términos del Anexo 24, respalde cada entrada y salida. Un control de inventarios consistente es requisito para conservar el programa y para responder un descargo sin diferencias."
+          "desc": "Revisión del sistema de inventarios Anexo 24 para verificar que respalda cada entrada y salida del programa IMMEX."
         },
         {
           "title": "Reingeniería del Departamento de Importaciones y Exportaciones",
-          "desc": "Rediseñamos los procesos y responsabilidades del área de comercio exterior para que el cumplimiento quede integrado a la operación diaria y no dependa de criterios aislados. El objetivo es que la estructura sostenga la autorización por sí misma."
+          "desc": "Rediseño de procesos y responsabilidades del área de importaciones y exportaciones para integrar el cumplimiento a la operación."
         },
         {
           "title": "Artículo 303 del TLCAN y reglas de origen",
-          "desc": "Revisamos el tratamiento de las contribuciones sobre insumos no originarios incorporados a la exportación, conforme al artículo 303 del TLCAN y a su tratamiento equivalente vigente en el T-MEC. Es un punto donde un cálculo incorrecto genera diferencias y créditos fiscales."
+          "desc": "Revisión del tratamiento de insumos no originarios en exportación conforme al artículo 303 del TLCAN y el T-MEC."
         }
       ],
       "outcomes": [
@@ -2495,27 +2495,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Valoración aduanera y base gravable",
-          "desc": "Determinación del valor en aduana de la mercancía y aplicación de los criterios de valoración conforme a la legislación y al Acuerdo de Valoración de la OMC: método de valor de transacción, ajustes incrementables, vinculación entre partes y métodos secundarios. Una base gravable bien sustentada evita diferencias de impuestos y observaciones en revisión."
+          "desc": "Determinación del valor en aduana conforme a la legislación y al Acuerdo OMC: transacción, ajustes y métodos secundarios."
         },
         {
           "title": "Clasificación, origen y pedimentos",
-          "desc": "Correcta elaboración del pedimento, análisis del origen de la mercancía y certificación bajo los tratados de libre comercio suscritos por México. El origen define la preferencia arancelaria y las reglas específicas; un error aquí se traduce en aranceles pagados de más o en preferencias negadas."
+          "desc": "Elaboración del pedimento, análisis de origen y certificación bajo los tratados de libre comercio suscritos por México."
         },
         {
           "title": "Regulaciones no arancelarias y permisos previos",
-          "desc": "Cumplimiento de restricciones y regulaciones no arancelarias, permisos previos ante la Secretaría de Economía y demás requisitos sectoriales. Identificamos qué exige cada fracción para que la mercancía no quede detenida ni la operación expuesta a sanción."
+          "desc": "Cumplimiento de regulaciones no arancelarias y permisos previos para que la mercancía no quede detenida en la aduana."
         },
         {
           "title": "Programas de fomento: IMMEX, PROSEC y Drawback",
-          "desc": "Asesoría en el programa IMMEX, en PROSEC y en la recuperación de contribuciones vía Drawback y devolución de impuestos. Estas figuras permiten diferir o recuperar aranceles de forma legal; aplicarlas requiere soporte documental y control que ordenamos desde el origen."
+          "desc": "Asesoría en IMMEX, PROSEC y recuperación de contribuciones vía Drawback y devolución de impuestos."
         },
         {
           "title": "Control de inventarios: Anexo 24, Anexo 31 y Data Stage",
-          "desc": "Implementación y revisión del sistema de control de inventarios (Anexo 24), el sistema de validación Anexo 31 y el sistema Data Stage. El control de inventarios es la columna del régimen temporal: sin él no se acredita el retorno y se causan los impuestos diferidos."
+          "desc": "Implementación del Anexo 24, validación Anexo 31 y Data Stage para sostener el régimen temporal de importación."
         },
         {
           "title": "Análisis de riesgo y fomento a la exportación",
-          "desc": "Diagnóstico de riesgo en materia aduanera sobre las operaciones de la empresa y aprovechamiento de los esquemas de fomento a la exportación. Anticipar el punto débil de la operación cuesta menos que corregirlo durante una auditoría."
+          "desc": "Diagnóstico de riesgo aduanero sobre las operaciones de la empresa y aprovechamiento de esquemas de fomento a la exportación."
         }
       ],
       "outcomes": [
@@ -2568,27 +2568,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Dictamen pericial en clasificación arancelaria",
-          "desc": "Análisis técnico de la mercancía y su ubicación en la TIGIE conforme a las Reglas Generales de Interpretación, notas legales de sección y capítulo, y criterios aplicables. Sirve como prueba pericial para sostener la fracción correcta frente a una reclasificación de la autoridad."
+          "desc": "Análisis técnico de la mercancía en la TIGIE conforme a las Reglas Generales de Interpretación, ofrecido como prueba pericial."
         },
         {
           "title": "Sustento de origen de las mercancías",
-          "desc": "Verificación del cumplimiento de las reglas de origen del tratado invocado, revisión del valor de contenido regional o del salto arancelario según corresponda, y soporte documental. Permite defender la preferencia arancelaria cuando la autoridad la desconoce."
+          "desc": "Verificación de reglas de origen, contenido regional o salto arancelario, con soporte documental para defender la preferencia."
         },
         {
           "title": "Avalúos y valoración aduanera",
-          "desc": "Determinación del valor en aduana con base en los métodos de valoración previstos en la Ley Aduanera, partiendo del valor de transacción y, en su defecto, de los métodos secundarios. Aporta el fundamento para controvertir un avalúo o un ajuste de la base gravable."
+          "desc": "Determinación del valor en aduana conforme a la Ley Aduanera para controvertir un avalúo o ajuste de la base gravable."
         },
         {
           "title": "Criterios aduaneros y opinión técnica",
-          "desc": "Interpretación de la normativa aduanera y los criterios de la autoridad aplicables al caso concreto, para fijar la postura técnica que respalda los agravios de la defensa o que da certeza jurídica antes de tomar una decisión operativa."
+          "desc": "Interpretación de normativa aduanera y criterios de la autoridad para fijar la postura técnica del caso."
         },
         {
           "title": "Revisión de Anexo 24 y control de inventarios",
-          "desc": "Análisis del sistema de control de inventarios del Anexo 24, la trazabilidad de entradas, descargos y retornos, y la consistencia del balance de materiales del programa IMMEX. Identifica y documenta el sustento frente a observaciones de la autoridad."
+          "desc": "Análisis del Anexo 24, trazabilidad de entradas y retornos, y balance de materiales IMMEX ante observaciones de la autoridad."
         },
         {
           "title": "Soporte pericial en la defensa legal",
-          "desc": "Elaboración de los dictámenes que respaldan los agravios presentados en recursos administrativos y juicios contencioso administrativos en materia aduanera, coordinados con la estrategia jurídica del asunto."
+          "desc": "Dictámenes que respaldan los agravios en recursos y juicios aduaneros, coordinados con la estrategia jurídica del asunto."
         }
       ],
       "outcomes": [
@@ -2643,27 +2643,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Cumplimiento aduanero validado por sistema",
-          "desc": "Herramientas desarrolladas para verificar la información antes de la transmisión: consistencia entre pedimento, factura y datos del importador, vigencia de certificados y catálogos, y reglas de validación sobre clasificación y valor. El objetivo es alcanzar un nivel de cumplimiento óptimo, no corregir después del despacho."
+          "desc": "Herramientas que verifican la consistencia entre pedimento, factura y datos del importador antes de la transmisión."
         },
         {
           "title": "Detección y mitigación de hallazgos en tiempo real",
-          "desc": "Reglas que señalan inconsistencias y desviaciones mientras la operación ocurre, no en la auditoría posterior. Identificar un error en el momento permite rectificar con menor exposición y documentar la corrección, en lugar de arrastrar el mismo problema en cada embarque."
+          "desc": "Reglas que señalan inconsistencias durante la operación, no en la auditoría posterior, para corregir con menor exposición."
         },
         {
           "title": "Logística internacional, terrestre y marítima",
-          "desc": "Coordinación del movimiento de mercancía por vía terrestre y marítima dentro del comercio exterior, con la información aduanera y la documental amarradas al flujo físico. Que el dato del pedimento corresponda al embarque real, y que cada cambio quede registrado."
+          "desc": "Coordinación del movimiento terrestre y marítimo con datos aduaneros y documentales ligados al flujo físico de la mercancía."
         },
         {
           "title": "Almacenaje y control de inventarios",
-          "desc": "Registro de entradas, salidas, existencias y mermas con el detalle que exigen depósito fiscal y los programas de fomento. Un inventario que cuadra con los descargos de pedimentos es la base para sostener IMMEX o depósito fiscal ante una revisión."
+          "desc": "Registro de entradas, salidas y mermas con el detalle que exigen depósito fiscal y los programas de fomento."
         },
         {
           "title": "Distribución con trazabilidad documental",
-          "desc": "Seguimiento de la mercancía desde el despacho hasta su entrega, conservando la liga entre cada movimiento y su soporte aduanero y fiscal. La trazabilidad reduce el tiempo de respuesta cuando la autoridad solicita evidencia de una operación específica."
+          "desc": "Seguimiento de la mercancía de despacho a entrega, conservando el vínculo con el soporte aduanero y fiscal de cada movimiento."
         },
         {
           "title": "Monitoreo de la operación a gran escala",
-          "desc": "Visibilidad sobre el estado de las operaciones: qué está en proceso, qué está detenido y qué requiere acción. El monitoreo continuo es lo que hace manejable un volumen alto sin perder control sobre el cumplimiento de cada pedimento."
+          "desc": "Visibilidad continua sobre el estado de las operaciones: en proceso, detenidas o con acción pendiente."
         }
       ],
       "outcomes": [
@@ -2718,27 +2718,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Revisión de operaciones contra registros contables",
-          "desc": "Cotejamos las operaciones del periodo contra los registros contables y la normatividad contable aplicable, verificando que cada partida que sustenta el IVA acreditable esté efectivamente asentada. Es la base que la autoridad espera encontrar al revisar el origen del saldo a favor."
+          "desc": "Cotejo de operaciones del periodo contra registros contables para verificar que cada partida del IVA acreditable esté asentada."
         },
         {
           "title": "Verificación de requisitos fiscales del acreditamiento",
-          "desc": "Revisamos que las operaciones cumplan los requisitos fiscales vigentes para que el IVA sea acreditable: comprobantes válidos, efectiva realización y pago de las operaciones, y procedencia del impuesto trasladado. Sin estos requisitos, la autoridad rechaza la porción correspondiente."
+          "desc": "Verificación de que las operaciones cumplan los requisitos fiscales vigentes para que el IVA sea acreditable."
         },
         {
           "title": "Revisión de la determinación del saldo a favor",
-          "desc": "Analizamos cómo se determinó el saldo a favor de IVA del periodo, validando el cálculo del impuesto trasladado, el acreditable y la mecánica que arroja la cifra solicitada. Una determinación correcta es lo que sostiene el monto frente a una revisión."
+          "desc": "Validación del cálculo del impuesto trasladado, el acreditable y la mecánica que arroja el saldo a favor solicitado."
         },
         {
           "title": "Conciliación de la DIOT con la declaración mensual",
-          "desc": "Confrontamos la Declaración Informativa de Operaciones con Terceros contra la declaración mensual presentada al SAT para detectar y resolver diferencias antes de presentar. La congruencia entre ambas reduce el riesgo de observaciones sobre el acreditamiento informado."
+          "desc": "Confronta de la DIOT contra la declaración mensual presentada al SAT para detectar y resolver diferencias antes de presentar."
         },
         {
           "title": "Presentación de la solicitud de devolución",
-          "desc": "Integramos y presentamos la solicitud de devolución por los meses que correspondan, con la determinación y el soporte de operaciones ordenados conforme a lo que requiere la autoridad. Una solicitud bien armada llega con el respaldo listo desde el primer momento."
+          "desc": "Integración y presentación de la solicitud de devolución con la determinación y el soporte de operaciones ordenados."
         },
         {
           "title": "Seguimiento hasta la respuesta de la autoridad",
-          "desc": "Damos seguimiento al trámite y atendemos lo que la autoridad solicite hasta que emite su respuesta. El proceso no termina al presentar: la atención a requerimientos durante la revisión es donde muchas devoluciones se ganan o se pierden."
+          "desc": "Seguimiento del trámite y atención de requerimientos hasta que la autoridad emite su respuesta."
         }
       ],
       "outcomes": [
@@ -2793,27 +2793,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Determinación y registro de origen",
-          "desc": "Revisamos y construimos los registros de origen que sustentan la calificación de cada producto: clasificación de insumos, criterio aplicable y memoria de cálculo. Es el expediente que convierte una afirmación de origen en algo demostrable ante la autoridad o el cliente."
+          "desc": "Construcción de registros de origen: clasificación de insumos, criterio aplicable y memoria de cálculo por producto."
         },
         {
           "title": "Gestión de origen con proveedores nacionales",
-          "desc": "Diseñamos los formatos de solicitud de origen y gestionamos su obtención con los proveedores nacionales, de modo que el aporte regional de cada insumo quede documentado. Sin esta base, el producto final no puede acreditar la regla de origen aplicable."
+          "desc": "Diseño de formatos y gestión con proveedores nacionales para documentar el aporte regional de cada insumo."
         },
         {
           "title": "Certificación y registro de productos elegibles",
-          "desc": "Registramos los productos que califican y tramitamos la obtención de certificados de origen bajo el instrumento correspondiente. Esto habilita al exportador a entregar al comprador un documento válido y al importador a aplicar la preferencia."
+          "desc": "Registro de productos elegibles y tramitación de certificados de origen bajo el instrumento correspondiente."
         },
         {
           "title": "Auditoría y cumplimiento de reglas de origen",
-          "desc": "Auditamos los procesos de determinación y certificación y analizamos el cumplimiento de las reglas de origen aplicables. El objetivo es detectar certificaciones débiles antes de que lo haga una verificación y corregir el criterio mientras todavía es subsanable."
+          "desc": "Auditoría de determinación y certificación para detectar certificaciones débiles antes de una verificación de la autoridad."
         },
         {
           "title": "Análisis de preferencias y correlación arancelaria",
-          "desc": "Realizamos el análisis de factibilidad para identificar las tarifas preferenciales disponibles y correlacionamos las fracciones arancelarias con las nomenclaturas regionales, incluida ALADI. Así se confirma qué beneficio aplica realmente a cada mercancía y bajo qué tratado."
+          "desc": "Análisis de factibilidad arancelaria y correlación de fracciones con nomenclaturas regionales, incluida ALADI."
         },
         {
           "title": "Resoluciones anticipadas y verificaciones de origen",
-          "desc": "Asesoramos en procedimientos aduaneros para obtener preferencias, tramitamos solicitudes de resolución anticipada y atendemos las verificaciones de origen que abre la autoridad. La resolución anticipada da certeza sobre el criterio antes de operar; la atención a verificaciones protege la preferencia ya aplicada."
+          "desc": "Solicitudes de resolución anticipada y atención de verificaciones de origen para proteger la preferencia ya aplicada."
         }
       ],
       "outcomes": [
@@ -2868,23 +2868,23 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Despacho con agente aduanal",
-          "desc": "Coordinamos el despacho ante la aduana con agente aduanal: clasificación de la fracción arancelaria, elaboración del pedimento y determinación de las contribuciones aplicables, como el IGI y el IVA. La clasificación correcta define lo que se paga y los requisitos que se activan, por eso es el punto de partida de toda la operación."
+          "desc": "Coordinación del despacho con agente aduanal: clasificación arancelaria, pedimento y determinación del IGI y el IVA."
         },
         {
           "title": "Cumplimiento de NOM",
-          "desc": "Identificamos qué Normas Oficiales Mexicanas aplican a su producto, sea de etiquetado comercial, información comercial o seguridad, y gestionamos la acreditación que la aduana exige para liberar la mercancía. Resolver la NOM antes del cruce evita que el embarque quede retenido por un requisito normativo."
+          "desc": "Identificación de las NOM aplicables al producto y gestión de la acreditación para que la aduana libere la mercancía."
         },
         {
           "title": "Gestión de permisos y regulaciones no arancelarias",
-          "desc": "Tramitamos los permisos previos, avisos y autorizaciones que distintas dependencias exigen según el tipo de mercancía. Mapear estos requisitos antes de importar evita que el producto llegue al cruce sin la documentación que condiciona su entrada al país."
+          "desc": "Gestión de permisos previos y autorizaciones de dependencias para que la mercancía no llegue al cruce sin documentación."
         },
         {
           "title": "Almacenaje",
-          "desc": "Disponemos de bodega para resguardar la mercancía antes o después del despacho, sea para consolidar embarques, escalonar entregas o mantener la carga mientras se completa un trámite. Tener dónde colocar la mercancía da margen para operar sin presión sobre el cruce."
+          "desc": "Bodega disponible para consolidar embarques, escalonar entregas o resguardar la carga mientras se completa un trámite."
         },
         {
           "title": "Transporte y entrega puerta a puerta",
-          "desc": "Coordinamos el transporte de la carga y el servicio puerta a puerta, desde el origen hasta el destino final en México. Al manejar el despacho y el movimiento físico bajo una misma coordinación, la mercancía no se queda esperando un eslabón que responde por separado."
+          "desc": "Coordinación del transporte y entrega puerta a puerta, con el despacho y el movimiento físico bajo una misma coordinación."
         }
       ],
       "outcomes": [
@@ -2941,27 +2941,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Ongoing tax and customs advisory",
-          "desc": "Monitoring of the compliance the company is obliged to meet and support on business decisions with tax or customs effect: classification, valuation, customs regimes, foreign trade operations. The aim is to identify exposure before it becomes an assessment or a penalty."
+          "desc": "Monitoring of required compliance and advisory on business decisions with tax or customs effect."
         },
         {
           "title": "Administrative appeals",
-          "desc": "Filing of the revocation appeal and other defense remedies at the administrative level against acts of the tax and customs authority. This is the first instance to contest an act without yet going to court, and in many matters it decides the outcome."
+          "desc": "Filing the revocation appeal and other administrative-level remedies against acts of the tax and customs authority."
         },
         {
           "title": "Litigation before the Federal Court of Administrative Justice",
-          "desc": "Filing and follow-up of administrative litigation against final resolutions: tax assessments, fines, and customs determinations. The ordinary or summary track is chosen according to the amount and nature of the matter."
+          "desc": "Administrative litigation against final resolutions: tax assessments, fines, and customs determinations."
         },
         {
           "title": "Amparo proceedings and human rights",
-          "desc": "Filing of indirect and direct amparo when an act of authority violates fundamental rights or when the prior instance has been exhausted. The human rights recognized in the Constitution and in treaties serve as a basis of defense against the authority's actions."
+          "desc": "Indirect and direct amparo when an authority act violates fundamental rights or the prior instance is exhausted."
         },
         {
           "title": "Conclusive agreements, arbitration, and mediation",
-          "desc": "Conclusive agreements before PRODECON to resolve differences with the authority during its review powers, international commercial arbitration for disputes between private parties in cross-border operations, and mediation. These are routes to close a matter without exhausting full litigation."
+          "desc": "Conclusive agreements before PRODECON, international commercial arbitration, and mediation as alternatives to litigation."
         },
         {
           "title": "Expert opinions before the courts",
-          "desc": "Acting as experts before the Judicial Branch of the Federation and before the Federal Court of Administrative Justice. The expert opinion provides the technical support in customs and tax matters that the adjudicator needs to decide."
+          "desc": "Expert opinions before federal courts providing the technical customs and tax support the adjudicator needs."
         }
       ],
       "outcomes": [
@@ -3016,27 +3016,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Foreign trade risk evaluation and analysis",
-          "desc": "We identify where operations drift from the authorized framework: classification, valuation, origin, inventory control, and documentary support. This is the diagnosis that shows where the company is exposed before the authority finds it."
+          "desc": "We identify where operations drift from the authorized framework in classification, valuation, origin, and inventory control."
         },
         {
           "title": "Preventive audits and annual assurance plans",
-          "desc": "We run preventive foreign trade audits and structure an annual continuous assurance plan plus an annual specialized advisory plan. Recurring review catches deviations in time and keeps operations within the limits of the authorization."
+          "desc": "Preventive audits and a continuous annual assurance plan to keep operations within the authorization's limits."
         },
         {
           "title": "Reconstruction of pedimento balances",
-          "desc": "We reconstruct pedimento balances for fixed assets and raw materials, along with capital goods and accessories. Reconciling these balances with physical inventory is the basis for sustaining the legal status of temporarily imported goods."
+          "desc": "Reconstruction and reconciliation of pedimento balances for fixed assets and raw materials against physical inventory."
         },
         {
           "title": "Internal control and inventory analysis",
-          "desc": "We analyze internal controls and inventory risk to confirm that the inventory control system, as required under Annex 24, backs every entry and exit. Consistent inventory control is a condition for keeping the program and for answering a review without unexplained differences."
+          "desc": "Review of the Annex 24 inventory control system to confirm it backs every entry and exit of the IMMEX program."
         },
         {
           "title": "Reengineering of the Import-Export Department",
-          "desc": "We redesign the processes and responsibilities of the foreign trade area so compliance is built into daily operations rather than left to isolated judgment. The goal is a structure that sustains the authorization on its own."
+          "desc": "Redesign of import-export department processes and responsibilities so compliance is built into daily operations."
         },
         {
           "title": "NAFTA Article 303 and rules of origin",
-          "desc": "We review the treatment of duties on non-originating inputs incorporated into exports, under NAFTA Article 303 and its equivalent treatment in force under the USMCA. This is a point where an incorrect calculation creates differences and tax assessments."
+          "desc": "Review of duty treatment on non-originating inputs incorporated into exports under NAFTA Article 303 and the USMCA."
         }
       ],
       "outcomes": [
@@ -3091,27 +3091,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Customs valuation and the dutiable base",
-          "desc": "Determining the customs value of the merchandise and applying valuation criteria under Mexican law and the WTO Valuation Agreement: transaction value, dutiable additions, related-party situations, and secondary methods. A well-supported base prevents tax differences and findings during review."
+          "desc": "Determining customs value under the WTO Valuation Agreement: transaction value, dutiable additions, and secondary methods."
         },
         {
           "title": "Classification, origin, and entries",
-          "desc": "Correct filing of entries (pedimentos), analysis of the origin of the merchandise, and certification under the free trade agreements Mexico has signed. Origin drives the tariff preference and the specific rules; an error here means duties overpaid or preferences denied."
+          "desc": "Correct pedimento filing, origin analysis, and certification under Mexico's free trade agreements."
         },
         {
           "title": "Non-tariff regulations and prior permits",
-          "desc": "Compliance with non-tariff restrictions and regulations, prior permits before the Ministry of Economy, and other sector requirements. We identify what each tariff code demands so goods are not held and the operation is not exposed to penalty."
+          "desc": "Compliance with non-tariff regulations and prior permits so goods are not held at the border."
         },
         {
           "title": "Promotion programs: IMMEX, PROSEC, and Drawback",
-          "desc": "Advisory on the IMMEX program, PROSEC, and recovery of contributions through Drawback and tax refunds. These mechanisms let you defer or recover duties legally; using them requires documentary support and control that we set up from the start."
+          "desc": "Advisory on IMMEX, PROSEC, and recovery of duties through Drawback and tax refunds."
         },
         {
           "title": "Inventory control: Annex 24, Annex 31, and Data Stage",
-          "desc": "Setup and review of the inventory control system (Annex 24), the Annex 31 validation system, and the Data Stage system. Inventory control is the backbone of the temporary regime: without it, returns cannot be proven and deferred taxes come due."
+          "desc": "Setup and review of Annex 24, Annex 31 validation, and Data Stage to sustain the temporary import regime."
         },
         {
           "title": "Risk analysis and export promotion",
-          "desc": "Risk analysis in customs matters across your operations, plus use of export promotion schemes. Spotting the weak point in an operation costs far less than correcting it during an audit."
+          "desc": "Customs risk analysis across your operations plus use of export promotion schemes."
         }
       ],
       "outcomes": [
@@ -3164,27 +3164,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Expert opinion on tariff classification",
-          "desc": "Technical analysis of the goods and their position in the tariff schedule under the General Rules of Interpretation, section and chapter legal notes, and applicable criteria. It serves as expert evidence to defend the correct classification against an authority reclassification."
+          "desc": "Technical analysis of goods under the General Rules of Interpretation to defend the correct classification as expert evidence."
         },
         {
           "title": "Substantiating origin of goods",
-          "desc": "Verification that the goods meet the rules of origin of the treaty invoked, review of regional value content or tariff shift as applicable, and documentary support. This lets you defend preferential treatment when the authority denies it."
+          "desc": "Verification of treaty rules of origin, regional value content or tariff shift, and documentary support for the defense."
         },
         {
           "title": "Appraisals and customs valuation",
-          "desc": "Determination of customs value using the valuation methods set in the Customs Law, starting from transaction value and, where that does not apply, the secondary methods. It provides the basis to dispute an appraisal or an adjustment to the taxable base."
+          "desc": "Customs value determination under the Customs Law to dispute an authority appraisal or adjustment to the taxable base."
         },
         {
           "title": "Customs criteria and technical opinion",
-          "desc": "Interpretation of customs regulations and the authority's criteria as they apply to the specific case, to fix the technical position that supports the defense grievances or that provides certainty before an operational decision is made."
+          "desc": "Interpretation of customs regulations and authority criteria to fix the technical position for the specific case."
         },
         {
           "title": "Annex 24 and inventory control review",
-          "desc": "Analysis of the Annex 24 inventory control system, the traceability of entries, discharges, and returns, and the consistency of the IMMEX material balance. It identifies and documents the support needed to respond to authority findings."
+          "desc": "Analysis of the Annex 24 system, entry and return traceability, and IMMEX material balance consistency to address findings."
         },
         {
           "title": "Expert support within legal defense",
-          "desc": "Preparation of the opinions that back the grievances raised in administrative appeals and tax litigation in customs matters, coordinated with the legal strategy of the case."
+          "desc": "Opinions backing grievances in administrative appeals and customs litigation, coordinated with the legal strategy."
         }
       ],
       "outcomes": [
@@ -3239,27 +3239,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "System-validated customs compliance",
-          "desc": "Tools built to verify information before transmission: consistency between the customs entry, the invoice and importer data, validity of certificates and catalogs, and validation rules over classification and value. The goal is to reach an optimal level of compliance, not to fix things after release."
+          "desc": "Tools that verify consistency between the customs entry, invoice, and importer data before transmission."
         },
         {
           "title": "Real-time detection and mitigation of findings",
-          "desc": "Rules that flag inconsistencies and deviations while the operation is happening, not in a later audit. Catching an error in the moment allows correction with lower exposure and documents the fix, instead of carrying the same problem through every shipment."
+          "desc": "Rules that flag inconsistencies while the operation runs, not in a later audit, so corrections carry lower exposure."
         },
         {
           "title": "International, land and maritime logistics",
-          "desc": "Coordination of goods moving by land and sea within foreign trade, with the customs and documentary data tied to the physical flow. The entry data matches the actual shipment, and every change stays on record."
+          "desc": "Coordination of land and maritime goods movement with customs and documentary data tied to the physical flow."
         },
         {
           "title": "Storage and inventory control",
-          "desc": "Recording of inflows, outflows, balances and waste at the level of detail that bonded warehouse and incentive programs require. An inventory that reconciles with customs write-offs is the basis for sustaining IMMEX or bonded warehouse under review."
+          "desc": "Recording of inflows, outflows, balances, and waste at the detail level that bonded warehouse and incentive programs require."
         },
         {
           "title": "Distribution with documentary traceability",
-          "desc": "Tracking goods from release to delivery while keeping the link between each movement and its customs and tax support. Traceability cuts response time when the authority requests evidence on a specific operation."
+          "desc": "Tracking goods from release to delivery while preserving the link to customs and tax support for each movement."
         },
         {
           "title": "Monitoring at scale",
-          "desc": "Visibility over the state of operations: what is in process, what is held and what needs action. Continuous monitoring is what makes high volume manageable without losing control over the compliance of each entry."
+          "desc": "Continuous visibility over operations: what is in process, what is held, and what needs action."
         }
       ],
       "outcomes": [
@@ -3314,27 +3314,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Review of operations against accounting records",
-          "desc": "We match the period's operations against the accounting records and applicable accounting standards, verifying that every item supporting creditable VAT is actually booked. This is the foundation the authority expects to find when it reviews the origin of the credit balance."
+          "desc": "We match the period's operations against accounting records to verify every item supporting creditable VAT is booked."
         },
         {
           "title": "Verification of tax requirements for the credit",
-          "desc": "We review that operations meet the current tax requirements for VAT to be creditable: valid invoices, operations actually carried out and paid, and a sound basis for the VAT charged. Without these, the authority rejects the corresponding portion."
+          "desc": "We verify operations meet current tax requirements for VAT to be creditable: valid invoices, carried out and paid."
         },
         {
           "title": "Review of the credit balance determination",
-          "desc": "We analyze how the period's VAT credit balance was determined, validating the calculation of VAT charged, creditable VAT, and the mechanics that yield the amount requested. A correct determination is what holds the amount up under review."
+          "desc": "We validate the calculation of VAT charged, creditable VAT, and the mechanics that yield the balance requested."
         },
         {
           "title": "Reconciliation of the DIOT with the monthly statement",
-          "desc": "We compare the Informative Statement of Third-Party Operations against the monthly statement filed with the SAT to find and resolve differences before filing. Consistency between the two lowers the risk of observations on the reported credit."
+          "desc": "We compare the DIOT against the monthly SAT statement to find and resolve differences before filing."
         },
         {
           "title": "Filing the refund request",
-          "desc": "We assemble and file the refund request for the applicable months, with the determination and operational support organized as the authority requires. A well-built request arrives with the backup ready from the start."
+          "desc": "We assemble and file the refund request with the determination and operational support organized as required."
         },
         {
           "title": "Follow-up until the authority responds",
-          "desc": "We follow the process and address what the authority asks until it issues its response. The work does not end at filing: handling requirements during the review is where many refunds are won or lost."
+          "desc": "We follow the process and address authority requirements until the response is issued."
         }
       ],
       "outcomes": [
@@ -3389,27 +3389,27 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Origin determination and records",
-          "desc": "We review and build the origin records that support each product's qualification: input classification, applicable criterion, and calculation memorandum. This file is what turns an origin claim into something demonstrable before the authority or the buyer."
+          "desc": "We build the origin records supporting each product's qualification: input classification, criterion, and calculation."
         },
         {
           "title": "Origin management with national suppliers",
-          "desc": "We design the origin request formats and manage their collection from national suppliers, so the regional content of each input is documented. Without this base, the finished good cannot meet the applicable rule of origin."
+          "desc": "We design request formats and collect origin documentation from national suppliers for each relevant input."
         },
         {
           "title": "Certification and registration of eligible products",
-          "desc": "We register the products that qualify and obtain certificates of origin under the relevant instrument. This lets the exporter hand the buyer a valid document and the importer apply the preference."
+          "desc": "We register qualifying products and obtain certificates of origin under the applicable instrument."
         },
         {
           "title": "Audit and rule-of-origin compliance",
-          "desc": "We audit determination and certification processes and analyze compliance with the applicable rules of origin. The goal is to catch weak certifications before a verification does, and correct the criterion while it can still be fixed."
+          "desc": "We audit determination and certification to catch weak certifications before a verification does."
         },
         {
           "title": "Preference analysis and tariff correlation",
-          "desc": "We run the feasibility analysis to identify available preferential rates and correlate tariff codes with regional nomenclatures, including ALADI. This confirms which benefit actually applies to each good and under which agreement."
+          "desc": "We identify available preferential rates and correlate tariff codes with regional nomenclatures, including ALADI."
         },
         {
           "title": "Advance rulings and origin verifications",
-          "desc": "We advise on customs procedures to obtain preferences, file requests for advance rulings, and handle the origin verifications the authority opens. An advance ruling gives certainty on the criterion before you operate; handling verifications protects the preference already applied."
+          "desc": "We file advance ruling requests and handle authority origin verifications to protect the preference already applied."
         }
       ],
       "outcomes": [
@@ -3464,23 +3464,23 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "whatWeDo": [
         {
           "title": "Customs clearance with a licensed broker",
-          "desc": "We handle clearance through a licensed customs broker: tariff classification, the pedimento filing, and the applicable duties such as the general import duty and VAT. Correct classification drives what you pay and which requirements get triggered, so it is the starting point for the whole operation."
+          "desc": "We handle clearance through a licensed broker: tariff classification, pedimento filing, and applicable duties."
         },
         {
           "title": "NOM compliance",
-          "desc": "We identify which Mexican Official Standards apply to your product, whether commercial labeling, product information, or safety, and handle the accreditation customs requires before releasing the goods. Resolving the NOM ahead of the crossing keeps the shipment from being held over a regulatory requirement."
+          "desc": "We identify which NOMs apply to your product and handle the accreditation customs requires before releasing the goods."
         },
         {
           "title": "Permit and non-tariff regulation management",
-          "desc": "We process the prior permits, notices, and authorizations that different agencies require depending on the type of goods. Mapping these requirements before importing keeps the product from reaching the border without the documentation that conditions its entry."
+          "desc": "We process prior permits and authorizations so goods do not reach the border without the required documentation."
         },
         {
           "title": "Warehousing",
-          "desc": "We provide warehouse space to hold goods before or after clearance, whether to consolidate shipments, stagger deliveries, or keep cargo while a filing is completed. Having somewhere to place the goods gives room to operate without pressure on the crossing."
+          "desc": "Warehouse space to consolidate shipments, stagger deliveries, or hold cargo while a filing is completed."
         },
         {
           "title": "Transportation and door-to-door delivery",
-          "desc": "We coordinate cargo transportation and door-to-door service, from origin to the final destination in Mexico. By running clearance and the physical move under one coordination, the goods do not sit waiting on a link that answers separately."
+          "desc": "We coordinate cargo transportation and door-to-door delivery, with clearance and the physical move under one coordination."
         }
       ],
       "outcomes": [
