@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import Link from "next/link";
 import { editorialEase } from "@/lib/motion";
 
 const CONTENT = {
@@ -81,6 +80,20 @@ const CONTENT = {
     contactEmail: "contacto@bgc.mx",
     of: "de",
     progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
   },
   en: {
     eyebrow: "Quick diagnostic",
@@ -157,11 +170,26 @@ const CONTENT = {
     contactEmail: "contacto@bgc.mx",
     of: "of",
     progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
   },
 } as const;
 
 type Lang = "es" | "en";
 type ResultKey = "HIGH_DEFENSE" | "DEFENSE" | "COMPLIANCE_IMMEX" | "ADVISORY" | "GENERAL";
+type FormState = "idle" | "sending" | "success" | "error";
 
 function getResult(answers: number[]): ResultKey {
   const [q1, q2, q3] = answers;
@@ -173,11 +201,27 @@ function getResult(answers: number[]): ResultKey {
   return "GENERAL";
 }
 
+function buildQuizSummary(lang: Lang, answers: number[]): string {
+  const c = CONTENT[lang];
+  return answers
+    .map((ans, qi) => `Q: ${c.questions[qi].text}\nA: ${c.questions[qi].opts[ans]}`)
+    .join("\n\n");
+}
+
+const inputBase =
+  "w-full rounded-[8px] border bg-surface-2/40 px-4 py-3 text-[14px] text-chalk placeholder:text-ash/50 transition-colors focus:outline-none";
+
 export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
   const c = CONTENT[lang];
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const done = step === c.questions.length;
+
+  const [formState, setFormState] = useState<FormState>("idle");
+  const [leadName, setLeadName] = useState("");
+  const [leadEmail, setLeadEmail] = useState("");
+  const [leadPhone, setLeadPhone] = useState("");
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({});
 
   function pick(opt: number) {
     const next = [...answers, opt];
@@ -188,6 +232,51 @@ export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
   function reset() {
     setAnswers([]);
     setStep(0);
+    setFormState("idle");
+    setLeadName("");
+    setLeadEmail("");
+    setLeadPhone("");
+    setFieldErrors({});
+  }
+
+  async function submitLead(e: FormEvent) {
+    e.preventDefault();
+    const errors: { name?: string; email?: string } = {};
+    if (!leadName.trim()) errors.name = c.form.nameRequired;
+    if (!leadEmail.trim()) errors.email = c.form.emailRequired;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadEmail.trim()))
+      errors.email = c.form.emailInvalid;
+    if (Object.keys(errors).length) {
+      setFieldErrors(errors);
+      return;
+    }
+    setFieldErrors({});
+    setFormState("sending");
+    try {
+      const payload: Record<string, unknown> = {
+        name: leadName.trim(),
+        email: leadEmail.trim(),
+        source: "form",
+        locale: lang,
+        service: resultKey ?? "",
+        message: buildQuizSummary(lang, answers),
+        sourceUrl: typeof window !== "undefined" ? window.location.href : "",
+      };
+      if (leadPhone.trim()) payload.phone = leadPhone.trim();
+      const res = await fetch("/api/leads", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok !== false) {
+        setFormState("success");
+      } else {
+        setFormState("error");
+      }
+    } catch {
+      setFormState("error");
+    }
   }
 
   const resultKey = done ? getResult(answers) : null;
@@ -229,7 +318,7 @@ export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
           <div className="h-[2px] bg-white/[0.06]">
             <motion.div
               className="h-full bg-accent"
-              animate={{ width: `${((step) / c.questions.length) * 100}%` }}
+              animate={{ width: `${(step / c.questions.length) * 100}%` }}
               transition={{ duration: 0.5, ease: editorialEase }}
             />
           </div>
@@ -277,11 +366,9 @@ export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
                 transition={{ duration: 0.5, ease: editorialEase }}
                 className="max-w-2xl"
               >
+                {/* Result */}
                 <div className="mb-2 flex items-center gap-3">
-                  <span
-                    aria-hidden
-                    className="inline-block h-2 w-2 rounded-full bg-accent signal-glow"
-                  />
+                  <span aria-hidden className="inline-block h-2 w-2 rounded-full bg-accent signal-glow" />
                   <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
                     {resultKey}
                   </span>
@@ -291,26 +378,118 @@ export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
                 </h3>
                 <p className="mt-5 text-[16px] leading-relaxed text-bone/90">{result?.body}</p>
 
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <Link
-                    href={`/${lang}/contact`}
-                    className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-2.5 font-mono text-[13px] font-medium uppercase tracking-[0.12em] text-ink transition-opacity hover:opacity-90"
-                  >
-                    {result?.cta}
-                  </Link>
-                  <button
-                    onClick={reset}
-                    className="font-mono text-[13px] uppercase tracking-[0.12em] text-ash transition-colors hover:text-chalk"
-                  >
-                    {c.restart}
-                  </button>
-                </div>
-
                 {isTJ && (
                   <p className="mt-6 font-mono text-[12px] text-ash">
                     {c.contactTJ} · {c.contactSD}
                   </p>
                 )}
+
+                {/* Divider */}
+                <div className="my-8 h-px bg-line" />
+
+                {/* Lead form */}
+                <AnimatePresence mode="wait">
+                  {formState === "success" ? (
+                    <motion.div
+                      key="success"
+                      initial={{ opacity: 0, y: 8 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.4, ease: editorialEase }}
+                      className="flex items-start gap-4"
+                    >
+                      <span aria-hidden className="mt-1 inline-block h-2 w-2 shrink-0 rounded-full bg-accent signal-glow" />
+                      <div>
+                        <p className="font-display text-[1.1rem] font-medium text-chalk">
+                          {c.form.successTitle}
+                        </p>
+                        <p className="mt-1 text-[14px] leading-relaxed text-bone/80">
+                          {c.form.successBody}
+                        </p>
+                      </div>
+                    </motion.div>
+                  ) : (
+                    <motion.form
+                      key="form"
+                      onSubmit={submitLead}
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      transition={{ duration: 0.3, ease: editorialEase }}
+                      noValidate
+                    >
+                      <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.16em] text-ash">
+                        {c.form.heading}
+                      </p>
+                      <div className="grid gap-3 sm:grid-cols-2">
+                        {/* Name */}
+                        <div className="flex flex-col gap-1">
+                          <input
+                            type="text"
+                            value={leadName}
+                            onChange={(e) => setLeadName(e.target.value)}
+                            placeholder={c.form.namePlaceholder}
+                            disabled={formState === "sending"}
+                            className={`${inputBase} ${fieldErrors.name ? "border-red-500/60 focus:border-red-500/80" : "border-line focus:border-accent/50"}`}
+                          />
+                          {fieldErrors.name && (
+                            <span className="font-mono text-[11px] text-red-400">
+                              {fieldErrors.name}
+                            </span>
+                          )}
+                        </div>
+                        {/* Email */}
+                        <div className="flex flex-col gap-1">
+                          <input
+                            type="email"
+                            value={leadEmail}
+                            onChange={(e) => setLeadEmail(e.target.value)}
+                            placeholder={c.form.emailPlaceholder}
+                            disabled={formState === "sending"}
+                            className={`${inputBase} ${fieldErrors.email ? "border-red-500/60 focus:border-red-500/80" : "border-line focus:border-accent/50"}`}
+                          />
+                          {fieldErrors.email && (
+                            <span className="font-mono text-[11px] text-red-400">
+                              {fieldErrors.email}
+                            </span>
+                          )}
+                        </div>
+                        {/* Phone */}
+                        <div className="sm:col-span-2 sm:max-w-xs">
+                          <input
+                            type="tel"
+                            value={leadPhone}
+                            onChange={(e) => setLeadPhone(e.target.value)}
+                            placeholder={c.form.phonePlaceholder}
+                            disabled={formState === "sending"}
+                            className={`${inputBase} border-line focus:border-accent/50`}
+                          />
+                        </div>
+                      </div>
+
+                      {formState === "error" && (
+                        <p className="mt-3 font-mono text-[11px] text-red-400">
+                          {c.form.errorMsg}
+                        </p>
+                      )}
+
+                      <div className="mt-5 flex flex-wrap items-center gap-4">
+                        <button
+                          type="submit"
+                          disabled={formState === "sending"}
+                          className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-2.5 font-mono text-[13px] font-medium uppercase tracking-[0.12em] text-ink transition-opacity hover:opacity-90 disabled:opacity-60"
+                        >
+                          {formState === "sending" ? c.form.sending : c.form.submit}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={reset}
+                          className="font-mono text-[13px] uppercase tracking-[0.12em] text-ash transition-colors hover:text-chalk"
+                        >
+                          {c.restart}
+                        </button>
+                      </div>
+                    </motion.form>
+                  )}
+                </AnimatePresence>
               </motion.div>
             )}
           </AnimatePresence>
