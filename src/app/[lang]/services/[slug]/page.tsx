@@ -11,6 +11,8 @@ import { SignalLine } from "@/components/site/SignalLine";
 import { ServiceInstrument, DrawCheck } from "@/components/site/ServiceInstrument";
 import { MediaFrame } from "@/components/site/MediaFrame";
 import { Faq } from "@/components/site/Faq";
+import { ForeignTradeFlow } from "@/components/site/ForeignTradeFlow";
+import { ForeignTradeDiagnostic } from "@/components/site/ForeignTradeDiagnostic";
 
 export const dynamicParams = false;
 
@@ -147,6 +149,14 @@ export default async function ServiceDetailPage({
           className="!rounded-none"
         />
       </section>
+
+      {/* Flujo aduanal + diagnóstico — solo foreign-trade */}
+      {slug === "foreign-trade" && (
+        <>
+          <ForeignTradeFlow lang={lang} />
+          <ForeignTradeDiagnostic lang={lang} />
+        </>
+      )}
 
       {/* FAQ */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
