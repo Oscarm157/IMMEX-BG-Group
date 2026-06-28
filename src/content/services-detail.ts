@@ -1199,6 +1199,286 @@ const INTERNATIONAL_TRADE_EXPERTS_FLOW: FlowData = {
   },
 };
 
+const INFORMATION_TECHNOLOGY_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Dónde empieza la mejora en tu operación?",
+    lead: "Cuatro preguntas para orientar qué herramienta o proceso resuelve el problema principal.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es el problema principal en tu operación hoy?",
+        opts: [
+          "El pedimento, la factura y los registros internos no coinciden",
+          "Los errores y hallazgos aparecen semanas o meses después de cerrar las operaciones",
+          "El volumen creció y ya no tenemos visibilidad en tiempo real sobre la cadena",
+          "Operamos bajo IMMEX o depósito fiscal y la trazabilidad de inventarios es insuficiente",
+        ],
+      },
+      {
+        text: "¿Cómo validas la información antes de transmitir a la aduana?",
+        opts: [
+          "Por revisión manual o en hoja de cálculo",
+          "Tenemos herramientas, pero no capturan todas las inconsistencias",
+          "Validamos después del despacho, no antes de transmitir",
+          "Estamos iniciando operaciones de comercio exterior",
+        ],
+      },
+      {
+        text: "¿Cuántas operaciones aduaneras mensuales aproximadas maneja tu empresa?",
+        opts: [
+          "Menos de 100 operaciones",
+          "Entre 100 y 500 operaciones",
+          "Más de 500 operaciones",
+          "No lo sabemos con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es el área más urgente de atender?",
+        opts: [
+          "Validar la información antes de transmitir y evitar errores en pedimentos",
+          "Detectar inconsistencias mientras la operación ocurre, no en la auditoría posterior",
+          "Controlar inventarios para sostener los beneficios de IMMEX o depósito fiscal",
+          "Coordinar la logística internacional, terrestre y marítima bajo una sola plataforma",
+        ],
+      },
+    ],
+    results: {
+      PRE_TRANSMISSION: {
+        title: "Validación antes de transmitir",
+        body: "Cuando el pedimento, la factura y los registros internos no cuadran, el problema se corrige antes de la transmisión, no después del despacho. Implementamos reglas de validación sobre clasificación, valor y datos del importador que atajan el error en el origen.",
+        cta: "Hablar con el equipo",
+      },
+      REALTIME_MONITORING: {
+        title: "Detección y mitigación en tiempo real",
+        body: "Encontrar un error semanas después de la operación implica rectificaciones, recargos y exposición acumulada. Las reglas de detección señalan la desviación mientras la operación ocurre, con margen para corregir y documentar la rectificación antes de que se repita en los siguientes embarques.",
+        cta: "Hablar con el equipo",
+      },
+      INVENTORY_IMMEX: {
+        title: "Control de inventarios para programa de fomento",
+        body: "IMMEX y depósito fiscal requieren el registro de entradas, salidas, existencias y mermas amarrado a los descargos de pedimentos. Sin esa trazabilidad, el beneficio fiscal queda expuesto ante una revisión. Implementamos el control que el programa exige y que la autoridad puede verificar.",
+        cta: "Programar revisión",
+      },
+      FULL_LOGISTICS: {
+        title: "Coordinación logística integral",
+        body: "Cuando el volumen supera lo que el control manual puede sostener, la coordinación de la logística internacional, terrestre y marítima bajo una sola plataforma da visibilidad sobre qué está en proceso, qué está detenido y qué requiere acción, sin perder el enlace entre el dato aduanero y el movimiento físico.",
+        cta: "Hablar con el equipo",
+      },
+      GENERAL: {
+        title: "Diagnóstico de la operación",
+        body: "Revisamos el punto de partida: dónde vive la información hoy, qué validaciones existen y dónde surgen los hallazgos. Con ese mapa definimos qué herramienta o proceso resuelve el problema de raíz.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does improvement start in your operation?",
+    lead: "Four questions to identify which tool or process addresses the main problem.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is the main problem in your operation today?",
+        opts: [
+          "The customs entry, the invoice, and the internal records do not match",
+          "Errors and findings appear weeks or months after the operations close",
+          "Volume has grown and we no longer have real-time visibility over the chain",
+          "We operate under IMMEX or bonded warehouse and inventory traceability is insufficient",
+        ],
+      },
+      {
+        text: "How do you validate information before transmitting to customs?",
+        opts: [
+          "By manual review or spreadsheet",
+          "We have tools, but they do not catch all inconsistencies",
+          "We validate after release, not before transmission",
+          "We are starting our foreign trade operations",
+        ],
+      },
+      {
+        text: "How many monthly customs operations does your company handle approximately?",
+        opts: [
+          "Fewer than 100 operations",
+          "Between 100 and 500 operations",
+          "More than 500 operations",
+          "We are not sure of the exact number",
+        ],
+      },
+      {
+        text: "What is the most urgent area to address?",
+        opts: [
+          "Validating information before transmission and avoiding errors on customs entries",
+          "Detecting inconsistencies while the operation is running, not in a later audit",
+          "Controlling inventory to sustain IMMEX or bonded warehouse benefits",
+          "Coordinating international, land, and maritime logistics under a single platform",
+        ],
+      },
+    ],
+    results: {
+      PRE_TRANSMISSION: {
+        title: "Validation before transmission",
+        body: "When the customs entry, the invoice, and the internal records do not match, the problem is fixed before transmission, not after release. We implement validation rules over classification, value, and importer data that catch the error at the source.",
+        cta: "Talk to the team",
+      },
+      REALTIME_MONITORING: {
+        title: "Real-time detection and mitigation",
+        body: "Finding an error weeks after the operation means amendments, surcharges, and compounded exposure. Detection rules flag the deviation while the operation is running, with room to correct and document the fix before the same problem repeats on the next shipments.",
+        cta: "Talk to the team",
+      },
+      INVENTORY_IMMEX: {
+        title: "Inventory control for incentive programs",
+        body: "IMMEX and bonded warehouse require inflows, outflows, balances, and waste to be recorded and tied to customs write-offs. Without that traceability, the tax benefit is exposed in a review. We implement the inventory control the program requires and the authority can verify.",
+        cta: "Schedule a review",
+      },
+      FULL_LOGISTICS: {
+        title: "Full logistics coordination",
+        body: "When volume outgrows manual control, coordinating international, land, and maritime logistics under a single platform provides visibility over what is in process, what is held, and what needs action, without losing the link between the customs data and the physical movement.",
+        cta: "Talk to the team",
+      },
+      GENERAL: {
+        title: "Operation diagnostic",
+        body: "We review the starting point: where the information lives today, what validations exist, and where findings surface. With that map we define which tool or process addresses the root problem.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const q1 = answers[0];
+    const q4 = answers[3];
+    if (q1 === 3) return "INVENTORY_IMMEX";
+    if (q1 === 0 || q4 === 0) return "PRE_TRANSMISSION";
+    if (q1 === 1 || q4 === 1) return "REALTIME_MONITORING";
+    if (q4 === 2) return "INVENTORY_IMMEX";
+    if (q4 === 3) return "FULL_LOGISTICS";
+    return "GENERAL";
+  },
+  resultTag: {
+    PRE_TRANSMISSION: { es: "Validación previa", en: "Pre-transmission validation" },
+    REALTIME_MONITORING: { es: "Detección en tiempo real", en: "Real-time detection" },
+    INVENTORY_IMMEX: { es: "Control de inventarios", en: "Inventory control" },
+    FULL_LOGISTICS: { es: "Logística integral", en: "Full logistics" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {},
+};
+
+const INFORMATION_TECHNOLOGY_FLOW: FlowData = {
+  es: {
+    eyebrow: "Ciclo operativo",
+    title: "De la validación a la visibilidad total de la operación.",
+    lead: "Cada operación de comercio exterior recorre las mismas etapas. BG Consulting Group interviene donde la información se origina, antes de que los errores alcancen la transmisión o se acumulen en una auditoría.",
+    panel: "Flujo de cumplimiento TI · 6 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Diagnóstico inicial",
+        desc: "Revisamos cómo vive la información hoy: pedimentos, facturas, registros contables y sistemas existentes. El objetivo es identificar dónde surgen los desajustes antes de diseñar cualquier herramienta, para no automatizar un proceso que ya tiene un problema de fondo.",
+      },
+      {
+        n: "02",
+        name: "Validación antes de transmitir",
+        desc: "Implementamos reglas de validación sobre la información antes de que llegue al mecanismo de selección automatizado: consistencia entre pedimento y factura, datos del importador, vigencia de certificados y catálogos, y criterios sobre clasificación y valor. El error que no se transmite no requiere rectificación.",
+      },
+      {
+        n: "03",
+        name: "Detección y mitigación en tiempo real",
+        desc: "Las reglas de detección señalan inconsistencias y desviaciones mientras la operación está en curso. Identificar el hallazgo en el momento permite corregirlo con menor exposición, documentar la rectificación y evitar que el mismo error se repita en los siguientes embarques.",
+      },
+      {
+        n: "04",
+        name: "Control de inventarios",
+        desc: "Para empresas bajo IMMEX o depósito fiscal, implementamos el registro de entradas, salidas, existencias y mermas con el nivel de detalle que exige la autoridad. Un inventario que cuadra con los descargos de pedimentos es lo que sostiene el beneficio fiscal ante una revisión.",
+      },
+      {
+        n: "05",
+        name: "Trazabilidad logística",
+        desc: "Coordinamos el movimiento de mercancía por vía internacional, terrestre y marítima, manteniendo el enlace entre el dato aduanero y el flujo físico. Cada cambio en la cadena queda registrado y la información del pedimento corresponde al embarque real.",
+      },
+      {
+        n: "06",
+        name: "Monitoreo a gran escala",
+        desc: "Con la operación en marcha, el monitoreo continuo da visibilidad sobre qué está en proceso, qué está detenido y qué requiere acción, sin importar el volumen. Es lo que hace manejable una operación de miles de pedimentos mensuales sin perder el control sobre el cumplimiento de cada uno.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Operational cycle",
+    title: "From validation to full visibility over the operation.",
+    lead: "Every customs operation moves through the same stages. BG Consulting Group steps in where information originates, before errors reach transmission or compound in an audit.",
+    panel: "IT compliance flow · 6 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Initial diagnostic",
+        desc: "We review how information lives today: customs entries, invoices, accounting records, and existing systems. The goal is to identify where mismatches arise before designing any tool, so the outcome is not an automated version of a process that already has a structural problem.",
+      },
+      {
+        n: "02",
+        name: "Validation before transmission",
+        desc: "We implement validation rules over the information before it reaches the automated selection system: consistency between the entry and the invoice, importer data, validity of certificates and catalogs, and criteria over classification and value. An error that is never transmitted is an error that never needs amending.",
+      },
+      {
+        n: "03",
+        name: "Real-time detection and mitigation",
+        desc: "Detection rules flag inconsistencies and deviations while the operation is running. Catching the finding in the moment allows correction at lower exposure, documents the fix, and prevents the same error from repeating on the next shipments.",
+      },
+      {
+        n: "04",
+        name: "Inventory control",
+        desc: "For companies under IMMEX or bonded warehouse, we implement the recording of inflows, outflows, balances, and waste at the level of detail the authority requires. An inventory that reconciles with customs write-offs is what sustains the tax benefit under review.",
+      },
+      {
+        n: "05",
+        name: "Logistics traceability",
+        desc: "We coordinate the movement of goods by international, land, and maritime routes, keeping the link between the customs data and the physical flow. Every change in the chain is recorded and the entry data matches the actual shipment.",
+      },
+      {
+        n: "06",
+        name: "Monitoring at scale",
+        desc: "With the operation running, continuous monitoring provides visibility over what is in process, what is held, and what needs action, regardless of volume. It is what makes an operation of thousands of monthly entries manageable without losing control over the compliance of each one.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -1564,7 +1844,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Esto aplica solo a importación o también a logística y distribución?",
           "a": "Cubre la operación logística internacional, terrestre y marítima, e incluye almacenaje, distribución y monitoreo. La información aduanera se mantiene ligada al movimiento físico de la mercancía a lo largo de la cadena."
         }
-      ]
+      ],
+      diagnostic: INFORMATION_TECHNOLOGY_DIAGNOSTIC,
+      flow: INFORMATION_TECHNOLOGY_FLOW,
     },
     {
       "overview": "Una empresa con saldo a favor de IVA tiene dinero retenido por la autoridad que solo recupera si la solicitud de devolución llega bien soportada y consistente con su contabilidad y declaraciones. El SAT revisa origen de operaciones, requisitos fiscales y congruencia entre lo informado y lo declarado antes de liberar un peso. BG Consulting revisa la determinación del saldo a favor, ordena el soporte de las operaciones y presenta la solicitud conforme a las Normas de Información Financiera y a los requisitos fiscales vigentes, dando seguimiento hasta que la autoridad resuelve.",
@@ -2140,7 +2422,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Does this apply only to imports, or also to logistics and distribution?",
           "a": "It covers international, land and maritime logistics, and includes storage, distribution and monitoring. The customs information stays linked to the physical movement of the goods across the chain."
         }
-      ]
+      ],
+      diagnostic: INFORMATION_TECHNOLOGY_DIAGNOSTIC,
+      flow: INFORMATION_TECHNOLOGY_FLOW,
     },
     {
       "overview": "A company carrying a VAT credit balance has money held by the tax authority that it only recovers when the refund request arrives well supported and consistent with its accounting and filings. Before releasing anything, the SAT reviews the origin of the operations, the tax requirements they must meet, and whether what was reported matches what was filed. BG Consulting reviews how the credit balance was determined, organizes the support behind the operations, and files the refund request under Financial Information Standards and current tax requirements, following up until the authority responds.",
