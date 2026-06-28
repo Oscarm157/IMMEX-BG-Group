@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { editorialEase } from "@/lib/motion";
+import { CustomsStageVisual } from "@/components/site/CustomsStageVisual";
 
 const CONTENT = {
   es: {
@@ -201,6 +202,23 @@ function getResult(answers: number[]): ResultKey {
   return "GENERAL";
 }
 
+// Etiqueta humana por resultado (reemplaza el enum crudo) y la etapa del ciclo
+// del pedimento que mejor representa el caso, para reusar CustomsStageVisual.
+const RESULT_TAG: Record<ResultKey, { es: string; en: string }> = {
+  HIGH_DEFENSE: { es: "Defensa inmediata", en: "Immediate defense" },
+  DEFENSE: { es: "Defensa técnica", en: "Technical defense" },
+  COMPLIANCE_IMMEX: { es: "Cumplimiento IMMEX", en: "IMMEX compliance" },
+  ADVISORY: { es: "Asesoría", en: "Advisory" },
+  GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+};
+const STAGE_FOR_RESULT: Record<ResultKey, number> = {
+  HIGH_DEFENSE: 4,
+  DEFENSE: 4,
+  COMPLIANCE_IMMEX: 3,
+  ADVISORY: 0,
+  GENERAL: 2,
+};
+
 function buildQuizSummary(lang: Lang, answers: number[]): string {
   const c = CONTENT[lang];
   return answers
@@ -212,6 +230,7 @@ const inputBase =
   "w-full rounded-[8px] border bg-surface-2/40 px-4 py-3 text-[14px] text-chalk placeholder:text-ash/50 transition-colors focus:outline-none";
 
 export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
+  const reduce = useReducedMotion();
   const c = CONTENT[lang];
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
@@ -364,30 +383,39 @@ export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: editorialEase }}
-                className="max-w-2xl"
               >
-                {/* Result */}
-                <div className="mb-2 flex items-center gap-3">
-                  <span aria-hidden className="inline-block h-2 w-2 rounded-full bg-accent signal-glow" />
-                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
-                    {resultKey}
-                  </span>
-                </div>
-                <h3 className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
-                  {result?.title}
-                </h3>
-                <p className="mt-5 text-[16px] leading-relaxed text-bone/90">{result?.body}</p>
+                {/* Result + visual de la etapa correspondiente */}
+                <div className="grid gap-8 lg:grid-cols-[1fr_minmax(0,300px)] lg:items-center lg:gap-12">
+                  <div className="max-w-2xl">
+                    <div className="mb-2 flex items-center gap-3">
+                      <span aria-hidden className="inline-block h-2 w-2 rounded-full bg-accent signal-glow" />
+                      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+                        {resultKey ? RESULT_TAG[resultKey][lang] : ""}
+                      </span>
+                    </div>
+                    <h3 className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
+                      {result?.title}
+                    </h3>
+                    <p className="mt-5 text-[16px] leading-relaxed text-bone/90">{result?.body}</p>
 
-                {isTJ && (
-                  <p className="mt-6 font-mono text-[12px] text-ash">
-                    {c.contactTJ} · {c.contactSD}
-                  </p>
-                )}
+                    {isTJ && (
+                      <p className="mt-6 font-mono text-[12px] text-ash">
+                        {c.contactTJ} · {c.contactSD}
+                      </p>
+                    )}
+                  </div>
+                  {resultKey && (
+                    <div className="hidden lg:block">
+                      <CustomsStageVisual stage={STAGE_FOR_RESULT[resultKey]} reduce={!!reduce} />
+                    </div>
+                  )}
+                </div>
 
                 {/* Divider */}
-                <div className="my-8 h-px bg-line" />
+                <div className="my-8 h-px max-w-2xl bg-line" />
 
                 {/* Lead form */}
+                <div className="max-w-2xl">
                 <AnimatePresence mode="wait">
                   {formState === "success" ? (
                     <motion.div
@@ -490,6 +518,7 @@ export function ForeignTradeDiagnostic({ lang }: { lang: Lang }) {
                     </motion.form>
                   )}
                 </AnimatePresence>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>

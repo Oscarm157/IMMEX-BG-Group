@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { editorialEase } from "@/lib/motion";
+import { CustomsStageVisual } from "@/components/site/CustomsStageVisual";
 
 type Stage = { n: string; name: string; desc: string };
 
@@ -165,18 +166,23 @@ export function ForeignTradeFlow({ lang }: { lang: Lang }) {
                   animate={{ opacity: 1, y: 0 }}
                   exit={reduce ? { opacity: 1, y: 0 } : { opacity: 0, y: -10 }}
                   transition={{ duration: 0.45, ease: editorialEase }}
-                  className="grid gap-5 sm:grid-cols-[auto_1fr] sm:gap-10"
+                  className="grid items-center gap-8 lg:grid-cols-[1fr_minmax(0,360px)] lg:gap-12"
                 >
-                  <span className="font-display text-[clamp(2.6rem,7vw,4.6rem)] font-medium leading-none tracking-[-0.03em] tabular-nums text-accent signal-text-glow">
-                    {stages[active].n}
-                  </span>
-                  <div className="max-w-xl">
-                    <h3 className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
-                      {stages[active].name}
-                    </h3>
-                    <p className="mt-4 text-[16px] leading-relaxed text-bone/90">
-                      {stages[active].desc}
-                    </p>
+                  <div className="grid gap-5 sm:grid-cols-[auto_1fr] sm:gap-10">
+                    <span className="font-display text-[clamp(2.6rem,7vw,4.6rem)] font-medium leading-none tracking-[-0.03em] tabular-nums text-accent signal-text-glow">
+                      {stages[active].n}
+                    </span>
+                    <div className="max-w-xl">
+                      <h3 className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
+                        {stages[active].name}
+                      </h3>
+                      <p className="mt-4 text-[16px] leading-relaxed text-bone/90">
+                        {stages[active].desc}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="hidden lg:block">
+                    <CustomsStageVisual stage={active} reduce={!!reduce} />
                   </div>
                 </motion.div>
               </AnimatePresence>
