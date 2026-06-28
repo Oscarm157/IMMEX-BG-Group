@@ -274,7 +274,7 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Alcance del servicio — filas con número display, sin tarjetas ni animación */}
+      {/* Alcance del servicio: filas con número display, sin tarjetas ni animación */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
         <SectionHeading title={sec.doTitle} className="mb-12" />
         <div className="border-t border-line">
