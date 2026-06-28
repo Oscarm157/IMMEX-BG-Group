@@ -275,7 +275,7 @@ export default async function ServiceDetailPage({
       </section>
 
       {/* Alcance del servicio: filas con número display, sin tarjetas ni animación */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20">
         <SectionHeading title={sec.doTitle} className="mb-12" />
         <div className="border-t border-line">
           {c.whatWeDo.map((w, i) => (
