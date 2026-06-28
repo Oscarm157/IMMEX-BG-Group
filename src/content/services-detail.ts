@@ -2469,6 +2469,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC,
       flow: COMPLIANCE_AND_ASSURANCE_FLOW,
+      bandImage: "/img/gen/compliance.webp",
+      bandCaption: "Cumplimiento y aseguramiento en comercio exterior",
     },
     {
       "overview": "El comercio exterior cambia con cada modificación regulatoria, y un criterio mal aplicado en valoración, origen o clasificación puede convertirse en un crédito fiscal, una multa o la suspensión del padrón. En BG Consulting Group acompañamos a la empresa importadora y exportadora para que cada operación cumpla la legislación vigente y, al mismo tiempo, aproveche los beneficios fiscales y arancelarios que México ha pactado en sus tratados internacionales.",
@@ -2615,6 +2617,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC,
       flow: INTERNATIONAL_TRADE_EXPERTS_FLOW,
+      bandImage: "/img/gen/international-trade.webp",
+      bandCaption: "Operación de comercio internacional, de origen a destino",
     },
     {
       "overview": "Una operación de comercio exterior genera miles de pedimentos, facturas, certificados de origen y registros de movimiento que la autoridad puede revisar años después del despacho. Cuando esa información vive en hojas de cálculo aisladas o se reconcilia a mano, las inconsistencias aparecen tarde, normalmente durante una auditoría. BG Consulting Group implementa tecnología capaz de operar a gran escala y desarrolla herramientas de cumplimiento aduanero que permiten alcanzar un nivel de cumplimiento óptimo o mitigar hallazgos en tiempo real, sobre la operación logística internacional, terrestre y marítima.",
@@ -2688,6 +2692,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: INFORMATION_TECHNOLOGY_DIAGNOSTIC,
       flow: INFORMATION_TECHNOLOGY_FLOW,
+      bandImage: "/img/gen/information-technology.webp",
+      bandCaption: "Tecnología y trazabilidad para comercio exterior",
     },
     {
       "overview": "Una empresa con saldo a favor de IVA tiene dinero retenido por la autoridad que solo recupera si la solicitud de devolución llega bien soportada y consistente con su contabilidad y declaraciones. El SAT revisa origen de operaciones, requisitos fiscales y congruencia entre lo informado y lo declarado antes de liberar un peso. BG Consulting revisa la determinación del saldo a favor, ordena el soporte de las operaciones y presenta la solicitud conforme a las Normas de Información Financiera y a los requisitos fiscales vigentes, dando seguimiento hasta que la autoridad resuelve.",
@@ -2761,6 +2767,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: FISCAL_SERVICES_DIAGNOSTIC,
       flow: FISCAL_SERVICES_FLOW,
+      bandImage: "/img/gen/fiscal.webp",
+      bandCaption: "Servicios fiscales para la operación aduanera",
     },
     {
       "overview": "México mantiene una de las redes de tratados comerciales más amplias del mundo, y cada acuerdo abre acceso preferencial siempre que la mercancía cumpla las reglas de origen y la documentación resista una verificación. El problema rara vez es la tarifa preferencial en sí, sino acreditarla: registros incompletos, certificados mal sustentados y proveedores que no documentan su aporte regional. BG Consulting Group estructura la determinación y certificación de origen para que el beneficio arancelario se aplique con respaldo y se sostenga frente a la autoridad.",
@@ -2834,6 +2842,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: TRADE_AGREEMENTS_DIAGNOSTIC,
       flow: TRADE_AGREEMENTS_FLOW,
+      bandImage: "/img/gen/trade-agreements.webp",
+      bandCaption: "Tratados y reglas de origen, preferencias aplicadas",
     },
     {
       "overview": "Importar a México implica clasificar correctamente la mercancía, cumplir regulaciones no arancelarias, tramitar permisos y despachar ante la aduana sin que la carga se detenga. Un error en la fracción arancelaria o una NOM omitida puede frenar el contenedor en el cruce y generar costos que nadie presupuestó. BG Consulting Group acompaña la operación desde el origen hasta la entrega en destino, coordinando el despacho aduanal, el cumplimiento normativo y la logística en el corredor Tijuana-San Diego.",
@@ -2903,6 +2913,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: IMPORT_SERVICES_DIAGNOSTIC,
       flow: IMPORT_SERVICES_FLOW,
+      bandImage: "/img/gen/import.webp",
+      bandCaption: "Servicios de importación, del pedimento a la entrega",
     }
   ],
   "en": [
@@ -3053,6 +3065,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC,
       flow: COMPLIANCE_AND_ASSURANCE_FLOW,
+      bandImage: "/img/gen/compliance.webp",
+      bandCaption: "Compliance and assurance in foreign trade",
     },
     {
       "overview": "Foreign trade rules change with every regulatory update, and a single misapplied criterion in valuation, origin, or classification can turn into a tax assessment, a penalty, or loss of your importer registry. BG Consulting Group works with importers and exporters so each transaction meets current law while using the tax and customs benefits Mexico has secured through its international trade agreements.",
@@ -3199,6 +3213,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC,
       flow: INTERNATIONAL_TRADE_EXPERTS_FLOW,
+      bandImage: "/img/gen/international-trade.webp",
+      bandCaption: "International trade operations, from origin to destination",
     },
     {
       "overview": "A cross-border operation produces thousands of customs entries, invoices, certificates of origin and movement records that the authority can review years after release. When that information lives in disconnected spreadsheets and gets reconciled by hand, inconsistencies surface late, usually during an audit. BG Consulting Group deploys information technology capable of managing a large-scale operation and builds customs compliance tools that help reach an optimal level of compliance or mitigate findings in real time, across international, land and maritime logistics.",
@@ -3272,6 +3288,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: INFORMATION_TECHNOLOGY_DIAGNOSTIC,
       flow: INFORMATION_TECHNOLOGY_FLOW,
+      bandImage: "/img/gen/information-technology.webp",
+      bandCaption: "Technology and traceability for foreign trade",
     },
     {
       "overview": "A company carrying a VAT credit balance has money held by the tax authority that it only recovers when the refund request arrives well supported and consistent with its accounting and filings. Before releasing anything, the SAT reviews the origin of the operations, the tax requirements they must meet, and whether what was reported matches what was filed. BG Consulting reviews how the credit balance was determined, organizes the support behind the operations, and files the refund request under Financial Information Standards and current tax requirements, following up until the authority responds.",
@@ -3345,6 +3363,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: FISCAL_SERVICES_DIAGNOSTIC,
       flow: FISCAL_SERVICES_FLOW,
+      bandImage: "/img/gen/fiscal.webp",
+      bandCaption: "Fiscal services for customs operations",
     },
     {
       "overview": "Mexico holds one of the widest networks of trade agreements in the world, and each one opens preferential access as long as the goods meet the rules of origin and the paperwork survives a verification. The hard part is rarely the preferential rate itself, it is proving entitlement to it: incomplete records, weakly supported certificates, and suppliers who never document their regional content. BG Consulting Group structures origin determination and certification so the tariff benefit is applied with backing and holds up before the authority.",
@@ -3418,6 +3438,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: TRADE_AGREEMENTS_DIAGNOSTIC,
       flow: TRADE_AGREEMENTS_FLOW,
+      bandImage: "/img/gen/trade-agreements.webp",
+      bandCaption: "Trade agreements and rules of origin, preferences applied",
     },
     {
       "overview": "Importing into Mexico means classifying goods correctly, meeting non-tariff regulations, securing permits, and clearing customs without the shipment stalling. A wrong tariff code or an overlooked NOM can hold a container at the border and trigger costs no one budgeted for. BG Consulting Group manages the operation from origin to final delivery, coordinating customs clearance, regulatory compliance, and logistics across the Tijuana-San Diego corridor.",
@@ -3487,6 +3509,8 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       ],
       diagnostic: IMPORT_SERVICES_DIAGNOSTIC,
       flow: IMPORT_SERVICES_FLOW,
+      bandImage: "/img/gen/import.webp",
+      bandCaption: "Import services, from entry to delivery",
     }
   ]
 };
