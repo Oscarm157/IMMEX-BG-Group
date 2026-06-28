@@ -642,6 +642,1684 @@ const LEGAL_FLOW: FlowData = {
   },
 };
 
+const COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿En qué punto está tu operación de comercio exterior?",
+    lead: "Cuatro preguntas para orientar el punto de partida.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Operamos bajo IMMEX y queremos verificar que cumplimos todos los requisitos",
+          "Llegó una orden de visita domiciliaria o un requerimiento de la autoridad",
+          "Los saldos de pedimentos no cuadran con el inventario real",
+          "El área de comercio exterior carece de estructura y controles claros",
+        ],
+      },
+      {
+        text: "¿Tu empresa opera bajo programa IMMEX?",
+        opts: [
+          "Sí, con dudas sobre el cumplimiento de todos los requisitos de operación",
+          "Sí, y ya recibimos una observación o requerimiento relacionado con el programa",
+          "No, pero estamos evaluando solicitarlo",
+          "No, nuestra operación no lo requiere",
+        ],
+      },
+      {
+        text: "¿Cuándo fue la última revisión interna de la operación aduanera?",
+        opts: [
+          "Nunca o hace más de dos años",
+          "Hace menos de un año",
+          "Tenemos una revisión en curso en este momento",
+          "No lo sabemos con certeza",
+        ],
+      },
+      {
+        text: "¿Hay plazos corriendo para responder a la autoridad?",
+        opts: [
+          "Sí, tengo días o pocas semanas para actuar",
+          "Sí, pero con uno a tres meses de margen",
+          "No hay plazos inmediatos, es planeación",
+          "No lo sé con certeza",
+        ],
+      },
+    ],
+    results: {
+      URGENT_REVIEW: {
+        title: "Revisión con plazos corriendo",
+        body: "Cuando la autoridad notifica una visita o un requerimiento, los plazos para preparar la respuesta son cortos. Revisamos la documentación de las operaciones, identificamos las contingencias y preparamos el soporte técnico para atender el requerimiento dentro del tiempo disponible.",
+        cta: "Hablar con el equipo",
+      },
+      IMMEX_AUDIT: {
+        title: "Auditoría preventiva IMMEX",
+        body: "Revisamos la operación bajo los requisitos del programa IMMEX: clasificación, valoración, Anexo 24, soporte documental y control de inventarios. Identificar las contingencias por iniciativa propia, antes de que lo haga la autoridad, es lo que protege la autorización y los privilegios de exportación.",
+        cta: "Programar revisión",
+      },
+      BALANCE_RECON: {
+        title: "Reconstrucción de saldos de pedimentos",
+        body: "Reconstruimos y conciliamos los saldos de activo fijo y materia prima registrados en los pedimentos contra el inventario real, incluyendo bienes de capital y accesorios. Sin esa conciliación, las diferencias quedan expuestas ante cualquier revisión de la autoridad.",
+        cta: "Hablar con el equipo",
+      },
+      PROCESS_REENG: {
+        title: "Estructura del área de comercio exterior",
+        body: "Cuando el área creció sin controles definidos, el cumplimiento depende de criterios aislados y cada operación acumula contingencia. Rediseñamos los procesos y responsabilidades del departamento de importaciones y exportaciones para que el cumplimiento quede integrado a la operación diaria.",
+        cta: "Consultar",
+      },
+      GENERAL: {
+        title: "Diagnóstico del cumplimiento",
+        body: "Revisamos el punto de partida de la operación aduanera y orientamos el trabajo hacia lo que el programa o la autorización necesita, sin presuposiciones sobre el área ni la urgencia.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your foreign trade operation stand?",
+    lead: "Four questions to identify the right starting point.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "We operate under IMMEX and want to confirm we meet every operating requirement",
+          "An audit order or an information request from the authority has arrived",
+          "Pedimento balances do not reconcile with the real inventory",
+          "The foreign trade area lacks clear structure and controls",
+        ],
+      },
+      {
+        text: "Does your company operate under an IMMEX program?",
+        opts: [
+          "Yes, with doubts about whether we meet every operating requirement",
+          "Yes, and we have already received a finding or request related to the program",
+          "No, but we are evaluating whether to apply",
+          "No, our operation does not require it",
+        ],
+      },
+      {
+        text: "When was the last internal review of the customs operation?",
+        opts: [
+          "Never, or more than two years ago",
+          "Less than a year ago",
+          "A review is in progress right now",
+          "We are not sure",
+        ],
+      },
+      {
+        text: "Are there deadlines running to respond to the authority?",
+        opts: [
+          "Yes, I have days or a few weeks to act",
+          "Yes, but I have one to three months of room",
+          "No immediate deadlines, this is planning",
+          "I am not sure",
+        ],
+      },
+    ],
+    results: {
+      URGENT_REVIEW: {
+        title: "Review with deadlines running",
+        body: "When the authority notifies an audit visit or an information request, the window to prepare is short. We review the documentation behind the operations, identify the exposures, and build the technical support to address the requirement within the available time.",
+        cta: "Talk to the team",
+      },
+      IMMEX_AUDIT: {
+        title: "Preventive IMMEX audit",
+        body: "We review operations against the requirements of the IMMEX program: classification, valuation, Annex 24, documentary support, and inventory control. Identifying contingencies on your own initiative, before the authority does, is what protects the authorization and the export privileges granted.",
+        cta: "Schedule a review",
+      },
+      BALANCE_RECON: {
+        title: "Reconstruction of pedimento balances",
+        body: "We rebuild and reconcile the fixed assets and raw materials balances recorded on pedimentos against the real inventory, including capital goods and accessories. Without that reconciliation, the differences are exposed the moment the authority runs a review.",
+        cta: "Talk to the team",
+      },
+      PROCESS_REENG: {
+        title: "Foreign trade area structure",
+        body: "When the area grew without defined controls, compliance depends on isolated judgment and every operation accumulates exposure. We redesign the processes and responsibilities of the import-export department so compliance is built into daily operations rather than left to individual criteria.",
+        cta: "Consult",
+      },
+      GENERAL: {
+        title: "Compliance diagnostic",
+        body: "We review the starting point of the customs operation and direct the work toward what the program or authorization needs, without assumptions about the area or the urgency.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, , , q4] = answers;
+    if (q4 === 0) return "URGENT_REVIEW";
+    if (q1 === 2) return "BALANCE_RECON";
+    if (q1 === 3) return "PROCESS_REENG";
+    if (q1 === 0 || q1 === 1) return "IMMEX_AUDIT";
+    return "GENERAL";
+  },
+  resultTag: {
+    URGENT_REVIEW: { es: "Revisión urgente", en: "Urgent review" },
+    IMMEX_AUDIT: { es: "Auditoría IMMEX", en: "IMMEX audit" },
+    BALANCE_RECON: { es: "Saldos de pedimentos", en: "Pedimento balances" },
+    PROCESS_REENG: { es: "Estructura del área", en: "Department structure" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    URGENT_REVIEW: 4,
+    IMMEX_AUDIT: 3,
+    BALANCE_RECON: 3,
+  },
+};
+
+const COMPLIANCE_AND_ASSURANCE_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de aseguramiento",
+    title: "Del diagnóstico al cumplimiento sostenido.",
+    lead: "BG Consulting estructura la revisión, corrige las desviaciones y rediseña los controles para que la autorización se conserve sin depender de revisiones aisladas.",
+    panel: "Plan de aseguramiento · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Evaluación de riesgos",
+        desc: "Identificamos los puntos donde la operación se aparta del marco autorizado: clasificación, valoración, origen, control de inventarios y soporte documental. Este diagnóstico muestra dónde está expuesta la empresa antes de que lo detecte la autoridad.",
+      },
+      {
+        n: "02",
+        name: "Auditoría preventiva",
+        desc: "Revisamos la operación contra los requisitos del programa IMMEX y las demás autorizaciones de comercio exterior vigentes. La auditoría preventiva permite encontrar y corregir desviaciones en condiciones controladas, antes de que una visita de la autoridad las encuentre.",
+      },
+      {
+        n: "03",
+        name: "Reconstrucción de saldos",
+        desc: "Reconstruimos los saldos de pedimentos de activo fijo y materia prima, incluyendo bienes de capital y accesorios. Cuadrar esos saldos con el inventario físico es la base para acreditar la legal estancia de la mercancía importada temporalmente ante cualquier revisión.",
+      },
+      {
+        n: "04",
+        name: "Control interno e inventarios",
+        desc: "Analizamos los controles internos y el sistema de control de inventarios conforme al Anexo 24, verificando que respalde cada entrada y salida. Un control de inventarios consistente es requisito para conservar el programa y para responder un descargo sin diferencias.",
+      },
+      {
+        n: "05",
+        name: "Reingeniería del área",
+        desc: "Rediseñamos los procesos y responsabilidades del departamento de importaciones y exportaciones para que el cumplimiento quede integrado a la operación diaria. El objetivo es una estructura que sostenga la autorización por sí misma, sin depender de criterios aislados.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Assurance process",
+    title: "From diagnostic to sustained compliance.",
+    lead: "BG Consulting structures the review, corrects the deviations, and redesigns the controls so the authorization is kept without relying on isolated reviews.",
+    panel: "Assurance plan · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Risk evaluation",
+        desc: "We identify where operations drift from the authorized scope: classification, valuation, origin, inventory control, and documentary support. This diagnosis shows where the company is exposed before the authority finds it.",
+      },
+      {
+        n: "02",
+        name: "Preventive audit",
+        desc: "We review operations against the requirements of the IMMEX program and other foreign trade authorizations in force. A preventive audit lets you find and correct deviations under controlled conditions, before an authority visit does.",
+      },
+      {
+        n: "03",
+        name: "Balance reconstruction",
+        desc: "We reconstruct pedimento balances for fixed assets and raw materials, including capital goods and accessories. Reconciling those balances with the physical inventory is the basis for proving the legal status of temporarily imported goods under any review.",
+      },
+      {
+        n: "04",
+        name: "Internal control and inventory",
+        desc: "We analyze internal controls and the inventory control system under Annex 24, verifying it backs every entry and exit. Consistent inventory control is a condition for keeping the program and for answering a review without unexplained differences.",
+      },
+      {
+        n: "05",
+        name: "Department reengineering",
+        desc: "We redesign the processes and responsibilities of the import-export department so compliance is built into daily operations. The goal is a structure that sustains the authorization on its own, without depending on isolated judgment calls.",
+      },
+    ],
+  },
+};
+
+const INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Qué está cuestionando la autoridad?",
+    lead: "Cuatro preguntas para orientar el tipo de dictamen o soporte técnico que necesitas.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es la situación que necesitas resolver?",
+        opts: [
+          "La autoridad reclasificó la fracción arancelaria de mi mercancía",
+          "La autoridad rechazó el origen declarado y perdí la preferencia arancelaria",
+          "La autoridad objetó el valor en aduana o ajustó la base gravable",
+          "Tenemos observaciones al control de inventarios del Anexo 24 (IMMEX)",
+        ],
+      },
+      {
+        text: "¿En qué etapa está el asunto?",
+        opts: [
+          "Aún no hay acto de la autoridad: busco certeza antes de operar",
+          "La autoridad ejerce sus facultades y necesito responder con sustento técnico",
+          "Ya hay una resolución notificada y quiero presentar una defensa con dictamen pericial",
+          "No estoy seguro de la etapa",
+        ],
+      },
+      {
+        text: "¿Hay plazos corriendo para responder?",
+        opts: [
+          "Sí, tengo días o pocas semanas para actuar",
+          "Sí, pero con uno a tres meses de margen",
+          "No hay plazos inmediatos, es preventivo",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es el corredor principal de tu operación?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce fronterizo en la zona norte",
+          "Operación marítima, aérea o interior",
+          "Aún no tenemos operaciones activas",
+        ],
+      },
+    ],
+    results: {
+      CLASSIFICATION: {
+        title: "Dictamen en clasificación arancelaria",
+        body: "Analizamos la mercancía y construimos el sustento de la fracción que corresponde conforme a las Reglas Generales de Interpretación, las notas legales y los criterios aplicables. El dictamen respalda la controversia frente a la reclasificación de la autoridad y sirve como prueba en el recurso o en el juicio.",
+        cta: "Hablar con el equipo",
+      },
+      ORIGIN: {
+        title: "Sustento técnico de origen",
+        body: "Verificamos el cumplimiento de las reglas de origen del tratado invocado, revisamos el valor de contenido regional o el salto arancelario según corresponda y ordenamos el soporte documental. El dictamen permite defender la preferencia arancelaria cuando la autoridad la desconoce.",
+        cta: "Hablar con el equipo",
+      },
+      VALUATION: {
+        title: "Avalúo y valoración aduanera",
+        body: "Determinamos el valor en aduana con base en los métodos de valoración de la Ley Aduanera, partiendo del valor de transacción y, en su caso, de los métodos secundarios. El avalúo aporta el fundamento técnico para controvertir el ajuste de la base gravable o el avalúo propio de la autoridad.",
+        cta: "Hablar con el equipo",
+      },
+      ANNEX24: {
+        title: "Revisión del Anexo 24 e IMMEX",
+        body: "Revisamos el sistema de control de inventarios, la trazabilidad entre pedimentos de entrada y de retorno, los descargos y el balance de materiales. El objetivo es identificar el sustento documental y técnico para responder a la observación de la autoridad sobre las mercancías sujetas al régimen temporal.",
+        cta: "Hablar con el equipo",
+      },
+      PREVENTIVE: {
+        title: "Opinión preventiva de certeza jurídica",
+        body: "Antes de que exista un acto de la autoridad, una decisión operativa con impacto fiscal conviene evaluarla con criterio técnico. Fijamos la postura sobre clasificación, origen o valor y emitimos la opinión que da certeza antes de ejecutar la operación.",
+        cta: "Consultar",
+      },
+      GENERAL: {
+        title: "Diagnóstico del asunto",
+        body: "Revisamos el punto de partida y orientamos el tipo de dictamen o soporte técnico que necesita el caso, sin presuposiciones sobre el área ni sobre si ya existe un acto de la autoridad.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "What is the authority challenging?",
+    lead: "Four questions to identify the type of expert opinion or technical support your case needs.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is the situation you need to resolve?",
+        opts: [
+          "The authority reclassified the tariff code of my goods",
+          "The authority rejected my declared origin and the preferential rate was lost",
+          "The authority questioned the customs value or adjusted the taxable base",
+          "We have findings on the Annex 24 inventory control system (IMMEX)",
+        ],
+      },
+      {
+        text: "What stage is the matter at?",
+        opts: [
+          "No act from the authority yet: I want certainty before acting",
+          "The authority is exercising its review powers and I need to respond with technical support",
+          "A resolution has already been notified and I want to file a defense with an expert opinion",
+          "I am not sure of the stage",
+        ],
+      },
+      {
+        text: "Are deadlines already running?",
+        opts: [
+          "Yes, I have days or a few weeks to act",
+          "Yes, but I have one to three months of room",
+          "No immediate deadlines, this is preventive",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "What is the main corridor for your operation?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another border crossing in the northern zone",
+          "Maritime, air, or inland operation",
+          "No active operations yet",
+        ],
+      },
+    ],
+    results: {
+      CLASSIFICATION: {
+        title: "Expert opinion on tariff classification",
+        body: "We analyze the goods and build the support for the classification that applies under the General Rules of Interpretation, the legal notes, and the applicable criteria. The opinion backs the dispute against the authority's reclassification and serves as evidence in an appeal or in court.",
+        cta: "Talk to the team",
+      },
+      ORIGIN: {
+        title: "Technical substantiation of origin",
+        body: "We verify that the goods meet the rules of origin of the treaty invoked, review the regional value content or tariff shift as applicable, and organize the documentary support. The opinion allows you to defend the preferential rate when the authority denies it.",
+        cta: "Talk to the team",
+      },
+      VALUATION: {
+        title: "Customs appraisal and valuation",
+        body: "We determine the customs value using the valuation methods set in the Customs Law, starting from transaction value and, where that does not apply, the secondary methods. The appraisal provides the technical basis to dispute an adjustment to the taxable base or the authority's own valuation.",
+        cta: "Talk to the team",
+      },
+      ANNEX24: {
+        title: "Annex 24 and IMMEX review",
+        body: "We review the inventory control system, the traceability between entry and return pedimentos, the write-offs, and the material balance. The goal is to identify the documentary and technical support to respond to the authority's finding on goods under the temporary regime.",
+        cta: "Talk to the team",
+      },
+      PREVENTIVE: {
+        title: "Preventive opinion for legal certainty",
+        body: "Before any act from the authority, an operational decision with tax exposure is worth assessing with technical criteria. We fix the position on classification, origin, or value and issue the opinion that gives certainty before the operation is carried out.",
+        cta: "Consult",
+      },
+      GENERAL: {
+        title: "Diagnostic of the matter",
+        body: "We review the starting point and orient the type of expert opinion or technical support the case needs, without assumptions about the area or whether an act from the authority already exists.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2] = answers;
+    if (q2 === 0) return "PREVENTIVE";
+    if (q1 === 0) return "CLASSIFICATION";
+    if (q1 === 1) return "ORIGIN";
+    if (q1 === 2) return "VALUATION";
+    if (q1 === 3) return "ANNEX24";
+    return "GENERAL";
+  },
+  resultTag: {
+    CLASSIFICATION: { es: "Clasificación arancelaria", en: "Tariff classification" },
+    ORIGIN: { es: "Origen de la mercancía", en: "Origin of goods" },
+    VALUATION: { es: "Valoración aduanera", en: "Customs valuation" },
+    ANNEX24: { es: "Anexo 24 IMMEX", en: "Annex 24 IMMEX" },
+    PREVENTIVE: { es: "Opinión preventiva", en: "Preventive opinion" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    CLASSIFICATION: 0,
+    VALUATION: 1,
+    ORIGIN: 2,
+    ANNEX24: 3,
+  },
+};
+
+const INTERNATIONAL_TRADE_EXPERTS_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de peritaje",
+    title: "Del análisis técnico al dictamen con sustento.",
+    lead: "Cuando la autoridad cuestiona la clasificación, el origen o el valor de una mercancía, o cuando se necesita certeza jurídica antes de operar, el dictamen pericial recorre estas etapas hasta quedar listo para usarse como prueba.",
+    panel: "Proceso pericial · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Revisión del caso",
+        desc: "Analizamos el acto de la autoridad: la reclasificación, el rechazo del origen, el ajuste de valor o las observaciones al Anexo 24. Esta revisión determina el alcance del dictamen y los criterios técnicos aplicables al caso concreto.",
+      },
+      {
+        n: "02",
+        name: "Análisis técnico de la mercancía",
+        desc: "Según la materia, analizamos la mercancía bajo las Reglas Generales de Interpretación y las notas legales para clasificación, verificamos el cumplimiento de las reglas de origen del tratado para origen, o aplicamos los métodos de valoración aduanera para el valor. Este es el núcleo técnico del dictamen.",
+      },
+      {
+        n: "03",
+        name: "Construcción del dictamen",
+        desc: "Documentamos el criterio, los fundamentos normativos y la conclusión técnica en el formato que exige su uso como prueba: recurso administrativo, juicio ante el TFJA o presentación ante la aduana. Un dictamen bien construido responde exactamente a lo que la autoridad cuestionó.",
+      },
+      {
+        n: "04",
+        name: "Coordinación con la defensa legal",
+        desc: "Alineamos el dictamen con los agravios que presentará el área jurídica. El soporte técnico y la postura legal van en la misma dirección: la clasificación que sostiene el dictamen es la misma que sustenta el recurso o el juicio.",
+      },
+      {
+        n: "05",
+        name: "Seguimiento del asunto",
+        desc: "Acompañamos el asunto mientras la autoridad resuelve. Si surgen preguntas adicionales o si la contraparte o la autoridad cuestionan el dictamen, respondemos con el sustento técnico del caso.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Expert opinion process",
+    title: "From technical analysis to a grounded expert opinion.",
+    lead: "When the authority challenges classification, origin, or the value of goods, or when legal certainty is needed before acting, the expert opinion moves through these stages until it is ready to be used as evidence.",
+    panel: "Expert opinion process · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Case review",
+        desc: "We analyze the authority's act: the reclassification, the origin denial, the value adjustment, or the Annex 24 findings. This review determines the scope of the opinion and the technical criteria applicable to the specific case.",
+      },
+      {
+        n: "02",
+        name: "Technical analysis of the goods",
+        desc: "Depending on the subject, we analyze the goods under the General Rules of Interpretation and legal notes for classification, verify compliance with the treaty's rules of origin for an origin matter, or apply the customs valuation methods for a value dispute. This is the technical core of the opinion.",
+      },
+      {
+        n: "03",
+        name: "Drafting the expert opinion",
+        desc: "We document the criterion, the regulatory grounds, and the technical conclusion in the format required for its use as evidence: administrative appeal, TFJA litigation, or presentation before customs. A well-built opinion answers exactly what the authority challenged.",
+      },
+      {
+        n: "04",
+        name: "Coordination with legal defense",
+        desc: "We align the expert opinion with the grievances the legal team will raise. The technical support and the legal position run in the same direction: the classification the opinion sustains is the same one the appeal or court filing rests on.",
+      },
+      {
+        n: "05",
+        name: "Follow-up on the matter",
+        desc: "We accompany the matter while the authority resolves. If additional questions arise or if the opposing party or the authority challenges the opinion, we respond with the technical support behind the case.",
+      },
+    ],
+  },
+};
+
+const INFORMATION_TECHNOLOGY_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Dónde empieza la mejora en tu operación?",
+    lead: "Cuatro preguntas para orientar qué herramienta o proceso resuelve el problema principal.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es el problema principal en tu operación hoy?",
+        opts: [
+          "El pedimento, la factura y los registros internos no coinciden",
+          "Los errores y hallazgos aparecen semanas o meses después de cerrar las operaciones",
+          "El volumen creció y ya no tenemos visibilidad en tiempo real sobre la cadena",
+          "Operamos bajo IMMEX o depósito fiscal y la trazabilidad de inventarios es insuficiente",
+        ],
+      },
+      {
+        text: "¿Cómo validas la información antes de transmitir a la aduana?",
+        opts: [
+          "Por revisión manual o en hoja de cálculo",
+          "Tenemos herramientas, pero no capturan todas las inconsistencias",
+          "Validamos después del despacho, no antes de transmitir",
+          "Estamos iniciando operaciones de comercio exterior",
+        ],
+      },
+      {
+        text: "¿Cuántas operaciones aduaneras mensuales aproximadas maneja tu empresa?",
+        opts: [
+          "Menos de 100 operaciones",
+          "Entre 100 y 500 operaciones",
+          "Más de 500 operaciones",
+          "No lo sabemos con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es el área más urgente de atender?",
+        opts: [
+          "Validar la información antes de transmitir y evitar errores en pedimentos",
+          "Detectar inconsistencias mientras la operación ocurre, no en la auditoría posterior",
+          "Controlar inventarios para sostener los beneficios de IMMEX o depósito fiscal",
+          "Coordinar la logística internacional, terrestre y marítima bajo una sola plataforma",
+        ],
+      },
+    ],
+    results: {
+      PRE_TRANSMISSION: {
+        title: "Validación antes de transmitir",
+        body: "Cuando el pedimento, la factura y los registros internos no cuadran, el problema se corrige antes de la transmisión, no después del despacho. Implementamos reglas de validación sobre clasificación, valor y datos del importador que atajan el error en el origen.",
+        cta: "Hablar con el equipo",
+      },
+      REALTIME_MONITORING: {
+        title: "Detección y mitigación en tiempo real",
+        body: "Encontrar un error semanas después de la operación implica rectificaciones, recargos y exposición acumulada. Las reglas de detección señalan la desviación mientras la operación ocurre, con margen para corregir y documentar la rectificación antes de que se repita en los siguientes embarques.",
+        cta: "Hablar con el equipo",
+      },
+      INVENTORY_IMMEX: {
+        title: "Control de inventarios para programa de fomento",
+        body: "IMMEX y depósito fiscal requieren el registro de entradas, salidas, existencias y mermas amarrado a los descargos de pedimentos. Sin esa trazabilidad, el beneficio fiscal queda expuesto ante una revisión. Implementamos el control que el programa exige y que la autoridad puede verificar.",
+        cta: "Programar revisión",
+      },
+      FULL_LOGISTICS: {
+        title: "Coordinación logística integral",
+        body: "Cuando el volumen supera lo que el control manual puede sostener, la coordinación de la logística internacional, terrestre y marítima bajo una sola plataforma da visibilidad sobre qué está en proceso, qué está detenido y qué requiere acción, sin perder el enlace entre el dato aduanero y el movimiento físico.",
+        cta: "Hablar con el equipo",
+      },
+      GENERAL: {
+        title: "Diagnóstico de la operación",
+        body: "Revisamos el punto de partida: dónde vive la información hoy, qué validaciones existen y dónde surgen los hallazgos. Con ese mapa definimos qué herramienta o proceso resuelve el problema de raíz.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does improvement start in your operation?",
+    lead: "Four questions to identify which tool or process addresses the main problem.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is the main problem in your operation today?",
+        opts: [
+          "The customs entry, the invoice, and the internal records do not match",
+          "Errors and findings appear weeks or months after the operations close",
+          "Volume has grown and we no longer have real-time visibility over the chain",
+          "We operate under IMMEX or bonded warehouse and inventory traceability is insufficient",
+        ],
+      },
+      {
+        text: "How do you validate information before transmitting to customs?",
+        opts: [
+          "By manual review or spreadsheet",
+          "We have tools, but they do not catch all inconsistencies",
+          "We validate after release, not before transmission",
+          "We are starting our foreign trade operations",
+        ],
+      },
+      {
+        text: "How many monthly customs operations does your company handle approximately?",
+        opts: [
+          "Fewer than 100 operations",
+          "Between 100 and 500 operations",
+          "More than 500 operations",
+          "We are not sure of the exact number",
+        ],
+      },
+      {
+        text: "What is the most urgent area to address?",
+        opts: [
+          "Validating information before transmission and avoiding errors on customs entries",
+          "Detecting inconsistencies while the operation is running, not in a later audit",
+          "Controlling inventory to sustain IMMEX or bonded warehouse benefits",
+          "Coordinating international, land, and maritime logistics under a single platform",
+        ],
+      },
+    ],
+    results: {
+      PRE_TRANSMISSION: {
+        title: "Validation before transmission",
+        body: "When the customs entry, the invoice, and the internal records do not match, the problem is fixed before transmission, not after release. We implement validation rules over classification, value, and importer data that catch the error at the source.",
+        cta: "Talk to the team",
+      },
+      REALTIME_MONITORING: {
+        title: "Real-time detection and mitigation",
+        body: "Finding an error weeks after the operation means amendments, surcharges, and compounded exposure. Detection rules flag the deviation while the operation is running, with room to correct and document the fix before the same problem repeats on the next shipments.",
+        cta: "Talk to the team",
+      },
+      INVENTORY_IMMEX: {
+        title: "Inventory control for incentive programs",
+        body: "IMMEX and bonded warehouse require inflows, outflows, balances, and waste to be recorded and tied to customs write-offs. Without that traceability, the tax benefit is exposed in a review. We implement the inventory control the program requires and the authority can verify.",
+        cta: "Schedule a review",
+      },
+      FULL_LOGISTICS: {
+        title: "Full logistics coordination",
+        body: "When volume outgrows manual control, coordinating international, land, and maritime logistics under a single platform provides visibility over what is in process, what is held, and what needs action, without losing the link between the customs data and the physical movement.",
+        cta: "Talk to the team",
+      },
+      GENERAL: {
+        title: "Operation diagnostic",
+        body: "We review the starting point: where the information lives today, what validations exist, and where findings surface. With that map we define which tool or process addresses the root problem.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const q1 = answers[0];
+    const q4 = answers[3];
+    if (q1 === 3) return "INVENTORY_IMMEX";
+    if (q1 === 0 || q4 === 0) return "PRE_TRANSMISSION";
+    if (q1 === 1 || q4 === 1) return "REALTIME_MONITORING";
+    if (q4 === 2) return "INVENTORY_IMMEX";
+    if (q4 === 3) return "FULL_LOGISTICS";
+    return "GENERAL";
+  },
+  resultTag: {
+    PRE_TRANSMISSION: { es: "Validación previa", en: "Pre-transmission validation" },
+    REALTIME_MONITORING: { es: "Detección en tiempo real", en: "Real-time detection" },
+    INVENTORY_IMMEX: { es: "Control de inventarios", en: "Inventory control" },
+    FULL_LOGISTICS: { es: "Logística integral", en: "Full logistics" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {},
+};
+
+const INFORMATION_TECHNOLOGY_FLOW: FlowData = {
+  es: {
+    eyebrow: "Ciclo operativo",
+    title: "De la validación a la visibilidad total de la operación.",
+    lead: "Cada operación de comercio exterior recorre las mismas etapas. BG Consulting Group interviene donde la información se origina, antes de que los errores alcancen la transmisión o se acumulen en una auditoría.",
+    panel: "Flujo de cumplimiento TI · 6 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Diagnóstico inicial",
+        desc: "Revisamos cómo vive la información hoy: pedimentos, facturas, registros contables y sistemas existentes. El objetivo es identificar dónde surgen los desajustes antes de diseñar cualquier herramienta, para no automatizar un proceso que ya tiene un problema de fondo.",
+      },
+      {
+        n: "02",
+        name: "Validación antes de transmitir",
+        desc: "Implementamos reglas de validación sobre la información antes de que llegue al mecanismo de selección automatizado: consistencia entre pedimento y factura, datos del importador, vigencia de certificados y catálogos, y criterios sobre clasificación y valor. El error que no se transmite no requiere rectificación.",
+      },
+      {
+        n: "03",
+        name: "Detección y mitigación en tiempo real",
+        desc: "Las reglas de detección señalan inconsistencias y desviaciones mientras la operación está en curso. Identificar el hallazgo en el momento permite corregirlo con menor exposición, documentar la rectificación y evitar que el mismo error se repita en los siguientes embarques.",
+      },
+      {
+        n: "04",
+        name: "Control de inventarios",
+        desc: "Para empresas bajo IMMEX o depósito fiscal, implementamos el registro de entradas, salidas, existencias y mermas con el nivel de detalle que exige la autoridad. Un inventario que cuadra con los descargos de pedimentos es lo que sostiene el beneficio fiscal ante una revisión.",
+      },
+      {
+        n: "05",
+        name: "Trazabilidad logística",
+        desc: "Coordinamos el movimiento de mercancía por vía internacional, terrestre y marítima, manteniendo el enlace entre el dato aduanero y el flujo físico. Cada cambio en la cadena queda registrado y la información del pedimento corresponde al embarque real.",
+      },
+      {
+        n: "06",
+        name: "Monitoreo a gran escala",
+        desc: "Con la operación en marcha, el monitoreo continuo da visibilidad sobre qué está en proceso, qué está detenido y qué requiere acción, sin importar el volumen. Es lo que hace manejable una operación de miles de pedimentos mensuales sin perder el control sobre el cumplimiento de cada uno.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Operational cycle",
+    title: "From validation to full visibility over the operation.",
+    lead: "Every customs operation moves through the same stages. BG Consulting Group steps in where information originates, before errors reach transmission or compound in an audit.",
+    panel: "IT compliance flow · 6 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Initial diagnostic",
+        desc: "We review how information lives today: customs entries, invoices, accounting records, and existing systems. The goal is to identify where mismatches arise before designing any tool, so the outcome is not an automated version of a process that already has a structural problem.",
+      },
+      {
+        n: "02",
+        name: "Validation before transmission",
+        desc: "We implement validation rules over the information before it reaches the automated selection system: consistency between the entry and the invoice, importer data, validity of certificates and catalogs, and criteria over classification and value. An error that is never transmitted is an error that never needs amending.",
+      },
+      {
+        n: "03",
+        name: "Real-time detection and mitigation",
+        desc: "Detection rules flag inconsistencies and deviations while the operation is running. Catching the finding in the moment allows correction at lower exposure, documents the fix, and prevents the same error from repeating on the next shipments.",
+      },
+      {
+        n: "04",
+        name: "Inventory control",
+        desc: "For companies under IMMEX or bonded warehouse, we implement the recording of inflows, outflows, balances, and waste at the level of detail the authority requires. An inventory that reconciles with customs write-offs is what sustains the tax benefit under review.",
+      },
+      {
+        n: "05",
+        name: "Logistics traceability",
+        desc: "We coordinate the movement of goods by international, land, and maritime routes, keeping the link between the customs data and the physical flow. Every change in the chain is recorded and the entry data matches the actual shipment.",
+      },
+      {
+        n: "06",
+        name: "Monitoring at scale",
+        desc: "With the operation running, continuous monitoring provides visibility over what is in process, what is held, and what needs action, regardless of volume. It is what makes an operation of thousands of monthly entries manageable without losing control over the compliance of each one.",
+      },
+    ],
+  },
+};
+
+const FISCAL_SERVICES_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Por dónde empieza tu trámite de IVA?",
+    lead: "Cuatro preguntas para orientarte hacia el paso correcto.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación con el IVA hoy?",
+        opts: [
+          "Tengo saldo a favor acumulado que no he solicitado en devolución",
+          "Presenté una solicitud de devolución y fue rechazada o está detenida",
+          "Tengo dudas sobre si mis acreditamientos están bien sustentados",
+          "Recibí un requerimiento de información del SAT durante una revisión",
+        ],
+      },
+      {
+        text: "¿Cuál es el origen principal de tu saldo a favor?",
+        opts: [
+          "Exportaciones o ventas a tasa 0% que superan el IVA que traslado",
+          "Inversiones en activo fijo con IVA pagado pendiente de recuperar",
+          "Operación mixta con varias actividades o tasas",
+          "No identifico con claridad el origen del saldo",
+        ],
+      },
+      {
+        text: "¿Has conciliado la DIOT contra tu declaración mensual?",
+        opts: [
+          "No, y sospecho que hay diferencias entre lo informado y lo declarado",
+          "Sí, pero tengo diferencias que no he resuelto",
+          "Sí, está conciliada y consistente",
+          "No presentamos DIOT o no aplica a nuestra operación",
+        ],
+      },
+      {
+        text: "¿Qué tan urgente es el trámite?",
+        opts: [
+          "Hay una revisión del SAT o un requerimiento activo que atender",
+          "El capital inmovilizado afecta el flujo de operaciones",
+          "Queremos ordenar el soporte antes de presentar la solicitud",
+          "Sin urgencia inmediata, es trabajo previo de planeación",
+        ],
+      },
+    ],
+    results: {
+      REQUIREMENTS: {
+        title: "Atención a requerimiento del SAT",
+        body: "Cuando la autoridad emite un requerimiento durante la revisión, la respuesta debe llegar con el soporte de las operaciones ya integrado. Revisamos el alcance del requerimiento, ordenamos la documentación y atendemos la solicitud dentro del plazo.",
+        cta: "Hablar con el equipo",
+      },
+      REJECTED: {
+        title: "Solicitud rechazada o detenida",
+        body: "Un rechazo o una devolución parcial indica que la determinación o el soporte no satisficieron los requisitos de la autoridad. Revisamos la determinación del saldo, identificamos la observación y preparamos la respuesta o una nueva solicitud con soporte reforzado.",
+        cta: "Hablar con el equipo",
+      },
+      DIOT_MISMATCH: {
+        title: "Conciliación DIOT y declaración mensual",
+        body: "Diferencias entre lo informado en la DIOT y lo declarado en el periodo son una causa frecuente de observación. Conciliamos ambas fuentes, identificamos las diferencias y las resolvemos antes de presentar, para que el acreditamiento no quede cuestionado desde el inicio.",
+        cta: "Hablar con el equipo",
+      },
+      ACCUMULATED: {
+        title: "Solicitud de devolución de IVA",
+        body: "Revisamos la determinación del saldo a favor, verificamos que las operaciones cumplan los requisitos fiscales para el acreditamiento y presentamos la solicitud con el soporte ordenado. Damos seguimiento hasta que la autoridad resuelve.",
+        cta: "Hablar con el equipo",
+      },
+      GENERAL: {
+        title: "Diagnóstico del saldo a favor",
+        body: "Revisamos el punto de partida: la determinación del saldo, el estado de la conciliación y el soporte de las operaciones. Orientamos el trabajo hacia lo que el trámite necesita.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your VAT refund process start?",
+    lead: "Four questions to point you toward the right step.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation with VAT today?",
+        opts: [
+          "I have an accumulated credit balance I have not yet requested as a refund",
+          "I filed a refund request and it was rejected or is stalled",
+          "I have doubts about whether my creditable amounts are properly supported",
+          "I received an information request from the SAT during a review",
+        ],
+      },
+      {
+        text: "What is the main source of your credit balance?",
+        opts: [
+          "Exports or 0% rate sales that exceed the VAT I charge",
+          "Fixed asset investments with VAT paid and pending recovery",
+          "Mixed operations with various activities or rates",
+          "I cannot clearly identify the source of the balance",
+        ],
+      },
+      {
+        text: "Have you reconciled the DIOT against your monthly statement?",
+        opts: [
+          "No, and I suspect there are differences between what was reported and what was filed",
+          "Yes, but there are differences I have not resolved",
+          "Yes, it is reconciled and consistent",
+          "We do not file a DIOT or it does not apply to our operation",
+        ],
+      },
+      {
+        text: "How urgent is the process?",
+        opts: [
+          "There is an active SAT review or information request to address",
+          "The tied-up capital is affecting operational cash flow",
+          "We want to organize the support before filing the request",
+          "No immediate urgency, this is advance planning",
+        ],
+      },
+    ],
+    results: {
+      REQUIREMENTS: {
+        title: "Responding to a SAT information request",
+        body: "When the authority issues a requirement during its review, the response must arrive with operational support already in place. We review the scope of the requirement, organize the documentation, and address it within the deadline.",
+        cta: "Talk to the team",
+      },
+      REJECTED: {
+        title: "Rejected or stalled refund request",
+        body: "A rejection or partial refund indicates that the determination or the support did not satisfy the authority's requirements. We review the balance determination, identify the observation, and prepare the response or a new request with stronger backing.",
+        cta: "Talk to the team",
+      },
+      DIOT_MISMATCH: {
+        title: "Reconciling the DIOT and the monthly statement",
+        body: "Differences between what was reported in the DIOT and what was declared in the period are a frequent source of observations. We reconcile both sources, identify the differences, and resolve them before filing, so the credit is not questioned from the outset.",
+        cta: "Talk to the team",
+      },
+      ACCUMULATED: {
+        title: "VAT refund request",
+        body: "We review the credit balance determination, verify that the operations meet the tax requirements for the credit, and file the request with organized support. We follow up until the authority responds.",
+        cta: "Talk to the team",
+      },
+      GENERAL: {
+        title: "Credit balance diagnostic",
+        body: "We review the starting point: the balance determination, the reconciliation status, and the operational support. We direct the work toward what the process needs.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, , q3, q4] = answers;
+    if (q4 === 0) return "REQUIREMENTS";
+    if (q1 === 1) return "REJECTED";
+    if (q3 === 0 || q3 === 1) return "DIOT_MISMATCH";
+    if (q1 === 0 || q1 === 2) return "ACCUMULATED";
+    return "GENERAL";
+  },
+  resultTag: {
+    REQUIREMENTS: { es: "Requerimiento SAT", en: "SAT requirement" },
+    REJECTED: { es: "Solicitud rechazada", en: "Rejected request" },
+    DIOT_MISMATCH: { es: "Conciliación DIOT", en: "DIOT reconciliation" },
+    ACCUMULATED: { es: "Devolución de IVA", en: "VAT refund" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    REQUIREMENTS: 4,
+    REJECTED: 3,
+    DIOT_MISMATCH: 1,
+    ACCUMULATED: 0,
+  },
+};
+
+const FISCAL_SERVICES_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de devolución",
+    title: "De la revisión de operaciones a la resolución del SAT.",
+    lead: "Cada solicitud de devolución de IVA recorre las mismas etapas. BG Consulting ordena el soporte desde el inicio y da seguimiento hasta que la autoridad resuelve.",
+    panel: "Flujo de devolución · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Revisión de operaciones y registros",
+        desc: "Cotejamos las operaciones del periodo contra los registros contables y la normatividad contable aplicable. La base que la autoridad espera encontrar es que cada partida que sustenta el IVA acreditable esté efectivamente asentada y cumpla los requisitos fiscales vigentes.",
+      },
+      {
+        n: "02",
+        name: "Conciliación DIOT y declaración mensual",
+        desc: "Confrontamos la Declaración Informativa de Operaciones con Terceros contra la declaración mensual presentada al SAT. Las diferencias entre lo informado y lo declarado son una causa frecuente de observación; resolverlas antes de presentar evita que detengan o reduzcan la devolución.",
+      },
+      {
+        n: "03",
+        name: "Determinación del saldo a favor",
+        desc: "Analizamos la mecánica de determinación del saldo: impuesto trasladado, IVA acreditable y el cálculo que arroja la cifra solicitada. Una determinación correcta es lo que sostiene el monto frente a una revisión.",
+      },
+      {
+        n: "04",
+        name: "Presentación de la solicitud",
+        desc: "Integramos y presentamos la solicitud de devolución con la determinación y el soporte de operaciones ordenados conforme a lo que requiere la autoridad. Una solicitud bien armada llega con el respaldo listo desde el primer momento.",
+      },
+      {
+        n: "05",
+        name: "Seguimiento hasta la resolución",
+        desc: "Damos seguimiento al trámite y atendemos los requerimientos de información que la autoridad emita durante la revisión. El proceso no termina al presentar: la atención a requerimientos es donde muchas devoluciones se ganan o se pierden.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Refund process",
+    title: "From operations review to the SAT resolution.",
+    lead: "Every VAT refund request moves through the same stages. BG Consulting organizes the support from the start and follows up until the authority responds.",
+    panel: "Refund flow · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Operations and records review",
+        desc: "We match the period's operations against the accounting records and applicable accounting standards. The foundation the authority expects to find is that every item supporting creditable VAT is booked and meets current tax requirements.",
+      },
+      {
+        n: "02",
+        name: "DIOT and monthly statement reconciliation",
+        desc: "We compare the Informative Statement of Third-Party Operations against the monthly statement filed with the SAT. Differences between what was reported and what was declared are a frequent source of observations; resolving them before filing prevents them from stalling or reducing the refund.",
+      },
+      {
+        n: "03",
+        name: "Credit balance determination",
+        desc: "We analyze the determination mechanics: VAT charged, creditable VAT, and the calculation that produces the amount requested. A correct determination is what holds the amount up under review.",
+      },
+      {
+        n: "04",
+        name: "Filing the refund request",
+        desc: "We assemble and file the refund request with the determination and operational support organized as the authority requires. A well-built request arrives with its backing ready from day one.",
+      },
+      {
+        n: "05",
+        name: "Follow-up until the resolution",
+        desc: "We follow the process and address the information requirements the authority issues during its review. The work does not end at filing: handling requirements is where many refunds are won or lost.",
+      },
+    ],
+  },
+};
+
+const TRADE_AGREEMENTS_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Dónde está el problema con el origen de tu mercancía?",
+    lead: "Cuatro preguntas para orientarte hacia el paso que corresponde.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Un comprador exige certificado de origen y no tengo el expediente para acreditarlo",
+          "La autoridad abrió una verificación de origen con plazo para responder",
+          "Importo pagando el arancel general y quiero saber si aplica una tarifa preferencial",
+          "Quiero organizar mis registros de origen antes de que llegue una verificación",
+        ],
+      },
+      {
+        text: "¿Tus proveedores nacionales te dan documentación de origen?",
+        opts: [
+          "No: entregan facturas sin declaración de origen ni los formatos que exige el cálculo",
+          "Algunos sí, pero la cobertura es incompleta y no garantiza la regla de origen",
+          "Sí, aunque no estamos seguros de que el formato cumpla los requisitos del tratado",
+          "No utilizamos insumos nacionales que afecten la determinación de origen",
+        ],
+      },
+      {
+        text: "¿Hay un plazo corriendo?",
+        opts: [
+          "Sí, tengo días o pocas semanas para responder",
+          "Sí, pero con uno a tres meses de margen",
+          "No hay plazos inmediatos, es planeación o cumplimiento preventivo",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es el corredor principal de tu operación?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce fronterizo en la zona norte",
+          "Operación con múltiples tratados o mercados de exportación",
+          "Aún estamos definiendo nuestros mercados de exportación",
+        ],
+      },
+    ],
+    results: {
+      VERIFICATION: {
+        title: "Atención a la verificación de origen",
+        body: "La autoridad del país importador requiere sustentar el origen declarado dentro de un plazo determinado. Integramos y revisamos el expediente, validamos que la determinación de origen sea consistente con la regla aplicable y preparamos la respuesta para sostener la preferencia ya aplicada.",
+        cta: "Hablar con el equipo",
+      },
+      CERTIFICATION: {
+        title: "Certificación y expediente de origen",
+        body: "Revisamos y construimos los registros de origen que sustentan la calificación de cada producto: clasificación de insumos, criterio aplicable y memoria de cálculo. Con ese expediente, registramos los productos elegibles y tramitamos los certificados que el comprador requiere bajo el tratado correspondiente.",
+        cta: "Hablar con el equipo",
+      },
+      PREFERENCE_ANALYSIS: {
+        title: "Análisis de preferencias arancelarias",
+        body: "Realizamos el análisis de factibilidad para identificar las tarifas preferenciales disponibles y correlacionamos las fracciones arancelarias con las nomenclaturas regionales, incluida ALADI. Así se confirma qué beneficio aplica a cada mercancía y bajo qué tratado, en lugar de seguir pagando el arancel general por omisión.",
+        cta: "Consultar",
+      },
+      SUPPLIER_MGMT: {
+        title: "Gestión de origen con proveedores",
+        body: "Diseñamos los formatos de solicitud de origen y gestionamos su obtención con los proveedores nacionales, de modo que el aporte regional de cada insumo quede documentado. Sin esta base, el producto final no puede acreditar la regla de origen aplicable y el certificado no resistirá una verificación.",
+        cta: "Hablar con el equipo",
+      },
+      AUDIT: {
+        title: "Auditoría preventiva de origen",
+        body: "Auditamos los procesos de determinación y certificación y analizamos el cumplimiento de las reglas de origen aplicables. El objetivo es detectar certificaciones débiles antes de que lo haga una verificación, y corregir el criterio mientras todavía es subsanable.",
+        cta: "Programar revisión",
+      },
+      GENERAL: {
+        title: "Diagnóstico de origen",
+        body: "Revisamos el punto de partida de los registros y la certificación de origen, y orientamos el trabajo hacia lo que la operación necesita, sin presuposiciones sobre el tratado ni la urgencia.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where is the problem with your goods' origin?",
+    lead: "Four questions to point you toward the right next step.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "A buyer requires a certificate of origin and I do not have the file to support it",
+          "The authority opened an origin verification with a response deadline",
+          "I am paying the general tariff and want to know whether a preferential rate applies",
+          "I want to organize my origin records before a verification arrives",
+        ],
+      },
+      {
+        text: "Do your national suppliers provide origin documentation?",
+        opts: [
+          "No: they provide invoices with no origin declaration and none of the formats the calculation requires",
+          "Some do, but coverage is incomplete and does not guarantee the rule of origin",
+          "Yes, though we are not sure the format meets the agreement requirements",
+          "We do not use national inputs that affect the origin determination",
+        ],
+      },
+      {
+        text: "Is there a deadline already running?",
+        opts: [
+          "Yes, I have days or a few weeks to respond",
+          "Yes, but I have one to three months of room",
+          "No immediate deadline, this is planning or preventive compliance",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "What is the main corridor for your operation?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another border crossing in the northern zone",
+          "Operation spanning multiple agreements or export markets",
+          "We are still defining our export markets",
+        ],
+      },
+    ],
+    results: {
+      VERIFICATION: {
+        title: "Origin verification response",
+        body: "The importing country's authority requires the declared origin to be supported within a set deadline. We assemble and review the file, confirm the origin determination is consistent with the applicable rule, and prepare the response within the deadline to sustain the preference already applied.",
+        cta: "Talk to the team",
+      },
+      CERTIFICATION: {
+        title: "Origin certification and records",
+        body: "We review and build the origin records that support each product's qualification: input classification, applicable criterion, and calculation memorandum. With that file in place, we register eligible products and obtain the certificates the buyer requires under the relevant agreement.",
+        cta: "Talk to the team",
+      },
+      PREFERENCE_ANALYSIS: {
+        title: "Tariff preference analysis",
+        body: "We run the feasibility analysis to identify the available preferential rates and correlate tariff codes with regional nomenclatures, including ALADI. This confirms which benefit actually applies to each good and under which agreement, instead of continuing to pay the general tariff by omission.",
+        cta: "Consult",
+      },
+      SUPPLIER_MGMT: {
+        title: "Supplier origin management",
+        body: "We design the origin request formats and manage their collection from national suppliers so the regional content of each input is documented. Without this base, the finished good cannot meet the applicable rule of origin, and the certificate will not hold up in a verification.",
+        cta: "Talk to the team",
+      },
+      AUDIT: {
+        title: "Preventive origin audit",
+        body: "We audit origin determination and certification processes and analyze compliance with the applicable rules of origin. The goal is to catch weak certifications before a verification does, and correct the criterion while it can still be fixed.",
+        cta: "Schedule a review",
+      },
+      GENERAL: {
+        title: "Origin diagnostic",
+        body: "We review the starting point of origin records and certification, and direct the work to what the operation needs, without assumptions about the agreement or the urgency.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2] = answers;
+    if (q1 === 1) return "VERIFICATION";
+    if (q1 === 0) return "CERTIFICATION";
+    if (q1 === 2) return "PREFERENCE_ANALYSIS";
+    if (q2 === 0 || q2 === 1) return "SUPPLIER_MGMT";
+    return "AUDIT";
+  },
+  resultTag: {
+    VERIFICATION: { es: "Verificación de origen", en: "Origin verification" },
+    CERTIFICATION: { es: "Certificación", en: "Certification" },
+    PREFERENCE_ANALYSIS: { es: "Preferencias arancelarias", en: "Tariff preferences" },
+    SUPPLIER_MGMT: { es: "Gestión de proveedores", en: "Supplier management" },
+    AUDIT: { es: "Auditoría preventiva", en: "Preventive audit" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    VERIFICATION: 4,
+    PREFERENCE_ANALYSIS: 0,
+    AUDIT: 3,
+  },
+};
+
+const TRADE_AGREEMENTS_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de origen",
+    title: "De la calificación del producto a la preferencia arancelaria aplicada.",
+    lead: "Cada operación de origen recorre las mismas etapas. Cuando la autoridad abre una verificación, BG conduce la respuesta desde el armado del expediente hasta el cierre del procedimiento.",
+    panel: "Flujo de origen · 6 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Análisis de factibilidad",
+        desc: "Se identifican los tratados aplicables a la mercancía, se correlacionan las fracciones arancelarias con las nomenclaturas regionales y se determina qué tarifa preferencial corresponde a cada producto. Sin este análisis, la empresa puede pagar el arancel general cuando la preferencia ya está disponible.",
+      },
+      {
+        n: "02",
+        name: "Determinación y registro de origen",
+        desc: "Se construye el expediente de origen: clasificación de insumos, criterio de calificación aplicable y memoria de cálculo. Este registro es lo que convierte una afirmación de origen en algo demostrable ante la autoridad o el comprador en una verificación posterior.",
+      },
+      {
+        n: "03",
+        name: "Gestión con proveedores nacionales",
+        desc: "Se diseñan los formatos de solicitud de origen y se gestiona su obtención con los proveedores nacionales. Cuando la regla depende del aporte regional, el origen de los insumos debe estar documentado para que el producto final califique bajo el tratado.",
+      },
+      {
+        n: "04",
+        name: "Certificación de productos elegibles",
+        desc: "Se registran los productos que califican y se tramita la obtención de los certificados de origen bajo el instrumento correspondiente. El certificado válido habilita al exportador a entregar un documento al comprador y al importador a aplicar la preferencia en aduana.",
+      },
+      {
+        n: "05",
+        name: "Auditoría y cumplimiento continuo",
+        desc: "Se auditan los procesos de determinación y certificación y se analiza el cumplimiento de las reglas de origen vigentes. El objetivo es detectar certificaciones débiles y corregir el criterio antes de que una verificación encuentre la inconsistencia.",
+      },
+      {
+        n: "06",
+        name: "Resoluciones anticipadas y verificaciones",
+        desc: "Se asesora en procedimientos para obtener resoluciones anticipadas de la autoridad sobre el criterio de origen antes de operar, y se atienden las verificaciones que la autoridad del país importador abra. La resolución anticipada da certeza previa; la atención a verificaciones protege la preferencia ya aplicada.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Origin process",
+    title: "From product qualification to the preferential rate applied.",
+    lead: "Every origin operation moves through the same stages. When the authority opens a verification, BG handles the response from assembling the file through to closing the proceeding.",
+    panel: "Origin flow · 6 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Feasibility analysis",
+        desc: "We identify the agreements that apply to the goods, correlate tariff codes with regional nomenclatures, and determine which preferential rate fits each product. Without this analysis, a company may keep paying the general tariff when the preference is already available.",
+      },
+      {
+        n: "02",
+        name: "Origin determination and records",
+        desc: "We build the origin file: input classification, applicable qualification criterion, and calculation memorandum. This record is what turns an origin claim into something demonstrable before the authority or the buyer in a later verification.",
+      },
+      {
+        n: "03",
+        name: "National supplier management",
+        desc: "We design the origin request formats and manage their collection from national suppliers. When the rule depends on regional content, the origin of domestic inputs must be documented for the finished good to qualify under the agreement.",
+      },
+      {
+        n: "04",
+        name: "Eligible product certification",
+        desc: "We register qualifying products and obtain certificates of origin under the relevant instrument. A valid certificate lets the exporter hand the buyer a proper document and the importer apply the preference at customs.",
+      },
+      {
+        n: "05",
+        name: "Audit and ongoing compliance",
+        desc: "We audit origin determination and certification processes and analyze compliance with the applicable rules of origin. The goal is to catch weak certifications and correct the criterion before a verification finds the inconsistency.",
+      },
+      {
+        n: "06",
+        name: "Advance rulings and verifications",
+        desc: "We advise on procedures to obtain advance rulings from the authority on the origin criterion before the operation takes place, and handle the verifications the importing country's authority opens. The advance ruling gives certainty up front; handling verifications protects the preference already applied.",
+      },
+    ],
+  },
+};
+
+const IMPORT_SERVICES_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Cuál es el punto de partida de tu operación?",
+    lead: "Cuatro preguntas para orientarte hacia el área correcta.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Mi carga está detenida en aduana y necesito resolverlo",
+          "Quiero importar un producto y no sé qué requisitos aplican",
+          "Tengo dudas sobre NOM o permisos que mi producto pueda requerir",
+          "Busco coordinar despacho, almacenaje y transporte bajo una sola gestión",
+        ],
+      },
+      {
+        text: "¿Has importado este producto a México antes?",
+        opts: [
+          "No, es la primera vez y no conozco los requisitos",
+          "Sí, pero tuve problemas en el cruce o la documentación",
+          "Sí, y quiero mejorar la coordinación logística",
+          "La operación es recurrente y está bien establecida",
+        ],
+      },
+      {
+        text: "¿Hay plazos que ya están corriendo?",
+        opts: [
+          "Sí, la carga ya está en tránsito o detenida",
+          "Sí, el cliente espera entrega en días",
+          "No, es planeación para una importación futura",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es tu corredor principal?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce fronterizo en la zona norte",
+          "Operación marítima o aérea",
+          "Aún no tengo operaciones activas",
+        ],
+      },
+    ],
+    results: {
+      HELD_URGENT: {
+        title: "Carga detenida, acción inmediata",
+        body: "Cuando la mercancía queda retenida en aduana, cada día suma almacenaje y rompe compromisos de entrega. Revisamos la causa: clasificación incorrecta, NOM no acreditada, permiso faltante o documentación incompleta, y coordinamos la solución para liberar la carga.",
+        cta: "Hablar con el equipo",
+      },
+      FIRST_TIME: {
+        title: "Orientación para primera importación",
+        body: "Antes de mover el embarque, revisamos la fracción arancelaria, identificamos las NOM aplicables, los permisos previos de las dependencias correspondientes y las contribuciones que se activan. Así el producto llega al cruce con todos los requisitos resueltos.",
+        cta: "Consultar requisitos",
+      },
+      NOM_PERMIT: {
+        title: "NOM y permisos previos",
+        body: "Identificamos qué Normas Oficiales Mexicanas aplican al producto, sea de etiquetado, información comercial o seguridad, y tramitamos los permisos y avisos de las dependencias correspondientes. Resolver estos requisitos antes del cruce evita que el embarque quede retenido por un punto normativo.",
+        cta: "Revisar mi producto",
+      },
+      LOGISTICS: {
+        title: "Coordinación logística integral",
+        body: "Gestionamos el despacho aduanal, el almacenaje y el transporte puerta a puerta bajo una misma coordinación en el corredor Tijuana-San Diego. Al manejar todos los eslabones, la mercancía no se queda esperando entre partes que responden por separado.",
+        cta: "Hablar con el equipo",
+      },
+      GENERAL: {
+        title: "Diagnóstico de la operación",
+        body: "Revisamos el punto de partida de la importación, la fracción arancelaria, los requisitos normativos y la logística disponible, y orientamos la operación hacia el despacho sin retenciones evitables.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your operation start?",
+    lead: "Four questions to point you toward the right area.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "My cargo is held at customs and I need to resolve it",
+          "I want to import a product and do not know which requirements apply",
+          "I have questions about NOMs or permits my product may require",
+          "I need to coordinate clearance, warehousing, and transport under one point of contact",
+        ],
+      },
+      {
+        text: "Have you imported this product into Mexico before?",
+        opts: [
+          "No, this is the first time and I do not know the requirements",
+          "Yes, but I had problems at the border or with documentation",
+          "Yes, and I want to improve the logistics coordination",
+          "The operation is recurring and well established",
+        ],
+      },
+      {
+        text: "Are deadlines already running?",
+        opts: [
+          "Yes, the cargo is already in transit or being held",
+          "Yes, the customer expects delivery within days",
+          "No, this is planning for a future import",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "What is your main corridor?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another border crossing in the northern zone",
+          "Maritime or air operation",
+          "No active operations yet",
+        ],
+      },
+    ],
+    results: {
+      HELD_URGENT: {
+        title: "Goods held, immediate action",
+        body: "When cargo is detained at customs, every day adds storage costs and breaks delivery commitments. We identify the cause, whether wrong classification, an unaccredited NOM, a missing permit, or incomplete paperwork, and coordinate the solution to release the goods.",
+        cta: "Talk to the team",
+      },
+      FIRST_TIME: {
+        title: "Guidance for a first import",
+        body: "Before the shipment moves, we review the tariff classification, identify the applicable NOMs, the prior permits required by the relevant agencies, and the duties that apply. The product reaches the border with every requirement already resolved.",
+        cta: "Check requirements",
+      },
+      NOM_PERMIT: {
+        title: "NOMs and prior permits",
+        body: "We identify which Mexican Official Standards apply to the product, whether for labeling, product information, or safety, and process the permits and notices required by the relevant agencies. Resolving these requirements before the crossing keeps the shipment from being held over a regulatory point.",
+        cta: "Review my product",
+      },
+      LOGISTICS: {
+        title: "Integrated logistics coordination",
+        body: "We manage customs clearance, warehousing, and door-to-door transport under a single coordination across the Tijuana-San Diego corridor. By handling every link, goods do not sit waiting on a party that answers only for its own leg.",
+        cta: "Talk to the team",
+      },
+      GENERAL: {
+        title: "Operation diagnostic",
+        body: "We review the starting point of the import: tariff classification, regulatory requirements, and available logistics, then direct the operation toward clearance without avoidable holds.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2, q3] = answers;
+    if (q1 === 0) return "HELD_URGENT";
+    if (q3 === 0) return "HELD_URGENT";
+    if (q1 === 2) return "NOM_PERMIT";
+    if (q1 === 3) return "LOGISTICS";
+    if (q1 === 1 && q2 === 0) return "FIRST_TIME";
+    return "GENERAL";
+  },
+  resultTag: {
+    HELD_URGENT: { es: "Carga detenida", en: "Goods held" },
+    FIRST_TIME: { es: "Primera importación", en: "First import" },
+    NOM_PERMIT: { es: "NOM y permisos", en: "NOMs and permits" },
+    LOGISTICS: { es: "Logística integral", en: "Integrated logistics" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    HELD_URGENT: 0,
+    FIRST_TIME: 0,
+    NOM_PERMIT: 1,
+    LOGISTICS: 3,
+    GENERAL: 0,
+  },
+};
+
+const IMPORT_SERVICES_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de importación",
+    title: "Del origen a la entrega en destino.",
+    lead: "Cada importación recorre las mismas etapas. BG coordina el despacho, el cumplimiento normativo y la logística en el corredor Tijuana-San Diego para que la mercancía cruce sin retenciones evitables.",
+    panel: "Flujo de importación · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Clasificación arancelaria",
+        desc: "Se determina la fracción arancelaria de la mercancía conforme a las Reglas Generales de Interpretación. La fracción define el arancel aplicable, el IGI y el IVA, y activa los requisitos normativos del producto: NOM, permisos y regulaciones no arancelarias. Un error en la fracción es el origen de la mayoría de las retenciones en aduana.",
+      },
+      {
+        n: "02",
+        name: "NOM y regulaciones no arancelarias",
+        desc: "Se identifican las Normas Oficiales Mexicanas aplicables al producto, sean de etiquetado comercial, información comercial o seguridad, y se gestiona la acreditación que la aduana exige antes de liberar la mercancía. La verificación normativa se resuelve antes del cruce, no cuando el embarque ya está detenido.",
+      },
+      {
+        n: "03",
+        name: "Permisos previos y trámites ante dependencias",
+        desc: "Se tramitan los permisos previos, avisos y autorizaciones que distintas dependencias exigen según el tipo de mercancía: Salud, Economía, SADER u otras. Mapear estos requisitos antes de que la carga llegue al cruce evita que el producto quede detenido por un trámite que debía resolverse antes.",
+      },
+      {
+        n: "04",
+        name: "Despacho aduanal y pedimento",
+        desc: "Se coordina el despacho ante la aduana con agente aduanal: elaboración del pedimento, transmisión ante el mecanismo de selección automatizado y atención al reconocimiento cuando aplica. La clasificación correcta, el soporte documental completo y los requisitos normativos acreditados son los que permiten que la mercancía cruce sin retenciones.",
+      },
+      {
+        n: "05",
+        name: "Almacenaje, transporte y entrega",
+        desc: "Con la mercancía liberada, se coordina el movimiento físico: almacenaje para consolidar embarques o resguardar la carga mientras se completa algún trámite, y transporte puerta a puerta hasta el destino final en México. Al manejar el despacho y la logística bajo una misma coordinación, la mercancía no espera entre eslabones que responden por separado.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Import process",
+    title: "From origin to delivery at destination.",
+    lead: "Every import moves through the same stages. BG coordinates clearance, regulatory compliance, and logistics across the Tijuana-San Diego corridor so goods cross without avoidable holds.",
+    panel: "Import flow · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Tariff classification",
+        desc: "The tariff code is determined under the General Rules of Interpretation. The code drives the applicable duty, the general import duty, and VAT, and triggers the product's regulatory requirements: NOMs, permits, and non-tariff regulations. A wrong classification is the source of most customs holds.",
+      },
+      {
+        n: "02",
+        name: "NOMs and non-tariff regulations",
+        desc: "We identify which Mexican Official Standards apply to the product, whether for commercial labeling, product information, or safety, and handle the accreditation customs requires before releasing the goods. The regulatory check is resolved ahead of the crossing, not once the shipment is already held.",
+      },
+      {
+        n: "03",
+        name: "Prior permits and agency filings",
+        desc: "We process the prior permits, notices, and authorizations that different agencies require depending on the type of goods. Mapping these requirements before the cargo reaches the border keeps the product from being detained over a filing that should have been completed beforehand.",
+      },
+      {
+        n: "04",
+        name: "Customs clearance and pedimento",
+        desc: "We coordinate clearance through a licensed customs broker: preparing the pedimento, transmitting it to the automated selection system, and attending the physical inspection when triggered. Correct classification, complete supporting documentation, and accredited regulatory requirements are what let the goods cross without holds.",
+      },
+      {
+        n: "05",
+        name: "Warehousing, transport, and delivery",
+        desc: "Once the goods are released, we coordinate the physical move: warehousing to consolidate shipments or hold cargo while a filing is completed, and door-to-door transport to the final destination in Mexico. By running clearance and logistics under one coordination, the goods do not sit waiting on a link that answers only for its own leg.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -788,7 +2466,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Qué es el artículo 303 del TLCAN y por qué lo revisan?",
           "a": "El artículo 303 del TLCAN, con un tratamiento equivalente vigente en el T-MEC, regula las contribuciones sobre insumos no originarios que se incorporan a mercancías destinadas a exportación bajo programas como IMMEX: limita la devolución o exención de aranceles cuando el producto final se exporta a la región del tratado. Su aplicación incorrecta genera diferencias en el pago de contribuciones; revisarlo evita créditos fiscales derivados de un cálculo equivocado."
         }
-      ]
+      ],
+      diagnostic: COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC,
+      flow: COMPLIANCE_AND_ASSURANCE_FLOW,
     },
     {
       "overview": "El comercio exterior cambia con cada modificación regulatoria, y un criterio mal aplicado en valoración, origen o clasificación puede convertirse en un crédito fiscal, una multa o la suspensión del padrón. En BG Consulting Group acompañamos a la empresa importadora y exportadora para que cada operación cumpla la legislación vigente y, al mismo tiempo, aproveche los beneficios fiscales y arancelarios que México ha pactado en sus tratados internacionales.",
@@ -932,7 +2612,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿En qué momento conviene solicitar una opinión pericial?",
           "a": "Cuando la autoridad ya cuestionó la clasificación, el origen o el valor y se va a presentar una defensa, y también de forma preventiva, cuando una decisión operativa con impacto fiscal requiere certeza jurídica antes de ejecutarse."
         }
-      ]
+      ],
+      diagnostic: INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC,
+      flow: INTERNATIONAL_TRADE_EXPERTS_FLOW,
     },
     {
       "overview": "Una operación de comercio exterior genera miles de pedimentos, facturas, certificados de origen y registros de movimiento que la autoridad puede revisar años después del despacho. Cuando esa información vive en hojas de cálculo aisladas o se reconcilia a mano, las inconsistencias aparecen tarde, normalmente durante una auditoría. BG Consulting Group implementa tecnología capaz de operar a gran escala y desarrolla herramientas de cumplimiento aduanero que permiten alcanzar un nivel de cumplimiento óptimo o mitigar hallazgos en tiempo real, sobre la operación logística internacional, terrestre y marítima.",
@@ -1003,7 +2685,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Esto aplica solo a importación o también a logística y distribución?",
           "a": "Cubre la operación logística internacional, terrestre y marítima, e incluye almacenaje, distribución y monitoreo. La información aduanera se mantiene ligada al movimiento físico de la mercancía a lo largo de la cadena."
         }
-      ]
+      ],
+      diagnostic: INFORMATION_TECHNOLOGY_DIAGNOSTIC,
+      flow: INFORMATION_TECHNOLOGY_FLOW,
     },
     {
       "overview": "Una empresa con saldo a favor de IVA tiene dinero retenido por la autoridad que solo recupera si la solicitud de devolución llega bien soportada y consistente con su contabilidad y declaraciones. El SAT revisa origen de operaciones, requisitos fiscales y congruencia entre lo informado y lo declarado antes de liberar un peso. BG Consulting revisa la determinación del saldo a favor, ordena el soporte de las operaciones y presenta la solicitud conforme a las Normas de Información Financiera y a los requisitos fiscales vigentes, dando seguimiento hasta que la autoridad resuelve.",
@@ -1074,7 +2758,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Bajo qué marco se realiza la revisión?",
           "a": "La revisión se realiza conforme a las Normas de Información Financiera y a los requisitos fiscales vigentes, contrastando las operaciones contra los registros contables del periodo. Sobre esa base se determina y soporta el saldo a favor que se solicita en devolución."
         }
-      ]
+      ],
+      diagnostic: FISCAL_SERVICES_DIAGNOSTIC,
+      flow: FISCAL_SERVICES_FLOW,
     },
     {
       "overview": "México mantiene una de las redes de tratados comerciales más amplias del mundo, y cada acuerdo abre acceso preferencial siempre que la mercancía cumpla las reglas de origen y la documentación resista una verificación. El problema rara vez es la tarifa preferencial en sí, sino acreditarla: registros incompletos, certificados mal sustentados y proveedores que no documentan su aporte regional. BG Consulting Group estructura la determinación y certificación de origen para que el beneficio arancelario se aplique con respaldo y se sostenga frente a la autoridad.",
@@ -1145,7 +2831,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "La autoridad abrió una verificación de origen. ¿Qué hacen ustedes?",
           "a": "Atendemos la verificación: integramos y revisamos el expediente, validamos que la determinación de origen sea consistente con la regla aplicable y preparamos la respuesta dentro del plazo requerido. El objetivo es sostener la preferencia ya aplicada y evitar el desconocimiento del trato preferencial y el cobro de diferencias."
         }
-      ]
+      ],
+      diagnostic: TRADE_AGREEMENTS_DIAGNOSTIC,
+      flow: TRADE_AGREEMENTS_FLOW,
     },
     {
       "overview": "Importar a México implica clasificar correctamente la mercancía, cumplir regulaciones no arancelarias, tramitar permisos y despachar ante la aduana sin que la carga se detenga. Un error en la fracción arancelaria o una NOM omitida puede frenar el contenedor en el cruce y generar costos que nadie presupuestó. BG Consulting Group acompaña la operación desde el origen hasta la entrega en destino, coordinando el despacho aduanal, el cumplimiento normativo y la logística en el corredor Tijuana-San Diego.",
@@ -1212,7 +2900,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Se encargan también del transporte y la entrega?",
           "a": "Sí. Además del despacho aduanal, coordinamos el transporte de la carga y el servicio puerta a puerta hasta el destino final en México, junto con almacenaje cuando se requiere consolidar o resguardar la mercancía. La idea es que el trámite y el movimiento físico avancen coordinados, no por separado."
         }
-      ]
+      ],
+      diagnostic: IMPORT_SERVICES_DIAGNOSTIC,
+      flow: IMPORT_SERVICES_FLOW,
     }
   ],
   "en": [
@@ -1360,7 +3050,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "What is NAFTA Article 303 and why do you review it?",
           "a": "NAFTA Article 303, with an equivalent treatment in force under the USMCA, governs duties on non-originating inputs incorporated into goods destined for export under programs like IMMEX: it limits the refund or waiver of duties when the finished good is exported to the treaty region. Applying it incorrectly creates differences in duty payments; reviewing it avoids tax assessments arising from a wrong calculation."
         }
-      ]
+      ],
+      diagnostic: COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC,
+      flow: COMPLIANCE_AND_ASSURANCE_FLOW,
     },
     {
       "overview": "Foreign trade rules change with every regulatory update, and a single misapplied criterion in valuation, origin, or classification can turn into a tax assessment, a penalty, or loss of your importer registry. BG Consulting Group works with importers and exporters so each transaction meets current law while using the tax and customs benefits Mexico has secured through its international trade agreements.",
@@ -1504,7 +3196,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "When does it make sense to request an expert opinion?",
           "a": "When the authority has already challenged classification, origin, or value and a defense is being filed, and also preventively, when an operational decision with tax exposure requires legal certainty before it is carried out."
         }
-      ]
+      ],
+      diagnostic: INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC,
+      flow: INTERNATIONAL_TRADE_EXPERTS_FLOW,
     },
     {
       "overview": "A cross-border operation produces thousands of customs entries, invoices, certificates of origin and movement records that the authority can review years after release. When that information lives in disconnected spreadsheets and gets reconciled by hand, inconsistencies surface late, usually during an audit. BG Consulting Group deploys information technology capable of managing a large-scale operation and builds customs compliance tools that help reach an optimal level of compliance or mitigate findings in real time, across international, land and maritime logistics.",
@@ -1575,7 +3269,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Does this apply only to imports, or also to logistics and distribution?",
           "a": "It covers international, land and maritime logistics, and includes storage, distribution and monitoring. The customs information stays linked to the physical movement of the goods across the chain."
         }
-      ]
+      ],
+      diagnostic: INFORMATION_TECHNOLOGY_DIAGNOSTIC,
+      flow: INFORMATION_TECHNOLOGY_FLOW,
     },
     {
       "overview": "A company carrying a VAT credit balance has money held by the tax authority that it only recovers when the refund request arrives well supported and consistent with its accounting and filings. Before releasing anything, the SAT reviews the origin of the operations, the tax requirements they must meet, and whether what was reported matches what was filed. BG Consulting reviews how the credit balance was determined, organizes the support behind the operations, and files the refund request under Financial Information Standards and current tax requirements, following up until the authority responds.",
@@ -1646,7 +3342,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Under what framework is the review performed?",
           "a": "The review is performed under Financial Information Standards and current tax requirements, contrasting operations against the period's accounting records. On that basis the credit balance to be refunded is determined and supported."
         }
-      ]
+      ],
+      diagnostic: FISCAL_SERVICES_DIAGNOSTIC,
+      flow: FISCAL_SERVICES_FLOW,
     },
     {
       "overview": "Mexico holds one of the widest networks of trade agreements in the world, and each one opens preferential access as long as the goods meet the rules of origin and the paperwork survives a verification. The hard part is rarely the preferential rate itself, it is proving entitlement to it: incomplete records, weakly supported certificates, and suppliers who never document their regional content. BG Consulting Group structures origin determination and certification so the tariff benefit is applied with backing and holds up before the authority.",
@@ -1717,7 +3415,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "The authority opened an origin verification. What do you do?",
           "a": "We handle the verification: we assemble and review the file, confirm the origin determination is consistent with the applicable rule, and prepare the response within the required deadline. The goal is to sustain the preference already applied and avoid denial of preferential treatment and collection of differences."
         }
-      ]
+      ],
+      diagnostic: TRADE_AGREEMENTS_DIAGNOSTIC,
+      flow: TRADE_AGREEMENTS_FLOW,
     },
     {
       "overview": "Importing into Mexico means classifying goods correctly, meeting non-tariff regulations, securing permits, and clearing customs without the shipment stalling. A wrong tariff code or an overlooked NOM can hold a container at the border and trigger costs no one budgeted for. BG Consulting Group manages the operation from origin to final delivery, coordinating customs clearance, regulatory compliance, and logistics across the Tijuana-San Diego corridor.",
@@ -1784,7 +3484,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Do you also handle transport and delivery?",
           "a": "Yes. Beyond customs clearance, we coordinate cargo transportation and door-to-door service to the final destination in Mexico, along with warehousing when goods need to be consolidated or held. The point is to keep the filing and the physical move advancing together, not separately."
         }
-      ]
+      ],
+      diagnostic: IMPORT_SERVICES_DIAGNOSTIC,
+      flow: IMPORT_SERVICES_FLOW,
     }
   ]
 };
