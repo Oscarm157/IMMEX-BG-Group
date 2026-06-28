@@ -642,6 +642,278 @@ const LEGAL_FLOW: FlowData = {
   },
 };
 
+const COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿En qué punto está tu operación de comercio exterior?",
+    lead: "Cuatro preguntas para orientar el punto de partida.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Operamos bajo IMMEX y queremos verificar que cumplimos todos los requisitos",
+          "Llegó una orden de visita domiciliaria o un requerimiento de la autoridad",
+          "Los saldos de pedimentos no cuadran con el inventario real",
+          "El área de comercio exterior carece de estructura y controles claros",
+        ],
+      },
+      {
+        text: "¿Tu empresa opera bajo programa IMMEX?",
+        opts: [
+          "Sí, con dudas sobre el cumplimiento de todos los requisitos de operación",
+          "Sí, y ya recibimos una observación o requerimiento relacionado con el programa",
+          "No, pero estamos evaluando solicitarlo",
+          "No, nuestra operación no lo requiere",
+        ],
+      },
+      {
+        text: "¿Cuándo fue la última revisión interna de la operación aduanera?",
+        opts: [
+          "Nunca o hace más de dos años",
+          "Hace menos de un año",
+          "Tenemos una revisión en curso en este momento",
+          "No lo sabemos con certeza",
+        ],
+      },
+      {
+        text: "¿Hay plazos corriendo para responder a la autoridad?",
+        opts: [
+          "Sí, tengo días o pocas semanas para actuar",
+          "Sí, pero con uno a tres meses de margen",
+          "No hay plazos inmediatos, es planeación",
+          "No lo sé con certeza",
+        ],
+      },
+    ],
+    results: {
+      URGENT_REVIEW: {
+        title: "Revisión con plazos corriendo",
+        body: "Cuando la autoridad notifica una visita o un requerimiento, los plazos para preparar la respuesta son cortos. Revisamos la documentación de las operaciones, identificamos las contingencias y preparamos el soporte técnico para atender el requerimiento dentro del tiempo disponible.",
+        cta: "Hablar con el equipo",
+      },
+      IMMEX_AUDIT: {
+        title: "Auditoría preventiva IMMEX",
+        body: "Revisamos la operación bajo los requisitos del programa IMMEX: clasificación, valoración, Anexo 24, soporte documental y control de inventarios. Identificar las contingencias por iniciativa propia, antes de que lo haga la autoridad, es lo que protege la autorización y los privilegios de exportación.",
+        cta: "Programar revisión",
+      },
+      BALANCE_RECON: {
+        title: "Reconstrucción de saldos de pedimentos",
+        body: "Reconstruimos y conciliamos los saldos de activo fijo y materia prima registrados en los pedimentos contra el inventario real, incluyendo bienes de capital y accesorios. Sin esa conciliación, las diferencias quedan expuestas ante cualquier revisión de la autoridad.",
+        cta: "Hablar con el equipo",
+      },
+      PROCESS_REENG: {
+        title: "Estructura del área de comercio exterior",
+        body: "Cuando el área creció sin controles definidos, el cumplimiento depende de criterios aislados y cada operación acumula contingencia. Rediseñamos los procesos y responsabilidades del departamento de importaciones y exportaciones para que el cumplimiento quede integrado a la operación diaria.",
+        cta: "Consultar",
+      },
+      GENERAL: {
+        title: "Diagnóstico del cumplimiento",
+        body: "Revisamos el punto de partida de la operación aduanera y orientamos el trabajo hacia lo que el programa o la autorización necesita, sin presuposiciones sobre el área ni la urgencia.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your foreign trade operation stand?",
+    lead: "Four questions to identify the right starting point.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "We operate under IMMEX and want to confirm we meet every operating requirement",
+          "An audit order or an information request from the authority has arrived",
+          "Pedimento balances do not reconcile with the real inventory",
+          "The foreign trade area lacks clear structure and controls",
+        ],
+      },
+      {
+        text: "Does your company operate under an IMMEX program?",
+        opts: [
+          "Yes, with doubts about whether we meet every operating requirement",
+          "Yes, and we have already received a finding or request related to the program",
+          "No, but we are evaluating whether to apply",
+          "No, our operation does not require it",
+        ],
+      },
+      {
+        text: "When was the last internal review of the customs operation?",
+        opts: [
+          "Never, or more than two years ago",
+          "Less than a year ago",
+          "A review is in progress right now",
+          "We are not sure",
+        ],
+      },
+      {
+        text: "Are there deadlines running to respond to the authority?",
+        opts: [
+          "Yes, I have days or a few weeks to act",
+          "Yes, but I have one to three months of room",
+          "No immediate deadlines, this is planning",
+          "I am not sure",
+        ],
+      },
+    ],
+    results: {
+      URGENT_REVIEW: {
+        title: "Review with deadlines running",
+        body: "When the authority notifies an audit visit or an information request, the window to prepare is short. We review the documentation behind the operations, identify the exposures, and build the technical support to address the requirement within the available time.",
+        cta: "Talk to the team",
+      },
+      IMMEX_AUDIT: {
+        title: "Preventive IMMEX audit",
+        body: "We review operations against the requirements of the IMMEX program: classification, valuation, Annex 24, documentary support, and inventory control. Identifying contingencies on your own initiative, before the authority does, is what protects the authorization and the export privileges granted.",
+        cta: "Schedule a review",
+      },
+      BALANCE_RECON: {
+        title: "Reconstruction of pedimento balances",
+        body: "We rebuild and reconcile the fixed assets and raw materials balances recorded on pedimentos against the real inventory, including capital goods and accessories. Without that reconciliation, the differences are exposed the moment the authority runs a review.",
+        cta: "Talk to the team",
+      },
+      PROCESS_REENG: {
+        title: "Foreign trade area structure",
+        body: "When the area grew without defined controls, compliance depends on isolated judgment and every operation accumulates exposure. We redesign the processes and responsibilities of the import-export department so compliance is built into daily operations rather than left to individual criteria.",
+        cta: "Consult",
+      },
+      GENERAL: {
+        title: "Compliance diagnostic",
+        body: "We review the starting point of the customs operation and direct the work toward what the program or authorization needs, without assumptions about the area or the urgency.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, , , q4] = answers;
+    if (q4 === 0) return "URGENT_REVIEW";
+    if (q1 === 2) return "BALANCE_RECON";
+    if (q1 === 3) return "PROCESS_REENG";
+    if (q1 === 0 || q1 === 1) return "IMMEX_AUDIT";
+    return "GENERAL";
+  },
+  resultTag: {
+    URGENT_REVIEW: { es: "Revisión urgente", en: "Urgent review" },
+    IMMEX_AUDIT: { es: "Auditoría IMMEX", en: "IMMEX audit" },
+    BALANCE_RECON: { es: "Saldos de pedimentos", en: "Pedimento balances" },
+    PROCESS_REENG: { es: "Estructura del área", en: "Department structure" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    URGENT_REVIEW: 4,
+    IMMEX_AUDIT: 3,
+    BALANCE_RECON: 3,
+  },
+};
+
+const COMPLIANCE_AND_ASSURANCE_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de aseguramiento",
+    title: "Del diagnóstico al cumplimiento sostenido.",
+    lead: "BG Consulting estructura la revisión, corrige las desviaciones y rediseña los controles para que la autorización se conserve sin depender de revisiones aisladas.",
+    panel: "Plan de aseguramiento · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Evaluación de riesgos",
+        desc: "Identificamos los puntos donde la operación se aparta del marco autorizado: clasificación, valoración, origen, control de inventarios y soporte documental. Este diagnóstico muestra dónde está expuesta la empresa antes de que lo detecte la autoridad.",
+      },
+      {
+        n: "02",
+        name: "Auditoría preventiva",
+        desc: "Revisamos la operación contra los requisitos del programa IMMEX y las demás autorizaciones de comercio exterior vigentes. La auditoría preventiva permite encontrar y corregir desviaciones en condiciones controladas, antes de que una visita de la autoridad las encuentre.",
+      },
+      {
+        n: "03",
+        name: "Reconstrucción de saldos",
+        desc: "Reconstruimos los saldos de pedimentos de activo fijo y materia prima, incluyendo bienes de capital y accesorios. Cuadrar esos saldos con el inventario físico es la base para acreditar la legal estancia de la mercancía importada temporalmente ante cualquier revisión.",
+      },
+      {
+        n: "04",
+        name: "Control interno e inventarios",
+        desc: "Analizamos los controles internos y el sistema de control de inventarios conforme al Anexo 24, verificando que respalde cada entrada y salida. Un control de inventarios consistente es requisito para conservar el programa y para responder un descargo sin diferencias.",
+      },
+      {
+        n: "05",
+        name: "Reingeniería del área",
+        desc: "Rediseñamos los procesos y responsabilidades del departamento de importaciones y exportaciones para que el cumplimiento quede integrado a la operación diaria. El objetivo es una estructura que sostenga la autorización por sí misma, sin depender de criterios aislados.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Assurance process",
+    title: "From diagnostic to sustained compliance.",
+    lead: "BG Consulting structures the review, corrects the deviations, and redesigns the controls so the authorization is kept without relying on isolated reviews.",
+    panel: "Assurance plan · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Risk evaluation",
+        desc: "We identify where operations drift from the authorized scope: classification, valuation, origin, inventory control, and documentary support. This diagnosis shows where the company is exposed before the authority finds it.",
+      },
+      {
+        n: "02",
+        name: "Preventive audit",
+        desc: "We review operations against the requirements of the IMMEX program and other foreign trade authorizations in force. A preventive audit lets you find and correct deviations under controlled conditions, before an authority visit does.",
+      },
+      {
+        n: "03",
+        name: "Balance reconstruction",
+        desc: "We reconstruct pedimento balances for fixed assets and raw materials, including capital goods and accessories. Reconciling those balances with the physical inventory is the basis for proving the legal status of temporarily imported goods under any review.",
+      },
+      {
+        n: "04",
+        name: "Internal control and inventory",
+        desc: "We analyze internal controls and the inventory control system under Annex 24, verifying it backs every entry and exit. Consistent inventory control is a condition for keeping the program and for answering a review without unexplained differences.",
+      },
+      {
+        n: "05",
+        name: "Department reengineering",
+        desc: "We redesign the processes and responsibilities of the import-export department so compliance is built into daily operations. The goal is a structure that sustains the authorization on its own, without depending on isolated judgment calls.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -788,7 +1060,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Qué es el artículo 303 del TLCAN y por qué lo revisan?",
           "a": "El artículo 303 del TLCAN, con un tratamiento equivalente vigente en el T-MEC, regula las contribuciones sobre insumos no originarios que se incorporan a mercancías destinadas a exportación bajo programas como IMMEX: limita la devolución o exención de aranceles cuando el producto final se exporta a la región del tratado. Su aplicación incorrecta genera diferencias en el pago de contribuciones; revisarlo evita créditos fiscales derivados de un cálculo equivocado."
         }
-      ]
+      ],
+      diagnostic: COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC,
+      flow: COMPLIANCE_AND_ASSURANCE_FLOW,
     },
     {
       "overview": "El comercio exterior cambia con cada modificación regulatoria, y un criterio mal aplicado en valoración, origen o clasificación puede convertirse en un crédito fiscal, una multa o la suspensión del padrón. En BG Consulting Group acompañamos a la empresa importadora y exportadora para que cada operación cumpla la legislación vigente y, al mismo tiempo, aproveche los beneficios fiscales y arancelarios que México ha pactado en sus tratados internacionales.",
@@ -1360,7 +1634,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "What is NAFTA Article 303 and why do you review it?",
           "a": "NAFTA Article 303, with an equivalent treatment in force under the USMCA, governs duties on non-originating inputs incorporated into goods destined for export under programs like IMMEX: it limits the refund or waiver of duties when the finished good is exported to the treaty region. Applying it incorrectly creates differences in duty payments; reviewing it avoids tax assessments arising from a wrong calculation."
         }
-      ]
+      ],
+      diagnostic: COMPLIANCE_AND_ASSURANCE_DIAGNOSTIC,
+      flow: COMPLIANCE_AND_ASSURANCE_FLOW,
     },
     {
       "overview": "Foreign trade rules change with every regulatory update, and a single misapplied criterion in valuation, origin, or classification can turn into a tax assessment, a penalty, or loss of your importer registry. BG Consulting Group works with importers and exporters so each transaction meets current law while using the tax and customs benefits Mexico has secured through its international trade agreements.",
