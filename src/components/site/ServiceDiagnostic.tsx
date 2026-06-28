@@ -21,7 +21,7 @@ function buildQuizSummary(
 }
 
 const inputBase =
-  "w-full rounded-[8px] border bg-surface-2/40 px-4 py-3 text-[14px] text-chalk placeholder:text-ash/50 transition-colors focus:outline-none";
+  "w-full rounded-[8px] border bg-surface-2/40 px-4 py-3 text-[16px] text-chalk placeholder:text-smoke transition-colors focus:outline-none";
 
 export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) {
   const reduce = useReducedMotion();
@@ -105,26 +105,26 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
   return (
     <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
       <div className="mb-10 max-w-2xl">
-        <span className="mb-3 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+        <span className="mb-3 flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.18em] text-accent">
           <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
           {c.eyebrow}
         </span>
         <h2 className="font-display text-[clamp(1.9rem,4vw,3rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
           {c.title}
         </h2>
-        <p className="mt-4 text-[16px] leading-relaxed text-bone/80">{c.lead}</p>
+        <p className="mt-4 text-[18px] leading-relaxed text-bone/90">{c.lead}</p>
       </div>
 
       <div className="console-panel grid-field overflow-hidden rounded-[16px] bg-surface-1">
         {/* Top bar */}
         <div className="flex items-center justify-between border-b border-line px-6 py-3.5 sm:px-8">
-          <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ash">
+          <span className="font-mono text-[13px] uppercase tracking-[0.16em] text-smoke">
             {done ? (isTJ ? c.contactTJ : c.contactEmail) : `${c.progress} ${step + 1} ${c.of} ${c.questions.length}`}
           </span>
           {step > 0 && (
             <button
               onClick={reset}
-              className="font-mono text-[11px] uppercase tracking-[0.14em] text-ash transition-colors hover:text-chalk"
+              className="font-mono text-[13px] uppercase tracking-[0.14em] text-smoke transition-colors hover:text-chalk"
             >
               {c.restart}
             </button>
@@ -166,10 +166,10 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                       transition={{ duration: 0.35, delay: i * 0.06, ease: editorialEase }}
                       className="group flex items-start gap-4 rounded-[10px] border border-line bg-surface-2/40 px-5 py-4 text-left transition-all duration-200 hover:border-accent/40 hover:bg-surface-2"
                     >
-                      <span className="mt-0.5 shrink-0 font-mono text-[11px] tabular-nums text-accent">
+                      <span className="mt-0.5 shrink-0 font-mono text-[13px] tabular-nums text-accent">
                         {String.fromCharCode(65 + i)}
                       </span>
-                      <span className="text-[14px] leading-snug text-bone/90 transition-colors group-hover:text-chalk">
+                      <span className="text-[16px] leading-snug text-bone/90 transition-colors group-hover:text-chalk">
                         {opt}
                       </span>
                     </motion.button>
@@ -187,16 +187,16 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                   <div className="max-w-2xl">
                     <div className="mb-2 flex items-center gap-3">
                       <span aria-hidden className="inline-block h-2 w-2 rounded-full bg-accent signal-glow" />
-                      <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
+                      <span className="font-mono text-[13px] uppercase tracking-[0.16em] text-accent">
                         {tag}
                       </span>
                     </div>
                     <h3 className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
                       {result?.title}
                     </h3>
-                    <p className="mt-5 text-[16px] leading-relaxed text-bone/90">{result?.body}</p>
+                    <p className="mt-5 text-[18px] leading-relaxed text-bone/90">{result?.body}</p>
                     {isTJ && (
-                      <p className="mt-6 font-mono text-[12px] text-ash">
+                      <p className="mt-6 font-mono text-[12px] text-smoke">
                         {c.contactTJ} · {c.contactSD}
                       </p>
                     )}
@@ -225,7 +225,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                           <p className="font-display text-[1.1rem] font-medium text-chalk">
                             {c.form.successTitle}
                           </p>
-                          <p className="mt-1 text-[14px] leading-relaxed text-bone/80">
+                          <p className="mt-1 text-[16px] leading-relaxed text-bone/90">
                             {c.form.successBody}
                           </p>
                         </div>
@@ -239,7 +239,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                         transition={{ duration: 0.3, ease: editorialEase }}
                         noValidate
                       >
-                        <p className="mb-5 font-mono text-[11px] uppercase tracking-[0.16em] text-ash">
+                        <p className="mb-5 font-mono text-[13px] uppercase tracking-[0.16em] text-smoke">
                           {c.form.heading}
                         </p>
                         <div className="grid gap-3 sm:grid-cols-2">
@@ -253,7 +253,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                               className={`${inputBase} ${fieldErrors.name ? "border-red-500/60 focus:border-red-500/80" : "border-line focus:border-accent/50"}`}
                             />
                             {fieldErrors.name && (
-                              <span className="font-mono text-[11px] text-red-400">{fieldErrors.name}</span>
+                              <span className="font-mono text-[13px] text-red-400">{fieldErrors.name}</span>
                             )}
                           </div>
                           <div className="flex flex-col gap-1">
@@ -266,7 +266,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                               className={`${inputBase} ${fieldErrors.email ? "border-red-500/60 focus:border-red-500/80" : "border-line focus:border-accent/50"}`}
                             />
                             {fieldErrors.email && (
-                              <span className="font-mono text-[11px] text-red-400">{fieldErrors.email}</span>
+                              <span className="font-mono text-[13px] text-red-400">{fieldErrors.email}</span>
                             )}
                           </div>
                           <div className="sm:col-span-2 sm:max-w-xs">
@@ -281,7 +281,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                           </div>
                         </div>
                         {formState === "error" && (
-                          <p className="mt-3 font-mono text-[11px] text-red-400">{c.form.errorMsg}</p>
+                          <p className="mt-3 font-mono text-[13px] text-red-400">{c.form.errorMsg}</p>
                         )}
                         <div className="mt-5 flex flex-wrap items-center gap-4">
                           <button
@@ -294,7 +294,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                           <button
                             type="button"
                             onClick={reset}
-                            className="font-mono text-[13px] uppercase tracking-[0.12em] text-ash transition-colors hover:text-chalk"
+                            className="font-mono text-[13px] uppercase tracking-[0.12em] text-smoke transition-colors hover:text-chalk"
                           >
                             {c.restart}
                           </button>
