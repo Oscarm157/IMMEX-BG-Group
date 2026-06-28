@@ -20,6 +20,63 @@ export function generateStaticParams() {
   return SERVICE_SLUGS.map((slug) => ({ slug }));
 }
 
+// ─── SEO data anchored to real overview content ───────────────────────────────
+
+const BASE_URL = "https://bgconsultingroup.com";
+
+// Keyword-rich titles per service, derived from overview themes.
+// Order mirrors SERVICE_SLUGS: legal-consulting, compliance-and-assurance,
+// foreign-trade, international-trade-experts, information-technology,
+// fiscal-services, trade-agreements, import-services.
+const SERVICE_TITLES: Record<"es" | "en", string[]> = {
+  es: [
+    "Asesoría Legal Fiscal y Aduanera en Comercio Exterior",
+    "Auditoría IMMEX y Aseguramiento Aduanero",
+    "Comercio Exterior: Valoración Aduanera, Clasificación e IMMEX",
+    "Dictámenes Periciales en Clasificación Arancelaria y Origen",
+    "Tecnología de Cumplimiento Aduanero y Logística Internacional",
+    "Devolución de IVA y Servicios Fiscales en Comercio Exterior",
+    "Certificación de Origen T-MEC y Acuerdos Comerciales Internacionales",
+    "Importación a México: Despacho Aduanal, NOM y Logística Tijuana-San Diego",
+  ],
+  en: [
+    "Tax and Customs Legal Defense for Foreign Trade Companies",
+    "IMMEX Compliance Audits and Customs Assurance Programs",
+    "Foreign Trade: Customs Valuation, Tariff Classification and IMMEX",
+    "International Trade Expert Opinions on Classification and Valuation",
+    "Customs Compliance Technology and International Logistics",
+    "VAT Refund and Tax Services for Foreign Trade Companies",
+    "USMCA Rules of Origin Certification and Trade Agreement Preferences",
+    "Import Services to Mexico: Customs Clearance, NOM and Tijuana Logistics",
+  ],
+};
+
+// Meta descriptions: 150-160 chars, keyword-anchored to real overview content.
+const SERVICE_DESCRIPTIONS: Record<"es" | "en", string[]> = {
+  es: [
+    "Seguimiento al cumplimiento fiscal y aduanero en comercio exterior. Defensa ante el SAT y TFJA desde la notificación hasta la resolución, Tijuana-San Diego.",
+    "Auditorías preventivas IMMEX, reconstrucción de saldos de pedimentos y reingeniería del área de comercio exterior. Certeza jurídica ante revisión aduanera.",
+    "Asesoría en valoración aduanera, clasificación e IMMEX, PROSEC y Drawback. Cada operación de importación y exportación sustentada ante el SAT y la ANAM.",
+    "Dictámenes periciales en clasificación arancelaria, origen de mercancías y valoración aduanera para sustentar la defensa legal ante el SAT, la ANAM y el TFJA.",
+    "Validación de pedimentos, detección de hallazgos en tiempo real y control de inventarios IMMEX. Cumplimiento aduanero óptimo a gran escala, Tijuana-San Diego.",
+    "Revisión y presentación de solicitudes de devolución de IVA ante el SAT. Conciliación DIOT, soporte documental y seguimiento hasta la respuesta de la autoridad.",
+    "Determinación y certificación de origen bajo T-MEC y tratados internacionales. Gestión con proveedores y atención a verificaciones de origen ante la autoridad.",
+    "Despacho aduanal, cumplimiento de NOM, permisos previos y transporte puerta a puerta en el corredor Tijuana-San Diego. Sin retenciones evitables en la aduana.",
+  ],
+  en: [
+    "Tax and customs compliance monitoring for foreign trade companies. Defense before the SAT, ANAM and TFJA from notice through to resolution, Tijuana-San Diego.",
+    "Preventive IMMEX audits, pedimento balance reconstruction and import-export department reengineering. Legal certainty before any customs authority review.",
+    "Advisory on customs valuation, tariff classification, IMMEX, PROSEC and Drawback. Import and export operations supported with technical criteria before the SAT.",
+    "Expert opinions on tariff classification, origin of goods and customs valuation to substantiate legal defense before the customs authority and the TFJA.",
+    "Pedimento validation, real-time finding detection and IMMEX inventory control. Reach optimal customs compliance at scale across the Tijuana-San Diego corridor.",
+    "Review and filing of VAT refund requests before the SAT. DIOT reconciliation, operations support and follow-up through the authority resolution process.",
+    "Origin determination and USMCA certification for trade agreement preferences. Supplier origin management and authority verification response, Tijuana-San Diego.",
+    "Customs clearance, NOM compliance, permit processing and door-to-door transport on the Tijuana-San Diego corridor. No avoidable customs holds on your shipments.",
+  ],
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 export async function generateMetadata({
   params,
 }: {
@@ -29,8 +86,48 @@ export async function generateMetadata({
   if (!isLocale(lang)) return {};
   const idx = SERVICE_SLUGS.indexOf(slug as (typeof SERVICE_SLUGS)[number]);
   if (idx === -1) return {};
+
   const d = getDictionary(lang);
-  return { title: d.services.items[idx].name };
+  const s = d.services.items[idx];
+  const c = SERVICE_DETAIL[lang][idx];
+
+  const locale = lang === "es" ? "es_MX" : "en_US";
+  const ogImage = c.bandImage ?? "/img/gen/border-crossing.webp";
+  const canonicalPath = `/${lang}/services/${slug}`;
+
+  return {
+    title: SERVICE_TITLES[lang][idx],
+    description: SERVICE_DESCRIPTIONS[lang][idx],
+    alternates: {
+      canonical: canonicalPath,
+      languages: {
+        es: `/es/services/${slug}`,
+        en: `/en/services/${slug}`,
+      },
+    },
+    openGraph: {
+      type: "website",
+      locale,
+      siteName: "BG Consulting Group",
+      title: SERVICE_TITLES[lang][idx],
+      description: SERVICE_DESCRIPTIONS[lang][idx],
+      url: `${BASE_URL}${canonicalPath}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: s.name,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: SERVICE_TITLES[lang][idx],
+      description: SERVICE_DESCRIPTIONS[lang][idx],
+      images: [ogImage],
+    },
+  };
 }
 
 export default async function ServiceDetailPage({
@@ -51,8 +148,75 @@ export default async function ServiceDetailPage({
   const prevIdx = (idx - 1 + total) % total;
   const nextIdx = (idx + 1) % total;
 
+  const homeLabel = lang === "es" ? "Inicio" : "Home";
+  const servicesLabel = d.nav.services;
+  const serviceUrl = `${BASE_URL}/${lang}/services/${slug}`;
+
+  // ── JSON-LD: FAQPage + Service + BreadcrumbList ──────────────────────────
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "FAQPage",
+        mainEntity: c.faq.map((item) => ({
+          "@type": "Question",
+          name: item.q,
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: item.a,
+          },
+        })),
+      },
+      {
+        "@type": "Service",
+        name: s.name,
+        description: c.overview,
+        provider: {
+          "@type": "Organization",
+          name: "BG Consulting Group",
+          url: `${BASE_URL}/${lang}`,
+        },
+        areaServed: [
+          { "@type": "City", name: "Tijuana" },
+          { "@type": "City", name: "San Diego" },
+        ],
+        url: serviceUrl,
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          {
+            "@type": "ListItem",
+            position: 1,
+            name: homeLabel,
+            item: `${BASE_URL}/${lang}`,
+          },
+          {
+            "@type": "ListItem",
+            position: 2,
+            name: servicesLabel,
+            item: `${BASE_URL}/${lang}/services`,
+          },
+          {
+            "@type": "ListItem",
+            position: 3,
+            name: s.name,
+            item: serviceUrl,
+          },
+        ],
+      },
+    ],
+  };
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
+        }}
+      />
+
       {/* Hero */}
       <section className="grid-field relative overflow-hidden">
         <div className="relative z-10 mx-auto grid max-w-[1280px] items-center gap-12 px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:pb-24">
