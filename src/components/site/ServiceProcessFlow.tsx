@@ -31,23 +31,23 @@ export function ServiceProcessFlow({ slug, lang }: { slug: string; lang: Lang })
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
         {/* Header */}
         <div className="mb-10 max-w-3xl">
-          <span className="mb-4 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+          <span className="mb-4 flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.18em] text-accent">
             <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
             {c.eyebrow}
           </span>
           <h2 className="font-display text-[clamp(1.9rem,4.2vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {c.title}
           </h2>
-          <p className="mt-5 max-w-xl text-[16px] leading-relaxed text-bone/90">{c.lead}</p>
+          <p className="mt-5 max-w-xl text-[18px] leading-relaxed text-bone/90">{c.lead}</p>
         </div>
 
         <div className="console-panel grid-field overflow-hidden rounded-[14px] bg-surface-1/70">
           {/* Console bar */}
           <div className="flex items-center justify-between border-b border-line px-5 py-3.5 sm:px-7">
-            <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ash">
+            <span className="font-mono text-[13px] uppercase tracking-[0.18em] text-smoke">
               {c.panel}
             </span>
-            <span className="font-mono text-[11px] tabular-nums tracking-[0.14em] text-accent">
+            <span className="font-mono text-[13px] tabular-nums tracking-[0.14em] text-accent">
               {String(active + 1).padStart(2, "0")} / {String(stages.length).padStart(2, "0")}
             </span>
           </div>
@@ -80,15 +80,8 @@ export function ServiceProcessFlow({ slug, lang }: { slug: string; lang: Lang })
                       }`}
                     />
                     <span
-                      className={`mt-3 hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.1em] transition-colors duration-300 sm:block ${
-                        i === active ? "text-chalk" : "text-ash"
-                      }`}
-                    >
-                      {s.name}
-                    </span>
-                    <span
-                      className={`mt-2 font-mono text-[11px] tabular-nums sm:hidden ${
-                        i === active ? "text-chalk" : "text-ash"
+                      className={`mt-3 font-mono text-[13px] tabular-nums transition-colors duration-300 ${
+                        i === active ? "text-chalk" : "text-smoke"
                       }`}
                     >
                       {s.n}
@@ -117,7 +110,7 @@ export function ServiceProcessFlow({ slug, lang }: { slug: string; lang: Lang })
                       <h3 className="font-display text-[clamp(1.5rem,3vw,2.2rem)] font-medium leading-tight tracking-[-0.02em] text-chalk">
                         {stages[active].name}
                       </h3>
-                      <p className="mt-4 text-[16px] leading-relaxed text-bone/90">
+                      <p className="mt-4 text-[18px] leading-relaxed text-bone/90">
                         {stages[active].desc}
                       </p>
                     </div>
@@ -137,7 +130,7 @@ export function ServiceProcessFlow({ slug, lang }: { slug: string; lang: Lang })
                 onClick={() => setActive(Math.max(0, active - 1))}
                 disabled={active === 0}
                 aria-label="Previous stage"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ash transition-all hover:border-accent/40 hover:text-chalk disabled:opacity-30"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-smoke transition-all hover:border-accent/40 hover:text-chalk disabled:opacity-30"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M8.5 3L5 7l3.5 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -147,7 +140,7 @@ export function ServiceProcessFlow({ slug, lang }: { slug: string; lang: Lang })
                 onClick={() => setActive(Math.min(last, active + 1))}
                 disabled={active === last}
                 aria-label="Next stage"
-                className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-ash transition-all hover:border-accent/40 hover:text-chalk disabled:opacity-30"
+                className="flex h-8 w-8 items-center justify-center rounded-full border border-line text-smoke transition-all hover:border-accent/40 hover:text-chalk disabled:opacity-30"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden>
                   <path d="M5.5 3L9 7l-3.5 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />

@@ -6,8 +6,8 @@ import { SERVICE_SLUGS } from "@/content/service-slugs";
 import { SERVICE_DETAIL } from "@/content/services-detail";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
+import { siteConfig } from "@/lib/site-config";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { SignalLine } from "@/components/site/SignalLine";
 import { ServiceInstrument, DrawCheck } from "@/components/site/ServiceInstrument";
 import { MediaFrame } from "@/components/site/MediaFrame";
 import { Faq } from "@/components/site/Faq";
@@ -223,7 +223,7 @@ export default async function ServiceDetailPage({
           <div>
             <Reveal>
               <span className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-accent">
-                <span className="tabular-nums text-ash">
+                <span className="tabular-nums text-smoke">
                   {String(idx + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
                 </span>
                 <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
@@ -255,6 +255,9 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
+      {/* Diagnóstico: primera sección guiada tras el hero (orienta y capta el lead) */}
+      {c.diagnostic && <ServiceDiagnostic slug={slug} lang={lang} />}
+
       {/* Cuándo nos buscan (dolores) — filas editoriales con divisores */}
       <section className="grid-field-light bg-paper">
         <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-24">
@@ -266,63 +269,51 @@ export default async function ServiceDetailPage({
                 delay={i * 0.07}
                 className="grid grid-cols-[2.5rem_1fr] items-baseline gap-x-6 gap-y-2 border-b border-ash/20 py-8 sm:grid-cols-[2.5rem_5fr_8fr] sm:gap-x-10 sm:py-10"
               >
-                <span className="font-mono text-[11px] tabular-nums text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-mono text-[12px] tabular-nums text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
                 <h3 className="font-display text-lg font-medium leading-snug tracking-[-0.02em] text-ink sm:text-xl">{p.title}</h3>
-                <p className="col-start-2 mt-1 text-[15px] leading-relaxed text-graphite sm:col-start-3 sm:mt-0">{p.desc}</p>
+                <p className="col-start-2 mt-1 text-[17px] leading-relaxed text-ink/75 sm:col-start-3 sm:mt-0">{p.desc}</p>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Qué hacemos — bento asimétrico 3 cols, zigzag wide/narrow */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+      {/* Alcance del servicio: filas con número display, sin tarjetas ni animación */}
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 pt-32 sm:px-8 sm:pb-24 sm:pt-40">
         <SectionHeading title={sec.doTitle} className="mb-12" />
-        <div className="grid gap-4 lg:grid-cols-3">
-          {c.whatWeDo.map((w, i) => {
-            const isWide = [0, 3, 4].includes(i);
-            return (
-              <Reveal
-                key={w.title}
-                delay={(i % 3) * 0.06}
-                className={`console-panel rounded-[14px] bg-surface-1 p-7 ${isWide ? "lg:col-span-2" : "lg:col-span-1"}`}
-              >
-                <div className="mb-5 flex items-center gap-4">
-                  <span className="font-mono text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
-                  <SignalLine className="w-8" />
-                </div>
-                {isWide ? (
-                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <h3 className="font-display text-xl font-medium leading-snug tracking-[-0.01em] text-chalk">{w.title}</h3>
-                    <p className="text-[15px] leading-relaxed text-bone/80">{w.desc}</p>
-                  </div>
-                ) : (
-                  <>
-                    <h3 className="font-display text-xl font-medium leading-snug tracking-[-0.01em] text-chalk">{w.title}</h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-bone/80">{w.desc}</p>
-                  </>
-                )}
-              </Reveal>
-            );
-          })}
+        <div className="border-t border-line">
+          {c.whatWeDo.map((w, i) => (
+            <div
+              key={w.title}
+              className="grid grid-cols-[2.25rem_1fr] items-baseline gap-x-5 border-b border-line py-7 sm:grid-cols-[4rem_1fr] sm:gap-x-8"
+            >
+              <span className="font-display text-[clamp(1.5rem,4vw,2.6rem)] font-medium leading-none tracking-[-0.03em] tabular-nums text-accent/70">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="grid gap-1.5 sm:grid-cols-[minmax(0,20rem)_1fr] sm:items-baseline sm:gap-10">
+                <h3 className="font-display text-lg font-medium leading-snug tracking-[-0.01em] text-chalk sm:text-xl">{w.title}</h3>
+                <p className="text-[17px] leading-relaxed text-bone/90">{w.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
       {/* Qué obtienes (outcomes) */}
-      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20">
+      <section className="mx-auto max-w-[1280px] border-t border-smoke/20 px-5 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-28">
         <SectionHeading title={sec.outcomesTitle} className="mb-10" />
         <div className="console-panel overflow-hidden rounded-[14px] bg-surface-1">
           {c.outcomes.map((o, i) => (
             <Reveal key={i} delay={Math.min(i, 4) * 0.05} className="flex items-start gap-4 border-b border-line px-7 py-6 last:border-b-0">
               <DrawCheck size={18} delay={0.1 + Math.min(i, 6) * 0.12} className="mt-0.5 shrink-0" />
-              <span className="text-[16px] leading-snug text-chalk">{o}</span>
+              <span className="text-[17px] leading-snug text-chalk">{o}</span>
             </Reveal>
           ))}
         </div>
       </section>
 
       {/* Banda visual del dominio */}
-      <section className="relative mb-20 border-y border-line sm:mb-24">
+      <section className="relative mb-20 border-y border-smoke/20 sm:mb-24">
         <MediaFrame
           src={c.bandImage ?? "/img/gen/border-crossing.webp"}
           ratio="21/9"
@@ -332,38 +323,47 @@ export default async function ServiceDetailPage({
         />
       </section>
 
-      {/* Flujo del proceso + diagnóstico — solo servicios con data */}
+      {/* Ciclo operativo (flujo del proceso): solo servicios con data */}
       {c.flow && <ServiceProcessFlow slug={slug} lang={lang} />}
-      {c.diagnostic && <ServiceDiagnostic slug={slug} lang={lang} />}
 
       {/* FAQ */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+      <section className="mx-auto max-w-[1280px] border-t border-smoke/20 px-5 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-28">
         <SectionHeading title={sec.faqTitle} className="mb-10" />
         <Faq items={c.faq} />
       </section>
 
-      {/* CTA */}
-      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-16 pt-16 sm:px-8 sm:pb-20 sm:pt-20">
-        <Reveal className="console-panel relative flex flex-col items-start gap-6 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-14 sm:px-14 sm:py-16">
+      {/* Contacto: teléfono grande y claro (el público llama) */}
+      <section className="mx-auto max-w-[1280px] border-t border-smoke/20 px-5 pb-16 pt-24 sm:px-8 sm:pb-20 sm:pt-28">
+        <div className="console-panel relative flex flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-14 sm:px-14 sm:py-16">
           <h2 className="max-w-2xl font-display text-[clamp(1.7rem,4vw,2.8rem)] font-medium leading-[1.06] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}
           </h2>
-          <p className="max-w-lg text-[16px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
+          <p className="max-w-lg text-[17px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
+            <a href="tel:+526646079642" className="group flex flex-col gap-1">
+              <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-smoke">Tijuana</span>
+              <span className="font-display text-[clamp(1.4rem,3vw,2rem)] font-medium tracking-[-0.01em] text-chalk transition-colors group-hover:text-accent">{siteConfig.offices[0].phone}</span>
+            </a>
+            <a href="tel:+16196382168" className="group flex flex-col gap-1">
+              <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-smoke">San Diego</span>
+              <span className="font-display text-[clamp(1.4rem,3vw,2rem)] font-medium tracking-[-0.01em] text-chalk transition-colors group-hover:text-accent">{siteConfig.offices[1].phone}</span>
+            </a>
+          </div>
           <PillButton href={`/${lang}/contact`} variant="accent" arrow>
             {d.nav.cta}
           </PillButton>
-        </Reveal>
+        </div>
       </section>
 
       {/* Prev / next */}
       <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-32">
         <div className="grid gap-4 border-t border-line pt-8 sm:grid-cols-2">
           <Link href={`/${lang}/services/${SERVICE_SLUGS[prevIdx]}`} className="console-panel group rounded-[14px] bg-surface-1 px-6 py-5 transition-colors hover:bg-surface-2/60">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ash">&larr; {String(prevIdx + 1).padStart(2, "0")}</span>
+            <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-smoke">&larr; {String(prevIdx + 1).padStart(2, "0")}</span>
             <span className="mt-1 block font-display text-lg text-chalk">{d.services.items[prevIdx].name}</span>
           </Link>
           <Link href={`/${lang}/services/${SERVICE_SLUGS[nextIdx]}`} className="console-panel group rounded-[14px] bg-surface-1 px-6 py-5 text-right transition-colors hover:bg-surface-2/60">
-            <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ash">{String(nextIdx + 1).padStart(2, "0")} &rarr;</span>
+            <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-smoke">{String(nextIdx + 1).padStart(2, "0")} &rarr;</span>
             <span className="mt-1 block font-display text-lg text-chalk">{d.services.items[nextIdx].name}</span>
           </Link>
         </div>
