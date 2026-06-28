@@ -1752,6 +1752,299 @@ const FISCAL_SERVICES_FLOW: FlowData = {
   },
 };
 
+const TRADE_AGREEMENTS_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Dónde está el problema con el origen de tu mercancía?",
+    lead: "Cuatro preguntas para orientarte hacia el paso que corresponde.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Un comprador exige certificado de origen y no tengo el expediente para acreditarlo",
+          "La autoridad abrió una verificación de origen con plazo para responder",
+          "Importo pagando el arancel general y quiero saber si aplica una tarifa preferencial",
+          "Quiero organizar mis registros de origen antes de que llegue una verificación",
+        ],
+      },
+      {
+        text: "¿Tus proveedores nacionales te dan documentación de origen?",
+        opts: [
+          "No: entregan facturas sin declaración de origen ni los formatos que exige el cálculo",
+          "Algunos sí, pero la cobertura es incompleta y no garantiza la regla de origen",
+          "Sí, aunque no estamos seguros de que el formato cumpla los requisitos del tratado",
+          "No utilizamos insumos nacionales que afecten la determinación de origen",
+        ],
+      },
+      {
+        text: "¿Hay un plazo corriendo?",
+        opts: [
+          "Sí, tengo días o pocas semanas para responder",
+          "Sí, pero con uno a tres meses de margen",
+          "No hay plazos inmediatos, es planeación o cumplimiento preventivo",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es el corredor principal de tu operación?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce fronterizo en la zona norte",
+          "Operación con múltiples tratados o mercados de exportación",
+          "Aún estamos definiendo nuestros mercados de exportación",
+        ],
+      },
+    ],
+    results: {
+      VERIFICATION: {
+        title: "Atención a la verificación de origen",
+        body: "La autoridad del país importador requiere sustentar el origen declarado dentro de un plazo determinado. Integramos y revisamos el expediente, validamos que la determinación de origen sea consistente con la regla aplicable y preparamos la respuesta para sostener la preferencia ya aplicada.",
+        cta: "Hablar con el equipo",
+      },
+      CERTIFICATION: {
+        title: "Certificación y expediente de origen",
+        body: "Revisamos y construimos los registros de origen que sustentan la calificación de cada producto: clasificación de insumos, criterio aplicable y memoria de cálculo. Con ese expediente, registramos los productos elegibles y tramitamos los certificados que el comprador requiere bajo el tratado correspondiente.",
+        cta: "Hablar con el equipo",
+      },
+      PREFERENCE_ANALYSIS: {
+        title: "Análisis de preferencias arancelarias",
+        body: "Realizamos el análisis de factibilidad para identificar las tarifas preferenciales disponibles y correlacionamos las fracciones arancelarias con las nomenclaturas regionales, incluida ALADI. Así se confirma qué beneficio aplica a cada mercancía y bajo qué tratado, en lugar de seguir pagando el arancel general por omisión.",
+        cta: "Consultar",
+      },
+      SUPPLIER_MGMT: {
+        title: "Gestión de origen con proveedores",
+        body: "Diseñamos los formatos de solicitud de origen y gestionamos su obtención con los proveedores nacionales, de modo que el aporte regional de cada insumo quede documentado. Sin esta base, el producto final no puede acreditar la regla de origen aplicable y el certificado no resistirá una verificación.",
+        cta: "Hablar con el equipo",
+      },
+      AUDIT: {
+        title: "Auditoría preventiva de origen",
+        body: "Auditamos los procesos de determinación y certificación y analizamos el cumplimiento de las reglas de origen aplicables. El objetivo es detectar certificaciones débiles antes de que lo haga una verificación, y corregir el criterio mientras todavía es subsanable.",
+        cta: "Programar revisión",
+      },
+      GENERAL: {
+        title: "Diagnóstico de origen",
+        body: "Revisamos el punto de partida de los registros y la certificación de origen, y orientamos el trabajo hacia lo que la operación necesita, sin presuposiciones sobre el tratado ni la urgencia.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where is the problem with your goods' origin?",
+    lead: "Four questions to point you toward the right next step.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "A buyer requires a certificate of origin and I do not have the file to support it",
+          "The authority opened an origin verification with a response deadline",
+          "I am paying the general tariff and want to know whether a preferential rate applies",
+          "I want to organize my origin records before a verification arrives",
+        ],
+      },
+      {
+        text: "Do your national suppliers provide origin documentation?",
+        opts: [
+          "No: they provide invoices with no origin declaration and none of the formats the calculation requires",
+          "Some do, but coverage is incomplete and does not guarantee the rule of origin",
+          "Yes, though we are not sure the format meets the agreement requirements",
+          "We do not use national inputs that affect the origin determination",
+        ],
+      },
+      {
+        text: "Is there a deadline already running?",
+        opts: [
+          "Yes, I have days or a few weeks to respond",
+          "Yes, but I have one to three months of room",
+          "No immediate deadline, this is planning or preventive compliance",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "What is the main corridor for your operation?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another border crossing in the northern zone",
+          "Operation spanning multiple agreements or export markets",
+          "We are still defining our export markets",
+        ],
+      },
+    ],
+    results: {
+      VERIFICATION: {
+        title: "Origin verification response",
+        body: "The importing country's authority requires the declared origin to be supported within a set deadline. We assemble and review the file, confirm the origin determination is consistent with the applicable rule, and prepare the response within the deadline to sustain the preference already applied.",
+        cta: "Talk to the team",
+      },
+      CERTIFICATION: {
+        title: "Origin certification and records",
+        body: "We review and build the origin records that support each product's qualification: input classification, applicable criterion, and calculation memorandum. With that file in place, we register eligible products and obtain the certificates the buyer requires under the relevant agreement.",
+        cta: "Talk to the team",
+      },
+      PREFERENCE_ANALYSIS: {
+        title: "Tariff preference analysis",
+        body: "We run the feasibility analysis to identify the available preferential rates and correlate tariff codes with regional nomenclatures, including ALADI. This confirms which benefit actually applies to each good and under which agreement, instead of continuing to pay the general tariff by omission.",
+        cta: "Consult",
+      },
+      SUPPLIER_MGMT: {
+        title: "Supplier origin management",
+        body: "We design the origin request formats and manage their collection from national suppliers so the regional content of each input is documented. Without this base, the finished good cannot meet the applicable rule of origin, and the certificate will not hold up in a verification.",
+        cta: "Talk to the team",
+      },
+      AUDIT: {
+        title: "Preventive origin audit",
+        body: "We audit origin determination and certification processes and analyze compliance with the applicable rules of origin. The goal is to catch weak certifications before a verification does, and correct the criterion while it can still be fixed.",
+        cta: "Schedule a review",
+      },
+      GENERAL: {
+        title: "Origin diagnostic",
+        body: "We review the starting point of origin records and certification, and direct the work to what the operation needs, without assumptions about the agreement or the urgency.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2] = answers;
+    if (q1 === 1) return "VERIFICATION";
+    if (q1 === 0) return "CERTIFICATION";
+    if (q1 === 2) return "PREFERENCE_ANALYSIS";
+    if (q2 === 0 || q2 === 1) return "SUPPLIER_MGMT";
+    return "AUDIT";
+  },
+  resultTag: {
+    VERIFICATION: { es: "Verificación de origen", en: "Origin verification" },
+    CERTIFICATION: { es: "Certificación", en: "Certification" },
+    PREFERENCE_ANALYSIS: { es: "Preferencias arancelarias", en: "Tariff preferences" },
+    SUPPLIER_MGMT: { es: "Gestión de proveedores", en: "Supplier management" },
+    AUDIT: { es: "Auditoría preventiva", en: "Preventive audit" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    VERIFICATION: 4,
+    PREFERENCE_ANALYSIS: 0,
+    AUDIT: 3,
+  },
+};
+
+const TRADE_AGREEMENTS_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de origen",
+    title: "De la calificación del producto a la preferencia arancelaria aplicada.",
+    lead: "Cada operación de origen recorre las mismas etapas. Cuando la autoridad abre una verificación, BG conduce la respuesta desde el armado del expediente hasta el cierre del procedimiento.",
+    panel: "Flujo de origen · 6 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Análisis de factibilidad",
+        desc: "Se identifican los tratados aplicables a la mercancía, se correlacionan las fracciones arancelarias con las nomenclaturas regionales y se determina qué tarifa preferencial corresponde a cada producto. Sin este análisis, la empresa puede pagar el arancel general cuando la preferencia ya está disponible.",
+      },
+      {
+        n: "02",
+        name: "Determinación y registro de origen",
+        desc: "Se construye el expediente de origen: clasificación de insumos, criterio de calificación aplicable y memoria de cálculo. Este registro es lo que convierte una afirmación de origen en algo demostrable ante la autoridad o el comprador en una verificación posterior.",
+      },
+      {
+        n: "03",
+        name: "Gestión con proveedores nacionales",
+        desc: "Se diseñan los formatos de solicitud de origen y se gestiona su obtención con los proveedores nacionales. Cuando la regla depende del aporte regional, el origen de los insumos debe estar documentado para que el producto final califique bajo el tratado.",
+      },
+      {
+        n: "04",
+        name: "Certificación de productos elegibles",
+        desc: "Se registran los productos que califican y se tramita la obtención de los certificados de origen bajo el instrumento correspondiente. El certificado válido habilita al exportador a entregar un documento al comprador y al importador a aplicar la preferencia en aduana.",
+      },
+      {
+        n: "05",
+        name: "Auditoría y cumplimiento continuo",
+        desc: "Se auditan los procesos de determinación y certificación y se analiza el cumplimiento de las reglas de origen vigentes. El objetivo es detectar certificaciones débiles y corregir el criterio antes de que una verificación encuentre la inconsistencia.",
+      },
+      {
+        n: "06",
+        name: "Resoluciones anticipadas y verificaciones",
+        desc: "Se asesora en procedimientos para obtener resoluciones anticipadas de la autoridad sobre el criterio de origen antes de operar, y se atienden las verificaciones que la autoridad del país importador abra. La resolución anticipada da certeza previa; la atención a verificaciones protege la preferencia ya aplicada.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Origin process",
+    title: "From product qualification to the preferential rate applied.",
+    lead: "Every origin operation moves through the same stages. When the authority opens a verification, BG handles the response from assembling the file through to closing the proceeding.",
+    panel: "Origin flow · 6 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Feasibility analysis",
+        desc: "We identify the agreements that apply to the goods, correlate tariff codes with regional nomenclatures, and determine which preferential rate fits each product. Without this analysis, a company may keep paying the general tariff when the preference is already available.",
+      },
+      {
+        n: "02",
+        name: "Origin determination and records",
+        desc: "We build the origin file: input classification, applicable qualification criterion, and calculation memorandum. This record is what turns an origin claim into something demonstrable before the authority or the buyer in a later verification.",
+      },
+      {
+        n: "03",
+        name: "National supplier management",
+        desc: "We design the origin request formats and manage their collection from national suppliers. When the rule depends on regional content, the origin of domestic inputs must be documented for the finished good to qualify under the agreement.",
+      },
+      {
+        n: "04",
+        name: "Eligible product certification",
+        desc: "We register qualifying products and obtain certificates of origin under the relevant instrument. A valid certificate lets the exporter hand the buyer a proper document and the importer apply the preference at customs.",
+      },
+      {
+        n: "05",
+        name: "Audit and ongoing compliance",
+        desc: "We audit origin determination and certification processes and analyze compliance with the applicable rules of origin. The goal is to catch weak certifications and correct the criterion before a verification finds the inconsistency.",
+      },
+      {
+        n: "06",
+        name: "Advance rulings and verifications",
+        desc: "We advise on procedures to obtain advance rulings from the authority on the origin criterion before the operation takes place, and handle the verifications the importing country's authority opens. The advance ruling gives certainty up front; handling verifications protects the preference already applied.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -2263,7 +2556,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "La autoridad abrió una verificación de origen. ¿Qué hacen ustedes?",
           "a": "Atendemos la verificación: integramos y revisamos el expediente, validamos que la determinación de origen sea consistente con la regla aplicable y preparamos la respuesta dentro del plazo requerido. El objetivo es sostener la preferencia ya aplicada y evitar el desconocimiento del trato preferencial y el cobro de diferencias."
         }
-      ]
+      ],
+      diagnostic: TRADE_AGREEMENTS_DIAGNOSTIC,
+      flow: TRADE_AGREEMENTS_FLOW,
     },
     {
       "overview": "Importar a México implica clasificar correctamente la mercancía, cumplir regulaciones no arancelarias, tramitar permisos y despachar ante la aduana sin que la carga se detenga. Un error en la fracción arancelaria o una NOM omitida puede frenar el contenedor en el cruce y generar costos que nadie presupuestó. BG Consulting Group acompaña la operación desde el origen hasta la entrega en destino, coordinando el despacho aduanal, el cumplimiento normativo y la logística en el corredor Tijuana-San Diego.",
@@ -2843,7 +3138,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "The authority opened an origin verification. What do you do?",
           "a": "We handle the verification: we assemble and review the file, confirm the origin determination is consistent with the applicable rule, and prepare the response within the required deadline. The goal is to sustain the preference already applied and avoid denial of preferential treatment and collection of differences."
         }
-      ]
+      ],
+      diagnostic: TRADE_AGREEMENTS_DIAGNOSTIC,
+      flow: TRADE_AGREEMENTS_FLOW,
     },
     {
       "overview": "Importing into Mexico means classifying goods correctly, meeting non-tariff regulations, securing permits, and clearing customs without the shipment stalling. A wrong tariff code or an overlooked NOM can hold a container at the border and trigger costs no one budgeted for. BG Consulting Group manages the operation from origin to final delivery, coordinating customs clearance, regulatory compliance, and logistics across the Tijuana-San Diego corridor.",
