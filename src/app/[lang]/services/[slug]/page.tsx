@@ -160,10 +160,10 @@ export default async function ServiceDetailPage({
       {/* Banda visual del dominio */}
       <section className="relative mb-20 border-y border-line sm:mb-24">
         <MediaFrame
-          src="/img/gen/border-crossing.webp"
+          src={c.bandImage ?? "/img/gen/border-crossing.webp"}
           ratio="21/9"
           panel={false}
-          caption={`${s.name} · cruce Tijuana–San Diego`}
+          caption={c.bandCaption ?? `${s.name} · cruce Tijuana–San Diego`}
           className="!rounded-none"
         />
       </section>

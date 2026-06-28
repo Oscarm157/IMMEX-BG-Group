@@ -63,6 +63,8 @@ export type ServiceDetail = {
   faq: { q: string; a: string }[];
   diagnostic?: DiagnosticData;
   flow?: FlowData;
+  bandImage?: string;
+  bandCaption?: string;
 };
 
 const FT_DIAGNOSTIC: DiagnosticData = {
@@ -340,6 +342,306 @@ const FT_FLOW: FlowData = {
   },
 };
 
+const LEGAL_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Por dónde empieza tu asunto?",
+    lead: "Cuatro preguntas para orientarte hacia la vía correcta.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Me llegó una notificación: crédito fiscal, multa o PAMA",
+          "Tengo una revisión o auditoría en curso de mis operaciones",
+          "Voy a tomar una decisión de negocio con efecto fiscal o aduanero",
+          "Tengo una resolución desfavorable que quiero combatir",
+        ],
+      },
+      {
+        text: "¿En qué etapa está el asunto?",
+        opts: [
+          "La autoridad ejerce sus facultades, aún no hay determinación",
+          "Ya hay una resolución o crédito notificado",
+          "Es planeación, todavía no hay acto de autoridad",
+          "No estoy seguro",
+        ],
+      },
+      {
+        text: "¿Hay plazos corriendo?",
+        opts: [
+          "Sí, tengo días o pocas semanas para responder",
+          "Sí, pero con uno a tres meses de margen",
+          "No hay plazos inmediatos, es planeación",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Dónde concentras tu operación?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce de la frontera norte",
+          "Operación en el interior del país",
+          "Aún no tengo operaciones activas",
+        ],
+      },
+    ],
+    results: {
+      IMMEDIATE_DEFENSE: {
+        title: "Defensa con plazos corriendo",
+        body: "Los medios de defensa arrancan sus plazos con la notificación del acto. Revisamos el alcance, construimos los agravios con sustento técnico y presentamos el recurso o la demanda dentro de los plazos del procedimiento.",
+        cta: "Hablar con el equipo",
+      },
+      DEFENSE: {
+        title: "Defensa técnica del asunto",
+        body: "Revisamos el acto, los pedimentos y el soporte documental de las operaciones, y construimos la postura técnica. La defensa se conduce desde la notificación hasta su conclusión por la vía que conviene al caso: recurso, juicio ante el TFJA o amparo.",
+        cta: "Hablar con el equipo",
+      },
+      APPEAL: {
+        title: "Vía para combatir la resolución",
+        body: "Frente a una resolución definitiva, la vía depende del acto y de la etapa procesal: recurso de revocación en sede administrativa, juicio ante el Tribunal Federal de Justicia Administrativa o amparo. Analizamos el caso y elegimos la que corresponde.",
+        cta: "Hablar con el equipo",
+      },
+      CONCLUSIVE: {
+        title: "Acuerdo conclusivo ante PRODECON",
+        body: "Mientras la autoridad ejerce sus facultades de comprobación, el acuerdo conclusivo permite plantear y resolver las diferencias antes de la determinación definitiva, como alternativa a llevar el desacuerdo al litigio.",
+        cta: "Plantear el acuerdo",
+      },
+      ADVISORY: {
+        title: "Asesoría antes de decidir",
+        body: "Cada decisión con efecto fiscal o aduanero conviene evaluarla antes de ejecutarla. Analizamos el cambio de régimen, la reestructura o la operación transfronteriza, fijamos la contingencia y orientamos la decisión con criterio técnico.",
+        cta: "Consultar",
+      },
+      GENERAL: {
+        title: "Diagnóstico del asunto",
+        body: "Revisamos el punto de partida y orientamos el trabajo hacia lo que el asunto necesita, sin presuposiciones sobre la vía ni la urgencia.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your matter start?",
+    lead: "Four questions to point you toward the right route.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "I received a notice: tax assessment, fine, or PAMA",
+          "A review or audit of my operations is underway",
+          "I am about to make a business decision with tax or customs effect",
+          "I have an unfavorable resolution I want to challenge",
+        ],
+      },
+      {
+        text: "What stage is the matter at?",
+        opts: [
+          "The authority is exercising its powers, no assessment yet",
+          "A resolution or assessment has already been notified",
+          "It is planning, there is no act from the authority yet",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "Are deadlines already running?",
+        opts: [
+          "Yes, I have days or a few weeks to respond",
+          "Yes, but I have one to three months of room",
+          "No immediate deadlines, this is planning",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "Where is your operation concentrated?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another northern border crossing",
+          "Operation in the country's interior",
+          "No active operations yet",
+        ],
+      },
+    ],
+    results: {
+      IMMEDIATE_DEFENSE: {
+        title: "Defense with deadlines running",
+        body: "Defense remedies start their deadlines at notification of the act. We review the scope, build the grievances with technical support, and file the appeal or lawsuit within the procedural deadlines.",
+        cta: "Talk to the team",
+      },
+      DEFENSE: {
+        title: "Technical defense of the matter",
+        body: "We review the act, the pedimentos, and the supporting documentation, and build the technical position. The defense runs from notification through to conclusion by the route that fits the case: administrative appeal, TFJA litigation, or amparo.",
+        cta: "Talk to the team",
+      },
+      APPEAL: {
+        title: "Route to challenge the resolution",
+        body: "Against a final resolution, the route depends on the act and the procedural stage: revocation appeal in the administrative channel, litigation before the Federal Court of Administrative Justice, or amparo. We analyze the case and choose the one that fits.",
+        cta: "Talk to the team",
+      },
+      CONCLUSIVE: {
+        title: "Conclusive agreement before PRODECON",
+        body: "While the authority exercises its review powers, the conclusive agreement lets you raise and settle the differences before the final assessment, as an alternative to taking the disagreement to litigation.",
+        cta: "Raise the agreement",
+      },
+      ADVISORY: {
+        title: "Advisory before deciding",
+        body: "Every decision with tax or customs effect is worth evaluating before execution. We analyze the change of regime, the restructuring, or the cross-border operation, fix the exposure, and orient the decision with technical criteria.",
+        cta: "Consult",
+      },
+      GENERAL: {
+        title: "Diagnostic of the matter",
+        body: "We review the starting point and direct the work to what the matter needs, without assumptions about the route or the urgency.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2, q3] = answers;
+    if (q1 === 2) return "ADVISORY";
+    if (q1 === 3) return "APPEAL";
+    if (q1 === 0 || q1 === 1) {
+      if (q3 === 0) return "IMMEDIATE_DEFENSE";
+      if (q2 === 0) return "CONCLUSIVE";
+      return "DEFENSE";
+    }
+    return "GENERAL";
+  },
+  resultTag: {
+    IMMEDIATE_DEFENSE: { es: "Defensa inmediata", en: "Immediate defense" },
+    DEFENSE: { es: "Defensa técnica", en: "Technical defense" },
+    APPEAL: { es: "Medios de defensa", en: "Defense remedies" },
+    CONCLUSIVE: { es: "Acuerdo conclusivo", en: "Conclusive agreement" },
+    ADVISORY: { es: "Asesoría", en: "Advisory" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  // CustomsStageVisual solo tiene motivos del ciclo del pedimento; el único
+  // coherente con materia legal es "Defensa" (índice 4: notificación, recurso,
+  // juicio, amparo). Solo los resultados de defensa lo usan; los demás no
+  // muestran visual a propósito, en lugar de forzar un diagrama aduanero ajeno.
+  stageForResult: {
+    IMMEDIATE_DEFENSE: 4,
+    DEFENSE: 4,
+    APPEAL: 4,
+  },
+};
+
+const LEGAL_FLOW: FlowData = {
+  es: {
+    eyebrow: "Ruta del asunto",
+    title: "De la asesoría a la resolución del asunto.",
+    lead: "Cuando la autoridad interviene, el asunto recorre las mismas etapas. BG conduce la defensa desde la notificación del acto hasta su conclusión, por la vía ordinaria o alternativa que corresponda.",
+    panel: "Vías de defensa · 6 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Asesoría y prevención",
+        desc: "Antes de que exista un acto, el seguimiento del cumplimiento y la asesoría de cada decisión con efecto fiscal o aduanero identifican la contingencia. El propósito es que el riesgo se corrija por iniciativa propia, antes de que se convierta en un crédito o una sanción.",
+      },
+      {
+        n: "02",
+        name: "Facultades de comprobación",
+        desc: "La autoridad ejerce sus facultades de comprobación sobre las operaciones: clasificación, valoración, origen, regímenes como IMMEX. Se responde con sustento técnico y, cuando aplica, el acuerdo conclusivo ante PRODECON permite plantear y resolver las diferencias antes de que se emita la determinación.",
+      },
+      {
+        n: "03",
+        name: "Notificación",
+        desc: "La autoridad notifica el acto administrativo: una determinación de crédito fiscal, una multa o el inicio de un Procedimiento Administrativo en Materia Aduanera. Desde la notificación corren los plazos para defenderse y cada decisión condiciona el resultado del asunto.",
+      },
+      {
+        n: "04",
+        name: "Recurso",
+        desc: "El recurso de revocación y demás medios en sede administrativa controvierten el acto ante la propia autoridad, sin acudir todavía al tribunal. Es la primera instancia de defensa y en muchos asuntos define el resultado.",
+      },
+      {
+        n: "05",
+        name: "Juicio TFJA",
+        desc: "El juicio contencioso administrativo ante el Tribunal Federal de Justicia Administrativa revisa la resolución definitiva ante un órgano independiente de la autoridad que la emitió. La vía ordinaria o sumaria se elige según la cuantía y la naturaleza del asunto.",
+      },
+      {
+        n: "06",
+        name: "Amparo",
+        desc: "El amparo indirecto o directo procede cuando el acto vulnera derechos fundamentales o cuando se ha agotado la instancia previa. Los derechos reconocidos en la Constitución y en los tratados sirven como base de defensa frente a la actuación de la autoridad.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Route of the matter",
+    title: "From advisory to resolution of the matter.",
+    lead: "When the authority steps in, the matter moves through the same stages. BG handles the defense from notification of the act through to its conclusion, by whichever ordinary or alternative route fits.",
+    panel: "Defense routes · 6 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Advisory and prevention",
+        desc: "Before any act exists, monitoring compliance and advising each decision with tax or customs effect identifies the exposure. The aim is to correct the risk on your own initiative, before it turns into an assessment or a penalty.",
+      },
+      {
+        n: "02",
+        name: "Authority review",
+        desc: "The authority exercises its review powers over the operations: classification, valuation, origin, regimes such as IMMEX. We respond with technical support and, where it applies, the conclusive agreement before PRODECON lets you raise and settle the differences before an assessment is issued.",
+      },
+      {
+        n: "03",
+        name: "Notification",
+        desc: "The authority serves the administrative act: a tax assessment, a fine, or the start of an administrative customs proceeding (PAMA). From notification, the deadlines to mount a defense run, and each decision shapes how the matter ends.",
+      },
+      {
+        n: "04",
+        name: "Appeal",
+        desc: "The revocation appeal and other administrative-channel remedies challenge the act before the authority itself, without going to court yet. It is the first instance of defense, and in many matters it decides the outcome.",
+      },
+      {
+        n: "05",
+        name: "TFJA litigation",
+        desc: "The administrative litigation before the Federal Court of Administrative Justice reviews the final resolution before a body independent of the authority that issued it. The ordinary or summary route is chosen based on the amount and the nature of the matter.",
+      },
+      {
+        n: "06",
+        name: "Amparo",
+        desc: "Indirect or direct amparo applies when the act violates fundamental rights or once the prior instance has been exhausted. The rights recognized in the Constitution and in treaties serve as the basis of defense against the authority's action.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -411,7 +713,11 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Atienden operaciones entre Tijuana y San Diego?",
           "a": "Sí. El cruce de mercancías y las operaciones entre ambos lados de la frontera concentran buena parte de la materia aduanera y de las controversias entre particulares. Para estas últimas, el arbitraje comercial internacional es una de las vías previstas para resolver el conflicto fuera de los tribunales."
         }
-      ]
+      ],
+      diagnostic: LEGAL_DIAGNOSTIC,
+      flow: LEGAL_FLOW,
+      bandImage: "/img/gen/legal-defense.webp",
+      bandCaption: "Defensa fiscal y aduanera, de la notificación a la resolución",
     },
     {
       "overview": "El programa IMMEX y el resto de las autorizaciones de comercio exterior se sostienen sobre el cumplimiento detallado de sus requisitos de operación, no solo sobre sus beneficios. Una omisión documental o una operación que la autoridad interprete de forma adversa en revisión puede costar la autorización y los privilegios de exportación. En BG Consulting diseñamos programas de auditoría interna y externa en comercio exterior y aduanas que validan la certeza jurídica de cada operación dentro del marco autorizado.",
@@ -979,7 +1285,11 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Do you handle operations between Tijuana and San Diego?",
           "a": "Yes. The movement of goods and operations across both sides of the border concentrate much of the customs work and of the disputes between private parties. For the latter, international commercial arbitration is one of the routes available to resolve the conflict outside the courts."
         }
-      ]
+      ],
+      diagnostic: LEGAL_DIAGNOSTIC,
+      flow: LEGAL_FLOW,
+      bandImage: "/img/gen/legal-defense.webp",
+      bandCaption: "Tax and customs defense, from notice to resolution",
     },
     {
       "overview": "The IMMEX program and other foreign trade authorizations rest on detailed compliance with their operating requirements, not only on their benefits. A documentary gap or an operation an authority reads adversely during a review can cost the authorization and the export privileges granted to the company. BG Consulting builds internal and external audit programs in foreign trade and customs that validate the legal certainty of every operation within its authorized scope.",
