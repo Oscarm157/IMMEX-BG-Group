@@ -80,14 +80,7 @@ export function ServiceProcessFlow({ slug, lang }: { slug: string; lang: Lang })
                       }`}
                     />
                     <span
-                      className={`mt-3 hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-[0.1em] transition-colors duration-300 sm:block ${
-                        i === active ? "text-chalk" : "text-ash"
-                      }`}
-                    >
-                      {s.name}
-                    </span>
-                    <span
-                      className={`mt-2 font-mono text-[11px] tabular-nums sm:hidden ${
+                      className={`mt-3 font-mono text-[11px] tabular-nums transition-colors duration-300 ${
                         i === active ? "text-chalk" : "text-ash"
                       }`}
                     >

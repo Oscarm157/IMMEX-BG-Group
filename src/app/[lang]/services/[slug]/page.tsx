@@ -7,7 +7,6 @@ import { SERVICE_DETAIL } from "@/content/services-detail";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 import { SectionHeading } from "@/components/site/SectionHeading";
-import { SignalLine } from "@/components/site/SignalLine";
 import { ServiceInstrument, DrawCheck } from "@/components/site/ServiceInstrument";
 import { MediaFrame } from "@/components/site/MediaFrame";
 import { Faq } from "@/components/site/Faq";
@@ -275,36 +274,24 @@ export default async function ServiceDetailPage({
         </div>
       </section>
 
-      {/* Qué hacemos — bento asimétrico 3 cols, zigzag wide/narrow */}
+      {/* Alcance del servicio — filas con número display, sin tarjetas ni animación */}
       <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
         <SectionHeading title={sec.doTitle} className="mb-12" />
-        <div className="grid gap-4 lg:grid-cols-3">
-          {c.whatWeDo.map((w, i) => {
-            const isWide = [0, 3, 4].includes(i);
-            return (
-              <Reveal
-                key={w.title}
-                delay={(i % 3) * 0.06}
-                className={`console-panel rounded-[14px] bg-surface-1 p-7 ${isWide ? "lg:col-span-2" : "lg:col-span-1"}`}
-              >
-                <div className="mb-5 flex items-center gap-4">
-                  <span className="font-mono text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
-                  <SignalLine className="w-8" />
-                </div>
-                {isWide ? (
-                  <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
-                    <h3 className="font-display text-xl font-medium leading-snug tracking-[-0.01em] text-chalk">{w.title}</h3>
-                    <p className="text-[15px] leading-relaxed text-bone/80">{w.desc}</p>
-                  </div>
-                ) : (
-                  <>
-                    <h3 className="font-display text-xl font-medium leading-snug tracking-[-0.01em] text-chalk">{w.title}</h3>
-                    <p className="mt-3 text-[15px] leading-relaxed text-bone/80">{w.desc}</p>
-                  </>
-                )}
-              </Reveal>
-            );
-          })}
+        <div className="border-t border-line">
+          {c.whatWeDo.map((w, i) => (
+            <div
+              key={w.title}
+              className="grid grid-cols-[2.25rem_1fr] items-baseline gap-x-5 border-b border-line py-7 sm:grid-cols-[4rem_1fr] sm:gap-x-8"
+            >
+              <span className="font-display text-[clamp(1.5rem,4vw,2.6rem)] font-medium leading-none tracking-[-0.03em] tabular-nums text-accent/70">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="grid gap-1.5 sm:grid-cols-[minmax(0,20rem)_1fr] sm:items-baseline sm:gap-10">
+                <h3 className="font-display text-lg font-medium leading-snug tracking-[-0.01em] text-chalk sm:text-xl">{w.title}</h3>
+                <p className="text-[15px] leading-relaxed text-bone/70">{w.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
