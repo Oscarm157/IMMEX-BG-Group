@@ -914,6 +914,291 @@ const COMPLIANCE_AND_ASSURANCE_FLOW: FlowData = {
   },
 };
 
+const INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Qué está cuestionando la autoridad?",
+    lead: "Cuatro preguntas para orientar el tipo de dictamen o soporte técnico que necesitas.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es la situación que necesitas resolver?",
+        opts: [
+          "La autoridad reclasificó la fracción arancelaria de mi mercancía",
+          "La autoridad rechazó el origen declarado y perdí la preferencia arancelaria",
+          "La autoridad objetó el valor en aduana o ajustó la base gravable",
+          "Tenemos observaciones al control de inventarios del Anexo 24 (IMMEX)",
+        ],
+      },
+      {
+        text: "¿En qué etapa está el asunto?",
+        opts: [
+          "Aún no hay acto de la autoridad: busco certeza antes de operar",
+          "La autoridad ejerce sus facultades y necesito responder con sustento técnico",
+          "Ya hay una resolución notificada y quiero presentar una defensa con dictamen pericial",
+          "No estoy seguro de la etapa",
+        ],
+      },
+      {
+        text: "¿Hay plazos corriendo para responder?",
+        opts: [
+          "Sí, tengo días o pocas semanas para actuar",
+          "Sí, pero con uno a tres meses de margen",
+          "No hay plazos inmediatos, es preventivo",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es el corredor principal de tu operación?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce fronterizo en la zona norte",
+          "Operación marítima, aérea o interior",
+          "Aún no tenemos operaciones activas",
+        ],
+      },
+    ],
+    results: {
+      CLASSIFICATION: {
+        title: "Dictamen en clasificación arancelaria",
+        body: "Analizamos la mercancía y construimos el sustento de la fracción que corresponde conforme a las Reglas Generales de Interpretación, las notas legales y los criterios aplicables. El dictamen respalda la controversia frente a la reclasificación de la autoridad y sirve como prueba en el recurso o en el juicio.",
+        cta: "Hablar con el equipo",
+      },
+      ORIGIN: {
+        title: "Sustento técnico de origen",
+        body: "Verificamos el cumplimiento de las reglas de origen del tratado invocado, revisamos el valor de contenido regional o el salto arancelario según corresponda y ordenamos el soporte documental. El dictamen permite defender la preferencia arancelaria cuando la autoridad la desconoce.",
+        cta: "Hablar con el equipo",
+      },
+      VALUATION: {
+        title: "Avalúo y valoración aduanera",
+        body: "Determinamos el valor en aduana con base en los métodos de valoración de la Ley Aduanera, partiendo del valor de transacción y, en su caso, de los métodos secundarios. El avalúo aporta el fundamento técnico para controvertir el ajuste de la base gravable o el avalúo propio de la autoridad.",
+        cta: "Hablar con el equipo",
+      },
+      ANNEX24: {
+        title: "Revisión del Anexo 24 e IMMEX",
+        body: "Revisamos el sistema de control de inventarios, la trazabilidad entre pedimentos de entrada y de retorno, los descargos y el balance de materiales. El objetivo es identificar el sustento documental y técnico para responder a la observación de la autoridad sobre las mercancías sujetas al régimen temporal.",
+        cta: "Hablar con el equipo",
+      },
+      PREVENTIVE: {
+        title: "Opinión preventiva de certeza jurídica",
+        body: "Antes de que exista un acto de la autoridad, una decisión operativa con impacto fiscal conviene evaluarla con criterio técnico. Fijamos la postura sobre clasificación, origen o valor y emitimos la opinión que da certeza antes de ejecutar la operación.",
+        cta: "Consultar",
+      },
+      GENERAL: {
+        title: "Diagnóstico del asunto",
+        body: "Revisamos el punto de partida y orientamos el tipo de dictamen o soporte técnico que necesita el caso, sin presuposiciones sobre el área ni sobre si ya existe un acto de la autoridad.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "What is the authority challenging?",
+    lead: "Four questions to identify the type of expert opinion or technical support your case needs.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is the situation you need to resolve?",
+        opts: [
+          "The authority reclassified the tariff code of my goods",
+          "The authority rejected my declared origin and the preferential rate was lost",
+          "The authority questioned the customs value or adjusted the taxable base",
+          "We have findings on the Annex 24 inventory control system (IMMEX)",
+        ],
+      },
+      {
+        text: "What stage is the matter at?",
+        opts: [
+          "No act from the authority yet: I want certainty before acting",
+          "The authority is exercising its review powers and I need to respond with technical support",
+          "A resolution has already been notified and I want to file a defense with an expert opinion",
+          "I am not sure of the stage",
+        ],
+      },
+      {
+        text: "Are deadlines already running?",
+        opts: [
+          "Yes, I have days or a few weeks to act",
+          "Yes, but I have one to three months of room",
+          "No immediate deadlines, this is preventive",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "What is the main corridor for your operation?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another border crossing in the northern zone",
+          "Maritime, air, or inland operation",
+          "No active operations yet",
+        ],
+      },
+    ],
+    results: {
+      CLASSIFICATION: {
+        title: "Expert opinion on tariff classification",
+        body: "We analyze the goods and build the support for the classification that applies under the General Rules of Interpretation, the legal notes, and the applicable criteria. The opinion backs the dispute against the authority's reclassification and serves as evidence in an appeal or in court.",
+        cta: "Talk to the team",
+      },
+      ORIGIN: {
+        title: "Technical substantiation of origin",
+        body: "We verify that the goods meet the rules of origin of the treaty invoked, review the regional value content or tariff shift as applicable, and organize the documentary support. The opinion allows you to defend the preferential rate when the authority denies it.",
+        cta: "Talk to the team",
+      },
+      VALUATION: {
+        title: "Customs appraisal and valuation",
+        body: "We determine the customs value using the valuation methods set in the Customs Law, starting from transaction value and, where that does not apply, the secondary methods. The appraisal provides the technical basis to dispute an adjustment to the taxable base or the authority's own valuation.",
+        cta: "Talk to the team",
+      },
+      ANNEX24: {
+        title: "Annex 24 and IMMEX review",
+        body: "We review the inventory control system, the traceability between entry and return pedimentos, the write-offs, and the material balance. The goal is to identify the documentary and technical support to respond to the authority's finding on goods under the temporary regime.",
+        cta: "Talk to the team",
+      },
+      PREVENTIVE: {
+        title: "Preventive opinion for legal certainty",
+        body: "Before any act from the authority, an operational decision with tax exposure is worth assessing with technical criteria. We fix the position on classification, origin, or value and issue the opinion that gives certainty before the operation is carried out.",
+        cta: "Consult",
+      },
+      GENERAL: {
+        title: "Diagnostic of the matter",
+        body: "We review the starting point and orient the type of expert opinion or technical support the case needs, without assumptions about the area or whether an act from the authority already exists.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2] = answers;
+    if (q2 === 0) return "PREVENTIVE";
+    if (q1 === 0) return "CLASSIFICATION";
+    if (q1 === 1) return "ORIGIN";
+    if (q1 === 2) return "VALUATION";
+    if (q1 === 3) return "ANNEX24";
+    return "GENERAL";
+  },
+  resultTag: {
+    CLASSIFICATION: { es: "Clasificación arancelaria", en: "Tariff classification" },
+    ORIGIN: { es: "Origen de la mercancía", en: "Origin of goods" },
+    VALUATION: { es: "Valoración aduanera", en: "Customs valuation" },
+    ANNEX24: { es: "Anexo 24 IMMEX", en: "Annex 24 IMMEX" },
+    PREVENTIVE: { es: "Opinión preventiva", en: "Preventive opinion" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    CLASSIFICATION: 0,
+    VALUATION: 1,
+    ORIGIN: 2,
+    ANNEX24: 3,
+  },
+};
+
+const INTERNATIONAL_TRADE_EXPERTS_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de peritaje",
+    title: "Del análisis técnico al dictamen con sustento.",
+    lead: "Cuando la autoridad cuestiona la clasificación, el origen o el valor de una mercancía, o cuando se necesita certeza jurídica antes de operar, el dictamen pericial recorre estas etapas hasta quedar listo para usarse como prueba.",
+    panel: "Proceso pericial · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Revisión del caso",
+        desc: "Analizamos el acto de la autoridad: la reclasificación, el rechazo del origen, el ajuste de valor o las observaciones al Anexo 24. Esta revisión determina el alcance del dictamen y los criterios técnicos aplicables al caso concreto.",
+      },
+      {
+        n: "02",
+        name: "Análisis técnico de la mercancía",
+        desc: "Según la materia, analizamos la mercancía bajo las Reglas Generales de Interpretación y las notas legales para clasificación, verificamos el cumplimiento de las reglas de origen del tratado para origen, o aplicamos los métodos de valoración aduanera para el valor. Este es el núcleo técnico del dictamen.",
+      },
+      {
+        n: "03",
+        name: "Construcción del dictamen",
+        desc: "Documentamos el criterio, los fundamentos normativos y la conclusión técnica en el formato que exige su uso como prueba: recurso administrativo, juicio ante el TFJA o presentación ante la aduana. Un dictamen bien construido responde exactamente a lo que la autoridad cuestionó.",
+      },
+      {
+        n: "04",
+        name: "Coordinación con la defensa legal",
+        desc: "Alineamos el dictamen con los agravios que presentará el área jurídica. El soporte técnico y la postura legal van en la misma dirección: la clasificación que sostiene el dictamen es la misma que sustenta el recurso o el juicio.",
+      },
+      {
+        n: "05",
+        name: "Seguimiento del asunto",
+        desc: "Acompañamos el asunto mientras la autoridad resuelve. Si surgen preguntas adicionales o si la contraparte o la autoridad cuestionan el dictamen, respondemos con el sustento técnico del caso.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Expert opinion process",
+    title: "From technical analysis to a grounded expert opinion.",
+    lead: "When the authority challenges classification, origin, or the value of goods, or when legal certainty is needed before acting, the expert opinion moves through these stages until it is ready to be used as evidence.",
+    panel: "Expert opinion process · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Case review",
+        desc: "We analyze the authority's act: the reclassification, the origin denial, the value adjustment, or the Annex 24 findings. This review determines the scope of the opinion and the technical criteria applicable to the specific case.",
+      },
+      {
+        n: "02",
+        name: "Technical analysis of the goods",
+        desc: "Depending on the subject, we analyze the goods under the General Rules of Interpretation and legal notes for classification, verify compliance with the treaty's rules of origin for an origin matter, or apply the customs valuation methods for a value dispute. This is the technical core of the opinion.",
+      },
+      {
+        n: "03",
+        name: "Drafting the expert opinion",
+        desc: "We document the criterion, the regulatory grounds, and the technical conclusion in the format required for its use as evidence: administrative appeal, TFJA litigation, or presentation before customs. A well-built opinion answers exactly what the authority challenged.",
+      },
+      {
+        n: "04",
+        name: "Coordination with legal defense",
+        desc: "We align the expert opinion with the grievances the legal team will raise. The technical support and the legal position run in the same direction: the classification the opinion sustains is the same one the appeal or court filing rests on.",
+      },
+      {
+        n: "05",
+        name: "Follow-up on the matter",
+        desc: "We accompany the matter while the authority resolves. If additional questions arise or if the opposing party or the authority challenges the opinion, we respond with the technical support behind the case.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -1206,7 +1491,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿En qué momento conviene solicitar una opinión pericial?",
           "a": "Cuando la autoridad ya cuestionó la clasificación, el origen o el valor y se va a presentar una defensa, y también de forma preventiva, cuando una decisión operativa con impacto fiscal requiere certeza jurídica antes de ejecutarse."
         }
-      ]
+      ],
+      diagnostic: INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC,
+      flow: INTERNATIONAL_TRADE_EXPERTS_FLOW,
     },
     {
       "overview": "Una operación de comercio exterior genera miles de pedimentos, facturas, certificados de origen y registros de movimiento que la autoridad puede revisar años después del despacho. Cuando esa información vive en hojas de cálculo aisladas o se reconcilia a mano, las inconsistencias aparecen tarde, normalmente durante una auditoría. BG Consulting Group implementa tecnología capaz de operar a gran escala y desarrolla herramientas de cumplimiento aduanero que permiten alcanzar un nivel de cumplimiento óptimo o mitigar hallazgos en tiempo real, sobre la operación logística internacional, terrestre y marítima.",
@@ -1780,7 +2067,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "When does it make sense to request an expert opinion?",
           "a": "When the authority has already challenged classification, origin, or value and a defense is being filed, and also preventively, when an operational decision with tax exposure requires legal certainty before it is carried out."
         }
-      ]
+      ],
+      diagnostic: INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC,
+      flow: INTERNATIONAL_TRADE_EXPERTS_FLOW,
     },
     {
       "overview": "A cross-border operation produces thousands of customs entries, invoices, certificates of origin and movement records that the authority can review years after release. When that information lives in disconnected spreadsheets and gets reconciled by hand, inconsistencies surface late, usually during an audit. BG Consulting Group deploys information technology capable of managing a large-scale operation and builds customs compliance tools that help reach an optimal level of compliance or mitigate findings in real time, across international, land and maritime logistics.",
