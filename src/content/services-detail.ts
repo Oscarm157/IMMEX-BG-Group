@@ -2045,6 +2045,281 @@ const TRADE_AGREEMENTS_FLOW: FlowData = {
   },
 };
 
+const IMPORT_SERVICES_DIAGNOSTIC: DiagnosticData = {
+  es: {
+    eyebrow: "Diagnóstico rápido",
+    title: "¿Cuál es el punto de partida de tu operación?",
+    lead: "Cuatro preguntas para orientarte hacia el área correcta.",
+    restart: "Volver a empezar",
+    questions: [
+      {
+        text: "¿Cuál es tu situación hoy?",
+        opts: [
+          "Mi carga está detenida en aduana y necesito resolverlo",
+          "Quiero importar un producto y no sé qué requisitos aplican",
+          "Tengo dudas sobre NOM o permisos que mi producto pueda requerir",
+          "Busco coordinar despacho, almacenaje y transporte bajo una sola gestión",
+        ],
+      },
+      {
+        text: "¿Has importado este producto a México antes?",
+        opts: [
+          "No, es la primera vez y no conozco los requisitos",
+          "Sí, pero tuve problemas en el cruce o la documentación",
+          "Sí, y quiero mejorar la coordinación logística",
+          "La operación es recurrente y está bien establecida",
+        ],
+      },
+      {
+        text: "¿Hay plazos que ya están corriendo?",
+        opts: [
+          "Sí, la carga ya está en tránsito o detenida",
+          "Sí, el cliente espera entrega en días",
+          "No, es planeación para una importación futura",
+          "No lo sé con certeza",
+        ],
+      },
+      {
+        text: "¿Cuál es tu corredor principal?",
+        opts: [
+          "Tijuana - San Diego",
+          "Otro cruce fronterizo en la zona norte",
+          "Operación marítima o aérea",
+          "Aún no tengo operaciones activas",
+        ],
+      },
+    ],
+    results: {
+      HELD_URGENT: {
+        title: "Carga detenida, acción inmediata",
+        body: "Cuando la mercancía queda retenida en aduana, cada día suma almacenaje y rompe compromisos de entrega. Revisamos la causa: clasificación incorrecta, NOM no acreditada, permiso faltante o documentación incompleta, y coordinamos la solución para liberar la carga.",
+        cta: "Hablar con el equipo",
+      },
+      FIRST_TIME: {
+        title: "Orientación para primera importación",
+        body: "Antes de mover el embarque, revisamos la fracción arancelaria, identificamos las NOM aplicables, los permisos previos de las dependencias correspondientes y las contribuciones que se activan. Así el producto llega al cruce con todos los requisitos resueltos.",
+        cta: "Consultar requisitos",
+      },
+      NOM_PERMIT: {
+        title: "NOM y permisos previos",
+        body: "Identificamos qué Normas Oficiales Mexicanas aplican al producto, sea de etiquetado, información comercial o seguridad, y tramitamos los permisos y avisos de las dependencias correspondientes. Resolver estos requisitos antes del cruce evita que el embarque quede retenido por un punto normativo.",
+        cta: "Revisar mi producto",
+      },
+      LOGISTICS: {
+        title: "Coordinación logística integral",
+        body: "Gestionamos el despacho aduanal, el almacenaje y el transporte puerta a puerta bajo una misma coordinación en el corredor Tijuana-San Diego. Al manejar todos los eslabones, la mercancía no se queda esperando entre partes que responden por separado.",
+        cta: "Hablar con el equipo",
+      },
+      GENERAL: {
+        title: "Diagnóstico de la operación",
+        body: "Revisamos el punto de partida de la importación, la fracción arancelaria, los requisitos normativos y la logística disponible, y orientamos la operación hacia el despacho sin retenciones evitables.",
+        cta: "Hablar con el equipo",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "de",
+    progress: "Pregunta",
+    form: {
+      heading: "Recibe orientación del equipo",
+      namePlaceholder: "Nombre completo",
+      emailPlaceholder: "Correo electrónico",
+      phonePlaceholder: "Teléfono (opcional)",
+      submit: "Enviar",
+      sending: "Enviando...",
+      successTitle: "Recibido",
+      successBody: "El equipo revisará tu caso y se pondrá en contacto contigo en breve.",
+      errorMsg: "Ocurrió un error al enviar. Intenta de nuevo o escribe a contacto@bgc.mx.",
+      nameRequired: "El nombre es obligatorio",
+      emailRequired: "El correo electrónico es obligatorio",
+      emailInvalid: "Correo electrónico no válido",
+    },
+  },
+  en: {
+    eyebrow: "Quick diagnostic",
+    title: "Where does your operation start?",
+    lead: "Four questions to point you toward the right area.",
+    restart: "Start over",
+    questions: [
+      {
+        text: "What is your situation today?",
+        opts: [
+          "My cargo is held at customs and I need to resolve it",
+          "I want to import a product and do not know which requirements apply",
+          "I have questions about NOMs or permits my product may require",
+          "I need to coordinate clearance, warehousing, and transport under one point of contact",
+        ],
+      },
+      {
+        text: "Have you imported this product into Mexico before?",
+        opts: [
+          "No, this is the first time and I do not know the requirements",
+          "Yes, but I had problems at the border or with documentation",
+          "Yes, and I want to improve the logistics coordination",
+          "The operation is recurring and well established",
+        ],
+      },
+      {
+        text: "Are deadlines already running?",
+        opts: [
+          "Yes, the cargo is already in transit or being held",
+          "Yes, the customer expects delivery within days",
+          "No, this is planning for a future import",
+          "I am not sure",
+        ],
+      },
+      {
+        text: "What is your main corridor?",
+        opts: [
+          "Tijuana - San Diego",
+          "Another border crossing in the northern zone",
+          "Maritime or air operation",
+          "No active operations yet",
+        ],
+      },
+    ],
+    results: {
+      HELD_URGENT: {
+        title: "Goods held, immediate action",
+        body: "When cargo is detained at customs, every day adds storage costs and breaks delivery commitments. We identify the cause, whether wrong classification, an unaccredited NOM, a missing permit, or incomplete paperwork, and coordinate the solution to release the goods.",
+        cta: "Talk to the team",
+      },
+      FIRST_TIME: {
+        title: "Guidance for a first import",
+        body: "Before the shipment moves, we review the tariff classification, identify the applicable NOMs, the prior permits required by the relevant agencies, and the duties that apply. The product reaches the border with every requirement already resolved.",
+        cta: "Check requirements",
+      },
+      NOM_PERMIT: {
+        title: "NOMs and prior permits",
+        body: "We identify which Mexican Official Standards apply to the product, whether for labeling, product information, or safety, and process the permits and notices required by the relevant agencies. Resolving these requirements before the crossing keeps the shipment from being held over a regulatory point.",
+        cta: "Review my product",
+      },
+      LOGISTICS: {
+        title: "Integrated logistics coordination",
+        body: "We manage customs clearance, warehousing, and door-to-door transport under a single coordination across the Tijuana-San Diego corridor. By handling every link, goods do not sit waiting on a party that answers only for its own leg.",
+        cta: "Talk to the team",
+      },
+      GENERAL: {
+        title: "Operation diagnostic",
+        body: "We review the starting point of the import: tariff classification, regulatory requirements, and available logistics, then direct the operation toward clearance without avoidable holds.",
+        cta: "Talk to the team",
+      },
+    },
+    contactTJ: "Tijuana +52 (664) 607 9642",
+    contactSD: "San Diego (619) 638-2168",
+    contactEmail: "contacto@bgc.mx",
+    of: "of",
+    progress: "Question",
+    form: {
+      heading: "Get guidance from the team",
+      namePlaceholder: "Full name",
+      emailPlaceholder: "Email address",
+      phonePlaceholder: "Phone (optional)",
+      submit: "Send",
+      sending: "Sending...",
+      successTitle: "Received",
+      successBody: "The team will review your case and be in touch shortly.",
+      errorMsg: "An error occurred. Try again or write to contacto@bgc.mx.",
+      nameRequired: "Name is required",
+      emailRequired: "Email address is required",
+      emailInvalid: "Invalid email address",
+    },
+  },
+  getResult(answers: number[]): string {
+    const [q1, q2, q3] = answers;
+    if (q1 === 0) return "HELD_URGENT";
+    if (q3 === 0) return "HELD_URGENT";
+    if (q1 === 2) return "NOM_PERMIT";
+    if (q1 === 3) return "LOGISTICS";
+    if (q1 === 1 && q2 === 0) return "FIRST_TIME";
+    return "GENERAL";
+  },
+  resultTag: {
+    HELD_URGENT: { es: "Carga detenida", en: "Goods held" },
+    FIRST_TIME: { es: "Primera importación", en: "First import" },
+    NOM_PERMIT: { es: "NOM y permisos", en: "NOMs and permits" },
+    LOGISTICS: { es: "Logística integral", en: "Integrated logistics" },
+    GENERAL: { es: "Diagnóstico", en: "Diagnostic" },
+  },
+  stageForResult: {
+    HELD_URGENT: 0,
+    FIRST_TIME: 0,
+    NOM_PERMIT: 1,
+    LOGISTICS: 3,
+    GENERAL: 0,
+  },
+};
+
+const IMPORT_SERVICES_FLOW: FlowData = {
+  es: {
+    eyebrow: "Proceso de importación",
+    title: "Del origen a la entrega en destino.",
+    lead: "Cada importación recorre las mismas etapas. BG coordina el despacho, el cumplimiento normativo y la logística en el corredor Tijuana-San Diego para que la mercancía cruce sin retenciones evitables.",
+    panel: "Flujo de importación · 5 etapas",
+    stages: [
+      {
+        n: "01",
+        name: "Clasificación arancelaria",
+        desc: "Se determina la fracción arancelaria de la mercancía conforme a las Reglas Generales de Interpretación. La fracción define el arancel aplicable, el IGI y el IVA, y activa los requisitos normativos del producto: NOM, permisos y regulaciones no arancelarias. Un error en la fracción es el origen de la mayoría de las retenciones en aduana.",
+      },
+      {
+        n: "02",
+        name: "NOM y regulaciones no arancelarias",
+        desc: "Se identifican las Normas Oficiales Mexicanas aplicables al producto, sean de etiquetado comercial, información comercial o seguridad, y se gestiona la acreditación que la aduana exige antes de liberar la mercancía. La verificación normativa se resuelve antes del cruce, no cuando el embarque ya está detenido.",
+      },
+      {
+        n: "03",
+        name: "Permisos previos y trámites ante dependencias",
+        desc: "Se tramitan los permisos previos, avisos y autorizaciones que distintas dependencias exigen según el tipo de mercancía: Salud, Economía, SADER u otras. Mapear estos requisitos antes de que la carga llegue al cruce evita que el producto quede detenido por un trámite que debía resolverse antes.",
+      },
+      {
+        n: "04",
+        name: "Despacho aduanal y pedimento",
+        desc: "Se coordina el despacho ante la aduana con agente aduanal: elaboración del pedimento, transmisión ante el mecanismo de selección automatizado y atención al reconocimiento cuando aplica. La clasificación correcta, el soporte documental completo y los requisitos normativos acreditados son los que permiten que la mercancía cruce sin retenciones.",
+      },
+      {
+        n: "05",
+        name: "Almacenaje, transporte y entrega",
+        desc: "Con la mercancía liberada, se coordina el movimiento físico: almacenaje para consolidar embarques o resguardar la carga mientras se completa algún trámite, y transporte puerta a puerta hasta el destino final en México. Al manejar el despacho y la logística bajo una misma coordinación, la mercancía no espera entre eslabones que responden por separado.",
+      },
+    ],
+  },
+  en: {
+    eyebrow: "Import process",
+    title: "From origin to delivery at destination.",
+    lead: "Every import moves through the same stages. BG coordinates clearance, regulatory compliance, and logistics across the Tijuana-San Diego corridor so goods cross without avoidable holds.",
+    panel: "Import flow · 5 stages",
+    stages: [
+      {
+        n: "01",
+        name: "Tariff classification",
+        desc: "The tariff code is determined under the General Rules of Interpretation. The code drives the applicable duty, the general import duty, and VAT, and triggers the product's regulatory requirements: NOMs, permits, and non-tariff regulations. A wrong classification is the source of most customs holds.",
+      },
+      {
+        n: "02",
+        name: "NOMs and non-tariff regulations",
+        desc: "We identify which Mexican Official Standards apply to the product, whether for commercial labeling, product information, or safety, and handle the accreditation customs requires before releasing the goods. The regulatory check is resolved ahead of the crossing, not once the shipment is already held.",
+      },
+      {
+        n: "03",
+        name: "Prior permits and agency filings",
+        desc: "We process the prior permits, notices, and authorizations that different agencies require depending on the type of goods. Mapping these requirements before the cargo reaches the border keeps the product from being detained over a filing that should have been completed beforehand.",
+      },
+      {
+        n: "04",
+        name: "Customs clearance and pedimento",
+        desc: "We coordinate clearance through a licensed customs broker: preparing the pedimento, transmitting it to the automated selection system, and attending the physical inspection when triggered. Correct classification, complete supporting documentation, and accredited regulatory requirements are what let the goods cross without holds.",
+      },
+      {
+        n: "05",
+        name: "Warehousing, transport, and delivery",
+        desc: "Once the goods are released, we coordinate the physical move: warehousing to consolidate shipments or hold cargo while a filing is completed, and door-to-door transport to the final destination in Mexico. By running clearance and logistics under one coordination, the goods do not sit waiting on a link that answers only for its own leg.",
+      },
+    ],
+  },
+};
+
 export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
   "es": [
     {
@@ -2625,7 +2900,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "¿Se encargan también del transporte y la entrega?",
           "a": "Sí. Además del despacho aduanal, coordinamos el transporte de la carga y el servicio puerta a puerta hasta el destino final en México, junto con almacenaje cuando se requiere consolidar o resguardar la mercancía. La idea es que el trámite y el movimiento físico avancen coordinados, no por separado."
         }
-      ]
+      ],
+      diagnostic: IMPORT_SERVICES_DIAGNOSTIC,
+      flow: IMPORT_SERVICES_FLOW,
     }
   ],
   "en": [
@@ -3207,7 +3484,9 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
           "q": "Do you also handle transport and delivery?",
           "a": "Yes. Beyond customs clearance, we coordinate cargo transportation and door-to-door service to the final destination in Mexico, along with warehousing when goods need to be consolidated or held. The point is to keep the filing and the physical move advancing together, not separately."
         }
-      ]
+      ],
+      diagnostic: IMPORT_SERVICES_DIAGNOSTIC,
+      flow: IMPORT_SERVICES_FLOW,
     }
   ]
 };
