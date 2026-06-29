@@ -172,3 +172,34 @@ export const articles = pgTable("articles", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });
+
+export type FeedbackStatus = "open" | "resolved";
+
+// Enlaces de feedback: un token por cliente/ronda. El widget del sitio público solo
+// aparece si la URL trae un token activo. Se crean y revocan desde el panel admin.
+export const feedbackLinks = pgTable("feedback_links", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  token: text("token").notNull().unique(),
+  label: text("label").notNull(),
+  active: boolean("active").default(true).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
+
+// Notas que deja el cliente al hacer click en el sitio. Anónimas, con contexto del
+// elemento clicado y posición en el documento para poder ubicar el pin.
+export const feedbackNotes = pgTable("feedback_notes", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  linkId: uuid("link_id")
+    .notNull()
+    .references(() => feedbackLinks.id, { onDelete: "cascade" }),
+  path: text("path").notNull(),
+  note: text("note").notNull(),
+  selector: text("selector"),
+  elementText: text("element_text"),
+  xPct: integer("x_pct"),
+  yPct: integer("y_pct"),
+  viewportW: integer("viewport_w"),
+  pageTitle: text("page_title"),
+  status: text("status").$type<FeedbackStatus>().default("open").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
