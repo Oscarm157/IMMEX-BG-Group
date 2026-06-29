@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Users, KanbanSquare, ListFilter, UserRound, LayoutDashboard, Newspaper,
-  Megaphone, Share2, LogOut, Sun, Moon,
+  Megaphone, Share2, LogOut, Sun, Moon, MessageSquare,
 } from "lucide-react";
 import {
   Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup,
@@ -26,7 +26,7 @@ function isActive(pathname: string, href: string) {
 }
 
 export function AppSidebar({
-  user, showUsers, showDashboard, showBlog, showPosts, showAds, logoutAction,
+  user, showUsers, showDashboard, showBlog, showPosts, showAds, showFeedback, logoutAction,
 }: {
   user: { name: string; role: string };
   showUsers: boolean;
@@ -34,6 +34,7 @@ export function AppSidebar({
   showBlog: boolean;
   showPosts: boolean;
   showAds: boolean;
+  showFeedback: boolean;
   logoutAction: () => void;
 }) {
   const pathname = usePathname();
@@ -66,6 +67,7 @@ export function AppSidebar({
   const contenido: Item[] = [];
   if (showBlog) contenido.push({ href: "/admin/blog", label: "Blog", icon: Newspaper });
   if (showPosts) contenido.push({ href: "/admin/posts", label: "Generador de posts", icon: Share2 });
+  if (showFeedback) contenido.push({ href: "/admin/feedback", label: "Comentarios del sitio", icon: MessageSquare });
 
   const cuenta: Item[] = [];
   if (showUsers) cuenta.push({ href: "/admin/users", label: "Usuarios", icon: Users });
