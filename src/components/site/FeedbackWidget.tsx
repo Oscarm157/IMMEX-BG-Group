@@ -44,6 +44,38 @@ function cssPath(el: Element): string {
   return parts.join(" > ").slice(0, 500);
 }
 
+// Nombre legible del archivo de imagen (decodifica el wrapper /_next/image de Next).
+function imageName(src: string): string {
+  let s = src;
+  try {
+    if (s.includes("/_next/image")) {
+      const u = new URL(s, window.location.origin);
+      s = u.searchParams.get("url") || s;
+    }
+  } catch {}
+  return decodeURIComponent(s).split("?")[0].split("/").pop() || s;
+}
+
+// Describe el elemento clicado para que el comentario diga sobre QUÉ es.
+// Las imágenes se identifican por archivo + alt (no tienen texto).
+function describeElement(el: Element): string | null {
+  const img = (el.tagName === "IMG" ? el : el.querySelector("img")) as HTMLImageElement | null;
+  if (img) {
+    const name = imageName(img.currentSrc || img.src || "");
+    const alt = (img.alt || "").trim();
+    return `imagen: ${name}${alt ? ` (${alt})` : ""}`.slice(0, 200);
+  }
+  // Imagen de fondo (CSS) en el elemento o un par de ancestros.
+  let node: Element | null = el;
+  for (let i = 0; node && i < 3; i++, node = node.parentElement) {
+    const bg = getComputedStyle(node).backgroundImage;
+    const m = bg && bg !== "none" ? bg.match(/url\(["']?([^"')]+)["']?\)/) : null;
+    if (m) return `imagen de fondo: ${imageName(m[1])}`.slice(0, 200);
+  }
+  const text = (el.textContent || "").trim().replace(/\s+/g, " ");
+  return text ? text.slice(0, 120) : null;
+}
+
 export function FeedbackWidget() {
   const pathname = usePathname();
   const [token, setToken] = useState<string | null>(null);
@@ -53,6 +85,7 @@ export function FeedbackWidget() {
   const [noteText, setNoteText] = useState("");
   const [sending, setSending] = useState(false);
   const [pins, setPins] = useState<Pin[]>([]);
+  const [total, setTotal] = useState(0);
   const [openPin, setOpenPin] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [docSize, setDocSize] = useState({ w: 0, h: 0 });
@@ -113,6 +146,7 @@ export function FeedbackWidget() {
         if (cancelled) return;
         setReady(true);
         setPins(Array.isArray(data.notes) ? data.notes : []);
+        setTotal(typeof data.total === "number" ? data.total : 0);
         measure();
       } catch {
         /* sin red: el widget simplemente no aparece */
@@ -149,7 +183,7 @@ export function FeedbackWidget() {
         screen: { left: e.clientX, top: e.clientY },
         doc: { xPct, yPct },
         selector: el ? cssPath(el) : null,
-        elementText: el ? (el.textContent || "").trim().slice(0, 120) || null : null,
+        elementText: el ? describeElement(el) : null,
       });
       setNoteText("");
       setPinMode(false);
@@ -192,6 +226,7 @@ export function FeedbackWidget() {
           { id: data.id, note: noteText.trim(), xPct: Math.round(draft.doc.xPct), yPct: Math.round(draft.doc.yPct), status: "open" },
           ...prev,
         ]);
+        setTotal((t) => t + 1);
         setDraft(null);
         setNoteText("");
         showToast("Comentario enviado");
@@ -309,6 +344,11 @@ export function FeedbackWidget() {
         >
           <MessageSquarePlus className="size-4" />
           Comentar
+          {total > 0 && (
+            <span className="ml-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-accent-foreground/15 px-1.5 text-[11px] font-semibold tabular-nums">
+              {total}
+            </span>
+          )}
         </button>
       )}
 

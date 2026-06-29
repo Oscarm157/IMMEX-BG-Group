@@ -77,9 +77,11 @@ export function FeedbackBoard({
       const title = items[0]?.pageTitle;
       lines.push(`## ${path}${title ? ` — ${title}` : ""}`);
       items.forEach((n, i) => {
-        const where = n.elementText ? ` · sobre “${n.elementText}”` : "";
         const st = n.status === "resolved" ? "resuelto" : "abierto";
-        lines.push(`${i + 1}. [${st}] (${fmt(n.createdAt)}${where}) ${n.note}`);
+        lines.push(`${i + 1}. [${st}] ${n.note}`);
+        if (n.elementText) lines.push(`   - ubicación: ${n.elementText}`);
+        if (n.selector) lines.push(`   - selector: ${n.selector}`);
+        lines.push(`   - ${fmt(n.createdAt)}`);
       });
       lines.push("");
     }

@@ -68,7 +68,12 @@ export async function GET(req: Request) {
       .where(and(eq(feedbackNotes.linkId, link.id), eq(feedbackNotes.path, path)))
       .orderBy(desc(feedbackNotes.createdAt));
   }
-  return Response.json({ ok: true, label: link.label, notes });
+  // Total en todo el sitio (todas las páginas) para el contador del widget.
+  const all = await db
+    .select({ id: feedbackNotes.id })
+    .from(feedbackNotes)
+    .where(eq(feedbackNotes.linkId, link.id));
+  return Response.json({ ok: true, label: link.label, notes, total: all.length });
 }
 
 // POST: guarda una nota anónima ligada a un token activo.
