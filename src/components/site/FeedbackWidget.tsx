@@ -12,11 +12,19 @@ type Pin = {
   status: "open" | "resolved";
 };
 
+type Rect = { top: number; left: number; width: number; height: number };
+
 type Draft = {
   screen: { left: number; top: number };
   doc: { xPct: number; yPct: number };
-  selector: string | null;
-  elementText: string | null;
+  // Nivel elemento (lo que se clicó exacto)
+  elementSelector: string | null;
+  elementStore: string | null; // se guarda (con nombre de archivo, para Oscar)
+  elementShow: string | null; // se muestra al cliente (sin nombres internos)
+  // Nivel sección (bloque completo que lo contiene)
+  sectionSelector: string | null;
+  sectionStore: string | null;
+  sectionRect: Rect | null;
 };
 
 const TOKEN_KEY = "bg_fb_token";
@@ -56,35 +64,59 @@ function imageName(src: string): string {
   return decodeURIComponent(s).split("?")[0].split("/").pop() || s;
 }
 
-// Describe el elemento clicado para que el comentario diga sobre QUÉ es.
-// Las imágenes se identifican por archivo + alt (no tienen texto).
-function describeElement(el: Element): string | null {
+// Describe el elemento clicado. `store` se guarda para Oscar (incluye nombre de
+// archivo de imagen); `show` es lo que ve el cliente (sin nombres internos raros).
+function describeElement(el: Element): { store: string | null; show: string | null } {
   const img = (el.tagName === "IMG" ? el : el.querySelector("img")) as HTMLImageElement | null;
   if (img) {
     const name = imageName(img.currentSrc || img.src || "");
     const alt = (img.alt || "").trim();
-    return `imagen: ${name}${alt ? ` (${alt})` : ""}`.slice(0, 200);
+    return {
+      store: `imagen: ${name}${alt ? ` (${alt})` : ""}`.slice(0, 200),
+      show: alt ? `Imagen: ${alt}` : "Imagen",
+    };
   }
   // Imagen de fondo (CSS) en el elemento o un par de ancestros.
   let node: Element | null = el;
   for (let i = 0; node && i < 3; i++, node = node.parentElement) {
     const bg = getComputedStyle(node).backgroundImage;
     const m = bg && bg !== "none" ? bg.match(/url\(["']?([^"')]+)["']?\)/) : null;
-    if (m) return `imagen de fondo: ${imageName(m[1])}`.slice(0, 200);
+    if (m) return { store: `imagen de fondo: ${imageName(m[1])}`.slice(0, 200), show: "Imagen de fondo" };
   }
   const text = (el.textContent || "").trim().replace(/\s+/g, " ");
-  return text ? text.slice(0, 120) : null;
+  const t = text ? text.slice(0, 120) : null;
+  return { store: t, show: t };
+}
+
+// Sección/bloque que contiene al elemento, para comentar "toda esta sección".
+function nearestSection(el: Element): Element {
+  let node: Element | null = el;
+  while (node && node !== document.body) {
+    const tag = node.tagName.toLowerCase();
+    if (tag === "section" || tag === "header" || tag === "footer" || node.hasAttribute("data-section")) return node;
+    node = node.parentElement;
+  }
+  // Fallback: hijo directo de <main> (las bandas del sitio).
+  const main = document.querySelector("main");
+  if (main) {
+    let n: Element | null = el;
+    while (n && n.parentElement && n.parentElement !== main) n = n.parentElement;
+    if (n && n.parentElement === main) return n;
+  }
+  return el.closest("section, main") || el;
 }
 
 export function FeedbackWidget() {
   const pathname = usePathname();
   const [token, setToken] = useState<string | null>(null);
   const [ready, setReady] = useState(false);
-  const [pinMode, setPinMode] = useState(false);
+  const [commentMode, setCommentMode] = useState(false);
   const [draft, setDraft] = useState<Draft | null>(null);
+  const [scope, setScope] = useState<"element" | "section">("element");
   const [noteText, setNoteText] = useState("");
   const [sending, setSending] = useState(false);
   const [pins, setPins] = useState<Pin[]>([]);
+  const [hoverRect, setHoverRect] = useState<{ top: number; left: number; width: number; height: number } | null>(null);
   const [total, setTotal] = useState(0);
   const [openPin, setOpenPin] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
@@ -164,9 +196,10 @@ export function FeedbackWidget() {
     return () => window.removeEventListener("resize", measure);
   }, [ready, measure]);
 
-  // Captura el click en modo pin (fase de captura, bloquea la navegación del sitio).
+  // Modo comentarios persistente: mientras esté activo y sin editor abierto, cada
+  // click agrega una nota (no hay que reactivarlo). Bloquea la navegación del sitio.
   useEffect(() => {
-    if (!pinMode) return;
+    if (!commentMode || draft) return;
 
     function onClick(e: MouseEvent) {
       const target = e.target as Element | null;
@@ -179,30 +212,61 @@ export function FeedbackWidget() {
       const root = document.documentElement;
       const xPct = root.scrollWidth ? (pageX / root.scrollWidth) * 100 : 0;
       const yPct = root.scrollHeight ? (pageY / root.scrollHeight) * 100 : 0;
+      const desc = el ? describeElement(el) : { store: null, show: null };
+      let sectionSelector: string | null = null;
+      let sectionStore: string | null = null;
+      let sectionRect: Rect | null = null;
+      if (el) {
+        const sec = nearestSection(el);
+        sectionSelector = cssPath(sec);
+        const heading = sec.querySelector("h1, h2, h3")?.textContent?.trim();
+        sectionStore = `sección: ${heading ? heading.slice(0, 120) : sectionSelector}`;
+        const r = sec.getBoundingClientRect();
+        sectionRect = { top: r.top, left: r.left, width: r.width, height: r.height };
+      }
       setDraft({
         screen: { left: e.clientX, top: e.clientY },
         doc: { xPct, yPct },
-        selector: el ? cssPath(el) : null,
-        elementText: el ? describeElement(el) : null,
+        elementSelector: el ? cssPath(el) : null,
+        elementStore: desc.store,
+        elementShow: desc.show,
+        sectionSelector,
+        sectionStore,
+        sectionRect,
       });
+      setScope("element");
       setNoteText("");
-      setPinMode(false);
+      setHoverRect(null);
+    }
+
+    function onMove(e: MouseEvent) {
+      const target = e.target as Element | null;
+      if (!target || target.nodeType !== 1 || target.closest("[data-fb-ui]")) {
+        setHoverRect(null);
+        return;
+      }
+      const r = target.getBoundingClientRect();
+      setHoverRect({ top: r.top, left: r.left, width: r.width, height: r.height });
     }
 
     function onKey(e: KeyboardEvent) {
-      if (e.key === "Escape") setPinMode(false);
+      if (e.key === "Escape") setCommentMode(false);
     }
 
     document.addEventListener("click", onClick, true);
+    document.addEventListener("mousemove", onMove, true);
     document.addEventListener("keydown", onKey);
     return () => {
       document.removeEventListener("click", onClick, true);
+      document.removeEventListener("mousemove", onMove, true);
       document.removeEventListener("keydown", onKey);
+      setHoverRect(null);
     };
-  }, [pinMode]);
+  }, [commentMode, draft]);
 
   async function submit() {
     if (!draft || !token || !noteText.trim() || sending) return;
+    const useSection = scope === "section" && !!draft.sectionSelector;
     setSending(true);
     try {
       const res = await fetch("/api/feedback", {
@@ -212,8 +276,8 @@ export function FeedbackWidget() {
           token,
           path: pathname,
           note: noteText.trim(),
-          selector: draft.selector,
-          elementText: draft.elementText,
+          selector: useSection ? draft.sectionSelector : draft.elementSelector,
+          elementText: useSection ? draft.sectionStore : draft.elementStore,
           xPct: draft.doc.xPct,
           yPct: draft.doc.yPct,
           viewportW: window.innerWidth,
@@ -275,15 +339,35 @@ export function FeedbackWidget() {
         </div>
       )}
 
-      {/* Banner del modo pin */}
-      {pinMode && (
+      {/* Resaltado del elemento bajo el cursor en modo comentarios */}
+      {commentMode && !draft && hoverRect && (
+        <div
+          data-fb-ui
+          aria-hidden
+          className="pointer-events-none fixed z-[9993] rounded-[3px] border-2 border-accent bg-accent/10 transition-[top,left,width,height] duration-75"
+          style={{ top: hoverRect.top, left: hoverRect.left, width: hoverRect.width, height: hoverRect.height }}
+        />
+      )}
+
+      {/* Resaltado de la sección completa cuando el toggle está en "sección" */}
+      {draft && scope === "section" && draft.sectionRect && (
+        <div
+          data-fb-ui
+          aria-hidden
+          className="pointer-events-none fixed z-[9993] rounded-[3px] border-2 border-accent bg-accent/10"
+          style={{ top: draft.sectionRect.top, left: draft.sectionRect.left, width: draft.sectionRect.width, height: draft.sectionRect.height }}
+        />
+      )}
+
+      {/* Banner del modo comentarios */}
+      {commentMode && !draft && (
         <div
           data-fb-ui
           className="fixed inset-x-0 top-0 z-[9995] flex items-center justify-center gap-3 bg-accent px-4 py-2 text-[13px] font-medium text-accent-foreground"
         >
-          Haz click en el punto que quieres comentar
-          <button type="button" data-fb-ui onClick={() => setPinMode(false)} className="rounded-md bg-black/15 px-2 py-0.5 text-[12px] hover:bg-black/25">
-            Cancelar (Esc)
+          Modo comentarios activo · pasa el cursor y haz click en lo que quieras comentar
+          <button type="button" data-fb-ui onClick={() => setCommentMode(false)} className="rounded-md bg-black/15 px-2 py-0.5 text-[12px] hover:bg-black/25">
+            Salir (Esc)
           </button>
         </div>
       )}
@@ -301,9 +385,33 @@ export function FeedbackWidget() {
               <X className="size-4" />
             </button>
           </div>
-          {draft.elementText && (
-            <p className="mb-2 line-clamp-2 rounded-md bg-black/20 px-2 py-1 text-[11px] text-ash">“{draft.elementText}”</p>
+          {draft.sectionSelector && (
+            <div className="mb-2 inline-flex rounded-lg border border-line p-0.5 text-[11px]">
+              <button
+                type="button"
+                data-fb-ui
+                onClick={() => setScope("element")}
+                className={`rounded-md px-2 py-1 transition ${scope === "element" ? "bg-accent text-accent-foreground" : "text-ash hover:text-bone"}`}
+              >
+                Este elemento
+              </button>
+              <button
+                type="button"
+                data-fb-ui
+                onClick={() => setScope("section")}
+                className={`rounded-md px-2 py-1 transition ${scope === "section" ? "bg-accent text-accent-foreground" : "text-ash hover:text-bone"}`}
+              >
+                Toda la sección
+              </button>
+            </div>
           )}
+          {scope === "element"
+            ? draft.elementShow && (
+                <p className="mb-2 line-clamp-2 rounded-md bg-black/20 px-2 py-1 text-[11px] text-ash">{draft.elementShow}</p>
+              )
+            : (
+              <p className="mb-2 rounded-md bg-black/20 px-2 py-1 text-[11px] text-ash">Comentario sobre toda la sección resaltada</p>
+            )}
           <textarea
             data-fb-ui
             autoFocus
@@ -331,14 +439,27 @@ export function FeedbackWidget() {
         </div>
       )}
 
-      {/* Lanzador */}
-      {!pinMode && !draft && (
+      {/* Toggle del modo comentarios (persistente) */}
+      {commentMode ? (
+        <button
+          type="button"
+          data-fb-ui
+          onClick={() => {
+            setCommentMode(false);
+            setDraft(null);
+          }}
+          className="fixed bottom-5 left-5 z-[9994] inline-flex items-center gap-2 rounded-full border border-accent bg-ink px-4 py-2.5 text-[13px] font-medium text-accent shadow-xl transition hover:bg-surface-1"
+        >
+          <X className="size-4" />
+          Salir del modo comentarios
+        </button>
+      ) : (
         <button
           type="button"
           data-fb-ui
           onClick={() => {
             setOpenPin(null);
-            setPinMode(true);
+            setCommentMode(true);
           }}
           className="fixed bottom-5 left-5 z-[9994] inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2.5 text-[13px] font-medium text-accent-foreground shadow-xl transition hover:opacity-90"
         >
