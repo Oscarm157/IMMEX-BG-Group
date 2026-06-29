@@ -222,7 +222,9 @@ export function FeedbackWidget() {
         const heading = sec.querySelector("h1, h2, h3")?.textContent?.trim();
         sectionStore = `sección: ${heading ? heading.slice(0, 120) : sectionSelector}`;
         const r = sec.getBoundingClientRect();
-        sectionRect = { top: r.top, left: r.left, width: r.width, height: r.height };
+        // Coordenadas del documento (no del viewport) para que el resaltado siga a la
+        // sección al hacer scroll y cubra su altura real.
+        sectionRect = { top: r.top + window.scrollY, left: r.left + window.scrollX, width: r.width, height: r.height };
       }
       setDraft({
         screen: { left: e.clientX, top: e.clientY },
@@ -349,12 +351,13 @@ export function FeedbackWidget() {
         />
       )}
 
-      {/* Resaltado de la sección completa cuando el toggle está en "sección" */}
+      {/* Resaltado de la sección completa cuando el toggle está en "sección".
+          Posición absoluta en el documento: sigue a la sección al hacer scroll. */}
       {draft && scope === "section" && draft.sectionRect && (
         <div
           data-fb-ui
           aria-hidden
-          className="pointer-events-none fixed z-[9993] rounded-[3px] border-2 border-accent bg-accent/10"
+          className="pointer-events-none absolute z-[9993] rounded-[3px] border-2 border-accent bg-accent/10"
           style={{ top: draft.sectionRect.top, left: draft.sectionRect.left, width: draft.sectionRect.width, height: draft.sectionRect.height }}
         />
       )}
