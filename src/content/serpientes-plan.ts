@@ -16,11 +16,13 @@ export const meta = {
 export const clubTagline = "Letales en la Duela, Imparables en el Juego";
 
 /* Cifras públicas de redes sociales, NO vienen del documento del analista:
-   investigación propia sobre las cuentas oficiales, julio 2026. Son cifras
-   aproximadas obtenidas de resultados públicos de búsqueda (Instagram y
-   Facebook no permiten scraping directo sin sesión iniciada), no de una API
-   oficial ni de un panel de analítica. Se usan solo como referencia de
-   magnitud en la comparativa, no como dato exacto en tiempo real. */
+   investigación propia sobre las cuentas oficiales, julio 2026. Las de
+   Guaycuras y Lobos son aproximadas, de resultados públicos de búsqueda
+   (Instagram y Facebook no permiten scraping directo sin sesión iniciada),
+   no de una API oficial ni de un panel de analítica. El dato de Facebook de
+   Serpientes Tijuana lo confirmó Oscar directo desde la página (1.9k
+   seguidores). Se usan solo como referencia de magnitud en la comparativa,
+   no como dato exacto en tiempo real. */
 export const REDES_RIVALES = {
   fuente: "Cifras públicas aproximadas, consultadas julio 2026",
   equipos: {
@@ -34,7 +36,7 @@ export const REDES_RIVALES = {
     },
     "Serpientes Tijuana": {
       instagram: { seguidores: 487, handle: "@serpientestijuana" },
-      facebook: null,
+      facebook: { meGusta: 1900 },
     },
   },
 } as const;
