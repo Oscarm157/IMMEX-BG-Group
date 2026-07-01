@@ -15,6 +15,30 @@ export const meta = {
    identidad de marca, separado del copy analítico. */
 export const clubTagline = "Letales en la Duela, Imparables en el Juego";
 
+/* Cifras públicas de redes sociales, NO vienen del documento del analista:
+   investigación propia sobre las cuentas oficiales, julio 2026. Son cifras
+   aproximadas obtenidas de resultados públicos de búsqueda (Instagram y
+   Facebook no permiten scraping directo sin sesión iniciada), no de una API
+   oficial ni de un panel de analítica. Se usan solo como referencia de
+   magnitud en la comparativa, no como dato exacto en tiempo real. */
+export const REDES_RIVALES = {
+  fuente: "Cifras públicas aproximadas, consultadas julio 2026",
+  equipos: {
+    "Guaycuras de La Paz": {
+      instagram: { seguidores: 2925, handle: "@guaycuraslapazclubdebasquetbol" },
+      facebook: { meGusta: 19940 },
+    },
+    "Lobos de Ensenada": {
+      instagram: { seguidores: 4270, handle: "@ensenadalobos" },
+      facebook: { meGusta: 11414 },
+    },
+    "Serpientes Tijuana": {
+      instagram: { seguidores: 487, handle: "@serpientestijuana" },
+      facebook: null,
+    },
+  },
+} as const;
+
 export const CONTEXTO = {
   numero: "01",
   titulo: "Contexto general",

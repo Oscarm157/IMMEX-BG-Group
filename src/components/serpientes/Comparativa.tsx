@@ -1,5 +1,9 @@
 import { Reveal } from "@/components/site/Reveal";
-import { COMPARATIVA } from "@/content/serpientes-plan";
+import { COMPARATIVA, REDES_RIVALES } from "@/content/serpientes-plan";
+
+function n(num: number) {
+  return num.toLocaleString("es-MX");
+}
 
 export function Comparativa() {
   return (
@@ -48,6 +52,35 @@ export function Comparativa() {
                     </span>
                   </header>
 
+                  {(() => {
+                    const redes =
+                      REDES_RIVALES.equipos[
+                        equipo.nombre as keyof typeof REDES_RIVALES.equipos
+                      ];
+                    return (
+                      <div className="mb-5 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-[var(--st-line)] pb-5 [font-family:var(--font-plex-mono)]">
+                        <span className="flex items-baseline gap-1.5">
+                          <span
+                            className={`text-[20px] leading-none ${destacado ? "text-[var(--st-gold)]" : "text-[var(--st-chalk)]"}`}
+                          >
+                            {n(redes.instagram.seguidores)}
+                          </span>
+                          <span className="text-[11px] text-[var(--st-ash)]">IG</span>
+                        </span>
+                        {redes.facebook && (
+                          <span className="flex items-baseline gap-1.5">
+                            <span
+                              className={`text-[20px] leading-none ${destacado ? "text-[var(--st-gold)]" : "text-[var(--st-chalk)]"}`}
+                            >
+                              {n(redes.facebook.meGusta)}
+                            </span>
+                            <span className="text-[11px] text-[var(--st-ash)]">FB</span>
+                          </span>
+                        )}
+                      </div>
+                    );
+                  })()}
+
                   <p className="text-[14px] leading-[1.62] text-[var(--st-bone)] md:text-[15px]">
                     {equipo.resumen}
                   </p>
@@ -73,6 +106,9 @@ export function Comparativa() {
             );
           })}
         </div>
+        <p className="mt-4 text-[11px] text-[var(--st-ash)]">
+          IG / FB: {REDES_RIVALES.fuente}.
+        </p>
       </div>
     </section>
   );
