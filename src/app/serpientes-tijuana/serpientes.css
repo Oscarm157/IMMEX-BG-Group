@@ -1,0 +1,83 @@
+/* Tokens escopados a esta ruta. No toca src/app/globals.css (tema del sitio BG). */
+
+.st-root {
+  --st-void: #0a0a0b;
+  --st-surface-1: #16171a;
+  --st-surface-2: #1e2024;
+  --st-line: #2a2c31;
+
+  --st-chalk: #f5f5f2;
+  --st-bone: #a3a5ab;
+  --st-ash: #6f7178;
+
+  --st-gold: #c9a876;
+  --st-red: #d6202e;
+
+  --font-display: var(--font-anton), system-ui, sans-serif;
+  --font-label: var(--font-oswald), system-ui, sans-serif;
+
+  background: var(--st-void);
+  color: var(--st-chalk);
+  min-height: 100vh;
+  font-family: var(--font-inter), system-ui, sans-serif;
+}
+
+.st-eyebrow {
+  font-family: var(--font-label);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.st-display {
+  font-family: var(--font-display);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+}
+
+/* Wordmark del hero: única excepción intencional donde dorado y rojo conviven,
+   replicando el logo real (relleno dorado, contorno rojo). */
+.st-wordmark {
+  color: var(--st-gold);
+  -webkit-text-stroke: 1.5px var(--st-red);
+  paint-order: stroke fill;
+}
+
+@media (min-width: 768px) {
+  .st-wordmark {
+    -webkit-text-stroke-width: 2.5px;
+  }
+}
+
+/* Fila con scroll-snap horizontal en mobile (comparativa/calendario), sin barra. */
+.st-hscroll {
+  scrollbar-width: none;
+}
+.st-hscroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Compensa el header fijo al saltar a un ancla en /documento. */
+.st-anchor {
+  scroll-margin-top: 96px;
+}
+
+.st-marquee-track {
+  animation: st-marquee 32s linear infinite;
+}
+
+@keyframes st-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .st-marquee-track {
+    animation-play-state: paused;
+  }
+}
