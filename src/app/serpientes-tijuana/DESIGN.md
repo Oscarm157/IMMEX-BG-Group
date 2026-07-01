@@ -67,12 +67,14 @@ cancha de noche / marcador encendido.
   primario; ghost (borde `--st-line`, texto chalk) para secundario. Sin sombras.
 - **Cards/contenedores:** por defecto NO hay cards. Separación por franjas de
   superficie (`--st-surface-1` vs `--st-void`) y hairlines, no por
-  borde+sombra+radio. Excepción: la comparativa de 3 equipos y las 4 campañas
-  pueden usar un contorno 1px, sin radio grande, sin sombra, porque ahí sí hay
-  necesidad real de delimitar unidades comparables. El fondo de la card es
-  siempre un tono más oscuro que la franja que la contiene (si la sección usa
-  `--st-surface-1`, la card usa `--st-void`; nunca el mismo tono en ambos, para
-  que el contorno no sea la única separación visual).
+  borde+sombra+radio. Excepción: cualquier bloque que agrupe UNIDADES
+  COMPARABLES (equipos, campañas, tipos de contenido, indicadores, objetivos de
+  pauta) puede usar contorno 1px, sin radio grande, sin sombra. El fondo de la
+  card siempre se aparta un tono de la franja que la contiene, nunca el mismo
+  tono en ambos (para que el contorno no sea la única separación visual): si la
+  sección usa `--st-surface-1`, la card usa `--st-void` (recede, efecto
+  tallado); si la sección es el `--st-void` base, la card usa `--st-surface-1`
+  (se eleva, efecto de superficie levantada).
 - **Navegación (StickyBar):** barra fija superior, fondo `--st-void` con
   backdrop-blur sutil al hacer scroll, wordmark chico a la izquierda, dos
   acciones a la derecha (documento completo / descargar) en Oswald.
