@@ -8,16 +8,16 @@ export function EstrategiaPilares() {
     <section className="border-t border-[var(--st-line)] px-6 py-24 md:px-10 md:py-40">
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-          <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
             {ESTRATEGIA.numero}
           </span>
-          <h2 className="st-display text-[clamp(28px,5vw,56px)] text-[var(--st-chalk)]">
+          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
             {ESTRATEGIA.titulo}
           </h2>
         </Reveal>
 
         <Reveal delay={0.1} y={40}>
-          <p className="st-display mt-8 max-w-[18ch] text-[clamp(30px,6vw,74px)] leading-[0.98] text-[var(--st-chalk)] md:mt-10">
+          <p className="st-display mt-8 max-w-[18ch] text-[clamp(26px,4.6vw,52px)] leading-[1.02] text-[var(--st-chalk)] md:mt-10">
             {ESTRATEGIA.subtitulo}
           </p>
         </Reveal>
@@ -32,10 +32,10 @@ export function EstrategiaPilares() {
           <Reveal y={40}>
             <article className="flex h-full flex-col border-t-2 border-[var(--st-gold)] pt-8">
               <div className="flex items-baseline gap-4">
-                <span className="st-display text-[clamp(52px,9vw,120px)] leading-none text-[var(--st-gold)]">
+                <span className="st-display text-[clamp(40px,6.5vw,88px)] leading-none text-[var(--st-gold)]">
                   {primero.numero}
                 </span>
-                <h3 className="st-display text-[clamp(26px,4vw,44px)] text-[var(--st-chalk)]">
+                <h3 className="st-display text-[clamp(20px,3vw,32px)] text-[var(--st-chalk)]">
                   {primero.titulo}
                 </h3>
               </div>
@@ -62,10 +62,10 @@ export function EstrategiaPilares() {
               <Reveal key={pilar.numero} delay={0.1 + i * 0.1} y={32}>
                 <article className="border-t border-[var(--st-line)] pt-6">
                   <div className="flex items-baseline gap-3">
-                    <span className="st-display text-[clamp(28px,5vw,48px)] leading-none text-[var(--st-gold)]">
+                    <span className="st-display text-[clamp(22px,3.6vw,36px)] leading-none text-[var(--st-gold)]">
                       {pilar.numero}
                     </span>
-                    <h3 className="st-display text-[clamp(20px,3vw,30px)] text-[var(--st-chalk)]">
+                    <h3 className="st-display text-[clamp(17px,2.4vw,22px)] text-[var(--st-chalk)]">
                       {pilar.titulo}
                     </h3>
                   </div>

@@ -8,10 +8,10 @@ export function KpiYMetas() {
       <div className="mx-auto max-w-[1280px]">
         {/* Sub-sección A: indicadores como tablero de métricas. */}
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-          <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
             {INDICADORES.numero}
           </span>
-          <h2 className="st-display text-[clamp(28px,5vw,56px)] text-[var(--st-chalk)]">
+          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
             {INDICADORES.titulo}
           </h2>
         </Reveal>
@@ -51,10 +51,10 @@ export function KpiYMetas() {
 
         {/* Sub-sección B: metas como línea de tiempo de tres horizontes. */}
         <Reveal className="mt-24 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mt-32">
-          <span className="st-display text-[clamp(34px,6vw,72px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(26px,4.4vw,52px)] leading-none text-[var(--st-gold)]">
             {METAS.numero}
           </span>
-          <h2 className="st-display text-[clamp(26px,4.5vw,48px)] text-[var(--st-chalk)]">
+          <h2 className="st-display text-[clamp(20px,3.2vw,36px)] text-[var(--st-chalk)]">
             {METAS.titulo}
           </h2>
         </Reveal>
@@ -64,10 +64,10 @@ export function KpiYMetas() {
             <Reveal key={h.nombre} delay={i * 0.1} y={36} className="md:px-8 md:first:pl-0 md:last:pr-0">
               <div className="border-t-2 border-[var(--st-gold)] pt-6">
                 <div className="mb-5 flex items-baseline gap-3">
-                  <span className="st-display text-[clamp(28px,4vw,44px)] leading-none text-[var(--st-gold)]">
+                  <span className="st-display text-[clamp(22px,3.2vw,32px)] leading-none text-[var(--st-gold)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="st-display text-[clamp(18px,2.4vw,26px)] leading-[1.05] text-[var(--st-chalk)]">
+                  <h3 className="st-display text-[clamp(16px,2vw,20px)] leading-[1.1] text-[var(--st-chalk)]">
                     {h.nombre}
                   </h3>
                 </div>

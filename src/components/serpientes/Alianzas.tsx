@@ -9,10 +9,10 @@ export function Alianzas() {
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
           <div className="md:sticky md:top-28 md:self-start">
             <Reveal className="flex flex-wrap items-baseline gap-x-5 gap-y-2">
-              <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+              <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
                 {ALIANZAS.numero}
               </span>
-              <h2 className="st-display text-[clamp(28px,5vw,48px)] leading-[0.95] text-[var(--st-chalk)]">
+              <h2 className="st-display text-[clamp(22px,3.6vw,38px)] leading-[0.95] text-[var(--st-chalk)]">
                 {ALIANZAS.titulo}
               </h2>
             </Reveal>
@@ -32,7 +32,7 @@ export function Alianzas() {
               <p className="flex flex-wrap items-center gap-x-4 gap-y-3">
                 {ALIANZAS.aliados.slice(0, 6).map((a, i, arr) => (
                   <span key={i} className="inline-flex items-center gap-4">
-                    <span className="st-display text-[clamp(18px,2.6vw,30px)] leading-none text-[var(--st-chalk)]">
+                    <span className="st-display text-[clamp(16px,2.2vw,24px)] leading-none text-[var(--st-chalk)]">
                       {a}
                     </span>
                     {i < arr.length - 1 && (

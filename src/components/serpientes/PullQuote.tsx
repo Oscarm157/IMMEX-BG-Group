@@ -9,7 +9,7 @@ export function PullQuote() {
           {/* Análisis de apoyo, en columna angosta. */}
           <div>
             <div className="mb-8 flex items-baseline gap-4">
-              <span className="st-display text-[clamp(34px,6vw,72px)] leading-none text-[var(--st-gold)]">
+              <span className="st-display text-[clamp(28px,4.5vw,54px)] leading-none text-[var(--st-gold)]">
                 {DIAGNOSTICO.numero}
               </span>
               <span className="st-eyebrow text-[13px] tracking-[0.2em] text-[var(--st-bone)]">
@@ -36,7 +36,7 @@ export function PullQuote() {
               >
                 &ldquo;
               </span>
-              <blockquote className="st-display relative text-[clamp(30px,6vw,68px)] leading-[1.02] text-[var(--st-chalk)]">
+              <blockquote className="st-display relative text-[clamp(26px,4.6vw,50px)] leading-[1.05] text-[var(--st-chalk)]">
                 {DIAGNOSTICO.posicionamiento}
               </blockquote>
               <figcaption className="mt-8 flex items-center gap-3">

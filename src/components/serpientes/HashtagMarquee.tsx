@@ -6,10 +6,10 @@ export function HashtagMarquee() {
     <section className="overflow-hidden border-t border-[var(--st-line)] py-24 md:py-36">
       <div className="mx-auto mb-12 max-w-[1280px] px-6 md:mb-16 md:px-10">
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-          <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
             {HASHTAGS.numero}
           </span>
-          <h2 className="st-display text-[clamp(28px,5vw,56px)] text-[var(--st-chalk)]">
+          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
             {HASHTAGS.titulo}
           </h2>
         </Reveal>
@@ -21,7 +21,7 @@ export function HashtagMarquee() {
           <ul key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1}>
             {HASHTAGS.lista.map((tag, i) => (
               <li key={i} className="flex items-center">
-                <span className="st-display whitespace-nowrap px-8 text-[clamp(28px,5vw,60px)] leading-none text-[var(--st-chalk)]">
+                <span className="st-display whitespace-nowrap px-8 text-[clamp(22px,3.8vw,42px)] leading-none text-[var(--st-chalk)]">
                   {tag}
                 </span>
                 <span className="h-2 w-2 rotate-45 bg-[var(--st-red)]" aria-hidden />

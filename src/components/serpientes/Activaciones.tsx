@@ -6,10 +6,10 @@ export function Activaciones() {
     <section className="border-t border-[var(--st-line)] bg-[var(--st-surface-2)] px-6 py-24 md:px-10 md:py-40">
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mb-12 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mb-16">
-          <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
             {ACTIVACIONES.numero}
           </span>
-          <h2 className="st-display max-w-[16ch] text-[clamp(28px,5vw,56px)] text-[var(--st-chalk)]">
+          <h2 className="st-display max-w-[16ch] text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
             {ACTIVACIONES.titulo}
           </h2>
         </Reveal>

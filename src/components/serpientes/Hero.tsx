@@ -34,7 +34,7 @@ export function Hero() {
           </p>
         </Reveal>
         <Reveal delay={0.12} y={40}>
-          <h1 className="st-display st-wordmark text-[clamp(72px,20vw,320px)] leading-[0.82]">
+          <h1 className="st-display st-wordmark text-[clamp(56px,13vw,200px)] leading-[0.82]">
             Serpientes
           </h1>
         </Reveal>
@@ -51,7 +51,7 @@ export function Hero() {
       <div className="relative border-t border-[var(--st-line)] pt-8">
         <div className="grid gap-6 md:grid-cols-[auto_1fr] md:items-end md:gap-14">
           <Reveal delay={0.1}>
-            <h2 className="st-display max-w-[16ch] text-[clamp(26px,5vw,46px)] text-[var(--st-chalk)]">
+            <h2 className="st-display max-w-[16ch] text-[clamp(20px,3.4vw,34px)] text-[var(--st-chalk)]">
               {meta.title}
             </h2>
           </Reveal>

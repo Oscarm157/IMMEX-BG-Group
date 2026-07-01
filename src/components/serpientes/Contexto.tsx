@@ -10,7 +10,7 @@ export function Contexto() {
         {/* Riel de sección: número gigante + eyebrow. */}
         <div className="md:sticky md:top-28 md:self-start">
           <Reveal>
-            <span className="st-display block text-[clamp(64px,12vw,150px)] leading-none text-[var(--st-gold)]">
+            <span className="st-display block text-[clamp(48px,8vw,100px)] leading-none text-[var(--st-gold)]">
               {CONTEXTO.numero}
             </span>
           </Reveal>

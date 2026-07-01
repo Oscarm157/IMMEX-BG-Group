@@ -7,10 +7,10 @@ export function Objetivos() {
     <section className="border-t border-[var(--st-line)] bg-[var(--st-surface-1)] px-6 py-24 md:px-10 md:py-40">
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mb-10 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mb-14">
-          <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
             {OBJETIVOS.numero}
           </span>
-          <h2 className="st-display text-[clamp(28px,5vw,56px)] text-[var(--st-chalk)]">
+          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
             {OBJETIVOS.titulo}
           </h2>
         </Reveal>
@@ -21,7 +21,7 @@ export function Objetivos() {
             <span className="st-eyebrow mb-5 block text-[12px] text-[var(--st-gold)]">
               Objetivo general
             </span>
-            <p className="max-w-[26ch] text-[clamp(24px,4.4vw,52px)] font-light leading-[1.14] text-[var(--st-chalk)]">
+            <p className="max-w-[26ch] text-[clamp(20px,3.4vw,38px)] font-light leading-[1.2] text-[var(--st-chalk)]">
               {OBJETIVOS.general}
             </p>
           </div>

@@ -7,10 +7,10 @@ export function Cierre() {
     <section className="border-t border-[var(--st-line)] px-6 py-24 md:px-10 md:py-44">
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-          <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
             {CONCLUSION.numero}
           </span>
-          <h2 className="st-display text-[clamp(28px,5vw,56px)] text-[var(--st-chalk)]">
+          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
             {CONCLUSION.titulo}
           </h2>
         </Reveal>
@@ -31,10 +31,10 @@ export function Cierre() {
             {CONCLUSION.puntos.map((punto, i) => (
               <Reveal key={i} delay={i * 0.1}>
                 <div className="flex items-baseline gap-5 py-5">
-                  <span className="st-display text-[clamp(30px,4vw,48px)] leading-none text-[var(--st-gold)]">
+                  <span className="st-display text-[clamp(24px,3.2vw,36px)] leading-none text-[var(--st-gold)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <p className="st-display text-[clamp(18px,2.6vw,28px)] leading-[1.05] text-[var(--st-chalk)]">
+                  <p className="st-display text-[clamp(16px,2.2vw,22px)] leading-[1.1] text-[var(--st-chalk)]">
                     {punto}
                   </p>
                 </div>
@@ -45,7 +45,7 @@ export function Cierre() {
 
         {/* Declaración de cierre, protagonista. */}
         <Reveal className="mt-20 border-t border-[var(--st-line)] pt-14 md:mt-28 md:pt-20" y={40}>
-          <p className="st-display max-w-[22ch] text-[clamp(32px,6.5vw,88px)] leading-[0.98] text-[var(--st-chalk)]">
+          <p className="st-display max-w-[22ch] text-[clamp(28px,5vw,60px)] leading-[1.02] text-[var(--st-chalk)]">
             {CONCLUSION.cierre}
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-4">

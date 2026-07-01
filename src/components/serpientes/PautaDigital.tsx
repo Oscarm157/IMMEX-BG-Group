@@ -6,10 +6,10 @@ export function PautaDigital() {
     <section className="border-t border-[var(--st-line)] bg-[var(--st-surface-1)] px-6 py-24 md:px-10 md:py-40">
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-          <span className="st-display text-[clamp(40px,7vw,88px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
             {PAUTA_DIGITAL.numero}
           </span>
-          <h2 className="st-display max-w-[16ch] text-[clamp(28px,5vw,56px)] text-[var(--st-chalk)]">
+          <h2 className="st-display max-w-[16ch] text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
             {PAUTA_DIGITAL.titulo}
           </h2>
         </Reveal>
@@ -37,10 +37,10 @@ export function PautaDigital() {
             >
               <div className="grid gap-5 border border-[var(--st-line)] bg-[var(--st-void)] p-6 md:grid-cols-[auto_1fr] md:items-center md:gap-8 md:p-8">
                 <div className="flex items-baseline gap-4 md:flex-col md:items-start md:gap-1">
-                  <span className="st-display text-[clamp(34px,5vw,64px)] leading-none text-[var(--st-gold)]">
+                  <span className="st-display text-[clamp(26px,4vw,48px)] leading-none text-[var(--st-gold)]">
                     {String(i + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="st-display text-[clamp(22px,3vw,34px)] text-[var(--st-chalk)]">
+                  <h3 className="st-display text-[clamp(18px,2.4vw,26px)] text-[var(--st-chalk)]">
                     {obj.titulo}
                   </h3>
                 </div>
