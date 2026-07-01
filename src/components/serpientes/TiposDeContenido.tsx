@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 import { TIPOS_CONTENIDO } from "@/content/serpientes-plan";
+import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function TiposDeContenido() {
   const { reels, historias, jugadores, aficion } = TIPOS_CONTENIDO;
@@ -37,7 +38,7 @@ export function TiposDeContenido() {
                   Ideas
                 </span>
                 <ul className="grid gap-2 text-[13.5px] leading-[1.45] text-[var(--st-bone)]">
-                  {reels.ideas.map((x, i) => (
+                  {reels.ideas.slice(0, 5).map((x, i) => (
                     <li key={i}>{x}</li>
                   ))}
                 </ul>
@@ -60,7 +61,7 @@ export function TiposDeContenido() {
                   Frases de cierre
                 </span>
                 <ul className="grid gap-3">
-                  {reels.frases.map((x, i) => (
+                  {reels.frases.slice(0, 3).map((x, i) => (
                     <li
                       key={i}
                       className="st-display text-[clamp(15px,1.8vw,19px)] leading-[1.1] text-[var(--st-chalk)]"
@@ -71,6 +72,10 @@ export function TiposDeContenido() {
                 </ul>
               </div>
             </div>
+            <VerEnDocumento
+              count={reels.ideas.length - 5 + (reels.frases.length - 3)}
+              sectionId="tipos-contenido"
+            />
           </article>
         </Reveal>
 
@@ -84,7 +89,7 @@ export function TiposDeContenido() {
                 </h3>
                 <p className="mt-2 text-[13px] text-[var(--st-gold)]">{tipo.intro}</p>
                 <ul className="mt-5 grid gap-2 text-[13px] leading-[1.45] text-[var(--st-bone)]">
-                  {tipo.ideas.map((x, j) => (
+                  {tipo.ideas.slice(0, 4).map((x, j) => (
                     <li key={j} className="grid grid-cols-[auto_1fr] gap-2.5">
                       <span className="mt-[7px] h-px w-2.5 bg-[var(--st-ash)]" aria-hidden />
                       {x}
@@ -95,6 +100,10 @@ export function TiposDeContenido() {
             </Reveal>
           ))}
         </div>
+        <VerEnDocumento
+          count={secundarios.reduce((sum, t) => sum + Math.max(0, t.ideas.length - 4), 0)}
+          sectionId="tipos-contenido"
+        />
       </div>
     </section>
   );

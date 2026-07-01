@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 import { INDICADORES, METAS } from "@/content/serpientes-plan";
+import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function KpiYMetas() {
   return (
@@ -33,10 +34,16 @@ export function KpiYMetas() {
                   </span>
                 </div>
                 <ul className="mt-5 grid gap-2 text-[13px] leading-[1.45] text-[var(--st-bone)]">
-                  {grupo.items.map((item, j) => (
+                  {grupo.items.slice(0, 5).map((item, j) => (
                     <li key={j}>{item}</li>
                   ))}
                 </ul>
+                {grupo.items.length > 5 && (
+                  <VerEnDocumento
+                    count={grupo.items.length - 5}
+                    sectionId="indicadores"
+                  />
+                )}
               </div>
             </Reveal>
           ))}

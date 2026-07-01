@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 import { PLAN_CONTENIDO } from "@/content/serpientes-plan";
+import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function ContenidoCalendario() {
   const pretemporada = PLAN_CONTENIDO.fases[0];
@@ -29,7 +30,7 @@ export function ContenidoCalendario() {
             </div>
             <p className="mt-3 text-[15px] text-[var(--st-bone)]">{pretemporada.objetivo}</p>
             <ul className="mt-7 grid grid-cols-2 gap-x-6 gap-y-2.5">
-              {pretemporada.contenido.map((c, i) => (
+              {pretemporada.contenido.slice(0, 6).map((c, i) => (
                 <li
                   key={i}
                   className="grid grid-cols-[auto_1fr] gap-2.5 text-[13.5px] leading-[1.45] text-[var(--st-chalk)]"
@@ -44,6 +45,12 @@ export function ContenidoCalendario() {
                 </li>
               ))}
             </ul>
+            {pretemporada.contenido.length > 6 && (
+              <VerEnDocumento
+                count={pretemporada.contenido.length - 6}
+                sectionId="plan-contenido"
+              />
+            )}
           </Reveal>
 
           <div className="grid content-start gap-4 border-l border-[var(--st-line)] pl-6 md:pl-10">
@@ -103,7 +110,7 @@ export function ContenidoCalendario() {
                 {playoffs.nombre}
               </h3>
               <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3">
-                {playoffs.contenido.map((c, i) => (
+                {playoffs.contenido.slice(0, 5).map((c, i) => (
                   <li
                     key={i}
                     className="st-eyebrow text-[13px] tracking-[0.06em] text-[var(--st-bone)]"
@@ -112,6 +119,12 @@ export function ContenidoCalendario() {
                   </li>
                 ))}
               </ul>
+              {playoffs.contenido.length > 5 && (
+                <VerEnDocumento
+                  count={playoffs.contenido.length - 5}
+                  sectionId="plan-contenido"
+                />
+              )}
             </div>
           </div>
         </Reveal>

@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 import { ALIANZAS } from "@/content/serpientes-plan";
+import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function Alianzas() {
   return (
@@ -29,12 +30,12 @@ export function Alianzas() {
             </span>
             <Reveal>
               <p className="flex flex-wrap items-center gap-x-4 gap-y-3">
-                {ALIANZAS.aliados.map((a, i) => (
+                {ALIANZAS.aliados.slice(0, 6).map((a, i, arr) => (
                   <span key={i} className="inline-flex items-center gap-4">
                     <span className="st-display text-[clamp(18px,2.6vw,30px)] leading-none text-[var(--st-chalk)]">
                       {a}
                     </span>
-                    {i < ALIANZAS.aliados.length - 1 && (
+                    {i < arr.length - 1 && (
                       <span
                         className="h-1.5 w-1.5 rotate-45 bg-[var(--st-gold)]"
                         aria-hidden
@@ -50,7 +51,7 @@ export function Alianzas() {
               Ideas de colaboración
             </span>
             <ul className="border-t border-[var(--st-line)]">
-              {ALIANZAS.ideas.map((idea, i) => (
+              {ALIANZAS.ideas.slice(0, 4).map((idea, i) => (
                 <Reveal key={i} delay={i * 0.05}>
                   <li className="flex items-baseline gap-4 border-b border-[var(--st-line)] py-3.5 text-[15px] leading-[1.4] text-[var(--st-bone)]">
                     <span
@@ -64,6 +65,10 @@ export function Alianzas() {
                 </Reveal>
               ))}
             </ul>
+            <VerEnDocumento
+              count={ALIANZAS.aliados.length - 6 + (ALIANZAS.ideas.length - 4)}
+              sectionId="alianzas"
+            />
           </div>
         </div>
       </div>

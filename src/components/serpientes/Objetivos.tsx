@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 import { OBJETIVOS } from "@/content/serpientes-plan";
+import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function Objetivos() {
   return (
@@ -43,7 +44,7 @@ export function Objetivos() {
                 </h3>
               </div>
               <ul className="grid gap-3.5">
-                {grupo.items.map((item, j) => (
+                {grupo.items.slice(0, 4).map((item, j) => (
                   <li
                     key={j}
                     className="grid grid-cols-[auto_1fr] gap-3 text-[14px] leading-[1.55] text-[var(--st-bone)]"
@@ -53,6 +54,9 @@ export function Objetivos() {
                   </li>
                 ))}
               </ul>
+              {grupo.items.length > 4 && (
+                <VerEnDocumento count={grupo.items.length - 4} sectionId="objetivos" />
+              )}
             </Reveal>
           ))}
         </div>
