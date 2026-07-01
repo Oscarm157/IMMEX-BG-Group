@@ -36,6 +36,33 @@
   line-height: 0.95;
 }
 
+/* Wordmark del hero: única excepción intencional donde dorado y rojo conviven,
+   replicando el logo real (relleno dorado, contorno rojo). */
+.st-wordmark {
+  color: var(--st-gold);
+  -webkit-text-stroke: 1.5px var(--st-red);
+  paint-order: stroke fill;
+}
+
+@media (min-width: 768px) {
+  .st-wordmark {
+    -webkit-text-stroke-width: 2.5px;
+  }
+}
+
+/* Fila con scroll-snap horizontal en mobile (comparativa/calendario), sin barra. */
+.st-hscroll {
+  scrollbar-width: none;
+}
+.st-hscroll::-webkit-scrollbar {
+  display: none;
+}
+
+/* Compensa el header fijo al saltar a un ancla en /documento. */
+.st-anchor {
+  scroll-margin-top: 96px;
+}
+
 .st-marquee-track {
   animation: st-marquee 32s linear infinite;
 }

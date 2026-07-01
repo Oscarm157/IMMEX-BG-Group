@@ -561,7 +561,7 @@ export const CONCLUSION = {
     "Si Serpientes logra comunicar con fuerza, involucrar a la ciudad y mantener una producción constante de contenido, puede posicionarse como una de las franquicias con mayor crecimiento y alcance dentro de CIBAPAC.",
 };
 
-/* Ensamblado para /documento — mismas constantes de arriba, sin reescribir texto. */
+/* Ensamblado para /documento, mismas constantes de arriba, sin reescribir texto. */
 export const PLAN_SECTIONS = [
   { id: "contexto", numero: CONTEXTO.numero, titulo: CONTEXTO.titulo, data: CONTEXTO },
   { id: "comparativa", numero: COMPARATIVA.numero, titulo: COMPARATIVA.titulo, data: COMPARATIVA },
