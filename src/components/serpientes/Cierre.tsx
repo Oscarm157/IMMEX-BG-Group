@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Reveal } from "@/components/site/Reveal";
-import { CONCLUSION, meta } from "@/content/serpientes-plan";
+import { CONCLUSION, meta, clubTagline } from "@/content/serpientes-plan";
 
 export function Cierre() {
   return (
@@ -53,7 +53,11 @@ export function Cierre() {
 
         {/* Declaración de cierre, protagonista. */}
         <Reveal className="mt-20 border-t border-[var(--st-line)] pt-14 md:mt-28 md:pt-20" y={40}>
-          <p className="st-display max-w-[22ch] text-[clamp(28px,5vw,60px)] leading-[1.02] text-[var(--st-chalk)]">
+          {/* Punch corto en Anton (cartel); la frase larga en editorial limpio. */}
+          <p className="st-display max-w-[15ch] text-[clamp(34px,6.5vw,80px)] leading-[0.9] text-[var(--st-gold)]">
+            {clubTagline}
+          </p>
+          <p className="mt-8 max-w-[42ch] text-[clamp(19px,2.4vw,30px)] font-medium leading-[1.34] text-[var(--st-chalk)]">
             {CONCLUSION.cierre}
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-4">

@@ -6,37 +6,34 @@ export function Contexto() {
 
   return (
     <section className="st-band st-band-void border-t border-[var(--st-line)] px-6 py-20 md:px-10 md:py-28">
-      <div className="mx-auto grid max-w-[1280px] gap-10 md:grid-cols-[minmax(0,0.9fr)_minmax(0,1.6fr)] md:gap-20">
-        {/* Riel de sección: número gigante + eyebrow. */}
-        <div className="md:sticky md:top-28 md:self-start">
-          <Reveal>
-            <span className="st-display block text-[clamp(48px,8vw,100px)] leading-none text-[var(--st-gold)]">
-              {CONTEXTO.numero}
-            </span>
-          </Reveal>
-          <Reveal delay={0.08}>
-            <span className="st-eyebrow mt-4 block text-[13px] tracking-[0.2em] text-[var(--st-bone)]">
-              {CONTEXTO.titulo}
-            </span>
-          </Reveal>
-        </div>
+      <div className="mx-auto max-w-[1280px]">
+        {/* Header: número gigante + título en línea. */}
+        <Reveal className="mb-10 flex items-baseline gap-x-5 md:mb-14">
+          <span className="st-display text-[clamp(48px,8vw,104px)] leading-[0.8] text-[var(--st-gold)]">
+            {CONTEXTO.numero}
+          </span>
+          <span className="st-eyebrow text-[13px] tracking-[0.2em] text-[var(--st-bone)]">
+            {CONTEXTO.titulo}
+          </span>
+        </Reveal>
 
-        {/* Columna de lectura: primer párrafo como entrada, resto de apoyo. */}
-        <div>
-          <Reveal delay={0.06}>
-            <p className="text-[clamp(22px,3.2vw,34px)] font-light leading-[1.28] text-[var(--st-chalk)]">
-              {lead}
-            </p>
-          </Reveal>
-          <div className="mt-10 grid gap-6 border-l border-[var(--st-line)] pl-6 md:mt-12 md:max-w-[54ch]">
-            {rest.map((p, i) => (
-              <Reveal key={i} delay={0.12 + i * 0.08}>
-                <p className="text-[16px] leading-[1.7] text-[var(--st-bone)] md:text-[17px]">
-                  {p}
-                </p>
-              </Reveal>
-            ))}
-          </div>
+        {/* Lead como declaración dominante, medida cómoda (no columna delgada). */}
+        <Reveal delay={0.06} y={40}>
+          <p className="max-w-[34ch] text-[clamp(26px,3.8vw,46px)] font-medium leading-[1.16] tracking-[-0.015em] text-[var(--st-chalk)]">
+            {lead}
+          </p>
+        </Reveal>
+
+        {/* Apoyo en panel de superficie relleno, dos columnas, regla dorada.
+            Da estructura y llena, en vez de texto flotando. */}
+        <div className="mt-12 grid gap-x-14 gap-y-6 border-t-2 border-[var(--st-gold)] bg-[var(--st-surface-1)] p-7 md:mt-16 md:grid-cols-2 md:p-10">
+          {rest.map((p, i) => (
+            <Reveal key={i} delay={0.12 + i * 0.08}>
+              <p className="text-[15px] leading-[1.68] text-[var(--st-bone)] md:text-[16px]">
+                {p}
+              </p>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

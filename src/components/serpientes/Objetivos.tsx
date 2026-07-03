@@ -20,11 +20,11 @@ export function Objetivos() {
 
         {/* Objetivo general como declaración de ancho completo. */}
         <Reveal delay={0.08} y={40}>
-          <div className="border-y border-[var(--st-line)] py-10 md:py-14">
-            <span className="st-eyebrow mb-5 block text-[12px] text-[var(--st-gold)]">
+          <div className="border-t-2 border-[var(--st-gold)] bg-[var(--st-void)] p-8 md:p-12">
+            <span className="st-eyebrow mb-6 block text-[12px] text-[var(--st-gold)]">
               Objetivo general
             </span>
-            <p className="max-w-[26ch] text-[clamp(20px,3.4vw,38px)] font-light leading-[1.2] text-[var(--st-chalk)]">
+            <p className="max-w-[40ch] text-[clamp(20px,3vw,34px)] font-medium leading-[1.32] tracking-[-0.005em] text-[var(--st-chalk)]">
               {OBJETIVOS.general}
             </p>
           </div>
