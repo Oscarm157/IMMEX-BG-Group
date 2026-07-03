@@ -21,8 +21,11 @@ export const clubTagline = "Letales en la Duela, Imparables en el Juego";
    (Instagram y Facebook no permiten scraping directo sin sesión iniciada),
    no de una API oficial ni de un panel de analítica. El dato de Facebook de
    Serpientes Tijuana lo confirmó Oscar directo desde la página (1.9k
-   seguidores). Se usan solo como referencia de magnitud en la comparativa,
-   no como dato exacto en tiempo real. */
+   seguidores). Jaibos Tampico (@jaibos.tampico) y Cazadores de Tapachula
+   (@cazadorestapachula) se agregaron como referencia de los equipos más
+   seguidos de CIBAPAC, mismas cifras públicas aproximadas de julio 2026. Se
+   usan solo como referencia de magnitud en la comparativa, no como dato exacto
+   en tiempo real. */
 export const REDES_RIVALES = {
   fuente: "Cifras públicas aproximadas, consultadas julio 2026",
   equipos: {
@@ -33,6 +36,14 @@ export const REDES_RIVALES = {
     "Lobos de Ensenada": {
       instagram: { seguidores: 4270, handle: "@ensenadalobos" },
       facebook: { meGusta: 11414 },
+    },
+    "Jaibos Tampico": {
+      instagram: { seguidores: 4495, handle: "@jaibos.tampico" },
+      facebook: { meGusta: 7025 },
+    },
+    "Cazadores de Tapachula": {
+      instagram: { seguidores: 3319, handle: "@cazadorestapachula" },
+      facebook: { meGusta: 1902 },
     },
     "Serpientes Tijuana": {
       instagram: { seguidores: 487, handle: "@serpientestijuana" },
