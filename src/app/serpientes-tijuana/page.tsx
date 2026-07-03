@@ -7,6 +7,7 @@ import { Objetivos } from "@/components/serpientes/Objetivos";
 import { EstrategiaPilares } from "@/components/serpientes/EstrategiaPilares";
 import { ContenidoCalendario } from "@/components/serpientes/ContenidoCalendario";
 import { TiposDeContenido } from "@/components/serpientes/TiposDeContenido";
+import { ReferenciasReels } from "@/components/serpientes/ReferenciasReels";
 import { Activaciones } from "@/components/serpientes/Activaciones";
 import { Campanas } from "@/components/serpientes/Campanas";
 import { HashtagMarquee } from "@/components/serpientes/HashtagMarquee";
@@ -28,6 +29,7 @@ export default function SerpientesTijuanaPage() {
         <EstrategiaPilares />
         <ContenidoCalendario />
         <TiposDeContenido />
+        <ReferenciasReels />
         <Activaciones />
         <Campanas />
         <HashtagMarquee />

@@ -616,3 +616,72 @@ export const PLAN_SECTIONS = [
   { id: "metas", numero: METAS.numero, titulo: METAS.titulo, data: METAS },
   { id: "conclusion", numero: CONCLUSION.numero, titulo: CONCLUSION.titulo, data: CONCLUSION },
 ] as const;
+
+/* Récord deportivo de Serpientes en la temporada 2025 CIBAPAC. Dato real de los
+   resultados oficiales (ligacibapac.mx/resultados), NO del documento del analista.
+   18 victorias, 10 derrotas en los partidos listados. */
+export const RECORD_DEPORTIVO = {
+  ganados: 18,
+  perdidos: 10,
+  nota: "Temporada 2025 CIBAPAC, resultados oficiales",
+};
+
+/* Reels de referencia que compartió Oscar (benchmark de contenido con su alcance
+   real). NO se descargan ni se re-hospedan: se muestran con el embed oficial de
+   Instagram. Vistas tal cual las reportó Oscar. */
+export const REFERENCIAS_REELS = {
+  eyebrow: "Referencias",
+  titulo: "Contenido que funciona",
+  intro:
+    "Ejemplos reales de la liga y de ligas mayores, con su alcance. Los reels de puros highlights rinden menos; los que suman dinámica, colaboración o narrativa jalan mucho más.",
+  benchmark: [
+    {
+      fuente: "Cazadores de Tapachula",
+      reels: [
+        { label: "Dinámica con barbería", url: "https://www.instagram.com/reel/DQ-SUkXEbp5/", vistas: "134k" },
+        { label: "GameDay highlights", url: "https://www.instagram.com/reel/DQ96TYdEfdk/", vistas: "47k" },
+        { label: "Clavada en conjunto", url: "https://www.instagram.com/reel/DRsNE6bkef-/", vistas: "43k" },
+        { label: "Clip de clavada", url: "https://www.instagram.com/reel/DR-WlxNESP1/", vistas: "27k" },
+        { label: "Jugadas con efecto de fondo", url: "https://www.instagram.com/reel/DSVZjaMkUV4/", vistas: "22k" },
+      ],
+    },
+    {
+      fuente: "amhoops.mx · jugadas de Serpientes",
+      reels: [
+        { label: "Tapón de Jones", url: "https://www.instagram.com/reel/DN_uhVGEmPD/", vistas: "23k" },
+        { label: "Jugada del base", url: "https://www.instagram.com/reel/DQAxQVhjw9k/", vistas: "10k" },
+        { label: "Triples del zurdo Vázquez", url: "https://www.instagram.com/reel/DQHztZQEj_c/", vistas: "10k" },
+      ],
+    },
+    {
+      fuente: "Guaycuras de La Paz",
+      reels: [
+        { label: "Close up highlights", url: "https://www.instagram.com/reel/DRWMgKSAAMu/", vistas: "21k" },
+        { label: "Highlights de un jugador", url: "https://www.instagram.com/reel/DXDaXN6AnWL/", vistas: "20k" },
+        { label: "Game winner", url: "https://www.instagram.com/reel/DVv_1-ujRQX/", vistas: "11k" },
+      ],
+    },
+    {
+      fuente: "Lobos de Ensenada",
+      reels: [
+        { label: "Jugada de tapón", url: "https://www.instagram.com/reel/DRzisBIDSTO/", vistas: "17.9k" },
+        { label: "Reel de la final", url: "https://www.instagram.com/reel/DRgB99bj-N-/", vistas: "16.6k" },
+        { label: "Interacción con la afición", url: "https://www.instagram.com/reel/DOq556QCQtv/", vistas: "16.2k" },
+      ],
+    },
+    {
+      fuente: "adaniaphotos",
+      reels: [
+        { label: "Highlights del zurdo Vázquez", url: "https://www.instagram.com/reel/DP-HVJyD1LC/", vistas: "6k" },
+      ],
+    },
+  ],
+  ideas: {
+    fuente: "NBA",
+    nota: "Ejemplos de otras ligas para adaptar, no benchmark de CIBAPAC.",
+    reels: [
+      { label: "Primer lanzamiento (ej. en un juego de Toros)", url: "https://www.instagram.com/reel/DaBwkBssWC0/", vistas: "1.2M" },
+      { label: "Colaboración de reparto (ej. Rappi, boletos en entregas)", url: "https://www.instagram.com/reel/DaBmgJCRC_Z/", vistas: "1M" },
+    ],
+  },
+};

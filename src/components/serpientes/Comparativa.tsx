@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/site/Reveal";
-import { COMPARATIVA, REDES_RIVALES } from "@/content/serpientes-plan";
+import { COMPARATIVA, REDES_RIVALES, RECORD_DEPORTIVO } from "@/content/serpientes-plan";
 
 function n(num: number) {
   return num.toLocaleString("es-MX");
@@ -123,6 +123,30 @@ export function Comparativa() {
           <h2 className="st-display text-[clamp(24px,3.8vw,44px)] text-[var(--st-chalk)]">
             {COMPARATIVA.titulo}
           </h2>
+        </Reveal>
+
+        {/* Contraste que cristaliza la tesis: fuerte en la duela, último en redes. */}
+        <Reveal
+          y={30}
+          className="mb-14 flex flex-wrap items-center gap-x-10 gap-y-6 border-y border-[var(--st-line)] py-7 md:mb-20"
+        >
+          <div className="flex items-baseline gap-3">
+            <span className="st-display text-[clamp(38px,5.2vw,64px)] leading-none text-[var(--st-gold)]">
+              {RECORD_DEPORTIVO.ganados}-{RECORD_DEPORTIVO.perdidos}
+            </span>
+            <span className="st-eyebrow max-w-[15ch] text-[11px] leading-tight text-[var(--st-bone)]">
+              en la duela · {RECORD_DEPORTIVO.nota}
+            </span>
+          </div>
+          <span className="hidden h-12 w-px bg-[var(--st-line)] md:block" aria-hidden />
+          <div className="flex items-baseline gap-3">
+            <span className="st-display text-[clamp(38px,5.2vw,64px)] leading-none text-[var(--st-chalk)]">
+              5.º
+            </span>
+            <span className="st-eyebrow max-w-[16ch] text-[11px] leading-tight text-[var(--st-bone)]">
+              de 5 en seguidores de Instagram
+            </span>
+          </div>
         </Reveal>
 
         {/* Data-viz versus: hace visible el tamaño real del rezago. */}
