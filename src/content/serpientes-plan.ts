@@ -563,7 +563,7 @@ export const COTIZACION = {
     "El núcleo es la estrategia y el contenido, que corre cada mes. La cobertura de partido se suma por encuentro, según el calendario de juegos.",
   paquete: {
     nombre: "Paquete mensual",
-    precio: "$13,000",
+    precio: "$13,700",
     periodo: "/ mes",
     incluye: [
       "Estrategia y calendario editorial",
