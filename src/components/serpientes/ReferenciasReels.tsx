@@ -14,7 +14,7 @@ export function ReferenciasReels() {
           </span>
         </Reveal>
         <Reveal className="mb-6">
-          <h2 className="st-display text-[clamp(30px,5.4vw,58px)] text-[var(--st-chalk)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {r.titulo}
           </h2>
         </Reveal>
@@ -24,7 +24,7 @@ export function ReferenciasReels() {
           </p>
         </Reveal>
 
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {r.reels.map((reel, i) => (
             <Reveal key={reel.url} delay={i * 0.06}>
               <ReelCard

@@ -8,14 +8,14 @@ export function Contexto() {
   return (
     <section className="st-band st-band-void border-t border-[var(--st-line)] px-6 py-20 md:px-10 md:py-28">
       <div className="mx-auto max-w-[1280px]">
-        {/* Header: número gigante + título en línea. */}
+        {/* Header: número + título en línea (escala unificada del deck). */}
         <Reveal className="mb-10 flex items-baseline gap-x-5 md:mb-14">
-          <span className="st-display text-[clamp(48px,8vw,104px)] leading-[0.8] text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {CONTEXTO.numero}
           </span>
-          <span className="st-eyebrow text-[13px] tracking-[0.2em] text-[var(--st-bone)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {CONTEXTO.titulo}
-          </span>
+          </h2>
         </Reveal>
 
         {/* Lead editorial: capitular + frase clave en dorado, tamaño de lectura

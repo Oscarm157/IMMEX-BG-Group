@@ -18,10 +18,10 @@ export function TiposDeContenido() {
     >
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mb-12 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mb-16">
-          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {TIPOS_CONTENIDO.numero}
           </span>
-          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {TIPOS_CONTENIDO.titulo}
           </h2>
         </Reveal>
@@ -30,7 +30,7 @@ export function TiposDeContenido() {
         <Reveal y={40}>
           <article className="border border-[var(--st-gold)]/40 bg-[var(--st-surface-1)] p-7 md:p-12">
             <div className="flex flex-wrap items-baseline justify-between gap-3">
-              <h3 className="st-display text-[clamp(20px,3.4vw,36px)] text-[var(--st-gold)]">
+              <h3 className="st-display st-h3 text-[var(--st-gold)]">
                 {reels.titulo}
               </h3>
               <span className="st-eyebrow text-[11px] text-[var(--st-red)]">
@@ -92,7 +92,7 @@ export function TiposDeContenido() {
           {secundarios.map((tipo, i) => (
             <Reveal key={tipo.titulo} delay={i * 0.1}>
               <div className="h-full bg-[var(--st-surface-1)] p-6 md:p-8">
-                <h3 className="st-display text-[clamp(19px,2.4vw,26px)] text-[var(--st-chalk)]">
+                <h3 className="st-display st-h3 text-[var(--st-chalk)]">
                   {tipo.titulo}
                 </h3>
                 <p className="mt-2 text-[13px] text-[var(--st-gold)]">{tipo.intro}</p>

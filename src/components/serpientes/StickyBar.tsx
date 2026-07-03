@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { meta } from "@/content/serpientes-plan";
 
 export function StickyBar() {
   return (
@@ -9,7 +8,7 @@ export function StickyBar() {
           Serpientes Tijuana
         </span>
 
-        {/* Desktop: las dos acciones siempre visibles. */}
+        {/* Desktop: acceso al documento completo. */}
         <nav className="st-eyebrow hidden items-center gap-5 text-[12px] md:flex">
           <Link
             href="/serpientes-tijuana/documento"
@@ -17,16 +16,9 @@ export function StickyBar() {
           >
             Documento completo
           </Link>
-          <a
-            href={meta.docxHref}
-            download
-            className="rounded-full bg-[var(--st-red)] px-4 py-2 text-[var(--st-chalk)] transition hover:brightness-110"
-          >
-            Descargar original
-          </a>
         </nav>
 
-        {/* Mobile: colapsa a un ícono, las dos acciones pasan a un menú de un toque. */}
+        {/* Mobile: colapsa a un ícono con el acceso al documento. */}
         <details className="relative md:hidden">
           <summary
             className="flex h-9 w-9 cursor-pointer list-none items-center justify-center rounded-full border border-[var(--st-line)] text-[var(--st-chalk)] [&::-webkit-details-marker]:hidden"
@@ -41,13 +33,6 @@ export function StickyBar() {
             >
               Documento completo
             </Link>
-            <a
-              href={meta.docxHref}
-              download
-              className="rounded-full bg-[var(--st-red)] px-3 py-2 text-center text-[var(--st-chalk)] transition hover:brightness-110"
-            >
-              Descargar original
-            </a>
           </nav>
         </details>
       </div>
