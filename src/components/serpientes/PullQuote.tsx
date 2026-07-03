@@ -3,7 +3,15 @@ import { DIAGNOSTICO } from "@/content/serpientes-plan";
 
 export function PullQuote() {
   return (
-    <section className="border-t border-[var(--st-line)] px-6 py-24 md:px-10 md:py-44">
+    <section
+      className="st-band st-band-image border-t border-[var(--st-line)] px-6 py-28 md:px-10 md:py-48"
+      style={
+        {
+          "--st-bg-img": "url(/serpientes/duela-noche.jpg)",
+          "--st-bg-opacity": "0.5",
+        } as React.CSSProperties
+      }
+    >
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] md:gap-16">
           {/* Análisis de apoyo, en columna angosta. */}

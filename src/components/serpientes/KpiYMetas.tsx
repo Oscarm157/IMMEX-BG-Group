@@ -4,7 +4,10 @@ import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function KpiYMetas() {
   return (
-    <section className="border-t border-[var(--st-line)] bg-[var(--st-surface-1)] px-6 py-24 md:px-10 md:py-40">
+    <section className="st-band st-band-void border-t border-[var(--st-line)] px-6 py-20 md:px-10 md:py-28">
+      <span className="st-ghostnum -top-6 right-2 md:right-10" aria-hidden>
+        {INDICADORES.numero}
+      </span>
       <div className="mx-auto max-w-[1280px]">
         {/* Sub-sección A: indicadores como tablero de métricas. */}
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">

@@ -4,7 +4,7 @@ import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function Alianzas() {
   return (
-    <section className="border-t border-[var(--st-line)] px-6 py-24 md:px-10 md:py-40">
+    <section className="st-band st-band-surface border-t border-[var(--st-line)] px-6 py-20 md:px-10 md:py-28">
       <div className="mx-auto max-w-[1280px]">
         <div className="grid gap-10 md:grid-cols-[minmax(0,1fr)_minmax(0,1.5fr)] md:gap-16">
           <div className="md:sticky md:top-28 md:self-start">
