@@ -3,7 +3,15 @@ import { PAUTA_DIGITAL } from "@/content/serpientes-plan";
 
 export function PautaDigital() {
   return (
-    <section className="border-t border-[var(--st-line)] bg-[var(--st-surface-1)] px-6 py-24 md:px-10 md:py-40">
+    <section
+      className="st-band st-band-image border-t border-[var(--st-line)] px-6 py-20 md:px-10 md:py-28"
+      style={
+        {
+          "--st-bg-img": "url(/serpientes/tribuna-humo.jpg)",
+          "--st-bg-opacity": "0.4",
+        } as React.CSSProperties
+      }
+    >
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
           <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">

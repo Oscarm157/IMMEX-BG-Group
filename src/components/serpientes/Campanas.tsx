@@ -3,7 +3,10 @@ import { CAMPANAS } from "@/content/serpientes-plan";
 
 export function Campanas() {
   return (
-    <section className="border-t border-[var(--st-line)] bg-[var(--st-surface-1)] px-6 py-24 md:px-10 md:py-40">
+    <section className="st-band st-band-red border-t border-[var(--st-line)] px-6 py-20 md:px-10 md:py-28">
+      <span className="st-ghostnum -top-6 right-2 md:right-10" aria-hidden>
+        {CAMPANAS.numero}
+      </span>
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mb-12 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mb-16">
           <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">

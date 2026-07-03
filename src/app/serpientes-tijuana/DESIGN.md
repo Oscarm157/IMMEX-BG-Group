@@ -82,10 +82,40 @@ cancha de noche / marcador encendido.
 ## Layout y espaciado
 - Ancho máximo de contenido: 1280px para bloques con grid, ~720px para el
   cuerpo de `/documento` (columna de lectura).
-- Ritmo vertical: secciones espaciosas (128-192px de padding vertical en
-  desktop), cada bloque es una franja full-bleed con su propia superficie.
+- Ritmo vertical: ~80-112px de padding vertical en desktop (`py-20 md:py-28`).
+  Se bajó de los 128-192px originales: con tanto negro y contenido escaso, el
+  padding grande dejaba pantallas vacías que leían planas. La profundidad la dan
+  las franjas y la tipografía, no el aire muerto.
 - Densidad: aireada en la narrativa (una idea por pantalla), más densa en
   `/documento` (lectura continua).
+
+## Sistema de franjas (rompe el negro monótono)
+Cada sección hermana usa una franja distinta de su vecina; ninguna comparte
+fondo con la de al lado. Clases en `serpientes.css`, todas bajo `.st-band`
+(position relative + overflow hidden):
+- `.st-band-void`: near-black base con vignette superior sutil (profundidad).
+- `.st-band-surface`: superficie elevada, gradiente `--st-surface-1` a `#141619`,
+  perceptiblemente más clara que void (el contraste original #16171a vs #0a0a0b
+  era invisible; por eso se subió `--st-surface-1` a #1c1f24).
+- `.st-band-red`: franja roja oscura cinematográfica, un solo uso (Campañas, la
+  sección más "encendida"). Mantiene el rojo especial; no se abusa.
+- `.st-band-image`: fondo con imagen full-bleed (`::before`) + overlay oscuro
+  (`::after`) para legibilidad. La imagen va por `--st-bg-img`, opacidad por
+  `--st-bg-opacity` (~0.4-0.5).
+- `.st-ghostnum`: número de sección gigante en contorno tenue como elemento
+  gráfico de fondo. Llena el vacío vertical y ancla la franja sin depender de
+  imagen. Se usa en las franjas void/surface/red, no en las de imagen.
+
+## Capa gráfica (fondos generados)
+Cuatro fondos cinematográficos generados con Nano Banana Pro (Replicate), en
+`public/serpientes/`, atmósfera "cancha de noche / marcador / vestidor":
+`duela-noche` (cancha vacía con reflector), `marcador` (arena con marcador
+encendido, bokeh rojo/ámbar), `tribuna-humo` (gradas con humo y luz cálida),
+`serpiente-textura` (escamas en negro con acentos dorado/rojo). Se usan como
+`band-image` en Diagnóstico (03), Tipos de contenido (07), Pauta (11) y Cierre
+(15). Script reproducible: `scripts/gen-serpientes-bg.mjs`. Ninguna tiene
+personas ni caras (respeta el guardrail); son escenas de ambiente, no fotos
+fabricadas de jugadores.
 
 ## Motion
 - Scroll-reveal con `Reveal`/`RevealStagger` (`src/components/site/Reveal.tsx`)
@@ -100,8 +130,11 @@ cancha de noche / marcador encendido.
 - No indigo/violeta.
 - No cards genéricas con sombra+radio grande — ver excepción arriba.
 - No fotos de jugadores/equipo inventadas o generadas — no hay assets reales
-  todavía. La página se sostiene con tipografía, color e iconografía vectorial
-  simple (balón, cancha, marcador), nunca fotografía fabricada.
+  todavía. Nada de caras ni personas fabricadas. Sí se permiten fondos de
+  AMBIENTE generados (cancha vacía, marcador, gradas, textura de serpiente): son
+  escenas sin personas que dan atmósfera, no suplantan al equipo real. La página
+  se sostiene con tipografía, color y estos ambientes, nunca con jugadores
+  fabricados.
 - El dorado y el rojo no se usan juntos en la misma palabra/elemento salvo en
   el wordmark del hero (ahí replica el logo real, es la única excepción
   intencional).

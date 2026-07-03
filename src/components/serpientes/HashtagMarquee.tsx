@@ -3,7 +3,7 @@ import { HASHTAGS } from "@/content/serpientes-plan";
 
 export function HashtagMarquee() {
   return (
-    <section className="overflow-hidden border-t border-[var(--st-line)] py-24 md:py-36">
+    <section className="st-band st-band-void overflow-hidden border-t border-[var(--st-line)] py-20 md:py-28">
       <div className="mx-auto mb-12 max-w-[1280px] px-6 md:mb-16 md:px-10">
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
           <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">

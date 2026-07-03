@@ -5,110 +5,171 @@ function n(num: number) {
   return num.toLocaleString("es-MX");
 }
 
-export function Comparativa() {
+const EQUIPOS = COMPARATIVA.equipos.map((e) => {
+  const redes =
+    REDES_RIVALES.equipos[e.nombre as keyof typeof REDES_RIVALES.equipos];
+  return {
+    nombre: e.nombre,
+    corto: e.nombre.split(" ")[0],
+    resumen: e.resumen,
+    fortalezas: e.fortalezas,
+    ig: redes.instagram.seguidores,
+    fb: redes.facebook.meGusta,
+    destacado: "destacado" in e && e.destacado === true,
+  };
+});
+
+const SERPIENTES = EQUIPOS.find((e) => e.destacado)!;
+const RIVALES = EQUIPOS.filter((e) => !e.destacado);
+
+type Fila = { corto: string; valor: number; pct: number; destacado: boolean };
+
+function GrupoMetrica({
+  titulo,
+  sufijo,
+  filas,
+}: {
+  titulo: string;
+  sufijo: string;
+  filas: Fila[];
+}) {
   return (
-    <section className="border-t border-[var(--st-line)] bg-[var(--st-surface-1)] px-6 py-24 md:px-10 md:py-40">
+    <div>
+      <div className="mb-6 flex items-baseline justify-between border-b border-[var(--st-line)] pb-3">
+        <span className="st-eyebrow text-[12px] tracking-[0.18em] text-[var(--st-chalk)]">
+          {titulo}
+        </span>
+        <span className="st-eyebrow text-[10px] tracking-[0.16em] text-[var(--st-ash)]">
+          {sufijo}
+        </span>
+      </div>
+      <div className="grid gap-4">
+        {filas.map((f, i) => (
+          <Reveal
+            key={f.corto}
+            delay={i * 0.08}
+            className="grid grid-cols-[5.5rem_1fr] items-center gap-4 sm:grid-cols-[7rem_1fr]"
+          >
+            <span
+              className={`st-eyebrow text-[12px] leading-tight ${
+                f.destacado ? "text-[var(--st-gold)]" : "text-[var(--st-bone)]"
+              }`}
+            >
+              {f.corto}
+            </span>
+            <div className="flex items-center gap-3">
+              <div className="h-5 flex-1 bg-[var(--st-void)]">
+                <div
+                  className={`st-bar-track ${
+                    f.destacado ? "bg-[var(--st-gold)]" : "bg-[var(--st-bone)]/45"
+                  }`}
+                  style={{ width: `${f.pct}%` }}
+                />
+              </div>
+              <span
+                className={`w-16 shrink-0 text-right text-[15px] leading-none [font-family:var(--font-plex-mono)] sm:w-20 sm:text-[17px] ${
+                  f.destacado ? "text-[var(--st-gold)]" : "text-[var(--st-chalk)]"
+                }`}
+              >
+                {n(f.valor)}
+              </span>
+            </div>
+          </Reveal>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function Comparativa() {
+  const maxIg = Math.max(...EQUIPOS.map((e) => e.ig));
+  const maxFb = Math.max(...EQUIPOS.map((e) => e.fb));
+  const filasIg: Fila[] = EQUIPOS.map((e) => ({
+    corto: e.corto,
+    valor: e.ig,
+    pct: (e.ig / maxIg) * 100,
+    destacado: e.destacado,
+  }));
+  const filasFb: Fila[] = EQUIPOS.map((e) => ({
+    corto: e.corto,
+    valor: e.fb,
+    pct: (e.fb / maxFb) * 100,
+    destacado: e.destacado,
+  }));
+
+  return (
+    <section className="st-band st-band-surface border-t border-[var(--st-line)] px-6 py-24 md:px-10 md:py-32">
+      <span className="st-ghostnum -top-8 right-2 md:right-8" aria-hidden>
+        {COMPARATIVA.numero}
+      </span>
       <div className="mx-auto max-w-[1280px]">
-        <Reveal className="mb-12 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mb-16">
-          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
+        <Reveal className="mb-14 flex items-baseline gap-x-5 md:mb-20">
+          <span className="st-display text-[clamp(34px,5.4vw,68px)] leading-none text-[var(--st-gold)]">
             {COMPARATIVA.numero}
           </span>
-          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
+          <h2 className="st-display text-[clamp(24px,3.8vw,44px)] text-[var(--st-chalk)]">
             {COMPARATIVA.titulo}
           </h2>
         </Reveal>
 
-        {/* Desktop: 3 columnas. Mobile: scroll-snap horizontal para leer la
-            comparativa completa de un vistazo, sin apilar. */}
-        <div className="st-hscroll -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0 md:pb-0">
-          {COMPARATIVA.equipos.map((equipo, i) => {
-            const destacado = "destacado" in equipo && equipo.destacado;
-            return (
-              <Reveal
-                key={equipo.nombre}
-                delay={i * 0.1}
-                className="w-[82vw] shrink-0 snap-start sm:w-[62vw] md:w-auto"
-              >
-                <article
-                  className={`flex h-full flex-col border p-6 md:p-7 ${
-                    destacado
-                      ? "border-[var(--st-gold)] bg-[var(--st-void)]"
-                      : "border-[var(--st-line)] bg-[var(--st-void)]/40"
-                  }`}
-                >
-                  <header className="mb-5 flex items-start justify-between gap-3 border-b border-[var(--st-line)] pb-5">
-                    <h3
-                      className={`st-display text-[22px] leading-[1.05] md:text-[26px] ${
-                        destacado ? "text-[var(--st-gold)]" : "text-[var(--st-chalk)]"
-                      }`}
-                    >
-                      {equipo.nombre}
+        {/* Data-viz versus: hace visible el tamaño real del rezago. */}
+        <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+          <GrupoMetrica titulo="Instagram" sufijo="seguidores" filas={filasIg} />
+          <GrupoMetrica titulo="Facebook" sufijo="me gusta" filas={filasFb} />
+        </div>
+        <p className="mt-6 text-[11px] text-[var(--st-ash)]">
+          {REDES_RIVALES.fuente}.
+        </p>
+
+        {/* Lectura cualitativa: 1 destacado + 2 rivales, no tres tarjetas gemelas. */}
+        <div className="mt-20 grid gap-6 md:mt-28 md:grid-cols-[1.35fr_1fr] md:gap-8">
+          <Reveal>
+            <article className="flex h-full flex-col border border-[var(--st-gold)] bg-[var(--st-void)] p-8 md:p-10">
+              <div className="mb-6 flex items-baseline justify-between gap-4 border-b border-[var(--st-line)] pb-6">
+                <h3 className="st-display text-[26px] leading-none text-[var(--st-gold)] md:text-[34px]">
+                  {SERPIENTES.nombre}
+                </h3>
+                <span className="st-eyebrow shrink-0 text-[11px] text-[var(--st-gold)]">
+                  Nosotros
+                </span>
+              </div>
+              <p className="text-[15px] leading-[1.65] text-[var(--st-bone)] md:text-[16px]">
+                {SERPIENTES.resumen}
+              </p>
+              <ul className="mt-8 grid gap-3 border-t border-[var(--st-line)] pt-8 sm:grid-cols-2">
+                {SERPIENTES.fortalezas.map((f, j) => (
+                  <li
+                    key={j}
+                    className="grid grid-cols-[auto_1fr] gap-3 text-[13px] leading-[1.5] text-[var(--st-chalk)]"
+                  >
+                    <span className="mt-[7px] h-1 w-1 bg-[var(--st-gold)]" aria-hidden />
+                    {f}
+                  </li>
+                ))}
+              </ul>
+            </article>
+          </Reveal>
+
+          <div className="grid gap-6">
+            {RIVALES.map((r, i) => (
+              <Reveal key={r.nombre} delay={i * 0.1}>
+                <article className="border-l-2 border-[var(--st-line)] pl-6 md:pl-8">
+                  <div className="mb-3 flex items-baseline justify-between gap-3">
+                    <h3 className="st-display text-[19px] leading-none text-[var(--st-chalk)] md:text-[22px]">
+                      {r.nombre}
                     </h3>
-                    <span
-                      className="st-eyebrow shrink-0 pt-1 text-[11px] text-[var(--st-ash)]"
-                      aria-hidden
-                    >
-                      {String(i + 1).padStart(2, "0")}
+                    <span className="st-eyebrow shrink-0 text-[10px] text-[var(--st-ash)]">
+                      Rival
                     </span>
-                  </header>
-
-                  {(() => {
-                    const redes =
-                      REDES_RIVALES.equipos[
-                        equipo.nombre as keyof typeof REDES_RIVALES.equipos
-                      ];
-                    return (
-                      <div className="mb-5 flex flex-wrap items-baseline gap-x-5 gap-y-1 border-b border-[var(--st-line)] pb-5 [font-family:var(--font-plex-mono)]">
-                        <span className="flex items-baseline gap-1.5">
-                          <span
-                            className={`text-[20px] leading-none ${destacado ? "text-[var(--st-gold)]" : "text-[var(--st-chalk)]"}`}
-                          >
-                            {n(redes.instagram.seguidores)}
-                          </span>
-                          <span className="text-[11px] text-[var(--st-ash)]">IG</span>
-                        </span>
-                        {redes.facebook && (
-                          <span className="flex items-baseline gap-1.5">
-                            <span
-                              className={`text-[20px] leading-none ${destacado ? "text-[var(--st-gold)]" : "text-[var(--st-chalk)]"}`}
-                            >
-                              {n(redes.facebook.meGusta)}
-                            </span>
-                            <span className="text-[11px] text-[var(--st-ash)]">FB</span>
-                          </span>
-                        )}
-                      </div>
-                    );
-                  })()}
-
-                  <p className="text-[14px] leading-[1.62] text-[var(--st-bone)] md:text-[15px]">
-                    {equipo.resumen}
+                  </div>
+                  <p className="text-[13px] leading-[1.6] text-[var(--st-bone)] md:text-[14px]">
+                    {r.resumen}
                   </p>
-
-                  <ul className="mt-6 grid gap-2.5 border-t border-[var(--st-line)] pt-6">
-                    {equipo.fortalezas.map((f, j) => (
-                      <li
-                        key={j}
-                        className="grid grid-cols-[auto_1fr] gap-3 text-[13px] leading-[1.5] text-[var(--st-chalk)]"
-                      >
-                        <span
-                          className={`mt-[7px] h-1 w-1 ${
-                            destacado ? "bg-[var(--st-gold)]" : "bg-[var(--st-ash)]"
-                          }`}
-                          aria-hidden
-                        />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
                 </article>
               </Reveal>
-            );
-          })}
+            ))}
+          </div>
         </div>
-        <p className="mt-4 text-[11px] text-[var(--st-ash)]">
-          IG / FB: {REDES_RIVALES.fuente}.
-        </p>
       </div>
     </section>
   );
