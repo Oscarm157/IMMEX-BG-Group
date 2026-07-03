@@ -22,6 +22,17 @@ const EQUIPOS = COMPARATIVA.equipos.map((e) => {
 const SERPIENTES = EQUIPOS.find((e) => e.destacado)!;
 const RIVALES = EQUIPOS.filter((e) => !e.destacado);
 
+// Barras: todos los equipos de CIBAPAC con dato de redes, ordenados por
+// seguidores (Serpientes queda al fondo, hace visible el rezago).
+const BARRAS = Object.entries(REDES_RIVALES.equipos)
+  .map(([nombre, r]) => ({
+    corto: nombre.split(" ")[0],
+    ig: r.instagram.seguidores,
+    fb: r.facebook.meGusta,
+    destacado: nombre === "Serpientes Tijuana",
+  }))
+  .sort((a, b) => b.ig - a.ig);
+
 type Fila = { corto: string; valor: number; pct: number; destacado: boolean };
 
 function GrupoMetrica({
@@ -82,20 +93,22 @@ function GrupoMetrica({
 }
 
 export function Comparativa() {
-  const maxIg = Math.max(...EQUIPOS.map((e) => e.ig));
-  const maxFb = Math.max(...EQUIPOS.map((e) => e.fb));
-  const filasIg: Fila[] = EQUIPOS.map((e) => ({
+  const maxIg = Math.max(...BARRAS.map((e) => e.ig));
+  const maxFb = Math.max(...BARRAS.map((e) => e.fb));
+  const filasIg: Fila[] = BARRAS.map((e) => ({
     corto: e.corto,
     valor: e.ig,
     pct: (e.ig / maxIg) * 100,
     destacado: e.destacado,
   }));
-  const filasFb: Fila[] = EQUIPOS.map((e) => ({
-    corto: e.corto,
-    valor: e.fb,
-    pct: (e.fb / maxFb) * 100,
-    destacado: e.destacado,
-  }));
+  const filasFb: Fila[] = [...BARRAS]
+    .sort((a, b) => b.fb - a.fb)
+    .map((e) => ({
+      corto: e.corto,
+      valor: e.fb,
+      pct: (e.fb / maxFb) * 100,
+      destacado: e.destacado,
+    }));
 
   return (
     <section className="st-band st-band-surface border-t border-[var(--st-line)] px-6 py-24 md:px-10 md:py-32">

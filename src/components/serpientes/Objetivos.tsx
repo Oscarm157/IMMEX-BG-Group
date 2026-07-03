@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/site/Reveal";
 import { OBJETIVOS } from "@/content/serpientes-plan";
 import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
+import { Highlight } from "@/components/serpientes/Highlight";
 
 export function Objetivos() {
   return (
@@ -20,12 +21,15 @@ export function Objetivos() {
 
         {/* Objetivo general como declaración de ancho completo. */}
         <Reveal delay={0.08} y={40}>
-          <div className="border-y border-[var(--st-line)] py-10 md:py-14">
-            <span className="st-eyebrow mb-5 block text-[12px] text-[var(--st-gold)]">
+          <div className="border-t-2 border-[var(--st-gold)] bg-[var(--st-void)] p-8 md:p-12">
+            <span className="st-eyebrow mb-6 block text-[12px] text-[var(--st-gold)]">
               Objetivo general
             </span>
-            <p className="max-w-[26ch] text-[clamp(20px,3.4vw,38px)] font-light leading-[1.2] text-[var(--st-chalk)]">
-              {OBJETIVOS.general}
+            <p className="max-w-[56ch] text-[clamp(17px,1.9vw,23px)] leading-[1.5] text-[var(--st-chalk)]">
+              <Highlight
+                text={OBJETIVOS.general}
+                phrase="por encima de Guaycuras de La Paz y Lobos de Ensenada"
+              />
             </p>
           </div>
         </Reveal>

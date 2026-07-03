@@ -129,12 +129,15 @@ fabricadas de jugadores.
 ## Guardrails
 - No indigo/violeta.
 - No cards genéricas con sombra+radio grande — ver excepción arriba.
-- No fotos de jugadores/equipo inventadas o generadas — no hay assets reales
-  todavía. Nada de caras ni personas fabricadas. Sí se permiten fondos de
-  AMBIENTE generados (cancha vacía, marcador, gradas, textura de serpiente): son
-  escenas sin personas que dan atmósfera, no suplantan al equipo real. La página
-  se sostiene con tipografía, color y estos ambientes, nunca con jugadores
-  fabricados.
+- Fotos reales del equipo: SÍ (el cliente las entregó, `public/serpientes/hero-*.jpg`,
+  acción real de juego). Se usan en el hero como imagen protagonista. Nunca fotos
+  de personas FABRICADAS/generadas: las caras deben ser del equipo real. Los
+  fondos de ambiente generados (cancha vacía, marcador, gradas, serpiente) siguen
+  válidos para bandas de mid-page (son escenas sin personas).
+- Anton (display de cartel) solo para frases CORTAS: wordmark, números, títulos,
+  un punch de 1-2 líneas. Las declaraciones largas van en Inter medium editorial
+  (peso ~500, leading ~1.3, medida controlada), nunca en Anton (se apelmaza en
+  una pared condensada). Regla fijada tras feedback de Oscar.
 - El dorado y el rojo no se usan juntos en la misma palabra/elemento salvo en
   el wordmark del hero (ahí replica el logo real, es la única excepción
   intencional).
