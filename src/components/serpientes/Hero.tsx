@@ -47,7 +47,7 @@ export function Hero() {
             </p>
           </Reveal>
           <Reveal delay={0.12} y={40}>
-            <h1 className="st-display st-wordmark text-[clamp(56px,13vw,200px)] leading-[0.82]">
+            <h1 className="st-display st-wordmark text-[clamp(40px,9vw,140px)] leading-[0.82]">
               Serpientes
             </h1>
           </Reveal>
@@ -88,7 +88,7 @@ export function Hero() {
             <div className="flex items-center gap-3 text-[var(--st-ash)] md:justify-end">
               <span className="st-eyebrow text-[12px]">Desliza</span>
               <span className="h-px w-12 bg-[var(--st-line)]" aria-hidden />
-              <span className="st-eyebrow text-[12px]">15 secciones</span>
+              <span className="st-eyebrow text-[12px]">12 secciones</span>
             </div>
           </Reveal>
         </div>

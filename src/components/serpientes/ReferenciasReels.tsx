@@ -18,56 +18,23 @@ export function ReferenciasReels() {
             {r.titulo}
           </h2>
         </Reveal>
-        <Reveal className="mb-14 max-w-[64ch] md:mb-20">
+        <Reveal className="mb-12 max-w-[64ch] md:mb-16">
           <p className="text-[15px] leading-[1.6] text-[var(--st-bone)] md:text-[16px]">
             {r.intro}
           </p>
         </Reveal>
 
-        {r.benchmark.map((grupo) => (
-          <div key={grupo.fuente} className="mb-12 md:mb-16">
-            <Reveal className="mb-5 border-b border-[var(--st-line)] pb-3">
-              <h3 className="st-eyebrow text-[13px] text-[var(--st-chalk)]">
-                {grupo.fuente}
-              </h3>
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
+          {r.reels.map((reel, i) => (
+            <Reveal key={reel.url} delay={i * 0.06}>
+              <ReelCard
+                url={reel.url}
+                label={reel.label}
+                vistas={reel.vistas}
+                fuente={reel.fuente}
+              />
             </Reveal>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-              {grupo.reels.map((reel, i) => (
-                <Reveal key={reel.url} delay={i * 0.05}>
-                  <ReelCard
-                    url={reel.url}
-                    label={reel.label}
-                    vistas={reel.vistas}
-                    fuente={grupo.fuente.split(" · ")[0]}
-                  />
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        ))}
-
-        {/* Ideas de activación de otras ligas (referencia, no benchmark). */}
-        <div className="mt-8 border-t-2 border-[var(--st-gold)] pt-12">
-          <Reveal className="mb-5">
-            <h3 className="st-eyebrow text-[13px] text-[var(--st-gold)]">
-              {r.ideas.fuente} · ideas de activación
-            </h3>
-            <p className="mt-2 max-w-[54ch] text-[13px] leading-[1.5] text-[var(--st-ash)]">
-              {r.ideas.nota}
-            </p>
-          </Reveal>
-          <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {r.ideas.reels.map((reel, i) => (
-              <Reveal key={reel.url} delay={i * 0.05}>
-                <ReelCard
-                  url={reel.url}
-                  label={reel.label}
-                  vistas={reel.vistas}
-                  fuente={r.ideas.fuente}
-                />
-              </Reveal>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     </section>

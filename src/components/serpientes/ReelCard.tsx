@@ -73,7 +73,7 @@ export function ReelCard({
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative h-[min(88vh,720px)] w-[min(420px,92vw)]"
+            className="relative h-[min(90vh,860px)] w-[min(360px,92vw)]"
           >
             <button
               type="button"
@@ -84,10 +84,9 @@ export function ReelCard({
             </button>
             <iframe
               src={embedUrl}
-              className="h-full w-full border border-[var(--st-line)] bg-[var(--st-void)]"
+              className="h-full w-full overflow-y-auto border border-[var(--st-line)] bg-[var(--st-void)]"
               allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
               allowFullScreen
-              scrolling="no"
               title={label}
             />
           </div>

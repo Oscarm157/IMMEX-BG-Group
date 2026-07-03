@@ -1,5 +1,5 @@
 import { Reveal } from "@/components/site/Reveal";
-import { INDICADORES, METAS } from "@/content/serpientes-plan";
+import { INDICADORES } from "@/content/serpientes-plan";
 import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
 
 export function KpiYMetas() {
@@ -47,44 +47,6 @@ export function KpiYMetas() {
                     sectionId="indicadores"
                   />
                 )}
-              </div>
-            </Reveal>
-          ))}
-        </div>
-
-        {/* Sub-sección B: metas como línea de tiempo de tres horizontes. */}
-        <Reveal className="mt-24 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mt-32">
-          <span className="st-display text-[clamp(26px,4.4vw,52px)] leading-none text-[var(--st-gold)]">
-            {METAS.numero}
-          </span>
-          <h2 className="st-display text-[clamp(20px,3.2vw,36px)] text-[var(--st-chalk)]">
-            {METAS.titulo}
-          </h2>
-        </Reveal>
-
-        <div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-3 md:gap-0">
-          {METAS.horizontes.map((h, i) => (
-            <Reveal key={h.nombre} delay={i * 0.1} y={36} className="md:px-8 md:first:pl-0 md:last:pr-0">
-              <div className="border-t-2 border-[var(--st-gold)] pt-6">
-                <div className="mb-5 flex items-baseline gap-3">
-                  <span className="st-display text-[clamp(22px,3.2vw,32px)] leading-none text-[var(--st-gold)]">
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="st-display text-[clamp(16px,2vw,20px)] leading-[1.1] text-[var(--st-chalk)]">
-                    {h.nombre}
-                  </h3>
-                </div>
-                <ul className="grid gap-3">
-                  {h.items.map((item, j) => (
-                    <li
-                      key={j}
-                      className="grid grid-cols-[auto_1fr] gap-3 text-[14px] leading-[1.5] text-[var(--st-bone)]"
-                    >
-                      <span className="mt-[8px] h-1 w-1 bg-[var(--st-red)]" aria-hidden />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
               </div>
             </Reveal>
           ))}

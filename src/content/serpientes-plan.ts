@@ -32,22 +32,27 @@ export const REDES_RIVALES = {
     "Guaycuras de La Paz": {
       instagram: { seguidores: 2925, handle: "@guaycuraslapazclubdebasquetbol" },
       facebook: { meGusta: 19940 },
+      enLigaDesde: 2018,
     },
     "Lobos de Ensenada": {
       instagram: { seguidores: 4270, handle: "@ensenadalobos" },
       facebook: { meGusta: 11414 },
+      enLigaDesde: 2019,
     },
     "Jaibos Tampico": {
       instagram: { seguidores: 4495, handle: "@jaibos.tampico" },
       facebook: { meGusta: 7025 },
+      enLigaDesde: 2021,
     },
     "Cazadores de Tapachula": {
       instagram: { seguidores: 3319, handle: "@cazadorestapachula" },
       facebook: { meGusta: 1902 },
+      enLigaDesde: 2025,
     },
     "Serpientes Tijuana": {
       instagram: { seguidores: 487, handle: "@serpientestijuana" },
       facebook: { meGusta: 1900 },
+      enLigaDesde: 2025,
     },
   },
 } as const;
@@ -236,7 +241,13 @@ export const PLAN_CONTENIDO = {
     },
   ],
   calendarioSemanal: {
-    objetivo: "Generar conversación semanal.",
+    objetivo:
+      "No se publica todos los días: se rota entre estos formatos según el calendario de juegos.",
+    frecuencia: {
+      mensual: "~20 al mes",
+      semanal: "4-5 por semana",
+      diaJuego: "hasta 2 el día de juego",
+    },
     dias: [
       { dia: "Lunes", contenido: "Resumen del juego anterior o mensaje motivacional." },
       { dia: "Martes", contenido: "Jugador destacado o estadística." },
@@ -327,51 +338,8 @@ export const TIPOS_CONTENIDO = {
   },
 };
 
-export const ACTIVACIONES = {
-  numero: "08",
-  titulo: "Activaciones para aumentar asistencia",
-  lista: [
-    {
-      numero: "1",
-      titulo: "Noche de escuelas",
-      descripcion: "Invitar a escuelas, academias y equipos juveniles. Ofrecer paquetes especiales.",
-    },
-    {
-      numero: "2",
-      titulo: "Noche universitaria",
-      descripcion: "Promoción para estudiantes con credencial. Crear contenido especial para universidades.",
-    },
-    {
-      numero: "3",
-      titulo: "Noche familiar",
-      descripcion: "Paquetes para familias, fotos con jugadores y dinámicas para niños.",
-    },
-    {
-      numero: "4",
-      titulo: "Noche de patrocinador",
-      descripcion: "Cada patrocinador puede tener una activación especial en cancha y redes.",
-    },
-    {
-      numero: "5",
-      titulo: "Reto de la afición",
-      descripcion: "Premiar a la sección más ruidosa o a la mejor porra.",
-    },
-    {
-      numero: "6",
-      titulo: "Dinámica “Llena la Guarida”",
-      descripcion: "Campaña específica para partidos clave.",
-    },
-    {
-      numero: "7",
-      titulo: "Boletos por interacción",
-      descripcion:
-        "Dinámicas en redes: comparte la publicación, etiqueta a tres amigos, sube una historia apoyando al equipo, usa el hashtag oficial, gana boletos o mercancía.",
-    },
-  ],
-};
-
 export const CAMPANAS = {
-  numero: "09",
+  numero: "08",
   titulo: "Campañas recomendadas",
   lista: [
     {
@@ -418,24 +386,8 @@ export const CAMPANAS = {
   ],
 };
 
-export const HASHTAGS = {
-  numero: "10",
-  titulo: "Hashtags recomendados",
-  lista: [
-    "#SerpientesTijuana",
-    "#LaGuarida",
-    "#NuestraCanchaNuestraCaza",
-    "#TijuanaEsSerpientes",
-    "#TodosALaGuarida",
-    "#CIBAPAC",
-    "#BasquetbolTijuana",
-    "#OrgulloTijuanense",
-    "#TemporadaSerpientes",
-  ],
-};
-
 export const PAUTA_DIGITAL = {
-  numero: "11",
+  numero: "09",
   titulo: "Recomendaciones para pauta digital",
   intro: "La pauta debe dividirse en tres objetivos:",
   objetivos: [
@@ -474,7 +426,7 @@ export const PAUTA_DIGITAL = {
 };
 
 export const ALIANZAS = {
-  numero: "12",
+  numero: "10",
   titulo: "Alianzas estratégicas",
   intro: "Para superar a Guaycuras y Lobos en alcance, Serpientes debe apoyarse en la ciudad.",
   aliados: [
@@ -503,7 +455,7 @@ export const ALIANZAS = {
 };
 
 export const INDICADORES = {
-  numero: "13",
+  numero: "11",
   titulo: "Indicadores de éxito",
   intro: "Para medir si la estrategia está funcionando, se recomienda revisar mensualmente:",
   grupos: [
@@ -546,44 +498,8 @@ export const INDICADORES = {
   ],
 };
 
-export const METAS = {
-  numero: "14",
-  titulo: "Meta de crecimiento sugerida",
-  horizontes: [
-    {
-      nombre: "Primeros 3 meses",
-      items: [
-        "Duplicar la comunidad actual en Instagram.",
-        "Incrementar el alcance promedio por publicación.",
-        "Lograr que cada juego genere contenido de aficionados.",
-        "Tener presencia semanal en medios o páginas deportivas.",
-        "Consolidar el concepto “La Guarida”.",
-      ],
-    },
-    {
-      nombre: "Durante la temporada",
-      items: [
-        "Lograr que cada partido tenga campaña previa.",
-        "Incrementar asistencia en juegos locales.",
-        "Generar al menos 3 a 5 Reels fuertes por semana.",
-        "Conseguir colaboraciones con jugadores, patrocinadores y creadores.",
-        "Posicionar a Serpientes como una de las franquicias con mayor crecimiento digital de CIBAPAC.",
-      ],
-    },
-    {
-      nombre: "Al cierre de temporada",
-      items: [
-        "Superar a competidores directos en crecimiento porcentual.",
-        "Tener una comunidad más activa.",
-        "Mejorar el valor comercial para patrocinadores.",
-        "Convertir la experiencia de juego en un evento esperado por la ciudad.",
-      ],
-    },
-  ],
-};
-
 export const CONCLUSION = {
-  numero: "15",
+  numero: "12",
   titulo: "Conclusión",
   parrafos: [
     "Serpientes Tijuana ya demostró que puede competir deportivamente. Ahora el siguiente paso es convertir ese rendimiento en una marca más grande, más visible y más conectada con la ciudad.",
@@ -607,13 +523,10 @@ export const PLAN_SECTIONS = [
   { id: "estrategia", numero: ESTRATEGIA.numero, titulo: ESTRATEGIA.titulo, data: ESTRATEGIA },
   { id: "plan-contenido", numero: PLAN_CONTENIDO.numero, titulo: PLAN_CONTENIDO.titulo, data: PLAN_CONTENIDO },
   { id: "tipos-contenido", numero: TIPOS_CONTENIDO.numero, titulo: TIPOS_CONTENIDO.titulo, data: TIPOS_CONTENIDO },
-  { id: "activaciones", numero: ACTIVACIONES.numero, titulo: ACTIVACIONES.titulo, data: ACTIVACIONES },
   { id: "campanas", numero: CAMPANAS.numero, titulo: CAMPANAS.titulo, data: CAMPANAS },
-  { id: "hashtags", numero: HASHTAGS.numero, titulo: HASHTAGS.titulo, data: HASHTAGS },
   { id: "pauta-digital", numero: PAUTA_DIGITAL.numero, titulo: PAUTA_DIGITAL.titulo, data: PAUTA_DIGITAL },
   { id: "alianzas", numero: ALIANZAS.numero, titulo: ALIANZAS.titulo, data: ALIANZAS },
   { id: "indicadores", numero: INDICADORES.numero, titulo: INDICADORES.titulo, data: INDICADORES },
-  { id: "metas", numero: METAS.numero, titulo: METAS.titulo, data: METAS },
   { id: "conclusion", numero: CONCLUSION.numero, titulo: CONCLUSION.titulo, data: CONCLUSION },
 ] as const;
 
@@ -633,55 +546,12 @@ export const REFERENCIAS_REELS = {
   eyebrow: "Referencias",
   titulo: "Contenido que funciona",
   intro:
-    "Ejemplos reales de la liga y de ligas mayores, con su alcance. Los reels de puros highlights rinden menos; los que suman dinámica, colaboración o narrativa jalan mucho más.",
-  benchmark: [
-    {
-      fuente: "Cazadores de Tapachula",
-      reels: [
-        { label: "Dinámica con barbería", url: "https://www.instagram.com/reel/DQ-SUkXEbp5/", vistas: "134k" },
-        { label: "GameDay highlights", url: "https://www.instagram.com/reel/DQ96TYdEfdk/", vistas: "47k" },
-        { label: "Clavada en conjunto", url: "https://www.instagram.com/reel/DRsNE6bkef-/", vistas: "43k" },
-        { label: "Clip de clavada", url: "https://www.instagram.com/reel/DR-WlxNESP1/", vistas: "27k" },
-        { label: "Jugadas con efecto de fondo", url: "https://www.instagram.com/reel/DSVZjaMkUV4/", vistas: "22k" },
-      ],
-    },
-    {
-      fuente: "amhoops.mx · jugadas de Serpientes",
-      reels: [
-        { label: "Tapón de Jones", url: "https://www.instagram.com/reel/DN_uhVGEmPD/", vistas: "23k" },
-        { label: "Jugada del base", url: "https://www.instagram.com/reel/DQAxQVhjw9k/", vistas: "10k" },
-        { label: "Triples del zurdo Vázquez", url: "https://www.instagram.com/reel/DQHztZQEj_c/", vistas: "10k" },
-      ],
-    },
-    {
-      fuente: "Guaycuras de La Paz",
-      reels: [
-        { label: "Close up highlights", url: "https://www.instagram.com/reel/DRWMgKSAAMu/", vistas: "21k" },
-        { label: "Highlights de un jugador", url: "https://www.instagram.com/reel/DXDaXN6AnWL/", vistas: "20k" },
-        { label: "Game winner", url: "https://www.instagram.com/reel/DVv_1-ujRQX/", vistas: "11k" },
-      ],
-    },
-    {
-      fuente: "Lobos de Ensenada",
-      reels: [
-        { label: "Jugada de tapón", url: "https://www.instagram.com/reel/DRzisBIDSTO/", vistas: "17.9k" },
-        { label: "Reel de la final", url: "https://www.instagram.com/reel/DRgB99bj-N-/", vistas: "16.6k" },
-        { label: "Interacción con la afición", url: "https://www.instagram.com/reel/DOq556QCQtv/", vistas: "16.2k" },
-      ],
-    },
-    {
-      fuente: "adaniaphotos",
-      reels: [
-        { label: "Highlights del zurdo Vázquez", url: "https://www.instagram.com/reel/DP-HVJyD1LC/", vistas: "6k" },
-      ],
-    },
+    "Cinco ejemplos, con su alcance real. Variados a propósito: los reels de puros highlights rinden menos; los que suman dinámica, interacción o colaboración jalan mucho más.",
+  reels: [
+    { fuente: "Cazadores de Tapachula", label: "GameDay highlights", url: "https://www.instagram.com/reel/DQ96TYdEfdk/", vistas: "47k" },
+    { fuente: "amhoops · Serpientes", label: "Tapón de Jones", url: "https://www.instagram.com/reel/DN_uhVGEmPD/", vistas: "23k" },
+    { fuente: "Guaycuras de La Paz", label: "Close up highlights", url: "https://www.instagram.com/reel/DRWMgKSAAMu/", vistas: "21k" },
+    { fuente: "Lobos de Ensenada", label: "Interacción con la afición", url: "https://www.instagram.com/reel/DOq556QCQtv/", vistas: "16.2k" },
+    { fuente: "NBA · idea de activación", label: "Colaboración de reparto", url: "https://www.instagram.com/reel/DaBmgJCRC_Z/", vistas: "1M" },
   ],
-  ideas: {
-    fuente: "NBA",
-    nota: "Ejemplos de otras ligas para adaptar, no benchmark de CIBAPAC.",
-    reels: [
-      { label: "Primer lanzamiento (ej. en un juego de Toros)", url: "https://www.instagram.com/reel/DaBwkBssWC0/", vistas: "1.2M" },
-      { label: "Colaboración de reparto (ej. Rappi, boletos en entregas)", url: "https://www.instagram.com/reel/DaBmgJCRC_Z/", vistas: "1M" },
-    ],
-  },
 };

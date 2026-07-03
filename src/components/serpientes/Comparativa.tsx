@@ -29,11 +29,18 @@ const BARRAS = Object.entries(REDES_RIVALES.equipos)
     corto: nombre.split(" ")[0],
     ig: r.instagram.seguidores,
     fb: r.facebook.meGusta,
+    desde: r.enLigaDesde,
     destacado: nombre === "Serpientes Tijuana",
   }))
   .sort((a, b) => b.ig - a.ig);
 
-type Fila = { corto: string; valor: number; pct: number; destacado: boolean };
+type Fila = {
+  corto: string;
+  valor: number;
+  pct: number;
+  destacado: boolean;
+  desde?: number;
+};
 
 function GrupoMetrica({
   titulo,
@@ -61,12 +68,19 @@ function GrupoMetrica({
             delay={i * 0.08}
             className="grid grid-cols-[5.5rem_1fr] items-center gap-4 sm:grid-cols-[7rem_1fr]"
           >
-            <span
-              className={`st-eyebrow text-[12px] leading-tight ${
-                f.destacado ? "text-[var(--st-gold)]" : "text-[var(--st-bone)]"
-              }`}
-            >
-              {f.corto}
+            <span className="grid gap-1">
+              <span
+                className={`st-eyebrow text-[12px] leading-tight ${
+                  f.destacado ? "text-[var(--st-gold)]" : "text-[var(--st-bone)]"
+                }`}
+              >
+                {f.corto}
+              </span>
+              {f.desde && (
+                <span className="text-[10px] leading-none text-[var(--st-ash)] [font-family:var(--font-plex-mono)]">
+                  desde {f.desde}
+                </span>
+              )}
             </span>
             <div className="flex items-center gap-3">
               <div className="h-5 flex-1 bg-[var(--st-void)]">
@@ -100,6 +114,7 @@ export function Comparativa() {
     valor: e.ig,
     pct: (e.ig / maxIg) * 100,
     destacado: e.destacado,
+    desde: e.desde,
   }));
   const filasFb: Fila[] = [...BARRAS]
     .sort((a, b) => b.fb - a.fb)
@@ -154,8 +169,15 @@ export function Comparativa() {
           <GrupoMetrica titulo="Instagram" sufijo="seguidores" filas={filasIg} />
           <GrupoMetrica titulo="Facebook" sufijo="me gusta" filas={filasFb} />
         </div>
+        <Reveal className="mt-8 border-l-2 border-[var(--st-gold)] pl-5">
+          <p className="max-w-[70ch] text-[13px] leading-[1.6] text-[var(--st-bone)] md:text-[14px]">
+            Años en CIBAPAC: Guaycuras y Lobos llevan 6-7 temporadas. Cazadores
+            debutó en 2025 igual que Serpientes y ya suma 3,319 seguidores. El
+            rezago es de estrategia, no solo de antigüedad.
+          </p>
+        </Reveal>
         <p className="mt-6 text-[11px] text-[var(--st-ash)]">
-          {REDES_RIVALES.fuente}.
+          {REDES_RIVALES.fuente}. Antigüedad por temporadas en la liga (aprox.).
         </p>
 
         {/* Lectura cualitativa: 1 destacado + 2 rivales, no tres tarjetas gemelas. */}

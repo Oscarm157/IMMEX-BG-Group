@@ -49,21 +49,6 @@ function Block({ title, children }: { title: string; children: React.ReactNode }
   );
 }
 
-function Chips({ items }: { items: readonly string[] }) {
-  return (
-    <ul className="flex flex-wrap gap-2">
-      {items.map((it, i) => (
-        <li
-          key={i}
-          className="border border-[var(--st-line)] px-3 py-1.5 font-[var(--font-plex-mono)] text-[13px] text-[var(--st-gold)]"
-        >
-          {it}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function Body({ section }: { section: Section }) {
   switch (section.id) {
     case "contexto":
@@ -197,28 +182,6 @@ function Body({ section }: { section: Section }) {
       );
     }
 
-    case "activaciones":
-      return (
-        <div className="grid gap-5">
-          {section.data.lista.map((a) => (
-            <div
-              key={a.numero}
-              className="grid grid-cols-[auto_1fr] gap-4 border-t border-[var(--st-line)] pt-5"
-            >
-              <span className="st-display text-[24px] leading-none text-[var(--st-gold)]">
-                {a.numero}
-              </span>
-              <div className="grid gap-1.5">
-                <h3 className="st-display text-[19px] text-[var(--st-chalk)]">{a.titulo}</h3>
-                <p className="text-[15px] leading-[1.6] text-[var(--st-bone)]">
-                  {a.descripcion}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      );
-
     case "campanas":
       return (
         <div className="grid gap-6">
@@ -236,9 +199,6 @@ function Body({ section }: { section: Section }) {
           ))}
         </div>
       );
-
-    case "hashtags":
-      return <Chips items={section.data.lista} />;
 
     case "pauta-digital":
       return (
@@ -276,17 +236,6 @@ function Body({ section }: { section: Section }) {
           {section.data.grupos.map((g) => (
             <Block key={g.categoria} title={g.categoria}>
               <Bullets items={g.items} />
-            </Block>
-          ))}
-        </div>
-      );
-
-    case "metas":
-      return (
-        <div className="grid gap-8">
-          {section.data.horizontes.map((h) => (
-            <Block key={h.nombre} title={h.nombre}>
-              <Bullets items={h.items} />
             </Block>
           ))}
         </div>
