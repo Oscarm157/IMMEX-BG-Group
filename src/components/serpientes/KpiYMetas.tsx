@@ -11,10 +11,10 @@ export function KpiYMetas() {
       <div className="mx-auto max-w-[1280px]">
         {/* Sub-sección A: indicadores como tablero de métricas. */}
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {INDICADORES.numero}
           </span>
-          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {INDICADORES.titulo}
           </h2>
         </Reveal>

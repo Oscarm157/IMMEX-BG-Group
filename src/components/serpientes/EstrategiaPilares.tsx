@@ -11,10 +11,10 @@ export function EstrategiaPilares() {
       </span>
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="flex flex-wrap items-baseline gap-x-6 gap-y-2">
-          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {ESTRATEGIA.numero}
           </span>
-          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {ESTRATEGIA.titulo}
           </h2>
         </Reveal>
@@ -38,7 +38,7 @@ export function EstrategiaPilares() {
                 <span className="st-display text-[clamp(40px,6.5vw,88px)] leading-none text-[var(--st-gold)]">
                   {primero.numero}
                 </span>
-                <h3 className="st-display text-[clamp(20px,3vw,32px)] text-[var(--st-chalk)]">
+                <h3 className="st-display st-h3 text-[var(--st-chalk)]">
                   {primero.titulo}
                 </h3>
               </div>
@@ -68,7 +68,7 @@ export function EstrategiaPilares() {
                     <span className="st-display text-[clamp(22px,3.6vw,36px)] leading-none text-[var(--st-gold)]">
                       {pilar.numero}
                     </span>
-                    <h3 className="st-display text-[clamp(17px,2.4vw,22px)] text-[var(--st-chalk)]">
+                    <h3 className="st-display st-h3 text-[var(--st-chalk)]">
                       {pilar.titulo}
                     </h3>
                   </div>

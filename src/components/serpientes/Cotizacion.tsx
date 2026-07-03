@@ -13,7 +13,7 @@ export function Cotizacion() {
           </span>
         </Reveal>
         <Reveal className="mb-6">
-          <h2 className="st-display text-[clamp(34px,6vw,72px)] text-[var(--st-chalk)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {COTIZACION.titulo}
           </h2>
         </Reveal>

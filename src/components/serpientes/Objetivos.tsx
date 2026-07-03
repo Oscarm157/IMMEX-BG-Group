@@ -11,10 +11,10 @@ export function Objetivos() {
       </span>
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mb-10 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mb-14">
-          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {OBJETIVOS.numero}
           </span>
-          <h2 className="st-display text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {OBJETIVOS.titulo}
           </h2>
         </Reveal>
@@ -47,7 +47,7 @@ export function Objetivos() {
                 <span className="st-display text-[clamp(40px,6vw,88px)] leading-[0.85] text-[var(--st-gold)]">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="st-display text-[clamp(20px,2.6vw,30px)] leading-[1.05] text-[var(--st-chalk)]">
+                <h3 className="st-display st-h3 text-[var(--st-chalk)]">
                   {grupo.categoria}
                 </h3>
               </div>

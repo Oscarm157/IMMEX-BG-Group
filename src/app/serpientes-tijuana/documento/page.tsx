@@ -18,13 +18,6 @@ export default function DocumentoPage() {
           >
             &larr; Volver al resumen
           </Link>
-          <a
-            href={meta.docxHref}
-            download
-            className="st-eyebrow rounded-full bg-[var(--st-red)] px-4 py-2 text-[12px] text-[var(--st-chalk)] transition hover:brightness-110"
-          >
-            Descargar original
-          </a>
         </div>
       </header>
 

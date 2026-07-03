@@ -7,8 +7,8 @@
   --st-line: #33363d;
 
   --st-chalk: #f5f5f2;
-  --st-bone: #a3a5ab;
-  --st-ash: #6f7178;
+  --st-bone: #b0b2b8;
+  --st-ash: #868891;
 
   --st-gold: #c9a876;
   --st-red: #d6202e;
@@ -34,6 +34,25 @@
   font-weight: 400;
   letter-spacing: -0.01em;
   line-height: 0.95;
+}
+
+/* Escala tipográfica de sección: mismos tamaños en todo el deck para que se lea
+   estructurado (no un tamaño distinto por sección). Se combinan con .st-display. */
+.st-num {
+  font-size: clamp(30px, 4.6vw, 56px);
+  line-height: 0.85;
+}
+.st-h2 {
+  font-size: clamp(24px, 3.4vw, 42px);
+  line-height: 1;
+}
+.st-h3 {
+  font-size: clamp(18px, 2.4vw, 26px);
+  line-height: 1.05;
+}
+.st-statement {
+  font-size: clamp(30px, 5.6vw, 66px);
+  line-height: 1.03;
 }
 
 /* Wordmark del hero: única excepción intencional donde dorado y rojo conviven,
@@ -125,7 +144,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(180deg, rgba(10, 10, 11, 0.72) 0%, rgba(10, 10, 11, 0.55) 45%, rgba(10, 10, 11, 0.9) 100%);
+  background: linear-gradient(180deg, rgba(10, 10, 11, 0.78) 0%, rgba(10, 10, 11, 0.64) 45%, rgba(10, 10, 11, 0.92) 100%);
 }
 
 /* Número de sección gigante como elemento gráfico de fondo: llena el vacío

@@ -14,10 +14,10 @@ export function ContenidoCalendario() {
       </span>
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mb-14 flex flex-wrap items-baseline gap-x-6 gap-y-2 md:mb-20">
-          <span className="st-display text-[clamp(32px,5vw,64px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {PLAN_CONTENIDO.numero}
           </span>
-          <h2 className="st-display max-w-[14ch] text-[clamp(22px,3.6vw,40px)] text-[var(--st-chalk)]">
+          <h2 className="st-display max-w-[14ch] st-h2 text-[var(--st-chalk)]">
             {PLAN_CONTENIDO.titulo}
           </h2>
         </Reveal>
@@ -27,7 +27,7 @@ export function ContenidoCalendario() {
           <Reveal>
             <div className="flex items-baseline gap-3">
               <span className="st-eyebrow text-[12px] text-[var(--st-gold)]">Fase</span>
-              <h3 className="st-display text-[clamp(19px,3vw,28px)] text-[var(--st-chalk)]">
+              <h3 className="st-display st-h3 text-[var(--st-chalk)]">
                 {pretemporada.nombre}
               </h3>
             </div>
@@ -70,7 +70,7 @@ export function ContenidoCalendario() {
         {/* Sub-vista B: frecuencia real (no diaria) + menú de formatos que rota. */}
         <div className="mt-24 border-t border-[var(--st-line)] pt-10 md:mt-32">
           <Reveal className="flex flex-wrap items-end justify-between gap-6">
-            <h3 className="st-display text-[clamp(18px,2.8vw,28px)] text-[var(--st-chalk)]">
+            <h3 className="st-display st-h3 text-[var(--st-chalk)]">
               Ritmo de publicación
             </h3>
             <span className="max-w-[30ch] text-right text-[13px] leading-[1.4] text-[var(--st-bone)]">

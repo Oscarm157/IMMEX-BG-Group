@@ -132,10 +132,10 @@ export function Comparativa() {
       </span>
       <div className="mx-auto max-w-[1280px]">
         <Reveal className="mb-14 flex items-baseline gap-x-5 md:mb-20">
-          <span className="st-display text-[clamp(34px,5.4vw,68px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {COMPARATIVA.numero}
           </span>
-          <h2 className="st-display text-[clamp(24px,3.8vw,44px)] text-[var(--st-chalk)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {COMPARATIVA.titulo}
           </h2>
         </Reveal>

@@ -7,7 +7,6 @@
 export const meta = {
   title: "Comparativa y Plan de Crecimiento Digital",
   subtitle: "Serpientes Tijuana CIBAPAC",
-  docxHref: "/Plan de Crecimiento Digital Serpientes Tijuana.docx",
 };
 
 /* Tagline oficial del club, NO viene del documento del analista.
@@ -434,8 +433,6 @@ export const ALIANZAS = {
     "Universidades.",
     "Academias de basquetbol.",
     "Gimnasios.",
-    "Restaurantes.",
-    "Bares deportivos.",
     "Marcas locales.",
     "Influencers deportivos.",
     "Creadores de contenido de Tijuana.",
@@ -566,7 +563,7 @@ export const COTIZACION = {
     "El núcleo es la estrategia y el contenido, que corre cada mes. La cobertura de partido se suma por encuentro, según el calendario de juegos.",
   paquete: {
     nombre: "Paquete mensual",
-    precio: "$13,000",
+    precio: "$13,700",
     periodo: "/ mes",
     incluye: [
       "Estrategia y calendario editorial",
@@ -586,7 +583,7 @@ export const COTIZACION = {
     incluye: [
       "Grabación profesional en cancha",
       "Highlights y reel del encuentro",
-      "1 o 2 cámaras según el partido",
+      "1 a 2 cámaras por juego, hasta 2 el día de partido",
     ],
     nota: "Los juegos de visita se cotizan aparte.",
   },

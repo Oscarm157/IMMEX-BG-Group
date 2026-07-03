@@ -15,12 +15,12 @@ export function PullQuote() {
       <div className="mx-auto max-w-[1280px]">
         {/* Header compacto. */}
         <Reveal className="mb-10 flex items-baseline gap-4 md:mb-14">
-          <span className="st-display text-[clamp(28px,4.5vw,54px)] leading-none text-[var(--st-gold)]">
+          <span className="st-display st-num text-[var(--st-gold)]">
             {DIAGNOSTICO.numero}
           </span>
-          <span className="st-eyebrow text-[13px] tracking-[0.2em] text-[var(--st-bone)]">
+          <h2 className="st-display st-h2 text-[var(--st-chalk)]">
             {DIAGNOSTICO.titulo}
-          </span>
+          </h2>
         </Reveal>
 
         {/* Posicionamiento como statement protagonista, ancho y asimétrico. */}
@@ -32,7 +32,7 @@ export function PullQuote() {
             >
               &ldquo;
             </span>
-            <blockquote className="st-display relative text-[clamp(30px,6vw,74px)] leading-[1.02] text-[var(--st-chalk)]">
+            <blockquote className="st-display st-statement relative text-[var(--st-chalk)]">
               {DIAGNOSTICO.posicionamiento}
             </blockquote>
           </figure>
