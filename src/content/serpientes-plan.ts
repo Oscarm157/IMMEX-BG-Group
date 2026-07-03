@@ -555,3 +555,39 @@ export const REFERENCIAS_REELS = {
     { fuente: "NBA · idea de activación", label: "Colaboración de reparto", url: "https://www.instagram.com/reel/DaBmgJCRC_Z/", vistas: "1M" },
   ],
 };
+
+/* Cotización comercial de Oscar (NO del documento del analista). Modelo de dos
+   capas: paquete fijo mensual de estrategia/contenido + cobertura de partido
+   variable por encuentro (grabación aparte, para proteger margen). */
+export const COTIZACION = {
+  eyebrow: "Inversión",
+  titulo: "Cotización",
+  intro:
+    "El núcleo es la estrategia y el contenido, que corre cada mes. La cobertura de partido se suma por encuentro, según el calendario de juegos.",
+  paquete: {
+    nombre: "Paquete mensual",
+    precio: "$13,000",
+    periodo: "/ mes",
+    incluye: [
+      "Estrategia y calendario editorial",
+      "Publicación y gestión en Facebook, Instagram y TikTok",
+      "Diseño gráfico: partidos, jugadores, promociones e historias",
+      "Creación y edición de video básico con material existente",
+      "Captación de leads para alianzas y patrocinios",
+      "Gestión de pauta digital",
+      "Reporte mensual de resultados",
+    ],
+    nota: "La pauta (presupuesto de anuncios en Meta y TikTok) la define y aporta el club, aparte del paquete.",
+  },
+  cobertura: {
+    nombre: "Cobertura de partido",
+    precio: "Por encuentro",
+    detalle: "Cotización según formato",
+    incluye: [
+      "Grabación profesional en cancha",
+      "Highlights y reel del encuentro",
+      "1 o 2 cámaras según el partido",
+    ],
+    nota: "Los juegos de visita se cotizan aparte.",
+  },
+};

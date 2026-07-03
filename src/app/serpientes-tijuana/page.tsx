@@ -13,6 +13,7 @@ import { PautaDigital } from "@/components/serpientes/PautaDigital";
 import { Alianzas } from "@/components/serpientes/Alianzas";
 import { KpiYMetas } from "@/components/serpientes/KpiYMetas";
 import { Cierre } from "@/components/serpientes/Cierre";
+import { Cotizacion } from "@/components/serpientes/Cotizacion";
 
 export default function SerpientesTijuanaPage() {
   return (
@@ -33,6 +34,7 @@ export default function SerpientesTijuanaPage() {
         <Alianzas />
         <KpiYMetas />
         <Cierre />
+        <Cotizacion />
       </main>
     </>
   );
