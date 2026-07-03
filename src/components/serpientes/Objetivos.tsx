@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/site/Reveal";
 import { OBJETIVOS } from "@/content/serpientes-plan";
 import { VerEnDocumento } from "@/components/serpientes/VerEnDocumento";
+import { Highlight } from "@/components/serpientes/Highlight";
 
 export function Objetivos() {
   return (
@@ -24,8 +25,11 @@ export function Objetivos() {
             <span className="st-eyebrow mb-6 block text-[12px] text-[var(--st-gold)]">
               Objetivo general
             </span>
-            <p className="max-w-[40ch] text-[clamp(20px,3vw,34px)] font-medium leading-[1.32] tracking-[-0.005em] text-[var(--st-chalk)]">
-              {OBJETIVOS.general}
+            <p className="max-w-[56ch] text-[clamp(17px,1.9vw,23px)] leading-[1.5] text-[var(--st-chalk)]">
+              <Highlight
+                text={OBJETIVOS.general}
+                phrase="por encima de Guaycuras de La Paz y Lobos de Ensenada"
+              />
             </p>
           </div>
         </Reveal>

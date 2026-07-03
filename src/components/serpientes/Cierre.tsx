@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Reveal } from "@/components/site/Reveal";
 import { CONCLUSION, meta, clubTagline } from "@/content/serpientes-plan";
+import { Highlight } from "@/components/serpientes/Highlight";
 
 export function Cierre() {
   return (
@@ -57,8 +58,11 @@ export function Cierre() {
           <p className="st-display max-w-[15ch] text-[clamp(34px,6.5vw,80px)] leading-[0.9] text-[var(--st-gold)]">
             {clubTagline}
           </p>
-          <p className="mt-8 max-w-[42ch] text-[clamp(19px,2.4vw,30px)] font-medium leading-[1.34] text-[var(--st-chalk)]">
-            {CONCLUSION.cierre}
+          <p className="mt-8 max-w-[56ch] text-[clamp(16px,1.9vw,22px)] leading-[1.5] text-[var(--st-chalk)]">
+            <Highlight
+              text={CONCLUSION.cierre}
+              phrase="mayor crecimiento y alcance dentro de CIBAPAC"
+            />
           </p>
           <div className="mt-12 flex flex-wrap items-center gap-4">
             <Link

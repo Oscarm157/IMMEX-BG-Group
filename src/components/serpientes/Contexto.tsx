@@ -1,5 +1,6 @@
 import { Reveal } from "@/components/site/Reveal";
 import { CONTEXTO } from "@/content/serpientes-plan";
+import { Highlight } from "@/components/serpientes/Highlight";
 
 export function Contexto() {
   const [lead, ...rest] = CONTEXTO.parrafos;
@@ -17,10 +18,14 @@ export function Contexto() {
           </span>
         </Reveal>
 
-        {/* Lead como declaración dominante, medida cómoda (no columna delgada). */}
+        {/* Lead editorial: capitular + frase clave en dorado, tamaño de lectura
+            (no un bloque inflado). */}
         <Reveal delay={0.06} y={40}>
-          <p className="max-w-[34ch] text-[clamp(26px,3.8vw,46px)] font-medium leading-[1.16] tracking-[-0.015em] text-[var(--st-chalk)]">
-            {lead}
+          <p className="st-dropcap max-w-[52ch] text-[clamp(17px,1.9vw,22px)] leading-[1.55] text-[var(--st-chalk)]">
+            <Highlight
+              text={lead}
+              phrase="temporada 2025 altamente positiva"
+            />
           </p>
         </Reveal>
 
