@@ -37,7 +37,7 @@ export default function DocumentoPage() {
             {meta.title}
           </h1>
 
-          {/* Tabla de contenido: 15 anclas. */}
+          {/* Tabla de contenido: una ancla por sección. */}
           <nav
             aria-label="Contenido del documento"
             className="mt-12 grid gap-x-6 gap-y-1 border-t border-[var(--st-line)] pt-8 sm:grid-cols-2"

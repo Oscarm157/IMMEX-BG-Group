@@ -67,13 +67,39 @@ export function ContenidoCalendario() {
           </div>
         </div>
 
-        {/* Sub-vista B: calendario semanal como marcador de 7 celdas, data-dense. */}
-        <Reveal className="mt-24 mb-8 flex items-end justify-between gap-6 border-t border-[var(--st-line)] pt-10 md:mt-32">
-          <h3 className="st-display text-[clamp(18px,2.8vw,28px)] text-[var(--st-chalk)]">
-            Semana tipo
-          </h3>
-          <span className="max-w-[24ch] text-right text-[13px] leading-[1.4] text-[var(--st-bone)]">
-            {calendarioSemanal.objetivo}
+        {/* Sub-vista B: frecuencia real (no diaria) + menú de formatos que rota. */}
+        <div className="mt-24 border-t border-[var(--st-line)] pt-10 md:mt-32">
+          <Reveal className="flex flex-wrap items-end justify-between gap-6">
+            <h3 className="st-display text-[clamp(18px,2.8vw,28px)] text-[var(--st-chalk)]">
+              Ritmo de publicación
+            </h3>
+            <span className="max-w-[30ch] text-right text-[13px] leading-[1.4] text-[var(--st-bone)]">
+              {calendarioSemanal.objetivo}
+            </span>
+          </Reveal>
+          <Reveal
+            delay={0.06}
+            className="mt-8 grid grid-cols-1 gap-px overflow-hidden border border-[var(--st-line)] sm:grid-cols-3"
+          >
+            {[
+              { valor: calendarioSemanal.frecuencia.mensual, etiqueta: "Publicaciones" },
+              { valor: calendarioSemanal.frecuencia.semanal, etiqueta: "Ritmo semanal" },
+              { valor: calendarioSemanal.frecuencia.diaJuego, etiqueta: "Día de juego" },
+            ].map((f) => (
+              <div key={f.etiqueta} className="bg-[var(--st-void)] p-6 md:p-7">
+                <span className="st-display text-[clamp(22px,3vw,32px)] leading-none text-[var(--st-gold)]">
+                  {f.valor}
+                </span>
+                <span className="st-eyebrow mt-3 block text-[11px] text-[var(--st-ash)]">
+                  {f.etiqueta}
+                </span>
+              </div>
+            ))}
+          </Reveal>
+        </div>
+        <Reveal className="mt-10 mb-8">
+          <span className="st-eyebrow text-[12px] text-[var(--st-bone)]">
+            Formatos que rotan
           </span>
         </Reveal>
         <div className="st-hscroll -mx-6 flex snap-x snap-mandatory gap-px overflow-x-auto px-6 md:mx-0 md:grid md:grid-cols-7 md:overflow-visible md:px-0">
