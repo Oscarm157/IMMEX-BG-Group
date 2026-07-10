@@ -89,8 +89,18 @@ export async function POST(req: Request) {
     return Response.json({ ok: false, error: 'bad_request' }, { status: 400 });
   }
 
+  // Honeypot: los bots rellenan campos ocultos. Si viene con valor, aceptamos en
+  // silencio (200 ok) sin guardar ni notificar, para no darle señal al bot.
+  if (typeof body.website === 'string' && body.website.trim()) {
+    return Response.json({ ok: true });
+  }
+
   const name = cap(body.name, 200);
   const email = cap(body.email, 200);
+  // Si viene email, exigimos formato válido (el capping no valida forma).
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    return Response.json({ ok: false, error: 'bad_email' }, { status: 400 });
+  }
   const phone = cap(body.phone, 60);
   const sourceUrl = cap(body.sourceUrl, 500);
   const localeLabel = body.locale === 'en' ? 'EN' : 'ES';

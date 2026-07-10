@@ -36,6 +36,7 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
           email: String(data.get("email") || ""),
           company: String(data.get("company") || ""),
           message: String(data.get("message") || ""),
+          website: String(data.get("website") || ""), // honeypot
           sourceUrl: typeof window !== "undefined" ? window.location.href : "",
           utmSource: utm.get("utm_source") || "",
           utmCampaign: utm.get("utm_campaign") || "",
@@ -58,8 +59,42 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
   const statusText = status === "sent" ? dict.sent : status === "error" ? errorMsg : dict.note;
   const statusColor = status === "error" ? "text-accent" : "text-smoke";
 
+  const consent =
+    locale === "es" ? (
+      <>
+        Acepto el{" "}
+        <a
+          href={`/${locale}/privacy`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-bone underline underline-offset-2 hover:text-accent"
+        >
+          aviso de privacidad
+        </a>{" "}
+        y el tratamiento de mis datos.
+      </>
+    ) : (
+      <>
+        I accept the{" "}
+        <a
+          href={`/${locale}/privacy`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-bone underline underline-offset-2 hover:text-accent"
+        >
+          privacy notice
+        </a>{" "}
+        and the processing of my data.
+      </>
+    );
+
   return (
     <form onSubmit={onSubmit} className="flex flex-col gap-8">
+      {/* Honeypot anti-bot: fuera de pantalla, los humanos no lo ven ni lo tabulan. */}
+      <div aria-hidden className="pointer-events-none absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
+        <label htmlFor="website">No llenar</label>
+        <input id="website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+      </div>
       <div className="grid gap-8 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className={label}>
@@ -86,6 +121,10 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
         </label>
         <textarea id="message" name="message" rows={4} required className={`${field} resize-none`} />
       </div>
+      <label className="flex items-start gap-3 text-[13px] leading-relaxed text-smoke">
+        <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 shrink-0 accent-accent" />
+        <span>{consent}</span>
+      </label>
       <div className="flex flex-wrap items-center gap-5">
         <SubmitPill type="submit" variant="accent" arrow disabled={status === "sending"}>
           {dict.submit}

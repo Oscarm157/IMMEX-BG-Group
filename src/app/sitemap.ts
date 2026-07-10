@@ -3,22 +3,39 @@ import { locales } from "@/content/dictionaries";
 import { SERVICE_SLUGS } from "@/content/service-slugs";
 import { GUIA_SLUGS } from "@/content/guias";
 import { UBICACION_SLUGS } from "@/content/ubicaciones";
+import { getPublishedArticles } from "@/lib/blog/data";
 
 const BASE_URL = "https://bgconsultingroup.com";
 
-// Rutas estáticas del sitio corporativo bilingüe (el blog es dinámico desde DB
-// y se añadirá cuando se genere su sitemap propio).
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const entries: MetadataRoute.Sitemap = [];
 
   for (const lang of locales) {
     entries.push({ url: `${BASE_URL}/${lang}`, changeFrequency: "monthly", priority: 1 });
-    for (const p of ["services", "software", "about", "contact"]) {
+    for (const p of ["services", "software", "about", "contact", "blog"]) {
       entries.push({ url: `${BASE_URL}/${lang}/${p}`, changeFrequency: "monthly", priority: 0.8 });
     }
     for (const slug of SERVICE_SLUGS) {
       entries.push({ url: `${BASE_URL}/${lang}/services/${slug}`, changeFrequency: "monthly", priority: 0.7 });
     }
+  }
+
+  // Blog: artículos publicados (bilingües). Si la DB falla, el sitemap no se rompe.
+  try {
+    const articles = await getPublishedArticles();
+    for (const a of articles) {
+      const lastModified = a.updatedAt ?? a.publishedAt ?? undefined;
+      for (const lang of locales) {
+        entries.push({
+          url: `${BASE_URL}/${lang}/blog/${a.slug}`,
+          lastModified,
+          changeFrequency: "monthly",
+          priority: 0.6,
+        });
+      }
+    }
+  } catch {
+    /* sin entradas de blog si la DB no está disponible en build */
   }
 
   // Corpus SEO español-first (sin prefijo de idioma).
