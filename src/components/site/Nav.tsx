@@ -48,6 +48,7 @@ export function Nav({
   slugs,
   servicesCta,
   software,
+  hideLangSwitch = false,
 }: {
   lang: Locale;
   dict: NavDict;
@@ -56,6 +57,7 @@ export function Nav({
   slugs: readonly string[];
   servicesCta: string;
   software: SoftwareNav;
+  hideLangSwitch?: boolean;
 }) {
   const pathname = usePathname();
   const reduce = useReducedMotion();
@@ -166,9 +168,11 @@ export function Nav({
             {dict.contact}
           </Link>
 
-          <Link href={switchHref} aria-label={langSwitch.aria} className="text-[13px] font-medium tracking-[0.08em] text-smoke transition-colors hover:text-chalk">
-            {langSwitch.to}
-          </Link>
+          {!hideLangSwitch && (
+            <Link href={switchHref} aria-label={langSwitch.aria} className="text-[13px] font-medium tracking-[0.08em] text-smoke transition-colors hover:text-chalk">
+              {langSwitch.to}
+            </Link>
+          )}
           <PillButton href={`/${lang}/contact`} variant="accent" className="px-5 py-2.5 text-sm">
             {dict.cta}
           </PillButton>
@@ -297,9 +301,11 @@ export function Nav({
                 <PillButton href={`/${lang}/contact`} variant="accent" arrow>
                   {dict.cta}
                 </PillButton>
-                <Link href={switchHref} className="text-[13px] font-medium tracking-[0.08em] text-smoke">
-                  {langSwitch.to}
-                </Link>
+                {!hideLangSwitch && (
+                  <Link href={switchHref} className="text-[13px] font-medium tracking-[0.08em] text-smoke">
+                    {langSwitch.to}
+                  </Link>
+                )}
               </div>
             </div>
           </motion.div>
