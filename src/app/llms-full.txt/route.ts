@@ -78,6 +78,12 @@ export function GET() {
   L.push("");
   for (const c of dict.software.capabilities) L.push(`- ${c.title}: ${c.body}`);
   L.push("");
+  L.push(`## ${dict.software.editionsTitle}`);
+  for (const e of dict.software.editionsDetail) {
+    L.push(`- ${e.name}${e.anexo ? ` (${e.anexo})` : ""}: ${e.body}`);
+  }
+  L.push(dict.software.editionsNote);
+  L.push("");
 
   L.push("# Ubicaciones");
   L.push("");
