@@ -175,6 +175,23 @@ export const dictionaries = {
           points: ["Almacén", "Normas específicas (NOM)", "Gestión de permisos", "Agente aduanal"],
         },
       ],
+      complementaryLabel: "También ofrecemos",
+      complementary: [
+        {
+          name: "HTS Software",
+          summary: "Software de clasificación arancelaria para determinar la fracción correcta de tu mercancía.",
+          href: "https://www.gsmartcode.com/",
+          external: true,
+        },
+        {
+          name: "Fulfillment",
+          summary: "Control de la selección de producto, el inventario y el servicio al cliente sin retrasar la entrega.",
+        },
+        {
+          name: "3PL y logística",
+          summary: "Operación física de la mercancía: logística, almacenaje, distribución y monitoreo.",
+        },
+      ],
     },
     flow: {
       eyebrow: "Cómo trabajamos",
@@ -201,6 +218,7 @@ export const dictionaries = {
         { title: "Integración MRP y ERP", body: "Se conecta con tu sistema con transacciones automáticas, sin doble captura." },
         { title: "Certificados de origen", body: "Gestión, auditoría y trazabilidad de la documentación de origen." },
         { title: "TLCAN / T-MEC", body: "Módulo de cumplimiento para los requisitos de la aduana estadounidense." },
+        { title: "Trazabilidad y auditoría", body: "El histórico documental de cada operación queda disponible para auditoría interna o de la autoridad." },
       ],
       stats: [
         { value: "180+", label: "empresas confían en BMS" },
@@ -210,7 +228,13 @@ export const dictionaries = {
       modes: { label: "Disponible en", items: ["Escritorio", "Web", "App"] },
       editionsLabel: "Ediciones",
       editionsTitle: "Una suite, varias ediciones.",
-      editions: ["BMS Suite", "BMS A24", "BMS A24C", "BMS A30", "BMS ONE"],
+      editionsDetail: [
+        { name: "BMS Suite", anexo: null, body: "La plataforma completa: reúne todos los módulos en escritorio, web y app." },
+        { name: "BMS A24", anexo: "Anexo 24", body: "Control de inventarios IMMEX con todos los módulos que exige la normatividad aduanera." },
+        { name: "BMS A24C", anexo: "Anexo 24", body: "Variante certificada del Anexo 24, para operaciones bajo certificación IVA/IEPS." },
+        { name: "BMS A30", anexo: "Anexo 30", body: "Manejo de materiales con visibilidad y control de riesgos para el descargo del Anexo 30." },
+        { name: "BMS ONE", anexo: null, body: "Vincula los departamentos de la operación sobre una única fuente de información." },
+      ],
       editionsNote: "Disponibles en escritorio, web y app. Licencias de 1 a 150 usuarios, multi-base por RFC.",
       capsTitle: "Lo que hace.",
       faqTitle: "Preguntas frecuentes.",
@@ -432,6 +456,23 @@ export const dictionaries = {
           points: ["Warehouse", "Specific standards (NOM)", "Permit management", "Customs broker"],
         },
       ],
+      complementaryLabel: "We also offer",
+      complementary: [
+        {
+          name: "HTS Software",
+          summary: "Tariff classification software to determine the correct code for your merchandise.",
+          href: "https://www.gsmartcode.com/",
+          external: true,
+        },
+        {
+          name: "Fulfillment",
+          summary: "Control over product selection, inventory and customer service without delaying delivery.",
+        },
+        {
+          name: "3PL and logistics",
+          summary: "Physical operation of the merchandise: logistics, storage, distribution and monitoring.",
+        },
+      ],
     },
     flow: {
       eyebrow: "How we work",
@@ -458,6 +499,7 @@ export const dictionaries = {
         { title: "MRP and ERP integration", body: "Connects to your system with automatic transactions, no double entry." },
         { title: "Origin certificates", body: "Management, audit and traceability of origin documentation." },
         { title: "NAFTA / USMCA", body: "Compliance module for U.S. customs requirements." },
+        { title: "Traceability and audit", body: "The document history of each operation stays available for internal or authority audit." },
       ],
       stats: [
         { value: "180+", label: "companies trust BMS" },
@@ -467,7 +509,13 @@ export const dictionaries = {
       modes: { label: "Available on", items: ["Desktop", "Web", "App"] },
       editionsLabel: "Editions",
       editionsTitle: "One suite, several editions.",
-      editions: ["BMS Suite", "BMS A24", "BMS A24C", "BMS A30", "BMS ONE"],
+      editionsDetail: [
+        { name: "BMS Suite", anexo: null, body: "The full platform: brings every module together on desktop, web and app." },
+        { name: "BMS A24", anexo: "Annex 24", body: "IMMEX inventory control with every module the customs regulation requires." },
+        { name: "BMS A24C", anexo: "Annex 24", body: "Certified variant of Annex 24, for operations under VAT/IEPS certification." },
+        { name: "BMS A30", anexo: "Annex 30", body: "Material management with visibility and risk control for Annex 30 discharge." },
+        { name: "BMS ONE", anexo: null, body: "Links the departments of the operation over a single source of information." },
+      ],
       editionsNote: "Available on desktop, web and app. Licenses from 1 to 150 users, multi-database per Tax ID.",
       capsTitle: "What it does.",
       faqTitle: "Frequently asked.",
