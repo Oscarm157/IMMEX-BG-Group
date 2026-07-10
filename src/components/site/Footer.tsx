@@ -1,13 +1,9 @@
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import type { Dictionary, Locale } from "@/content/dictionaries";
+import { siteConfig } from "@/lib/site-config";
 
-const socials = [
-  { label: "LinkedIn", href: "https://www.linkedin.com/company/bgconsultingroup/" },
-  { label: "Instagram", href: "https://www.instagram.com/bgconsultingroup/" },
-  { label: "Facebook", href: "https://www.facebook.com/bgconsulting/" },
-  { label: "X", href: "https://twitter.com/BGC_MX" },
-];
+const socials = siteConfig.social;
 
 export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
   const links = [

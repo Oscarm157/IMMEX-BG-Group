@@ -57,6 +57,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
         "@type": "Article",
         headline: g.h1,
         description: g.seoDescription,
+        ...(g.respuestaCorta ? { abstract: g.respuestaCorta } : {}),
         inLanguage: "es-MX",
         dateModified: g.actualizado,
         author: { "@type": "Organization", name: "BG Consulting Group", url: `${BASE_URL}/es` },
@@ -104,7 +105,14 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
               {g.h1}
             </h1>
           </Reveal>
-          <Reveal delay={0.16}>
+          {g.respuestaCorta && (
+            <Reveal delay={0.16}>
+              <p className="mt-7 max-w-2xl border-l-2 border-accent pl-5 text-[19px] font-medium leading-relaxed tracking-[-0.01em] text-chalk">
+                {g.respuestaCorta}
+              </p>
+            </Reveal>
+          )}
+          <Reveal delay={0.22}>
             <p className="mt-6 max-w-2xl text-[18px] leading-relaxed text-bone/90">{g.definicion[0]}</p>
           </Reveal>
           <Reveal delay={0.24}>

@@ -30,6 +30,13 @@ export const siteConfig = {
     es: "Disponibilidad 24/7",
     en: "Available 24/7",
   },
+  // Perfiles oficiales (fuente única; los consume el Footer y el schema Organization).
+  social: [
+    { label: "LinkedIn", href: "https://www.linkedin.com/company/bgconsultingroup/" },
+    { label: "Instagram", href: "https://www.instagram.com/bgconsultingroup/" },
+    { label: "Facebook", href: "https://www.facebook.com/bgconsulting/" },
+    { label: "X", href: "https://twitter.com/BGC_MX" },
+  ],
 } as const;
 
 // Destinatario de las notificaciones de leads (form y chatbot).

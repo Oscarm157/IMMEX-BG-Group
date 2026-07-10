@@ -12,6 +12,8 @@ export type Guia = {
   h1: string;
   seoTitle: string;
   seoDescription: string;
+  // Answer capsule: respuesta directa de ~25 palabras, arriba del todo (GEO).
+  respuestaCorta?: string;
   // Definición propia en 2-3 párrafos (no copiada del DOF).
   definicion: string[];
   // Fundamento legal exacto (artículo/regla) — diferenciador de una firma legal.
@@ -36,6 +38,8 @@ export type Guia = {
 export const GUIAS: Guia[] = [
   {
     slug: "anexo-24",
+    respuestaCorta:
+      "El Anexo 24 es el estándar del sistema automatizado de control de inventarios que toda empresa IMMEX debe llevar para su mercancía de importación temporal.",
     eyebrow: "Guía · Comercio exterior",
     h1: "Anexo 24: el control de inventarios que exige el SAT a una empresa IMMEX",
     seoTitle: "Anexo 24: qué es y cómo cumplirlo | Control de inventarios IMMEX",
@@ -122,6 +126,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "que-es-immex",
+    respuestaCorta:
+      "IMMEX es el programa que permite importar temporalmente insumos y maquinaria sin pagar los impuestos de entrada, siempre que se destinen a producir bienes de exportación.",
     eyebrow: "Guía · IMMEX",
     h1: "Qué es IMMEX: el programa para importar temporalmente sin pagar impuestos de entrada",
     seoTitle: "Qué es IMMEX: definición, beneficios y obligaciones del programa",
@@ -208,6 +214,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "decreto-immex",
+    respuestaCorta:
+      "El Decreto IMMEX es la norma que crea y regula el programa: define modalidades, beneficios, obligaciones y las causales por las que la autoridad puede cancelarlo.",
     eyebrow: "Guía · IMMEX",
     h1: "Decreto IMMEX: la norma que da y quita el programa de importación temporal",
     seoTitle: "Decreto IMMEX: obligaciones y causales de cancelación del programa",
@@ -282,6 +290,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "pedimento",
+    respuestaCorta:
+      "El pedimento es el documento fiscal y aduanero que declara ante la autoridad la entrada o salida de mercancías, con su régimen, clasificación, valor e impuestos.",
     eyebrow: "Guía · Aduanas",
     h1: "Qué es un pedimento: el documento que ampara toda operación de comercio exterior",
     seoTitle: "Qué es un pedimento aduanal: definición, tipos y para qué sirve",
@@ -368,6 +378,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "manifestacion-de-valor",
+    respuestaCorta:
+      "La manifestación de valor es el documento con el que el importador declara y respalda el valor en aduana de la mercancía, con los elementos y pruebas que lo sustentan.",
     eyebrow: "Guía · Aduanas",
     h1: "Manifestación de valor: el documento con el que sustentas el valor de tu importación",
     seoTitle: "Manifestación de valor: qué es, quién la presenta y qué debe contener",
@@ -442,6 +454,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "encargo-conferido",
+    respuestaCorta:
+      "El encargo conferido es la autorización electrónica con la que el importador faculta a un agente aduanal para despachar sus mercancías ante la aduana en su nombre.",
     eyebrow: "Guía · Aduanas",
     h1: "Encargo conferido: la autorización con la que un agente aduanal opera por tu empresa",
     seoTitle: "Encargo conferido: qué es, cómo se otorga y por qué revisarlo",
@@ -506,6 +520,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "clasificacion-arancelaria",
+    respuestaCorta:
+      "La clasificación arancelaria es la asignación de la fracción de la TIGIE que corresponde a una mercancía; de ella dependen los impuestos, regulaciones y permisos aplicables.",
     eyebrow: "Guía · Aduanas",
     h1: "Clasificación arancelaria: el número del que dependen tus impuestos y permisos",
     seoTitle: "Clasificación arancelaria: qué es la fracción y cómo se determina",
@@ -584,6 +600,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "valoracion-aduanera",
+    respuestaCorta:
+      "La valoración aduanera es el procedimiento para determinar el valor en aduana de la mercancía, la base sobre la que se calculan los impuestos al comercio exterior.",
     eyebrow: "Guía · Aduanas",
     h1: "Valoración aduanera: cómo se determina la base sobre la que pagas impuestos",
     seoTitle: "Valoración aduanera: qué es el valor en aduana y cómo se calcula",
@@ -658,6 +676,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "regimenes-aduaneros",
+    respuestaCorta:
+      "Los regímenes aduaneros son los destinos que la ley da a una mercancía al entrar o salir del país (importación definitiva, temporal, depósito fiscal, tránsito), y definen sus obligaciones e impuestos.",
     eyebrow: "Guía · Aduanas",
     h1: "Regímenes aduaneros: los seis destinos que puede tener tu mercancía",
     seoTitle: "Regímenes aduaneros en México: cuáles son y en qué se diferencian",
@@ -732,6 +752,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "drawback",
+    respuestaCorta:
+      "El drawback es el mecanismo que permite recuperar los impuestos de importación pagados por insumos que luego se incorporan a mercancías exportadas.",
     eyebrow: "Guía · Fiscal aduanero",
     h1: "Drawback: recuperar el arancel que pagaste por insumos que después exportaste",
     seoTitle: "Drawback: qué es, cómo funciona y quién puede solicitarlo",
@@ -806,6 +828,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "anexo-30",
+    respuestaCorta:
+      "El Anexo 30 es el control de descargos del IVA/IEPS: el sistema que acredita ante el SAT que la mercancía importada temporalmente retornó o cambió de régimen en plazo, base de la certificación IVA/IEPS.",
     eyebrow: "Guía · Comercio exterior",
     h1: "Anexo 30: el control de descargos que sostiene tu certificación IVA e IEPS",
     seoTitle: "Anexo 30: qué es y para qué sirve | Control de descargos IVA/IEPS",
@@ -880,6 +904,8 @@ export const GUIAS: Guia[] = [
   },
   {
     slug: "vucem",
+    respuestaCorta:
+      "La VUCEM es la Ventanilla Única de Comercio Exterior: la plataforma digital por la que se realizan de forma electrónica los trámites y documentos aduaneros en México.",
     eyebrow: "Guía · Aduanas",
     h1: "Qué es la VUCEM: la ventanilla digital por la que pasa todo tu comercio exterior",
     seoTitle: "Qué es la VUCEM: para qué sirve, COVE, e-document y tips de uso",

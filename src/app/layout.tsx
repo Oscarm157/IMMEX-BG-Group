@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Space_Grotesk, IBM_Plex_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@/components/site/Analytics";
+import { OrganizationSchema } from "@/components/site/OrganizationSchema";
 
 const instrumentSerif = Instrument_Serif({
   variable: "--font-instrument",
@@ -61,6 +62,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-ink text-chalk">
         {children}
+        <OrganizationSchema />
         <Analytics />
       </body>
     </html>
