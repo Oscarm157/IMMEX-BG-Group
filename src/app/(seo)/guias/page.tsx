@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function GuiasIndex() {
   return (
-    <section className="mx-auto max-w-[1100px] px-5 pb-28 pt-36 sm:px-8 sm:pt-44">
+    <section className="mx-auto max-w-[1320px] px-5 pb-28 pt-36 sm:px-8 sm:pt-44">
       <SectionHeading
         eyebrow="Guías"
         title="Comercio exterior, explicado con criterio legal"

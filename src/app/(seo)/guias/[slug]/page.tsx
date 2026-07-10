@@ -92,7 +92,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
       {/* Hero */}
       <section className="grid-field relative overflow-hidden">
-        <div className="relative z-10 mx-auto max-w-[900px] px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:pb-20">
+        <div className="relative z-10 mx-auto max-w-[1080px] px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:pb-20">
           <Reveal>
             <span className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-accent">
               <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
@@ -122,7 +122,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
       {/* Definición (párrafos restantes) */}
       {g.definicion.length > 1 && (
-        <section className="mx-auto max-w-[820px] px-5 pb-16 pt-8 sm:px-8">
+        <section className="mx-auto max-w-[984px] px-5 pb-16 pt-8 sm:px-8">
           <div className="flex flex-col gap-5">
             {g.definicion.slice(1).map((p, i) => (
               <Reveal key={i} delay={i * 0.05}>
@@ -134,7 +134,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
       )}
 
       {/* Fundamento legal (diferenciador de firma legal) */}
-      <section className="mx-auto max-w-[820px] px-5 pb-16 sm:px-8">
+      <section className="mx-auto max-w-[984px] px-5 pb-16 sm:px-8">
         <Reveal className="console-panel rounded-[16px] bg-surface-1 px-7 py-8 sm:px-10 sm:py-9">
           <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">Fundamento legal</span>
           <p className="mt-4 font-display text-[17px] font-medium leading-snug tracking-[-0.01em] text-chalk">
@@ -146,8 +146,8 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
       {/* Puntos clave (interludio claro) */}
       <section className="grid-field-light bg-paper">
-        <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 sm:py-24">
-          <SectionHeading eyebrow="Cómo funciona" title="Qué exige el sistema" tone="light" className="mb-12" />
+        <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 sm:py-24">
+          <SectionHeading eyebrow="Cómo funciona" title="Puntos clave" tone="light" className="mb-12" />
           <div className="border-t border-ash/20">
             {g.puntosClave.map((p, i) => (
               <Reveal
@@ -166,7 +166,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
 
       {/* Distinción (si existe) */}
       {g.distincion && g.distincion.length > 0 && (
-        <section className="mx-auto max-w-[1100px] px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
+        <section className="mx-auto max-w-[1320px] px-5 pb-20 pt-32 sm:px-8 sm:pt-40">
           <SectionHeading eyebrow="No confundir" title="Diferencias clave" className="mb-12" />
           <div className="grid gap-4 sm:grid-cols-2">
             {g.distincion.map((d, i) => (
@@ -180,7 +180,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
       )}
 
       {/* Errores comunes (ángulo legal) */}
-      <section className="mx-auto max-w-[1100px] px-5 pb-20 pt-24 sm:px-8 sm:pt-28">
+      <section className="mx-auto max-w-[1320px] px-5 pb-20 pt-24 sm:px-8 sm:pt-28">
         <SectionHeading eyebrow="Dónde nace el riesgo" title="Errores comunes y su consecuencia" className="mb-12" />
         <div className="border-t border-line">
           {g.errores.map((e, i) => (
@@ -201,16 +201,16 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-[820px] px-5 pb-20 pt-24 sm:px-8 sm:pt-28">
+      <section className="mx-auto max-w-[984px] px-5 pb-20 pt-24 sm:px-8 sm:pt-28">
         <SectionHeading eyebrow="Preguntas frecuentes" title="Dudas habituales" className="mb-10" />
         <Faq items={g.faq} />
       </section>
 
       {/* CTA servicio + relacionadas */}
-      <section className="mx-auto max-w-[1100px] px-5 pb-24 pt-8 sm:px-8 sm:pb-32">
+      <section className="mx-auto max-w-[1320px] px-5 pb-24 pt-8 sm:px-8 sm:pb-32">
         <div className="console-panel relative flex flex-col items-start gap-6 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-12 sm:px-14 sm:py-14">
           <h2 className="max-w-2xl font-display text-[clamp(1.6rem,3.6vw,2.4rem)] font-medium leading-[1.08] tracking-[-0.02em] text-chalk">
-            ¿Necesitas resolverlo con soporte legal detrás?
+            {g.ctaTitulo ?? "¿Necesitas resolverlo con soporte legal detrás?"}
           </h2>
           <p className="max-w-lg text-[17px] leading-relaxed text-bone/90">
             Revisamos tu operación, detectamos el riesgo antes de que lo haga la autoridad y lo sostenemos con criterio legal.

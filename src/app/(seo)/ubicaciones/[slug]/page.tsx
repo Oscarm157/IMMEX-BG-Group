@@ -108,7 +108,7 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
 
       {/* Hero */}
       <section className="grid-field relative overflow-hidden">
-        <div className="relative z-10 mx-auto max-w-[900px] px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:pb-20">
+        <div className="relative z-10 mx-auto max-w-[1080px] px-5 pb-16 pt-36 sm:px-8 sm:pt-44 lg:pb-20">
           <Reveal>
             <span className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-accent">
               <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
@@ -137,7 +137,7 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Intro restante + modelo */}
-      <section className="mx-auto max-w-[820px] px-5 pb-16 pt-8 sm:px-8">
+      <section className="mx-auto max-w-[984px] px-5 pb-16 pt-8 sm:px-8">
         <div className="flex flex-col gap-5">
           {u.intro.slice(1).map((p, i) => (
             <Reveal key={i} delay={i * 0.05}>
@@ -153,8 +153,8 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
 
       {/* Aduana y cruces (dato único de la plaza) */}
       <section className="grid-field-light bg-paper">
-        <div className="mx-auto max-w-[1100px] px-5 py-20 sm:px-8 sm:py-24">
-          <SectionHeading eyebrow={u.aduana.nombre} title="Cruces de la plaza" tone="light" className="mb-12" />
+        <div className="mx-auto max-w-[1320px] px-5 py-20 sm:px-8 sm:py-24">
+          <SectionHeading eyebrow={u.aduana.nombre} title={`Cruces de ${u.ciudad}`} tone="light" className="mb-12" />
           <div className="grid gap-4 sm:grid-cols-3">
             {u.aduana.cruces.map((c, i) => (
               <Reveal key={c.nombre} delay={i * 0.06} className="card-light rounded-[14px] px-6 py-6">
@@ -168,7 +168,7 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Sectores típicos */}
-      <section className="mx-auto max-w-[1100px] px-5 pb-16 pt-24 sm:px-8 sm:pt-28">
+      <section className="mx-auto max-w-[1320px] px-5 pb-16 pt-24 sm:px-8 sm:pt-28">
         <SectionHeading eyebrow="Industria de la región" title="Sectores que atendemos" className="mb-8" />
         <div className="flex flex-wrap gap-3">
           {u.sectores.map((s) => (
@@ -183,8 +183,8 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
       </section>
 
       {/* Operaciones */}
-      <section className="mx-auto max-w-[1100px] px-5 pb-20 pt-16 sm:px-8">
-        <SectionHeading eyebrow="Qué resolvemos" title="Operaciones en la plaza" className="mb-12" />
+      <section className="mx-auto max-w-[1320px] px-5 pb-20 pt-16 sm:px-8">
+        <SectionHeading eyebrow="Qué resolvemos" title={`Operaciones en ${u.ciudad}`} className="mb-12" />
         <div className="border-t border-line">
           {u.operaciones.map((o, i) => (
             <div
@@ -205,7 +205,7 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
 
       {/* NAP — solo sede real */}
       {u.esSede && u.nap && (
-        <section className="mx-auto max-w-[1100px] px-5 pb-20 sm:px-8">
+        <section className="mx-auto max-w-[1320px] px-5 pb-20 sm:px-8">
           <div className="console-panel grid gap-8 rounded-[18px] bg-surface-1 px-8 py-12 sm:grid-cols-3 sm:px-14 sm:py-14">
             <div>
               <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-smoke">Dirección</span>
@@ -229,15 +229,15 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
       )}
 
       {/* FAQ */}
-      <section className="mx-auto max-w-[820px] px-5 pb-20 pt-8 sm:px-8">
-        <SectionHeading eyebrow="Preguntas frecuentes" title="Sobre operar aquí" className="mb-10" />
+      <section className="mx-auto max-w-[984px] px-5 pb-20 pt-8 sm:px-8">
+        <SectionHeading eyebrow="Preguntas frecuentes" title={`Sobre operar en ${u.ciudad}`} className="mb-10" />
         <Faq items={u.faq} />
       </section>
 
       {/* Servicios relevantes */}
-      <section className="mx-auto max-w-[1100px] px-5 pb-24 pt-8 sm:px-8 sm:pb-32">
+      <section className="mx-auto max-w-[1320px] px-5 pb-24 pt-8 sm:px-8 sm:pb-32">
         <div className="border-t border-line pt-8">
-          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-smoke">Servicios en esta plaza</span>
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-smoke">Servicios en {u.ciudad}</span>
           <div className="mt-6 grid gap-4 sm:grid-cols-3">
             {u.servicios.map((s) => (
               <Link
