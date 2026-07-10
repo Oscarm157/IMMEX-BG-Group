@@ -229,7 +229,7 @@ export default async function UbicacionPage({ params }: { params: Promise<{ slug
       )}
 
       {/* FAQ */}
-      <section className="mx-auto max-w-[984px] px-5 pb-20 pt-8 sm:px-8">
+      <section className="mx-auto max-w-[984px] px-5 pb-20 pt-24 sm:px-8 sm:pt-28">
         <SectionHeading eyebrow="Preguntas frecuentes" title={`Sobre operar en ${u.ciudad}`} className="mb-10" />
         <Faq items={u.faq} />
       </section>
