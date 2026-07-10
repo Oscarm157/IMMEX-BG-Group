@@ -102,7 +102,7 @@ export default async function SoftwarePage({
       </section>
 
       {/* Ediciones — desglose de módulos */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-20 sm:px-8 sm:pb-24">
+      <section className="mx-auto max-w-[1280px] px-5 pb-20 pt-20 sm:px-8 sm:pb-24 sm:pt-24">
         <SectionHeading eyebrow={s.editionsLabel} title={s.editionsTitle} className="mb-12" />
         <div className="grid gap-4 md:grid-cols-2">
           {s.editionsDetail.map((e, i) => (

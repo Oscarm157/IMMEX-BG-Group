@@ -115,7 +115,7 @@ export default async function AboutPage({
       </section>
 
       {/* Equipo */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-32">
+      <section className="mx-auto max-w-[1280px] px-5 pb-24 pt-16 sm:px-8 sm:pb-32 sm:pt-20">
         <SectionHeading eyebrow={a.teamEyebrow} title={a.teamTitle} lead={a.teamLead} className="mb-10" />
         {/* Liderazgo */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">

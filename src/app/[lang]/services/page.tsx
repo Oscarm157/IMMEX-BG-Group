@@ -125,7 +125,7 @@ export default async function ServicesPage({
       </section>
 
       {/* CTA */}
-      <section className="px-5 pb-24 sm:px-8 sm:pb-32">
+      <section className="px-5 pb-24 pt-20 sm:px-8 sm:pb-32 sm:pt-24">
         <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
           <h2 className="relative z-10 max-w-2xl font-display text-[clamp(2rem,5vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
             {d.homeCta.title}

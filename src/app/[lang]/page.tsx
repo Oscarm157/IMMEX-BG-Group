@@ -240,7 +240,7 @@ export default async function HomePage({
       </section>
 
       {/* CTA — panel de consola con aura */}
-      <section className="px-5 pb-24 sm:px-8 sm:pb-32">
+      <section className="px-5 pb-24 pt-24 sm:px-8 sm:pb-32 sm:pt-28">
         <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
           <Image
             src="/img/gen/core.webp"
