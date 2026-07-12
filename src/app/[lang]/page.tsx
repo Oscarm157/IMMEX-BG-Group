@@ -1,6 +1,8 @@
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDictionary, isLocale } from "@/content/dictionaries";
+import { siteConfig } from "@/lib/site-config";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 import { TelemetryPanel } from "@/components/site/TelemetryPanel";
@@ -242,27 +244,62 @@ export default async function HomePage({
         metrics={d.telemetry.metrics}
       />
 
-      {/* CTA — panel de consola */}
-      <section className="px-5 pb-24 pt-24 sm:px-8 sm:pb-32 sm:pt-28">
-        <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
-          <span className="relative z-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
-            <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
-            {d.nav.contact}
-          </span>
-          <h2 className="relative z-10 max-w-2xl font-display text-[clamp(2rem,5vw,3.4rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
-            {d.homeCta.title}
-          </h2>
-          <p className="relative z-10 max-w-lg text-[17px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
-          <Link
-            href={`/${lang}/contact`}
-            className="group relative z-10 inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3.5 text-[15px] font-medium tracking-[-0.01em] text-on-accent transition-all duration-300 hover:-translate-y-px hover:bg-accent-dim active:scale-[0.98]"
-          >
-            {d.homeCta.cta}
-            <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">
-              &rarr;
-            </span>
-          </Link>
-        </Reveal>
+      {/* CTA — banda cinematográfica de cierre */}
+      <section className="relative overflow-hidden border-t border-line">
+        <Image
+          src="/img/gen/border-crossing.webp"
+          alt=""
+          aria-hidden
+          fill
+          sizes="100vw"
+          className="object-cover object-center opacity-[0.22]"
+        />
+        <div aria-hidden className="absolute inset-0 bg-gradient-to-br from-ink via-ink/95 to-ink/70" />
+        <div className="relative z-10 mx-auto max-w-[1280px] px-5 py-28 sm:px-8 sm:py-36">
+          <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:gap-20">
+            <Reveal>
+              <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
+                <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
+                {d.nav.contact}
+              </span>
+              <h2 className="mt-6 max-w-3xl font-display text-[clamp(2.6rem,6.5vw,5.2rem)] font-medium leading-[0.98] tracking-[-0.03em] text-chalk">
+                {d.homeCta.title}
+              </h2>
+              <p className="mt-7 max-w-xl text-[18px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
+              <Link
+                href={`/${lang}/contact`}
+                className="group mt-9 inline-flex items-center gap-2 rounded-full bg-accent px-7 py-4 text-[15px] font-medium tracking-[-0.01em] text-on-accent transition-all duration-300 hover:-translate-y-px hover:bg-accent-dim active:scale-[0.98]"
+              >
+                {d.homeCta.cta}
+                <span aria-hidden className="transition-transform duration-300 group-hover:translate-x-0.5">&rarr;</span>
+              </Link>
+            </Reveal>
+            <Reveal delay={0.12} className="flex flex-col gap-7 lg:border-l lg:border-line/60 lg:pl-16">
+              <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-smoke">
+                {lang === "es" ? "Directo con el equipo" : "Straight to the team"}
+              </span>
+              {siteConfig.offices.map((o) => (
+                <a key={o.city} href={`tel:${o.phone.replace(/[^+\d]/g, "")}`} className="group flex flex-col gap-1">
+                  <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-smoke">{o.city}</span>
+                  <span className="font-display text-[clamp(1.4rem,3vw,2rem)] font-medium tracking-[-0.01em] text-chalk transition-colors group-hover:text-accent">
+                    {o.phone}
+                  </span>
+                </a>
+              ))}
+              <a href={`mailto:${siteConfig.email}`} className="font-mono text-[14px] text-bone/80 transition-colors hover:text-accent">
+                {siteConfig.email}
+              </a>
+            </Reveal>
+          </div>
+          <dl className="mt-16 flex flex-wrap gap-x-12 gap-y-5 border-t border-line/60 pt-8">
+            {[d.stats.items[0], d.stats.items[3], d.stats.items[1]].map((s) => (
+              <div key={s.label} className="flex items-baseline gap-3">
+                <dt className="font-display text-2xl font-medium tabular-nums text-accent sm:text-3xl">{s.value}</dt>
+                <dd className="max-w-[9rem] text-[13px] leading-snug text-bone/70">{s.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
       </section>
     </>
   );
