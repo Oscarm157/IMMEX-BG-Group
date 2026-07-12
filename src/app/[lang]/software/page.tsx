@@ -46,7 +46,7 @@ export default async function SoftwarePage({
               </h1>
             </Reveal>
             <Reveal delay={0.16}>
-              <p className="mt-7 max-w-md text-[17px] leading-relaxed text-bone/85">{s.lead}</p>
+              <p className="mt-7 max-w-xl border-l-2 border-accent/50 pl-5 text-[clamp(1.05rem,1.6vw,1.3rem)] leading-relaxed text-bone">{s.lead}</p>
             </Reveal>
             <Reveal delay={0.24}>
               <div className="mt-8">
@@ -57,15 +57,18 @@ export default async function SoftwarePage({
             </Reveal>
           </div>
 
-          <Reveal delay={0.18} className="relative flex items-center justify-center">
-            <Image
-              src="/img/gen/core.webp"
-              alt="Núcleo del sistema BMS"
-              width={520}
-              height={520}
-              priority
-              className="w-[78%] max-w-[440px] drop-shadow-[0_0_60px_rgba(0,230,160,0.18)]"
-            />
+          {/* Placeholder del producto: logo BMS grande. Sustituir por captura real del sistema. */}
+          <Reveal delay={0.18} className="relative">
+            <div className="console-panel grid-field flex aspect-[4/3] items-center justify-center overflow-hidden rounded-[16px] bg-surface-1 p-10">
+              <Image
+                src="/bms_Logotipo_blanco.png"
+                alt="BMS Custom System"
+                width={560}
+                height={167}
+                priority
+                className="w-[72%] max-w-[340px] drop-shadow-[0_0_50px_rgba(0,230,160,0.12)]"
+              />
+            </div>
           </Reveal>
         </div>
       </section>
@@ -95,6 +98,7 @@ export default async function SoftwarePage({
                 </span>
                 <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-ink">{c.title}</h3>
                 <p className="mt-3 text-[14px] leading-relaxed text-graphite">{c.body}</p>
+                <p className="mt-4 border-t border-ink/10 pt-3 font-mono text-[12px] leading-relaxed text-graphite/80">{c.use}</p>
               </Reveal>
             ))}
           </div>
