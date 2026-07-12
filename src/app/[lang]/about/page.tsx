@@ -29,8 +29,18 @@ export default async function AboutPage({
   const d = getDictionary(lang);
   const a = d.about;
   const role = (m: (typeof TEAM)[number]) => (lang === "es" ? m.es : m.en);
-  const leads = TEAM.filter((m) => m.lead);
+  const owners = TEAM.filter((m) => m.owner);
+  const directors = TEAM.filter((m) => m.lead && !m.owner);
   const rest = TEAM.filter((m) => !m.lead);
+  const initials = (name: string) => {
+    const parts = name.split(" ").filter(Boolean);
+    return ((parts[0]?.[0] ?? "") + (parts[parts.length - 1]?.[0] ?? "")).toUpperCase();
+  };
+  const tier = {
+    owners: lang === "es" ? "Socios" : "Partners",
+    directors: lang === "es" ? "Dirección" : "Leadership",
+    team: lang === "es" ? "Especialistas" : "Specialists",
+  };
 
   return (
     <>
@@ -115,19 +125,49 @@ export default async function AboutPage({
       </section>
 
       {/* Equipo */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-24 pt-16 sm:px-8 sm:pb-32 sm:pt-20">
-        <SectionHeading eyebrow={a.teamEyebrow} title={a.teamTitle} lead={a.teamLead} className="mb-10" />
-        {/* Liderazgo */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {leads.map((m) => (
+      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-24 pt-24 sm:px-8 sm:pb-32 sm:pt-32">
+        <SectionHeading eyebrow={a.teamEyebrow} title={a.teamTitle} lead={a.teamLead} className="mb-12" />
+
+        {/* Socios (dueños) — card destacada */}
+        <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.owners}</span>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2">
+          {owners.map((m) => (
+            <Reveal key={m.name} className="console-panel flex items-center gap-5 rounded-[16px] bg-surface-1 p-7">
+              {m.photo ? (
+                <Image
+                  src={m.photo}
+                  alt={m.name}
+                  width={88}
+                  height={88}
+                  className="h-[88px] w-[88px] shrink-0 rounded-full object-cover"
+                />
+              ) : (
+                <span className="flex h-[88px] w-[88px] shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent/10 font-display text-2xl font-medium text-accent">
+                  {initials(m.name)}
+                </span>
+              )}
+              <div>
+                <span className="block font-display text-2xl font-medium leading-tight text-chalk">{m.name}</span>
+                <span className="mt-1.5 block font-mono text-[12px] uppercase tracking-[0.12em] text-accent">{role(m)}</span>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+
+        {/* Dirección */}
+        <span className="mt-14 block font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.directors}</span>
+        <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {directors.map((m) => (
             <Reveal key={m.name} className="console-panel flex flex-col rounded-[14px] bg-surface-1 px-6 py-6">
               <span className="font-display text-lg font-medium text-chalk">{m.name}</span>
               <span className="mt-1 font-mono text-[11px] uppercase tracking-[0.1em] text-accent">{role(m)}</span>
             </Reveal>
           ))}
         </div>
-        {/* Resto del equipo */}
-        <div className="console-panel mt-4 grid overflow-hidden rounded-[14px] bg-surface-1 sm:grid-cols-2 lg:grid-cols-3">
+
+        {/* Equipo */}
+        <span className="mt-14 block font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.team}</span>
+        <div className="console-panel mt-5 grid overflow-hidden rounded-[14px] bg-surface-1 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((m) => (
             <div
               key={m.name}

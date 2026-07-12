@@ -1,10 +1,12 @@
 // Equipo real de BG Consulting Group (docs/bgcg-site-content.txt). Nombres tal cual.
 // lead: liderazgo, se destaca arriba; el resto va en grilla compacta.
-export type Member = { name: string; es: string; en: string; lead?: boolean };
+// owner: dueños (Mario y Edgardo), card destacada con foto/monograma.
+// photo: ruta a la foto cuando exista; si falta, se usa monograma con iniciales.
+export type Member = { name: string; es: string; en: string; lead?: boolean; owner?: boolean; photo?: string };
 
 export const TEAM: Member[] = [
-  { name: "Mario A. Cortés", es: "Co-CEO", en: "Co-CEO", lead: true },
-  { name: "Edgardo Romero", es: "Co-CEO", en: "Co-CEO", lead: true },
+  { name: "Mario A. Cortés", es: "Co-CEO", en: "Co-CEO", lead: true, owner: true },
+  { name: "Edgardo Romero", es: "Co-CEO", en: "Co-CEO", lead: true, owner: true },
   { name: "Rogelio Viloria Beltrán", es: "Co-CEO y CFO", en: "Co-CEO & CFO", lead: true },
   { name: "Luis Mateo", es: "COO", en: "COO", lead: true },
   { name: "Hugo García", es: "CIO", en: "CIO", lead: true },
