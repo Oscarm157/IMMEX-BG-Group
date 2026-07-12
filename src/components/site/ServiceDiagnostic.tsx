@@ -34,7 +34,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
   const [leadName, setLeadName] = useState("");
   const [leadEmail, setLeadEmail] = useState("");
   const [leadPhone, setLeadPhone] = useState("");
-  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string }>({});
+  const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
 
   if (!data) return null;
 
@@ -61,11 +61,14 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
 
   async function submitLead(e: FormEvent) {
     e.preventDefault();
-    const errors: { name?: string; email?: string } = {};
+    const errors: { name?: string; email?: string; phone?: string } = {};
     if (!leadName.trim()) errors.name = c.form.nameRequired;
     if (!leadEmail.trim()) errors.email = c.form.emailRequired;
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(leadEmail.trim()))
       errors.email = c.form.emailInvalid;
+    if (!leadPhone.trim()) errors.phone = c.form.phoneRequired;
+    else if (!/^[+\d][\d\s().-]{6,}$/.test(leadPhone.trim()))
+      errors.phone = c.form.phoneInvalid;
     if (Object.keys(errors).length) {
       setFieldErrors(errors);
       return;
@@ -82,7 +85,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
         message: buildQuizSummary(lang, c.questions, answers),
         sourceUrl: typeof window !== "undefined" ? window.location.href : "",
       };
-      if (leadPhone.trim()) payload.phone = leadPhone.trim();
+      payload.phone = leadPhone.trim();
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -269,15 +272,18 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                               <span className="font-mono text-[13px] text-red-400">{fieldErrors.email}</span>
                             )}
                           </div>
-                          <div className="sm:col-span-2 sm:max-w-xs">
+                          <div className="flex flex-col gap-1 sm:col-span-2 sm:max-w-xs">
                             <input
                               type="tel"
                               value={leadPhone}
                               onChange={(e) => setLeadPhone(e.target.value)}
                               placeholder={c.form.phonePlaceholder}
                               disabled={formState === "sending"}
-                              className={`${inputBase} border-line focus:border-accent/50`}
+                              className={`${inputBase} ${fieldErrors.phone ? "border-red-500/60 focus:border-red-500/80" : "border-line focus:border-accent/50"}`}
                             />
+                            {fieldErrors.phone && (
+                              <span className="font-mono text-[13px] text-red-400">{fieldErrors.phone}</span>
+                            )}
                           </div>
                         </div>
                         {formState === "error" && (

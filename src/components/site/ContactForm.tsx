@@ -6,6 +6,7 @@ import { SubmitPill } from "./PillButton";
 type FormDict = {
   name: string;
   email: string;
+  phone: string;
   company: string;
   message: string;
   submit: string;
@@ -34,6 +35,7 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
           locale,
           name: String(data.get("name") || ""),
           email: String(data.get("email") || ""),
+          phone: String(data.get("phone") || ""),
           company: String(data.get("company") || ""),
           message: String(data.get("message") || ""),
           website: String(data.get("website") || ""), // honeypot
@@ -109,11 +111,27 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
           <input id="email" name="email" type="email" required className={field} autoComplete="email" />
         </div>
       </div>
-      <div>
-        <label htmlFor="company" className={label}>
-          {dict.company}
-        </label>
-        <input id="company" name="company" className={field} autoComplete="organization" />
+      <div className="grid gap-8 sm:grid-cols-2">
+        <div>
+          <label htmlFor="phone" className={label}>
+            {dict.phone}
+          </label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            required
+            pattern="[+\d][\d\s().\-]{6,}"
+            className={field}
+            autoComplete="tel"
+          />
+        </div>
+        <div>
+          <label htmlFor="company" className={label}>
+            {dict.company}
+          </label>
+          <input id="company" name="company" className={field} autoComplete="organization" />
+        </div>
       </div>
       <div>
         <label htmlFor="message" className={label}>

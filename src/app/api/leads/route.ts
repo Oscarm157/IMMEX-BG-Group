@@ -102,6 +102,15 @@ export async function POST(req: Request) {
     return Response.json({ ok: false, error: 'bad_email' }, { status: 400 });
   }
   const phone = cap(body.phone, 60);
+  // Los formularios del sitio exigen teléfono con formato válido; el chatbot no.
+  if (body.source === 'form') {
+    if (!phone) {
+      return Response.json({ ok: false, error: 'phone_required' }, { status: 400 });
+    }
+    if (!/^[+\d][\d\s().-]{6,}$/.test(phone)) {
+      return Response.json({ ok: false, error: 'bad_phone' }, { status: 400 });
+    }
+  }
   const sourceUrl = cap(body.sourceUrl, 500);
   const localeLabel = body.locale === 'en' ? 'EN' : 'ES';
   const rawMessages: ChatMessage[] = Array.isArray(body.messages)
@@ -111,7 +120,10 @@ export async function POST(req: Request) {
         .map((m: ChatMessage) => ({ role: String(m.role), content: m.content.slice(0, 4000) }))
     : [];
 
-  let hadError = false;
+  // El éxito del envío se define por si el lead se GUARDÓ, no por si la
+  // notificación (correo/webhook) salió. Un fallo de correo no debe pintar el
+  // formulario como roto: el lead ya quedó capturado en el CRM.
+  let savedOk = false;
   const leadSource: 'bot' | 'form' | 'manual' =
     body.source === 'form' || body.source === 'manual' ? body.source : 'bot';
 
@@ -189,6 +201,7 @@ export async function POST(req: Request) {
       })
       .returning({ id: leads.id });
     newLeadId = inserted[0]?.id;
+    savedOk = Boolean(newLeadId);
 
     if (newLeadId) {
       await db.insert(leadEvents).values({
@@ -202,7 +215,6 @@ export async function POST(req: Request) {
     }
   } catch (err) {
     console.error('lead: DB insert failed', err);
-    hadError = true;
   }
 
   // Webhook saliente opcional (Zapier / Make / n8n). No hace nada si LEAD_WEBHOOK_URL
@@ -228,7 +240,6 @@ export async function POST(req: Request) {
       });
     } catch (err) {
       console.error('lead: webhook failed', err);
-      hadError = true;
     }
   }
 
@@ -282,11 +293,10 @@ export async function POST(req: Request) {
     });
   } catch (err) {
     console.error('lead: email failed', err);
-    hadError = true;
   }
 
-  if (hadError) {
-    return Response.json({ ok: false }, { status: 207 });
+  if (!savedOk) {
+    return Response.json({ ok: false, error: 'save_failed' }, { status: 500 });
   }
   return Response.json({ ok: true });
 }

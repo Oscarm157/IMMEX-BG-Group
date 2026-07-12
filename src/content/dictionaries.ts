@@ -271,6 +271,7 @@ export const dictionaries = {
       form: {
         name: "Nombre",
         email: "Correo",
+        phone: "Teléfono",
         company: "Empresa",
         message: "¿En qué te ayudamos?",
         submit: "Enviar",
@@ -564,6 +565,7 @@ export const dictionaries = {
       form: {
         name: "Name",
         email: "Email",
+        phone: "Phone",
         company: "Company",
         message: "How can we help?",
         submit: "Send",
