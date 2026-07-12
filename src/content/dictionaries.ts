@@ -125,9 +125,9 @@ export const dictionaries = {
       faqTitle: "Preguntas frecuentes",
     },
     homeCta: {
-      title: "Una auditoría de comercio exterior no avisa.",
-      body: "Los errores en tus pedimentos, en el valor y en los anexos salen en la revisión, cuando ya son multa. BG los detecta antes y defiende el asunto si la autoridad interviene.",
-      cta: "Quiero una revisión",
+      title: "Cerca de tu operación, en cada cruce.",
+      body: "Aduanas, compliance, legal y fiscal en una sola firma, a tu lado entre Tijuana y San Diego. Cuéntanos en qué estás y vemos cómo apoyarte.",
+      cta: "Hablemos con el equipo",
     },
     services: {
       eyebrow: "Servicios",
@@ -427,9 +427,9 @@ export const dictionaries = {
       faqTitle: "Frequently asked questions",
     },
     homeCta: {
-      title: "A customs audit gives no warning.",
-      body: "Errors in your entries, your customs value and your annexes surface during the review, when they are already a fine. BG catches them first and defends the matter if the authority steps in.",
-      cta: "I want a review",
+      title: "Close to your operation, at every crossing.",
+      body: "Customs, compliance, legal and tax in one firm, by your side between Tijuana and San Diego. Tell us where you are and we'll see how to help.",
+      cta: "Talk to the team",
     },
     services: {
       eyebrow: "Services",
