@@ -262,7 +262,7 @@ export default async function HomePage({
                 <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
                 {d.nav.contact}
               </span>
-              <h2 className="mt-6 max-w-3xl font-display text-[clamp(2.6rem,6.5vw,5.2rem)] font-medium leading-[0.98] tracking-[-0.03em] text-chalk">
+              <h2 className="mt-6 max-w-2xl font-display text-[clamp(2rem,5vw,3.6rem)] font-medium leading-[1.02] tracking-[-0.03em] text-chalk">
                 {d.homeCta.title}
               </h2>
               <p className="mt-7 max-w-xl text-[18px] leading-relaxed text-bone/90">{d.homeCta.body}</p>

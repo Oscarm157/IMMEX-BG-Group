@@ -7,6 +7,7 @@ import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { MediaFrame } from "@/components/site/MediaFrame";
+import { ContactCta } from "@/components/site/ContactCta";
 
 export async function generateMetadata({
   params,
@@ -183,17 +184,7 @@ export default async function AboutPage({
       </section>
 
       {/* CTA */}
-      <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-24 pt-16 sm:px-8 sm:pb-32 sm:pt-20">
-        <Reveal className="console-panel relative flex flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
-          <h2 className="max-w-2xl font-display text-[clamp(2rem,5vw,3.2rem)] font-medium leading-[1.05] tracking-[-0.02em] text-chalk">
-            {d.homeCta.title}
-          </h2>
-          <p className="max-w-lg text-[17px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
-          <PillButton href={`/${lang}/contact`} variant="accent" arrow>
-            {d.nav.cta}
-          </PillButton>
-        </Reveal>
-      </section>
+      <ContactCta lang={lang} />
     </>
   );
 }

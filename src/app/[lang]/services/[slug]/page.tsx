@@ -6,8 +6,8 @@ import { SERVICE_SLUGS } from "@/content/service-slugs";
 import { SERVICE_DETAIL } from "@/content/services-detail";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
-import { siteConfig } from "@/lib/site-config";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { ContactCta } from "@/components/site/ContactCta";
 import { ServiceInstrument, DrawCheck } from "@/components/site/ServiceInstrument";
 import { MediaFrame } from "@/components/site/MediaFrame";
 import { Faq } from "@/components/site/Faq";
@@ -332,28 +332,8 @@ export default async function ServiceDetailPage({
       {/* Ciclo operativo (flujo del proceso): solo servicios con data */}
       {c.flow && <ServiceProcessFlow slug={slug} lang={lang} />}
 
-      {/* Contacto: teléfono grande y claro (el público llama) */}
-      <section className="mx-auto max-w-[1280px] border-t border-smoke/20 px-5 pb-16 pt-24 sm:px-8 sm:pb-20 sm:pt-28">
-        <div className="console-panel relative flex flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-14 sm:px-14 sm:py-16">
-          <h2 className="max-w-2xl font-display text-[clamp(1.7rem,4vw,2.8rem)] font-medium leading-[1.06] tracking-[-0.02em] text-chalk">
-            {d.homeCta.title}
-          </h2>
-          <p className="max-w-lg text-[17px] leading-relaxed text-bone/90">{d.homeCta.body}</p>
-          <div className="flex flex-col gap-5 sm:flex-row sm:items-center sm:gap-10">
-            <a href="tel:+526646079642" className="group flex flex-col gap-1">
-              <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-smoke">Tijuana</span>
-              <span className="font-display text-[clamp(1.4rem,3vw,2rem)] font-medium tracking-[-0.01em] text-chalk transition-colors group-hover:text-accent">{siteConfig.offices[0].phone}</span>
-            </a>
-            <a href="tel:+16196382168" className="group flex flex-col gap-1">
-              <span className="font-mono text-[12px] uppercase tracking-[0.16em] text-smoke">San Diego</span>
-              <span className="font-display text-[clamp(1.4rem,3vw,2rem)] font-medium tracking-[-0.01em] text-chalk transition-colors group-hover:text-accent">{siteConfig.offices[1].phone}</span>
-            </a>
-          </div>
-          <PillButton href={`/${lang}/contact`} variant="accent" arrow>
-            {d.nav.cta}
-          </PillButton>
-        </div>
-      </section>
+      {/* Contacto: banda semi-compacta (misma familia que el home) */}
+      <ContactCta lang={lang} />
 
       {/* Prev / next */}
       <section className="mx-auto max-w-[1280px] px-5 pb-24 sm:px-8 sm:pb-32">
