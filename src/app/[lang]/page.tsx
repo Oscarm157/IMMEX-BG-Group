@@ -8,6 +8,7 @@ import { TelemetryPanel } from "@/components/site/TelemetryPanel";
 import { CustomsFlow } from "@/components/site/CustomsFlow";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { OperationViz } from "@/components/site/OperationViz";
+import { Logo } from "@/components/Logo";
 
 export default async function HomePage({
   params,
@@ -114,7 +115,7 @@ export default async function HomePage({
                   className="card-light flex flex-col rounded-[14px]"
                 >
                   <div className="flex items-center justify-between border-b border-line-soft px-7 py-3.5">
-                    <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-ink">{p.kicker}</span>
+                    <Logo variant={i === 0 ? "bg" : "bms"} tone="dark" size="sm" />
                     <span aria-hidden className="font-mono text-[11px] tabular-nums text-graphite/60">
                       {String(i + 1).padStart(2, "0")}
                     </span>
