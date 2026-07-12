@@ -17,7 +17,24 @@ const COPY = {
 export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
   const { lang } = await params;
   if (!isLocale(lang)) return {};
-  return { title: COPY[lang as Locale].eyebrow };
+  const c = COPY[lang as Locale];
+  const title = `${c.eyebrow} · ${c.title}`;
+  return {
+    title,
+    description: c.lead,
+    alternates: {
+      canonical: `/${lang}/blog`,
+      languages: { es: "/es/blog", en: "/en/blog" },
+    },
+    openGraph: {
+      type: "website",
+      locale: lang === "es" ? "es_MX" : "en_US",
+      siteName: "BG Consulting Group",
+      title,
+      description: c.lead,
+      url: `https://bgconsultingroup.com/${lang}/blog`,
+    },
+  };
 }
 
 export default async function BlogIndex({ params }: { params: Promise<{ lang: string }> }) {

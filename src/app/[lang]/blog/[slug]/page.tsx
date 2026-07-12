@@ -10,6 +10,9 @@ import { Markdown } from "@/components/site/Markdown";
 
 export const dynamic = "force-dynamic";
 
+const BASE_URL = "https://bgconsultingroup.com";
+const FALLBACK_OG = "/img/gen/border-crossing.webp";
+
 const COPY = {
   es: { back: "Todas las noticias", recommendations: "Recomendaciones de BG", source: "Fuente", cta: "Si un cambio normativo toca tu operación, el equipo de BG te dice qué significa y qué ajustar." },
   en: { back: "All news", recommendations: "BG recommendations", source: "Source", cta: "When a regulatory change touches your operation, the BG team tells you what it means and what to adjust." },
@@ -21,7 +24,36 @@ export async function generateMetadata({ params }: { params: Promise<{ lang: str
   const a = await getPublishedArticleBySlug(slug);
   if (!a) return {};
   const l = localize(a, lang as Locale);
-  return { title: l.title, description: l.excerpt ?? undefined };
+  const canonicalPath = `/${lang}/blog/${slug}`;
+  const ogImage = a.coverUrl ?? FALLBACK_OG;
+  const description = l.excerpt ?? undefined;
+
+  return {
+    title: l.title,
+    description,
+    alternates: {
+      canonical: canonicalPath,
+      languages: { es: `/es/blog/${slug}`, en: `/en/blog/${slug}` },
+    },
+    openGraph: {
+      type: "article",
+      locale: lang === "es" ? "es_MX" : "en_US",
+      siteName: "BG Consulting Group",
+      title: l.title,
+      description,
+      url: `${BASE_URL}${canonicalPath}`,
+      publishedTime: a.publishedAt ? new Date(a.publishedAt).toISOString() : undefined,
+      modifiedTime: a.updatedAt ? new Date(a.updatedAt).toISOString() : undefined,
+      section: a.category ?? undefined,
+      images: [{ url: ogImage, width: 1280, height: 720, alt: l.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: l.title,
+      description,
+      images: [ogImage],
+    },
+  };
 }
 
 export default async function ArticlePage({ params }: { params: Promise<{ lang: string; slug: string }> }) {
@@ -32,8 +64,46 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
   const t = COPY[lang as Locale];
   const l = localize(a, lang as Locale);
 
+  const articleUrl = `${BASE_URL}/${lang}/blog/${slug}`;
+  const ogImage = a.coverUrl ? `${BASE_URL}${a.coverUrl}` : `${BASE_URL}${FALLBACK_OG}`;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "NewsArticle",
+        headline: l.title,
+        description: l.excerpt ?? undefined,
+        image: [ogImage],
+        datePublished: a.publishedAt ? new Date(a.publishedAt).toISOString() : undefined,
+        dateModified: a.updatedAt ? new Date(a.updatedAt).toISOString() : undefined,
+        inLanguage: lang === "es" ? "es-MX" : "en-US",
+        articleSection: a.category ?? undefined,
+        author: { "@type": "Organization", name: "BG Consulting Group", url: `${BASE_URL}/${lang}` },
+        publisher: {
+          "@type": "Organization",
+          name: "BG Consulting Group",
+          logo: { "@type": "ImageObject", url: `${BASE_URL}/BG_Logotipo.png` },
+        },
+        mainEntityOfPage: articleUrl,
+        ...(a.sourceUrl ? { isBasedOn: a.sourceUrl } : {}),
+      },
+      {
+        "@type": "BreadcrumbList",
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: lang === "es" ? "Inicio" : "Home", item: `${BASE_URL}/${lang}` },
+          { "@type": "ListItem", position: 2, name: lang === "es" ? "Noticias" : "News", item: `${BASE_URL}/${lang}/blog` },
+          { "@type": "ListItem", position: 3, name: l.title, item: articleUrl },
+        ],
+      },
+    ],
+  };
+
   return (
     <article className="mx-auto max-w-[980px] px-5 pb-28 pt-36 sm:px-8 sm:pt-44">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+      />
       <Reveal>
         <Link href={`/${lang}/blog`} className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:text-accent-dim">
           &larr; {t.back}
