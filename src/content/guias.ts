@@ -2,7 +2,7 @@
 // Español-first. Cada guía debe tener su campo de valor único (definición
 // propia, fundamento legal citado, errores con ángulo legal), no plantilla
 // vacía. El contenido jurídico se calibra con material real del sitio y el
-// documento de estrategia; al escalar necesita revisión de un experto de BG.
+// documento de estrategia; al escalar requiere revisión de un experto de BG.
 
 export type QA = { q: string; a: string };
 
