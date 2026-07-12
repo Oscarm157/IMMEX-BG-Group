@@ -277,6 +277,18 @@ export const dictionaries = {
         note: "Te respondemos en menos de un día hábil.",
         sent: "Gracias. Te contactamos pronto.",
       },
+      stats: [
+        { value: "20+", label: "años en comercio exterior" },
+        { value: "180+", label: "empresas atendidas" },
+        { value: "24/7", label: "acompañamiento" },
+        { value: "2", label: "países, una operación" },
+      ],
+      processTitle: "Qué sigue cuando escribes",
+      process: [
+        { step: "01", title: "Recibimos tu mensaje", desc: "Entra directo al equipo, con el contexto de tu operación." },
+        { step: "02", title: "Un abogado lo revisa", desc: "Identificamos dónde está el riesgo y qué se puede corregir." },
+        { step: "03", title: "Te contactamos", desc: "Respuesta en menos de un día hábil, en español o inglés." },
+      ],
     },
     footer: {
       tagline: "Comercio exterior, aduanas y cumplimiento entre Tijuana y San Diego.",
@@ -558,6 +570,18 @@ export const dictionaries = {
         note: "We reply within one business day.",
         sent: "Thanks. We'll be in touch soon.",
       },
+      stats: [
+        { value: "20+", label: "years in foreign trade" },
+        { value: "180+", label: "companies served" },
+        { value: "24/7", label: "support" },
+        { value: "2", label: "countries, one operation" },
+      ],
+      processTitle: "What happens after you write",
+      process: [
+        { step: "01", title: "We get your message", desc: "It reaches the team directly, with the context of your operation." },
+        { step: "02", title: "A lawyer reviews it", desc: "We pinpoint where the risk is and what can be corrected." },
+        { step: "03", title: "We reach out", desc: "A reply within one business day, in English or Spanish." },
+      ],
     },
     footer: {
       tagline: "Foreign trade, customs and compliance between Tijuana and San Diego.",

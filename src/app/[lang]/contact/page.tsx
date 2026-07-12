@@ -43,7 +43,18 @@ export default async function ContactPage({
           <p className="mt-6 max-w-xl text-[17px] leading-relaxed text-bone/85">{c.lead}</p>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-10">
+        <Reveal delay={0.16}>
+          <dl className="mt-14 grid grid-cols-2 gap-px overflow-hidden rounded-[14px] border border-line bg-line sm:grid-cols-4">
+            {c.stats.map((s) => (
+              <div key={s.label} className="bg-surface-1 px-6 py-6">
+                <dt className="font-display text-3xl text-chalk sm:text-4xl">{s.value}</dt>
+                <dd className="mt-1.5 text-[13px] leading-snug text-bone/70">{s.label}</dd>
+              </div>
+            ))}
+          </dl>
+        </Reveal>
+
+        <div className="mt-14 grid gap-6 lg:grid-cols-[1fr_1.1fr] lg:gap-10">
           {/* Oficinas como readouts */}
           <Reveal className="flex flex-col gap-4">
             {c.offices.map((o) => (
@@ -75,6 +86,22 @@ export default async function ContactPage({
           <Reveal delay={0.1} className="console-panel rounded-[16px] bg-surface-1 px-7 py-8 sm:px-9 sm:py-10">
             <ContactForm dict={c.form} locale={lang} />
           </Reveal>
+        </div>
+
+        {/* Qué sigue después de enviar */}
+        <div className="mt-20 border-t border-line pt-14 sm:mt-28 sm:pt-16">
+          <Reveal>
+            <h2 className="font-display text-2xl tracking-[-0.02em] text-chalk sm:text-3xl">{c.processTitle}</h2>
+          </Reveal>
+          <div className="mt-10 grid gap-6 sm:grid-cols-3 sm:gap-8">
+            {c.process.map((p, i) => (
+              <Reveal key={p.step} delay={0.06 * (i + 1)} className="flex flex-col">
+                <span className="font-mono text-[13px] tracking-[0.14em] text-accent">{p.step}</span>
+                <h3 className="mt-4 font-display text-lg text-chalk">{p.title}</h3>
+                <p className="mt-2 text-[14px] leading-relaxed text-bone/75">{p.desc}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>
