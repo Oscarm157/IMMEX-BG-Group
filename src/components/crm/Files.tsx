@@ -3,7 +3,9 @@
 import { useRef, useState, useTransition } from "react";
 import { useFormStatus } from "react-dom";
 import { Upload, FileText, Image as ImageIcon, Download, Trash2, X, Eye } from "lucide-react";
+import { toast } from "sonner";
 import { uploadLeadFile, deleteLeadFile } from "@/app/admin/actions";
+import { ConfirmDialog } from "./ConfirmDialog";
 import { fmtSize } from "@/lib/crm-format";
 
 type LeadFile = {
@@ -35,8 +37,8 @@ function UploadButton() {
 export function Files({ leadId, files, editable = true }: { leadId: string; files: LeadFile[]; editable?: boolean }) {
   const formRef = useRef<HTMLFormElement>(null);
   const [preview, setPreview] = useState<LeadFile | null>(null);
-  const [error, setError] = useState<string | null>(null);
-  const [, startTransition] = useTransition();
+  const [toDelete, setToDelete] = useState<LeadFile | null>(null);
+  const [deleting, startTransition] = useTransition();
 
   return (
     <div>
@@ -45,12 +47,12 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
           <form
             ref={formRef}
             action={async (fd) => {
-              setError(null);
-              try {
-                await uploadLeadFile(leadId, fd);
+              const r = await uploadLeadFile(leadId, fd);
+              if (r.ok) {
                 formRef.current?.reset();
-              } catch {
-                setError("No se pudo subir. Revisa el archivo (máx. 10MB) e inténtalo de nuevo.");
+                toast.success("Archivo subido.");
+              } else {
+                toast.error(r.error);
               }
             }}
             className="flex items-center gap-2 rounded-[var(--crm-r-md)] border border-dashed border-[var(--crm-line-strong)] bg-[var(--crm-surface)] p-2.5"
@@ -64,7 +66,6 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
             <UploadButton />
           </form>
           <p className="mt-1.5 text-[13px] text-[var(--crm-ink-mute)]">Cualquier tipo de archivo, hasta 10MB.</p>
-          {error && <p className="mt-1.5 text-[13px] text-[var(--crm-wine)]">{error}</p>}
         </>
       )}
 
@@ -108,12 +109,9 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
                 {editable && (
                   <button
                     type="button"
-                    onClick={() => {
-                      if (confirm(`¿Eliminar ${f.name}?`))
-                        startTransition(() => deleteLeadFile(f.id, leadId));
-                    }}
+                    onClick={() => setToDelete(f)}
                     title="Eliminar"
-                    className="rounded-md p-1.5 text-[var(--crm-ink-soft)] transition-colors hover:bg-[var(--crm-wine-tint)] hover:text-[var(--crm-wine)]"
+                    className="rounded-md p-1.5 text-[var(--crm-ink-soft)] transition-colors hover:bg-[var(--crm-accent-tint)] hover:text-[var(--destructive)]"
                   >
                     <Trash2 className="size-4" strokeWidth={1.7} />
                   </button>
@@ -144,6 +142,26 @@ export function Files({ leadId, files, editable = true }: { leadId: string; file
           </div>
         </div>
       )}
+
+      <ConfirmDialog
+        open={toDelete !== null}
+        onClose={() => setToDelete(null)}
+        onConfirm={() => {
+          const f = toDelete;
+          if (!f) return;
+          startTransition(async () => {
+            const r = await deleteLeadFile(f.id, leadId);
+            if (r.ok) toast.success("Archivo eliminado.");
+            else toast.error(r.error);
+            setToDelete(null);
+          });
+        }}
+        title="Eliminar archivo"
+        description={toDelete ? `Se eliminará "${toDelete.name}" de forma permanente.` : undefined}
+        confirmLabel="Eliminar"
+        destructive
+        pending={deleting}
+      />
     </div>
   );
 }

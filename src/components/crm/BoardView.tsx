@@ -3,6 +3,7 @@
 import { Fragment, useMemo, useRef, useState, useTransition } from "react";
 import Link from "next/link";
 import { List, LayoutGrid } from "lucide-react";
+import { toast } from "sonner";
 import type { LeadStatus, LeadSource, LeadQualification } from "@/lib/schema";
 import type { UserRole } from "@/lib/schema";
 import { canEditLead } from "@/lib/crm-permissions";
@@ -92,14 +93,14 @@ export function BoardView({
     );
 
     startTransition(async () => {
-      try {
-        await updateLeadStatus(leadId, status);
-      } catch {
+      const r = await updateLeadStatus(leadId, status);
+      if (!r.ok) {
         // Roll back to the column it came from; the server rejected the move.
         const back = prevStatus.current[leadId];
         setItems((prev) =>
           prev.map((l) => (l.id === leadId ? { ...l, status: back } : l))
         );
+        toast.error(r.error);
       }
     });
   }

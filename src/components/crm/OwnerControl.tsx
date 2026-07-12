@@ -3,6 +3,7 @@
 import { useOptimistic, useTransition } from "react";
 import * as RS from "@radix-ui/react-select";
 import { ChevronDown, UserCircle2, Loader2, Check } from "lucide-react";
+import { toast } from "sonner";
 import type { UserRole } from "@/lib/schema";
 import { canEditAnyLead } from "@/lib/crm-permissions";
 import { assignLead } from "@/app/admin/actions";
@@ -42,9 +43,11 @@ export function OwnerControl({
     <RS.Root
       value={optimistic}
       onValueChange={(v) =>
-        startTransition(() => {
+        startTransition(async () => {
           setOptimistic(v);
-          assignLead(leadId, v === NONE ? null : v);
+          const r = await assignLead(leadId, v === NONE ? null : v);
+          if (r.ok) toast.success(v === NONE ? "Sin asignar" : `Asignado a ${users.find((u) => u.id === v)?.name ?? "responsable"}`);
+          else toast.error(r.error);
         })
       }
     >

@@ -7,6 +7,8 @@ import { createLead } from "@/app/admin/actions";
 import { Modal } from "./Modal";
 
 const labelCls = "mb-1 block text-[12.5px] font-medium text-[var(--crm-ink)]";
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_RE = /^[+\d][\d\s().-]{6,}$/;
 
 function CreateButton({ disabled }: { disabled: boolean }) {
   const { pending } = useFormStatus();
@@ -22,7 +24,11 @@ export function NewLeadModal() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const valid = name.trim() !== "" && (email.trim() !== "" || phone.trim() !== "");
+  const emailOk = email.trim() === "" || EMAIL_RE.test(email.trim());
+  const phoneOk = phone.trim() === "" || PHONE_RE.test(phone.trim());
+  const hasContact = email.trim() !== "" || phone.trim() !== "";
+  const valid = name.trim() !== "" && hasContact && emailOk && phoneOk;
+  const hint = !emailOk ? "Revisa el correo." : !phoneOk ? "Revisa el teléfono." : null;
 
   return (
     <>
@@ -43,9 +49,11 @@ export function NewLeadModal() {
           </div>
           <div>
             <label className={labelCls} htmlFor="nl-phone">Teléfono</label>
-            <input id="nl-phone" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} className="crm-input" placeholder="+52 664 000 0000" />
+            <input id="nl-phone" name="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} className="crm-input" placeholder="+52 664 000 0000" />
           </div>
-          <p className="text-[12.5px] text-[var(--crm-ink-mute)]">Nombre y al menos un dato de contacto.</p>
+          <p className={`text-[12.5px] ${hint ? "text-[var(--destructive)]" : "text-[var(--crm-ink-mute)]"}`}>
+            {hint ?? "Nombre y al menos un dato de contacto."}
+          </p>
           <CreateButton disabled={!valid} />
         </form>
       </Modal>

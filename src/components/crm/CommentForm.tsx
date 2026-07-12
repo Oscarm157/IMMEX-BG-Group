@@ -3,6 +3,8 @@
 import { useRef } from "react";
 import { useFormStatus } from "react-dom";
 import { Send, Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import type { ActionResult } from "@/lib/action-result";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -21,7 +23,7 @@ function SubmitButton() {
 export function CommentForm({
   action,
 }: {
-  action: (formData: FormData) => Promise<void>;
+  action: (formData: FormData) => Promise<ActionResult>;
 }) {
   const ref = useRef<HTMLFormElement>(null);
 
@@ -29,8 +31,13 @@ export function CommentForm({
     <form
       ref={ref}
       action={async (fd) => {
-        await action(fd);
-        ref.current?.reset();
+        const r = await action(fd);
+        if (r.ok) {
+          ref.current?.reset();
+          toast.success("Nota agregada.");
+        } else {
+          toast.error(r.error);
+        }
       }}
       className="flex flex-col gap-2"
     >

@@ -1,7 +1,9 @@
+import Link from "next/link";
 import { notFound } from "next/navigation";
-import { Mail, Phone, Globe, CalendarClock, Lock, Sparkles } from "lucide-react";
+import { Mail, Phone, Globe, CalendarClock, Lock, Sparkles, Megaphone } from "lucide-react";
 import { Breadcrumb } from "@/components/crm/Breadcrumb";
 import { getLead, getComments, getFiles, getEvents, getActiveUsers, getUserById } from "@/lib/crm-data";
+import { getAdById } from "@/lib/ads-data";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canEditLead, isReadOnly } from "@/lib/crm-permissions";
 import { fmtDate, fmtDateTime } from "@/lib/crm-format";
@@ -40,6 +42,14 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
     getEvents(id),
     getActiveUsers(),
   ]);
+
+  const ad = lead.adId ? await getAdById(lead.adId) : null;
+  const utm = [
+    { label: "Fuente", value: lead.utmSource },
+    { label: "Medio", value: lead.utmMedium },
+    { label: "Campaña", value: lead.utmCampaign },
+  ].filter((r) => r.value);
+  const hasAttribution = ad !== null || utm.length > 0;
 
   const canEdit = canEditLead(viewer, lead);
   const readOnly = isReadOnly(viewer.role);
@@ -154,6 +164,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
               events={events}
               comments={comments}
               files={files.map((f) => ({ id: f.id, name: f.name, contentType: f.contentType, size: f.size }))}
+              transcript={lead.transcript ?? null}
               leadId={lead.id}
               editable={editable}
               addComment={addComment}
@@ -184,6 +195,31 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
                 {lead.sourceUrl ?? "Agregado manualmente"}
               </p>
             </div>
+
+            {hasAttribution && (
+              <div className="mt-5 border-t border-[var(--crm-line)] pt-4">
+                <p className="crm-eyebrow mb-2.5">Atribución</p>
+                {ad && (
+                  <Link
+                    href={`/admin/ads/${ad.id}`}
+                    className="mb-2.5 inline-flex items-center gap-2 rounded-lg border border-[var(--crm-line)] bg-[var(--crm-surface)] px-3 py-2 text-[13px] font-medium text-[var(--crm-ink)] transition-colors hover:border-[var(--crm-ink-mute)]"
+                  >
+                    <Megaphone className="size-3.5 shrink-0 text-[var(--crm-accent-strong)]" strokeWidth={1.9} />
+                    <span className="truncate">{ad.name}</span>
+                  </Link>
+                )}
+                {utm.length > 0 && (
+                  <dl className="divide-y divide-[var(--crm-line)]">
+                    {utm.map((r) => (
+                      <div key={r.label} className="flex gap-3 py-2">
+                        <dt className="w-[68px] shrink-0 text-[12.5px] text-[var(--crm-ink-mute)]">{r.label}</dt>
+                        <dd className="min-w-0 flex-1 break-words text-[13px] font-medium text-[var(--crm-ink-soft)]">{r.value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>
