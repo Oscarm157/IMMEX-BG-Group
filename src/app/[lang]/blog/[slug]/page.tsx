@@ -11,8 +11,8 @@ import { Markdown } from "@/components/site/Markdown";
 export const dynamic = "force-dynamic";
 
 const COPY = {
-  es: { back: "Todas las noticias", recommendations: "Recomendaciones de BG", source: "Fuente", cta: "¿Le afecta este cambio? Hablemos." },
-  en: { back: "All news", recommendations: "BG recommendations", source: "Source", cta: "Does this change affect you? Let's talk." },
+  es: { back: "Todas las noticias", recommendations: "Recomendaciones de BG", source: "Fuente", cta: "Si un cambio normativo toca tu operación, el equipo de BG te dice qué significa y qué ajustar." },
+  en: { back: "All news", recommendations: "BG recommendations", source: "Source", cta: "When a regulatory change touches your operation, the BG team tells you what it means and what to adjust." },
 };
 
 export async function generateMetadata({ params }: { params: Promise<{ lang: string; slug: string }> }): Promise<Metadata> {
@@ -33,7 +33,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
   const l = localize(a, lang as Locale);
 
   return (
-    <article className="mx-auto max-w-[820px] px-5 pb-28 pt-36 sm:px-8 sm:pt-44">
+    <article className="mx-auto max-w-[980px] px-5 pb-28 pt-36 sm:px-8 sm:pt-44">
       <Reveal>
         <Link href={`/${lang}/blog`} className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent transition-colors hover:text-accent-dim">
           &larr; {t.back}
@@ -47,7 +47,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
         <h1 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.4rem)] font-medium leading-[1.04] tracking-[-0.03em] text-chalk">
           {l.title}
         </h1>
-        {l.excerpt && <p className="mt-5 text-[18px] leading-relaxed text-bone/90">{l.excerpt}</p>}
+        {l.excerpt && <p className="mt-5 max-w-[720px] text-[19px] leading-relaxed text-bone/90">{l.excerpt}</p>}
       </Reveal>
 
       <Reveal delay={0.12} className="mt-10">
@@ -55,7 +55,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
       </Reveal>
 
       {l.body && (
-        <div className="mt-12">
+        <div className="mt-12 max-w-[760px]">
           <Markdown>{l.body}</Markdown>
         </div>
       )}
@@ -82,7 +82,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
       )}
 
       <div className="mt-16 border-t border-line pt-10">
-        <p className="mb-5 max-w-md font-display text-xl font-medium tracking-[-0.01em] text-chalk">{t.cta}</p>
+        <p className="mb-5 max-w-2xl font-display text-2xl font-medium leading-snug tracking-[-0.01em] text-chalk">{t.cta}</p>
         <PillButton href={`/${lang}/contact`} variant="accent" arrow>
           {lang === "es" ? "Hablemos" : "Let's talk"}
         </PillButton>
