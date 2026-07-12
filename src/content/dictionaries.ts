@@ -292,11 +292,11 @@ export const dictionaries = {
         { value: "24/7", label: "acompañamiento" },
         { value: "2", label: "países, una operación" },
       ],
-      processTitle: "Qué sigue cuando escribes",
+      processTitle: "Qué pasa cuando nos escribes",
       process: [
-        { step: "01", title: "Recibimos tu mensaje", desc: "Entra directo al equipo, con el contexto de tu operación." },
-        { step: "02", title: "Un abogado lo revisa", desc: "Identificamos dónde está el riesgo y qué se puede corregir." },
-        { step: "03", title: "Te contactamos", desc: "Respuesta en menos de un día hábil, en español o inglés." },
+        { step: "01", title: "Recibimos tu mensaje", desc: "Llega directo al equipo, con el contexto de tu operación." },
+        { step: "02", title: "Un abogado revisa tu caso", desc: "Ubicamos dónde está el riesgo y qué conviene corregir." },
+        { step: "03", title: "Te respondemos", desc: "En menos de un día hábil, en español o inglés." },
       ],
     },
     footer: {
@@ -594,11 +594,11 @@ export const dictionaries = {
         { value: "24/7", label: "support" },
         { value: "2", label: "countries, one operation" },
       ],
-      processTitle: "What happens after you write",
+      processTitle: "What happens when you write",
       process: [
         { step: "01", title: "We get your message", desc: "It reaches the team directly, with the context of your operation." },
-        { step: "02", title: "A lawyer reviews it", desc: "We pinpoint where the risk is and what can be corrected." },
-        { step: "03", title: "We reach out", desc: "A reply within one business day, in English or Spanish." },
+        { step: "02", title: "A lawyer reviews your case", desc: "We pinpoint where the risk is and what to correct." },
+        { step: "03", title: "We reply", desc: "Within one business day, in English or Spanish." },
       ],
     },
     footer: {
