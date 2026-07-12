@@ -281,7 +281,7 @@ export const dictionaries = {
         email: "Correo",
         phone: "Teléfono",
         company: "Empresa",
-        message: "¿En qué te ayudamos?",
+        message: "¿Cómo podemos ayudarte?",
         submit: "Enviar",
         note: "Te respondemos en menos de un día hábil.",
         sent: "Gracias. Te contactamos pronto.",

@@ -72,8 +72,8 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
           className="text-bone underline underline-offset-2 hover:text-accent"
         >
           aviso de privacidad
-        </a>{" "}
-        y el tratamiento de mis datos.
+        </a>
+        .
       </>
     ) : (
       <>
@@ -85,8 +85,8 @@ export function ContactForm({ dict, locale }: { dict: FormDict; locale: string }
           className="text-bone underline underline-offset-2 hover:text-accent"
         >
           privacy notice
-        </a>{" "}
-        and the processing of my data.
+        </a>
+        .
       </>
     );
 
