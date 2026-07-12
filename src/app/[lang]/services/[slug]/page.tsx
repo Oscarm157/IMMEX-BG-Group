@@ -323,14 +323,14 @@ export default async function ServiceDetailPage({
         />
       </section>
 
-      {/* Ciclo operativo (flujo del proceso): solo servicios con data */}
-      {c.flow && <ServiceProcessFlow slug={slug} lang={lang} />}
-
-      {/* FAQ */}
+      {/* FAQ (subida por encima del flujo de proceso) */}
       <section className="mx-auto max-w-[1280px] border-t border-smoke/20 px-5 pb-20 pt-24 sm:px-8 sm:pb-24 sm:pt-28">
         <SectionHeading title={sec.faqTitle} className="mb-10" />
         <Faq items={c.faq} />
       </section>
+
+      {/* Ciclo operativo (flujo del proceso): solo servicios con data */}
+      {c.flow && <ServiceProcessFlow slug={slug} lang={lang} />}
 
       {/* Contacto: teléfono grande y claro (el público llama) */}
       <section className="mx-auto max-w-[1280px] border-t border-smoke/20 px-5 pb-16 pt-24 sm:px-8 sm:pb-20 sm:pt-28">

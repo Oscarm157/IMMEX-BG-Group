@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDictionary, isLocale } from "@/content/dictionaries";
@@ -160,6 +159,9 @@ export default async function HomePage({
             <h2 className="max-w-4xl text-balance font-display text-[clamp(2.4rem,6vw,5rem)] font-medium leading-[1.02] tracking-[-0.03em] text-chalk [text-shadow:0_2px_28px_rgba(0,0,0,0.55)]">
               {d.bandCta.title}
             </h2>
+            <p className="mx-auto mt-5 max-w-xl text-balance text-[16px] leading-relaxed text-bone/85 [text-shadow:0_1px_16px_rgba(0,0,0,0.6)]">
+              {d.bandCta.sub}
+            </p>
           </Reveal>
         </div>
       </section>
@@ -171,20 +173,6 @@ export default async function HomePage({
         lead={d.flow.lead}
         stages={d.flow.stages}
         panelLabel={d.flow.panel}
-      />
-
-      {/* Operación — diagrama animado (SVG) */}
-      <OperationViz
-        eyebrow={d.operationViz.eyebrow}
-        title={d.operationViz.title}
-        intro={d.operationViz.intro}
-        opLabel={d.operationViz.opLabel}
-        opId={d.operationViz.opId}
-        statusLabel={d.operationViz.statusLabel}
-        statusNote={d.operationViz.statusNote}
-        barLabel={d.operationViz.barLabel}
-        stages={d.flow.stages.map((s) => s.name)}
-        metrics={d.telemetry.metrics}
       />
 
       {/* Servicios + Valores — capítulo claro */}
@@ -226,31 +214,37 @@ export default async function HomePage({
             {d.values.items.map((v, i) => (
               <Reveal
                 key={v.name}
-                delay={(i % 4) * 0.06}
-                className="card-light flex flex-col rounded-[14px] p-7"
+                delay={(i % 4) * 0.08}
+                className="group relative flex flex-col overflow-hidden rounded-[16px] border border-line-soft bg-paper-2/40 p-7 transition-colors duration-300 hover:bg-ink"
               >
-                <span className="font-mono text-[12px] tabular-nums text-accent-ink">
+                <span className="font-display text-[clamp(2.6rem,5vw,3.6rem)] font-medium leading-none tabular-nums text-accent-ink transition-colors duration-300 group-hover:text-accent">
                   {String(i + 1).padStart(2, "0")}
                 </span>
-                <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-ink">{v.name}</h3>
-                <p className="mt-3 text-[14px] leading-relaxed text-graphite">{v.body}</p>
+                <h3 className="mt-6 font-display text-xl font-medium tracking-[-0.01em] text-ink transition-colors duration-300 group-hover:text-chalk">{v.name}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed text-graphite transition-colors duration-300 group-hover:text-bone/80">{v.body}</p>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA — panel de consola con aura */}
+      {/* Operación — diagrama animado (SVG), movido debajo de servicios */}
+      <OperationViz
+        eyebrow={d.operationViz.eyebrow}
+        title={d.operationViz.title}
+        intro={d.operationViz.intro}
+        opLabel={d.operationViz.opLabel}
+        opId={d.operationViz.opId}
+        statusLabel={d.operationViz.statusLabel}
+        statusNote={d.operationViz.statusNote}
+        barLabel={d.operationViz.barLabel}
+        stages={d.flow.stages.map((s) => s.name)}
+        metrics={d.telemetry.metrics}
+      />
+
+      {/* CTA — panel de consola */}
       <section className="px-5 pb-24 pt-24 sm:px-8 sm:pb-32 sm:pt-28">
         <Reveal className="console-panel relative mx-auto flex max-w-[1280px] flex-col items-start gap-7 overflow-hidden rounded-[18px] bg-surface-1 px-8 py-16 sm:px-16 sm:py-20">
-          <Image
-            src="/img/gen/core.webp"
-            alt=""
-            aria-hidden
-            width={460}
-            height={460}
-            className="pointer-events-none absolute -right-12 -top-16 z-0 w-[240px] opacity-50 mix-blend-screen sm:w-[420px]"
-          />
           <span className="relative z-10 flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-accent">
             <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
             {d.nav.contact}

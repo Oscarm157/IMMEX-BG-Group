@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
@@ -212,8 +213,11 @@ export function Nav({
               <div className="grid gap-x-10 gap-y-9 sm:grid-cols-3 lg:border-l lg:border-line lg:pl-16">
                 {GROUPS.map((group, gi) => (
                   <div key={gi}>
-                    <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-ash">{dict.groups[gi]}</span>
-                    <ul className="mt-4 flex flex-col gap-4">
+                    <span className="flex items-center gap-2 border-b border-line pb-3 font-mono text-[11px] uppercase tracking-[0.18em] text-chalk">
+                      <span aria-hidden className="inline-block h-1 w-1 rounded-full bg-accent" />
+                      {dict.groups[gi]}
+                    </span>
+                    <ul className="mt-5 flex flex-col gap-4">
                       {group.map((idx) => (
                         <li key={slugs[idx]}>
                           <Link href={`/${lang}/services/${slugs[idx]}`} className="group block">
@@ -234,7 +238,7 @@ export function Nav({
         )}
       </AnimatePresence>
 
-      {/* Dropdown Software (compacto) */}
+      {/* Mega-menú Software (full-width, mismo lienzo que Servicios) */}
       <AnimatePresence>
         {menu === "software" && (
           <motion.div
@@ -244,31 +248,37 @@ export function Nav({
             exit={{ opacity: 0, y: reduce ? 0 : -8 }}
             transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
             onMouseEnter={() => openMenu("software")}
-            className="absolute right-5 top-full hidden w-[min(92vw,520px)] sm:right-8 md:block"
+            className="absolute inset-x-0 top-full hidden border-t border-line bg-ink md:block"
           >
-            <div className="console-panel mt-2 rounded-[14px] border border-line bg-ink p-6">
-              <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
-                <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
-                {dict.software}
-              </span>
-              <p className="mt-3 text-[13.5px] leading-relaxed text-bone/90">{dict.softwareBlurb}</p>
-              <ul className="mt-5 grid grid-cols-2 gap-x-6 gap-y-3 border-t border-line pt-5">
-                {software.items.map((it) => (
-                  <li key={it}>
-                    <Link href={`/${lang}/software`} className="group flex items-center gap-2 text-[14px] text-chalk transition-colors hover:text-accent">
-                      <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-accent" />
-                      {it}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6 flex items-center gap-5 border-t border-line pt-5">
-                <PillButton href={`/${lang}/software`} variant="ghost" arrow className="text-sm">
+            <div className="mx-auto grid max-w-[1280px] gap-10 px-5 py-10 sm:px-8 lg:grid-cols-[0.8fr_2fr] lg:gap-16">
+              <div className="flex flex-col items-start">
+                <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-accent">
+                  <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
+                  {dict.software}
+                </span>
+                <h3 className="mt-4 max-w-xs font-display text-2xl font-medium leading-tight tracking-[-0.02em] text-chalk">BMS Custom System</h3>
+                <p className="mt-3 max-w-xs text-[14px] leading-relaxed text-bone/90">{dict.softwareBlurb}</p>
+                <PillButton href={`/${lang}/software`} variant="ghost" arrow className="mt-6 text-sm">
                   {dict.software}
                 </PillButton>
-                <a href={software.external} target="_blank" rel="noopener noreferrer" className="font-mono text-[12px] uppercase tracking-[0.1em] text-smoke transition-colors hover:text-accent">
+                <a href={software.external} target="_blank" rel="noopener noreferrer" className="mt-4 font-mono text-[12px] uppercase tracking-[0.1em] text-smoke transition-colors hover:text-accent">
                   BMS ↗
                 </a>
+              </div>
+              <div className="grid gap-8 sm:grid-cols-[0.85fr_1.15fr] sm:items-center lg:border-l lg:border-line lg:pl-16">
+                <div className="console-panel grid-field flex aspect-[5/3] items-center justify-center overflow-hidden rounded-[12px] bg-surface-1 p-6">
+                  <Image src="/bms_Logotipo_blanco.png" alt="BMS Custom System" width={420} height={125} className="w-[78%] max-w-[220px]" />
+                </div>
+                <ul className="grid grid-cols-2 gap-x-8 gap-y-3.5">
+                  {software.items.map((it) => (
+                    <li key={it}>
+                      <Link href={`/${lang}/software`} className="group flex items-center gap-2 text-[14px] text-chalk transition-colors hover:text-accent">
+                        <span aria-hidden className="h-1 w-1 shrink-0 rounded-full bg-accent" />
+                        {it}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           </motion.div>

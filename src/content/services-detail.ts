@@ -2424,11 +2424,23 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
         {
           "q": "¿Atienden operaciones entre Tijuana y San Diego?",
           "a": "Sí. El cruce de mercancías y las operaciones entre ambos lados de la frontera concentran buena parte de la materia aduanera y de las controversias entre particulares. Para estas últimas, el arbitraje comercial internacional es una de las vías previstas para resolver el conflicto fuera de los tribunales."
+        },
+        {
+          "q": "¿Cuánto tiempo tengo para defenderme tras una notificación?",
+          "a": "Depende del acto. Por regla general, el recurso de revocación y el juicio de nulidad ante el TFJA cuentan con 30 días hábiles a partir de que surte efectos la notificación. Dejar correr ese plazo puede dejar firme la resolución, por eso conviene revisar el acto apenas se recibe."
+        },
+        {
+          "q": "¿Qué es un PAMA y cómo se atiende?",
+          "a": "El Procedimiento Administrativo en Materia Aduanera se inicia cuando la autoridad detecta irregularidades durante el reconocimiento o una verificación. Abre un plazo para ofrecer pruebas y alegatos; la defensa oportuna dentro de ese plazo es la que evita que se determinen créditos o se decrete el embargo de la mercancía."
+        },
+        {
+          "q": "¿Conviene esperar a que la autoridad determine el crédito antes de actuar?",
+          "a": "No. Las actuaciones durante el ejercicio de las facultades de comprobación condicionan el resultado. Intervenir desde la auditoría, y no hasta la determinación, amplía las alternativas (acuerdo conclusivo, aclaraciones, autocorrección) y fortalece la defensa posterior."
         }
       ],
       diagnostic: LEGAL_DIAGNOSTIC,
       flow: LEGAL_FLOW,
-      bandImage: "/img/gen/legal-defense.webp",
+      bandImage: "/img/gen/legal-defense.png",
       bandCaption: "Defensa fiscal y aduanera, de la notificación a la resolución",
     },
     {
@@ -3020,11 +3032,23 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
         {
           "q": "Do you handle operations between Tijuana and San Diego?",
           "a": "Yes. The movement of goods and operations across both sides of the border concentrate much of the customs work and of the disputes between private parties. For the latter, international commercial arbitration is one of the routes available to resolve the conflict outside the courts."
+        },
+        {
+          "q": "How long do I have to defend myself after a notification?",
+          "a": "It depends on the act. As a general rule, the appeal for revocation and the annulment suit before the TFJA run for 30 business days from when the notification takes effect. Letting that deadline pass can leave the resolution final, which is why the act should be reviewed as soon as it arrives."
+        },
+        {
+          "q": "What is a PAMA and how is it handled?",
+          "a": "The Administrative Procedure in Customs Matters begins when the authority finds irregularities during inspection or a verification. It opens a window to offer evidence and arguments; a timely defense within that window is what prevents assessments from being determined or the merchandise from being seized."
+        },
+        {
+          "q": "Should I wait for the authority to assess the debt before acting?",
+          "a": "No. Actions taken while the authority exercises its review powers shape the outcome. Stepping in during the audit, rather than at the assessment, widens the alternatives (conclusive agreement, clarifications, self-correction) and strengthens the later defense."
         }
       ],
       diagnostic: LEGAL_DIAGNOSTIC,
       flow: LEGAL_FLOW,
-      bandImage: "/img/gen/legal-defense.webp",
+      bandImage: "/img/gen/legal-defense.png",
       bandCaption: "Tax and customs defense, from notice to resolution",
     },
     {

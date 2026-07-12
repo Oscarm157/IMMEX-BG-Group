@@ -14,7 +14,7 @@ export const dictionaries = {
       blog: "Noticias",
       contact: "Contacto",
       cta: "Hablemos",
-      megaTitle: "Ocho áreas, un mismo estándar.",
+      megaTitle: "Ocho áreas, un mismo criterio.",
       megaLead: "Comercio exterior, aduanas, legal, compliance y fiscal en una sola firma.",
       groups: ["Legal y cumplimiento", "Operación aduanera", "Origen y logística"],
       softwareBlurb: "BMS Custom System: ERP aduanero con Anexo 24/30, EDI, MRP/ERP y reportería en una plataforma.",
@@ -39,7 +39,7 @@ export const dictionaries = {
     },
     telemetry: {
       header: "Estado de operación",
-      title: "La operación, en una sola consola.",
+      title: "Toda la operación, en una sola vista.",
       lead: "Cada etapa del cruce, los anexos y la reportería en un mismo sistema: BG sostiene el criterio legal y BMS deja el rastro de cada movimiento.",
       live: "En línea",
       status: [
@@ -53,7 +53,7 @@ export const dictionaries = {
         { value: "50K", label: "Operaciones / año" },
       ],
     },
-    bandCta: { title: "Opera sin sorpresas." },
+    bandCta: { title: "Opera sin sorpresas.", sub: "Cada cruce, con el criterio legal y el rastro documental en su sitio." },
     operationViz: {
       eyebrow: "En operación",
       title: "El cruce, en orden.",
@@ -112,7 +112,7 @@ export const dictionaries = {
     },
     servicesPreview: {
       eyebrow: "Servicios",
-      title: "Ocho áreas, un mismo estándar.",
+      title: "Ocho áreas, un mismo criterio.",
       cta: "Ver todos los servicios",
       colIndex: "Índice",
       colService: "Servicio",
@@ -341,7 +341,7 @@ export const dictionaries = {
     },
     telemetry: {
       header: "Operation status",
-      title: "The operation, in one console.",
+      title: "The whole operation, in a single view.",
       lead: "Every stage of the crossing, the annexes and the reporting in a single system: BG holds the legal judgment, BMS keeps the trail of every move.",
       live: "Live",
       status: [
@@ -355,7 +355,7 @@ export const dictionaries = {
         { value: "50K", label: "Operations / yr" },
       ],
     },
-    bandCta: { title: "Operate without surprises." },
+    bandCta: { title: "Operate without surprises.", sub: "Every crossing, with the legal criteria and the document trail in place." },
     operationViz: {
       eyebrow: "In operation",
       title: "The crossing, in order.",

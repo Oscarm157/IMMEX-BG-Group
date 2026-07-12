@@ -72,13 +72,13 @@ export default async function AboutPage({
           </div>
           <Reveal delay={0.18} className="relative flex items-center justify-center">
             <Image
-              src="/img/gen/core.webp"
+              src="/img/gen/about-hero.png"
               alt=""
               aria-hidden
-              width={520}
-              height={520}
+              width={1200}
+              height={1200}
               priority
-              className="w-[78%] max-w-[420px] drop-shadow-[0_0_60px_rgba(0,230,160,0.18)]"
+              className="w-[90%] max-w-[460px] mix-blend-screen"
             />
           </Reveal>
         </div>
@@ -114,10 +114,10 @@ export default async function AboutPage({
           <SectionHeading eyebrow={d.values.eyebrow} title={d.values.title} tone="light" className="mb-10" />
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {d.values.items.map((v, i) => (
-              <Reveal key={v.name} delay={(i % 4) * 0.06} className="card-light flex flex-col rounded-[14px] p-7">
-                <span className="font-mono text-[12px] tabular-nums text-accent-ink">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-5 font-display text-xl font-medium tracking-[-0.01em] text-ink">{v.name}</h3>
-                <p className="mt-3 text-[14px] leading-relaxed text-graphite">{v.body}</p>
+              <Reveal key={v.name} delay={(i % 4) * 0.08} className="group relative flex flex-col overflow-hidden rounded-[16px] border border-line-soft bg-paper-2/40 p-7 transition-colors duration-300 hover:bg-ink">
+                <span className="font-display text-[clamp(2.6rem,5vw,3.6rem)] font-medium leading-none tabular-nums text-accent-ink transition-colors duration-300 group-hover:text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <h3 className="mt-6 font-display text-xl font-medium tracking-[-0.01em] text-ink transition-colors duration-300 group-hover:text-chalk">{v.name}</h3>
+                <p className="mt-3 text-[14px] leading-relaxed text-graphite transition-colors duration-300 group-hover:text-bone/80">{v.body}</p>
               </Reveal>
             ))}
           </div>

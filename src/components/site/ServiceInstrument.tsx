@@ -156,8 +156,8 @@ function Dictamen({ l, reduce }: { l: InstrumentLabels; reduce: boolean }) {
       >
         <path d="M348 182 V 226" />
         <path d="M324 196 H 372" />
-        <path d="M324 196 q -7 16 -14 0 Z" />
-        <path d="M372 196 q -7 16 -14 0 Z" />
+        <path d="M317 196 q 7 16 14 0 Z" />
+        <path d="M365 196 q 7 16 14 0 Z" />
         <path d="M336 226 H 360" />
       </motion.g>
       {label(348, 250, l.status[1], "middle", ACCENT)}
