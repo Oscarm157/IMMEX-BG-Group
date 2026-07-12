@@ -125,9 +125,9 @@ export const dictionaries = {
       faqTitle: "Preguntas frecuentes",
     },
     homeCta: {
-      title: "Pongamos tu operación en orden.",
-      body: "Una conversación con el equipo legal de BG aclara dónde está el riesgo y qué se puede corregir.",
-      cta: "Hablemos",
+      title: "Una auditoría de comercio exterior no avisa.",
+      body: "Los errores en tus pedimentos, en el valor y en los anexos salen en la revisión, cuando ya son multa. BG los detecta antes y defiende el asunto si la autoridad interviene.",
+      cta: "Quiero una revisión",
     },
     services: {
       eyebrow: "Servicios",
@@ -427,9 +427,9 @@ export const dictionaries = {
       faqTitle: "Frequently asked questions",
     },
     homeCta: {
-      title: "Let's put your operation in order.",
-      body: "One conversation with BG's legal team makes clear where the risk is and what can be fixed.",
-      cta: "Let's talk",
+      title: "A customs audit gives no warning.",
+      body: "Errors in your entries, your customs value and your annexes surface during the review, when they are already a fine. BG catches them first and defends the matter if the authority steps in.",
+      cta: "I want a review",
     },
     services: {
       eyebrow: "Services",
