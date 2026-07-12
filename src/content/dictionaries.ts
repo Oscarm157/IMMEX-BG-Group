@@ -99,13 +99,13 @@ export const dictionaries = {
       lead: "La asesoría legal y el software aduanero trabajan sobre la misma realidad: tu operación de comercio exterior. BG y BMS la cubren de extremo a extremo.",
       bg: {
         kicker: "BG Consulting Group",
-        title: "La asesoría",
+        title: "Asesoría legal",
         body: "Defensa legal, cumplimiento y comercio exterior. El criterio que sostiene cada pedimento ante la autoridad.",
         points: ["Legal y litigio aduanero", "Compliance y auditoría", "Valor en aduana y origen"],
       },
       bms: {
         kicker: "BMS Software",
-        title: "El software",
+        title: "Software aduanero",
         body: "El sistema que automatiza el cumplimiento: Anexo 24, Anexo 30 y la trazabilidad de cada operación.",
         points: ["Anexo 24 y Anexo 30", "EDI y +100 reportes", "Hasta 150 usuarios"],
       },
@@ -380,13 +380,13 @@ export const dictionaries = {
       lead: "Legal counsel and customs software work on the same reality: your cross-border operation. BG and BMS cover it end to end.",
       bg: {
         kicker: "BG Consulting Group",
-        title: "The counsel",
+        title: "Legal counsel",
         body: "Legal defense, compliance and foreign trade. The judgment behind every entry filed before the authority.",
         points: ["Customs legal and litigation", "Compliance and audit", "Customs value and origin"],
       },
       bms: {
         kicker: "BMS Software",
-        title: "The software",
+        title: "Customs software",
         body: "The system that automates compliance: Annex 24, Annex 30 and full traceability of every operation.",
         points: ["Annex 24 and Annex 30", "EDI and 100+ reports", "Up to 150 users"],
       },
