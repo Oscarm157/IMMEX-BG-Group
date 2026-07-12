@@ -3,7 +3,9 @@
 import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { Check, Loader2, Pencil } from "lucide-react";
+import { toast } from "sonner";
 import { visibleServices } from "@/lib/services";
+import type { ActionResult } from "@/lib/action-result";
 import type { LeadQualification, LeadSource } from "@/lib/schema";
 
 const SERVICE_NAMES = visibleServices.map((s) => s.name);
@@ -65,7 +67,7 @@ export function LeadDetailsForm({
   lead,
   editable = true,
 }: {
-  action: (formData: FormData) => Promise<void>;
+  action: (formData: FormData) => Promise<ActionResult>;
   lead: Values;
   editable?: boolean;
 }) {
@@ -104,7 +106,18 @@ export function LeadDetailsForm({
   }
 
   return (
-    <form action={async (fd) => { await action(fd); setEditing(false); }} className="flex flex-col">
+    <form
+      action={async (fd) => {
+        const r = await action(fd);
+        if (r.ok) {
+          setEditing(false);
+          toast.success("Cambios guardados.");
+        } else {
+          toast.error(r.error);
+        }
+      }}
+      className="flex flex-col"
+    >
       <div className="crm-scroll max-h-[56vh] space-y-5 overflow-y-auto pr-3">
       <fieldset className="space-y-3">
         <legend className={legendCls}>Contacto</legend>

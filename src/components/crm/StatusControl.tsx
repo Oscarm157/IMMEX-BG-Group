@@ -3,6 +3,7 @@
 import { useOptimistic, useTransition } from "react";
 import * as RS from "@radix-ui/react-select";
 import { ChevronDown, Loader2, Check } from "lucide-react";
+import { toast } from "sonner";
 import type { LeadStatus } from "@/lib/schema";
 import { updateLeadStatus } from "@/app/admin/actions";
 import { STATUS_META, STATUS_ORDER } from "./status";
@@ -40,9 +41,12 @@ export function StatusControl({
     <RS.Root
       value={optimistic}
       onValueChange={(v) =>
-        startTransition(() => {
+        startTransition(async () => {
           setOptimistic(v as LeadStatus);
-          updateLeadStatus(leadId, v as LeadStatus);
+          const r = await updateLeadStatus(leadId, v as LeadStatus);
+          // En error, useOptimistic revierte solo al terminar la transición (no se revalidó).
+          if (r.ok) toast.success(`Estado: ${STATUS_META[v as LeadStatus]?.label ?? v}`);
+          else toast.error(r.error);
         })
       }
     >

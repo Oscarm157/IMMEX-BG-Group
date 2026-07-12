@@ -5,6 +5,8 @@ import { Activity } from "./Activity";
 import { CommentForm } from "./CommentForm";
 import { Files } from "./Files";
 import { fmtDateTime } from "@/lib/crm-format";
+import type { ActionResult } from "@/lib/action-result";
+import type { TranscriptMessage } from "@/lib/schema";
 
 type Comment = { id: string; body: string; createdAt: Date | string | null; authorName: string | null };
 type Event = { id: string; kind: string; detail: string; createdAt: Date | string | null; authorName: string | null };
@@ -30,6 +32,7 @@ export function LeadFeed({
   events,
   comments,
   files,
+  transcript,
   leadId,
   editable,
   addComment,
@@ -37,10 +40,12 @@ export function LeadFeed({
   events: Event[];
   comments: Comment[];
   files: FileRow[];
+  transcript: TranscriptMessage[] | null;
   leadId: string;
   editable: boolean;
-  addComment: (formData: FormData) => Promise<void>;
+  addComment: (formData: FormData) => Promise<ActionResult>;
 }) {
+  const hasTranscript = Array.isArray(transcript) && transcript.length > 0;
   return (
     <Tabs defaultValue="activity" className="gap-0">
       <TabsList variant="line" className="h-auto w-full justify-start gap-5 rounded-none border-b border-[var(--crm-line)] px-0 pb-2.5">
@@ -53,6 +58,11 @@ export function LeadFeed({
         <TabsTrigger value="files" className="flex-none px-0 text-[13.5px]">
           Archivos <Count n={files.length} />
         </TabsTrigger>
+        {hasTranscript && (
+          <TabsTrigger value="transcript" className="flex-none px-0 text-[13.5px]">
+            Conversación <Count n={transcript!.length} />
+          </TabsTrigger>
+        )}
       </TabsList>
 
       <TabsContent value="activity" className="pt-5">
@@ -95,6 +105,32 @@ export function LeadFeed({
       <TabsContent value="files" className="pt-5">
         <Files leadId={leadId} editable={editable} files={files} />
       </TabsContent>
+
+      {hasTranscript && (
+        <TabsContent value="transcript" className="pt-5">
+          <ul className="crm-scroll max-h-[460px] space-y-3 overflow-y-auto pr-2.5">
+            {transcript!.map((m, i) => {
+              const isUser = m.role === "user";
+              return (
+                <li key={i} className={`flex flex-col gap-1 ${isUser ? "items-end" : "items-start"}`}>
+                  <span className="crm-eyebrow text-[10px] text-[var(--crm-ink-mute)]">
+                    {isUser ? "Visitante" : "Asistente"}
+                  </span>
+                  <div
+                    className={`max-w-[86%] whitespace-pre-wrap rounded-lg border px-3.5 py-2.5 text-[13.5px] leading-relaxed ${
+                      isUser
+                        ? "border-[var(--crm-accent-tint-2)] bg-[var(--crm-accent-tint)] text-[var(--crm-ink)]"
+                        : "border-[var(--crm-line)] bg-[var(--crm-surface)] text-[var(--crm-ink-soft)]"
+                    }`}
+                  >
+                    {m.content}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </TabsContent>
+      )}
     </Tabs>
   );
 }

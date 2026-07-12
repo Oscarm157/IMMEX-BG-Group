@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canManageUsers, canViewDashboard, canManageBlog, canManagePosts, canViewAds } from "@/lib/crm-permissions";
@@ -5,6 +6,8 @@ import { logout } from "../actions";
 import { AppSidebar } from "./AppSidebar";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
+import { Toaster } from "@/components/ui/sonner";
+import { FlashToaster } from "@/components/crm/FlashToaster";
 // Provider legacy para los tooltips de UserRowActions (se migra a shadcn en la 2ª tanda).
 import { TooltipProvider } from "@/components/crm/ui/Tooltip";
 
@@ -34,6 +37,10 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           </header>
           <main className="mx-auto w-full max-w-[1380px] px-4 py-7 sm:px-7 sm:py-8">{children}</main>
         </SidebarInset>
+        <Toaster position="bottom-right" />
+        <Suspense fallback={null}>
+          <FlashToaster />
+        </Suspense>
       </SidebarProvider>
     </TooltipProvider>
   );

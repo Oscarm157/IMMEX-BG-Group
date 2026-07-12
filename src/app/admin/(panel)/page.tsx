@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Inbox, ArrowDown, ChevronsUpDown, ArrowUpRight } from "lucide-react";
+import { Inbox, ArrowDown, ChevronsUpDown, ArrowUpRight, Download } from "lucide-react";
 import { getLeads, getUsersBasic, getActiveUsers } from "@/lib/crm-data";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canViewAllLeads, isReadOnly } from "@/lib/crm-permissions";
@@ -123,6 +123,19 @@ export default async function LeadsList({
   const lastShown = Math.min(page * PAGE_SIZE, total);
   const filtered = Boolean(opts.search || opts.owner || opts.source || status || unassigned);
 
+  // Export CSV respetando filtros y scope de rol (la página baja el archivo directo).
+  const exportHref = (() => {
+    const p = new URLSearchParams();
+    if (opts.search) p.set("search", opts.search);
+    if (status) p.set("status", status);
+    if (opts.owner) p.set("owner", opts.owner);
+    if (opts.source) p.set("source", opts.source);
+    if (sort !== "recent") p.set("sort", sort);
+    if (unassigned) p.set("unassigned", "1");
+    const s = p.toString();
+    return s ? `/admin/leads-export?${s}` : "/admin/leads-export";
+  })();
+
   const SortIcon = ({ on }: { on: boolean }) =>
     on ? (
       <ArrowDown className="size-3 text-[var(--crm-accent-strong)]" />
@@ -135,7 +148,17 @@ export default async function LeadsList({
       <PageHeader
         eyebrow="Comercial"
         title="Leads"
-        actions={canCreate ? <NewLeadModal /> : undefined}
+        actions={
+          <>
+            {total > 0 && (
+              <a href={exportHref} className="crm-btn crm-btn-secondary" title="Exportar a CSV">
+                <Download className="size-[15px]" strokeWidth={2} />
+                Exportar
+              </a>
+            )}
+            {canCreate && <NewLeadModal />}
+          </>
+        }
       >
         <div className="mt-2 flex items-center gap-2 text-[13px] text-[var(--crm-ink-soft)]">
           <span>
