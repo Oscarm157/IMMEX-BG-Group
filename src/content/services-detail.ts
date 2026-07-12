@@ -1403,7 +1403,7 @@ const INFORMATION_TECHNOLOGY_DIAGNOSTIC: DiagnosticData = {
 const INFORMATION_TECHNOLOGY_FLOW: FlowData = {
   es: {
     eyebrow: "Ciclo operativo",
-    title: "De la validación a la visibilidad total de la operación.",
+    title: "De la validación a la visibilidad de la operación.",
     lead: "Cada operación de comercio exterior recorre las mismas etapas. BG Consulting Group interviene donde la información se origina, antes de que los errores alcancen la transmisión o se acumulen en una auditoría.",
     panel: "Flujo de cumplimiento TI · 6 etapas",
     stages: [
@@ -1441,7 +1441,7 @@ const INFORMATION_TECHNOLOGY_FLOW: FlowData = {
   },
   en: {
     eyebrow: "Operational cycle",
-    title: "From validation to full visibility over the operation.",
+    title: "From validation to visibility over the operation.",
     lead: "Every customs operation moves through the same stages. BG Consulting Group steps in where information originates, before errors reach transmission or compound in an audit.",
     panel: "IT compliance flow · 6 stages",
     stages: [
@@ -2621,7 +2621,7 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       bandCaption: "Operación de comercio internacional, de origen a destino",
     },
     {
-      "overview": "Una operación de comercio exterior genera miles de pedimentos, facturas, certificados de origen y registros de movimiento que la autoridad puede revisar años después del despacho. Cuando esa información vive en hojas de cálculo aisladas o se reconcilia a mano, las inconsistencias aparecen tarde, normalmente durante una auditoría. BG Consulting Group implementa tecnología capaz de operar a gran escala y desarrolla herramientas de cumplimiento aduanero que permiten alcanzar un nivel de cumplimiento óptimo o mitigar hallazgos en tiempo real, sobre la operación logística internacional, terrestre y marítima.",
+      "overview": "Una operación de comercio exterior genera miles de pedimentos, facturas, certificados de origen y registros de movimiento que la autoridad puede revisar años después del despacho. Cuando esa información vive en hojas de cálculo aisladas o se reconcilia a mano, las inconsistencias aparecen tarde, normalmente durante una auditoría. BG Consulting Group implementa tecnología capaz de operar a gran escala y desarrolla herramientas de cumplimiento aduanero que permiten alcanzar un cumplimiento sólido o mitigar hallazgos en tiempo real, sobre la operación logística internacional, terrestre y marítima.",
       "pains": [
         {
           "title": "Datos dispersos que no resisten una auditoría",
@@ -3217,7 +3217,7 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       bandCaption: "International trade operations, from origin to destination",
     },
     {
-      "overview": "A cross-border operation produces thousands of customs entries, invoices, certificates of origin and movement records that the authority can review years after release. When that information lives in disconnected spreadsheets and gets reconciled by hand, inconsistencies surface late, usually during an audit. BG Consulting Group deploys information technology capable of managing a large-scale operation and builds customs compliance tools that help reach an optimal level of compliance or mitigate findings in real time, across international, land and maritime logistics.",
+      "overview": "A cross-border operation produces thousands of customs entries, invoices, certificates of origin and movement records that the authority can review years after release. When that information lives in disconnected spreadsheets and gets reconciled by hand, inconsistencies surface late, usually during an audit. BG Consulting Group deploys information technology capable of managing a large-scale operation and builds customs compliance tools that help reach solid compliance or mitigate findings in real time, across international, land and maritime logistics.",
       "pains": [
         {
           "title": "Scattered data that fails an audit",

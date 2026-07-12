@@ -5,9 +5,9 @@ import { MotionSection } from "@/components/MotionSection";
 import { FloatingCTA } from "@/components/FloatingCTA";
 
 const partnershipBG = [
-  { icon: "gavel", title: "Defensa Fiscal", desc: "Protección legal integral ante autoridades fiscales y aduaneras." },
+  { icon: "gavel", title: "Defensa Fiscal", desc: "Defensa legal ante autoridades fiscales y aduaneras." },
   { icon: "verified_user", title: "Compliance Normativo", desc: "Estructuración de protocolos de cumplimiento bajo estándares internacionales." },
-  { icon: "strategy", title: "Estrategia Legal", desc: "Consultoría de alto nivel para blindar la operación corporativa." },
+  { icon: "strategy", title: "Estrategia Legal", desc: "Criterio legal que sostiene la operación ante la autoridad." },
 ];
 
 const partnershipBMS = [
@@ -42,10 +42,10 @@ const frameworkDimensions = [
 ];
 
 const benefits = [
-  { icon: "verified", title: "Cumplimiento normativo sólido", desc: "Cero discrepancias con la autoridad mediante validación jurídica constante." },
+  { icon: "verified", title: "Cumplimiento normativo defendible", desc: "Menos discrepancias con la autoridad, con revisión jurídica constante." },
   { icon: "shield", title: "Reducción de riesgos", desc: "Identificación y mitigación temprana de vulnerabilidades aduaneras." },
   { icon: "settings_suggest", title: "Automatización de procesos", desc: "Escalabilidad operativa sin incrementar la carga administrativa." },
-  { icon: "visibility", title: "Visibilidad operativa", desc: "Control total sobre los tiempos y costos de su operación IMMEX." },
+  { icon: "visibility", title: "Visibilidad operativa", desc: "Visibilidad de los tiempos y costos de tu operación IMMEX." },
 ];
 
 export default function Home() {
@@ -74,11 +74,11 @@ export default function Home() {
             <div className="flex items-center gap-4 md:gap-6">
               <span className="h-px w-10 bg-tertiary-fixed" />
               <span className="text-xs md:text-sm font-bold tracking-[0.3em] uppercase text-tertiary-fixed">
-                Foro IMMEX · Cumplimiento 360°
+                Foro IMMEX · Diagnóstico de cumplimiento
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-[1.05]">
-              Cumplimiento que se <span className="text-tertiary-fixed">implementa</span>, no que se promete.
+              Revisa tu operación IMMEX antes que <span className="text-tertiary-fixed">la autoridad</span>.
             </h1>
             <p className="text-base md:text-lg text-white/85 max-w-xl font-light leading-relaxed">
               Diagnóstico previo para asistentes al Foro IMMEX. Respaldo legal y software especializado en una sola conversación.
@@ -108,7 +108,7 @@ export default function Home() {
                   Capa Legal · BG Consulting
                 </p>
                 <p className="text-white/85 text-sm leading-relaxed">
-                  Defensa fiscal, compliance normativo y estrategia legal para blindar la operación.
+                  Defensa fiscal, compliance normativo y estrategia legal para dar certeza a la operación.
                 </p>
               </div>
               <div>
@@ -139,10 +139,10 @@ export default function Home() {
         <div className="container mx-auto px-8">
           <div className="text-center mb-24 max-w-3xl mx-auto space-y-4">
             <span className="text-tertiary-fixed-dim font-bold tracking-[0.3em] uppercase text-sm">
-              Sinergia Estratégica
+              BG + BMS
             </span>
             <h2 className="text-4xl md:text-6xl font-black tracking-tight text-primary">
-              Combinamos estrategia legal con ejecución tecnológica
+              Asesoría legal y software sobre la misma operación.
             </h2>
           </div>
 
@@ -207,7 +207,7 @@ export default function Home() {
         <div className="bg-primary-container py-8 px-8 border-b border-white/5">
           <div className="container mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <h3 className="text-2xl md:text-3xl font-black text-white tracking-tighter">
-              La Nueva Era del <span className="text-tertiary-fixed">Trade Governance MX</span>
+              Gobierno de comercio exterior, <span className="text-tertiary-fixed">en un solo marco</span>
             </h3>
             <Logo variant="bms" tone="light" size="md" />
           </div>
@@ -219,7 +219,7 @@ export default function Home() {
               BMS Trade Governance Framework
             </h2>
             <p className="text-xl text-white/85 leading-relaxed">
-              Estructura integral para automatizar y controlar la operación de comercio exterior, fortalecida por el respaldo legal y cumplimiento 360°.
+              Estructura para automatizar y controlar la operación de comercio exterior, con respaldo legal.
             </p>
           </div>
 
@@ -273,7 +273,7 @@ export default function Home() {
         <div className="container mx-auto px-6 md:px-8">
           <div className="max-w-3xl mb-16 md:mb-20 space-y-4">
             <span className="text-tertiary-fixed-dim font-bold tracking-[0.3em] uppercase text-xs md:text-sm">
-              Resultados medibles
+              Beneficios
             </span>
             <h2 className="text-3xl md:text-5xl font-black tracking-tight text-primary">
               Cuatro frentes que se cubren al mismo tiempo
@@ -308,7 +308,7 @@ export default function Home() {
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-20">
             <div className="lg:w-1/2 space-y-8">
               <span className="text-tertiary-fixed font-black tracking-widest uppercase text-sm">
-                Oportunidad Exclusiva
+                Diagnóstico para asistentes
               </span>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter text-white">
                 Diagnóstico sin costo para asistentes al foro
@@ -318,7 +318,7 @@ export default function Home() {
               </p>
               <div className="flex items-center gap-4 text-white/50 text-sm">
                 <span className="material-symbols-outlined text-tertiary-fixed">info</span>
-                Disponibilidad limitada según agenda técnica.
+                Sujeto a disponibilidad de agenda.
               </div>
             </div>
 
@@ -344,7 +344,7 @@ export default function Home() {
             <div className="space-y-4">
               <Logo variant="bms" tone="light" size="md" />
               <p className="text-white/85 text-sm leading-relaxed max-w-sm">
-                Software para automatización del Anexo 24, control operativo y trade governance.
+                Software para automatización del Anexo 24, control operativo y reportería.
               </p>
             </div>
             <div className="space-y-4">
@@ -365,7 +365,7 @@ export default function Home() {
           </div>
           <div className="pt-8 flex flex-col md:flex-row justify-between gap-3 text-white/40 text-xs tracking-[0.2em] uppercase">
             <span>© 2026 BG Consulting Group &amp; BMS Software</span>
-            <span>Cumplimiento 360°</span>
+            <span>Cumplimiento y trazabilidad</span>
           </div>
         </div>
       </footer>

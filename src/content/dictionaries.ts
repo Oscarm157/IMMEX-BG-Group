@@ -76,7 +76,7 @@ export const dictionaries = {
       paragraphs: [
         "Nos enfocamos en dar la asesoría y el soporte necesarios para asegurar a nuestros clientes una relación sana con las autoridades.",
         "Contamos con un equipo de profesionales en las distintas áreas del comercio exterior, con conocimiento y experiencia en buen gobierno, mejores prácticas, responsabilidad social y cumplimiento regulatorio.",
-        "El valor que ofrecemos es la posibilidad de blindar las operaciones de comercio exterior: control del riesgo regulatorio y normativo, su revisión permanente y su mitigación, adecuados a la actividad y el entorno de cada cliente.",
+        "El valor que ofrecemos es dar certeza a las operaciones de comercio exterior: control del riesgo regulatorio y normativo, su revisión permanente y su mitigación, adecuados a la actividad y el entorno de cada cliente.",
         "Adaptamos el plan de cumplimiento a los distintos entornos culturales y a la diversidad de cada plantilla, para que el mensaje de cumplimiento se entienda en todos los mercados donde el cliente opera.",
       ],
       teamEyebrow: "Equipo",
@@ -357,7 +357,7 @@ export const dictionaries = {
       paragraphs: [
         "We focus on providing the advice and support needed to ensure our clients a healthy relationship with the authorities.",
         "We have a team of professionals across the different areas of foreign trade, with knowledge and experience in good governance, best practices, social responsibility and regulatory compliance.",
-        "The value we offer is the ability to shield our clients' foreign trade operations: control of regulatory and normative risk, its ongoing review and its mitigation, suited to each client's activity and environment.",
+        "The value we offer is to safeguard our clients' foreign trade operations: control of regulatory and normative risk, its ongoing review and its mitigation, suited to each client's activity and environment.",
         "We adapt the compliance plan to the different cultural environments and to the diversity of each workforce, so the compliance message is understood in every market where the client operates.",
       ],
       teamEyebrow: "Team",
