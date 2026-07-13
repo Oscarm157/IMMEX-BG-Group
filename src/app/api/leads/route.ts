@@ -2,7 +2,7 @@ import Anthropic from '@anthropic-ai/sdk';
 import { and, eq, gt } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { leads, leadComments, leadEvents, ads } from '@/lib/schema';
-import { leadRecipient } from '@/lib/site-config';
+import { leadRecipient, siteConfig } from '@/lib/site-config';
 import { sendLeadEmail } from '@/lib/composio-mail';
 
 const QUAL_KEYS = [
@@ -268,23 +268,38 @@ export async function POST(req: Request) {
     .map(([label, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#888">${label}</td><td>${esc(v)}</td></tr>`)
     .join('');
 
-  const subject = `Nuevo lead (${leadSource}): ${name ?? 'Sin nombre'} (${localeLabel})`;
+  const sourceLabel = leadSource === 'form' ? 'Formulario' : leadSource === 'bot' ? 'Chatbot' : 'Manual';
+  const crmUrl = newLeadId ? `https://${siteConfig.domain}/admin/${newLeadId}` : null;
+  const subject = `Nuevo lead (${sourceLabel}): ${name ?? 'Sin nombre'} · ${localeLabel}`;
   const html = `
-    <h2 style="margin:0 0 16px;font-family:sans-serif">Nuevo lead (${esc(leadSource)})</h2>
-    <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
-      <tr><td style="padding:4px 12px 4px 0;color:#888">Nombre</td><td><strong>${esc(name ?? '—')}</strong></td></tr>
-      <tr><td style="padding:4px 12px 4px 0;color:#888">Email</td><td>${esc(email ?? '—')}</td></tr>
-      <tr><td style="padding:4px 12px 4px 0;color:#888">Teléfono</td><td>${esc(phone ?? '—')}</td></tr>
-      ${qualRows}
-      <tr><td style="padding:4px 12px 4px 0;color:#888">Idioma</td><td>${localeLabel}</td></tr>
-      <tr><td style="padding:4px 12px 4px 0;color:#888">Origen</td><td>${esc(sourceUrl ?? '—')}</td></tr>
-    </table>
-    <hr style="margin:20px 0;border:none;border-top:1px solid #eee"/>
-    <h3 style="margin:0 0 12px;font-family:sans-serif;font-size:14px;color:#333">Transcripción</h3>
-    <div style="font-family:sans-serif;font-size:13px;line-height:1.5;background:#f9f9f9;padding:12px;border-radius:4px">
-      ${transcript}
-    </div>
-  `.trim();
+    <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#f4f5f4;padding:24px 0;font-family:Arial,Helvetica,sans-serif">
+      <tr><td align="center">
+        <table role="presentation" width="560" cellpadding="0" cellspacing="0" style="max-width:560px;width:100%;background:#ffffff;border:1px solid #e6e8e6;border-radius:12px;overflow:hidden">
+          <tr><td style="height:4px;background:#70c48b;line-height:4px;font-size:0">&nbsp;</td></tr>
+          <tr><td style="padding:24px 28px 4px">
+            <div style="font-family:Georgia,'Times New Roman',serif;font-size:15px;color:#14181a;letter-spacing:0.02em">BG Consulting Group</div>
+            <div style="margin-top:16px;font-size:11px;text-transform:uppercase;letter-spacing:0.09em;color:#6b7280">Nuevo lead · ${esc(sourceLabel)}</div>
+            <div style="margin-top:6px;font-family:Georgia,'Times New Roman',serif;font-size:23px;font-weight:bold;color:#14181a">${esc(name ?? 'Sin nombre')}</div>
+            <div style="margin-top:10px;font-size:14px;color:#374151">
+              ${email ? `<a href="mailto:${esc(email)}" style="color:#15805a;text-decoration:none">${esc(email)}</a>` : ''}${email && phone ? ' &middot; ' : ''}${phone ? `<a href="tel:${esc(phone)}" style="color:#15805a;text-decoration:none">${esc(phone)}</a>` : ''}
+            </div>
+          </td></tr>
+          ${qualRows ? `<tr><td style="padding:14px 28px 4px">
+            <table role="presentation" cellpadding="0" cellspacing="0" style="font-size:14px;color:#374151;border-collapse:collapse">${qualRows}</table>
+          </td></tr>` : ''}
+          ${crmUrl ? `<tr><td style="padding:20px 28px 24px">
+            <a href="${crmUrl}" style="display:inline-block;background:#15805a;color:#ffffff;text-decoration:none;font-size:14px;font-weight:bold;padding:12px 22px;border-radius:8px">Abrir en el CRM &rarr;</a>
+          </td></tr>` : ''}
+          ${rawMessages.length ? `<tr><td style="padding:4px 28px 8px">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:0.09em;color:#6b7280;margin-bottom:8px">Conversación</div>
+            <div style="font-size:13px;line-height:1.55;color:#374151;background:#f7f8f7;border:1px solid #eef0ee;padding:14px;border-radius:8px">${transcript}</div>
+          </td></tr>` : ''}
+          <tr><td style="padding:16px 28px 22px;border-top:1px solid #eef0ee">
+            <div style="font-size:12px;color:#9aa0a6">Notificación automática &middot; ${esc(sourceUrl ?? siteConfig.domain)}</div>
+          </td></tr>
+        </table>
+      </td></tr>
+    </table>`.trim();
   await sendLeadEmail({ to: leadRecipient, subject, html });
 
   if (!savedOk) {
