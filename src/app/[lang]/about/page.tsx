@@ -134,7 +134,7 @@ export default async function AboutPage({
         <SectionHeading eyebrow={a.teamEyebrow} title={a.teamTitle} lead={a.teamLead} className="mb-12" />
 
         {/* Socios (dueños) — card destacada */}
-        <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.owners}</span>
+        <h3 className="font-display text-2xl font-medium tracking-[-0.01em] text-chalk sm:text-3xl">{tier.owners}</h3>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {owners.map((m) => (
             <Reveal key={m.name} className="console-panel flex flex-col items-center rounded-[18px] bg-surface-1 p-6 sm:p-7">
