@@ -1102,7 +1102,7 @@ export const GUIAS: Guia[] = [
     seoDescription:
       "Qué es la certificación en materia de IVA e IEPS, cómo funciona el crédito fiscal, las modalidades A, AA y AAA, su fundamento legal y la renovación anual.",
     definicion: [
-      "Desde 2014, la importación temporal bajo IMMEX causa IVA (y, en su caso, IEPS). La certificación en materia de IVA e IEPS es el reconocimiento que otorga el SAT para no desembolsar ese impuesto en cada pedimento: la empresa certificada aplica un crédito equivalente al 100% del IVA, que se compensa contra el propio impuesto que se causaría.",
+      "Desde la reforma fiscal que gravó las importaciones temporales, la mercancía que entra bajo IMMEX causa IVA (y, en su caso, IEPS). La certificación en materia de IVA e IEPS es el reconocimiento que otorga el SAT para no desembolsar ese impuesto en cada pedimento: la empresa certificada aplica un crédito equivalente al 100% del IVA, que se compensa contra el propio impuesto que se causaría.",
       "En la práctica, la certificación evita descapitalizarse. Sin ella, una empresa IMMEX tendría que pagar el IVA de cada importación temporal y esperar a recuperarlo, o garantizarlo con una fianza. Con ella, el impuesto se neutraliza con el crédito mientras la mercancía cumpla su ciclo temporal.",
       "El beneficio viene con obligaciones: la certificación exige sistemas de control (Anexo 30 y Anexo 31), estar al corriente en materia fiscal y renovar en tiempo. Es un estatus que se sostiene con cumplimiento continuo, no un sello que se obtiene una sola vez.",
     ],
