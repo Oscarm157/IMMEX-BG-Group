@@ -2,7 +2,19 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { MessageSquarePlus, X, Send, Check } from "lucide-react";
+import { MessageSquarePlus, X, Send, Check, Mic, MicOff } from "lucide-react";
+
+// Web Speech API: no está en los tipos DOM. Tipado mínimo local.
+type SpeechRecognitionLike = {
+  lang: string;
+  interimResults: boolean;
+  continuous: boolean;
+  start: () => void;
+  stop: () => void;
+  onresult: ((e: { resultIndex: number; results: ArrayLike<{ 0: { transcript: string } }> }) => void) | null;
+  onend: (() => void) | null;
+  onerror: (() => void) | null;
+};
 
 type Pin = {
   id: string;
@@ -121,13 +133,62 @@ export function FeedbackWidget() {
   const [openPin, setOpenPin] = useState<string | null>(null);
   const [toast, setToast] = useState<string | null>(null);
   const [docSize, setDocSize] = useState({ w: 0, h: 0 });
+  const [voiceSupported, setVoiceSupported] = useState(false);
+  const [listening, setListening] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
+  const baseTextRef = useRef("");
 
   const showToast = useCallback((msg: string) => {
     setToast(msg);
     if (toastTimer.current) clearTimeout(toastTimer.current);
     toastTimer.current = setTimeout(() => setToast(null), 2400);
   }, []);
+
+  // Soporte de dictado por voz (Chrome/Edge/Safari reciente; Firefox no).
+  useEffect(() => {
+    const w = window as unknown as { SpeechRecognition?: unknown; webkitSpeechRecognition?: unknown };
+    setVoiceSupported(!!(w.SpeechRecognition || w.webkitSpeechRecognition));
+  }, []);
+
+  const stopListening = useCallback(() => {
+    recognitionRef.current?.stop();
+    setListening(false);
+  }, []);
+
+  const toggleVoice = useCallback(() => {
+    if (listening) {
+      stopListening();
+      return;
+    }
+    const w = window as unknown as {
+      SpeechRecognition?: new () => SpeechRecognitionLike;
+      webkitSpeechRecognition?: new () => SpeechRecognitionLike;
+    };
+    const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
+    if (!Ctor) return;
+    const rec = new Ctor();
+    rec.lang = "es-MX";
+    rec.interimResults = true;
+    rec.continuous = true;
+    rec.onresult = (e) => {
+      let transcript = "";
+      for (let i = 0; i < e.results.length; i++) transcript += e.results[i][0].transcript;
+      const base = baseTextRef.current;
+      setNoteText(base ? `${base} ${transcript}`.trim() : transcript.trim());
+    };
+    rec.onend = () => setListening(false);
+    rec.onerror = () => setListening(false);
+    recognitionRef.current = rec;
+    baseTextRef.current = noteText;
+    rec.start();
+    setListening(true);
+  }, [listening, noteText, stopListening]);
+
+  // Si el editor se cierra (enviar, cerrar, salir del modo), corta el dictado.
+  useEffect(() => {
+    if (!draft && listening) stopListening();
+  }, [draft, listening, stopListening]);
 
   // Lee el token de la URL (?fb=) o de sessionStorage; limpia el query para que no se comparta por error.
   useEffect(() => {
@@ -308,7 +369,7 @@ export function FeedbackWidget() {
 
   if (!ready) return null;
 
-  const editorLeft = Math.min(draft?.screen.left ?? 0, window.innerWidth - 320);
+  const editorLeft = Math.min(draft?.screen.left ?? 0, window.innerWidth - 380);
   const editorTop = Math.min(draft?.screen.top ?? 0, window.innerHeight - 220);
 
   return (
@@ -379,7 +440,7 @@ export function FeedbackWidget() {
       {draft && (
         <div
           data-fb-ui
-          className="fixed z-[9996] w-[300px] rounded-xl border border-line bg-surface-1 p-3 shadow-2xl"
+          className="fixed z-[9996] w-[360px] rounded-xl border border-line bg-surface-1 p-3 shadow-2xl"
           style={{ left: Math.max(12, editorLeft), top: Math.max(12, editorTop) }}
         >
           <div className="mb-2 flex items-center justify-between">
@@ -424,10 +485,28 @@ export function FeedbackWidget() {
               if ((e.metaKey || e.ctrlKey) && e.key === "Enter") submit();
             }}
             placeholder="¿Qué quieres comentar de esta parte?"
-            rows={3}
+            rows={4}
             className="w-full resize-none rounded-lg border border-line bg-ink px-2.5 py-2 text-[13px] text-paper placeholder:text-ash focus:border-accent focus:outline-none"
           />
-          <div className="mt-2 flex justify-end">
+          <div className="mt-2 flex items-center justify-between gap-2">
+            {voiceSupported ? (
+              <button
+                type="button"
+                data-fb-ui
+                onClick={toggleVoice}
+                aria-label={listening ? "Detener dictado" : "Dictar por voz"}
+                className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[13px] font-medium transition ${
+                  listening
+                    ? "animate-pulse border-accent bg-accent/15 text-accent"
+                    : "border-line text-ash hover:text-bone"
+                }`}
+              >
+                {listening ? <MicOff className="size-3.5" /> : <Mic className="size-3.5" />}
+                {listening ? "Escuchando…" : "Dictar"}
+              </button>
+            ) : (
+              <span />
+            )}
             <button
               type="button"
               data-fb-ui
