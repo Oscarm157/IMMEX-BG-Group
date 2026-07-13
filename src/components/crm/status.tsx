@@ -4,13 +4,14 @@ import { avatarClass, initials } from "./avatar";
 
 export { STATUS_ORDER };
 
-// Paleta curada para tema oscuro: tinte suave + texto claro legible (300/400), no -700.
+// Tinte + texto por estado. Las clases crm-badge-* (globals.css) se adaptan a tema
+// claro/oscuro; new/lost usan tokens --crm-* que ya se re-tematizan solos.
 const STATUS_STYLE: Record<LeadStatus, { badge: string; dot: string }> = {
-  new: { badge: "bg-[var(--crm-wine-tint)] text-[var(--crm-wine)] border-[var(--crm-wine-ring)]", dot: "bg-[var(--crm-wine)]" },
-  contacted: { badge: "bg-sky-400/12 text-sky-300 border-sky-400/25", dot: "bg-sky-400" },
-  following_up: { badge: "bg-amber-400/12 text-amber-300 border-amber-400/25", dot: "bg-amber-400" },
-  proposal: { badge: "bg-violet-400/12 text-violet-300 border-violet-400/25", dot: "bg-violet-400" },
-  won: { badge: "bg-emerald-400/12 text-emerald-300 border-emerald-400/25", dot: "bg-emerald-400" },
+  new: { badge: "bg-[var(--crm-wine-tint)] text-[var(--crm-accent-strong)] border-[var(--crm-wine-ring)]", dot: "bg-[var(--crm-wine)]" },
+  contacted: { badge: "crm-badge-sky", dot: "bg-sky-400" },
+  following_up: { badge: "crm-badge-amber", dot: "bg-amber-400" },
+  proposal: { badge: "crm-badge-violet", dot: "bg-violet-400" },
+  won: { badge: "crm-badge-emerald", dot: "bg-emerald-400" },
   lost: { badge: "bg-[var(--crm-surface-2)] text-[var(--crm-ink-mute)] border-[var(--crm-line-strong)]", dot: "bg-[var(--crm-ink-mute)]" },
 };
 
@@ -32,8 +33,8 @@ export function StatusBadge({ status }: { status: LeadStatus }) {
 }
 
 const SOURCE_META: Record<LeadSource, { label: string; cls: string; dot: string }> = {
-  bot: { label: "Chatbot", cls: "bg-violet-400/12 text-violet-300 border-violet-400/22", dot: "bg-violet-400" },
-  form: { label: "Formulario", cls: "bg-teal-400/12 text-teal-300 border-teal-400/22", dot: "bg-teal-400" },
+  bot: { label: "Chatbot", cls: "crm-badge-violet", dot: "bg-violet-400" },
+  form: { label: "Formulario", cls: "crm-badge-teal", dot: "bg-teal-400" },
   manual: { label: "Manual", cls: "bg-[var(--crm-surface-2)] text-[var(--crm-ink-mute)] border-[var(--crm-line-strong)]", dot: "bg-[var(--crm-ink-mute)]" },
 };
 

@@ -81,7 +81,8 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
         email: leadEmail.trim(),
         source: "form",
         locale: lang,
-        service: resultKey ?? "",
+        // Guardar la etiqueta ES legible para el CRM, no el código crudo del resultado.
+        service: resultKey ? (data?.resultTag[resultKey]?.es ?? resultKey) : "",
         message: buildQuizSummary(lang, c.questions, answers),
         sourceUrl: typeof window !== "undefined" ? window.location.href : "",
       };

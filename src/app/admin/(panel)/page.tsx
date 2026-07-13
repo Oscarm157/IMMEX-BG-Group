@@ -5,6 +5,7 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { canViewAllLeads, isReadOnly } from "@/lib/crm-permissions";
 import type { LeadStatus } from "@/lib/schema";
 import { fmtDate } from "@/lib/crm-format";
+import { interesLabel } from "@/lib/crm-interes";
 import { StatusBadge, SourceBadge, OwnerChip, STATUS_META, STATUS_ORDER } from "@/components/crm/status";
 import { NewLeadModal } from "@/components/crm/NewLeadModal";
 import { LeadFilters } from "@/components/crm/LeadFilters";
@@ -210,7 +211,7 @@ export default async function LeadsList({
             {leads.map((lead, i) => {
               const ql = lead.qualification ?? {};
               const owner = lead.assignedTo ? userMap.get(lead.assignedTo) : null;
-              const chips = [ql.service ?? ql.industry, ql.monthlyVolume].filter(Boolean) as string[];
+              const chips = [interesLabel(ql.service ?? ql.industry), ql.monthlyVolume?.trim() || null].filter(Boolean) as string[];
               return (
                 <li key={lead.id} className="crm-fade" style={{ animationDelay: `${Math.min(i, 12) * 24}ms` }}>
                   <Link
@@ -285,6 +286,8 @@ export default async function LeadsList({
                   {leads.map((lead, i) => {
                     const ql = lead.qualification ?? {};
                     const owner = lead.assignedTo ? userMap.get(lead.assignedTo) : null;
+                    const interes = interesLabel(ql.service ?? ql.industry);
+                    const volumen = ql.monthlyVolume?.trim() || null;
                     return (
                       <tr
                         key={lead.id}
@@ -323,8 +326,20 @@ export default async function LeadsList({
                             </span>
                           )}
                         </td>
-                        <td className="crm-td text-[12.5px] text-[var(--crm-ink-soft)]">{ql.service ?? ql.industry ?? "–"}</td>
-                        <td className="crm-td text-[12.5px] text-[var(--crm-ink-soft)]">{ql.monthlyVolume ?? "–"}</td>
+                        <td className="crm-td text-[12.5px] text-[var(--crm-ink-soft)]">
+                          {interes ? (
+                            <span className="block max-w-[180px] truncate" title={interes}>{interes}</span>
+                          ) : (
+                            <span className="text-[var(--crm-ink-faint)]">–</span>
+                          )}
+                        </td>
+                        <td className="crm-td text-[12.5px] text-[var(--crm-ink-soft)]">
+                          {volumen ? (
+                            <span className="block max-w-[150px] truncate" title={volumen}>{volumen}</span>
+                          ) : (
+                            <span className="text-[var(--crm-ink-faint)]">–</span>
+                          )}
+                        </td>
                         <td className="crm-td">
                           <StatusBadge status={lead.status} />
                         </td>
