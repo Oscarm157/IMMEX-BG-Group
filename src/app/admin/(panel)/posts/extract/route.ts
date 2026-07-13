@@ -2,12 +2,26 @@ import { NextRequest, NextResponse } from "next/server";
 import { extractPdf } from "@/lib/posts/extractors/pdf";
 import { extractUrl } from "@/lib/posts/extractors/url";
 import { extractText } from "@/lib/posts/extractors/text";
+import { getCurrentUser } from "@/lib/crm-session";
+import { canManageBlog, canManagePosts } from "@/lib/crm-permissions";
+import { makeRateLimiter } from "@/lib/rate-limit";
 
 export const runtime = "nodejs";
 export const maxDuration = 60;
 
+const MAX_PDF_BYTES = 8 * 1024 * 1024;
+const extractLimiter = makeRateLimiter(60_000, 20);
+
 export async function POST(req: NextRequest) {
   try {
+    const me = await getCurrentUser();
+    if (!me || (!canManageBlog(me.role) && !canManagePosts(me.role))) {
+      return NextResponse.json({ error: "No autorizado." }, { status: 403 });
+    }
+    if (extractLimiter(me.id)) {
+      return NextResponse.json({ error: "Demasiadas solicitudes, intenta en un minuto." }, { status: 429 });
+    }
+
     const contentType = req.headers.get("content-type") ?? "";
 
     if (contentType.includes("multipart/form-data")) {
@@ -18,6 +32,9 @@ export async function POST(req: NextRequest) {
       }
       if (file.type !== "application/pdf" && !file.name.toLowerCase().endsWith(".pdf")) {
         return NextResponse.json({ error: "Solo se acepta PDF." }, { status: 400 });
+      }
+      if (file.size > MAX_PDF_BYTES) {
+        return NextResponse.json({ error: "El PDF es demasiado grande (máx 8 MB)." }, { status: 400 });
       }
       const bytes = Buffer.from(await file.arrayBuffer());
       const text = await extractPdf(bytes);

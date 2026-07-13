@@ -1,9 +1,9 @@
 "use server";
 
-import { cookies } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import { and, eq } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 import { put, del } from "@vercel/blob";
 import { db } from "@/lib/db";
 import {
@@ -23,6 +23,7 @@ import {
 } from "@/lib/crm-auth";
 import { requireUser, requireAdmin, requireLeadAccess } from "@/lib/crm-session";
 import { canViewDashboard, normalizeRole, isReadOnly } from "@/lib/crm-permissions";
+import { makeRateLimiter } from "@/lib/rate-limit";
 import { STATUS_LABELS, STATUS_ORDER } from "@/lib/crm-status";
 import type { ActionResult } from "@/lib/action-result";
 
@@ -40,6 +41,9 @@ async function logEvent(leadId: string, userId: string | null, kind: string, det
 }
 
 // ---- Auth ----
+
+// Anti fuerza-bruta del login: 8 intentos por minuto por IP.
+const loginLimiter = makeRateLimiter(60_000, 8);
 
 async function seedAdminIfNeeded() {
   const email = process.env.CRM_ADMIN_EMAIL;
@@ -60,6 +64,10 @@ export async function login(formData: FormData) {
   await seedAdminIfNeeded();
   const email = String(formData.get("email") ?? "").trim().toLowerCase();
   const password = String(formData.get("password") ?? "");
+
+  const h = await headers();
+  const ip = (h.get("x-forwarded-for") ?? "").split(",")[0].trim() || "unknown";
+  if (loginLimiter(ip)) redirect("/admin/login?error=1");
 
   const rows = await db.select().from(users).where(eq(users.email, email));
   const u = rows[0];
@@ -89,10 +97,25 @@ export async function changePassword(formData: FormData) {
   const me = await requireUser();
   const password = String(formData.get("password") ?? "");
   if (password.length < 8) redirect("/admin/change-password?error=1");
-  await db
+  // Sube sessionVersion para invalidar cualquier sesión abierta con la clave anterior.
+  const updated = await db
     .update(users)
-    .set({ passwordHash: await hashPassword(password), mustChangePassword: false })
-    .where(eq(users.id, me.id));
+    .set({
+      passwordHash: await hashPassword(password),
+      mustChangePassword: false,
+      sessionVersion: sql`${users.sessionVersion} + 1`,
+    })
+    .where(eq(users.id, me.id))
+    .returning({ sessionVersion: users.sessionVersion });
+  // Re-firma la cookie de ESTA sesión con la nueva versión para no auto-desloguearse.
+  const jar = await cookies();
+  jar.set(CRM_COOKIE, await signSession(me.id, Math.floor(Date.now() / 1000), updated[0]?.sessionVersion ?? 0), {
+    httpOnly: true,
+    secure: process.env.PREVIEW_INSECURE_COOKIE !== "1",
+    sameSite: "lax",
+    path: "/",
+    maxAge: 60 * 60 * 24 * 30,
+  });
   redirect("/admin");
 }
 

@@ -8,9 +8,12 @@ import { db } from "@/lib/db";
 import { articles } from "@/lib/schema";
 import { requireUser } from "@/lib/crm-session";
 import { canManageBlog } from "@/lib/crm-permissions";
+import { makeRateLimiter } from "@/lib/rate-limit";
 import { draftFromSource, type ArticleDraft } from "@/lib/blog/draft";
 
 const MAX_COVER_BYTES = 8 * 1024 * 1024;
+// Anti-abuso de la redacción con IA (cara): 10 borradores por minuto por usuario.
+const draftLimiter = makeRateLimiter(60_000, 10);
 
 async function ensureAdmin() {
   const me = await requireUser();
@@ -42,6 +45,7 @@ async function uniqueSlug(base: string, ignoreId?: string): Promise<string> {
 
 export async function draftArticle(formData: FormData) {
   const me = await ensureAdmin();
+  if (draftLimiter(me.id)) redirect("/admin/blog/new?error=rate");
   const source = String(formData.get("source") ?? "").trim();
   if (!source) redirect("/admin/blog/new?error=empty");
   const sourceName = String(formData.get("sourceName") ?? "").trim() || null;

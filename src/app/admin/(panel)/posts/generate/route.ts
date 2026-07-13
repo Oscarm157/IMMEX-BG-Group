@@ -3,18 +3,24 @@ import { generatePosts } from "@/lib/posts/anthropic";
 import { getDirectorProfile } from "@/lib/posts/profiles";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canManagePosts } from "@/lib/crm-permissions";
+import { makeRateLimiter } from "@/lib/rate-limit";
 import type { GenerateRequest, Red } from "@/lib/posts/types";
 
 export const runtime = "nodejs";
 export const maxDuration = 120;
 
 const VALID_NETWORKS: Red[] = ["linkedin", "instagram", "facebook"];
+// Anti-abuso de la llamada a IA (cara): 15 generaciones por minuto por usuario.
+const genLimiter = makeRateLimiter(60_000, 15);
 
 export async function POST(req: NextRequest) {
   try {
     const me = await getCurrentUser();
     if (!me || !canManagePosts(me.role)) {
       return NextResponse.json({ error: "No autorizado." }, { status: 403 });
+    }
+    if (genLimiter(me.id)) {
+      return NextResponse.json({ error: "Demasiadas generaciones seguidas, espera un minuto." }, { status: 429 });
     }
     if (!process.env.ANTHROPIC_API_KEY) {
       return NextResponse.json({ error: "Falta ANTHROPIC_API_KEY en el entorno." }, { status: 500 });
