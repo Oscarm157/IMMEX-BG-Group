@@ -121,7 +121,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ lang: 
       </Reveal>
 
       <Reveal delay={0.12} className="mt-10">
-        <MediaFrame src={a.coverUrl ?? undefined} ratio="16/9" caption={a.category ?? "Noticia"} />
+        <MediaFrame src={a.coverUrl ?? undefined} ratio="16/9" caption={a.category ?? "Noticia"} tint={false} />
       </Reveal>
 
       {l.body && (

@@ -27,6 +27,7 @@ export function MediaFrame({
   overlay = false,
   panel = true,
   enableMotion = true,
+  tint = true,
   className = "",
 }: {
   src?: string;
@@ -36,6 +37,7 @@ export function MediaFrame({
   overlay?: boolean;
   panel?: boolean;
   enableMotion?: boolean;
+  tint?: boolean;
   className?: string;
 }) {
   const reduce = useReducedMotion();
@@ -53,7 +55,11 @@ export function MediaFrame({
           src={src}
           alt={alt}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover grayscale-[0.35] contrast-[1.04] brightness-[0.9]"
+          className={
+            tint
+              ? "absolute inset-0 h-full w-full object-cover grayscale-[0.35] contrast-[1.04] brightness-[0.9]"
+              : "absolute inset-0 h-full w-full object-cover"
+          }
           style={reduce || !enableMotion ? undefined : { scale }}
         />
       ) : (
@@ -65,7 +71,7 @@ export function MediaFrame({
         </div>
       )}
 
-      {src && (
+      {src && tint && (
         <div aria-hidden className="pointer-events-none absolute inset-0 bg-accent/10 mix-blend-soft-light" />
       )}
       {overlay && (

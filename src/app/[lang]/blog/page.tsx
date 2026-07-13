@@ -63,6 +63,7 @@ export default async function BlogIndex({ params }: { params: Promise<{ lang: st
                   src={featured.coverUrl ?? undefined}
                   ratio="16/9"
                   caption={featured.category ?? t.eyebrow}
+                  tint={false}
                 />
                 <div>
                   <span className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-accent">
@@ -87,7 +88,7 @@ export default async function BlogIndex({ params }: { params: Promise<{ lang: st
                 return (
                   <Reveal key={a.id} delay={Math.min(i, 5) * 0.05}>
                     <Link href={`/${lang}/blog/${a.slug}`} className="group flex flex-col gap-4">
-                      <MediaFrame src={a.coverUrl ?? undefined} ratio="3/2" caption={a.category ?? t.eyebrow} />
+                      <MediaFrame src={a.coverUrl ?? undefined} ratio="3/2" caption={a.category ?? t.eyebrow} tint={false} />
                       <div>
                         <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-accent">
                           {[a.category, fmtArticleDate(a, lang as Locale)].filter(Boolean).join(" · ")}
