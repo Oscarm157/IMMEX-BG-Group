@@ -172,8 +172,9 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
           </div>
         </div>
 
-        {/* Property rail: calificación key/value editable + procedencia */}
-        <div className="lg:sticky lg:top-[76px] lg:self-start">
+        {/* Property rail: calificación key/value editable + procedencia.
+            Scroll interno para que el rail no estire el alto de la página. */}
+        <div className="crm-scroll lg:sticky lg:top-[76px] lg:self-start lg:max-h-[calc(100vh-92px)] lg:overflow-y-auto">
           <div className="crm-card crm-fade p-5" style={{ animationDelay: "120ms" }}>
             <LeadDetailsForm
               action={saveDetails}

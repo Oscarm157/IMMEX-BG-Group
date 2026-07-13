@@ -47,7 +47,7 @@ export function LeadFeed({
 }) {
   const hasTranscript = Array.isArray(transcript) && transcript.length > 0;
   return (
-    <Tabs defaultValue="activity" className="gap-0">
+    <Tabs defaultValue="notes" className="gap-0">
       <TabsList variant="line" className="h-auto w-full justify-start gap-5 rounded-none border-b border-[var(--crm-line)] px-0 pb-2.5">
         <TabsTrigger value="activity" className="flex-none px-0 text-[13.5px]">
           Actividad <Count n={events.length} />
