@@ -611,3 +611,9 @@ html[data-crm-theme="light"] .crm-root .crm-badge-teal    { background: rgb(13 1
 .crm-scroll::-webkit-scrollbar-thumb:hover {
   background: var(--crm-ink-faint);
 }
+
+/* Logo del panel según tema: navy (letras oscuras) en claro, blanco en oscuro.
+   Default (sin atributo) = tema oscuro → se muestra el blanco. */
+.crm-logo-navy { display: none; }
+html[data-crm-theme="light"] .crm-logo-white { display: none; }
+html[data-crm-theme="light"] .crm-logo-navy { display: block; }

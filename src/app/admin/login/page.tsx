@@ -20,7 +20,15 @@ export default async function CrmLogin({
             width={189}
             height={60}
             priority
-            className="mx-auto h-[46px] w-auto"
+            className="crm-logo-white mx-auto h-[46px] w-auto"
+          />
+          <Image
+            src="/BG_Logotipo.png"
+            alt="BG Consulting Group"
+            width={189}
+            height={60}
+            priority
+            className="crm-logo-navy mx-auto h-[46px] w-auto"
           />
           <h1 className="mt-5 font-semibold text-[26px] leading-tight tracking-tight text-[var(--crm-ink)]">
             Acceso al panel

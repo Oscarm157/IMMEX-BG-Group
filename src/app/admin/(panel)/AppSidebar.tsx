@@ -88,12 +88,15 @@ export function AppSidebar({
           {collapsed ? (
             <Image src="/bgg-mark.png" alt="BG Consulting Group" width={54} height={38} className="h-[38px] w-auto shrink-0" priority />
           ) : (
-            <Image src="/bgg-logo-dark.png" alt="BG Consulting Group" width={170} height={54} className="h-[50px] w-auto" priority />
+            <>
+              <Image src="/bgg-logo-dark.png" alt="BG Consulting Group" width={170} height={54} className="crm-logo-white h-[50px] w-auto" priority />
+              <Image src="/BG_Logotipo.png" alt="BG Consulting Group" width={170} height={54} className="crm-logo-navy h-[50px] w-auto" priority />
+            </>
           )}
         </Link>
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="crm-scroll">
         {groups.map((g) => (
           <SidebarGroup key={g.label}>
             <SidebarGroupLabel>{g.label}</SidebarGroupLabel>
