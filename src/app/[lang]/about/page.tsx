@@ -105,7 +105,7 @@ export default async function AboutPage({
       {/* Banda visual: oficinas */}
       <section className="relative border-y border-line-soft">
         <MediaFrame
-          src="/img/gen/offices.webp"
+          src="/oficinas__.webp"
           ratio="21/9"
           panel={false}
           caption="Oficinas Tijuana y San Diego"
