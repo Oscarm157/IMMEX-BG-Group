@@ -10,7 +10,7 @@ const ARTICLES = [
   {
     slug: "manifestacion-de-valor-electronica-obligatoria",
     category: "Aduanas",
-    cover: "/img/blog/manifestacion-de-valor-electronica-obligatoria.png",
+    cover: "/img/blog/manifestacion-de-valor-electronica-obligatoria.webp",
     sourceName: "Comunicado conjunto SAT-ANAM 16-2026",
     sourceUrl: "https://www.anam.gob.mx/comunicado-prensa-conjunto-16-2026/",
     sourceDate: "02/06/2026",
@@ -58,7 +58,7 @@ The change brings forward the point at which the value information must be compl
   {
     slug: "decreto-immex-restriccion-calzado",
     category: "IMMEX",
-    cover: "/img/blog/decreto-immex-restriccion-calzado.png",
+    cover: "/img/blog/decreto-immex-restriccion-calzado.webp",
     sourceName: "Diario Oficial de la Federación",
     sourceUrl: "https://www.dof.gob.mx",
     sourceDate: "28/08/2025",
@@ -100,7 +100,7 @@ If a program included finished footwear among its temporary operations, that rou
   {
     slug: "certificacion-iva-ieps-renovacion",
     category: "Fiscal",
-    cover: "/img/blog/certificacion-iva-ieps-renovacion.png",
+    cover: "/img/blog/certificacion-iva-ieps-renovacion.webp",
     sourceName: null,
     sourceUrl: null,
     sourceDate: null,
@@ -142,7 +142,7 @@ If the certification is not renewed on time or the registration is cancelled, th
   {
     slug: "reglas-de-origen-tmec-cf28",
     category: "T-MEC",
-    cover: "/img/blog/reglas-de-origen-tmec-cf28.png",
+    cover: "/img/blog/reglas-de-origen-tmec-cf28.webp",
     sourceName: "U.S. Customs and Border Protection",
     sourceUrl: "https://www.cbp.gov/document/forms/cbp-form-28-request-information",
     sourceDate: null,
