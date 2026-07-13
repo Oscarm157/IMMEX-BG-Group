@@ -28,7 +28,7 @@ export function NotifyEmailsForm({ emails }: { emails: string[] }) {
     >
       <div>
         <label className="mb-1.5 block text-[12.5px] font-medium text-[var(--crm-ink)]" htmlFor="s-emails">
-          Correos que reciben los leads
+          Correo general que recibe los leads
         </label>
         <textarea
           id="s-emails"
@@ -38,9 +38,11 @@ export function NotifyEmailsForm({ emails }: { emails: string[] }) {
           className="crm-textarea min-h-[110px] resize-y"
           placeholder="contacto@bgc.mx"
         />
-        <p className="mt-1 text-[11.5px] text-[var(--crm-ink-mute)]">
-          Un correo por línea, o separados por coma. Cada dirección recibe una notificación por cada lead nuevo.
-          Si lo dejas vacío, cae al destinatario por defecto.
+        <p className="mt-1 text-[11.5px] leading-relaxed text-[var(--crm-ink-mute)]">
+          Un correo por línea, o separados por coma. Cada lead nuevo se avisa siempre a estos correos.
+          Si el reparto (abajo) asignó el lead a un agente, también le llega a ese agente, sin duplicar.
+          Deja al menos uno: es el destinatario general y no se puede quedar vacío, si no, un lead sin agente
+          asignado no avisaría a nadie.
         </p>
       </div>
 

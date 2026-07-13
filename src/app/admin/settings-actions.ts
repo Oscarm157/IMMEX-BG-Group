@@ -17,6 +17,10 @@ export async function updateLeadNotifyEmails(formData: FormData): Promise<{ erro
     .map((s) => s.trim())
     .filter(Boolean);
 
+  if (emails.length === 0) {
+    return { error: "Deja al menos un correo general. Es el destinatario que siempre recibe los avisos." };
+  }
+
   const invalid = emails.filter((e) => !isValidEmail(e));
   if (invalid.length > 0) {
     return { error: `Estos correos no son válidos: ${invalid.join(", ")}` };
