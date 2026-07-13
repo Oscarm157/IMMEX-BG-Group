@@ -156,14 +156,18 @@ export function ChatWidget() {
   const [panelStyle, setPanelStyle] = useState<React.CSSProperties>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const proactiveShownRef = useRef(false);
 
   useEffect(() => {
     setLocale(window.location.pathname.startsWith('/en') ? 'en' : 'es');
   }, [setLocale]);
 
   useEffect(() => {
-    if (isOpen) return;
-    const t = setTimeout(() => setShowProactiveBubble(true), 5000);
+    if (isOpen || proactiveShownRef.current) return;
+    const t = setTimeout(() => {
+      proactiveShownRef.current = true;
+      setShowProactiveBubble(true);
+    }, 5000);
     return () => clearTimeout(t);
   }, [isOpen, setShowProactiveBubble]);
 
@@ -216,8 +220,7 @@ export function ChatWidget() {
   };
 
   const proactiveText = locale === 'es' ? '¿Dudas con su operación aduanal? Pregúnteme aquí.' : 'Questions about your customs operation? Ask me here.';
-  const launcherLabel = locale === 'es' ? 'Pregúntele a BG' : 'Ask BG';
-  const launcherSub = locale === 'es' ? 'Comercio exterior y aduanas' : 'Foreign trade and customs';
+  const launcherLabel = locale === 'es' ? 'Consulte con un asesor' : 'Talk to an advisor';
   const suggestions = locale === 'es' ? ES_SUGGESTIONS : EN_SUGGESTIONS;
   const canSend = Boolean(input.trim()) && !isStreaming;
 
@@ -411,13 +414,7 @@ export function ChatWidget() {
               aria-label={locale === 'es' ? 'Abrir chat' : 'Open chat'}
             >
               <Monogram className="size-9 text-[13px]" />
-              <span className="hidden text-left leading-tight md:block">
-                <span className="block text-[13px] font-medium tracking-tight text-chalk">{launcherLabel}</span>
-                <span className="mt-0.5 flex items-center gap-1.5 text-[11px] text-smoke">
-                  <LivePulse />
-                  {launcherSub}
-                </span>
-              </span>
+              <span className="hidden pr-1 text-[13px] font-medium tracking-tight text-chalk md:block">{launcherLabel}</span>
             </motion.button>
           </motion.div>
         )}
