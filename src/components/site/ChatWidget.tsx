@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { AnimatePresence, motion } from 'motion/react';
 import { X, ArrowUp, ArrowRight } from 'lucide-react';
@@ -19,16 +20,16 @@ const QUAL_STEPS: { key: keyof Qualification; en: string; es: string }[] = [
 ];
 
 const EN_SUGGESTIONS = [
-  'What is tariff classification?',
-  'How do I clear goods into the US?',
-  'What is Annex 24?',
-  'Do you handle IMMEX?',
+  'I need to classify my goods',
+  'I want to import under IMMEX',
+  'I have a customs problem',
+  'I need an advisor for my operation',
 ];
 const ES_SUGGESTIONS = [
-  '¿Qué es la fracción arancelaria?',
-  '¿Cómo cruzo mercancía a EUA?',
-  '¿Qué es el Anexo 24?',
-  '¿Manejan IMMEX?',
+  'Necesito clasificar mi mercancía',
+  'Quiero importar bajo IMMEX',
+  'Tengo un problema en la aduana',
+  'Necesito un asesor para mi operación',
 ];
 
 // Monograma de la firma. Cuadro mint con las iniciales reales de BG; da identidad
@@ -147,8 +148,8 @@ function MessageBubble({ role, content, streaming = false }: Pick<Message, 'role
 export function ChatWidget() {
   const {
     isOpen, openChat, closeChat, messages, isTyping, isStreaming, leadSaved,
-    qualification, suggestedReplies, showProactiveBubble, dismissBubble, locale,
-    setLocale, setShowProactiveBubble, sendMessage, sendNudge,
+    qualification, suggestedReplies, locale,
+    setLocale, sendMessage, sendNudge,
   } = useChatStore();
 
   const pathname = usePathname();
@@ -156,20 +157,10 @@ export function ChatWidget() {
   const [panelStyle, setPanelStyle] = useState<React.CSSProperties>({});
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const proactiveShownRef = useRef(false);
 
   useEffect(() => {
     setLocale(window.location.pathname.startsWith('/en') ? 'en' : 'es');
   }, [setLocale]);
-
-  useEffect(() => {
-    if (isOpen || proactiveShownRef.current) return;
-    const t = setTimeout(() => {
-      proactiveShownRef.current = true;
-      setShowProactiveBubble(true);
-    }, 5000);
-    return () => clearTimeout(t);
-  }, [isOpen, setShowProactiveBubble]);
 
   useEffect(() => {
     const vv = window.visualViewport;
@@ -219,7 +210,6 @@ export function ChatWidget() {
     }
   };
 
-  const proactiveText = locale === 'es' ? '¿Dudas con su operación aduanal? Pregúnteme aquí.' : 'Questions about your customs operation? Ask me here.';
   const launcherLabel = locale === 'es' ? 'Consulte con un asesor' : 'Talk to an advisor';
   const suggestions = locale === 'es' ? ES_SUGGESTIONS : EN_SUGGESTIONS;
   const canSend = Boolean(input.trim()) && !isStreaming;
@@ -285,7 +275,7 @@ export function ChatWidget() {
                   <div className="space-y-3">
                     <Monogram className="size-10 text-sm" />
                     <p className="text-[17px] font-medium leading-snug tracking-tight text-chalk">
-                      {locale === 'es' ? 'Buen día. ¿En qué operación puede orientarle la firma?' : 'Good day. What operation can the firm help you with?'}
+                      {locale === 'es' ? '¿Qué necesita resolver en su operación?' : 'What do you need to resolve in your operation?'}
                     </p>
                     <p className="text-[13.5px] leading-relaxed text-bone">
                       {locale === 'es'
@@ -374,49 +364,23 @@ export function ChatWidget() {
         )}
       </AnimatePresence>
 
-      {/* Launcher: pill con identidad en desktop, monograma en móvil. La burbuja
-          proactiva se ancla al launcher en vez de flotar suelta. */}
+      {/* Launcher: pill fijo con el isotipo de BG. Un solo elemento, sin burbuja. */}
       <AnimatePresence>
         {!isOpen && (
-          <motion.div
+          <motion.button
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 12, scale: 0.92 }}
             transition={{ delay: 0.8, duration: 0.5, ease: editorialEase }}
-            className="fixed bottom-[88px] right-5 z-50 flex flex-col items-end gap-2.5 md:bottom-6 md:right-8"
+            onClick={() => openChat()}
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
+            className="signal-glow fixed bottom-[88px] right-5 z-50 flex items-center gap-2.5 rounded-full border border-line bg-surface-2 py-2 pl-3 pr-4 md:bottom-6 md:right-8"
+            aria-label={locale === 'es' ? 'Abrir chat' : 'Open chat'}
           >
-            <AnimatePresence>
-              {showProactiveBubble && (
-                <motion.div
-                  initial={{ opacity: 0, y: 8, scale: 0.95 }}
-                  animate={{ opacity: 1, y: 0, scale: 1 }}
-                  exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                  transition={{ duration: 0.28, ease: editorialEase }}
-                  className="console-panel flex max-w-[240px] items-start gap-2 rounded-xl rounded-br-sm bg-surface-2 p-3"
-                >
-                  <p className="flex-1 text-[13px] leading-snug text-bone">{proactiveText}</p>
-                  <button
-                    onClick={dismissBubble}
-                    className="mt-0.5 shrink-0 text-ash transition-colors hover:text-chalk"
-                    aria-label={locale === 'es' ? 'Cerrar' : 'Dismiss'}
-                  >
-                    <X className="size-3.5" />
-                  </button>
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <motion.button
-              onClick={() => { openChat(); dismissBubble(); }}
-              whileHover={{ scale: 1.03 }}
-              whileTap={{ scale: 0.97 }}
-              className="signal-glow flex items-center gap-2.5 rounded-full border border-line bg-surface-2 py-2 pl-2 pr-3 md:pr-4"
-              aria-label={locale === 'es' ? 'Abrir chat' : 'Open chat'}
-            >
-              <Monogram className="size-9 text-[13px]" />
-              <span className="hidden pr-1 text-[13px] font-medium tracking-tight text-chalk md:block">{launcherLabel}</span>
-            </motion.button>
-          </motion.div>
+            <Image src="/bgg-mark.png" alt="" width={54} height={38} className="h-7 w-auto shrink-0" />
+            <span className="hidden pr-0.5 text-[13px] font-medium tracking-tight text-chalk md:block">{launcherLabel}</span>
+          </motion.button>
         )}
       </AnimatePresence>
     </>
