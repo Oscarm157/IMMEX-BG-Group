@@ -137,22 +137,22 @@ export default async function AboutPage({
         <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.owners}</span>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {owners.map((m) => (
-            <Reveal key={m.name} className="console-panel flex items-center gap-6 rounded-[16px] bg-surface-1 p-6 sm:p-7">
+            <Reveal key={m.name} className="console-panel group relative overflow-hidden rounded-[18px] bg-surface-1">
               {m.photo ? (
                 <Image
                   src={m.photo}
                   alt={m.name}
-                  width={320}
-                  height={400}
-                  className="h-[168px] w-[136px] shrink-0 rounded-[14px] object-cover object-top sm:h-[184px] sm:w-[148px]"
+                  width={640}
+                  height={760}
+                  className="aspect-square w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
                 />
               ) : (
-                <span className="flex h-[168px] w-[136px] shrink-0 items-center justify-center rounded-[14px] border border-accent/30 bg-accent/10 font-display text-4xl font-medium text-accent sm:h-[184px] sm:w-[148px]">
+                <span className="flex aspect-square w-full items-center justify-center bg-accent/10 font-display text-8xl font-medium text-accent">
                   {initials(m.name)}
                 </span>
               )}
-              <div>
-                <span className="block font-display text-2xl font-medium leading-tight text-chalk">{m.name}</span>
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-6 pb-6 pt-24 sm:px-7 sm:pb-7">
+                <span className="block font-display text-3xl font-medium leading-tight text-chalk">{m.name}</span>
                 <span className="mt-1.5 block font-mono text-[12px] uppercase tracking-[0.12em] text-accent">{role(m)}</span>
               </div>
             </Reveal>
