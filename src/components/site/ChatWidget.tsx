@@ -32,17 +32,10 @@ const ES_SUGGESTIONS = [
   'Necesito un asesor para mi operación',
 ];
 
-// Monograma de la firma. Cuadro mint con las iniciales reales de BG; da identidad
-// al launcher, al header y a la bienvenida sin un asset de logo cuadrado.
-function Monogram({ className = 'size-9 text-[13px]' }: { className?: string }) {
-  return (
-    <span
-      aria-hidden
-      className={`grid shrink-0 place-items-center rounded-lg bg-accent font-semibold tracking-tight text-on-accent ${className}`}
-    >
-      BG
-    </span>
-  );
+// Isotipo real de BG (hexágono navy + chevron mint). Da identidad al header y a
+// la bienvenida, en línea con el launcher.
+function Mark({ className = 'h-7' }: { className?: string }) {
+  return <Image src="/bgg-mark.png" alt="" width={54} height={38} className={`w-auto shrink-0 ${className}`} />;
 }
 
 function LivePulse() {
@@ -239,7 +232,7 @@ export function ChatWidget() {
             {/* Header con identidad de la firma */}
             <div className="flex shrink-0 items-center justify-between gap-3 border-b border-line bg-surface-2 px-4 py-3.5">
               <div className="flex items-center gap-3">
-                <Monogram className="size-9 text-[13px]" />
+                <Mark className="h-7" />
                 <div className="leading-tight">
                   <p className="text-sm font-medium tracking-tight text-chalk">BG Consulting Group</p>
                   <p className="mt-1 flex items-center gap-1.5 text-[12px] text-smoke">
@@ -273,7 +266,7 @@ export function ChatWidget() {
                   className="space-y-5"
                 >
                   <div className="space-y-3">
-                    <Monogram className="size-10 text-sm" />
+                    <Mark className="h-8" />
                     <p className="text-[17px] font-medium leading-snug tracking-tight text-chalk">
                       {locale === 'es' ? '¿Qué necesita resolver en su operación?' : 'What do you need to resolve in your operation?'}
                     </p>
