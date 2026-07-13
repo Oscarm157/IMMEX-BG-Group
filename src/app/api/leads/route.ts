@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { and, eq, gt } from 'drizzle-orm';
 import { db } from '@/lib/db';
-import { leads, leadComments, leadEvents, ads } from '@/lib/schema';
+import { leads, leadComments, leadEvents, ads, users } from '@/lib/schema';
 import { leadRecipient, siteConfig } from '@/lib/site-config';
 import { sendLeadEmail } from '@/lib/composio-mail';
 import { getLeadNotifyEmails } from '@/lib/settings';
@@ -315,7 +315,13 @@ export async function POST(req: Request) {
       </td></tr>
     </table>`.trim();
   const recipients = await getLeadNotifyEmails();
-  await sendLeadEmail({ to: recipients.length ? recipients : [leadRecipient], subject, html });
+  const to = new Set((recipients.length ? recipients : [leadRecipient]).map((e) => e.toLowerCase()));
+  // Si la rotación asignó el lead a un agente, también se le avisa a su correo (deduplicado).
+  if (assignedTo) {
+    const agent = await db.select({ email: users.email }).from(users).where(eq(users.id, assignedTo));
+    if (agent[0]?.email) to.add(agent[0].email.toLowerCase());
+  }
+  await sendLeadEmail({ to: [...to], subject, html });
 
   if (!savedOk) {
     return Response.json({ ok: false, error: 'save_failed' }, { status: 500 });
