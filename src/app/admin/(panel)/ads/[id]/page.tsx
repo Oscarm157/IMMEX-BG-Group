@@ -4,8 +4,9 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { canManageAds, canViewAds } from "@/lib/crm-permissions";
 import { getAdById, leadsForAd } from "@/lib/ads-data";
 import { adMetrics } from "@/lib/ads-metrics";
-import { updateAd, deleteAd } from "@/app/admin/ads-actions";
+import { updateAd } from "@/app/admin/ads-actions";
 import { AdForm } from "@/components/crm/ads/AdForm";
+import { DeleteAdButton } from "@/components/crm/DeleteAdButton";
 import { StatusBadge, SourceBadge } from "@/components/crm/status";
 import { SectionHeader } from "@/components/crm/PageShell";
 import { fmtDate } from "@/lib/crm-format";
@@ -53,11 +54,7 @@ export default async function AdDetail({ params }: { params: Promise<{ id: strin
         >
           <span aria-hidden>&larr;</span> Campañas
         </Link>
-        {editable && (
-          <form action={deleteAd.bind(null, ad.id)}>
-            <button className="crm-btn crm-btn-ghost crm-btn-sm">Borrar</button>
-          </form>
-        )}
+        {editable && <DeleteAdButton id={ad.id} />}
       </div>
 
       <div className="crm-fade mb-6">
@@ -119,7 +116,7 @@ export default async function AdDetail({ params }: { params: Promise<{ id: strin
         <SectionHeader title={`Leads atribuidos (${leads.length})`} className="mb-3" />
         {leads.length === 0 ? (
           <div className="crm-card p-6 text-[13px] leading-relaxed text-[var(--crm-ink-mute)]">
-            Aún no hay leads atribuidos. Se enlazan por UTM (utm_campaign = {ad.utmCampaign || "sin código"}) o manualmente desde el lead.
+            Aún no hay leads atribuidos. Se enlazan por UTM (utm_campaign = {ad.utmCampaign || "sin código"}) al momento de crearse el lead.
           </div>
         ) : (
           <div className="crm-card overflow-hidden">

@@ -11,8 +11,10 @@ export default async function BoardPage() {
   if (!me) redirect("/admin/login");
 
   const viewer = { id: me.id, role: me.role };
+  // El board no pagina: trae todos los leads del scope. Cap alto de guardarraíl para
+  // no quedarse sin tarjetas en silencio si el pipeline crece.
   const [{ rows }, usersList] = await Promise.all([
-    getLeads(viewer, { pageSize: 500 }),
+    getLeads(viewer, { pageSize: 5000 }),
     getUsersBasic(),
   ]);
 

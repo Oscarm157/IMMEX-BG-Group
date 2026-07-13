@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { users, type UserRole } from "@/lib/schema";
 import { hashPassword } from "@/lib/crm-auth";
 import { requireAdmin } from "@/lib/crm-session";
+import { isValidEmail } from "@/lib/validate";
 
 const ROLES: UserRole[] = ["admin", "agent", "viewer"];
 
@@ -27,6 +28,7 @@ export async function createUser(
   const roleRaw = String(formData.get("role") ?? "agent");
   const role: UserRole = ROLES.includes(roleRaw as UserRole) ? (roleRaw as UserRole) : "agent";
   if (!name || !email) return { error: "Nombre y correo son obligatorios." };
+  if (!isValidEmail(email)) return { error: "El correo no tiene un formato válido." };
 
   const existing = await db.select({ id: users.id }).from(users).where(eq(users.email, email));
   if (existing.length > 0) return { error: "Ya existe un usuario con ese correo." };
@@ -42,7 +44,7 @@ export async function createUser(
       mustChangePassword: true,
     });
   } catch {
-    return { error: "A user with that email already exists." };
+    return { error: "Ya existe un usuario con ese correo." };
   }
   revalidatePath("/admin/users");
   return { tempPassword };
@@ -56,6 +58,7 @@ export async function updateUser(
   const name = data.name.trim();
   const email = data.email.trim().toLowerCase();
   if (!name || !email) return { error: "Nombre y correo son obligatorios." };
+  if (!isValidEmail(email)) return { error: "El correo no tiene un formato válido." };
   if (!ROLES.includes(data.role)) return { error: "Rol inválido." };
   const role = data.role;
 

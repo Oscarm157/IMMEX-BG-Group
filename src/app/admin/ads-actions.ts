@@ -19,7 +19,10 @@ async function ensureAds() {
 
 const int = (v: FormDataEntryValue | null): number | null => {
   const d = String(v ?? "").replace(/[^\d]/g, "");
-  return d === "" ? null : parseInt(d, 10);
+  if (d === "") return null;
+  const n = parseInt(d, 10);
+  // Acota al rango de integer de Postgres para no reventar el insert/update.
+  return Number.isFinite(n) ? Math.min(n, 2_000_000_000) : null;
 };
 const str = (v: FormDataEntryValue | null): string | null => {
   const t = String(v ?? "").trim();

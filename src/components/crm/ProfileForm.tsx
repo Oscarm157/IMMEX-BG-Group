@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { Check, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
+import { toast } from "sonner";
 import { updateProfile } from "@/app/admin/actions";
 
 const labelCls = "mb-1.5 block text-[12.5px] font-medium text-[var(--crm-ink)]";
@@ -17,7 +18,11 @@ export function ProfileForm({ name, email }: { name: string; email: string }) {
       action={(fd) =>
         startTransition(async () => {
           setSaved(false);
-          await updateProfile(fd);
+          const r = await updateProfile(fd);
+          if (!r.ok) {
+            toast.error(r.error);
+            return;
+          }
           setCurrent(String(fd.get("name") ?? "").trim() || current);
           setSaved(true);
           setTimeout(() => setSaved(false), 2200);

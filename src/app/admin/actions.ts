@@ -119,12 +119,17 @@ export async function changePassword(formData: FormData) {
   redirect("/admin");
 }
 
-export async function updateProfile(formData: FormData) {
+export async function updateProfile(formData: FormData): Promise<ActionResult> {
   const me = await requireUser();
   const name = String(formData.get("name") ?? "").trim();
-  if (!name) return;
-  await db.update(users).set({ name }).where(eq(users.id, me.id));
+  if (!name) return { ok: false, error: "El nombre no puede quedar vacío." };
+  try {
+    await db.update(users).set({ name }).where(eq(users.id, me.id));
+  } catch {
+    return { ok: false, error: "No se pudo guardar. Intenta de nuevo." };
+  }
   revalidatePath("/admin");
+  return { ok: true };
 }
 
 // ---- Leads ----

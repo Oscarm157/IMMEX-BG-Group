@@ -121,7 +121,7 @@ export async function getDashboardMetrics(
   const bySource = sourceRows.map((r) => ({ source: r.source, count: r.c }));
 
   // ---- byService: qualification->>'service', fallback 'industry', null => "Sin clasificar" ----
-  const serviceExpr = sql<string>`coalesce(nullif(${leads.qualification} ->> 'service', ''), nullif(${leads.qualification} ->> 'industry', ''), 'Uncategorized')`;
+  const serviceExpr = sql<string>`coalesce(nullif(${leads.qualification} ->> 'service', ''), nullif(${leads.qualification} ->> 'industry', ''), 'Sin clasificar')`;
   const serviceRows = await db
     .select({ label: serviceExpr, c: count() })
     .from(leads)
@@ -164,7 +164,7 @@ export async function getDashboardMetrics(
     const k = keyOf(id);
     let a = agents.get(k);
     if (!a) {
-      a = { id, name: id ? name ?? "" : "Unassigned", leads: 0, won: 0, lost: 0, value: 0 };
+      a = { id, name: id ? name ?? "" : "Sin asignar", leads: 0, won: 0, lost: 0, value: 0 };
       agents.set(k, a);
     }
     return a;
