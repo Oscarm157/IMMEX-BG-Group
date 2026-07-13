@@ -40,3 +40,10 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .env*.local
+
+# local tooling / junk (no versionar)
+.claude/
+_junk/
+/pnpm-lock.yaml
+/pnpm-workspace.yaml
+scripts/_*.mjs
