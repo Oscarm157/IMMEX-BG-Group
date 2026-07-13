@@ -5,6 +5,7 @@ import { getDictionary, isLocale } from "@/content/dictionaries";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
 import { SectionHeading } from "@/components/site/SectionHeading";
+import { GovernanceFramework } from "@/components/site/GovernanceFramework";
 import { Faq } from "@/components/site/Faq";
 import { ContactCta } from "@/components/site/ContactCta";
 
@@ -130,6 +131,9 @@ export default async function SoftwarePage({
         </div>
         <p className="mt-8 max-w-xl text-[14px] leading-relaxed text-ash">{s.editionsNote}</p>
       </section>
+
+      {/* Trade Governance Framework */}
+      <GovernanceFramework framework={s.framework} />
 
       {/* Readouts BMS */}
       <section className="mx-auto max-w-[1280px] border-t border-line px-5 pb-20 pt-16 sm:px-8 sm:pb-24 sm:pt-20">

@@ -20,6 +20,8 @@ type NavDict = {
   megaLead: string;
   groups: readonly string[];
   softwareBlurb: string;
+  frameworkMention: string;
+  frameworkMentionSub: string;
 };
 
 type ServiceItem = { name: string; summary: string };
@@ -264,6 +266,16 @@ export function Nav({
                 <a href={software.external} target="_blank" rel="noopener noreferrer" className="mt-4 font-mono text-[12px] uppercase tracking-[0.1em] text-smoke transition-colors hover:text-accent">
                   BMS ↗
                 </a>
+                <Link
+                  href={`/${lang}/software#framework`}
+                  className="group mt-6 flex items-start gap-3 rounded-[10px] border border-line bg-surface-1 p-3 transition-colors hover:border-accent/40"
+                >
+                  <span aria-hidden className="mt-1 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent signal-glow" />
+                  <span className="min-w-0">
+                    <span className="block text-[13px] font-medium text-chalk transition-colors group-hover:text-accent">{dict.frameworkMention}</span>
+                    <span className="mt-0.5 block text-[12px] leading-snug text-smoke">{dict.frameworkMentionSub}</span>
+                  </span>
+                </Link>
               </div>
               <div className="grid gap-8 sm:grid-cols-[0.85fr_1.15fr] sm:items-center lg:border-l lg:border-line lg:pl-16">
                 <div className="console-panel grid-field flex aspect-[5/3] items-center justify-center overflow-hidden rounded-[12px] bg-surface-1 p-6">

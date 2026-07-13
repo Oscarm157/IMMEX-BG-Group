@@ -18,6 +18,8 @@ export const dictionaries = {
       megaLead: "Comercio exterior, aduanas, legal, compliance y fiscal en una sola firma.",
       groups: ["Legal y cumplimiento", "Operación aduanera", "Origen y logística"],
       softwareBlurb: "BMS Custom System: ERP aduanero con Anexo 24/30, EDI, MRP/ERP y reportería en una plataforma.",
+      frameworkMention: "Trade Governance Framework",
+      frameworkMentionSub: "Núcleo, dimensiones y control de la operación",
     },
     langSwitch: { to: "EN", aria: "Cambiar a inglés" },
     hero: {
@@ -211,6 +213,23 @@ export const dictionaries = {
       title: "El cumplimiento, automatizado.",
       lead: "BMS Custom System es el ERP aduanero con el que opera BG y más de 180 empresas. Ordena el control de inventarios, los anexos y la reportería de tu operación de comercio exterior.",
       slogan: "Un solo sistema para el inventario IMMEX, los anexos 24 y 30, la conectividad EDI y la reportería. El mismo que opera BG todos los días.",
+      framework: {
+        eyebrow: "Marco de gobernanza",
+        title: "BMS Trade Governance Framework",
+        lead: "Estructura para automatizar y controlar la operación de comercio exterior, con respaldo legal.",
+        coreLabel: "Núcleo",
+        core: [
+          { title: "Cumplimiento", body: "Operación alineada al marco normativo aduanero." },
+          { title: "Integridad", body: "Datos consistentes entre sistemas y registros oficiales." },
+          { title: "Confiabilidad", body: "Procesos repetibles y auditables en cada operación." },
+          { title: "Trazabilidad", body: "Evidencia continua del ciclo completo de la operación." },
+        ],
+        dimensions: [
+          { label: "Dimensión 1", title: "Requerimientos del negocio", items: ["Sistemas y aplicaciones", "Información y datos", "Infraestructura y ciberseguridad", "Personas y gobernanza"], body: "" },
+          { label: "Dimensión 2", title: "Recursos de TI y comercio exterior", items: ["Operación", "Controles internos", "Auditoría y monitoreo", "Inteligencia y mejora continua"], body: "" },
+          { label: "Dimensión 3", title: "Modelo de operación, control y mejora continua", items: [], body: "Gobernanza transversal sobre las dos dimensiones anteriores." },
+        ],
+      },
       capabilities: [
         { title: "Anexo 24 y Anexo 30", body: "Cumple los requisitos de control de inventarios IMMEX y deja cada movimiento registrado.", use: "Ej.: reportes de descargo listos para una auditoría del SAT." },
         { title: "Conectividad EDI", body: "Intercambio electrónico de archivos con la autoridad a través de web services.", use: "Ej.: transmisión de pedimentos y archivos sin captura manual." },
@@ -320,6 +339,8 @@ export const dictionaries = {
       megaLead: "Foreign trade, customs, legal, compliance and tax in one firm.",
       groups: ["Legal & compliance", "Customs operation", "Origin & logistics"],
       softwareBlurb: "BMS Custom System: a customs ERP with Annex 24/30, EDI, MRP/ERP and reporting in one platform.",
+      frameworkMention: "Trade Governance Framework",
+      frameworkMentionSub: "Core, dimensions and operation control",
     },
     langSwitch: { to: "ES", aria: "Switch to Spanish" },
     hero: {
@@ -513,6 +534,23 @@ export const dictionaries = {
       title: "Compliance, automated.",
       lead: "BMS Custom System is the customs ERP that BG and more than 180 companies run on. It orders the inventory control, the annexes and the reporting of your cross-border operation.",
       slogan: "One system for IMMEX inventory, Annex 24 and 30, EDI connectivity and reporting. The same one BG runs every day.",
+      framework: {
+        eyebrow: "Governance framework",
+        title: "BMS Trade Governance Framework",
+        lead: "A structure to automate and control your foreign-trade operation, with legal backing.",
+        coreLabel: "Core",
+        core: [
+          { title: "Compliance", body: "Operations aligned to the customs regulatory framework." },
+          { title: "Integrity", body: "Consistent data across systems and official records." },
+          { title: "Reliability", body: "Repeatable, auditable processes in every operation." },
+          { title: "Traceability", body: "Continuous evidence across the full operation cycle." },
+        ],
+        dimensions: [
+          { label: "Dimension 1", title: "Business requirements", items: ["Systems and applications", "Information and data", "Infrastructure and cybersecurity", "People and governance"], body: "" },
+          { label: "Dimension 2", title: "IT and foreign-trade resources", items: ["Operation", "Internal controls", "Audit and monitoring", "Intelligence and continuous improvement"], body: "" },
+          { label: "Dimension 3", title: "Operation, control and continuous-improvement model", items: [], body: "Cross-cutting governance over the two dimensions above." },
+        ],
+      },
       capabilities: [
         { title: "Annex 24 and Annex 30", body: "Meets IMMEX inventory control requirements and keeps every movement on record.", use: "E.g.: discharge reports ready for a SAT audit." },
         { title: "EDI connectivity", body: "Electronic file exchange with the authority through web services.", use: "E.g.: transmit entries and files with no manual capture." },
