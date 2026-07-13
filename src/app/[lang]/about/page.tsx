@@ -137,22 +137,22 @@ export default async function AboutPage({
         <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.owners}</span>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {owners.map((m) => (
-            <Reveal key={m.name} className="console-panel group relative overflow-hidden rounded-[18px] bg-surface-1">
+            <Reveal key={m.name} className="console-panel flex flex-col items-center rounded-[18px] bg-surface-1 p-6 sm:p-7">
               {m.photo ? (
                 <Image
                   src={m.photo}
                   alt={m.name}
-                  width={640}
-                  height={760}
-                  className="aspect-square w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.03]"
+                  width={800}
+                  height={1200}
+                  className="w-full max-w-[360px] rounded-[14px] object-cover"
                 />
               ) : (
-                <span className="flex aspect-square w-full items-center justify-center bg-accent/10 font-display text-8xl font-medium text-accent">
+                <span className="flex aspect-[2/3] w-full max-w-[360px] items-center justify-center rounded-[14px] bg-accent/10 font-display text-7xl font-medium text-accent">
                   {initials(m.name)}
                 </span>
               )}
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/45 to-transparent px-6 pb-6 pt-24 sm:px-7 sm:pb-7">
-                <span className="block font-display text-3xl font-medium leading-tight text-chalk">{m.name}</span>
+              <div className="mt-5 text-center">
+                <span className="block font-display text-2xl font-medium leading-tight text-chalk">{m.name}</span>
                 <span className="mt-1.5 block font-mono text-[12px] uppercase tracking-[0.12em] text-accent">{role(m)}</span>
               </div>
             </Reveal>
