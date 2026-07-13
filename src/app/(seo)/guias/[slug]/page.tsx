@@ -59,6 +59,7 @@ export default async function GuiaPage({ params }: { params: Promise<{ slug: str
         description: g.seoDescription,
         ...(g.respuestaCorta ? { abstract: g.respuestaCorta } : {}),
         inLanguage: "es-MX",
+        datePublished: g.publicado,
         dateModified: g.actualizado,
         author: { "@type": "Organization", name: "BG Consulting Group", url: `${BASE_URL}/es` },
         publisher: { "@type": "Organization", name: "BG Consulting Group", url: `${BASE_URL}/es` },

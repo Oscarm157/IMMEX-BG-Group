@@ -32,7 +32,8 @@ export type Guia = {
   servicio: { slug: string; label: string };
   // Slugs de otras guías del cluster (se enlazan solo si existen).
   relacionadas: string[];
-  actualizado: string; // ISO corto
+  publicado: string; // ISO corto (fecha de publicación → datePublished)
+  actualizado: string; // ISO corto (última revisión → dateModified)
 };
 
 export const GUIAS: Guia[] = [
@@ -122,7 +123,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "¿Tu Anexo 24 cuadraría hoy contra tus pedimentos?",
     servicio: { slug: "information-technology", label: "Tecnología de cumplimiento y control de inventarios" },
     relacionadas: ["anexo-30", "que-es-immex", "pedimento", "regimenes-aduaneros"],
-    actualizado: "2026-07-10",
+    publicado: "2026-04-14",
+    actualizado: "2026-04-14",
   },
   {
     slug: "que-es-immex",
@@ -210,7 +212,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "¿Tu programa IMMEX está sostenido o solo autorizado?",
     servicio: { slug: "foreign-trade", label: "Asesoría IMMEX y comercio exterior" },
     relacionadas: ["decreto-immex", "anexo-30", "regimenes-aduaneros", "pedimento"],
-    actualizado: "2026-07-10",
+    publicado: "2026-04-07",
+    actualizado: "2026-04-07",
   },
   {
     slug: "decreto-immex",
@@ -286,7 +289,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "¿Sabes por cuáles causales podrías perder tu programa IMMEX?",
     servicio: { slug: "compliance-and-assurance", label: "Cumplimiento y aseguramiento IMMEX" },
     relacionadas: ["que-es-immex", "anexo-30", "regimenes-aduaneros", "pedimento"],
-    actualizado: "2026-07-10",
+    publicado: "2026-04-28",
+    actualizado: "2026-07-02",
   },
   {
     slug: "pedimento",
@@ -374,7 +378,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "¿Una fracción o una clave mal puestas ya te generaron una observación?",
     servicio: { slug: "import-services", label: "Importación y despacho aduanero" },
     relacionadas: ["clasificacion-arancelaria", "valoracion-aduanera", "manifestacion-de-valor", "vucem"],
-    actualizado: "2026-07-10",
+    publicado: "2026-04-21",
+    actualizado: "2026-04-21",
   },
   {
     slug: "manifestacion-de-valor",
@@ -450,7 +455,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "Sustenta el valor de cada importación antes de que la autoridad lo cuestione.",
     servicio: { slug: "international-trade-experts", label: "Dictamen de valor y comercio exterior" },
     relacionadas: ["valoracion-aduanera", "pedimento", "clasificacion-arancelaria", "encargo-conferido"],
-    actualizado: "2026-07-10",
+    publicado: "2026-05-25",
+    actualizado: "2026-06-30",
   },
   {
     slug: "encargo-conferido",
@@ -516,7 +522,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "¿Sabes a cuántos agentes tienes el encargo conferido abierto hoy?",
     servicio: { slug: "compliance-and-assurance", label: "Cumplimiento y control de operación aduanera" },
     relacionadas: ["pedimento", "manifestacion-de-valor", "clasificacion-arancelaria", "regimenes-aduaneros"],
-    actualizado: "2026-07-10",
+    publicado: "2026-06-09",
+    actualizado: "2026-06-09",
   },
   {
     slug: "clasificacion-arancelaria",
@@ -596,7 +603,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "¿Tus fracciones arancelarias resistirían una reclasificación?",
     servicio: { slug: "international-trade-experts", label: "Dictamen de clasificación arancelaria" },
     relacionadas: ["valoracion-aduanera", "pedimento", "manifestacion-de-valor", "regimenes-aduaneros"],
-    actualizado: "2026-07-10",
+    publicado: "2026-05-11",
+    actualizado: "2026-05-11",
   },
   {
     slug: "valoracion-aduanera",
@@ -672,7 +680,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "¿Estás pagando impuestos sobre el valor correcto, ni de más ni de menos?",
     servicio: { slug: "international-trade-experts", label: "Dictamen de valor en aduana" },
     relacionadas: ["manifestacion-de-valor", "clasificacion-arancelaria", "pedimento", "drawback"],
-    actualizado: "2026-07-10",
+    publicado: "2026-05-18",
+    actualizado: "2026-05-18",
   },
   {
     slug: "regimenes-aduaneros",
@@ -748,7 +757,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "Elige el régimen que menos impuestos inmoviliza en tu operación.",
     servicio: { slug: "foreign-trade", label: "Estrategia de regímenes y comercio exterior" },
     relacionadas: ["que-es-immex", "drawback", "pedimento", "clasificacion-arancelaria"],
-    actualizado: "2026-07-10",
+    publicado: "2026-06-01",
+    actualizado: "2026-06-01",
   },
   {
     slug: "drawback",
@@ -824,7 +834,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "Recupera los aranceles que ya pagaste por insumos que exportaste.",
     servicio: { slug: "fiscal-services", label: "Recuperación de contribuciones y drawback" },
     relacionadas: ["regimenes-aduaneros", "que-es-immex", "valoracion-aduanera", "pedimento"],
-    actualizado: "2026-07-10",
+    publicado: "2026-06-23",
+    actualizado: "2026-06-23",
   },
   {
     slug: "anexo-30",
@@ -900,7 +911,8 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "Tu certificación se sostiene con un control de descargos que cuadre, no solo con el sello.",
     servicio: { slug: "compliance-and-assurance", label: "Certificación IVA/IEPS y control de descargos" },
     relacionadas: ["anexo-24", "que-es-immex", "regimenes-aduaneros", "pedimento"],
-    actualizado: "2026-07-10",
+    publicado: "2026-07-01",
+    actualizado: "2026-07-01",
   },
   {
     slug: "vucem",
@@ -988,7 +1000,453 @@ export const GUIAS: Guia[] = [
     ctaTitulo: "Ordena tu operación en la VUCEM antes de que un rechazo frene la mercancía en aduana.",
     servicio: { slug: "information-technology", label: "Tecnología y operación de comercio exterior" },
     relacionadas: ["pedimento", "encargo-conferido", "clasificacion-arancelaria", "manifestacion-de-valor"],
-    actualizado: "2026-07-10",
+    publicado: "2026-07-08",
+    actualizado: "2026-07-08",
+  },
+  {
+    slug: "padron-de-importadores",
+    respuestaCorta:
+      "El Padrón de Importadores es el registro ante el SAT sin el cual una empresa no puede importar; ciertos productos exigen además estar inscrito en el Padrón de Importadores de Sectores Específicos.",
+    eyebrow: "Guía · Comercio exterior",
+    h1: "Padrón de Importadores: el registro sin el que no puedes importar en México",
+    seoTitle: "Padrón de Importadores y de Sectores Específicos | Requisitos y suspensión",
+    seoDescription:
+      "Qué es el Padrón de Importadores, cuándo necesitas el de Sectores Específicos, su fundamento en la Ley Aduanera y por qué el SAT suspende la inscripción.",
+    definicion: [
+      "El Padrón de Importadores es el registro que lleva el SAT de las empresas y personas autorizadas para importar mercancía a México. No es un trámite decorativo: sin la inscripción activa, la aduana no permite que un pedimento de importación se despache a tu nombre. Es la primera llave de toda operación de comercio exterior.",
+      "Para ciertos productos sensibles no basta el padrón general. La autoridad exige además estar inscrito en el Padrón de Importadores de Sectores Específicos, un registro adicional por sector (por ejemplo, siderúrgico, textil, calzado, alcoholes, hidrocarburos). Cada sector tiene sus propios requisitos y su propia lógica de riesgo.",
+      "La inscripción no es permanente por default: se mantiene mientras la empresa esté al corriente en sus obligaciones fiscales y aduaneras. Un problema en el domicilio fiscal, en las declaraciones o en la operación puede derivar en la suspensión, y una suspensión frena todas las importaciones al mismo tiempo.",
+    ],
+    fundamento: {
+      cita: "Art. 59, fracción IV, Ley Aduanera · Reglas Generales de Comercio Exterior (padrones) y su Anexo 10",
+      texto:
+        "El artículo 59, fracción IV de la Ley Aduanera obliga a quien importa a estar inscrito en el Padrón de Importadores y, cuando corresponda, en el Padrón de Importadores de Sectores Específicos. Las Reglas Generales de Comercio Exterior detallan los requisitos de inscripción, las causales de suspensión y la reactivación; el Anexo 10 lista los sectores y las fracciones arancelarias que exigen el padrón sectorial.",
+    },
+    puntosClave: [
+      {
+        title: "Requisitos base",
+        desc: "Estar al corriente en el RFC y en las obligaciones fiscales, tener el domicilio fiscal localizado y la e.firma vigente, y encargar el despacho a un agente o agencia aduanal mediante encargo conferido.",
+      },
+      {
+        title: "Padrón sectorial cuando aplica",
+        desc: "Si la fracción arancelaria de tu producto está en el Anexo 10, además del padrón general necesitas el de Sectores Específicos de ese sector, con requisitos adicionales propios.",
+      },
+      {
+        title: "Encargo conferido",
+        desc: "La inscripción se acompaña de indicar ante el SAT qué agentes aduanales quedan autorizados a operar a tu nombre. Sin ese encargo, el agente no puede presentar tus pedimentos.",
+      },
+      {
+        title: "Se mantiene, no se olvida",
+        desc: "El padrón vive de tu cumplimiento continuo. Diferencias fiscales, domicilio no localizado o inconsistencias en la operación pueden suspenderlo, y con él se detienen todas tus importaciones.",
+      },
+    ],
+    distincion: [
+      {
+        title: "Padrón general vs. Sectores Específicos",
+        desc: "El padrón general habilita a importar en términos generales. El sectorial es un permiso adicional por producto sensible: sin él, aunque tengas el general, no puedes importar mercancía de ese sector.",
+      },
+      {
+        title: "Padrón de Importadores vs. de Exportadores Sectorial",
+        desc: "Importar exige el Padrón de Importadores. Exportar ciertos productos (por ejemplo, algunos sectores de minerales o alcohol) exige el Padrón de Exportadores Sectorial. Son registros distintos y no se cubren entre sí.",
+      },
+    ],
+    errores: [
+      {
+        title: "Arrancar la operación sin el sectorial",
+        desc: "Tener el padrón general y suponer que basta. Si el producto está en el Anexo 10, la mercancía se queda detenida en aduana hasta contar con el padrón sectorial, con costos de almacenaje y demora.",
+      },
+      {
+        title: "Domicilio fiscal no localizado",
+        desc: "Es una de las causas más comunes de suspensión. Si el SAT visita el domicilio y no localiza a la empresa, suspende el padrón y con ello la posibilidad de importar.",
+      },
+      {
+        title: "Encargo conferido desactualizado",
+        desc: "Cambiar de agencia aduanal sin actualizar el encargo conferido deja al nuevo agente sin poder operar y al anterior con acceso que ya no debería tener.",
+      },
+      {
+        title: "Descubrir la suspensión en la aduana",
+        desc: "Enterarte de que el padrón está suspendido cuando la mercancía ya llegó. La reactivación toma tiempo y, mientras, cada día de almacenaje corre en tu contra.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Toda empresa que importa necesita el Padrón de Importadores?",
+        a: "Sí. Salvo excepciones muy acotadas, importar a título de empresa exige la inscripción vigente en el Padrón de Importadores ante el SAT; sin ella la aduana no despacha el pedimento.",
+      },
+      {
+        q: "¿Cómo sé si mi producto necesita el padrón sectorial?",
+        a: "Depende de su fracción arancelaria. Si la fracción está listada en el Anexo 10 de las Reglas Generales de Comercio Exterior, además del padrón general necesitas el de Sectores Específicos del sector correspondiente.",
+      },
+      {
+        q: "¿Por qué el SAT suspende un padrón?",
+        a: "Por incumplimientos fiscales o aduaneros: domicilio no localizado, omisiones en declaraciones, inconsistencias en la operación o en el cumplimiento de obligaciones. La suspensión frena todas las importaciones hasta reactivarla.",
+      },
+      {
+        q: "¿Cuánto tarda reactivar un padrón suspendido?",
+        a: "No es inmediato: hay que corregir la causa y presentar la aclaración ante el SAT. Mientras dura el proceso no puedes importar, por eso conviene prevenir la suspensión antes que resolverla.",
+      },
+    ],
+    ctaTitulo: "¿Tu padrón aguantaría hoy una visita del SAT, o pararía tus importaciones?",
+    servicio: { slug: "import-services", label: "Importación, padrones y despacho aduanero" },
+    relacionadas: ["encargo-conferido", "que-es-immex", "pedimento", "clasificacion-arancelaria"],
+    publicado: "2026-05-04",
+    actualizado: "2026-05-04",
+  },
+  {
+    slug: "certificacion-iva-ieps",
+    respuestaCorta:
+      "La certificación en materia de IVA e IEPS es el reconocimiento del SAT que permite a una empresa IMMEX aplicar un crédito por el IVA de sus importaciones temporales, en lugar de pagarlo en cada pedimento.",
+    eyebrow: "Guía · Comercio exterior",
+    h1: "Certificación de IVA e IEPS: el crédito que evita pagar el IVA en cada importación temporal",
+    seoTitle: "Certificación IVA e IEPS | Modalidades A, AA, AAA y renovación",
+    seoDescription:
+      "Qué es la certificación en materia de IVA e IEPS, cómo funciona el crédito fiscal, las modalidades A, AA y AAA, su fundamento legal y la renovación anual.",
+    definicion: [
+      "Desde 2014, la importación temporal bajo IMMEX causa IVA (y, en su caso, IEPS). La certificación en materia de IVA e IEPS es el reconocimiento que otorga el SAT para no desembolsar ese impuesto en cada pedimento: la empresa certificada aplica un crédito equivalente al 100% del IVA, que se compensa contra el propio impuesto que se causaría.",
+      "En la práctica, la certificación evita descapitalizarse. Sin ella, una empresa IMMEX tendría que pagar el IVA de cada importación temporal y esperar a recuperarlo, o garantizarlo con una fianza. Con ella, el impuesto se neutraliza con el crédito mientras la mercancía cumpla su ciclo temporal.",
+      "El beneficio viene con obligaciones: la certificación exige sistemas de control (Anexo 30 y Anexo 31), estar al corriente en materia fiscal y renovar en tiempo. No es un sello que se obtiene una vez; es un estatus que se sostiene con cumplimiento continuo.",
+    ],
+    fundamento: {
+      cita: "Art. 28-A Ley del IVA · Art. 15-A Ley del IEPS · Título 7 de las Reglas Generales de Comercio Exterior",
+      texto:
+        "El artículo 28-A de la Ley del IVA (y el 15-A de la Ley del IEPS) permite aplicar un crédito equivalente al impuesto que se causaría por la importación temporal, a quien obtenga la certificación del SAT. El Título 7 de las Reglas Generales de Comercio Exterior regula las modalidades (A, AA y AAA), los requisitos, las obligaciones de control y la renovación. La alternativa a certificarse es garantizar el IVA e IEPS mediante fianza o carta de crédito.",
+    },
+    puntosClave: [
+      {
+        title: "Crédito del 100%",
+        desc: "La empresa certificada aplica un crédito por el IVA (e IEPS) de la importación temporal, de modo que no lo paga en efectivo en el pedimento mientras la mercancía retorne o se descargue en plazo.",
+      },
+      {
+        title: "Modalidades A, AA y AAA",
+        desc: "A mayor modalidad, más requisitos de trayectoria y control, pero también más beneficios y una vigencia más larga. La modalidad se elige según la madurez y el historial de la empresa.",
+      },
+      {
+        title: "Sistemas de control obligatorios",
+        desc: "La certificación se sostiene sobre el control de descargos (Anexo 30) y el control de cuentas de créditos y garantías (Anexo 31). Sin esos sistemas operando, el estatus no se mantiene.",
+      },
+      {
+        title: "Renovación anual",
+        desc: "La certificación se renueva; hay que solicitarla dentro de los 30 días previos al vencimiento y no tener adeudos. Dejar vencer el estatus obliga a pagar o afianzar el IVA de nuevo.",
+      },
+    ],
+    distincion: [
+      {
+        title: "Certificación vs. garantía (fianza)",
+        desc: "Son las dos vías para no pagar el IVA temporal en efectivo. La certificación aplica un crédito y exige control y cumplimiento; la garantía lo respalda con una fianza o carta de crédito, con costo financiero. La mayoría de las IMMEX opta por certificarse.",
+      },
+      {
+        title: "Modalidad A vs. AAA",
+        desc: "La A es la puerta de entrada, con vigencia de un año. La AAA exige mayor trayectoria y control, pero da beneficios superiores y hasta tres años de vigencia. No es solo un nivel: cambia obligaciones y facilidades.",
+      },
+    ],
+    errores: [
+      {
+        title: "Dejar vencer la certificación",
+        desc: "No solicitar la renovación dentro de los 30 días previos al vencimiento. Al perderla, cada importación temporal vuelve a causar IVA que hay que pagar o afianzar, con el golpe de flujo que eso implica.",
+      },
+      {
+        title: "Anexo 30 o 31 sin operar",
+        desc: "Obtener la certificación y descuidar los sistemas de control que la sostienen. En una revisión, la falta de descargos o de control de créditos pone en riesgo el estatus y el crédito aplicado.",
+      },
+      {
+        title: "Adeudos al momento de renovar",
+        desc: "Llegar a la renovación con créditos fiscales firmes o con obligaciones no cumplidas. La autoridad puede negar la renovación, y sin certificación la operación se encarece de inmediato.",
+      },
+      {
+        title: "Elegir la modalidad equivocada",
+        desc: "Pedir una modalidad que la empresa aún no puede sostener, o quedarse en una menor de la que le convendría. Cada modalidad tiene requisitos y beneficios distintos que conviene evaluar antes de solicitar.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Para qué sirve la certificación de IVA e IEPS?",
+        a: "Permite a una empresa IMMEX aplicar un crédito por el IVA (e IEPS) de sus importaciones temporales, en lugar de pagarlo en efectivo en cada pedimento. Es la forma de no descapitalizarse por el impuesto de la mercancía temporal.",
+      },
+      {
+        q: "¿Cada cuánto se renueva?",
+        a: "La certificación tiene vigencia según su modalidad y se renueva; la solicitud de renovación se presenta dentro de los 30 días previos al vencimiento y sin adeudos fiscales pendientes.",
+      },
+      {
+        q: "¿Qué pasa si pierdo la certificación?",
+        a: "Cada importación temporal vuelve a causar IVA e IEPS, que tendrías que pagar en el pedimento o garantizar con fianza o carta de crédito, con el consiguiente costo financiero.",
+      },
+      {
+        q: "¿La certificación me exige el Anexo 30 y el Anexo 31?",
+        a: "Sí. La certificación se sostiene sobre el control de descargos (Anexo 30) y el control de cuentas de créditos y garantías (Anexo 31). Son obligaciones que hay que operar, no solo tener en papel.",
+      },
+    ],
+    ctaTitulo: "¿Tu certificación IVA/IEPS llega en orden a la próxima renovación?",
+    servicio: { slug: "compliance-and-assurance", label: "Certificación IVA/IEPS y cumplimiento aduanero" },
+    relacionadas: ["anexo-30", "anexo-31", "que-es-immex", "regimenes-aduaneros"],
+    publicado: "2026-06-02",
+    actualizado: "2026-06-02",
+  },
+  {
+    slug: "anexo-31",
+    respuestaCorta:
+      "El Anexo 31 es el sistema de control de cuentas de créditos y garantías que deben operar las empresas con certificación de IVA e IEPS para reportar y descargar el impuesto de sus importaciones temporales.",
+    eyebrow: "Guía · Comercio exterior",
+    h1: "Anexo 31: el control de créditos y garantías que sostiene la certificación IVA/IEPS",
+    seoTitle: "Anexo 31: qué es y cómo funciona | Control de créditos IVA/IEPS",
+    seoDescription:
+      "Qué es el Anexo 31, cómo controla el crédito de IVA e IEPS de una empresa certificada, su relación con el Anexo 30 y el Anexo 24, y los errores que arriesgan la certificación.",
+    definicion: [
+      "El Anexo 31 es el sistema informático a través del cual una empresa con certificación de IVA e IEPS controla el crédito fiscal que genera cada importación temporal y su posterior descargo. Es la contabilidad viva del impuesto que la empresa no pagó gracias a la certificación.",
+      "Cada vez que entra mercancía temporal, se genera un monto de crédito por el IVA (e IEPS) que se habría pagado. Cuando esa mercancía retorna, se transfiere o cambia de régimen, el crédito se descarga. El Anexo 31 mantiene ese saldo y permite a la autoridad verificar que el crédito aplicado corresponde a mercancía que sí cumplió su ciclo temporal.",
+      "Es una obligación propia de la certificación, no de todo IMMEX. Una empresa que se certifica para no pagar el IVA temporal asume, a cambio, operar este control con la trazabilidad que la autoridad puede revisar en cualquier momento.",
+    ],
+    fundamento: {
+      cita: "Anexo 31 de las Reglas Generales de Comercio Exterior · Art. 28-A Ley del IVA",
+      texto:
+        "El crédito por el IVA (e IEPS) de la importación temporal previsto en el artículo 28-A de la Ley del IVA se otorga a las empresas certificadas, que deben controlarlo en el sistema del Anexo 31 de las Reglas Generales de Comercio Exterior. El Anexo 31 define los datos, cuentas y reportes que la empresa certificada transmite para acreditar el saldo de créditos y garantías.",
+    },
+    puntosClave: [
+      {
+        title: "Cuenta viva del crédito",
+        desc: "Registra el crédito de IVA e IEPS que genera cada importación temporal y lo descarga cuando la mercancía retorna, se transfiere o cambia de régimen. El saldo debe reflejar la realidad de la operación.",
+      },
+      {
+        title: "Ligado a la certificación",
+        desc: "Solo aplica a empresas con certificación de IVA e IEPS. Es la contrapartida de control por el beneficio de no pagar el impuesto temporal en efectivo.",
+      },
+      {
+        title: "Transmisión a la autoridad",
+        desc: "El sistema reporta al SAT los movimientos y saldos de las cuentas de créditos y garantías, de modo que el crédito aplicado sea verificable en todo momento.",
+      },
+      {
+        title: "Consistencia con inventarios",
+        desc: "El descargo del crédito debe cuadrar con el control de inventarios (Anexo 24) y con el de descargos (Anexo 30). Si los tres no coinciden, aparece la observación.",
+      },
+    ],
+    distincion: [
+      {
+        title: "Anexo 31 vs. Anexo 30",
+        desc: "El Anexo 30 controla los descargos de la mercancía temporal (qué entró y qué salió). El Anexo 31 controla el crédito y las garantías del IVA e IEPS asociado a esa mercancía. Se alimentan uno del otro, pero controlan cosas distintas.",
+      },
+      {
+        title: "Anexo 31 vs. Anexo 24",
+        desc: "El Anexo 24 es el control de inventarios de toda IMMEX. El Anexo 31 es el control del crédito fiscal de la certificación IVA/IEPS. Una empresa certificada suele necesitar los tres anexos operando y conciliados.",
+      },
+    ],
+    errores: [
+      {
+        title: "Saldo de crédito sin descargar",
+        desc: "Aplicar el crédito por la entrada y no descargarlo al retornar la mercancía. El saldo abierto sugiere que el impuesto no debió acreditarse, y la autoridad puede exigir el IVA correspondiente.",
+      },
+      {
+        title: "Anexo 31 desconectado del 30 y el 24",
+        desc: "Llevar el control de créditos por separado de los descargos y del inventario. Las diferencias entre los tres sistemas son de las primeras cosas que revisa la autoridad en una visita.",
+      },
+      {
+        title: "Reportes fuera de tiempo",
+        desc: "No transmitir los movimientos y saldos en los plazos que exige la certificación. Los reportes tardíos o incompletos ponen en riesgo el estatus de certificado.",
+      },
+      {
+        title: "Cambios de operación sin reflejar",
+        desc: "Modificar líneas de producto, proveedores o esquemas de importación sin ajustar el control del Anexo 31. El sistema deja de reflejar la operación real y el crédito queda expuesto.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Quién debe llevar el Anexo 31?",
+        a: "Las empresas con certificación en materia de IVA e IEPS. Es el sistema con el que controlan el crédito fiscal de sus importaciones temporales; no aplica a una IMMEX que no esté certificada.",
+      },
+      {
+        q: "¿En qué se diferencia del Anexo 30?",
+        a: "El Anexo 30 controla los descargos de la mercancía (entradas y salidas). El Anexo 31 controla el crédito y las garantías del IVA e IEPS asociado. Uno mira la mercancía, el otro el impuesto.",
+      },
+      {
+        q: "¿Qué pasa si el saldo del crédito no cuadra?",
+        a: "Un saldo abierto o inconsistente sugiere que se acreditó IVA de mercancía que no cumplió su ciclo temporal. La autoridad puede determinar el impuesto omitido, con recargos y con riesgo para la certificación.",
+      },
+      {
+        q: "¿El Anexo 31 sustituye al Anexo 24?",
+        a: "No. El Anexo 24 controla inventarios y el Anexo 31 controla el crédito fiscal. Una empresa certificada normalmente opera ambos, más el Anexo 30, y los tres deben conciliar.",
+      },
+    ],
+    ctaTitulo: "¿Tu Anexo 31 cuadra hoy con tus descargos y tu inventario?",
+    servicio: { slug: "compliance-and-assurance", label: "Certificación IVA/IEPS y control de descargos" },
+    relacionadas: ["certificacion-iva-ieps", "anexo-30", "anexo-24", "que-es-immex"],
+    publicado: "2026-06-16",
+    actualizado: "2026-06-16",
+  },
+  {
+    slug: "prosec",
+    respuestaCorta:
+      "PROSEC es un programa de la Secretaría de Economía que permite importar insumos y maquinaria con arancel preferencial (0% o 5%) para producir bienes de sectores específicos, sin importar el origen de la mercancía.",
+    eyebrow: "Guía · Comercio exterior",
+    h1: "PROSEC: el programa que baja el arancel de tus insumos y tu maquinaria",
+    seoTitle: "PROSEC: qué es y cómo funciona | Programa de Promoción Sectorial",
+    seoDescription:
+      "Qué es PROSEC, cómo da arancel preferencial a insumos y maquinaria por sector, su fundamento legal y su relación con IMMEX y la Regla 8ª.",
+    definicion: [
+      "PROSEC (Programa de Promoción Sectorial) es un instrumento de la Secretaría de Economía que permite a los productores de ciertos sectores importar insumos, partes, componentes y maquinaria con un arancel preferencial, típicamente 0% o 5%, con independencia del país de origen de la mercancía.",
+      "Su lógica es de competitividad: para que un fabricante en México no pague un arancel alto por el insumo que necesita, PROSEC reduce ese arancel cuando la empresa está autorizada en el sector correspondiente y usa la mercancía para producir los bienes de ese sector.",
+      "PROSEC se otorga por sector (electrónico, automotriz, textil, siderúrgico y muchos otros) y ampara fracciones arancelarias específicas. No es un permiso general para importar barato: es un beneficio acotado a lo que cada sector produce.",
+    ],
+    fundamento: {
+      cita: "Decreto por el que se establecen diversos Programas de Promoción Sectorial (PROSEC)",
+      texto:
+        "El Decreto PROSEC, administrado por la Secretaría de Economía, establece los sectores, las fracciones de insumos y maquinaria que amparan y el arancel preferencial aplicable. La empresa debe estar autorizada en el programa del sector correspondiente y usar la mercancía importada para producir los bienes de ese sector. PROSEC opera de la mano de la Regla 8ª de las Reglas Complementarias de la LIGIE para importar bajo el capítulo 98.",
+    },
+    puntosClave: [
+      {
+        title: "Arancel preferencial",
+        desc: "Los insumos, partes, componentes y maquinaria amparados pagan un arancel reducido, con frecuencia 0% o 5%, frente al arancel general de importación que tendrían sin el programa.",
+      },
+      {
+        title: "Por sector y por fracción",
+        desc: "El beneficio se autoriza para un sector específico y solo cubre las fracciones arancelarias que el Decreto lista para ese sector. Importar fuera de esa lista no goza del arancel PROSEC.",
+      },
+      {
+        title: "Independiente del origen",
+        desc: "A diferencia de un tratado, PROSEC no depende del país de origen: el arancel preferencial aplica venga la mercancía de donde venga, siempre que se cumpla el programa.",
+      },
+      {
+        title: "Uso productivo comprobable",
+        desc: "La mercancía importada bajo PROSEC debe emplearse en producir los bienes del sector autorizado. La autoridad puede verificar que el insumo se destinó a lo que el programa ampara.",
+      },
+    ],
+    distincion: [
+      {
+        title: "PROSEC vs. IMMEX",
+        desc: "IMMEX permite importar temporalmente sin pagar impuestos para transformar y retornar. PROSEC reduce el arancel de importación (incluso definitiva) por sector. Se complementan: muchas empresas usan ambos, cada uno para lo suyo.",
+      },
+      {
+        title: "PROSEC vs. Regla 8ª",
+        desc: "PROSEC define el arancel preferencial por sector; la Regla 8ª es el mecanismo que permite clasificar esos insumos en el capítulo 98 con autorización de la Secretaría de Economía. Suelen usarse juntas.",
+      },
+    ],
+    errores: [
+      {
+        title: "Importar fracciones no amparadas",
+        desc: "Aplicar el arancel PROSEC a insumos que no están en la lista del sector autorizado. La diferencia de arancel se convierte en un crédito fiscal cuando la autoridad lo detecta.",
+      },
+      {
+        title: "Sector autorizado que no corresponde",
+        desc: "Usar el programa de un sector para producir bienes de otro. El beneficio está acotado al sector autorizado; salirse de él invalida la preferencia.",
+      },
+      {
+        title: "No comprobar el uso productivo",
+        desc: "No poder demostrar que el insumo importado se destinó a producir los bienes del sector. Sin esa trazabilidad, la autoridad puede desconocer el arancel preferencial aplicado.",
+      },
+      {
+        title: "Dejar vencer o no actualizar el programa",
+        desc: "No mantener al día la autorización o no incorporar nuevas fracciones cuando cambia la producción. La empresa termina pagando arancel general por insumos que sí podría importar con preferencia.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Qué es PROSEC en términos simples?",
+        a: "Un programa de la Secretaría de Economía que baja el arancel de importación de insumos y maquinaria (a menudo a 0% o 5%) para quien produce bienes de un sector específico, sin importar el país de origen.",
+      },
+      {
+        q: "¿PROSEC sustituye a IMMEX?",
+        a: "No. IMMEX difiere impuestos en importaciones temporales para transformar y retornar; PROSEC reduce el arancel por sector. Son instrumentos distintos y muchas empresas los usan de forma combinada.",
+      },
+      {
+        q: "¿PROSEC depende de un tratado de libre comercio?",
+        a: "No. El arancel preferencial de PROSEC aplica con independencia del origen de la mercancía, a diferencia de las preferencias de un tratado, que sí exigen que el bien sea originario del país socio.",
+      },
+      {
+        q: "¿Qué relación tiene con la Regla 8ª?",
+        a: "PROSEC fija el arancel preferencial por sector y la Regla 8ª permite clasificar esos insumos en el capítulo 98 con autorización de la Secretaría de Economía. Es común operarlas juntas.",
+      },
+    ],
+    ctaTitulo: "¿Estás pagando arancel general por insumos que PROSEC podría dejarte importar a 0%?",
+    servicio: { slug: "foreign-trade", label: "Estrategia arancelaria, PROSEC y comercio exterior" },
+    relacionadas: ["regla-octava", "clasificacion-arancelaria", "que-es-immex", "decreto-immex"],
+    publicado: "2026-06-27",
+    actualizado: "2026-06-27",
+  },
+  {
+    slug: "regla-octava",
+    respuestaCorta:
+      "La Regla 8ª permite importar insumos, partes y componentes clasificándolos en el capítulo 98 de la tarifa, con autorización de la Secretaría de Economía, en lugar de por su fracción específica.",
+    eyebrow: "Guía · Comercio exterior",
+    h1: "Regla 8ª: importar insumos bajo el capítulo 98 con permiso de la Secretaría de Economía",
+    seoTitle: "Regla 8ª (Regla Octava): qué es y para qué sirve | Capítulo 98 TIGIE",
+    seoDescription:
+      "Qué es la Regla 8ª de las Reglas Complementarias de la LIGIE, cómo permite importar insumos por el capítulo 98, su relación con PROSEC y los errores frecuentes.",
+    definicion: [
+      "La Regla 8ª es una de las Reglas Complementarias para la aplicación de la Tarifa de la Ley de los Impuestos Generales de Importación y de Exportación. Permite que un productor importe insumos, partes, componentes, maquinaria y equipo clasificándolos en una fracción del capítulo 98, en lugar de hacerlo por la fracción arancelaria específica de cada mercancía.",
+      "El objetivo es facilitar la operación industrial: en vez de clasificar decenas de insumos distintos, cada uno con su fracción y su arancel, la empresa autorizada los introduce agrupados en el capítulo 98, normalmente ligado a un programa PROSEC y a un arancel preferencial.",
+      "No es un permiso automático: se requiere una autorización previa de la Secretaría de Economía, que fija qué mercancías y para qué producción se pueden importar bajo esta regla. Usarla fuera de esa autorización es una irregularidad de clasificación con consecuencias fiscales.",
+    ],
+    fundamento: {
+      cita: "Regla 8ª de las Reglas Complementarias de la LIGIE · Capítulo 98 de la TIGIE",
+      texto:
+        "La Regla 8ª de las Reglas Complementarias para la aplicación de la Tarifa de la LIGIE autoriza a clasificar en las fracciones del capítulo 98 la importación de mercancías destinadas a la producción, cuando la Secretaría de Economía emite la autorización correspondiente. Suele operar junto con un programa PROSEC, que determina el arancel preferencial aplicable a esos insumos.",
+    },
+    puntosClave: [
+      {
+        title: "Clasificación en el capítulo 98",
+        desc: "Permite introducir insumos y equipo por una fracción del capítulo 98, en lugar de por la fracción específica de cada mercancía, cuando se destinan a la producción autorizada.",
+      },
+      {
+        title: "Autorización previa de la SE",
+        desc: "No opera por default. La Secretaría de Economía emite una autorización que delimita qué mercancías y para qué bienes se pueden importar bajo la Regla 8ª.",
+      },
+      {
+        title: "De la mano de PROSEC",
+        desc: "La Regla 8ª se usa normalmente ligada a un programa PROSEC, que define el sector y el arancel preferencial de los insumos que se introducen por el capítulo 98.",
+      },
+      {
+        title: "Simplifica la operación",
+        desc: "Evita clasificar y arancelar decenas de insumos distintos uno por uno, agrupándolos bajo el esquema autorizado. La simplificación depende de operar dentro de los límites del permiso.",
+      },
+    ],
+    distincion: [
+      {
+        title: "Regla 8ª vs. clasificación normal",
+        desc: "La clasificación normal identifica cada mercancía por su fracción arancelaria específica. La Regla 8ª permite agrupar insumos en el capítulo 98 con autorización de la SE, para producción. No sustituye la clasificación correcta: la habilita para un fin acotado.",
+      },
+      {
+        title: "Regla 8ª vs. PROSEC",
+        desc: "PROSEC define el arancel preferencial por sector; la Regla 8ª es el mecanismo de clasificación en el capítulo 98 que permite aplicarlo a los insumos. Una fija el beneficio, la otra abre la puerta para usarlo.",
+      },
+    ],
+    errores: [
+      {
+        title: "Importar bajo Regla 8ª sin autorización vigente",
+        desc: "Clasificar en el capítulo 98 sin la autorización de la Secretaría de Economía o con una vencida. Es una irregularidad de clasificación que deriva en la diferencia de arancel y en sanciones.",
+      },
+      {
+        title: "Mercancía fuera del permiso",
+        desc: "Introducir por la Regla 8ª insumos que la autorización no ampara. El beneficio no cubre esa mercancía y la autoridad puede determinar el arancel omitido.",
+      },
+      {
+        title: "Destino distinto a la producción autorizada",
+        desc: "Usar los insumos importados bajo Regla 8ª para algo distinto de la producción para la que se autorizaron. Rompe la condición del esquema y expone la operación a un crédito fiscal.",
+      },
+      {
+        title: "No conciliar con PROSEC",
+        desc: "Operar la Regla 8ª sin que cuadre con el programa PROSEC y con el control de inventarios. Las inconsistencias entre el permiso, el arancel y el uso real son de las primeras que revisa la autoridad.",
+      },
+    ],
+    faq: [
+      {
+        q: "¿Para qué sirve la Regla 8ª?",
+        a: "Permite a un productor importar insumos, partes, componentes y maquinaria clasificándolos en el capítulo 98 de la tarifa, con autorización de la Secretaría de Economía, en lugar de por la fracción específica de cada mercancía.",
+      },
+      {
+        q: "¿La Regla 8ª es lo mismo que PROSEC?",
+        a: "No. PROSEC define el arancel preferencial por sector y la Regla 8ª es el mecanismo de clasificación en el capítulo 98 que permite aplicarlo a los insumos. Suelen operarse juntas, pero son cosas distintas.",
+      },
+      {
+        q: "¿Necesito una autorización para usarla?",
+        a: "Sí. La Regla 8ª requiere una autorización previa de la Secretaría de Economía que delimita qué mercancías y para qué producción se pueden importar bajo el capítulo 98.",
+      },
+      {
+        q: "¿Qué riesgo hay si la uso mal?",
+        a: "Clasificar en el capítulo 98 sin autorización, con mercancía no amparada o para un destino distinto es una irregularidad de clasificación: la autoridad puede determinar el arancel omitido, con recargos y sanciones.",
+      },
+    ],
+    ctaTitulo: "¿Tu esquema de Regla 8ª está dentro del permiso, o expuesto a un crédito fiscal?",
+    servicio: { slug: "foreign-trade", label: "Regla 8ª, PROSEC y estrategia arancelaria" },
+    relacionadas: ["prosec", "clasificacion-arancelaria", "que-es-immex", "decreto-immex"],
+    publicado: "2026-07-05",
+    actualizado: "2026-07-05",
   },
 ];
 
