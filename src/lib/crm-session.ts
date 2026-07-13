@@ -16,11 +16,13 @@ export type CurrentUser = {
 
 export async function getCurrentUser(): Promise<CurrentUser | null> {
   const jar = await cookies();
-  const uid = await verifySession(jar.get(CRM_COOKIE)?.value);
-  if (!uid) return null;
-  const rows = await db.select().from(users).where(eq(users.id, uid));
+  const session = await verifySession(jar.get(CRM_COOKIE)?.value);
+  if (!session) return null;
+  const rows = await db.select().from(users).where(eq(users.id, session.uid));
   const u = rows[0];
   if (!u || !u.active) return null;
+  // La cookie quedó invalidada por un reset de contraseña posterior.
+  if (session.ver !== u.sessionVersion) return null;
   return {
     id: u.id,
     name: u.name,

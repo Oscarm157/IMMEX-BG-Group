@@ -8,7 +8,7 @@ import { Composio } from "@composio/core";
  * para no tumbar el request ni el guardado del lead.
  */
 
-type LeadEmail = { to: string; subject: string; html: string };
+type LeadEmail = { to: string | string[]; subject: string; html: string };
 
 let client: Composio | null = null;
 
@@ -26,10 +26,16 @@ export async function sendLeadEmail({ to, subject, html }: LeadEmail): Promise<v
     console.warn("[composio] mail skipped: falta COMPOSIO_API_KEY o COMPOSIO_USER_ID");
     return;
   }
+  // Gmail acepta varios destinatarios separados por coma en un solo envío.
+  const recipient = Array.isArray(to) ? to.join(", ") : to;
+  if (!recipient) {
+    console.warn("[composio] mail skipped: sin destinatarios");
+    return;
+  }
   try {
     const result = await composio.tools.execute("GMAIL_SEND_EMAIL", {
       userId,
-      arguments: { recipient_email: to, subject, body: html, is_html: true },
+      arguments: { recipient_email: recipient, subject, body: html, is_html: true },
       // La cuenta de notificaciones usa la versión vigente del tool; para fijar
       // versión en prod, setear toolkitVersions al inicializar Composio.
       dangerouslySkipVersionCheck: true,

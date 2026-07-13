@@ -2,10 +2,12 @@
 
 import { useState, useTransition } from "react";
 import * as RS from "@radix-ui/react-select";
-import { KeyRound, UserX, UserCheck, Copy, Check, ChevronDown, Loader2 } from "lucide-react";
-import { resetUserPassword, setUserActive, updateUserRole } from "@/app/admin/users-actions";
+import { toast } from "sonner";
+import { KeyRound, UserX, UserCheck, Copy, Check, ChevronDown, Loader2, Trash2 } from "lucide-react";
+import { deleteUser, resetUserPassword, setUserActive, updateUserRole } from "@/app/admin/users-actions";
 import type { UserRole } from "@/lib/schema";
 import { EditUserModal } from "@/components/crm/EditUserModal";
+import { ConfirmDialog } from "@/components/crm/ConfirmDialog";
 import { Tooltip } from "@/components/crm/ui/Tooltip";
 
 export const ROLE_LABELS: Record<UserRole, string> = {
@@ -99,6 +101,7 @@ export function UserRowActions({
   const [pending, startTransition] = useTransition();
   const [temp, setTemp] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   // Acciones discretas: aparecen al pasar el cursor por la fila o al enfocar.
   // Si hay una contraseña temporal visible, se mantienen para no ocultarla.
@@ -158,6 +161,36 @@ export function UserRowActions({
           </button>
         </Tooltip>
       )}
+
+      {!isSelf && (
+        <Tooltip content="Eliminar">
+          <button
+            disabled={pending}
+            onClick={() => setConfirmDelete(true)}
+            aria-label="Eliminar"
+            className="rounded-md p-1.5 text-[var(--crm-ink-mute)] transition-colors hover:bg-[var(--destructive)]/10 hover:text-[var(--destructive)] disabled:opacity-50"
+          >
+            <Trash2 className="size-4" strokeWidth={1.7} />
+          </button>
+        </Tooltip>
+      )}
+
+      <ConfirmDialog
+        open={confirmDelete}
+        onClose={() => setConfirmDelete(false)}
+        onConfirm={() =>
+          startTransition(async () => {
+            const res = await deleteUser(userId);
+            if (res.error) toast.error(res.error);
+            setConfirmDelete(false);
+          })
+        }
+        title="Eliminar usuario"
+        description={`Se eliminará la cuenta de ${user.name}. El historial de leads se conserva. Esta acción no se puede deshacer.`}
+        confirmLabel="Eliminar"
+        destructive
+        pending={pending}
+      />
     </div>
   );
 }

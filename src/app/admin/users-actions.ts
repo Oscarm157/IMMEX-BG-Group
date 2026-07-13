@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { and, eq, ne } from "drizzle-orm";
+import { and, eq, ne, sql } from "drizzle-orm";
 import { db } from "@/lib/db";
 import { users, type UserRole } from "@/lib/schema";
 import { hashPassword } from "@/lib/crm-auth";
@@ -85,8 +85,41 @@ export async function updateUserRole(userId: string, role: UserRole) {
 export async function setUserActive(userId: string, active: boolean) {
   const me = await requireAdmin();
   if (userId === me.id) return; // cannot deactivate yourself
-  await db.update(users).set({ active }).where(eq(users.id, userId));
+  if (!active) {
+    // No dejar al CRM sin ningún admin activo.
+    const target = await db.select({ role: users.role }).from(users).where(eq(users.id, userId));
+    if (target[0]?.role === "admin") {
+      const otherActiveAdmins = await db
+        .select({ id: users.id })
+        .from(users)
+        .where(and(eq(users.role, "admin"), eq(users.active, true), ne(users.id, userId)));
+      if (otherActiveAdmins.length === 0) return;
+    }
+  }
+  // Al desactivar, invalidar la sesión abierta del usuario.
+  await db
+    .update(users)
+    .set(active ? { active } : { active, sessionVersion: sql`${users.sessionVersion} + 1` })
+    .where(eq(users.id, userId));
   revalidatePath("/admin/users");
+}
+
+export async function deleteUser(userId: string): Promise<{ error?: string }> {
+  const me = await requireAdmin();
+  if (userId === me.id) return { error: "No puedes eliminar tu propia cuenta." };
+  const target = await db.select({ role: users.role }).from(users).where(eq(users.id, userId));
+  if (!target[0]) return {};
+  if (target[0].role === "admin") {
+    const otherAdmins = await db
+      .select({ id: users.id })
+      .from(users)
+      .where(and(eq(users.role, "admin"), ne(users.id, userId)));
+    if (otherAdmins.length === 0) return { error: "No puedes eliminar al último administrador." };
+  }
+  // El historial (leads/comentarios/eventos) se conserva: las FK son ON DELETE SET NULL.
+  await db.delete(users).where(eq(users.id, userId));
+  revalidatePath("/admin/users");
+  return {};
 }
 
 export async function resetUserPassword(
@@ -96,7 +129,12 @@ export async function resetUserPassword(
   const tempPassword = genTempPassword();
   await db
     .update(users)
-    .set({ passwordHash: await hashPassword(tempPassword), mustChangePassword: true })
+    .set({
+      passwordHash: await hashPassword(tempPassword),
+      mustChangePassword: true,
+      // Invalida cualquier sesión abierta con la contraseña anterior.
+      sessionVersion: sql`${users.sessionVersion} + 1`,
+    })
     .where(eq(users.id, userId));
   revalidatePath("/admin/users");
   return { tempPassword };
