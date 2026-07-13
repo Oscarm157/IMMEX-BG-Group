@@ -2,6 +2,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getDictionary, isLocale } from "@/content/dictionaries";
+import { SERVICE_SLUGS } from "@/content/service-slugs";
 import { siteConfig } from "@/lib/site-config";
 import { Reveal } from "@/components/site/Reveal";
 import { PillButton } from "@/components/site/PillButton";
@@ -116,7 +117,12 @@ export default async function HomePage({
                   className="card-light flex flex-col rounded-[14px]"
                 >
                   <div className="flex items-center justify-between border-b border-line-soft px-7 py-3.5">
-                    <Logo variant={i === 0 ? "bg" : "bms"} tone="dark" size="sm" />
+                    <Logo
+                      variant={i === 0 ? "bg" : "bms"}
+                      tone="dark"
+                      size="sm"
+                      className={i === 0 ? "h-12 w-auto" : undefined}
+                    />
                     <span aria-hidden className="font-mono text-[11px] tabular-nums text-graphite/60">
                       {String(i + 1).padStart(2, "0")}
                     </span>
@@ -189,18 +195,19 @@ export default async function HomePage({
               <span>{d.servicesPreview.colScope}</span>
             </div>
             {d.services.items.map((s, i) => (
-              <Reveal
-                key={s.name}
-                delay={Math.min(i, 4) * 0.04}
-                className="grid grid-cols-1 gap-2 border-b border-line-soft px-7 py-6 transition-colors last:border-b-0 hover:bg-paper-2/70 sm:grid-cols-[3rem_1fr_1.4fr] sm:items-baseline sm:gap-6"
-              >
-                <span className="font-mono text-[13px] tabular-nums text-accent-ink">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-ink sm:text-xl">
-                  {s.name}
-                </h3>
-                <p className="text-[14px] leading-relaxed text-graphite">{s.summary}</p>
+              <Reveal key={s.name} delay={Math.min(i, 4) * 0.04} className="border-b border-line-soft last:border-b-0">
+                <Link
+                  href={`/${lang}/services/${SERVICE_SLUGS[i]}`}
+                  className="group grid grid-cols-1 gap-2 px-7 py-6 transition-colors hover:bg-paper-2/70 sm:grid-cols-[3rem_1fr_1.4fr] sm:items-baseline sm:gap-6"
+                >
+                  <span className="font-mono text-[13px] tabular-nums text-accent-ink">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-ink transition-colors group-hover:text-accent-ink sm:text-xl">
+                    {s.name}
+                  </h3>
+                  <p className="text-[14px] leading-relaxed text-graphite">{s.summary}</p>
+                </Link>
               </Reveal>
             ))}
           </div>
@@ -293,7 +300,7 @@ export default async function HomePage({
           </div>
           <dl className="mt-16 flex flex-wrap gap-x-12 gap-y-5 border-t border-line/60 pt-8">
             {[d.stats.items[0], d.stats.items[3], d.stats.items[1]].map((s) => (
-              <div key={s.label} className="flex items-baseline gap-3">
+              <div key={s.label} className="flex items-center gap-3">
                 <dt className="font-display text-2xl font-medium tabular-nums text-accent sm:text-3xl">{s.value}</dt>
                 <dd className="max-w-[9rem] text-[13px] leading-snug text-bone/70">{s.label}</dd>
               </div>
