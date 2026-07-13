@@ -1015,7 +1015,7 @@ export const GUIAS: Guia[] = [
     definicion: [
       "El Padrón de Importadores es el registro que lleva el SAT de las empresas y personas autorizadas para importar mercancía a México. No es un trámite decorativo: sin la inscripción activa, la aduana no permite que un pedimento de importación se despache a tu nombre. Es la primera llave de toda operación de comercio exterior.",
       "Para ciertos productos sensibles no basta el padrón general. La autoridad exige además estar inscrito en el Padrón de Importadores de Sectores Específicos, un registro adicional por sector (por ejemplo, siderúrgico, textil, calzado, alcoholes, hidrocarburos). Cada sector tiene sus propios requisitos y su propia lógica de riesgo.",
-      "La inscripción no es permanente por default: se mantiene mientras la empresa esté al corriente en sus obligaciones fiscales y aduaneras. Un problema en el domicilio fiscal, en las declaraciones o en la operación puede derivar en la suspensión, y una suspensión frena todas las importaciones al mismo tiempo.",
+      "La inscripción tampoco es para siempre: se mantiene mientras la empresa esté al corriente en sus obligaciones fiscales y aduaneras. Un problema en el domicilio fiscal, en las declaraciones o en la operación puede derivar en la suspensión, y una suspensión frena todas las importaciones al mismo tiempo.",
     ],
     fundamento: {
       cita: "Art. 59, fracción IV, Ley Aduanera · Reglas Generales de Comercio Exterior (padrones) y su Anexo 10",
@@ -1337,7 +1337,7 @@ export const GUIAS: Guia[] = [
     ],
     faq: [
       {
-        q: "¿Qué es PROSEC en términos simples?",
+        q: "¿Qué es PROSEC?",
         a: "Un programa de la Secretaría de Economía que baja el arancel de importación de insumos y maquinaria (a menudo a 0% o 5%) para quien produce bienes de un sector específico, sin importar el país de origen.",
       },
       {
@@ -1385,7 +1385,7 @@ export const GUIAS: Guia[] = [
       },
       {
         title: "Autorización previa de la SE",
-        desc: "No opera por default. La Secretaría de Economía emite una autorización que delimita qué mercancías y para qué bienes se pueden importar bajo la Regla 8ª.",
+        desc: "No opera de manera automática. La Secretaría de Economía emite una autorización que delimita qué mercancías y para qué bienes se pueden importar bajo la Regla 8ª.",
       },
       {
         title: "De la mano de PROSEC",
