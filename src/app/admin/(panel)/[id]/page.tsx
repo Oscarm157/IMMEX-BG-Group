@@ -7,6 +7,7 @@ import { getAdById } from "@/lib/ads-data";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canEditLead, isReadOnly } from "@/lib/crm-permissions";
 import { fmtDate, fmtDateTime } from "@/lib/crm-format";
+import { interesLabel } from "@/lib/crm-interes";
 import { StatusControl } from "@/components/crm/StatusControl";
 import { OwnerControl } from "@/components/crm/OwnerControl";
 import { SourceBadge, StatusBadge } from "@/components/crm/status";
@@ -138,7 +139,7 @@ export default async function LeadDetail({ params }: { params: Promise<{ id: str
           },
           {
             label: "Servicio",
-            value: lead.qualification?.service ?? <span className="text-[var(--crm-ink-faint)]">Sin definir</span>,
+            value: interesLabel(lead.qualification?.service) ?? <span className="text-[var(--crm-ink-faint)]">Sin definir</span>,
           },
           { label: "Origen", value: <SourceBadge source={lead.source} /> },
           { label: "Recibido", value: <span className="crm-num">{fmtDate(lead.createdAt)}</span> },
