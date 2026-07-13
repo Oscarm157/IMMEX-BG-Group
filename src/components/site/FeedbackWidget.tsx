@@ -2,19 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { MessageSquarePlus, X, Send, Check, Mic, MicOff } from "lucide-react";
-
-// Web Speech API: no está en los tipos DOM. Tipado mínimo local.
-type SpeechRecognitionLike = {
-  lang: string;
-  interimResults: boolean;
-  continuous: boolean;
-  start: () => void;
-  stop: () => void;
-  onresult: ((e: { resultIndex: number; results: ArrayLike<{ 0: { transcript: string } }> }) => void) | null;
-  onend: (() => void) | null;
-  onerror: (() => void) | null;
-};
+import { MessageSquarePlus, X, Send, Check, Mic, Square, Loader2 } from "lucide-react";
 
 type Pin = {
   id: string;
@@ -134,9 +122,12 @@ export function FeedbackWidget() {
   const [toast, setToast] = useState<string | null>(null);
   const [docSize, setDocSize] = useState({ w: 0, h: 0 });
   const [voiceSupported, setVoiceSupported] = useState(false);
-  const [listening, setListening] = useState(false);
+  const [recording, setRecording] = useState(false);
+  const [transcribing, setTranscribing] = useState(false);
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const recognitionRef = useRef<SpeechRecognitionLike | null>(null);
+  const recorderRef = useRef<MediaRecorder | null>(null);
+  const chunksRef = useRef<Blob[]>([]);
+  const discardRef = useRef(false);
   const baseTextRef = useRef("");
 
   const showToast = useCallback((msg: string) => {
@@ -145,50 +136,75 @@ export function FeedbackWidget() {
     toastTimer.current = setTimeout(() => setToast(null), 2400);
   }, []);
 
-  // Soporte de dictado por voz (Chrome/Edge/Safari reciente; Firefox no).
+  // Soporte de grabación de audio (para dictado por voz vía Whisper).
   useEffect(() => {
-    const w = window as unknown as { SpeechRecognition?: unknown; webkitSpeechRecognition?: unknown };
-    setVoiceSupported(!!(w.SpeechRecognition || w.webkitSpeechRecognition));
+    setVoiceSupported(
+      typeof navigator !== "undefined" &&
+        !!navigator.mediaDevices?.getUserMedia &&
+        typeof window.MediaRecorder !== "undefined"
+    );
   }, []);
 
-  const stopListening = useCallback(() => {
-    recognitionRef.current?.stop();
-    setListening(false);
+  // Detiene el recorder. discard=true tira el audio (cierre del editor); false lo transcribe.
+  const stopRecording = useCallback((discard: boolean) => {
+    discardRef.current = discard;
+    recorderRef.current?.stop();
+    setRecording(false);
   }, []);
 
-  const toggleVoice = useCallback(() => {
-    if (listening) {
-      stopListening();
+  const toggleVoice = useCallback(async () => {
+    if (recording) {
+      stopRecording(false);
       return;
     }
-    const w = window as unknown as {
-      SpeechRecognition?: new () => SpeechRecognitionLike;
-      webkitSpeechRecognition?: new () => SpeechRecognitionLike;
-    };
-    const Ctor = w.SpeechRecognition || w.webkitSpeechRecognition;
-    if (!Ctor) return;
-    const rec = new Ctor();
-    rec.lang = "es-MX";
-    rec.interimResults = true;
-    rec.continuous = true;
-    rec.onresult = (e) => {
-      let transcript = "";
-      for (let i = 0; i < e.results.length; i++) transcript += e.results[i][0].transcript;
-      const base = baseTextRef.current;
-      setNoteText(base ? `${base} ${transcript}`.trim() : transcript.trim());
-    };
-    rec.onend = () => setListening(false);
-    rec.onerror = () => setListening(false);
-    recognitionRef.current = rec;
+    if (!token) return;
+    let stream: MediaStream;
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+    } catch {
+      showToast("No se pudo acceder al micrófono");
+      return;
+    }
+    const rec = new MediaRecorder(stream);
+    chunksRef.current = [];
+    discardRef.current = false;
     baseTextRef.current = noteText;
+    rec.ondataavailable = (e) => {
+      if (e.data.size > 0) chunksRef.current.push(e.data);
+    };
+    rec.onstop = async () => {
+      stream.getTracks().forEach((t) => t.stop());
+      if (discardRef.current) return;
+      const blob = new Blob(chunksRef.current, { type: rec.mimeType || "audio/webm" });
+      if (blob.size === 0) return;
+      setTranscribing(true);
+      try {
+        const fd = new FormData();
+        fd.append("token", token);
+        fd.append("audio", blob, "nota.webm");
+        const res = await fetch("/api/feedback/transcribe", { method: "POST", body: fd });
+        const data = await res.json().catch(() => null);
+        if (res.ok && data?.text) {
+          const base = baseTextRef.current;
+          setNoteText(base ? `${base} ${data.text}`.trim() : String(data.text).trim());
+        } else {
+          showToast("No se pudo transcribir, intenta de nuevo");
+        }
+      } catch {
+        showToast("No se pudo transcribir, intenta de nuevo");
+      } finally {
+        setTranscribing(false);
+      }
+    };
+    recorderRef.current = rec;
     rec.start();
-    setListening(true);
-  }, [listening, noteText, stopListening]);
+    setRecording(true);
+  }, [recording, token, noteText, stopRecording, showToast]);
 
-  // Si el editor se cierra (enviar, cerrar, salir del modo), corta el dictado.
+  // Si el editor se cierra (enviar, cerrar, salir del modo), tira la grabación en curso.
   useEffect(() => {
-    if (!draft && listening) stopListening();
-  }, [draft, listening, stopListening]);
+    if (!draft && recording) stopRecording(true);
+  }, [draft, recording, stopRecording]);
 
   // Lee el token de la URL (?fb=) o de sessionStorage; limpia el query para que no se comparta por error.
   useEffect(() => {
@@ -494,15 +510,22 @@ export function FeedbackWidget() {
                 type="button"
                 data-fb-ui
                 onClick={toggleVoice}
-                aria-label={listening ? "Detener dictado" : "Dictar por voz"}
-                className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[13px] font-medium transition ${
-                  listening
+                disabled={transcribing}
+                aria-label={recording ? "Detener y transcribir" : "Dictar por voz"}
+                className={`inline-flex items-center gap-1.5 rounded-lg border px-2.5 py-1.5 text-[13px] font-medium transition disabled:opacity-60 ${
+                  recording
                     ? "animate-pulse border-accent bg-accent/15 text-accent"
                     : "border-line text-ash hover:text-bone"
                 }`}
               >
-                {listening ? <MicOff className="size-3.5" /> : <Mic className="size-3.5" />}
-                {listening ? "Escuchando…" : "Dictar"}
+                {transcribing ? (
+                  <Loader2 className="size-3.5 animate-spin" />
+                ) : recording ? (
+                  <Square className="size-3.5" />
+                ) : (
+                  <Mic className="size-3.5" />
+                )}
+                {transcribing ? "Transcribiendo…" : recording ? "Grabando…" : "Dictar"}
               </button>
             ) : (
               <span />
