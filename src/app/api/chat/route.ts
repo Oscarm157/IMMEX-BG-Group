@@ -2,10 +2,13 @@ import Anthropic from '@anthropic-ai/sdk';
 import type { Tool } from '@anthropic-ai/sdk/resources';
 import { buildPersona } from '@/lib/chat/persona';
 import { buildKnowledge } from '@/lib/chat/knowledge';
+import { visibleServices } from '@/lib/services';
 
 export const runtime = 'nodejs';
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
+
+const SERVICE_NAMES = visibleServices.map((s) => s.name);
 
 const TOOLS: Tool[] = [
   {
@@ -25,10 +28,15 @@ const TOOLS: Tool[] = [
   {
     name: 'update_qualification',
     description:
-      'Llama esta herramienta cuando el visitante conteste una pregunta de calificación, aunque sea de pasada: su sector o giro, volumen de operaciones (pedimentos o valor por mes), tipo de operación (importación, exportación, IMMEX), antigüedad operando o urgencia. Captura solo lo que realmente dijo; deja vacío el resto.',
+      'Llama esta herramienta cuando el visitante conteste una pregunta de calificación, aunque sea de pasada: su sector o giro, volumen de operaciones (pedimentos o valor por mes), tipo de operación (importación, exportación, IMMEX), antigüedad operando o urgencia. Captura solo lo que realmente dijo; deja vacío el resto. En cuanto entiendas qué necesita, fija "service" al servicio de BG más cercano de la lista.',
     input_schema: {
       type: 'object',
       properties: {
+        service: {
+          type: 'string',
+          enum: SERVICE_NAMES,
+          description: 'El servicio de BG que mejor corresponde a lo que necesita el visitante. Elige el más cercano de la lista aunque el visitante no lo nombre igual.',
+        },
         industry: { type: 'string', description: 'Sector o giro del visitante' },
         monthlyVolume: { type: 'string', description: 'Volumen de operaciones (pedimentos o valor mensual)' },
         paymentTerms: { type: 'string', description: 'Tipo de operación: importación, exportación, IMMEX, etc.' },

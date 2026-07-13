@@ -5,7 +5,6 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { canViewAllLeads, isReadOnly } from "@/lib/crm-permissions";
 import type { LeadStatus } from "@/lib/schema";
 import { fmtDate } from "@/lib/crm-format";
-import { interesLabel } from "@/lib/crm-interes";
 import { StatusBadge, SourceBadge, OwnerChip, STATUS_META, STATUS_ORDER } from "@/components/crm/status";
 import { NewLeadModal } from "@/components/crm/NewLeadModal";
 import { LeadFilters } from "@/components/crm/LeadFilters";
@@ -211,7 +210,7 @@ export default async function LeadsList({
             {leads.map((lead, i) => {
               const ql = lead.qualification ?? {};
               const owner = lead.assignedTo ? userMap.get(lead.assignedTo) : null;
-              const chips = [interesLabel(ql.service ?? ql.industry), ql.monthlyVolume?.trim() || null].filter(Boolean) as string[];
+              const chips = [(ql.service ?? ql.industry)?.trim() || null, ql.monthlyVolume?.trim() || null].filter(Boolean) as string[];
               return (
                 <li key={lead.id} className="crm-fade" style={{ animationDelay: `${Math.min(i, 12) * 24}ms` }}>
                   <Link
@@ -286,7 +285,7 @@ export default async function LeadsList({
                   {leads.map((lead, i) => {
                     const ql = lead.qualification ?? {};
                     const owner = lead.assignedTo ? userMap.get(lead.assignedTo) : null;
-                    const interes = interesLabel(ql.service ?? ql.industry);
+                    const interes = (ql.service ?? ql.industry)?.trim() || null;
                     const volumen = ql.monthlyVolume?.trim() || null;
                     return (
                       <tr

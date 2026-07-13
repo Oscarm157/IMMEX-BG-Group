@@ -5,6 +5,7 @@ import { motion, AnimatePresence, useReducedMotion } from "motion/react";
 import { editorialEase } from "@/lib/motion";
 import { SERVICE_DETAIL } from "@/content/services-detail";
 import { SERVICE_SLUGS } from "@/content/service-slugs";
+import { visibleServices } from "@/lib/services";
 import { CustomsStageVisual } from "@/components/site/CustomsStageVisual";
 
 type Lang = "es" | "en";
@@ -81,8 +82,9 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
         email: leadEmail.trim(),
         source: "form",
         locale: lang,
-        // Guardar la etiqueta ES legible para el CRM, no el código crudo del resultado.
-        service: resultKey ? (data?.resultTag[resultKey]?.es ?? resultKey) : "",
+        // El lead se categoriza con el servicio BG de esta página (por slug),
+        // no con el resultado del quiz. slug y visibleServices van en el mismo orden.
+        service: visibleServices[idx]?.name ?? "",
         message: buildQuizSummary(lang, c.questions, answers),
         sourceUrl: typeof window !== "undefined" ? window.location.href : "",
       };

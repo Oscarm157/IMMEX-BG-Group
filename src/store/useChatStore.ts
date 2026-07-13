@@ -17,6 +17,7 @@ export type LeadInfo = {
 
 // Subset of LeadQualification (schema.ts) que el chatbot captura.
 export type Qualification = {
+  service?: string;
   industry?: string;
   monthlyVolume?: string;
   paymentTerms?: string;
@@ -134,7 +135,7 @@ export const useChatStore = create<ChatState>((set, get) => {
             set({ suggestedReplies: evt.input.options ?? [] });
           }
           if (evt.type === 'tool_call' && evt.tool === 'update_qualification') {
-            const keys: (keyof Qualification)[] = ['industry', 'monthlyVolume', 'paymentTerms', 'timeInBusiness', 'urgency'];
+            const keys: (keyof Qualification)[] = ['service', 'industry', 'monthlyVolume', 'paymentTerms', 'timeInBusiness', 'urgency'];
             const next = { ...get().qualification };
             for (const k of keys) {
               if (evt.input?.[k]) next[k] = evt.input[k];
