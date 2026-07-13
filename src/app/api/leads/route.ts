@@ -1,9 +1,9 @@
 import Anthropic from '@anthropic-ai/sdk';
-import { Resend } from 'resend';
 import { and, eq, gt } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { leads, leadComments, leadEvents, ads } from '@/lib/schema';
-import { leadRecipient, mailFrom } from '@/lib/site-config';
+import { leadRecipient } from '@/lib/site-config';
+import { sendLeadEmail } from '@/lib/composio-mail';
 
 const QUAL_KEYS = [
   'service',
@@ -268,32 +268,24 @@ export async function POST(req: Request) {
     .map(([label, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#888">${label}</td><td>${esc(v)}</td></tr>`)
     .join('');
 
-  try {
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    await resend.emails.send({
-      from: mailFrom,
-      to: leadRecipient,
-      subject: `Nuevo lead (${leadSource}): ${name ?? 'Sin nombre'} (${localeLabel})`,
-      html: `
-        <h2 style="margin:0 0 16px;font-family:sans-serif">Nuevo lead (${esc(leadSource)})</h2>
-        <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
-          <tr><td style="padding:4px 12px 4px 0;color:#888">Nombre</td><td><strong>${esc(name ?? '—')}</strong></td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#888">Email</td><td>${esc(email ?? '—')}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#888">Teléfono</td><td>${esc(phone ?? '—')}</td></tr>
-          ${qualRows}
-          <tr><td style="padding:4px 12px 4px 0;color:#888">Idioma</td><td>${localeLabel}</td></tr>
-          <tr><td style="padding:4px 12px 4px 0;color:#888">Origen</td><td>${esc(sourceUrl ?? '—')}</td></tr>
-        </table>
-        <hr style="margin:20px 0;border:none;border-top:1px solid #eee"/>
-        <h3 style="margin:0 0 12px;font-family:sans-serif;font-size:14px;color:#333">Transcripción</h3>
-        <div style="font-family:sans-serif;font-size:13px;line-height:1.5;background:#f9f9f9;padding:12px;border-radius:4px">
-          ${transcript}
-        </div>
-      `.trim(),
-    });
-  } catch (err) {
-    console.error('lead: email failed', err);
-  }
+  const subject = `Nuevo lead (${leadSource}): ${name ?? 'Sin nombre'} (${localeLabel})`;
+  const html = `
+    <h2 style="margin:0 0 16px;font-family:sans-serif">Nuevo lead (${esc(leadSource)})</h2>
+    <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse">
+      <tr><td style="padding:4px 12px 4px 0;color:#888">Nombre</td><td><strong>${esc(name ?? '—')}</strong></td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:#888">Email</td><td>${esc(email ?? '—')}</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:#888">Teléfono</td><td>${esc(phone ?? '—')}</td></tr>
+      ${qualRows}
+      <tr><td style="padding:4px 12px 4px 0;color:#888">Idioma</td><td>${localeLabel}</td></tr>
+      <tr><td style="padding:4px 12px 4px 0;color:#888">Origen</td><td>${esc(sourceUrl ?? '—')}</td></tr>
+    </table>
+    <hr style="margin:20px 0;border:none;border-top:1px solid #eee"/>
+    <h3 style="margin:0 0 12px;font-family:sans-serif;font-size:14px;color:#333">Transcripción</h3>
+    <div style="font-family:sans-serif;font-size:13px;line-height:1.5;background:#f9f9f9;padding:12px;border-radius:4px">
+      ${transcript}
+    </div>
+  `.trim();
+  await sendLeadEmail({ to: leadRecipient, subject, html });
 
   if (!savedOk) {
     return Response.json({ ok: false, error: 'save_failed' }, { status: 500 });
