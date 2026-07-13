@@ -44,43 +44,39 @@ export function GovernanceFramework({ framework }: { framework: Framework }) {
           </motion.p>
         </motion.div>
 
-        {/* Diagrama del framework */}
-        <motion.div
-          variants={fadeUp}
-          initial="hidden"
-          whileInView="visible"
-          viewport={vp}
-          className="mt-12 flex justify-center sm:mt-16"
-        >
-          <div className="w-full max-w-[680px] overflow-hidden rounded-[20px] border border-line bg-[#0a0f18] p-3 sm:p-5">
+        {/* Diagrama + núcleo al lado, en columna */}
+        <div className="mt-12 grid items-center gap-10 sm:mt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="visible" viewport={vp}>
             <Image
               src="/framework-diagram.webp"
               alt="BMS Trade Governance Framework: núcleo de cumplimiento, integridad, confiabilidad y trazabilidad, con las dimensiones de requerimientos del negocio, recursos de TI y comercio exterior, y modelo de operación."
               width={1600}
               height={1600}
-              className="h-auto w-full"
+              priority
+              className="mx-auto h-auto w-full max-w-[560px] rounded-[16px]"
             />
-          </div>
-        </motion.div>
-
-        {/* Núcleo: los cuatro principios como base */}
-        <div className="mt-14">
-          <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ash">{framework.coreLabel}</p>
-          <motion.div
-            variants={stagger(0.06, 0.05)}
-            initial="hidden"
-            whileInView="visible"
-            viewport={vp}
-            className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-4"
-          >
-            {framework.core.map((c, i) => (
-              <motion.div key={c.title} variants={fadeUp} className="console-panel rounded-[14px] bg-surface-1 p-5">
-                <span className="font-mono text-[12px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
-                <h3 className="mt-3 font-display text-lg font-medium tracking-[-0.01em] text-chalk">{c.title}</h3>
-                <p className="mt-2 text-[13.5px] leading-relaxed text-bone/75">{c.body}</p>
-              </motion.div>
-            ))}
           </motion.div>
+
+          <div>
+            <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-ash">{framework.coreLabel}</p>
+            <motion.div
+              variants={stagger(0.06, 0.05)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={vp}
+              className="mt-5 border-t border-line/70"
+            >
+              {framework.core.map((c, i) => (
+                <motion.div key={c.title} variants={fadeUp} className="flex gap-5 border-b border-line/70 py-5">
+                  <span className="font-mono text-[13px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
+                  <div>
+                    <h3 className="font-display text-lg font-medium tracking-[-0.01em] text-chalk">{c.title}</h3>
+                    <p className="mt-1.5 text-[14px] leading-relaxed text-bone/75">{c.body}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </div>
         </div>
 
         {/* Dimensiones 1 y 2 en columnas, con la 3 como banda transversal que las abarca */}
@@ -89,7 +85,7 @@ export function GovernanceFramework({ framework }: { framework: Framework }) {
           initial="hidden"
           whileInView="visible"
           viewport={vp}
-          className="mt-4 overflow-hidden rounded-[14px] border border-line"
+          className="mt-10 overflow-hidden rounded-[14px] border border-line"
         >
           <div className="grid sm:grid-cols-2">
             {[dim1, dim2].map((d, i) => (
