@@ -225,8 +225,8 @@ export function ChatWidget() {
               'inset-x-0 bottom-0 top-0',
               'md:inset-auto md:bottom-[92px] md:right-8',
               'md:h-[min(660px,calc(100dvh-120px))] md:w-[416px]',
-              'md:rounded-2xl md:border md:border-line md:shadow-[0_28px_70px_rgba(0,0,0,0.55)]',
-              'bg-ink',
+              'md:rounded-2xl md:border md:border-white/12 md:ring-1 md:ring-white/5 md:shadow-[0_30px_90px_-12px_rgba(0,0,0,0.8)]',
+              'bg-surface-1',
             ].join(' ')}
           >
             {/* Header con identidad de la firma */}
