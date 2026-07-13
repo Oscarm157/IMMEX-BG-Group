@@ -137,17 +137,17 @@ export default async function AboutPage({
         <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.owners}</span>
         <div className="mt-5 grid gap-4 sm:grid-cols-2">
           {owners.map((m) => (
-            <Reveal key={m.name} className="console-panel flex items-center gap-5 rounded-[16px] bg-surface-1 p-7">
+            <Reveal key={m.name} className="console-panel flex items-center gap-6 rounded-[16px] bg-surface-1 p-6 sm:p-7">
               {m.photo ? (
                 <Image
                   src={m.photo}
                   alt={m.name}
-                  width={176}
-                  height={176}
-                  className="h-[88px] w-[88px] shrink-0 rounded-full object-cover object-top"
+                  width={320}
+                  height={400}
+                  className="h-[168px] w-[136px] shrink-0 rounded-[14px] object-cover object-top sm:h-[184px] sm:w-[148px]"
                 />
               ) : (
-                <span className="flex h-[88px] w-[88px] shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent/10 font-display text-2xl font-medium text-accent">
+                <span className="flex h-[168px] w-[136px] shrink-0 items-center justify-center rounded-[14px] border border-accent/30 bg-accent/10 font-display text-4xl font-medium text-accent sm:h-[184px] sm:w-[148px]">
                   {initials(m.name)}
                 </span>
               )}
