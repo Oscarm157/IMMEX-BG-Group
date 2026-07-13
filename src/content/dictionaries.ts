@@ -70,7 +70,7 @@ export const dictionaries = {
     },
     about: {
       eyebrow: "Nosotros",
-      title: "Veinte años en aduanas, fiscal y TI.",
+      title: "Veinte años en comercio exterior, fiscal y tecnología.",
       intro:
         "Somos una firma de consultoría legal especializada en comercio exterior. Entre nuestros socios se acumulan, en promedio, veinte años de experiencia en materia fiscal, aduanera y de tecnologías de la información.",
       paragraphs: [
@@ -372,7 +372,7 @@ export const dictionaries = {
     },
     about: {
       eyebrow: "About",
-      title: "Twenty years in customs, tax and IT.",
+      title: "Twenty years in foreign trade, tax and technology.",
       intro:
         "We are a legal consulting firm specialized in foreign trade. Our partners have accumulated, on average, twenty years of experience in tax, customs and information technology matters.",
       paragraphs: [
