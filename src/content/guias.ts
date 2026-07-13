@@ -1104,7 +1104,7 @@ export const GUIAS: Guia[] = [
     definicion: [
       "Desde 2014, la importación temporal bajo IMMEX causa IVA (y, en su caso, IEPS). La certificación en materia de IVA e IEPS es el reconocimiento que otorga el SAT para no desembolsar ese impuesto en cada pedimento: la empresa certificada aplica un crédito equivalente al 100% del IVA, que se compensa contra el propio impuesto que se causaría.",
       "En la práctica, la certificación evita descapitalizarse. Sin ella, una empresa IMMEX tendría que pagar el IVA de cada importación temporal y esperar a recuperarlo, o garantizarlo con una fianza. Con ella, el impuesto se neutraliza con el crédito mientras la mercancía cumpla su ciclo temporal.",
-      "El beneficio viene con obligaciones: la certificación exige sistemas de control (Anexo 30 y Anexo 31), estar al corriente en materia fiscal y renovar en tiempo. No es un sello que se obtiene una vez; es un estatus que se sostiene con cumplimiento continuo.",
+      "El beneficio viene con obligaciones: la certificación exige sistemas de control (Anexo 30 y Anexo 31), estar al corriente en materia fiscal y renovar en tiempo. Es un estatus que se sostiene con cumplimiento continuo, no un sello que se obtiene una sola vez.",
     ],
     fundamento: {
       cita: "Art. 28-A Ley del IVA · Art. 15-A Ley del IEPS · Título 7 de las Reglas Generales de Comercio Exterior",
@@ -1282,7 +1282,7 @@ export const GUIAS: Guia[] = [
     definicion: [
       "PROSEC (Programa de Promoción Sectorial) es un instrumento de la Secretaría de Economía que permite a los productores de ciertos sectores importar insumos, partes, componentes y maquinaria con un arancel preferencial, típicamente 0% o 5%, con independencia del país de origen de la mercancía.",
       "Su lógica es de competitividad: para que un fabricante en México no pague un arancel alto por el insumo que necesita, PROSEC reduce ese arancel cuando la empresa está autorizada en el sector correspondiente y usa la mercancía para producir los bienes de ese sector.",
-      "PROSEC se otorga por sector (electrónico, automotriz, textil, siderúrgico y muchos otros) y ampara fracciones arancelarias específicas. No es un permiso general para importar barato: es un beneficio acotado a lo que cada sector produce.",
+      "PROSEC se otorga por sector (electrónico, automotriz, textil, siderúrgico y muchos otros) y ampara fracciones arancelarias específicas. El beneficio queda acotado a lo que cada sector produce, no habilita a importar barato cualquier cosa.",
     ],
     fundamento: {
       cita: "Decreto por el que se establecen diversos Programas de Promoción Sectorial (PROSEC)",
@@ -1421,7 +1421,7 @@ export const GUIAS: Guia[] = [
       },
       {
         title: "No conciliar con PROSEC",
-        desc: "Operar la Regla 8ª sin que cuadre con el programa PROSEC y con el control de inventarios. Las inconsistencias entre el permiso, el arancel y el uso real son de las primeras que revisa la autoridad.",
+        desc: "Operar la Regla 8ª sin que cuadre con el programa PROSEC y con el control de inventarios. Las inconsistencias entre el permiso, el arancel y el uso real saltan a la vista en cuanto la autoridad cruza los datos.",
       },
     ],
     faq: [
