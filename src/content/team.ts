@@ -2,11 +2,11 @@
 // lead: liderazgo, se destaca arriba; el resto va en grilla compacta.
 // owner: dueños (Mario y Edgardo), card destacada con foto/monograma.
 // photo: ruta a la foto cuando exista; si falta, se usa monograma con iniciales.
-export type Member = { name: string; es: string; en: string; lead?: boolean; owner?: boolean; photo?: string };
+export type Member = { name: string; es: string; en: string; lead?: boolean; owner?: boolean; photo?: string; linkedin?: string };
 
 export const TEAM: Member[] = [
-  { name: "Mario A. Cortés", es: "Co-CEO", en: "Co-CEO", lead: true, owner: true, photo: "/nosotros/mario.jpg" },
-  { name: "Edgardo Romero", es: "Co-CEO", en: "Co-CEO", lead: true, owner: true, photo: "/nosotros/edgardo.jpg" },
+  { name: "Mario A. Cortés", es: "Co-CEO", en: "Co-CEO", lead: true, owner: true, photo: "/nosotros/mario.jpg", linkedin: "https://www.linkedin.com/in/mario-alberto-cort%C3%A9s-47682394/" },
+  { name: "Edgardo Romero", es: "Co-CEO", en: "Co-CEO", lead: true, owner: true, photo: "/nosotros/edgardo.jpg", linkedin: "https://www.linkedin.com/in/cumplimiento-aduanero/" },
   { name: "Rogelio Viloria Beltrán", es: "Co-CEO y CFO", en: "Co-CEO & CFO", lead: true },
   { name: "Luis Mateo", es: "COO", en: "COO", lead: true },
   { name: "Hugo García", es: "CIO", en: "CIO", lead: true },
