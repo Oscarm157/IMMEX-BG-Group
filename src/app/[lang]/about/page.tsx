@@ -71,16 +71,20 @@ export default async function AboutPage({
               </div>
             </Reveal>
           </div>
-          <Reveal delay={0.18} className="relative flex items-center justify-center">
-            <Image
-              src="/img/gen/about-hero.png"
-              alt=""
-              aria-hidden
-              width={1200}
-              height={1200}
-              priority
-              className="w-[90%] max-w-[460px] mix-blend-screen"
-            />
+          <Reveal delay={0.18} className="relative">
+            <div className="overflow-hidden rounded-[20px] border border-line/70 bg-surface-1 shadow-[0_30px_80px_-30px_rgba(0,0,0,0.7)]">
+              <Image
+                src="/nosotros/socios.jpg"
+                alt="Mario A. Cortés y Edgardo Romero, socios de BG Consulting Group"
+                width={1400}
+                height={1166}
+                priority
+                className="h-full w-full object-cover"
+              />
+            </div>
+            <span className="mt-3 block text-center font-mono text-[11px] uppercase tracking-[0.14em] text-bone/50">
+              Mario A. Cortés · Edgardo Romero
+            </span>
           </Reveal>
         </div>
       </section>
@@ -138,9 +142,9 @@ export default async function AboutPage({
                 <Image
                   src={m.photo}
                   alt={m.name}
-                  width={88}
-                  height={88}
-                  className="h-[88px] w-[88px] shrink-0 rounded-full object-cover"
+                  width={176}
+                  height={176}
+                  className="h-[88px] w-[88px] shrink-0 rounded-full object-cover object-top"
                 />
               ) : (
                 <span className="flex h-[88px] w-[88px] shrink-0 items-center justify-center rounded-full border border-accent/30 bg-accent/10 font-display text-2xl font-medium text-accent">
