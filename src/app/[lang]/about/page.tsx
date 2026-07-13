@@ -144,10 +144,10 @@ export default async function AboutPage({
                   alt={m.name}
                   width={800}
                   height={1200}
-                  className="w-full max-w-[360px] rounded-[14px] object-cover"
+                  className="w-full max-w-[306px] rounded-[14px] object-cover"
                 />
               ) : (
-                <span className="flex aspect-[2/3] w-full max-w-[360px] items-center justify-center rounded-[14px] bg-accent/10 font-display text-7xl font-medium text-accent">
+                <span className="flex aspect-[2/3] w-full max-w-[306px] items-center justify-center rounded-[14px] bg-accent/10 font-display text-7xl font-medium text-accent">
                   {initials(m.name)}
                 </span>
               )}
