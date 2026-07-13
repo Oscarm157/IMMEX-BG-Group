@@ -68,7 +68,7 @@ export async function login(formData: FormData) {
   }
 
   const jar = await cookies();
-  jar.set(CRM_COOKIE, await signSession(u.id, Math.floor(Date.now() / 1000)), {
+  jar.set(CRM_COOKIE, await signSession(u.id, Math.floor(Date.now() / 1000), u.sessionVersion), {
     httpOnly: true,
     secure: process.env.PREVIEW_INSECURE_COOKIE !== "1",
     sameSite: "lax",

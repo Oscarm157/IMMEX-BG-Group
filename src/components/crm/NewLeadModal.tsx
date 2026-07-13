@@ -4,10 +4,10 @@ import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { Plus } from "lucide-react";
 import { createLead } from "@/app/admin/actions";
+import { EMAIL_RE } from "@/lib/validate";
 import { Modal } from "./Modal";
 
 const labelCls = "mb-1 block text-[12.5px] font-medium text-[var(--crm-ink)]";
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const PHONE_RE = /^[+\d][\d\s().-]{6,}$/;
 
 function CreateButton({ disabled }: { disabled: boolean }) {

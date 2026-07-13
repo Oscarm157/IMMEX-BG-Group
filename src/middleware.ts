@@ -6,8 +6,8 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   if (pathname.startsWith("/admin/login")) return NextResponse.next();
 
-  const uid = await verifySession(req.cookies.get(CRM_COOKIE)?.value);
-  if (uid) return NextResponse.next();
+  const session = await verifySession(req.cookies.get(CRM_COOKIE)?.value);
+  if (session) return NextResponse.next();
 
   const url = req.nextUrl.clone();
   url.pathname = "/admin/login";

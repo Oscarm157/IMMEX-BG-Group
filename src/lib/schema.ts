@@ -46,9 +46,18 @@ export const users = pgTable("users", {
   role: text("role").$type<UserRole>().default("agent").notNull(),
   active: boolean("active").default(true).notNull(),
   mustChangePassword: boolean("must_change_password").default(true).notNull(),
+  // Se incrementa al resetear la contraseña o desactivar: invalida las cookies viejas.
+  sessionVersion: integer("session_version").default(0).notNull(),
   // Solo para usuarios con rol "client": acota su vista a este cliente.
   clientId: uuid("client_id").references(() => clients.id, { onDelete: "set null" }),
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
+});
+
+// Configuración del CRM: pares clave/valor (destinatarios de notificación, rotación de leads).
+export const settings = pgTable("settings", {
+  key: text("key").primaryKey(),
+  value: text("value").default("").notNull(),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });
 
 // Anuncios / campañas (captura manual v1).

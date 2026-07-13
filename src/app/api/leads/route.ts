@@ -4,6 +4,8 @@ import { db } from '@/lib/db';
 import { leads, leadComments, leadEvents, ads } from '@/lib/schema';
 import { leadRecipient, siteConfig } from '@/lib/site-config';
 import { sendLeadEmail } from '@/lib/composio-mail';
+import { getLeadNotifyEmails } from '@/lib/settings';
+import { assignNextLead } from '@/lib/lead-rotation';
 
 const QUAL_KEYS = [
   'service',
@@ -179,6 +181,9 @@ export async function POST(req: Request) {
 
   const summary = leadSource === 'bot' ? await summarize(rawMessages) : null;
 
+  // Reparto automático (round robin / porcentaje) según la config; null si está en "off".
+  const assignedTo = await assignNextLead();
+
   // Save to Neon (qualification + transcript + summary for the CRM)
   let newLeadId: string | undefined;
   try {
@@ -195,6 +200,7 @@ export async function POST(req: Request) {
         transcript: rawMessages.length ? rawMessages : null,
         summary,
         adId,
+        assignedTo,
         utmSource,
         utmCampaign,
         utmMedium,
@@ -209,6 +215,14 @@ export async function POST(req: Request) {
         kind: 'created',
         detail: leadSource === 'form' ? 'Lead creado desde el formulario de contacto' : 'Lead creado desde el chatbot',
       });
+      if (assignedTo) {
+        await db.insert(leadEvents).values({
+          leadId: newLeadId,
+          userId: assignedTo,
+          kind: 'assigned',
+          detail: 'Asignado automáticamente por rotación',
+        });
+      }
       if (message) {
         await db.insert(leadComments).values({ leadId: newLeadId, body: message });
       }
@@ -300,7 +314,8 @@ export async function POST(req: Request) {
         </table>
       </td></tr>
     </table>`.trim();
-  await sendLeadEmail({ to: leadRecipient, subject, html });
+  const recipients = await getLeadNotifyEmails();
+  await sendLeadEmail({ to: recipients.length ? recipients : [leadRecipient], subject, html });
 
   if (!savedOk) {
     return Response.json({ ok: false, error: 'save_failed' }, { status: 500 });

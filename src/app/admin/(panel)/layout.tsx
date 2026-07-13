@@ -27,6 +27,7 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           showPosts={canManagePosts(me.role)}
           showAds={canViewAds(me.role)}
           showFeedback={me.role === "admin"}
+          showSettings={canManageUsers(me.role)}
           logoutAction={logout}
         />
         <SidebarInset>

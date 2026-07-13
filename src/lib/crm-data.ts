@@ -147,3 +147,12 @@ export async function getUserById(id: string) {
 export async function getAllUsers() {
   return db.select().from(users).orderBy(asc(users.name));
 }
+
+/** Agentes activos elegibles para la rotación de leads. */
+export async function getEligibleAgents() {
+  return db
+    .select({ id: users.id, name: users.name })
+    .from(users)
+    .where(and(eq(users.role, "agent"), eq(users.active, true)))
+    .orderBy(asc(users.name));
+}

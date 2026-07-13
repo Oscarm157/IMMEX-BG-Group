@@ -67,22 +67,27 @@ async function hmacHex(msg: string): Promise<string> {
   return [...new Uint8Array(sig)].map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-export async function signSession(userId: string, issuedAt: number): Promise<string> {
-  const payload = `${userId}.${issuedAt}`;
+export async function signSession(userId: string, issuedAt: number, version = 0): Promise<string> {
+  const payload = `${userId}.${issuedAt}.${version}`;
   return `${payload}.${await hmacHex(payload)}`;
 }
 
-/** Returns the userId if the session signature is valid and not expired, else null. */
-export async function verifySession(token: string | undefined): Promise<string | null> {
+/**
+ * Returns { uid, ver } if the session signature is valid and not expired, else null.
+ * Tokens sin versión (firmados antes de este cambio) se tratan como ver = 0.
+ */
+export async function verifySession(
+  token: string | undefined
+): Promise<{ uid: string; ver: number } | null> {
   if (!token) return null;
   const i = token.lastIndexOf(".");
   if (i < 0) return null;
   const payload = token.slice(0, i);
   const sig = token.slice(i + 1);
   if (!timingSafeEqual(sig, await hmacHex(payload))) return null;
-  const [uid, iatStr] = payload.split(".");
+  const [uid, iatStr, verStr] = payload.split(".");
   const iat = Number(iatStr);
   if (!uid || !Number.isFinite(iat)) return null;
   if (Date.now() / 1000 - iat > SESSION_MAX_AGE_S) return null;
-  return uid;
+  return { uid, ver: Number(verStr) || 0 };
 }
