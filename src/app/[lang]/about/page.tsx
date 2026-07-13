@@ -172,14 +172,14 @@ export default async function AboutPage({
 
         {/* Equipo */}
         <span className="mt-14 block font-mono text-[11px] uppercase tracking-[0.16em] text-accent">{tier.team}</span>
-        <div className="console-panel mt-5 grid overflow-hidden rounded-[14px] bg-surface-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="console-panel mt-5 grid gap-px overflow-hidden rounded-[14px] bg-line sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((m) => (
             <div
               key={m.name}
-              className="flex items-baseline justify-between gap-4 border-b border-line px-6 py-4"
+              className="flex flex-col gap-1 bg-surface-1 px-6 py-4"
             >
               <span className="text-[14px] text-chalk">{m.name}</span>
-              <span className="shrink-0 text-right font-mono text-[10px] uppercase tracking-[0.08em] text-bone/60">
+              <span className="font-mono text-[10px] uppercase tracking-[0.08em] text-bone/60">
                 {role(m)}
               </span>
             </div>
