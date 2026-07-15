@@ -94,10 +94,15 @@ function ChatBody({ topicId }: { topicId: string }) {
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const lastMsgRef = useRef<HTMLDivElement>(null);
 
+  // Al enviar una pregunta, la llevamos al tope para leer la respuesta desde el
+  // inicio; cuando llega la respuesta NO saltamos al fondo (el usuario baja leyendo).
   useEffect(() => {
-    scrollRef.current?.scrollTo({ top: scrollRef.current.scrollHeight, behavior: "smooth" });
-  }, [messages, pending]);
+    if (messages[messages.length - 1]?.role === "user") {
+      lastMsgRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [messages]);
 
   async function send(question: string) {
     const q = question.trim();
@@ -143,13 +148,21 @@ function ChatBody({ topicId }: { topicId: string }) {
         ) : (
           messages.map((m, i) =>
             m.role === "user" ? (
-              <div key={i} className="flex justify-end">
+              <div
+                key={i}
+                ref={i === messages.length - 1 ? lastMsgRef : undefined}
+                className="flex scroll-mt-3 justify-end"
+              >
                 <div className="max-w-[85%] rounded-2xl rounded-br-sm bg-accent/12 px-3.5 py-2 text-[13.5px] leading-relaxed text-chalk">
                   {m.content}
                 </div>
               </div>
             ) : (
-              <div key={i} className="flex justify-start">
+              <div
+                key={i}
+                ref={i === messages.length - 1 ? lastMsgRef : undefined}
+                className="flex justify-start"
+              >
                 <div className="max-w-[92%] rounded-2xl rounded-bl-sm border border-line bg-surface-2 px-3.5 py-2.5">
                   <AssistantAnswer text={m.content} onSeek={seek} />
                 </div>
