@@ -78,7 +78,7 @@ export function Player({
         <aside className="hidden w-[308px] shrink-0 border-r border-line bg-surface-1 lg:block">
           <div className="sticky top-0 max-h-screen overflow-y-auto crm-scroll px-4 py-6">
             <Link href="/campus" className="mb-6 flex px-2">
-              <Logo variant="bg" tone="light" size="sm" />
+              <Logo variant="bg" tone="light" size="lg" />
             </Link>
             <div className="mb-5 flex items-center justify-between gap-2 px-2">
               <div className="min-w-0">
@@ -129,7 +129,7 @@ export function Player({
           <div className="absolute inset-0 bg-ink/70" onClick={() => setDrawerOpen(false)} />
           <div className="absolute inset-y-0 left-0 w-[86%] max-w-[320px] overflow-y-auto border-r border-line bg-surface-1 px-4 py-6">
             <div className="mb-3 px-2">
-              <Logo variant="bg" tone="light" size="sm" />
+              <Logo variant="bg" tone="light" size="lg" />
             </div>
             <div className="mb-5 flex items-center justify-between px-2">
               <p className="font-display text-[15px] font-semibold text-chalk">{categoryTitle}</p>

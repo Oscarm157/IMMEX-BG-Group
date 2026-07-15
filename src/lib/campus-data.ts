@@ -188,6 +188,25 @@ export async function getTopicView(
   };
 }
 
+// Catálogo: categorías accesibles al usuario (audiencia + org), publicadas,
+// cada una con su progreso. Ordenadas por el campo order.
+export async function getCatalog(user: CurrentLearner) {
+  const allowed = await accessibleCategoryIds(user);
+  if (allowed.size === 0) return [];
+  const cats = await db
+    .select()
+    .from(campusCategories)
+    .where(eq(campusCategories.status, "published"))
+    .orderBy(asc(campusCategories.order));
+  const visible = cats.filter((c) => allowed.has(c.id));
+  const out = [];
+  for (const category of visible) {
+    const { progress } = await computeCategoryProgress(user.id, category.id);
+    out.push({ category, progress });
+  }
+  return out;
+}
+
 // Alta de inscripción al primer acceso (idempotente).
 export async function ensureEnrollment(userId: string, categoryId: string) {
   await db

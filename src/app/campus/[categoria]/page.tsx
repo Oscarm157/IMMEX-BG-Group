@@ -37,7 +37,7 @@ export default async function CategoryPage({
         <div className="relative mx-auto w-full max-w-[1040px] px-5 pb-12 pt-7 sm:px-8 sm:pb-16 sm:pt-8">
           <div className="flex items-center justify-between">
             <Link href="/campus">
-              <Logo variant="bg" tone="light" size="sm" />
+              <Logo variant="bg" tone="light" size="lg" />
             </Link>
             <Link
               href="/campus"

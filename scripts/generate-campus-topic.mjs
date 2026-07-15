@@ -49,7 +49,8 @@ Reglas duras:
 - Sin em-dashes. Usa comas, dos puntos o punto.
 - intro: un solo párrafo que enganche y diga de qué trata y por qué importa.
 - desglose: markdown con 2 a 4 secciones ## y bullets con los puntos clave reales (términos como MVE, COVE, eDocument, Busem, OCR, IDP, expediente digital, etc. tal como aparecen).
-- quiz: 5 a 8 preguntas básicas, cada una con EXACTAMENTE 4 opciones y una sola correcta. Preguntas sobre lo explicado en el video, no de cultura general.`;
+- quiz: 5 a 8 preguntas básicas, cada una con EXACTAMENTE 4 opciones y una sola correcta. Preguntas sobre lo explicado en el video, no de cultura general.
+- Normaliza términos mal transcritos: "Busem", "Busen", "Busém" siempre se escriben VUCEM (Ventanilla Única de Comercio Exterior Mexicana).`;
 
 async function call() {
   for (const model of MODELS) {
