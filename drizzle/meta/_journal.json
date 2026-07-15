@@ -36,6 +36,13 @@
       "when": 1783909326896,
       "tag": "0004_glossy_lizard",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1784134944406,
+      "tag": "0005_curved_night_nurse",
+      "breakpoints": true
     }
   ]
 }
