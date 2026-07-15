@@ -20,7 +20,8 @@ export function YouTubePlayer({ videoId }: { videoId: string }) {
         "*",
       );
       win.postMessage(JSON.stringify({ event: "command", func: "playVideo", args: [] }), "*");
-      iframeRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      // Scroll al <figure> (tiene scroll-mt) para que el topbar sticky no corte el video.
+      iframeRef.current?.closest("figure")?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   }, [assistant]);
 
@@ -30,7 +31,7 @@ export function YouTubePlayer({ videoId }: { videoId: string }) {
     `?rel=0&enablejsapi=1${origin ? `&origin=${encodeURIComponent(origin)}` : ""}`;
 
   return (
-    <figure className="my-8 overflow-hidden rounded-2xl border border-line bg-surface-1 shadow-[0_24px_70px_-32px_rgba(0,0,0,0.85)] ring-1 ring-white/5">
+    <figure className="my-8 scroll-mt-[112px] overflow-hidden rounded-2xl border border-line bg-surface-1 shadow-[0_24px_70px_-32px_rgba(0,0,0,0.85)] ring-1 ring-white/5">
       <div className="relative aspect-video">
         <iframe
           ref={iframeRef}

@@ -146,19 +146,21 @@ export function Player({
           </div>
         </aside>
       ) : (
-        <button
-          type="button"
-          onClick={() => setRailOpen(true)}
-          aria-label="Mostrar contenido de la categoría"
-          className="group hidden shrink-0 flex-col items-center gap-3 border-r border-line bg-surface-1 px-3 py-5 transition-colors hover:bg-surface-2 lg:flex"
-        >
-          <span className="grid h-8 w-8 place-items-center rounded-full border border-line text-accent transition-colors group-hover:border-accent/50">
-            ›
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash [writing-mode:vertical-rl]">
-            Contenido
-          </span>
-        </button>
+        <div className="hidden shrink-0 border-r border-line bg-surface-1 lg:block">
+          <button
+            type="button"
+            onClick={() => setRailOpen(true)}
+            aria-label="Mostrar contenido de la categoría"
+            className="group sticky top-0 flex h-screen flex-col items-center gap-3 px-3 py-5 transition-colors hover:bg-surface-2"
+          >
+            <span className="grid h-8 w-8 place-items-center rounded-full border border-line text-accent transition-colors group-hover:border-accent/50">
+              ›
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash [writing-mode:vertical-rl]">
+              Contenido
+            </span>
+          </button>
+        </div>
       )}
 
       {/* Contenido */}

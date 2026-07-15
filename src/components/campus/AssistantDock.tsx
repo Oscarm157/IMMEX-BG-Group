@@ -17,27 +17,73 @@ function fmt(seconds: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-// Renderiza el texto del bot convirtiendo los marcadores ⟦SEG⟧ en chips que
-// hacen saltar el reproductor a ese segundo.
-function AssistantText({ text, onSeek }: { text: string; onSeek: (s: number) => void }) {
-  const parts = text.split(/⟦(\d+)⟧/g);
+// Inline: convierte ⟦SEG⟧ en chips clicables y **texto** en negritas.
+function Inline({ text, onSeek }: { text: string; onSeek: (s: number) => void }) {
+  const chunks = text.split(/(⟦\d+⟧|\*\*[^*]+\*\*)/g).filter(Boolean);
   return (
-    <span className="text-[13.5px] leading-relaxed text-bone">
-      {parts.map((part, i) =>
-        i % 2 === 1 ? (
-          <button
-            key={i}
-            type="button"
-            onClick={() => onSeek(Number(part))}
-            className="mx-0.5 inline-flex items-center gap-1 rounded-md bg-accent/15 px-1.5 py-0.5 align-baseline font-mono text-[11px] font-medium text-accent transition-colors hover:bg-accent/25"
-          >
-            ▶ {fmt(Number(part))}
-          </button>
+    <>
+      {chunks.map((c, i) => {
+        const seg = c.match(/^⟦(\d+)⟧$/);
+        if (seg) {
+          return (
+            <button
+              key={i}
+              type="button"
+              onClick={() => onSeek(Number(seg[1]))}
+              className="mx-0.5 inline-flex items-center gap-1 rounded-md bg-accent/15 px-1.5 py-0.5 align-baseline font-mono text-[11px] font-medium text-accent transition-colors hover:bg-accent/25"
+            >
+              ▶ {fmt(Number(seg[1]))}
+            </button>
+          );
+        }
+        const bold = c.match(/^\*\*([^*]+)\*\*$/);
+        if (bold) return <strong key={i} className="font-semibold text-chalk">{bold[1]}</strong>;
+        return <span key={i}>{c}</span>;
+      })}
+    </>
+  );
+}
+
+// Renderiza la respuesta del bot con estructura: párrafos y viñetas, para que no
+// se vea amontonado. Agrupa líneas de viñeta consecutivas en una lista.
+function AssistantAnswer({ text, onSeek }: { text: string; onSeek: (s: number) => void }) {
+  type Blk = { type: "p" | "ul"; items: string[] };
+  const blocks: Blk[] = [];
+  let cur: Blk | null = null;
+  for (const raw of text.split("\n")) {
+    const line = raw.trim();
+    const bullet = line.match(/^[-*•]\s+(.*)$/);
+    if (bullet) {
+      if (!cur || cur.type !== "ul") ((cur = { type: "ul", items: [] }), blocks.push(cur));
+      cur.items.push(bullet[1]);
+    } else if (!line) {
+      cur = null;
+    } else {
+      if (!cur || cur.type !== "p") ((cur = { type: "p", items: [] }), blocks.push(cur));
+      cur.items.push(line);
+    }
+  }
+  return (
+    <div className="space-y-2.5 text-[13.5px] leading-relaxed text-bone">
+      {blocks.map((b, i) =>
+        b.type === "ul" ? (
+          <ul key={i} className="space-y-1.5 pl-1">
+            {b.items.map((it, j) => (
+              <li key={j} className="flex gap-2">
+                <span className="mt-[7px] h-1 w-1 shrink-0 rounded-full bg-accent" />
+                <span>
+                  <Inline text={it} onSeek={onSeek} />
+                </span>
+              </li>
+            ))}
+          </ul>
         ) : (
-          <span key={i}>{part}</span>
+          <p key={i}>
+            <Inline text={b.items.join(" ")} onSeek={onSeek} />
+          </p>
         ),
       )}
-    </span>
+    </div>
   );
 }
 
@@ -105,7 +151,7 @@ function ChatBody({ topicId }: { topicId: string }) {
             ) : (
               <div key={i} className="flex justify-start">
                 <div className="max-w-[92%] rounded-2xl rounded-bl-sm border border-line bg-surface-2 px-3.5 py-2.5">
-                  <AssistantText text={m.content} onSeek={seek} />
+                  <AssistantAnswer text={m.content} onSeek={seek} />
                 </div>
               </div>
             ),
@@ -154,6 +200,9 @@ function ChatBody({ topicId }: { topicId: string }) {
             ↑
           </button>
         </div>
+        <p className="mt-2 text-center text-[10.5px] leading-snug text-ash">
+          El asistente puede cometer errores. Verifica la información importante antes de actuar.
+        </p>
       </form>
     </div>
   );
@@ -199,19 +248,21 @@ export function AssistantDock({ topicId }: { topicId: string }) {
           </div>
         </aside>
       ) : (
-        <button
-          type="button"
-          onClick={() => setRailOpen(true)}
-          aria-label="Mostrar asistente del video"
-          className="group hidden shrink-0 flex-col items-center gap-3 border-l border-line bg-surface-1 px-3 py-5 transition-colors hover:bg-surface-2 xl:flex"
-        >
-          <span className="grid h-8 w-8 place-items-center rounded-full border border-line text-accent transition-colors group-hover:border-accent/50">
-            ‹
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash [writing-mode:vertical-rl]">
-            Asistente
-          </span>
-        </button>
+        <div className="hidden shrink-0 border-l border-line bg-surface-1 xl:block">
+          <button
+            type="button"
+            onClick={() => setRailOpen(true)}
+            aria-label="Mostrar asistente del video"
+            className="group sticky top-0 flex h-screen flex-col items-center gap-3 px-3 py-5 transition-colors hover:bg-surface-2"
+          >
+            <span className="grid h-8 w-8 place-items-center rounded-full border border-line text-accent transition-colors group-hover:border-accent/50">
+              ‹
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ash [writing-mode:vertical-rl]">
+              Asistente
+            </span>
+          </button>
+        </div>
       )}
 
       {/* Botón flotante (< xl) */}
