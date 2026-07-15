@@ -1,5 +1,6 @@
 import { Markdown } from "@/components/site/Markdown";
 import type { Block } from "@/lib/campus-data";
+import { YouTubePlayer } from "./YouTubePlayer";
 
 // Renderiza la secuencia de bloques de un video. Cada kind es una familia visual
 // distinta; se pueden intercalar libremente.
@@ -25,20 +26,7 @@ function BlockView({ block }: { block: Block }) {
       ) : null;
 
     case "video":
-      return "videoId" in d ? (
-        <figure className="my-8 overflow-hidden rounded-2xl border border-line bg-surface-1 shadow-[0_24px_70px_-32px_rgba(0,0,0,0.85)] ring-1 ring-white/5">
-          <div className="relative aspect-video">
-            <iframe
-              className="absolute inset-0 h-full w-full"
-              src={`https://www.youtube-nocookie.com/embed/${d.videoId}?rel=0`}
-              title="Video"
-              loading="lazy"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          </div>
-        </figure>
-      ) : null;
+      return "videoId" in d ? <YouTubePlayer videoId={d.videoId} /> : null;
 
     case "button":
       return "href" in d ? (

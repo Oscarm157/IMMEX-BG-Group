@@ -43,6 +43,13 @@
       "when": 1784134944406,
       "tag": "0005_curved_night_nurse",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1784141029678,
+      "tag": "0006_soft_sabretooth",
+      "breakpoints": true
     }
   ]
 }

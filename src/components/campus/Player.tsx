@@ -100,6 +100,7 @@ export function Player({
   topics,
   currentSlug,
   user,
+  assistant,
   children,
 }: {
   categoryTitle: string;
@@ -107,6 +108,7 @@ export function Player({
   topics: SidebarTopic[];
   currentSlug: string;
   user: { name: string; audienceLabel: string };
+  assistant?: React.ReactNode;
   children: React.ReactNode;
 }) {
   const [railOpen, setRailOpen] = useState(true);
@@ -173,6 +175,9 @@ export function Player({
         </div>
         {children}
       </div>
+
+      {/* Asistente del video (tercera región: inline en xl, overlay en pantallas menores) */}
+      {assistant}
 
       {/* Drawer mobile */}
       {drawerOpen ? (

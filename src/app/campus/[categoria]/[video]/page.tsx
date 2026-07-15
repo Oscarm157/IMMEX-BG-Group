@@ -5,6 +5,8 @@ import { getTopicView, ensureEnrollment } from "@/lib/campus-data";
 import { Player } from "@/components/campus/Player";
 import { CampusBlocks } from "@/components/campus/CampusBlocks";
 import { QuizRunner } from "@/components/campus/QuizRunner";
+import { AssistantDock } from "@/components/campus/AssistantDock";
+import { VideoAssistantProvider } from "@/components/campus/video-assistant-context";
 import { markTopicComplete } from "../../actions";
 
 export default async function VideoPage({
@@ -25,13 +27,15 @@ export default async function VideoPage({
     .join(" · ");
 
   return (
-    <Player
-      categoryTitle={category.title}
-      categorySlug={category.slug}
-      topics={sidebar}
-      currentSlug={topic.slug}
-      user={{ name: me.name, audienceLabel }}
-    >
+    <VideoAssistantProvider>
+      <Player
+        categoryTitle={category.title}
+        categorySlug={category.slug}
+        topics={sidebar}
+        currentSlug={topic.slug}
+        user={{ name: me.name, audienceLabel }}
+        assistant={topic.hasAssistant ? <AssistantDock topicId={topic.id} /> : null}
+      >
       {/* Topbar de progreso */}
       <header className="console-panel sticky top-0 z-30 flex items-center gap-4 border-b border-line bg-ink/85 px-5 py-3 backdrop-blur-xl sm:px-8">
         <div className="hidden items-center gap-2 sm:flex">
@@ -116,7 +120,8 @@ export default async function VideoPage({
           <NeighborLink categoria={category.slug} slug={neighbors.next} dir="next" labeled />
         </div>
       </div>
-    </Player>
+      </Player>
+    </VideoAssistantProvider>
   );
 }
 

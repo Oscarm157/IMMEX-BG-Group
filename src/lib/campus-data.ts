@@ -144,6 +144,13 @@ export async function getTopicView(
     .where(eq(campusBlocks.topicId, current.id))
     .orderBy(asc(campusBlocks.order));
 
+  // El asistente del video solo aparece si el topic tiene transcript con tiempos.
+  const tRow = await db
+    .select({ transcript: campusTopics.transcript })
+    .from(campusTopics)
+    .where(eq(campusTopics.id, current.id));
+  const hasAssistant = !!tRow[0]?.transcript?.segments?.length;
+
   let quiz = null as null | {
     id: string;
     title: string;
@@ -176,7 +183,13 @@ export async function getTopicView(
 
   return {
     category,
-    topic: { id: current.id, slug: current.slug, title: current.title, done: current.topicDone },
+    topic: {
+      id: current.id,
+      slug: current.slug,
+      title: current.title,
+      done: current.topicDone,
+      hasAssistant,
+    },
     blocks: blocks as Block[],
     quiz,
     progress,

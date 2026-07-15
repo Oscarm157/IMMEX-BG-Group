@@ -1,0 +1,1 @@
+ALTER TABLE "campus_topics" ADD COLUMN "transcript" jsonb;

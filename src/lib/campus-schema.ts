@@ -29,6 +29,10 @@ export type CampusEnrollStatus = "not_started" | "in_progress" | "completed";
 export type CampusInvitePurpose = "invite" | "magiclink";
 export type CampusQuizSource = "manual" | "youtube_auto";
 
+// Transcript con tiempos del video de un topic. Fuente de verdad del asistente:
+// segments[{start(seg), text}]. Se llena al generar el video desde URL (Supadata).
+export type CampusTranscript = { segments: { start: number; text: string }[]; lang: string };
+
 // data del bloque según kind (validado en la app al leer/escribir).
 export type CampusBlockData =
   | { markdown: string } // text
@@ -120,6 +124,7 @@ export const campusTopics = pgTable(
     title: text("title").notNull(),
     order: integer("order"),
     status: text("status").$type<CampusStatus>().default("draft").notNull(),
+    transcript: jsonb("transcript").$type<CampusTranscript>(),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
   },
