@@ -1,19 +1,17 @@
 "use server";
 
-import { eq } from "drizzle-orm";
+import { and, asc, desc, eq, gte, lt } from "drizzle-orm";
 import Anthropic from "@anthropic-ai/sdk";
 import { db } from "@/lib/db";
-import { campusTopics, campusCategories } from "@/lib/campus-schema";
+import { campusTopics, campusAiUsage, campusAssistantMessages } from "@/lib/campus-schema";
 import { requireLearner } from "@/lib/campus-session";
 import { canAccessCategory } from "@/lib/campus-data";
-import { makeRateLimiter } from "@/lib/rate-limit";
 
 const MODELS = ["claude-sonnet-5", "claude-sonnet-4-6"];
 const MAX_QUESTION = 600;
-
-// Anti-abuso: por usuario. Ventana corta (fuerza-bruta) y tope diario (costo IA).
-const perMinute = makeRateLimiter(60_000, 12);
-const perDay = makeRateLimiter(24 * 60 * 60_000, 200);
+const RATE_PER_MIN = 12;
+const RATE_PER_DAY = 200;
+const CONTEXT_MESSAGES = 8; // historial que se manda a la IA como contexto
 
 export type AssistantMessage = { role: "user" | "assistant"; content: string };
 export type AssistantResult =
@@ -39,6 +37,21 @@ Reglas duras:
 - Cada segmento del transcript viene como "[mm:ss|SEG] texto", donde SEG es el segundo de inicio. Para citar un momento, escribe el marcador ⟦SEG⟧ (usa el SEG del segmento correspondiente). Ejemplo: "En BMS puedes generar el eDocument sin salir del sistema ⟦458⟧." No inventes segundos: usa solo los SEG que aparecen en el transcript.
 - Normaliza términos mal transcritos: "Busem/Busen/Busén" es VUCEM; "document/edument/dcument" es eDocument.`;
 
+// Rate limit durable (entre instancias): cuenta llamadas del usuario en la última
+// ventana desde campus_ai_usage. Devuelve true si excede minuto o día.
+async function overRateLimit(userId: string): Promise<boolean> {
+  const now = Date.now();
+  const dayAgo = new Date(now - 24 * 60 * 60_000);
+  const minAgo = new Date(now - 60_000);
+  const rows = await db
+    .select({ createdAt: campusAiUsage.createdAt })
+    .from(campusAiUsage)
+    .where(and(eq(campusAiUsage.userId, userId), gte(campusAiUsage.createdAt, dayAgo)));
+  const perDay = rows.length;
+  const perMin = rows.filter((r) => r.createdAt && r.createdAt >= minAgo).length;
+  return perDay >= RATE_PER_DAY || perMin >= RATE_PER_MIN;
+}
+
 async function callClaude(
   anthropic: Anthropic,
   system: Anthropic.TextBlockParam[],
@@ -63,7 +76,6 @@ async function callClaude(
 export async function askVideoAssistant(
   topicId: string,
   question: string,
-  history: AssistantMessage[] = [],
 ): Promise<AssistantResult> {
   const me = await requireLearner();
 
@@ -72,7 +84,7 @@ export async function askVideoAssistant(
   if (q.length > MAX_QUESTION) return { ok: false, error: "La pregunta es demasiado larga." };
   if (typeof topicId !== "string" || !topicId) return { ok: false, error: "Video inválido." };
 
-  if (perMinute(me.id) || perDay(me.id)) {
+  if (await overRateLimit(me.id)) {
     return { ok: false, error: "Vas muy rápido. Espera un momento antes de preguntar de nuevo." };
   }
 
@@ -107,11 +119,23 @@ export async function askVideoAssistant(
     },
   ];
 
-  // El historial previo (en memoria del cliente) más la pregunta nueva.
-  const trimmed = history
-    .filter((m) => (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
-    .slice(-8);
-  const messages: AssistantMessage[] = [...trimmed, { role: "user", content: q }];
+  // Historial previo desde DB (no se confía en el cliente): últimos N mensajes.
+  const prior = await db
+    .select({ role: campusAssistantMessages.role, content: campusAssistantMessages.content })
+    .from(campusAssistantMessages)
+    .where(
+      and(eq(campusAssistantMessages.userId, me.id), eq(campusAssistantMessages.topicId, topicId)),
+    )
+    .orderBy(desc(campusAssistantMessages.createdAt))
+    .limit(CONTEXT_MESSAGES);
+  const messages: AssistantMessage[] = [
+    ...prior.reverse().map((m) => ({ role: m.role, content: m.content })),
+    { role: "user", content: q },
+  ];
+
+  // Registra el uso para el rate limit durable y limpia lo viejo (> 1 día).
+  await db.insert(campusAiUsage).values({ userId: me.id });
+  await db.delete(campusAiUsage).where(lt(campusAiUsage.createdAt, new Date(Date.now() - 24 * 60 * 60_000)));
 
   const started = Date.now();
   try {
@@ -132,6 +156,11 @@ export async function askVideoAssistant(
       }),
     );
     if (!answer) return { ok: false, error: "No pude generar una respuesta. Intenta de nuevo." };
+    // Persiste el turno (pregunta + respuesta) para que el repaso no se pierda.
+    await db.insert(campusAssistantMessages).values([
+      { userId: me.id, topicId, role: "user", content: q },
+      { userId: me.id, topicId, role: "assistant", content: answer },
+    ]);
     return { ok: true, answer };
   } catch (e) {
     console.error(

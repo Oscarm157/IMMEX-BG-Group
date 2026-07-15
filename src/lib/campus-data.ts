@@ -9,6 +9,7 @@ import {
   campusQuizQuestions,
   campusProgress,
   campusEnrollments,
+  campusAssistantMessages,
   type CampusBlockData,
   type CampusBlockKind,
 } from "./campus-schema";
@@ -146,10 +147,35 @@ export async function getTopicView(
 
   // El asistente del video solo aparece si el topic tiene transcript con tiempos.
   const tRow = await db
-    .select({ transcript: campusTopics.transcript })
+    .select({ transcript: campusTopics.transcript, suggestions: campusTopics.suggestions })
     .from(campusTopics)
     .where(eq(campusTopics.id, current.id));
   const hasAssistant = !!tRow[0]?.transcript?.segments?.length;
+  // Historial del chat del asistente (persistente) para no perderlo al recargar.
+  const assistantHistory = hasAssistant
+    ? (
+        await db
+          .select({ role: campusAssistantMessages.role, content: campusAssistantMessages.content })
+          .from(campusAssistantMessages)
+          .where(
+            and(
+              eq(campusAssistantMessages.userId, user.id),
+              eq(campusAssistantMessages.topicId, current.id),
+            ),
+          )
+          .orderBy(asc(campusAssistantMessages.createdAt))
+          .limit(40)
+      ).map((m) => ({ role: m.role, content: m.content }))
+    : [];
+  // Sugerencias del asistente: propias del video si existen, si no genéricas.
+  const suggestions =
+    tRow[0]?.suggestions?.length
+      ? tRow[0].suggestions
+      : [
+          "Resúmeme el video en pocas líneas.",
+          "¿Cuáles son los puntos clave?",
+          "¿Qué debo recordar de este video?",
+        ];
 
   let quiz = null as null | {
     id: string;
@@ -189,6 +215,8 @@ export async function getTopicView(
       title: current.title,
       done: current.topicDone,
       hasAssistant,
+      suggestions,
+      assistantHistory,
     },
     blocks: blocks as Block[],
     quiz,

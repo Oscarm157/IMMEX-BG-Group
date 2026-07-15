@@ -4,13 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import { askVideoAssistant, type AssistantMessage } from "@/app/campus/assistant-actions";
 import { useVideoAssistant } from "./video-assistant-context";
 
-const SUGGESTIONS = [
-  "¿En qué minuto explican la diferencia entre COVE y eDocument?",
-  "¿Qué es la Manifestación de Valor y quién debe presentarla?",
-  "¿En qué parte hablan de VUCEM y para qué sirve?",
-  "El OCR y el IDP, ¿en qué se diferencian?",
-];
-
 function fmt(seconds: number) {
   const m = Math.floor(seconds / 60);
   const s = Math.floor(seconds % 60);
@@ -87,9 +80,17 @@ function AssistantAnswer({ text, onSeek }: { text: string; onSeek: (s: number) =
   );
 }
 
-function ChatBody({ topicId }: { topicId: string }) {
+function ChatBody({
+  topicId,
+  suggestions,
+  initialMessages,
+}: {
+  topicId: string;
+  suggestions: string[];
+  initialMessages: AssistantMessage[];
+}) {
   const assistant = useVideoAssistant();
-  const [messages, setMessages] = useState<AssistantMessage[]>([]);
+  const [messages, setMessages] = useState<AssistantMessage[]>(initialMessages);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -109,10 +110,9 @@ function ChatBody({ topicId }: { topicId: string }) {
     if (!q || pending) return;
     setError(null);
     setInput("");
-    const history = messages;
-    setMessages([...history, { role: "user", content: q }]);
+    setMessages((m) => [...m, { role: "user", content: q }]);
     setPending(true);
-    const res = await askVideoAssistant(topicId, q, history);
+    const res = await askVideoAssistant(topicId, q);
     setPending(false);
     if (res.ok) {
       setMessages((m) => [...m, { role: "assistant", content: res.answer }]);
@@ -133,7 +133,7 @@ function ChatBody({ topicId }: { topicId: string }) {
               tema y explicártelo con el contenido de la sesión.
             </p>
             <div className="flex flex-col gap-2">
-              {SUGGESTIONS.map((s) => (
+              {suggestions.map((s) => (
                 <button
                   key={s}
                   type="button"
@@ -173,7 +173,7 @@ function ChatBody({ topicId }: { topicId: string }) {
         {pending ? (
           <div className="flex items-center gap-2 px-1 text-[12px] text-smoke">
             <span className="signal-glow inline-block h-1.5 w-1.5 rounded-full bg-accent" />
-            Pensando...
+            Analizando...
           </div>
         ) : null}
         {error ? (
@@ -246,9 +246,26 @@ function DockHeader({ onClose, closeLabel }: { onClose: () => void; closeLabel: 
 }
 
 // Un solo componente: inline en pantallas anchas (xl), overlay flotante abajo.
-export function AssistantDock({ topicId }: { topicId: string }) {
+export function AssistantDock({
+  topicId,
+  suggestions,
+  initialMessages,
+}: {
+  topicId: string;
+  suggestions: string[];
+  initialMessages: AssistantMessage[];
+}) {
   const [railOpen, setRailOpen] = useState(true);
   const [overlayOpen, setOverlayOpen] = useState(false);
+  const overlayRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!overlayOpen) return;
+    overlayRef.current?.focus();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setOverlayOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [overlayOpen]);
 
   return (
     <>
@@ -257,7 +274,7 @@ export function AssistantDock({ topicId }: { topicId: string }) {
         <aside className="hidden w-[360px] shrink-0 border-l border-line bg-surface-1 xl:block">
           <div className="sticky top-0 flex h-screen flex-col">
             <DockHeader onClose={() => setRailOpen(false)} closeLabel="Ocultar asistente" />
-            <ChatBody topicId={topicId} />
+            <ChatBody topicId={topicId} suggestions={suggestions} initialMessages={initialMessages} />
           </div>
         </aside>
       ) : (
@@ -292,9 +309,16 @@ export function AssistantDock({ topicId }: { topicId: string }) {
       {overlayOpen ? (
         <div className="fixed inset-0 z-50 xl:hidden">
           <div className="absolute inset-0 bg-ink/70" onClick={() => setOverlayOpen(false)} />
-          <div className="absolute inset-y-0 right-0 flex w-[92%] max-w-[420px] flex-col border-l border-line bg-surface-1">
+          <div
+            ref={overlayRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Asistente del video"
+            tabIndex={-1}
+            className="absolute inset-y-0 right-0 flex w-[92%] max-w-[420px] flex-col border-l border-line bg-surface-1 outline-none"
+          >
             <DockHeader onClose={() => setOverlayOpen(false)} closeLabel="Cerrar" />
-            <ChatBody topicId={topicId} />
+            <ChatBody topicId={topicId} suggestions={suggestions} initialMessages={initialMessages} />
           </div>
         </div>
       ) : null}

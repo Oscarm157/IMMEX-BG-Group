@@ -8,22 +8,55 @@ import { useVideoAssistant } from "./video-assistant-context";
 export function YouTubePlayer({ videoId }: { videoId: string }) {
   const iframeRef = useRef<HTMLIFrameElement>(null);
   const assistant = useVideoAssistant();
+  const readyRef = useRef(false);
+  const pendingSeekRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!assistant) return;
-    assistant.registerSeek((seconds) => {
+    // Manda seekTo + playVideo por postMessage (IFrame API).
+    function apply(seconds: number) {
       const win = iframeRef.current?.contentWindow;
       if (!win) return;
-      // Comandos de la IFrame API por postMessage: salta y reproduce.
       win.postMessage(
         JSON.stringify({ event: "command", func: "seekTo", args: [seconds, true] }),
         "*",
       );
       win.postMessage(JSON.stringify({ event: "command", func: "playVideo", args: [] }), "*");
-      // Scroll al <figure> (tiene scroll-mt) para que el topbar sticky no corte el video.
-      iframeRef.current?.closest("figure")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }, [assistant]);
+    }
+
+    // El reproductor emite mensajes cuando ya está listo; hasta entonces el seek
+    // se guarda y se aplica al recibir el primer mensaje (evita saltos fallidos).
+    function onMessage(e: MessageEvent) {
+      if (!iframeRef.current || e.source !== iframeRef.current.contentWindow) return;
+      if (typeof e.data !== "string" || !e.data.includes("youtube")) return;
+      readyRef.current = true;
+      if (pendingSeekRef.current != null) {
+        apply(pendingSeekRef.current);
+        pendingSeekRef.current = null;
+      }
+    }
+    window.addEventListener("message", onMessage);
+
+    // Handshake para que el iframe empiece a emitir eventos.
+    const iv = setInterval(() => {
+      const win = iframeRef.current?.contentWindow;
+      if (!win) return;
+      win.postMessage(JSON.stringify({ event: "listening", id: videoId }), "*");
+      if (readyRef.current) clearInterval(iv);
+    }, 400);
+
+    if (assistant) {
+      assistant.registerSeek((seconds) => {
+        if (readyRef.current) apply(seconds);
+        else pendingSeekRef.current = seconds;
+        // Scroll al <figure> (tiene scroll-mt) para que el topbar sticky no corte el video.
+        iframeRef.current?.closest("figure")?.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+    return () => {
+      window.removeEventListener("message", onMessage);
+      clearInterval(iv);
+    };
+  }, [assistant, videoId]);
 
   const origin = typeof window !== "undefined" ? window.location.origin : "";
   const src =

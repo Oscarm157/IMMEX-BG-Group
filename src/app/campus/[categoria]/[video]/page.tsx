@@ -34,7 +34,15 @@ export default async function VideoPage({
         topics={sidebar}
         currentSlug={topic.slug}
         user={{ name: me.name, audienceLabel }}
-        assistant={topic.hasAssistant ? <AssistantDock topicId={topic.id} /> : null}
+        assistant={
+          topic.hasAssistant ? (
+            <AssistantDock
+              topicId={topic.id}
+              suggestions={topic.suggestions}
+              initialMessages={topic.assistantHistory}
+            />
+          ) : null
+        }
       >
       {/* Topbar de progreso */}
       <header className="console-panel sticky top-0 z-30 flex items-center gap-4 border-b border-line bg-ink/85 px-5 py-3 backdrop-blur-xl sm:px-8">

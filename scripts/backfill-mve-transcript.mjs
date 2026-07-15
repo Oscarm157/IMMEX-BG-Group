@@ -20,9 +20,17 @@ for (const line of raw.split("\n")) {
 if (!segments.length) throw new Error("no se parsearon segmentos");
 
 const transcript = { segments, lang: "es" };
+// Sugerencias curadas del asistente para el piloto MVE (el video sí las responde).
+const suggestions = [
+  "¿Cuáles son los dos métodos para agregar el eDocument?",
+  "¿Qué es la Manifestación de Valor y quién debe presentarla?",
+  "¿En qué parte hablan de VUCEM y para qué sirve?",
+  "El OCR y el IDP, ¿en qué se diferencian?",
+];
 const rows = await sql`select id from campus_topics where slug = ${TOPIC_SLUG}`;
 if (!rows.length) throw new Error(`topic ${TOPIC_SLUG} no existe`);
-await sql`update campus_topics set transcript = ${JSON.stringify(transcript)} where id = ${rows[0].id}`;
+await sql`update campus_topics set transcript = ${JSON.stringify(transcript)},
+          suggestions = ${JSON.stringify(suggestions)} where id = ${rows[0].id}`;
 
-console.log(`OK: ${segments.length} segmentos guardados en ${TOPIC_SLUG} (${segments[0].start}s -> ${segments.at(-1).start}s)`);
+console.log(`OK: ${segments.length} segmentos + ${suggestions.length} sugerencias en ${TOPIC_SLUG} (${segments[0].start}s -> ${segments.at(-1).start}s)`);
 process.exit(0);

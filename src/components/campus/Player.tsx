@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { logout } from "@/app/campus/auth-actions";
@@ -114,6 +114,13 @@ export function Player({
   const [railOpen, setRailOpen] = useState(true);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
+  useEffect(() => {
+    if (!drawerOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setDrawerOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [drawerOpen]);
+
   return (
     <div className="flex min-h-screen">
       {/* Sidebar desktop */}
@@ -185,7 +192,12 @@ export function Player({
       {drawerOpen ? (
         <div className="fixed inset-0 z-50 lg:hidden">
           <div className="absolute inset-0 bg-ink/70" onClick={() => setDrawerOpen(false)} />
-          <div className="absolute inset-y-0 left-0 flex w-[86%] max-w-[320px] flex-col border-r border-line bg-surface-1">
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-label="Contenido de la categoría"
+            className="absolute inset-y-0 left-0 flex w-[86%] max-w-[320px] flex-col border-r border-line bg-surface-1"
+          >
             <div className="px-4 pb-3 pt-6">
               <div className="mb-3">
                 <Logo variant="bg" tone="light" size="lg" />

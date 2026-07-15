@@ -1,19 +1,36 @@
-// Genera un video del campus desde un transcript con Claude (tool-use forzado):
-// title, intro, desglose y quiz. Inserta el topic en una categoría.
-// Prototipo del flujo estrella "generar video desde URL" (Fase 4 lo lleva a UI).
-// Uso: node --env-file=.env.local scripts/generate-campus-topic.mjs
-import { readFileSync } from "node:fs";
+// Genera un video del campus desde una URL de YouTube (tubería estrella de Fase 4):
+// - Trae el transcript CON tiempos (Supadata) -> se guarda en campus_topics.transcript
+//   (habilita el asistente del video automáticamente).
+// - Con Claude (tool-use forzado) produce title, intro, desglose, quiz y suggestions.
+// - Inserta/actualiza el topic con sus bloques + quiz + transcript + sugerencias.
+// Uso: CAMPUS_CATEGORY=comercio-exterior CAMPUS_SLUG=mve-edocument \
+//      CAMPUS_URL="https://www.youtube.com/watch?v=..." \
+//      node --env-file=.env.local scripts/generate-campus-topic.mjs
 import Anthropic from "@anthropic-ai/sdk";
 import { neon } from "@neondatabase/serverless";
+import { getTimestampedTranscript, youtubeId } from "./_supadata-timestamped.mjs";
 
 const sql = neon(process.env.DATABASE_URL);
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 const MODELS = ["claude-sonnet-5", "claude-sonnet-4-6"];
 
-const CATEGORY_SLUG = "comercio-exterior";
-const VIDEO_ID = "q76s5l8SE7M";
-const TOPIC_SLUG = "mve-edocument";
-const transcript = readFileSync("/root/bg-group/scripts/_mve-transcript.txt", "utf8");
+const CATEGORY_SLUG = process.env.CAMPUS_CATEGORY;
+const VIDEO_URL = process.env.CAMPUS_URL;
+const TOPIC_SLUG = process.env.CAMPUS_SLUG;
+if (!CATEGORY_SLUG || !VIDEO_URL || !TOPIC_SLUG) {
+  console.error("Faltan CAMPUS_CATEGORY, CAMPUS_URL y CAMPUS_SLUG.");
+  process.exit(1);
+}
+const VIDEO_ID = youtubeId(VIDEO_URL);
+if (!VIDEO_ID) {
+  console.error("URL de YouTube inválida.");
+  process.exit(1);
+}
+
+console.log("Trayendo transcript con tiempos (Supadata)...");
+const { segments, lang } = await getTimestampedTranscript(VIDEO_URL);
+console.log(`Transcript: ${segments.length} segmentos (${lang}).`);
+const transcriptText = segments.map((s) => s.text).join(" ");
 
 const TOOL = {
   name: "emit_topic",
@@ -37,8 +54,13 @@ const TOOL = {
           required: ["prompt", "options", "correctIndex"],
         },
       },
+      suggestions: {
+        type: "array",
+        description: "3 o 4 preguntas cortas que un alumno podría hacerle al asistente y que ESTE video SÍ responde. Naturales, específicas del contenido (no genéricas), sin numerarlas.",
+        items: { type: "string" },
+      },
     },
-    required: ["title", "intro", "desglose", "quiz"],
+    required: ["title", "intro", "desglose", "quiz", "suggestions"],
   },
 };
 
@@ -51,7 +73,8 @@ Reglas duras:
 - intro: un solo párrafo que enganche y diga de qué trata y por qué importa.
 - desglose: PROSA editorial que explique, organizada por concepto en 2 a 4 secciones con encabezado ## limpio. Los títulos NO llevan nombres de expositores (mal: "Digitalizador de documentos (José)"; bien: "Digitalizador de documentos en BMS"). Los párrafos son la base; usa viñetas SOLO para enumerar elementos discretos y cortos (pasos, métodos, requisitos), no para todo. Evita el muro de viñetas. Conserva los términos técnicos tal cual (MVE, COVE, eDocument, VUCEM, OCR, IDP, expediente digital).
 - quiz: 5 a 8 preguntas básicas, cada una con EXACTAMENTE 4 opciones y una sola correcta. Preguntas sobre lo explicado en el video, no de cultura general.
-- Normaliza términos mal transcritos: "Busem", "Busen", "Busém" siempre se escriben VUCEM (Ventanilla Única de Comercio Exterior Mexicana).`;
+- suggestions: 3 o 4 preguntas cortas, naturales y específicas del video, que el asistente pueda responder con este contenido (ej. "¿Cuáles son los dos métodos para agregar el eDocument?").
+- Normaliza términos mal transcritos: "Busem", "Busen", "Busém" siempre se escriben VUCEM (Ventanilla Única de Comercio Exterior Mexicana); "document/edument/dcument" es eDocument.`;
 
 async function call() {
   for (const model of MODELS) {
@@ -62,7 +85,7 @@ async function call() {
         system: SYSTEM,
         tools: [TOOL],
         tool_choice: { type: "tool", name: "emit_topic" },
-        messages: [{ role: "user", content: `<transcripcion>\n${transcript}\n</transcripcion>\n\nGenera el contenido de la lección con la herramienta emit_topic.` }],
+        messages: [{ role: "user", content: `<transcripcion>\n${transcriptText}\n</transcripcion>\n\nGenera el contenido de la lección con la herramienta emit_topic.` }],
       });
     } catch (e) {
       if (e?.status === 404) continue;
@@ -76,17 +99,20 @@ const res = await call();
 const block = res.content.find((b) => b.type === "tool_use");
 if (!block) throw new Error("sin tool_use en la respuesta");
 const data = block.input;
-console.log(`Generado: "${data.title}" · ${data.quiz.length} preguntas`);
+console.log(`Generado: "${data.title}" · ${data.quiz.length} preguntas · ${data.suggestions.length} sugerencias`);
 
 // Inserta / reemplaza el topic en la categoría.
 const cat = await sql`select id from campus_categories where slug = ${CATEGORY_SLUG}`;
+if (!cat.length) throw new Error(`categoría ${CATEGORY_SLUG} no existe`);
 const categoryId = cat[0].id;
+const transcript = JSON.stringify({ segments, lang });
 let t = await sql`select id from campus_topics where category_id = ${categoryId} and slug = ${TOPIC_SLUG}`;
 if (!t.length) {
-  t = await sql`insert into campus_topics (category_id, slug, title, "order", status)
-                values (${categoryId}, ${TOPIC_SLUG}, ${data.title}, ${0}, ${"published"}) returning id`;
+  t = await sql`insert into campus_topics (category_id, slug, title, "order", status, transcript, suggestions)
+                values (${categoryId}, ${TOPIC_SLUG}, ${data.title}, ${0}, ${"published"}, ${transcript}, ${JSON.stringify(data.suggestions)}) returning id`;
 } else {
-  await sql`update campus_topics set title = ${data.title}, status = ${"published"}, "order" = ${0} where id = ${t[0].id}`;
+  await sql`update campus_topics set title = ${data.title}, status = ${"published"},
+            transcript = ${transcript}, suggestions = ${JSON.stringify(data.suggestions)} where id = ${t[0].id}`;
 }
 const topicId = t[0].id;
 
@@ -94,7 +120,7 @@ await sql`delete from campus_blocks where topic_id = ${topicId}`;
 await sql`insert into campus_blocks (topic_id, kind, "order", data)
           values (${topicId}, ${"text"}, ${0}, ${JSON.stringify({ markdown: data.intro })})`;
 await sql`insert into campus_blocks (topic_id, kind, "order", data)
-          values (${topicId}, ${"video"}, ${1}, ${JSON.stringify({ provider: "youtube", videoId: VIDEO_ID, url: `https://www.youtube.com/watch?v=${VIDEO_ID}` })})`;
+          values (${topicId}, ${"video"}, ${1}, ${JSON.stringify({ provider: "youtube", videoId: VIDEO_ID, url: VIDEO_URL })})`;
 await sql`insert into campus_blocks (topic_id, kind, "order", data)
           values (${topicId}, ${"text"}, ${2}, ${JSON.stringify({ markdown: data.desglose })})`;
 
@@ -111,5 +137,5 @@ for (const q of data.quiz) {
             values (${quiz[0].id}, ${q.prompt}, ${JSON.stringify(q.options)}, ${q.correctIndex}, ${qi++})`;
 }
 
-console.log(`Video insignia sembrado: ${CATEGORY_SLUG}/${TOPIC_SLUG} (video real ${VIDEO_ID})`);
+console.log(`Video sembrado con asistente: ${CATEGORY_SLUG}/${TOPIC_SLUG} (video ${VIDEO_ID}, ${segments.length} segmentos)`);
 process.exit(0);

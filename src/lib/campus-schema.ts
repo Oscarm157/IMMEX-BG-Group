@@ -125,6 +125,9 @@ export const campusTopics = pgTable(
     order: integer("order"),
     status: text("status").$type<CampusStatus>().default("draft").notNull(),
     transcript: jsonb("transcript").$type<CampusTranscript>(),
+    // Preguntas sugeridas del asistente, específicas del video (generadas al crear
+    // el topic). Si null, el asistente usa un fallback genérico.
+    suggestions: jsonb("suggestions").$type<string[]>(),
     createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
     updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
   },
@@ -204,6 +207,31 @@ export const campusProgress = pgTable(
   },
   (t) => [unique().on(t.userId, t.stepType, t.stepId)],
 );
+
+// Uso del asistente IA (durable, para rate limit real entre instancias). Un
+// registro por llamada; se cuenta por ventana (minuto/día) antes de permitir otra.
+export const campusAiUsage = pgTable("campus_ai_usage", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => campusUsers.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
+
+// Historial del chat del asistente por usuario + video (persistente, para que el
+// repaso no se pierda al recargar). role = user | assistant.
+export const campusAssistantMessages = pgTable("campus_assistant_messages", {
+  id: uuid("id").primaryKey().defaultRandom(),
+  userId: uuid("user_id")
+    .notNull()
+    .references(() => campusUsers.id, { onDelete: "cascade" }),
+  topicId: uuid("topic_id")
+    .notNull()
+    .references(() => campusTopics.id, { onDelete: "cascade" }),
+  role: text("role").$type<"user" | "assistant">().notNull(),
+  content: text("content").notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+});
 
 // Intento de quiz (histórico). answers = índices elegidos por pregunta.
 export const campusQuizAttempts = pgTable("campus_quiz_attempts", {

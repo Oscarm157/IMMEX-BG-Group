@@ -50,6 +50,13 @@
       "when": 1784141029678,
       "tag": "0006_soft_sabretooth",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1784146849895,
+      "tag": "0007_good_crystal",
+      "breakpoints": true
     }
   ]
 }
