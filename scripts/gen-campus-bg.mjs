@@ -14,42 +14,38 @@ const OUT = "/root/bg-group/public/campus";
 mkdirSync(OUT, { recursive: true });
 
 const base =
-  "cinematic editorial photograph, dark moody atmosphere, deep navy charcoal blue tones (#0f1521), " +
-  "a single cool teal-green accent light (#00e6a0) glowing subtly, high contrast, deep blacks, " +
-  "volumetric fog, subtle film grain, anamorphic, vast negative space, no people, no faces, " +
-  "no text, no logos, no watermark, premium and restrained";
+  "realistic professional stock photograph, natural daylight, true-to-life colors, clean and modern, " +
+  "sharp focus, documentary style, corporate and understated, no people, no faces, " +
+  "no text, no logos, no watermark, not stylized, no heavy color grade";
 
 const jobs = [
   {
     name: "comercio-exterior-cover",
     ar: "16:9",
     prompt:
-      "Wide cinematic aerial view of a vast container shipping port terminal at blue hour, " +
-      "endless stacked cargo containers in deep navy shadow, cranes silhouetted, a few teal-green " +
-      "dock lights glowing through mist, calm and monumental, " + base,
+      "Wide daytime photograph of a real container shipping port terminal, neatly stacked cargo " +
+      "containers, gantry cranes, calm overcast sky, professional and orderly, " + base,
   },
   {
     name: "immex",
     ar: "16:9",
     prompt:
-      "Cinematic interior of a vast dark modern logistics warehouse at night, rows of shelving " +
-      "vanishing into shadow, a single shaft of cool teal light raking across the floor, haze, " +
-      "monumental emptiness, " + base,
+      "Interior of a clean modern logistics warehouse in daytime, organized shelving with boxes and " +
+      "pallets, bright even industrial lighting, wide angle, " + base,
   },
   {
     name: "reglas-de-origen",
     ar: "16:9",
     prompt:
-      "Cinematic night photograph of an empty border trade highway crossing, long exposure light " +
-      "trails in cool teal, overhead gantry structures, deep navy sky, industrial and quiet, fog, " + base,
+      "Daytime photograph of a commercial trade border highway with cargo trucks, overhead signage " +
+      "gantry, clear sky, orderly logistics scene, " + base,
   },
   {
     name: "pedimento",
     ar: "16:9",
     prompt:
-      "Abstract cinematic macro of stacked official paperwork and ledgers on a dark desk, shallow " +
-      "depth of field, a single teal edge light catching the paper edges, deep shadow, editorial " +
-      "still life, no readable text, " + base,
+      "A tidy modern office desk with a neat stack of business documents and folders, natural window " +
+      "daylight, shallow depth of field, clean corporate still life, no readable text, " + base,
   },
 ];
 

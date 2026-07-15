@@ -21,9 +21,9 @@ const TOOL = {
   input_schema: {
     type: "object",
     properties: {
-      title: { type: "string", description: "Título corto y claro del video (sin fecha)." },
+      title: { type: "string", description: "Título corto, claro y profesional, sin fecha ni nombres de personas." },
       intro: { type: "string", description: "1 párrafo (markdown) que engancha y dice de qué trata el video y por qué importa." },
-      desglose: { type: "string", description: "Markdown con secciones ## y bullets de los puntos clave REALES del video." },
+      desglose: { type: "string", description: "Contenido editorial en prosa (markdown), organizado por concepto en 2 a 4 secciones con encabezado ## limpio (SIN nombres de expositores). Base en párrafos; viñetas SOLO para enumerar elementos discretos y cortos (pasos, métodos, requisitos). No conviertas todo en viñetas." },
       quiz: {
         type: "array",
         description: "5 a 8 preguntas básicas de opción múltiple sobre lo visto.",
@@ -45,10 +45,11 @@ const TOOL = {
 const SYSTEM = `Eres editor de capacitación de BG Consulting Group, firma de comercio exterior y aduanas. A partir del transcript de un video, produces el contenido de la lección.
 Reglas duras:
 - Español. Tono de par experto que explica, claro y factual. Nada de vendehumos ni frases huecas.
+- No es un resumen del transcript: verifica, depura y REESTRUCTURA la información para que quede clara, útil y concisa. No todo lo del video tiene que estar. Omite saludos, agradecimientos, logística de instalación, chit-chat y relleno; quédate con lo que le sirve al alumno.
 - Usa SOLO información que esté en el transcript. No inventes datos, cifras, nombres ni funciones.
 - Sin em-dashes. Usa comas, dos puntos o punto.
 - intro: un solo párrafo que enganche y diga de qué trata y por qué importa.
-- desglose: markdown con 2 a 4 secciones ## y bullets con los puntos clave reales (términos como MVE, COVE, eDocument, Busem, OCR, IDP, expediente digital, etc. tal como aparecen).
+- desglose: PROSA editorial que explique, organizada por concepto en 2 a 4 secciones con encabezado ## limpio. Los títulos NO llevan nombres de expositores (mal: "Digitalizador de documentos (José)"; bien: "Digitalizador de documentos en BMS"). Los párrafos son la base; usa viñetas SOLO para enumerar elementos discretos y cortos (pasos, métodos, requisitos), no para todo. Evita el muro de viñetas. Conserva los términos técnicos tal cual (MVE, COVE, eDocument, VUCEM, OCR, IDP, expediente digital).
 - quiz: 5 a 8 preguntas básicas, cada una con EXACTAMENTE 4 opciones y una sola correcta. Preguntas sobre lo explicado en el video, no de cultura general.
 - Normaliza términos mal transcritos: "Busem", "Busen", "Busém" siempre se escriben VUCEM (Ventanilla Única de Comercio Exterior Mexicana).`;
 
@@ -57,7 +58,7 @@ async function call() {
     try {
       return await anthropic.messages.create({
         model,
-        max_tokens: 4000,
+        max_tokens: 8000,
         system: SYSTEM,
         tools: [TOOL],
         tool_choice: { type: "tool", name: "emit_topic" },

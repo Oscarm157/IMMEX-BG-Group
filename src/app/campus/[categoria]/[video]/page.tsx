@@ -20,6 +20,9 @@ export default async function VideoPage({
 
   const { category, topic, blocks, quiz, progress, sidebar, neighbors } = view;
   const mark = markTopicComplete.bind(null, topic.id, category.slug, topic.slug);
+  const audienceLabel = [me.audience === "empleado" ? "Colaborador" : "Cliente", me.role]
+    .filter(Boolean)
+    .join(" · ");
 
   return (
     <Player
@@ -27,6 +30,7 @@ export default async function VideoPage({
       categorySlug={category.slug}
       topics={sidebar}
       currentSlug={topic.slug}
+      user={{ name: me.name, audienceLabel }}
     >
       {/* Topbar de progreso */}
       <header className="console-panel sticky top-0 z-30 flex items-center gap-4 border-b border-line bg-ink/85 px-5 py-3 backdrop-blur-xl sm:px-8">
@@ -48,13 +52,13 @@ export default async function VideoPage({
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <NeighborLink categoria={category.slug} slug={neighbors.prev} dir="prev" />
-          <NeighborLink categoria={category.slug} slug={neighbors.next} dir="next" />
+          <NeighborLink categoria={category.slug} slug={neighbors.prev} dir="prev" labeled />
+          <NeighborLink categoria={category.slug} slug={neighbors.next} dir="next" labeled />
         </div>
       </header>
 
-      {/* Columna de lectura */}
-      <div className="mx-auto w-full max-w-[760px] px-5 py-10 sm:px-8 sm:py-14">
+      {/* Columna de lectura (contenedor ancho; el video usa todo el ancho, el texto conserva medida de lectura) */}
+      <div className="mx-auto w-full max-w-[980px] px-5 py-10 sm:px-8 sm:py-14">
         <div className="flex items-center justify-between gap-3">
           <nav className="min-w-0 font-mono text-[11px] uppercase tracking-[0.1em] text-ash">
             <Link href={`/campus/${category.slug}`} className="hover:text-smoke">

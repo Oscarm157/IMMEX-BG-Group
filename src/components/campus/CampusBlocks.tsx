@@ -17,8 +17,9 @@ function BlockView({ block }: { block: Block }) {
   const d = block.data;
   switch (block.kind) {
     case "text":
+      // La prosa conserva medida de lectura aunque el contenedor sea ancho.
       return "markdown" in d ? (
-        <div className="[&>*:first-child]:mt-0">
+        <div className="max-w-[760px] [&>*:first-child]:mt-0">
           <Markdown>{d.markdown}</Markdown>
         </div>
       ) : null;
