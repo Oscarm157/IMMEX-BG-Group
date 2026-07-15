@@ -25,7 +25,7 @@ function BlockView({ block }: { block: Block }) {
 
     case "video":
       return "videoId" in d ? (
-        <figure className="my-7 overflow-hidden rounded-xl border border-line bg-surface-1">
+        <figure className="my-8 overflow-hidden rounded-2xl border border-line bg-surface-1 shadow-[0_24px_70px_-32px_rgba(0,0,0,0.85)] ring-1 ring-white/5">
           <div className="relative aspect-video">
             <iframe
               className="absolute inset-0 h-full w-full"

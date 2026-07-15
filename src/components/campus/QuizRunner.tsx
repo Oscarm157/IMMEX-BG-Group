@@ -21,11 +21,48 @@ export function QuizRunner({
   topicSlug: string;
 }) {
   const router = useRouter();
+  const [started, setStarted] = useState(false);
   const [answers, setAnswers] = useState<number[]>(() => quiz.questions.map(() => -1));
   const [result, setResult] = useState<QuizResult | null>(null);
   const [pending, start] = useTransition();
 
   const allAnswered = answers.every((a) => a >= 0);
+
+  // Compacto por default: tarjeta colapsada hasta que se empieza.
+  if (!started && !result) {
+    return (
+      <section className="mt-12 flex flex-col gap-4 rounded-2xl border border-line bg-surface-1 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+        <div className="flex items-start gap-3">
+          <span className="mt-0.5 grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-surface-3 text-accent">
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden>
+              <path d="M7 9h6M7 12h4M4 4h12v12l-2-1.5L12 16l-2-1.5L8 16l-2-1.5L4 16V4z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
+            </svg>
+          </span>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="font-mono text-[11px] uppercase tracking-[0.12em] text-ash">Evaluación</span>
+              {quiz.passed ? (
+                <span className="rounded-full bg-accent/12 px-2 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-accent">
+                  Aprobado
+                </span>
+              ) : null}
+            </div>
+            <h2 className="mt-1 font-display text-[18px] font-semibold tracking-[-0.01em] text-chalk">{quiz.title}</h2>
+            <p className="mt-0.5 text-[13px] text-smoke">
+              {quiz.questions.length} preguntas · aprobar con 70%
+            </p>
+          </div>
+        </div>
+        <button
+          type="button"
+          onClick={() => setStarted(true)}
+          className="shrink-0 rounded-full bg-accent px-5 py-2.5 text-[14px] font-semibold text-on-accent transition-colors hover:bg-accent-dim"
+        >
+          {quiz.passed ? "Volver a hacerla" : "Empezar evaluación"}
+        </button>
+      </section>
+    );
+  }
 
   function choose(qi: number, oi: number) {
     if (result) return; // bloqueado tras enviar
