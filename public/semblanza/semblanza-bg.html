@@ -29,7 +29,7 @@
   @media screen{ body{padding:26px 0;} .page{margin:0 auto 26px; box-shadow:0 20px 55px rgba(0,0,0,.5);} }
 
   /* ---------- TEMA CLARO (pags 2, 4, 6) ---------- */
-  .page.light{ background:#e7eaef; color:#3a4756;
+  .page.light{ background:#eef0f4; color:#3a4756;
     --bone:#45525f; --smoke:#5c6675; --ash:#7b8494;
     --line:rgba(12,22,38,.13); --line-2:rgba(12,22,38,.08);
     --panel:#f3f5f8; --panel-2:#e9edf2; --navy:#e4e8ee;
@@ -43,7 +43,7 @@
   .rh{position:absolute; top:11mm; left:19mm; right:19mm; display:flex; justify-content:space-between; align-items:center; z-index:2;
       font-family:var(--mono); font-size:8px; letter-spacing:.2em; text-transform:uppercase; color:var(--ash);}
   .idbadge{display:inline-flex; align-items:center;}
-  .idbadge img{height:22px; width:auto; display:block; filter:grayscale(1) opacity(.5);}
+  .idbadge img{height:22px; width:auto; display:block;}
   /* membrete: tira gris clara superior en paginas dark; en claras el logo va directo */
   .page:not(.light) .rh{top:0; left:0; right:0; height:17mm; padding:0 19mm; background:#eef1f5; align-items:center; color:#5a6675;}
   .page:not(.light) .rh .idbadge img{height:28px;}
@@ -57,7 +57,7 @@
 
   /* ---------- COVER ---------- */
   .cover{padding:0; display:flex; flex-direction:column; background:#0c1626;}
-  .cover-top{flex:1; background:#e7eaef; padding:26mm 22mm 22mm; display:flex; flex-direction:column; position:relative; overflow:hidden;}
+  .cover-top{flex:1; background:#eef0f4; padding:26mm 22mm 22mm; display:flex; flex-direction:column; position:relative; overflow:hidden;}
   .cover-top::after{content:""; position:absolute; inset:0; pointer-events:none; background-image:var(--grain); background-size:170px 170px; opacity:.08; mix-blend-mode:multiply;}
   .cover-top > *{position:relative; z-index:1;}
   .cover-logos{display:flex; justify-content:space-between; align-items:center; gap:24px;}
