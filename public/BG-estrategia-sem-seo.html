@@ -131,6 +131,37 @@ ul.clean li.no{color:var(--bone)}
   .g2,.g3,.g4,.two-world,.motor{grid-template-columns:1fr}
   .motor .mid{display:none}
 }
+/* ---- Réplica de SERP de Google ---- */
+.serp{background:#fff;border-radius:12px;padding:16px 18px 18px;font-family:Arial,Helvetica,sans-serif;color:#202124;box-shadow:0 24px 60px rgba(0,0,0,.5);overflow:hidden}
+.serp-top{display:flex;align-items:center;gap:14px;padding-bottom:11px}
+.g-logo{font-size:20px;font-weight:700;letter-spacing:-1.2px;flex:none}
+.g-logo .b{color:#4285F4}.g-logo .r{color:#EA4335}.g-logo .y{color:#FBBC05}.g-logo .g{color:#34A853}
+.g-box{flex:1;display:flex;align-items:center;justify-content:space-between;border:1px solid #dfe1e5;border-radius:24px;padding:6px 14px;font-size:13px;color:#202124;box-shadow:0 1px 5px rgba(32,33,36,.12)}
+.g-box .ic{color:#4285F4;font-size:12px}
+.g-tabs{display:flex;gap:16px;font-size:10.5px;color:#5f6368;border-bottom:1px solid #ebebeb;padding-bottom:7px}
+.g-tabs .on{color:#1a73e8;font-weight:700;border-bottom:2px solid #1a73e8;padding-bottom:7px;margin-bottom:-8px}
+.res{padding:11px 0 0}
+.serp .site{display:flex;align-items:center;gap:8px}
+.serp .fav{width:19px;height:19px;border-radius:50%;background:#e8f0fe;color:#1a73e8;font-size:8px;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.serp .nm{font-size:10.5px;color:#202124;line-height:1.25}
+.serp .url{font-size:10px;color:#5f6368;line-height:1.25}
+.serp .ti{font-size:15px;color:#1a0dab;font-weight:400;margin-top:4px;line-height:1.3}
+.serp .sn{font-size:11px;color:#4d5156;margin-top:3px;line-height:1.5}
+.sl{margin:9px 0 0 27px}
+.sl div{border-bottom:1px solid #ebebeb;padding:6px 0}
+.sl a{font-size:12px;color:#1a0dab;display:block;text-decoration:none}
+.sl small{font-size:10px;color:#5f6368;display:block;margin-top:1px}
+.paa{margin-top:12px;padding-top:9px;border-top:1px solid #ebebeb}
+.paa .t{font-size:14px;color:#202124;margin-bottom:3px}
+.paa .q{display:flex;justify-content:space-between;align-items:center;font-size:11.5px;color:#202124;border-bottom:1px solid #ebebeb;padding:7px 0}
+.paa .q::after{content:"⌄";color:#5f6368;font-size:12px}
+/* anuncio de BG (demo) */
+.serp-ad{max-height:0;opacity:0;transform:translateY(-8px);overflow:hidden;transition:max-height .45s ease,opacity .35s ease,transform .45s ease;border-radius:8px}
+.serp.ad-on .serp-ad{max-height:210px;opacity:1;transform:none;margin-bottom:6px;box-shadow:0 0 0 2px rgba(0,230,160,.55),0 0 22px rgba(0,230,160,.35)}
+.serp-ad .in{padding:9px 10px}
+.ad-tag{display:inline-block;font-size:10px;font-weight:700;color:#202124;margin-right:6px}
+.ad-btn{display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:1px solid var(--accent);background:rgba(0,230,160,.12);color:var(--accent);border-radius:999px;padding:9px 17px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s}
+.ad-btn:hover{background:rgba(0,230,160,.22)}
 @media print{
   @page{size:A4 landscape;margin:0}
   html,body{background:var(--ink)}
@@ -145,7 +176,7 @@ ul.clean li.no{color:var(--bone)}
 </head>
 <body>
 <div id="bar"></div>
-<div id="count"><b>01</b> / 7</div>
+<div id="count"><b>01</b> / 8</div>
 
 <!-- 01 · PORTADA -->
 <section class="slide" id="s1">
@@ -202,13 +233,112 @@ ul.clean li.no{color:var(--bone)}
   </div>
 </section>
 
+<!-- 03 · SERP VUCEM -->
+<section class="slide" id="sserp">
+  <div class="grid-field"></div>
+  <div class="wrap">
+    <div class="head" style="margin-bottom:26px">
+      <div class="row"><span class="idx">03</span><span class="eyebrow"><span class="dot"></span>Ejemplo real</span></div>
+      <h2>Así se ve la búsqueda de "vucem" hoy</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:22px;align-items:start">
+
+      <div class="serp" id="serpCard">
+        <div class="serp-top">
+          <div class="g-logo"><span class="b">G</span><span class="r">o</span><span class="y">o</span><span class="b">g</span><span class="g">l</span><span class="r">e</span></div>
+          <div class="g-box"><span>vucem</span><span class="ic">◎ ⌕</span></div>
+        </div>
+        <div class="g-tabs"><span class="on">Todo</span><span>Noticias</span><span>Videos</span><span>Imágenes</span><span>Maps</span><span>Shopping</span><span>Más</span></div>
+
+        <div class="serp-ad">
+          <div class="in">
+            <div class="ad-tag">Patrocinado</div>
+            <div class="site" style="margin-top:2px">
+              <div class="fav" style="background:#04231a;color:#00e6a0">BG</div>
+              <div>
+                <div class="nm">BG Consulting Group</div>
+                <div class="url">https://www.bgconsultingroup.com</div>
+              </div>
+            </div>
+            <div class="ti">Consultoría en comercio exterior e IMMEX</div>
+            <div class="sn">Anexo 24, certificación de IVA e IEPS y asesoría IMMEX. Firma legal en Tijuana con cobertura nacional. Más de 20 años de práctica.</div>
+          </div>
+        </div>
+
+        <div class="res">
+          <div class="site">
+            <div class="fav">V</div>
+            <div><div class="nm">VUCEM</div><div class="url">https://www.ventanillaunica.gob.mx › vucem</div></div>
+          </div>
+          <div class="ti">VUCEM</div>
+          <div class="sn">Ventanilla Única de trámites de Comercio Exterior. Realiza trámites de importación y exportación. Consulta y gestiona procesos en línea. Contenedores. ADUANAS.</div>
+          <div class="sl">
+            <div><a>Ingreso VUCEM</a><small>Denuncia contra servidores públicos · Campos obligatorios ...</small></div>
+            <div><a>Trámites y requisitos</a><small>En esta sección encontrará la información referente a los ...</small></div>
+            <div><a>Sobre la VUCEM</a><small>La VUCEM debe ser concebida como una plataforma integral ...</small></div>
+            <div><a>Manuales y guías de usuario</a><small>Manuales de usuario · Guías de Usuario. Sección Manifestación ...</small></div>
+          </div>
+        </div>
+
+        <div class="res">
+          <div class="site">
+            <div class="fav">V</div>
+            <div><div class="nm">VUCEM</div><div class="url">https://www.ventanillaunica.gob.mx › ingreso.action</div></div>
+          </div>
+          <div class="ti">VUCEM</div>
+          <div class="sn">Campos obligatorios · Certificado (.cer): · Clave privada (.key): · Contraseña de clave privada: Iniciar sesión. Crear cuenta.</div>
+        </div>
+
+        <div class="paa">
+          <div class="t">Más preguntas</div>
+          <div class="q">¿Qué es la vucem y para qué sirve?</div>
+          <div class="q">¿Qué es la plataforma VUCEM?</div>
+          <div class="q">¿Cómo acceder a la VUCEM?</div>
+          <div class="q">¿Qué trámites se pueden hacer en Vucem?</div>
+        </div>
+
+        <div class="res">
+          <div class="site">
+            <div class="fav" style="background:#fce8e6;color:#c5221f">S</div>
+            <div><div class="nm">SNICE</div><div class="url">https://www.snice.gob.mx › avi › snice › f.c.vucem.html</div></div>
+          </div>
+          <div class="ti">¿Qué es VUCEM?</div>
+          <div class="sn">La Ventanilla Digital Mexicana de Comercio Exterior, conocida como VUCEM, es una plataforma integral de servicios ...</div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:14px">
+        <button class="ad-btn" id="adBtn" type="button" style="align-self:flex-start">
+          <span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(0,230,160,.8)"></span>
+          <span id="adBtnTxt">Activar anuncio de BG</span>
+        </button>
+        <p class="foot-note" style="margin:-4px 0 2px">Muestra cómo aparecería BG, por encima de los resultados del gobierno.</p>
+        <div class="panel">
+          <div class="kicker">Los primeros lugares son del gobierno</div>
+          <p style="color:var(--bone);font-size:13px">ventanillaunica.gob.mx, snice.gob.mx y gob.mx ocupan la página. Contra ellos, el primer lugar natural no es alcanzable.</p>
+        </div>
+        <div class="panel">
+          <div class="kicker" style="color:var(--smoke)">No hay anuncios</div>
+          <p style="color:var(--bone);font-size:13px">Nadie puja por esta búsqueda. BG entraría hasta arriba sin competencia por la posición.</p>
+        </div>
+        <div class="panel tint">
+          <div class="kicker">La regla</div>
+          <p style="color:var(--bone);font-size:13px">Cuando los primeros lugares son portales de gobierno, el SEO es imposible: ahí conviene SEM. En las demás búsquedas sí va SEO, porque a largo plazo es sostenido.</p>
+          <div class="divider"></div>
+          <p style="color:var(--bone);font-size:12.5px">90,500 búsquedas al mes: quien entra a la ventanilla única es una empresa IMMEX.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- 03 · SEM -->
 <section class="slide" id="s3b">
   <div class="grid-field"></div>
   <div class="glow-tl" style="top:-180px;right:-140px;background:rgba(0,230,160,.1)"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">03</span><span class="eyebrow"><span class="dot"></span>Google Ads · SEM</span></div>
+      <div class="row"><span class="idx">04</span><span class="eyebrow"><span class="dot"></span>Google Ads · SEM</span></div>
       <h2>Palabras clave para los anuncios</h2>
       <p class="lead">Dos campañas: servicios (aplica siempre) y aduanal por plaza (Tijuana, Monterrey, CDMX). El set de esta investigación se puja y rota durante el primer trimestre, conservando las que convierten.</p>
     </div>
@@ -237,7 +367,7 @@ ul.clean li.no{color:var(--bone)}
   <div class="glow-tl" style="bottom:-200px;left:-160px;background:rgba(0,230,160,.14)"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">04</span><span class="eyebrow"><span class="dot"></span>Inversión</span></div>
+      <div class="row"><span class="idx">05</span><span class="eyebrow"><span class="dot"></span>Inversión</span></div>
       <h2>Presupuesto y resultados esperados</h2>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:18px;align-items:stretch">
@@ -275,7 +405,7 @@ ul.clean li.no{color:var(--bone)}
   <div class="grid-field"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">05</span><span class="eyebrow"><span class="dot"></span>SEO · Contenido</span></div>
+      <div class="row"><span class="idx">06</span><span class="eyebrow"><span class="dot"></span>SEO · Contenido</span></div>
       <h2>Contenido para posicionar en Google</h2>
       <p class="lead">Términos de miles de búsquedas y dificultad baja. No se pagan por clic: se ganan con guías y blogs que construyen autoridad y rinden a largo plazo.</p>
     </div>
@@ -313,7 +443,7 @@ ul.clean li.no{color:var(--bone)}
   <div class="glow-tl" style="top:-160px;left:-120px;background:rgba(40,64,104,.3)"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">06</span><span class="eyebrow"><span class="dot"></span>Ejecución</span></div>
+      <div class="row"><span class="idx">07</span><span class="eyebrow"><span class="dot"></span>Ejecución</span></div>
       <h2>Plan de trabajo por fases</h2>
     </div>
     <div class="grid g3">
@@ -403,6 +533,15 @@ window.addEventListener('keydown',e=>{
   else if(e.key==='Home'){e.preventDefault();slides[0].scrollIntoView({behavior:'smooth'});}
   else if(e.key==='End'){e.preventDefault();slides[slides.length-1].scrollIntoView({behavior:'smooth'});}
 });
+
+const adBtn=document.getElementById('adBtn');
+if(adBtn){
+  adBtn.addEventListener('click',()=>{
+    const card=document.getElementById('serpCard');
+    const on=card.classList.toggle('ad-on');
+    document.getElementById('adBtnTxt').textContent = on ? 'Quitar anuncio' : 'Activar anuncio de BG';
+  });
+}
 </script>
 </body>
 </html>
