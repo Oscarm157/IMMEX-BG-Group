@@ -70,7 +70,7 @@ export function ContactCta({
                 </span>
               </a>
             ))}
-            <a href={`mailto:${siteConfig.email}`} className="font-mono text-[14px] text-bone/80 transition-colors hover:text-accent">
+            <a href={`mailto:${siteConfig.email}`} className="text-[15px] text-bone/80 transition-colors hover:text-accent">
               {siteConfig.email}
             </a>
           </Reveal>
