@@ -102,6 +102,18 @@ tbody tr.hi td.kw{color:#eafff7}
 .tag.opt{background:rgba(166,173,187,.13);color:var(--smoke)}
 .kd{font-family:var(--mono);font-variant-numeric:tabular-nums}
 table.mini{font-size:11px}
+/* tabla de asignacion */
+.kwbox{max-height:428px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+table.kwt{font-size:14px}
+table.kwt thead th{position:sticky;top:0;z-index:2;background:var(--s1);font-size:10px;padding:10px 14px 9px}
+table.kwt tbody td{padding:8px 14px;font-size:14px}
+table.kwt tbody td.kw{font-size:14.5px}
+.pick{cursor:pointer;border:1px solid transparent;font-family:var(--mono);font-size:11px;letter-spacing:.08em;padding:4px 11px;border-radius:6px;text-transform:uppercase;transition:filter .15s}
+.pick:hover{filter:brightness(1.25)}
+.pick[data-ch="SEM"]{background:rgba(0,230,160,.14);color:var(--accent);border-color:rgba(0,230,160,.35)}
+.pick[data-ch="SEO"]{background:rgba(120,160,220,.16);color:#8fb4e6;border-color:rgba(120,160,220,.35)}
+.tally{font-family:var(--mono);font-size:11px;color:var(--smoke);letter-spacing:.05em}
+.tally b{color:var(--chalk)}
 table.mini thead th{padding:0 9px 6px;font-size:9px}
 table.mini tbody td{padding:4px 9px}
 /* chips */
@@ -144,7 +156,7 @@ ul.clean li.no{color:var(--bone)}
   .motor .mid{display:none}
 }
 /* ---- Réplica de SERP de Google ---- */
-.serp{background:#fff;border-radius:12px;padding:16px 18px 18px;font-family:Arial,Helvetica,sans-serif;color:#202124;box-shadow:0 24px 60px rgba(0,0,0,.5);max-height:486px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
+.serp{background:#fff;border-radius:12px;padding:16px 18px 18px;font-family:Arial,Helvetica,sans-serif;color:#202124;box-shadow:0 24px 60px rgba(0,0,0,.5);max-height:434px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin}
 .serp::-webkit-scrollbar{width:9px}.serp::-webkit-scrollbar-thumb{background:#dadce0;border-radius:5px}.serp::-webkit-scrollbar-track{background:#fff}
 .serp-top{display:flex;align-items:center;gap:14px;padding-bottom:11px}
 .g-logo{font-size:20px;font-weight:700;letter-spacing:-1.2px;flex:none}
@@ -188,6 +200,13 @@ ul.clean li.no{color:var(--bone)}
 .serp.ad-on .serp-ad{max-height:250px;margin-top:8px;opacity:1;transform:none;margin-bottom:6px;box-shadow:0 0 0 2px rgba(0,230,160,.28),0 0 22px rgba(0,230,160,.18)}
 .serp-ad .in{padding:16px 10px 11px}
 .ad-tag{display:inline-block;font-size:10px;font-weight:700;color:#202124;margin-right:6px}
+.var-ctl{display:flex;align-items:center;gap:9px}
+.var-btn{cursor:pointer;border:1px solid var(--line);background:var(--s2);color:var(--bone);border-radius:8px;width:30px;height:27px;font-size:15px;line-height:1;transition:border-color .2s,color .2s}
+.var-btn:hover{border-color:var(--accent);color:var(--accent)}
+.var-lbl{font-family:var(--mono);font-size:10.5px;color:var(--smoke);letter-spacing:.05em}
+.var-lbl b{color:var(--chalk)}
+#adTi,#adSn{transition:opacity .22s}
+.serp-ad.swapping #adTi,.serp-ad.swapping #adSn{opacity:0}
 .ad-btn{display:inline-flex;align-items:center;gap:9px;cursor:pointer;border:1px solid var(--accent);background:rgba(0,230,160,.12);color:var(--accent);border-radius:999px;padding:9px 17px;font-family:var(--mono);font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;transition:background .2s}
 .ad-btn:hover{background:rgba(0,230,160,.22)}
 .chip.sm{font-size:9px;padding:2px 6px;border-radius:4px;line-height:1.3}
@@ -211,7 +230,7 @@ ul.clean li.no{color:var(--bone)}
 </head>
 <body>
 <div id="bar"></div>
-<div id="count"><b>01</b> / 11</div>
+<div id="count"><b>01</b> / 12</div>
 
 <!-- 01 · PORTADA -->
 <section class="slide" id="s1">
@@ -268,12 +287,50 @@ ul.clean li.no{color:var(--bone)}
   </div>
 </section>
 
-<!-- 03 · SERP VUCEM -->
+<!-- 03 · EJEMPLO PRACTICO VUCEM -->
+<section class="slide" id="skw">
+  <div class="grid-field"></div>
+  <div class="glow-tl" style="top:-170px;right:-130px;background:rgba(0,230,160,.09)"></div>
+  <div class="wrap">
+    <div class="head" style="margin-bottom:20px">
+      <div class="row"><span class="idx">03</span><span class="eyebrow"><span class="dot"></span>Ejemplo práctico</span></div>
+      <h2>La palabra clave "VUCEM"</h2>
+      <p class="lead">VUCEM es la Ventanilla Única de Comercio Exterior Mexicano, el portal del gobierno donde las empresas presentan sus trámites de importación y exportación. Quien la busca ya opera en comercio exterior.</p>
+    </div>
+    <div class="grid g4" style="gap:14px">
+      <div class="panel stat"><b style="font-size:2rem" class="mint">90,500</b><small>búsquedas al mes en México</small></div>
+      <div class="panel stat"><b style="font-size:2rem">36 %</b><small>dificultad para posicionar</small></div>
+      <div class="panel stat"><b style="font-size:2rem" class="mint">≈ $9</b><small>costo por clic estimado, en pesos</small></div>
+      <div class="panel stat"><b style="font-size:2rem">Ninguno</b><small>anunciantes pagando hoy</small></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1.25fr 1fr;gap:16px;margin-top:16px;align-items:start">
+      <div class="panel tint">
+        <div class="kicker">De dónde viene el tráfico del portal</div>
+        <p style="color:var(--bone);font-size:13.5px">El sitio oficial de VUCEM recibe alrededor de 150,000 visitas al mes, cifra estimada. Cerca de 90,500 de ellas empiezan igual: la persona busca "VUCEM" en Google y da clic al portal de gobierno. El resto entra de forma directa, escribiendo la dirección o desde un marcador guardado.</p>
+        <div class="divider"></div>
+        <p style="color:var(--chalk);font-size:13.5px">A esas 90,500 se puede llegar. Son las que pasan por Google, y ahí es donde un anuncio de BG puede aparecer antes que el portal. A quien entra directo no hay forma de alcanzarlo.</p>
+      </div>
+      <div style="display:grid;gap:14px">
+        <div class="panel">
+          <div class="kicker" style="color:var(--smoke)">Intención de búsqueda: navegacional</div>
+          <p style="color:var(--bone);font-size:13px">La persona quiere entrar al portal a hacer un trámite. No está buscando información general.</p>
+        </div>
+        <div class="panel">
+          <div class="kicker" style="color:var(--smoke)">Alrededor de la misma palabra</div>
+          <p style="color:var(--bone);font-size:13px">1,951 variantes con 104,600 búsquedas al mes en conjunto, y 44 preguntas frecuentes. Ingreso VUCEM, VUCEM SAT y ventanilla única VUCEM son las principales.</p>
+        </div>
+      </div>
+    </div>
+    <p class="foot-note">Volumen, dificultad, CPC e intención: SEMrush, base México, 16 de julio de 2026. CPC original $0.45 USD, convertido a ~$19 MXN/USD. Densidad competitiva 0.33.</p>
+  </div>
+</section>
+
+<!-- 04 · SERP VUCEM -->
 <section class="slide" id="sserp">
   <div class="grid-field"></div>
   <div class="wrap">
     <div class="head" style="margin-bottom:26px">
-      <div class="row"><span class="idx">03</span><span class="eyebrow"><span class="dot"></span>Ejemplo real</span></div>
+      <div class="row"><span class="idx">04</span><span class="eyebrow"><span class="dot"></span>Ejemplo práctico · La búsqueda</span></div>
       <h2>Así se ve la búsqueda de "VUCEM" hoy</h2>
     </div>
     <div style="display:grid;grid-template-columns:1.5fr 1fr;gap:22px;align-items:start">
@@ -295,8 +352,8 @@ ul.clean li.no{color:var(--bone)}
                 <div class="url">https://www.bgconsultingroup.com</div>
               </div>
             </div>
-            <div class="ti">Consultoría especializada en Comercio exterior e IMMEX | Atención rápida</div>
-            <div class="sn">Anexo 24, certificación de IVA e IEPS y asesoría IMMEX. Firma legal en Tijuana con cobertura nacional. Más de 20 años de práctica.</div>
+            <div class="ti" id="adTi">Consultoría especializada en Comercio exterior e IMMEX | Atención rápida</div>
+            <div class="sn" id="adSn">Anexo 24, certificación de IVA e IEPS y asesoría IMMEX. Firma legal en Tijuana con cobertura nacional. Más de 20 años de práctica.</div>
           </div>
         </div>
 
@@ -419,7 +476,12 @@ ul.clean li.no{color:var(--bone)}
           <span class="dot" style="width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px rgba(0,230,160,.8)"></span>
           <span id="adBtnTxt">Activar anuncio de BG</span>
         </button>
-        <p class="foot-note" style="margin:-4px 0 2px">Desplázate dentro del resultado para ver todo lo que sale hoy. Luego activa el anuncio.</p>
+        <div class="var-ctl">
+          <button class="var-btn" id="varPrev" type="button" aria-label="Variación anterior">‹</button>
+          <button class="var-btn" id="varNext" type="button" aria-label="Variación siguiente">›</button>
+          <div class="var-lbl">Variación <b id="varNum">1</b> de 3 · <span id="varName">Servicio</span></div>
+        </div>
+        <p class="foot-note" style="margin:-2px 0 2px">Desplázate dentro del resultado para ver todo lo que sale hoy. Activa el anuncio y usa las flechas para ver las tres versiones.</p>
         <div class="panel">
           <div class="kicker">Los primeros lugares son del gobierno</div>
           <p style="color:var(--bone);font-size:13px">Los resultados de arriba son ventanillaunica.gob.mx, snice.gob.mx y gob.mx. Posicionar por encima de esos sitios no es viable.</p>
@@ -431,8 +493,6 @@ ul.clean li.no{color:var(--bone)}
         <div class="panel tint">
           <div class="kicker">Qué conviene hacer</div>
           <p style="color:var(--bone);font-size:13px">Cuando los portales de gobierno ocupan los primeros lugares, conviene usar anuncios. En el resto de las búsquedas conviene SEO, porque el resultado se mantiene con el tiempo.</p>
-          <div class="divider"></div>
-          <p style="color:var(--bone);font-size:12.5px">VUCEM tiene 90,500 búsquedas al mes. Quien entra a la ventanilla única suele ser una empresa IMMEX.</p>
         </div>
       </div>
     </div>
@@ -445,7 +505,7 @@ ul.clean li.no{color:var(--bone)}
   <div class="glow-tl" style="top:-180px;right:-140px;background:rgba(0,230,160,.1)"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">04</span><span class="eyebrow"><span class="dot"></span>Google Ads · SEM</span></div>
+      <div class="row"><span class="idx">05</span><span class="eyebrow"><span class="dot"></span>Google Ads · SEM</span></div>
       <h2>Palabras clave para los anuncios</h2>
       <p class="lead">Dos campañas: servicios (aplica siempre) y aduanal por plaza (Tijuana, Monterrey, CDMX). El set de esta investigación se puja y rota durante el primer trimestre, conservando las que convierten.</p>
     </div>
@@ -475,7 +535,7 @@ ul.clean li.no{color:var(--bone)}
   <div class="grid-field"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">05</span><span class="eyebrow"><span class="dot"></span>SEO · Contenido</span></div>
+      <div class="row"><span class="idx">06</span><span class="eyebrow"><span class="dot"></span>SEO · Contenido</span></div>
       <h2>Contenido para posicionar en Google</h2>
       <p class="lead">Términos con miles de búsquedas al mes y dificultad baja. Se trabajan con guías y blogs, que dan autoridad y siguen trayendo visitas con el tiempo.</p>
     </div>
@@ -512,21 +572,19 @@ ul.clean li.no{color:var(--bone)}
   <div class="grid-field"></div>
   <div class="wrap">
     <div class="head" style="margin-bottom:18px">
-      <div class="row"><span class="idx">06</span><span class="eyebrow"><span class="dot"></span>Rotación del set · Mes 1</span></div>
+      <div class="row"><span class="idx">07</span><span class="eyebrow"><span class="dot"></span>Rotación del set · Mes 1</span></div>
       <h2>Mes 1: 21 palabras clave</h2>
       <p class="lead">Arranque: portales de gobierno sin competencia y términos de contratación. En SEO, los de menor dificultad.</p>
     </div>
-    <div class="grid g2" style="gap:16px;align-items:start">
-      <div class="panel" style="padding:12px 12px 6px">
-        <div class="kicker">SEM · Se pautan con anuncios</div>
-        <table class="mini"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th></tr></thead><tbody><tr><td class="kw">VUCEM</td><td class="n">90,500</td><td class="n kd">36</td><td class="n">≈ $9</td></tr><tr><td class="kw">ANAM</td><td class="n">18,100</td><td class="n kd">46</td><td class="n">≈ $9</td></tr><tr><td class="kw">SNICE</td><td class="n">9,900</td><td class="n kd">28</td><td class="n">≈ $7</td></tr><tr><td class="kw">SIICEX</td><td class="n">8,100</td><td class="n kd">49</td><td class="n">≈ $7</td></tr><tr><td class="kw">Aduanas de Mexico</td><td class="n">6,600</td><td class="n kd">48</td><td class="n">≈ $7</td></tr><tr><td class="kw">SAT Aduanas</td><td class="n">1,900</td><td class="n kd">35</td><td class="n">≈ $8</td></tr><tr><td class="kw">Ingreso VUCEM</td><td class="n">1,900</td><td class="n kd">36</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Agencia Aduanal</td><td class="n">8,100</td><td class="n kd">36</td><td class="n">≈ $13</td></tr><tr><td class="kw">Agente Aduanal</td><td class="n">6,600</td><td class="n kd">34</td><td class="n">≈ $15</td></tr><tr><td class="kw">Agente Aduanal Monterrey</td><td class="n">8,100</td><td class="n kd">19</td><td class="n">≈ $30</td></tr><tr><td class="kw">Agencia Aduanal Monterrey</td><td class="n">6,600</td><td class="n kd">17</td><td class="n">≈ $29</td></tr><tr><td class="kw">Agente Aduanal CDMX</td><td class="n">1,900</td><td class="n kd">29</td><td class="n">≈ $25</td></tr><tr><td class="kw">Despacho de Aduana</td><td class="n">3,600</td><td class="n kd">19</td><td class="n">≈ $6</td></tr></tbody></table>
-      </div>
-      <div class="panel" style="padding:12px 12px 6px">
-        <div class="kicker" style="color:var(--smoke)">SEO · Se trabajan con contenido</div>
-        <table class="mini"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th></tr></thead><tbody><tr><td class="kw">Anexo 31</td><td class="n">320</td><td class="n kd">8</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Metodos de Valoracion Aduanera</td><td class="n">720</td><td class="n kd">7</td><td class="n">≈ $2</td></tr><tr><td class="kw">Metodo de Valoracion Aduanera</td><td class="n">590</td><td class="n kd">10</td><td class="n">≈ $4</td></tr><tr><td class="kw">Identificadores Anexo 22</td><td class="n">480</td><td class="n kd">12</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Decreto PROSEC</td><td class="n">480</td><td class="n kd">14</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Anexo 22</td><td class="n">18,100</td><td class="n kd">17</td><td class="n">≈ $7</td></tr><tr><td class="kw">Anexo 30</td><td class="n">880</td><td class="n kd">18</td><td class="n">≈ $25</td></tr><tr><td class="kw">Valoracion Aduanera</td><td class="n">590</td><td class="n kd">15</td><td class="n">≈ $2</td></tr></tbody></table>
+    <div class="panel" style="padding:0 0 2px">
+      <div class="kwbox">
+        <table class="kwt"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th><th>Canal</th></tr></thead><tbody><tr><td class="kw">VUCEM</td><td class="n">90,500</td><td class="n kd">36</td><td class="n">≈ $9</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">ANAM</td><td class="n">18,100</td><td class="n kd">46</td><td class="n">≈ $9</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">SNICE</td><td class="n">9,900</td><td class="n kd">28</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">SIICEX</td><td class="n">8,100</td><td class="n kd">49</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduanas de Mexico</td><td class="n">6,600</td><td class="n kd">48</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">SAT Aduanas</td><td class="n">1,900</td><td class="n kd">35</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Ingreso VUCEM</td><td class="n">1,900</td><td class="n kd">36</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Agencia Aduanal</td><td class="n">8,100</td><td class="n kd">36</td><td class="n">≈ $13</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Agente Aduanal</td><td class="n">6,600</td><td class="n kd">34</td><td class="n">≈ $15</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Agente Aduanal Monterrey</td><td class="n">8,100</td><td class="n kd">19</td><td class="n">≈ $30</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Agencia Aduanal Monterrey</td><td class="n">6,600</td><td class="n kd">17</td><td class="n">≈ $29</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Agente Aduanal CDMX</td><td class="n">1,900</td><td class="n kd">29</td><td class="n">≈ $25</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Despacho de Aduana</td><td class="n">3,600</td><td class="n kd">19</td><td class="n">≈ $6</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Anexo 31</td><td class="n">320</td><td class="n kd">8</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Metodos de Valoracion Aduanera</td><td class="n">720</td><td class="n kd">7</td><td class="n">≈ $2</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Metodo de Valoracion Aduanera</td><td class="n">590</td><td class="n kd">10</td><td class="n">≈ $4</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Identificadores Anexo 22</td><td class="n">480</td><td class="n kd">12</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Decreto PROSEC</td><td class="n">480</td><td class="n kd">14</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Anexo 22</td><td class="n">18,100</td><td class="n kd">17</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Anexo 30</td><td class="n">880</td><td class="n kd">18</td><td class="n">≈ $25</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Valoracion Aduanera</td><td class="n">590</td><td class="n kd">15</td><td class="n">≈ $2</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr></tbody></table>
       </div>
     </div>
-    <p class="foot-note">Volumen, KD y CPC: SEMrush, base México, jul 2026. CPC convertido a pesos a ~$19 MXN/USD.</p>
+    <div class="row" style="justify-content:space-between;align-items:center;margin-top:9px">
+      <p class="foot-note" style="margin:0">Volumen, KD y CPC: SEMrush, base México, jul 2026. CPC en pesos a ~$19 MXN/USD. Da clic en la etiqueta de Canal para cambiar la palabra entre SEM y SEO.</p>
+      <div class="tally" data-tally="mes1">SEM <b>13</b> · SEO <b>8</b></div>
+    </div>
   </div>
 </section>
 
@@ -535,21 +593,19 @@ ul.clean li.no{color:var(--bone)}
   <div class="grid-field"></div>
   <div class="wrap">
     <div class="head" style="margin-bottom:18px">
-      <div class="row"><span class="idx">07</span><span class="eyebrow"><span class="dot"></span>Rotación del set · Mes 2</span></div>
+      <div class="row"><span class="idx">08</span><span class="eyebrow"><span class="dot"></span>Rotación del set · Mes 2</span></div>
       <h2>Mes 2: 21 palabras clave</h2>
       <p class="lead">Se amplía a las variantes de gobierno y a la aduana por plaza. En SEO, los clusters técnicos.</p>
     </div>
-    <div class="grid g2" style="gap:16px;align-items:start">
-      <div class="panel" style="padding:12px 12px 6px">
-        <div class="kicker">SEM · Se pautan con anuncios</div>
-        <table class="mini"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th></tr></thead><tbody><tr><td class="kw">VUCEM SAT</td><td class="n">1,600</td><td class="n kd">35</td><td class="n">≈ $8</td></tr><tr><td class="kw">Ventanilla Unica VUCEM</td><td class="n">1,300</td><td class="n kd">31</td><td class="n">≈ $8</td></tr><tr><td class="kw">VUCEM Ventanilla Unica</td><td class="n">1,300</td><td class="n kd">30</td><td class="n">≈ $8</td></tr><tr><td class="kw">Sellos VUCEM</td><td class="n">1,000</td><td class="n kd">31</td><td class="n">&lt; $1</td></tr><tr><td class="kw">SIICEX CAAAREM</td><td class="n">3,600</td><td class="n kd">39</td><td class="n">≈ $8</td></tr><tr><td class="kw">ANAM Aduanas</td><td class="n">720</td><td class="n kd">51</td><td class="n">≈ $6</td></tr><tr><td class="kw">Manifestacion de Valor VUCEM</td><td class="n">480</td><td class="n kd">26</td><td class="n">≈ $7</td></tr><tr><td class="kw">Agencia Nacional de Aduanas de México</td><td class="n">390</td><td class="n kd">49</td><td class="n">≈ $7</td></tr><tr><td class="kw">Aduana Mexico</td><td class="n">3,600</td><td class="n kd">49</td><td class="n">≈ $8</td></tr><tr><td class="kw">Oficina de Aduanas y Protección Fronteriza de Estados Unidos</td><td class="n">8,100</td><td class="n kd">48</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aduana Tijuana</td><td class="n">3,600</td><td class="n kd">19</td><td class="n">≈ $6</td></tr><tr><td class="kw">Aduana Monterrey</td><td class="n">720</td><td class="n kd">19</td><td class="n">≈ $8</td></tr><tr><td class="kw">Aduana de Monterrey</td><td class="n">2,400</td><td class="n kd">20</td><td class="n">≈ $7</td></tr><tr><td class="kw">Aduana Mexicali</td><td class="n">720</td><td class="n kd">19</td><td class="n">≈ $6</td></tr></tbody></table>
-      </div>
-      <div class="panel" style="padding:12px 12px 6px">
-        <div class="kicker" style="color:var(--smoke)">SEO · Se trabajan con contenido</div>
-        <table class="mini"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th></tr></thead><tbody><tr><td class="kw">Anexo 30 SAT</td><td class="n">170</td><td class="n kd">18</td><td class="n">≈ $22</td></tr><tr><td class="kw">TIGIE</td><td class="n">4,400</td><td class="n kd">19</td><td class="n">≈ $7</td></tr><tr><td class="kw">PROSEC</td><td class="n">2,900</td><td class="n kd">22</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Clasificacion Arancelaria</td><td class="n">480</td><td class="n kd">26</td><td class="n">≈ $8</td></tr><tr><td class="kw">Clasificacion Arancelaria Mexico</td><td class="n">260</td><td class="n kd">24</td><td class="n">≈ $5</td></tr><tr><td class="kw">Pedimento de Importacion</td><td class="n">6,600</td><td class="n kd">24</td><td class="n">≈ $7</td></tr><tr><td class="kw">Anexo 22 Llenado de Pedimento</td><td class="n">590</td><td class="n kd">15</td><td class="n">≈ $9</td></tr></tbody></table>
+    <div class="panel" style="padding:0 0 2px">
+      <div class="kwbox">
+        <table class="kwt"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th><th>Canal</th></tr></thead><tbody><tr><td class="kw">VUCEM SAT</td><td class="n">1,600</td><td class="n kd">35</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Ventanilla Unica VUCEM</td><td class="n">1,300</td><td class="n kd">31</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">VUCEM Ventanilla Unica</td><td class="n">1,300</td><td class="n kd">30</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Sellos VUCEM</td><td class="n">1,000</td><td class="n kd">31</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">SIICEX CAAAREM</td><td class="n">3,600</td><td class="n kd">39</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">ANAM Aduanas</td><td class="n">720</td><td class="n kd">51</td><td class="n">≈ $6</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Manifestacion de Valor VUCEM</td><td class="n">480</td><td class="n kd">26</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Agencia Nacional de Aduanas de México</td><td class="n">390</td><td class="n kd">49</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Mexico</td><td class="n">3,600</td><td class="n kd">49</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Oficina de Aduanas y Protección Fronteriza de Estados Unidos</td><td class="n">8,100</td><td class="n kd">48</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Tijuana</td><td class="n">3,600</td><td class="n kd">19</td><td class="n">≈ $6</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Monterrey</td><td class="n">720</td><td class="n kd">19</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana de Monterrey</td><td class="n">2,400</td><td class="n kd">20</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Mexicali</td><td class="n">720</td><td class="n kd">19</td><td class="n">≈ $6</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Anexo 30 SAT</td><td class="n">170</td><td class="n kd">18</td><td class="n">≈ $22</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">TIGIE</td><td class="n">4,400</td><td class="n kd">19</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">PROSEC</td><td class="n">2,900</td><td class="n kd">22</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Clasificacion Arancelaria</td><td class="n">480</td><td class="n kd">26</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Clasificacion Arancelaria Mexico</td><td class="n">260</td><td class="n kd">24</td><td class="n">≈ $5</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Pedimento de Importacion</td><td class="n">6,600</td><td class="n kd">24</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Anexo 22 Llenado de Pedimento</td><td class="n">590</td><td class="n kd">15</td><td class="n">≈ $9</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr></tbody></table>
       </div>
     </div>
-    <p class="foot-note">Volumen, KD y CPC: SEMrush, base México, jul 2026. CPC convertido a pesos a ~$19 MXN/USD.</p>
+    <div class="row" style="justify-content:space-between;align-items:center;margin-top:9px">
+      <p class="foot-note" style="margin:0">Volumen, KD y CPC: SEMrush, base México, jul 2026. CPC en pesos a ~$19 MXN/USD. Da clic en la etiqueta de Canal para cambiar la palabra entre SEM y SEO.</p>
+      <div class="tally" data-tally="mes2">SEM <b>14</b> · SEO <b>7</b></div>
+    </div>
   </div>
 </section>
 
@@ -558,21 +614,19 @@ ul.clean li.no{color:var(--bone)}
   <div class="grid-field"></div>
   <div class="wrap">
     <div class="head" style="margin-bottom:18px">
-      <div class="row"><span class="idx">08</span><span class="eyebrow"><span class="dot"></span>Rotación del set · Mes 3</span></div>
+      <div class="row"><span class="idx">09</span><span class="eyebrow"><span class="dot"></span>Rotación del set · Mes 3</span></div>
       <h2>Mes 3: 20 palabras clave</h2>
       <p class="lead">Cobertura por plaza y el resto del contenido técnico. Se sustituyen las palabras que no convirtieron.</p>
     </div>
-    <div class="grid g2" style="gap:16px;align-items:start">
-      <div class="panel" style="padding:12px 12px 6px">
-        <div class="kicker">SEM · Se pautan con anuncios</div>
-        <table class="mini"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th></tr></thead><tbody><tr><td class="kw">Aduana Manzanillo</td><td class="n">3,600</td><td class="n kd">22</td><td class="n">≈ $10</td></tr><tr><td class="kw">Aduana de Manzanillo</td><td class="n">1,300</td><td class="n kd">19</td><td class="n">≈ $10</td></tr><tr><td class="kw">Aduana Nogales</td><td class="n">3,600</td><td class="n kd">21</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aduana Guadalajara</td><td class="n">720</td><td class="n kd">25</td><td class="n">≈ $8</td></tr><tr><td class="kw">Aduana Nuevo Laredo</td><td class="n">1,000</td><td class="n kd">20</td><td class="n">≈ $8</td></tr><tr><td class="kw">Aduana de Tampico</td><td class="n">1,000</td><td class="n kd">33</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aduana de Querétaro</td><td class="n">2,400</td><td class="n kd">20</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aduana Pantaco</td><td class="n">1,000</td><td class="n kd">26</td><td class="n">≈ $6</td></tr><tr><td class="kw">Aduana 240</td><td class="n">1,000</td><td class="n kd">12</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aduana de Tijuana Garita el Chaparral</td><td class="n">8,100</td><td class="n kd">35</td><td class="n">&lt; $1</td></tr></tbody></table>
-      </div>
-      <div class="panel" style="padding:12px 12px 6px">
-        <div class="kicker" style="color:var(--smoke)">SEO · Se trabajan con contenido</div>
-        <table class="mini"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th></tr></thead><tbody><tr><td class="kw">COVE</td><td class="n">4,400</td><td class="n kd">25</td><td class="n">≈ $30</td></tr><tr><td class="kw">Drawback</td><td class="n">1,300</td><td class="n kd">25</td><td class="n">≈ $13</td></tr><tr><td class="kw">Pedimento de Exportacion</td><td class="n">1,000</td><td class="n kd">23</td><td class="n">≈ $9</td></tr><tr><td class="kw">Impuestos de Importacion</td><td class="n">590</td><td class="n kd">35</td><td class="n">≈ $7</td></tr><tr><td class="kw">Calculo de Impuestos de Importacion Mexico</td><td class="n">590</td><td class="n kd">16</td><td class="n">≈ $5</td></tr><tr><td class="kw">Aranceles a Textiles</td><td class="n">1,300</td><td class="n kd">15</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aranceles Mexico China</td><td class="n">1,300</td><td class="n kd">42</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aranceles a China</td><td class="n">1,000</td><td class="n kd">49</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Aranceles China Estados Unidos</td><td class="n">1,000</td><td class="n kd">48</td><td class="n">&lt; $1</td></tr><tr><td class="kw">Auditoria SAT</td><td class="n">590</td><td class="n kd">19</td><td class="n">≈ $7</td></tr></tbody></table>
+    <div class="panel" style="padding:0 0 2px">
+      <div class="kwbox">
+        <table class="kwt"><thead><tr><th>Palabra Clave</th><th class="n">Volumen</th><th class="n">KD %</th><th class="n">CPC</th><th>Canal</th></tr></thead><tbody><tr><td class="kw">Aduana Manzanillo</td><td class="n">3,600</td><td class="n kd">22</td><td class="n">≈ $10</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana de Manzanillo</td><td class="n">1,300</td><td class="n kd">19</td><td class="n">≈ $10</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Nogales</td><td class="n">3,600</td><td class="n kd">21</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Guadalajara</td><td class="n">720</td><td class="n kd">25</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Nuevo Laredo</td><td class="n">1,000</td><td class="n kd">20</td><td class="n">≈ $8</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana de Tampico</td><td class="n">1,000</td><td class="n kd">33</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana de Querétaro</td><td class="n">2,400</td><td class="n kd">20</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana Pantaco</td><td class="n">1,000</td><td class="n kd">26</td><td class="n">≈ $6</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana 240</td><td class="n">1,000</td><td class="n kd">12</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">Aduana de Tijuana Garita el Chaparral</td><td class="n">8,100</td><td class="n kd">35</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEM">SEM</button></td></tr><tr><td class="kw">COVE</td><td class="n">4,400</td><td class="n kd">25</td><td class="n">≈ $30</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Drawback</td><td class="n">1,300</td><td class="n kd">25</td><td class="n">≈ $13</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Pedimento de Exportacion</td><td class="n">1,000</td><td class="n kd">23</td><td class="n">≈ $9</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Impuestos de Importacion</td><td class="n">590</td><td class="n kd">35</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Calculo de Impuestos de Importacion Mexico</td><td class="n">590</td><td class="n kd">16</td><td class="n">≈ $5</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Aranceles a Textiles</td><td class="n">1,300</td><td class="n kd">15</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Aranceles Mexico China</td><td class="n">1,300</td><td class="n kd">42</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Aranceles a China</td><td class="n">1,000</td><td class="n kd">49</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Aranceles China Estados Unidos</td><td class="n">1,000</td><td class="n kd">48</td><td class="n">&lt; $1</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr><tr><td class="kw">Auditoria SAT</td><td class="n">590</td><td class="n kd">19</td><td class="n">≈ $7</td><td><button class="pick" type="button" data-ch="SEO">SEO</button></td></tr></tbody></table>
       </div>
     </div>
-    <p class="foot-note">Volumen, KD y CPC: SEMrush, base México, jul 2026. CPC convertido a pesos a ~$19 MXN/USD.</p>
+    <div class="row" style="justify-content:space-between;align-items:center;margin-top:9px">
+      <p class="foot-note" style="margin:0">Volumen, KD y CPC: SEMrush, base México, jul 2026. CPC en pesos a ~$19 MXN/USD. Da clic en la etiqueta de Canal para cambiar la palabra entre SEM y SEO.</p>
+      <div class="tally" data-tally="mes3">SEM <b>10</b> · SEO <b>10</b></div>
+    </div>
   </div>
 </section>
 
@@ -581,7 +635,7 @@ ul.clean li.no{color:var(--bone)}
   <div class="glow-tl" style="bottom:-200px;left:-160px;background:rgba(0,230,160,.14)"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">09</span><span class="eyebrow"><span class="dot"></span>Inversión</span></div>
+      <div class="row"><span class="idx">10</span><span class="eyebrow"><span class="dot"></span>Inversión</span></div>
       <h2>Presupuesto y resultados esperados</h2>
     </div>
     <div style="display:grid;grid-template-columns:1fr 1.2fr;gap:18px;align-items:stretch">
@@ -619,7 +673,7 @@ ul.clean li.no{color:var(--bone)}
   <div class="glow-tl" style="top:-160px;left:-120px;background:rgba(40,64,104,.3)"></div>
   <div class="wrap">
     <div class="head">
-      <div class="row"><span class="idx">10</span><span class="eyebrow"><span class="dot"></span>Ejecución</span></div>
+      <div class="row"><span class="idx">11</span><span class="eyebrow"><span class="dot"></span>Ejecución</span></div>
       <h2>Cómo lo ejecutaremos</h2>
     </div>
     <div class="grid g2" style="gap:18px;align-items:stretch">
@@ -700,6 +754,63 @@ if(adBtn){
     document.getElementById('adBtnTxt').textContent = on ? 'Quitar anuncio' : 'Activar anuncio de BG';
   });
 }
+
+const VARS=[
+  {n:'Servicio',
+   ti:'Consultoría especializada en Comercio exterior e IMMEX | Atención rápida',
+   sn:'Anexo 24, certificación de IVA e IEPS y asesoría IMMEX. Firma legal en Tijuana con cobertura nacional. Más de 20 años de práctica.'},
+  {n:'Agilidad',
+   ti:'Agiliza tus trámites de comercio exterior | VUCEM y aduanas',
+   sn:'Te acompañamos en la manifestación de valor, pedimentos y permisos ante VUCEM. Firma legal en Tijuana con cobertura nacional.'},
+  {n:'Trabajo por resolver',
+   ti:'¿Tu trámite en VUCEM se atoró? | Lo resolvemos contigo',
+   sn:'Revisamos los documentos y respondemos los requerimientos de la autoridad, para que tu operación no se detenga. Más de 20 años en comercio exterior.'}
+];
+let vi=0;
+function pintaVar(i){
+  const ad=document.querySelector('.serp-ad');
+  if(!ad) return;
+  ad.classList.add('swapping');
+  setTimeout(()=>{
+    document.getElementById('adTi').textContent=VARS[i].ti;
+    document.getElementById('adSn').textContent=VARS[i].sn;
+    document.getElementById('varNum').textContent=String(i+1);
+    document.getElementById('varName').textContent=VARS[i].n;
+    ad.classList.remove('swapping');
+  },220);
+}
+function giraVar(d){
+  vi=(vi+d+VARS.length)%VARS.length;
+  const card=document.getElementById('serpCard');
+  if(card && !card.classList.contains('ad-on')){
+    card.classList.add('ad-on');
+    document.getElementById('adBtnTxt').textContent='Quitar anuncio';
+  }
+  pintaVar(vi);
+}
+const vn=document.getElementById('varNext'); if(vn) vn.addEventListener('click',()=>giraVar(1));
+const vp=document.getElementById('varPrev'); if(vp) vp.addEventListener('click',()=>giraVar(-1));
+
+const KEY='bg-kw-canal';
+const saved=JSON.parse(localStorage.getItem(KEY)||'{}');
+function tally(){
+  document.querySelectorAll('[data-tally]').forEach(t=>{
+    const box=t.closest('.wrap').querySelectorAll('.pick');
+    let sem=0,seo=0; box.forEach(b=>b.dataset.ch==='SEM'?sem++:seo++);
+    t.innerHTML='SEM <b>'+sem+'</b> · SEO <b>'+seo+'</b>';
+  });
+}
+document.querySelectorAll('.pick').forEach(b=>{
+  const kw=b.closest('tr').querySelector('.kw').textContent;
+  if(saved[kw]){b.dataset.ch=saved[kw];b.textContent=saved[kw];}
+  b.addEventListener('click',()=>{
+    const n=b.dataset.ch==='SEM'?'SEO':'SEM';
+    b.dataset.ch=n;b.textContent=n;saved[kw]=n;
+    localStorage.setItem(KEY,JSON.stringify(saved));
+    tally();
+  });
+});
+tally();
 </script>
 </body>
 </html>
