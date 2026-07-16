@@ -40,6 +40,8 @@ export type DiagnosticData = {
   getResult: (answers: number[]) => string;
   resultTag: Record<string, { es: string; en: string }>;
   stageForResult: Record<string, number>;
+  /** Qué pregunta y qué opción significan Tijuana. Se omite si el diagnóstico no pregunta ubicación. */
+  tj?: { q: number; opt: number };
 };
 
 export type FlowStage = { n: string; name: string; desc: string };
@@ -277,6 +279,7 @@ const FT_DIAGNOSTIC: DiagnosticData = {
     ADVISORY: 0,
     GENERAL: 2,
   },
+  tj: { q: 3, opt: 0 },
 };
 
 const FT_FLOW: FlowData = {
@@ -356,12 +359,12 @@ const LEGAL_DIAGNOSTIC: DiagnosticData = {
     restart: "Volver a empezar",
     questions: [
       {
-        text: "¿Cuál es tu situación hoy?",
+        text: "¿Qué acto de autoridad tienes enfrente?",
         opts: [
-          "Me llegó una notificación: crédito fiscal, multa o PAMA",
-          "Tengo una revisión o auditoría en curso de mis operaciones",
-          "Voy a tomar una decisión de negocio con efecto fiscal o aduanero",
-          "Tengo una resolución desfavorable que quiero combatir",
+          "Una notificación: crédito fiscal, multa o PAMA",
+          "El ejercicio de facultades de comprobación sobre mis operaciones",
+          "Ninguno todavía, quiero blindar una decisión antes de tomarla",
+          "Una resolución desfavorable que quiero combatir",
         ],
       },
       {
@@ -374,21 +377,21 @@ const LEGAL_DIAGNOSTIC: DiagnosticData = {
         ],
       },
       {
-        text: "¿Hay plazos corriendo?",
+        text: "¿Cómo vas con el plazo legal para impugnar?",
         opts: [
-          "Sí, tengo días o pocas semanas para responder",
-          "Sí, pero con uno a tres meses de margen",
-          "No hay plazos inmediatos, es planeación",
-          "No lo sé con certeza",
+          "Está por vencer: me quedan días o pocas semanas",
+          "Corre, pero tengo uno a tres meses de margen",
+          "Todavía no corre ningún plazo, es planeación",
+          "No sé cuándo vence",
         ],
       },
       {
-        text: "¿Dónde concentras tu operación?",
+        text: "¿Se agotó alguna instancia previa?",
         opts: [
-          "Tijuana - San Diego",
-          "Otro cruce de la frontera norte",
-          "Operación en el interior del país",
-          "Aún no tengo operaciones activas",
+          "No, este sería el primer medio de defensa que promuevo",
+          "Ya presenté un recurso de revocación",
+          "Ya hubo juicio ante el Tribunal Federal de Justicia Administrativa",
+          "No estoy seguro",
         ],
       },
     ],
@@ -453,12 +456,12 @@ const LEGAL_DIAGNOSTIC: DiagnosticData = {
     restart: "Start over",
     questions: [
       {
-        text: "What is your situation today?",
+        text: "What authority action are you facing?",
         opts: [
-          "I received a notice: tax assessment, fine, or PAMA",
-          "A review or audit of my operations is underway",
-          "I am about to make a business decision with tax or customs effect",
-          "I have an unfavorable resolution I want to challenge",
+          "A notice: tax assessment, fine, or PAMA",
+          "The authority exercising its audit powers over my operations",
+          "None yet, I want to secure a decision before I make it",
+          "An unfavorable resolution I want to challenge",
         ],
       },
       {
@@ -471,21 +474,21 @@ const LEGAL_DIAGNOSTIC: DiagnosticData = {
         ],
       },
       {
-        text: "Are deadlines already running?",
+        text: "Where do you stand on the legal deadline to challenge?",
         opts: [
-          "Yes, I have days or a few weeks to respond",
-          "Yes, but I have one to three months of room",
-          "No immediate deadlines, this is planning",
-          "I am not sure",
+          "About to expire: I have days or a few weeks left",
+          "Running, but I have one to three months of room",
+          "No deadline is running yet, this is planning",
+          "I do not know when it expires",
         ],
       },
       {
-        text: "Where is your operation concentrated?",
+        text: "Have you exhausted a prior instance?",
         opts: [
-          "Tijuana - San Diego",
-          "Another northern border crossing",
-          "Operation in the country's interior",
-          "No active operations yet",
+          "No, this would be the first defense remedy I file",
+          "I already filed an administrative appeal",
+          "There was already a trial before the Federal Court of Administrative Justice",
+          "I am not sure",
         ],
       },
     ],
@@ -1146,6 +1149,7 @@ const INTERNATIONAL_TRADE_EXPERTS_DIAGNOSTIC: DiagnosticData = {
     ORIGIN: 2,
     ANNEX24: 3,
   },
+  tj: { q: 3, opt: 0 },
 };
 
 const INTERNATIONAL_TRADE_EXPERTS_FLOW: FlowData = {
@@ -1994,6 +1998,7 @@ const TRADE_AGREEMENTS_DIAGNOSTIC: DiagnosticData = {
     PREFERENCE_ANALYSIS: 0,
     AUDIT: 3,
   },
+  tj: { q: 3, opt: 0 },
 };
 
 const TRADE_AGREEMENTS_FLOW: FlowData = {
@@ -2283,6 +2288,7 @@ const IMPORT_SERVICES_DIAGNOSTIC: DiagnosticData = {
     LOGISTICS: 3,
     GENERAL: 0,
   },
+  tj: { q: 3, opt: 0 },
 };
 
 const IMPORT_SERVICES_FLOW: FlowData = {
