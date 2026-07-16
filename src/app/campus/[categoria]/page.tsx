@@ -8,9 +8,7 @@ import { Logo } from "@/components/Logo";
 // Portadas por video (piloto). Fase 4 lo llevará a un campo por topic.
 const TOPIC_COVER: Record<string, string> = {
   "mve-edocument": "/campus/comercio-exterior-cover.jpg",
-  "immex-que-es": "/campus/immex.jpg",
-  "reglas-de-origen": "/campus/reglas-de-origen.jpg",
-  "pedimento-aduanal": "/campus/pedimento.jpg",
+  "bms-actualizacion-marzo": "/campus/bms-manifestacion-valor.jpg",
 };
 
 export default async function CategoryPage({

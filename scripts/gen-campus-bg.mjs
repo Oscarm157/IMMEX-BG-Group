@@ -27,25 +27,12 @@ const jobs = [
       "containers, gantry cranes, calm overcast sky, professional and orderly, " + base,
   },
   {
-    name: "immex",
+    name: "bms-manifestacion-valor",
     ar: "16:9",
     prompt:
-      "Interior of a clean modern logistics warehouse in daytime, organized shelving with boxes and " +
-      "pallets, bright even industrial lighting, wide angle, " + base,
-  },
-  {
-    name: "reglas-de-origen",
-    ar: "16:9",
-    prompt:
-      "Daytime photograph of a commercial trade border highway with cargo trucks, overhead signage " +
-      "gantry, clear sky, orderly logistics scene, " + base,
-  },
-  {
-    name: "pedimento",
-    ar: "16:9",
-    prompt:
-      "A tidy modern office desk with a neat stack of business documents and folders, natural window " +
-      "daylight, shallow depth of field, clean corporate still life, no readable text, " + base,
+      "A tidy modern office desk in daytime with a desktop monitor showing an abstract data table, " +
+      "a neat stack of invoices and folders beside the keyboard, natural window daylight, " +
+      "shallow depth of field, clean corporate still life, no readable text on the screen, " + base,
   },
 ];
 
