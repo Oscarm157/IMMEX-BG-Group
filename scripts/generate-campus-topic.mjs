@@ -70,11 +70,12 @@ Reglas duras:
 - No es un resumen del transcript: verifica, depura y REESTRUCTURA la información para que quede clara, útil y concisa. No todo lo del video tiene que estar. Omite saludos, agradecimientos, logística de instalación, chit-chat y relleno; quédate con lo que le sirve al alumno.
 - Usa SOLO información que esté en el transcript. No inventes datos, cifras, nombres ni funciones.
 - Sin em-dashes. Usa comas, dos puntos o punto.
+- Español sin anglicismos innecesarios: "por defecto", no "por default".
 - intro: un solo párrafo que enganche y diga de qué trata y por qué importa.
 - desglose: PROSA editorial que explique, organizada por concepto en 2 a 4 secciones con encabezado ## limpio. Los títulos NO llevan nombres de expositores (mal: "Digitalizador de documentos (José)"; bien: "Digitalizador de documentos en BMS"). Los párrafos son la base; usa viñetas SOLO para enumerar elementos discretos y cortos (pasos, métodos, requisitos), no para todo. Evita el muro de viñetas. Conserva los términos técnicos tal cual (MVE, COVE, eDocument, VUCEM, OCR, IDP, expediente digital).
 - quiz: 5 a 8 preguntas básicas, cada una con EXACTAMENTE 4 opciones y una sola correcta. Preguntas sobre lo explicado en el video, no de cultura general.
 - suggestions: 3 o 4 preguntas cortas, naturales y específicas del video, que el asistente pueda responder con este contenido (ej. "¿Cuáles son los dos métodos para agregar el eDocument?").
-- Normaliza términos mal transcritos: "Busem", "Busen", "Busém" siempre se escriben VUCEM (Ventanilla Única de Comercio Exterior Mexicana); "document/edument/dcument" es eDocument.`;
+- Normaliza términos mal transcritos: "Busem", "Busen", "Busém" siempre se escriben VUCEM (Ventanilla Única de Comercio Exterior Mexicana); "document/edument/dcument/unidocumen/Idoc" es eDocument. La normalización aplica SIEMPRE, también cuando el transcript los usa como nombre de módulo, pestaña o menú ("el módulo Busen" es "el módulo VUCEM"): Busem/Busen/Busém no existen, nunca los dejes tal cual ni los uses como respuesta de quiz.`;
 
 async function call() {
   for (const model of MODELS) {
