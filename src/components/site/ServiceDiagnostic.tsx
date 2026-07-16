@@ -11,13 +11,25 @@ import { CustomsStageVisual } from "@/components/site/CustomsStageVisual";
 type Lang = "es" | "en";
 type FormState = "idle" | "sending" | "success" | "error";
 
+const OTHER_COPY = {
+  es: { label: "Otro:", placeholder: "Describe tu situación", cont: "Continuar" },
+  en: { label: "Other:", placeholder: "Describe your situation", cont: "Continue" },
+} as const;
+
+const OTHER_MAX = 200;
+
 function buildQuizSummary(
   lang: Lang,
   questions: readonly { text: string; opts: readonly string[] }[],
   answers: number[],
+  otherTexts: Record<number, string>,
 ): string {
   return answers
-    .map((ans, qi) => `Q: ${questions[qi].text}\nA: ${questions[qi].opts[ans]}`)
+    .map((ans, qi) => {
+      const q = questions[qi];
+      const a = ans < q.opts.length ? q.opts[ans] : `${OTHER_COPY[lang].label} ${otherTexts[qi] ?? ""}`.trim();
+      return `Q: ${q.text}\nA: ${a}`;
+    })
     .join("\n\n");
 }
 
@@ -31,6 +43,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
 
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
+  const [otherTexts, setOtherTexts] = useState<Record<number, string>>({});
   const [formState, setFormState] = useState<FormState>("idle");
   const [leadName, setLeadName] = useState("");
   const [leadEmail, setLeadEmail] = useState("");
@@ -43,7 +56,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
   const done = step === c.questions.length;
   const resultKey = done ? data.getResult(answers) : null;
   const result = resultKey ? c.results[resultKey] : null;
-  const isTJ = done && answers[3] === 0;
+  const isTJ = done && data.tj != null && answers[data.tj.q] === data.tj.opt;
 
   function pick(opt: number) {
     setAnswers((prev) => [...prev, opt]);
@@ -52,6 +65,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
 
   function reset() {
     setAnswers([]);
+    setOtherTexts({});
     setStep(0);
     setFormState("idle");
     setLeadName("");
@@ -85,7 +99,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
         // El lead se categoriza con el servicio BG de esta página (por slug),
         // no con el resultado del quiz. slug y visibleServices van en el mismo orden.
         service: visibleServices[idx]?.name ?? "",
-        message: buildQuizSummary(lang, c.questions, answers),
+        message: buildQuizSummary(lang, c.questions, answers, otherTexts),
         sourceUrl: typeof window !== "undefined" ? window.location.href : "",
       };
       payload.phone = leadPhone.trim();
@@ -180,6 +194,48 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                       </span>
                     </motion.button>
                   ))}
+                  <motion.div
+                    initial={{ opacity: 0, y: 8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{
+                      duration: 0.35,
+                      delay: c.questions[step].opts.length * 0.06,
+                      ease: editorialEase,
+                    }}
+                    className="flex items-start gap-4 rounded-[10px] border border-line bg-surface-2/40 px-5 py-4 transition-colors focus-within:border-accent/40 sm:col-span-2"
+                  >
+                    <span className="mt-2.5 shrink-0 font-mono text-[13px] tabular-nums text-accent">
+                      {String.fromCharCode(65 + c.questions[step].opts.length)}
+                    </span>
+                    <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
+                      <label htmlFor={`other-${step}`} className="shrink-0 text-[16px] leading-snug text-bone/90">
+                        {OTHER_COPY[lang].label}
+                      </label>
+                      <input
+                        id={`other-${step}`}
+                        type="text"
+                        value={otherTexts[step] ?? ""}
+                        onChange={(e) => setOtherTexts((prev) => ({ ...prev, [step]: e.target.value }))}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && (otherTexts[step] ?? "").trim()) {
+                            e.preventDefault();
+                            pick(c.questions[step].opts.length);
+                          }
+                        }}
+                        maxLength={OTHER_MAX}
+                        placeholder={OTHER_COPY[lang].placeholder}
+                        className={`${inputBase} border-line focus:border-accent/50`}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => pick(c.questions[step].opts.length)}
+                        disabled={!(otherTexts[step] ?? "").trim()}
+                        className="shrink-0 rounded-[8px] border border-line px-4 py-2.5 text-[14px] text-bone/90 transition-colors hover:border-accent/40 hover:text-chalk disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:border-line disabled:hover:text-bone/90"
+                      >
+                        {OTHER_COPY[lang].cont}
+                      </button>
+                    </div>
+                  </motion.div>
                 </div>
               </motion.div>
             ) : (
