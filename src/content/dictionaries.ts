@@ -177,23 +177,6 @@ export const dictionaries = {
           points: ["Almacén", "Normas específicas (NOM)", "Gestión de permisos", "Agente aduanal"],
         },
       ],
-      complementaryLabel: "También ofrecemos",
-      complementary: [
-        {
-          name: "HTS Software",
-          summary: "Software de clasificación arancelaria para determinar la fracción correcta de tu mercancía.",
-          href: "https://www.gsmartcode.com/",
-          external: true,
-        },
-        {
-          name: "Fulfillment",
-          summary: "Control de la selección de producto, el inventario y el servicio al cliente sin retrasar la entrega.",
-        },
-        {
-          name: "3PL y logística",
-          summary: "Operación física de la mercancía: logística, almacenaje, distribución y monitoreo.",
-        },
-      ],
     },
     flow: {
       eyebrow: "Cómo trabajamos",
@@ -496,23 +479,6 @@ export const dictionaries = {
           name: "Import services",
           summary: "The import operation covered from permit to clearance.",
           points: ["Warehouse", "Specific standards (NOM)", "Permit management", "Customs broker"],
-        },
-      ],
-      complementaryLabel: "We also offer",
-      complementary: [
-        {
-          name: "HTS Software",
-          summary: "Tariff classification software to determine the correct code for your merchandise.",
-          href: "https://www.gsmartcode.com/",
-          external: true,
-        },
-        {
-          name: "Fulfillment",
-          summary: "Control over product selection, inventory and customer service without delaying delivery.",
-        },
-        {
-          name: "3PL and logistics",
-          summary: "Physical operation of the merchandise: logistics, storage, distribution and monitoring.",
         },
       ],
     },

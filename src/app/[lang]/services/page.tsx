@@ -84,45 +84,6 @@ export default async function ServicesPage({
         </div>
       </section>
 
-      {/* Servicios complementarios (secundarios) */}
-      <section className="mx-auto max-w-[1280px] px-5 pb-8 pt-20 sm:px-8 sm:pt-24">
-        <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-smoke">
-          {d.services.complementaryLabel}
-        </span>
-        <div className="mt-6 grid gap-3 sm:grid-cols-3">
-          {d.services.complementary.map((c) => {
-            const inner = (
-              <>
-                <div className="flex items-center gap-2">
-                  <h3 className="font-display text-[17px] font-medium tracking-[-0.01em] text-bone">{c.name}</h3>
-                  {"external" in c && c.external && (
-                    <span aria-hidden className="text-[13px] text-smoke transition-colors group-hover:text-accent">
-                      &#8599;
-                    </span>
-                  )}
-                </div>
-                <p className="mt-2 text-[13px] leading-relaxed text-ash">{c.summary}</p>
-              </>
-            );
-            return "href" in c && c.href ? (
-              <a
-                key={c.name}
-                href={c.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group rounded-[12px] border border-line px-5 py-5 transition-colors hover:border-accent/40"
-              >
-                {inner}
-              </a>
-            ) : (
-              <div key={c.name} className="rounded-[12px] border border-line px-5 py-5">
-                {inner}
-              </div>
-            );
-          })}
-        </div>
-      </section>
-
       {/* CTA — misma banda compacta que Nosotros */}
       <ContactCta lang={lang} />
     </>
