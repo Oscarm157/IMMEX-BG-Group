@@ -377,7 +377,7 @@ const LEGAL_DIAGNOSTIC: DiagnosticData = {
         ],
       },
       {
-        text: "¿Cómo vas con el plazo legal para impugnar?",
+        text: "¿En qué punto está el plazo legal para impugnar?",
         opts: [
           "Está por vencer: me quedan días o pocas semanas",
           "Corre, pero tengo uno a tres meses de margen",
@@ -460,7 +460,7 @@ const LEGAL_DIAGNOSTIC: DiagnosticData = {
         opts: [
           "A notice: tax assessment, fine, or PAMA",
           "The authority exercising its audit powers over my operations",
-          "None yet, I want to secure a decision before I make it",
+          "None yet, I want legal certainty before I make a decision",
           "An unfavorable resolution I want to challenge",
         ],
       },
@@ -474,7 +474,7 @@ const LEGAL_DIAGNOSTIC: DiagnosticData = {
         ],
       },
       {
-        text: "Where do you stand on the legal deadline to challenge?",
+        text: "What is the status of the legal deadline to challenge?",
         opts: [
           "About to expire: I have days or a few weeks left",
           "Running, but I have one to three months of room",
