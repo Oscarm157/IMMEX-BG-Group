@@ -120,13 +120,22 @@ export function calcularVisibles(estado: Estado): IdeaFila[] {
   });
 }
 
-export function useKeywords() {
+/**
+ * `iniciales` son las keywords que trajo el servidor. Se usan mientras el store está
+ * vacío, que es lo que pasa en el HTML del servidor y en el primer render: sin esto la
+ * tabla sale diciendo que ninguna keyword pasa los filtros hasta que hidrata.
+ */
+export function useKeywords(iniciales: IdeaFila[] = []) {
   const snapshot = useSyncExternalStore(
     keywordsStore.suscribir,
     keywordsStore.leer,
     keywordsStore.leer,
   );
-  const visibles = useMemo(() => calcularVisibles(snapshot), [snapshot]);
+  const estadoVisible = useMemo(
+    () => (snapshot.ideas.length ? snapshot : { ...snapshot, ideas: iniciales }),
+    [snapshot, iniciales],
+  );
+  const visibles = useMemo(() => calcularVisibles(estadoVisible), [estadoVisible]);
   const seleccion = useMemo(
     () => visibles.filter((k) => snapshot.elegidas.has(claveIdea(k))),
     [visibles, snapshot.elegidas],
@@ -145,11 +154,6 @@ export function useKeywords() {
 
 /** Carga en el store las keywords que trajo el servidor para el filtro actual. */
 export function KeywordsProvider({ ideas, children }: { ideas: IdeaFila[]; children: ReactNode }) {
-  // Sembrar en el primer render, no solo en el efecto: si no, el HTML del servidor sale
-  // con la tabla vacía y se lee "ninguna keyword pasa estos filtros" hasta que hidrata.
-  if (!estado.ideas.length && ideas.length) {
-    estado = { ...estado, ideas };
-  }
   useEffect(() => {
     keywordsStore.cargarIdeas(ideas);
   }, [ideas]);

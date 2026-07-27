@@ -145,7 +145,7 @@ export default async function KeywordsPage({
       </div>
 
       <KeywordsProvider ideas={ideas}>
-        <Explorador total={resumen.keywords} grupos={grupos} />
+        <Explorador ideas={ideas} total={resumen.keywords} grupos={grupos} />
       </KeywordsProvider>
 
       {/* Comparativo de servicios: para decidir por dónde entrar, no para el día a día */}

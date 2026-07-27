@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { ArrowDown, ArrowUp, Copy, Check } from "lucide-react";
+import type { IdeaFila } from "@/lib/keywords-data";
 import { AgregarAGrupo } from "./AgregarAGrupo";
 import { Calculadora } from "./Calculadora";
 import { etiquetaServicio } from "@/lib/keywords-schema";
@@ -29,9 +30,12 @@ const num = (n: number, d = 0) =>
   n.toLocaleString("es-MX", { minimumFractionDigits: d, maximumFractionDigits: d });
 
 export function Explorador({
+  ideas,
   total,
   grupos,
 }: {
+  /** Las del servidor: se pintan mientras el store del cliente no ha hidratado. */
+  ideas: IdeaFila[];
   total: number;
   grupos: Array<{ id: string; nombre: string; servicio: string }>;
 }) {
@@ -47,7 +51,7 @@ export function Explorador({
     alternar,
     alternarTodas,
     limpiarSeleccion,
-  } = useKeywords();
+  } = useKeywords(ideas);
   const [copiado, setCopiado] = useState(false);
   const [mostrar, setMostrar] = useState(PAGINA);
 
