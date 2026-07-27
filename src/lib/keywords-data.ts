@@ -1,4 +1,4 @@
-import { and, desc, eq, gte, ilike, sql, type SQL } from "drizzle-orm";
+import { and, desc, eq, gte, ilike, inArray, sql, type SQL } from "drizzle-orm";
 import { db } from "./db";
 import {
   kwGrupoItems,
@@ -82,9 +82,48 @@ export async function getServicios(): Promise<ServicioResumen[]> {
     .sort((a, b) => b.total - a.total);
 }
 
+/** Las keywords de unos grupos, ya resueltas contra el research. */
+export async function getKeywordsDeGrupos(ids: string[]) {
+  if (!ids.length) return { porKeyword: new Map<string, string[]>(), fuera: [] as string[] };
+  const items = await db
+    .select({ grupoId: kwGrupoItems.grupoId, keyword: kwGrupoItems.keyword })
+    .from(kwGrupoItems)
+    .where(inArray(kwGrupoItems.grupoId, ids));
+
+  const nombres = new Map(
+    (await db.select({ id: kwGrupos.id, nombre: kwGrupos.nombre }).from(kwGrupos)).map((g) => [
+      g.id,
+      g.nombre,
+    ]),
+  );
+
+  // Una keyword puede estar en varios grupos: se guardan todos los nombres.
+  const porKeyword = new Map<string, string[]>();
+  for (const i of items) {
+    const clave = normaliza(i.keyword);
+    const nombre = nombres.get(i.grupoId);
+    if (!nombre) continue;
+    const ya = porKeyword.get(clave) ?? [];
+    if (!ya.includes(nombre)) ya.push(nombre);
+    porKeyword.set(clave, ya);
+  }
+
+  // Las que el grupo guardó pero ya no están en la última corrida: no se esconden.
+  const existentes = new Set(
+    (await db.select({ keyword: kwIdeas.keyword }).from(kwIdeas)).map((k) => normaliza(k.keyword)),
+  );
+  const fuera = [...new Set(items.map((i) => i.keyword))].filter(
+    (k) => !existentes.has(normaliza(k)),
+  );
+
+  return { porKeyword, fuera };
+}
+
 export type IdeaFila = {
   keyword: string;
   servicio: string;
+  /** Nombres de los grupos a los que pertenece. Vacío si no está en ninguno filtrado. */
+  grupos?: string[];
   plaza: string;
   mercado: KwMercado;
   fuente: KwFuente;
@@ -106,6 +145,8 @@ export async function getIdeas(filtros: {
   min?: number;
   q?: string;
   limite?: number;
+  /** Si viene, la tabla se acota a las keywords de esos grupos y cada fila trae su etiqueta. */
+  grupos?: string[];
 }): Promise<IdeaFila[]> {
   const conds: SQL[] = [];
   if (filtros.servicio) conds.push(eq(kwIdeas.servicio, filtros.servicio));
@@ -136,9 +177,16 @@ export async function getIdeas(filtros: {
     .where(conds.length ? and(...conds) : undefined)
     .orderBy(kwIdeas.keyword, kwRuns.mercado, desc(kwIdeas.volumen));
 
-  return filas
-    .sort((a, b) => b.volumen - a.volumen)
-    .slice(0, filtros.limite ?? 150);
+  const ordenadas = filas.sort((a, b) => b.volumen - a.volumen);
+
+  if (!filtros.grupos?.length) return ordenadas.slice(0, filtros.limite ?? 150);
+
+  // Con grupos activos manda el grupo: se muestran todas sus keywords, sin el tope
+  // de la vista general (un grupo grande cabe de sobra).
+  const { porKeyword } = await getKeywordsDeGrupos(filtros.grupos);
+  return ordenadas
+    .filter((k) => porKeyword.has(normaliza(k.keyword)))
+    .map((k) => ({ ...k, grupos: porKeyword.get(normaliza(k.keyword)) }));
 }
 
 /** Las plazas con research, para el filtro secundario. */
@@ -234,6 +282,28 @@ export async function getGrupos(): Promise<GrupoResumen[]> {
       };
     })
     .sort((a, b) => b.volumen - a.volumen);
+}
+
+/** Las keywords de cada grupo, para desplegar varias filas a la vez sin entrar a cada una. */
+export async function getItemsPorGrupo() {
+  const items = await db
+    .select({
+      grupoId: kwGrupoItems.grupoId,
+      keyword: kwGrupoItems.keyword,
+      volumen: kwGrupoItems.volumen,
+      cpc: kwGrupoItems.cpc,
+      competencia: kwGrupoItems.competencia,
+    })
+    .from(kwGrupoItems)
+    .orderBy(desc(kwGrupoItems.volumen));
+
+  const porGrupo = new Map<string, typeof items>();
+  for (const i of items) {
+    const ya = porGrupo.get(i.grupoId) ?? [];
+    ya.push(i);
+    porGrupo.set(i.grupoId, ya);
+  }
+  return porGrupo;
 }
 
 export async function getGrupo(id: string) {

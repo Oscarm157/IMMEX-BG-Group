@@ -4,7 +4,15 @@ import { PageHeader } from "@/components/crm/PageShell";
 import { Plegable } from "@/components/crm/Plegable";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canViewAds } from "@/lib/crm-permissions";
-import { getGruposBreve, getIdeas, getPlazas, getResumen, getServicios } from "@/lib/keywords-data";
+import {
+  getGrupos,
+  getGruposBreve,
+  getIdeas,
+  getKeywordsDeGrupos,
+  getPlazas,
+  getResumen,
+  getServicios,
+} from "@/lib/keywords-data";
 import { etiquetaServicio, type KwMercado } from "@/lib/keywords-schema";
 import { Explorador } from "./Explorador";
 import { KeywordsProvider } from "./KeywordsContext";
@@ -28,7 +36,12 @@ const fmtFecha = (d: Date | null) =>
 export default async function KeywordsPage({
   searchParams,
 }: {
-  searchParams: Promise<{ servicio?: string; plaza?: string; mercado?: string }>;
+  searchParams: Promise<{
+    servicio?: string;
+    plaza?: string;
+    mercado?: string;
+    grupos?: string;
+  }>;
 }) {
   const me = await getCurrentUser();
   if (!me) redirect("/admin/login");
@@ -38,24 +51,51 @@ export default async function KeywordsPage({
   const mercado =
     sp.mercado === "nacional_es" || sp.mercado === "extranjero_en" ? sp.mercado : undefined;
 
-  const [servicios, plazas, resumen, grupos] = await Promise.all([
+  const [servicios, plazas, resumen, grupos, todosLosGrupos] = await Promise.all([
     getServicios(),
     getPlazas(),
     getResumen(),
     getGruposBreve(),
+    getGrupos(),
   ]);
   const servicio = servicios.find((s) => s.servicio === sp.servicio)?.servicio;
   const plaza = plazas.find((p) => p.plaza === sp.plaza)?.plaza;
-  const ideas = await getIdeas({ servicio, plaza, mercado, limite: 600 });
 
-  const url = (cambio: { servicio?: string; plaza?: string; mercado?: string }) => {
+  // Los grupos activos viajan en la URL: se pueden prender varios y compartir el link.
+  const idsValidos = new Set(todosLosGrupos.map((g) => g.id));
+  const gruposActivos = (sp.grupos ?? "").split(",").filter((id) => idsValidos.has(id));
+
+  const ideas = await getIdeas({
+    servicio,
+    plaza,
+    mercado,
+    limite: 600,
+    grupos: gruposActivos,
+  });
+  const { fuera } = gruposActivos.length
+    ? await getKeywordsDeGrupos(gruposActivos)
+    : { fuera: [] as string[] };
+
+  const url = (cambio: {
+    servicio?: string;
+    plaza?: string;
+    mercado?: string;
+    grupos?: string[];
+  }) => {
     const p = new URLSearchParams();
-    const final = { servicio, plaza, mercado, ...cambio };
+    const final = { servicio, plaza, mercado, grupos: gruposActivos, ...cambio };
     if (final.servicio) p.set("servicio", final.servicio);
     if (final.plaza) p.set("plaza", final.plaza);
     if (final.mercado) p.set("mercado", final.mercado);
+    if (final.grupos.length) p.set("grupos", final.grupos.join(","));
     return `/admin/keywords${p.size ? `?${p}` : ""}`;
   };
+
+  /** Prende o apaga un grupo sin tocar los demás. */
+  const alternarGrupo = (id: string) =>
+    gruposActivos.includes(id)
+      ? gruposActivos.filter((g) => g !== id)
+      : [...gruposActivos, id];
 
   if (!resumen.keywords) {
     return (
@@ -144,9 +184,52 @@ export default async function KeywordsPage({
         ))}
       </div>
 
+      {/* Grupos: se prenden varios y la tabla muestra sus keywords juntas */}
+      {todosLosGrupos.length > 0 && (
+        <div className="mb-4 flex flex-wrap items-center gap-1.5">
+          <span className="mr-1 text-[11.5px] font-medium uppercase tracking-wide text-[var(--crm-ink-mute)]">
+            Grupos
+          </span>
+          {todosLosGrupos.map((g) => {
+            const activo = gruposActivos.includes(g.id);
+            return (
+              <Link
+                key={g.id}
+                href={url({ grupos: alternarGrupo(g.id) })}
+                className={`crm-btn crm-btn-sm ${activo ? "crm-btn-primary" : "crm-btn-secondary"}`}
+              >
+                {g.nombre}
+                <span className={activo ? "opacity-80" : "text-[var(--crm-ink-faint)]"}>
+                  {num(g.keywords)}
+                </span>
+              </Link>
+            );
+          })}
+          {gruposActivos.length > 0 && (
+            <Link href={url({ grupos: [] })} className="crm-btn crm-btn-sm crm-btn-ghost">
+              Quitar grupos
+            </Link>
+          )}
+        </div>
+      )}
+
       <KeywordsProvider ideas={ideas}>
-        <Explorador ideas={ideas} total={resumen.keywords} grupos={grupos} />
+        <Explorador
+          ideas={ideas}
+          total={gruposActivos.length ? ideas.length : resumen.keywords}
+          grupos={grupos}
+          conGrupos={gruposActivos.length > 0}
+        />
       </KeywordsProvider>
+
+      {fuera.length > 0 && (
+        <p className="mb-4 text-[12.5px] leading-relaxed text-[var(--crm-ink-mute)]">
+          {fuera.length === 1
+            ? "1 keyword de estos grupos ya no está en la última corrida"
+            : `${num(fuera.length)} keywords de estos grupos ya no están en la última corrida`}
+          : {fuera.join(", ")}.
+        </p>
+      )}
 
       {/* Comparativo de servicios: para decidir por dónde entrar, no para el día a día */}
       <Plegable

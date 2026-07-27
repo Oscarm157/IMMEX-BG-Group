@@ -3,23 +3,14 @@ import { redirect } from "next/navigation";
 import { PageHeader } from "@/components/crm/PageShell";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canViewAds } from "@/lib/crm-permissions";
-import { getGrupos } from "@/lib/keywords-data";
-import { etiquetaServicio } from "@/lib/keywords-schema";
+import { getGrupos, getItemsPorGrupo } from "@/lib/keywords-data";
+import { FilasGrupos } from "./FilasGrupos";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Grupos de keywords", robots: { index: false } };
 
-const ESTADOS: Record<string, { label: string; clase: string }> = {
-  borrador: { label: "Borrador", clase: "" },
-  listo: { label: "Listo", clase: "crm-badge-amber" },
-  lanzado: { label: "Correr en Google Ads", clase: "crm-badge-violet" },
-};
-
 const num = (n: number, d = 0) =>
   n.toLocaleString("es-MX", { minimumFractionDigits: d, maximumFractionDigits: d });
-
-const fmtFecha = (d: Date | null) =>
-  d ? new Intl.DateTimeFormat("es-MX", { day: "2-digit", month: "short" }).format(d) : "—";
 
 const COLUMNAS = ["volumen", "cpc", "disputa", "techoClics", "costoMes"] as const;
 type Columna = (typeof COLUMNAS)[number];
@@ -39,9 +30,8 @@ export default async function GruposPage({
     : "volumen";
   const asc = sp.dir === "asc";
 
-  const grupos = (await getGrupos()).sort((a, b) =>
-    asc ? a[orden] - b[orden] : b[orden] - a[orden],
-  );
+  const [todos, items] = await Promise.all([getGrupos(), getItemsPorGrupo()]);
+  const grupos = todos.sort((a, b) => (asc ? a[orden] - b[orden] : b[orden] - a[orden]));
 
   if (!grupos.length) {
     return (
@@ -91,51 +81,14 @@ export default async function GruposPage({
             </tr>
           </thead>
           <tbody>
-            {grupos.map((g) => (
-              <tr key={g.id} className="crm-row border-t border-[var(--crm-line)]">
-                <td className="crm-td">
-                  <Link
-                    href={`/admin/keywords/grupos/${g.id}`}
-                    className="text-[14px] font-medium text-[var(--crm-ink)] transition-colors hover:text-[var(--crm-accent-strong)]"
-                  >
-                    {g.nombre}
-                  </Link>
-                  <div className="mt-0.5 text-[12px] text-[var(--crm-ink-faint)]">
-                    {etiquetaServicio(g.servicio)} · {g.plaza ?? "Nacional"} ·{" "}
-                    {g.mercado === "nacional_es" ? "Nacional" : "Extranjero"} · {num(g.keywords)} kw
-                    {g.actualizado ? ` · ${fmtFecha(g.actualizado)}` : ""}
-                  </div>
-                </td>
-                <td className="crm-td w-[130px]">
-                  <div className="h-2 w-full overflow-hidden rounded-full bg-[var(--crm-surface-3)]">
-                    <span
-                      className="block h-full bg-[var(--crm-accent)]"
-                      style={{ width: `${(g.volumen / escala) * 100}%` }}
-                    />
-                  </div>
-                </td>
-                <td className="crm-td crm-num text-right text-[13.5px] font-semibold text-[var(--crm-ink)]">
-                  {num(g.volumen)}
-                </td>
-                <td className="crm-td crm-num text-right text-[13px] text-[var(--crm-ink-soft)]">
-                  ${g.cpc.toFixed(2)}
-                </td>
-                <td className="crm-td crm-num text-right text-[13px] text-[var(--crm-ink-mute)]">
-                  {num(g.disputa * 100)}%
-                </td>
-                <td className="crm-td crm-num text-right text-[13px] text-[var(--crm-ink-soft)]">
-                  {num(g.techoClics)}
-                </td>
-                <td className="crm-td crm-num text-right text-[13px] text-[var(--crm-ink-soft)]">
-                  ${num(g.costoMes)}
-                </td>
-                <td className="crm-td text-right">
-                  <span className={`crm-badge ${ESTADOS[g.estado]?.clase ?? ""}`}>
-                    {ESTADOS[g.estado]?.label ?? g.estado}
-                  </span>
-                </td>
-              </tr>
-            ))}
+            <FilasGrupos
+              grupos={grupos.map((g) => ({
+                ...g,
+                actualizado: g.actualizado ? g.actualizado.toISOString() : null,
+              }))}
+              items={Object.fromEntries(items)}
+              escala={escala}
+            />
           </tbody>
         </table>
       </div>

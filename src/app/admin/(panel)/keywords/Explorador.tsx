@@ -33,11 +33,14 @@ export function Explorador({
   ideas,
   total,
   grupos,
+  conGrupos = false,
 }: {
   /** Las del servidor: se pintan mientras el store del cliente no ha hidratado. */
   ideas: IdeaFila[];
   total: number;
   grupos: Array<{ id: string; nombre: string; servicio: string }>;
+  /** Con grupos activos aparece la columna que dice a cuál pertenece cada keyword. */
+  conGrupos?: boolean;
 }) {
   const {
     visibles,
@@ -237,6 +240,7 @@ export function Explorador({
                 <Th col="servicio" orden={orden} onClick={ordenarPor}>
                   Servicio
                 </Th>
+                {conGrupos && <th className="crm-th">Grupo</th>}
                 <th className="crm-th">Plaza</th>
                 <Th col="volumen" orden={orden} onClick={ordenarPor} derecha>
                   Vol/mes
@@ -295,6 +299,17 @@ export function Explorador({
                     <td className="crm-td text-[13px] text-[var(--crm-ink-soft)]">
                       {etiquetaServicio(k.servicio)}
                     </td>
+                    {conGrupos && (
+                      <td className="crm-td text-[12.5px]">
+                        <span className="flex flex-wrap gap-1">
+                          {(k.grupos ?? []).map((g) => (
+                            <span key={g} className="crm-badge">
+                              {g}
+                            </span>
+                          ))}
+                        </span>
+                      </td>
+                    )}
                     <td className="crm-td text-[13px] text-[var(--crm-ink-mute)]">{k.plaza}</td>
                     <td className="crm-td crm-num text-right text-[13.5px] font-medium text-[var(--crm-ink)]">
                       {num(k.volumen)}
