@@ -2,8 +2,9 @@ import { drizzle } from "drizzle-orm/neon-http";
 import { neon } from "@neondatabase/serverless";
 import * as coreSchema from "./schema";
 import * as campusSchema from "./campus-schema";
+import * as keywordsSchema from "./keywords-schema";
 
-const schema = { ...coreSchema, ...campusSchema };
+const schema = { ...coreSchema, ...campusSchema, ...keywordsSchema };
 
 type DB = ReturnType<typeof drizzle<typeof schema>>;
 
