@@ -135,7 +135,6 @@ export type IdeaFila = {
   variantes: number;
   dificultad: number | null; // solo SEMrush: qué tan difícil es posicionar sin pagar
   intencion: string | null; // solo SEMrush
-  serie: number[] | null; // 12 meses, para estacionalidad
 };
 
 export async function getIdeas(filtros: {
@@ -170,16 +169,21 @@ export async function getIdeas(filtros: {
       variantes: kwIdeas.variantes,
       dificultad: kwIdeas.dificultadSeo,
       intencion: kwIdeas.intencion,
-      serie: kwIdeas.serie12m,
+      // La serie de 12 meses no se pinta en ningún lado y son 12 números por fila:
+      // fuera del payload, que ahora viaja completo.
     })
     .from(kwIdeas)
     .innerJoin(kwRuns, eq(kwIdeas.runId, kwRuns.id))
     .where(conds.length ? and(...conds) : undefined)
     .orderBy(kwIdeas.keyword, kwRuns.mercado, desc(kwIdeas.volumen));
 
+  // Sin tope por default: el filtrado (texto, CPC, competencia) ocurre en el navegador,
+  // así que recortar aquí hacía que los filtros mintieran sobre lo que no llegó.
   const ordenadas = filas.sort((a, b) => b.volumen - a.volumen);
 
-  if (!filtros.grupos?.length) return ordenadas.slice(0, filtros.limite ?? 150);
+  if (!filtros.grupos?.length) {
+    return filtros.limite ? ordenadas.slice(0, filtros.limite) : ordenadas;
+  }
 
   // Con grupos activos manda el grupo: se muestran todas sus keywords, sin el tope
   // de la vista general (un grupo grande cabe de sobra).

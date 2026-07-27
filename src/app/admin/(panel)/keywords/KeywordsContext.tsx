@@ -142,11 +142,14 @@ export function calcularVisibles(estado: Estado): IdeaFila[] {
     if (q && !k.keyword.toLowerCase().includes(q)) return false;
     if (filtros.minVolumen != null && k.volumen < filtros.minVolumen) return false;
     if (filtros.maxVolumen != null && k.volumen > filtros.maxVolumen) return false;
-    // El CPC filtra sobre la puja alta, que es la que se muestra en la tabla. Las keywords
-    // sin puja reportada (0) solo pasan si no hay filtro de CPC: si no, un "desde $1"
-    // las dejaría fuera por baratas cuando en realidad no hay dato.
-    if (filtros.minCpc != null && (k.cpc <= 0 || k.cpc < filtros.minCpc)) return false;
-    if (filtros.maxCpc != null && (k.cpc <= 0 || k.cpc > filtros.maxCpc)) return false;
+    // El CPC filtra sobre la puja alta, que es la que se muestra en la tabla. Un 0 en
+    // "desde" es no poner piso, no "exígeme que tenga puja": escribirlo dejaba fuera a
+    // las ~770 keywords sin dato de puja sin que nada lo dijera.
+    const acotaCpc =
+      (filtros.minCpc != null && filtros.minCpc > 0) || (filtros.maxCpc != null && filtros.maxCpc > 0);
+    if (acotaCpc && k.cpc <= 0) return false; // sin puja reportada no se puede comparar
+    if (filtros.minCpc != null && k.cpc < filtros.minCpc) return false;
+    if (filtros.maxCpc != null && k.cpc > 0 && k.cpc > filtros.maxCpc) return false;
     if (filtros.competencias.length && !filtros.competencias.includes(k.competencia)) return false;
     if (filtros.soloConPuja && k.cpc <= 0) return false;
     return true;

@@ -65,13 +65,7 @@ export default async function KeywordsPage({
   const idsValidos = new Set(todosLosGrupos.map((g) => g.id));
   const gruposActivos = (sp.grupos ?? "").split(",").filter((id) => idsValidos.has(id));
 
-  const ideas = await getIdeas({
-    servicio,
-    plaza,
-    mercado,
-    limite: 600,
-    grupos: gruposActivos,
-  });
+  const ideas = await getIdeas({ servicio, plaza, mercado, grupos: gruposActivos });
   const { fuera } = gruposActivos.length
     ? await getKeywordsDeGrupos(gruposActivos)
     : { fuera: [] as string[] };
@@ -214,9 +208,11 @@ export default async function KeywordsPage({
       )}
 
       <KeywordsProvider ideas={ideas}>
+        {/* total = lo que de verdad tiene la tabla, no el research completo: el
+            contador decía "de 1,019" cuando solo habían llegado 600. */}
         <Explorador
           ideas={ideas}
-          total={gruposActivos.length ? ideas.length : resumen.keywords}
+          total={ideas.length}
           grupos={grupos}
           conGrupos={gruposActivos.length > 0}
         />

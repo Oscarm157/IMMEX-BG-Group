@@ -156,6 +156,12 @@ export function Explorador({
                 />
                 Solo las que Google reporta puja
               </label>
+              {(filtros.minCpc || filtros.maxCpc) && (
+                <p className="text-[11.5px] leading-tight text-[var(--crm-ink-faint)]">
+                  Al poner un rango de precio quedan fuera las keywords sin puja reportada: no hay
+                  con qué compararlas.
+                </p>
+              )}
             </div>
           </Grupo>
 
