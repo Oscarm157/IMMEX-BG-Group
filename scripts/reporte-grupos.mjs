@@ -1,0 +1,415 @@
+// Reporte de palabras clave para BG, armado desde los grupos guardados en /admin/keywords.
+//
+//   node --env-file=.env.local scripts/reporte-grupos.mjs
+//
+// Escribe un HTML autocontenido FUERA del repo: Oscarm157/IMMEX-BG-Group es público y el
+// research completo le sirve a cualquier competidor. Ninguna cifra se escribe a mano; si un
+// dato no está en la base, no aparece en el reporte.
+import { readFileSync, writeFileSync } from "node:fs";
+import { neon } from "@neondatabase/serverless";
+
+const SALIDA = "/root/BG-reporte-keywords.html";
+const LOGO = "/root/bg-group/public/BG_Logotipo_Blanco.png";
+const sql = neon(process.env.DATABASE_URL);
+
+// Supuestos, todos declarados en el propio reporte para que las cuentas se puedan rehacer.
+const COBERTURA = 0.65; // de las búsquedas del grupo, en cuántas se alcanza a aparecer
+const CTR = 0.08; // de esas impresiones, cuántas dan clic
+const CONVERSIONES = [0.01, 0.02, 0.035]; // clic a lead: conservador, esperado, optimista
+const TIPO_CAMBIO = 19;
+const PRESUPUESTO = [7500, 10000]; // pesos al mes, el rango del deck de estrategia
+
+/**
+ * Reparto por intención. Explícito y en orden: la primera regla que apareé manda.
+ * Está pensado para los servicios de BG; lo que no encaje sale en "sin grupo claro"
+ * en vez de forzarse a un grupo que no le toca.
+ */
+const GRUPOS = [
+  {
+    nombre: "Agente y despacho aduanal",
+    alias: ["agente aduanal", "agenteaduanal", "agencia aduanal", "agencias aduanales", "despacho de aduana", "despacho aduanal", "despacho aduanero"],
+    concordancia: "Frase para arrancar, exacta en las que traigan llamadas.",
+    negativas: ["curso", "qué es", "sueldo", "carrera", "requisitos para ser", "patente"],
+    nota: "Es la demanda de quien ya quiere contratar a alguien que le despache. La más cara y la más disputada del grupo.",
+  },
+  {
+    nombre: "Programa IMMEX",
+    alias: ["immex"],
+    concordancia: "Frase. La exacta se reserva para lo que convierta.",
+    negativas: ["qué es", "pdf", "ejemplos", "lista de empresas", "curso"],
+    nota: "Quien busca IMMEX suele estar evaluando el programa o ya operarlo con dudas. Cierra lento, no en la llamada.",
+  },
+  {
+    nombre: "VUCEM y trámites del portal",
+    alias: ["vucem", "cove", "ventanilla unica"],
+    concordancia: "Frase, y vigilar el informe de términos la primera semana.",
+    negativas: ["iniciar sesión", "contraseña", "mi cuenta", "no puedo entrar", "manual", "pdf"],
+    nota: "Es el volumen más grande del research y el de peor intención: casi todo es gente entrando al portal del gobierno a hacer un trámite. Sirve para hacerse conocido, no para vender esta semana.",
+  },
+  {
+    nombre: "Padrón de importadores",
+    alias: ["padron"],
+    concordancia: "Frase.",
+    negativas: ["consulta", "requisitos pdf", "formato", "curso"],
+    nota: "Trámite con problema atrás: quien lo busca suele estar atorado en el alta o en la suspensión.",
+  },
+  {
+    nombre: "Clasificación arancelaria",
+    alias: ["clasificacion arancelaria", "fraccion arancelaria", "tigie"],
+    concordancia: "Frase y exacta.",
+    negativas: ["buscador", "consulta gratis", "curso", "pdf"],
+    nota: "Consulta técnica y recurrente. Volumen chico, intención buena.",
+  },
+];
+
+/** Lo que no es demanda de consultoría, con el motivo a la vista. */
+const DESCARTES = [
+  { alias: ["aduana tijuana", "aduana de tijuana", "garita"], motivo: "Es gente buscando la aduana física, sus horarios o la garita. No busca a quien la asesore." },
+  { alias: ["auditoria sat"], motivo: "Demasiado amplia: mezcla auditoría fiscal con auditoría aduanera, y la mayoría no es comercio exterior." },
+];
+
+const normaliza = (t) =>
+  t.trim().toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
+
+const num = (n, d = 0) =>
+  Number(n).toLocaleString("es-MX", { minimumFractionDigits: d, maximumFractionDigits: d });
+
+const esc = (t) =>
+  String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+const COMPETENCIA = { LOW: "Baja", MEDIUM: "Media", HIGH: "Alta" };
+
+/** CPC ponderado por volumen: una keyword de 8,000 pesa más que una de 500. */
+function cpcPonderado(items) {
+  const conPuja = items.filter((k) => Number(k.cpc) > 0);
+  if (!conPuja.length) return 0;
+  const vol = conPuja.reduce((a, k) => a + k.volumen, 0);
+  return conPuja.reduce((a, k) => a + Number(k.cpc) * k.volumen, 0) / Math.max(1, vol);
+}
+
+function clasifica(keyword) {
+  const kw = normaliza(keyword);
+  for (const d of DESCARTES) {
+    if (d.alias.some((a) => kw.includes(normaliza(a)))) return { tipo: "descarte", motivo: d.motivo };
+  }
+  for (const g of GRUPOS) {
+    if (g.alias.some((a) => kw.includes(normaliza(a)))) return { tipo: "grupo", grupo: g.nombre };
+  }
+  return { tipo: "sin", motivo: "No cae en ninguno de los servicios del reparto." };
+}
+
+// ---- Datos ----
+
+const grupos = await sql`
+  SELECT g.id, g.nombre, g.servicio, g.plaza, g.mercado, g.estado, g.updated_at
+  FROM kw_grupos g ORDER BY g.updated_at DESC`;
+
+if (!grupos.length) {
+  console.error("No hay grupos guardados. Arma uno en /admin/keywords y vuelve a correr esto.");
+  process.exit(1);
+}
+
+const items = await sql`
+  SELECT grupo_id, keyword, volumen, cpc, competencia FROM kw_grupo_items ORDER BY volumen DESC`;
+
+const [corrida] = await sql`SELECT max(corrida_en) AS fecha FROM kw_runs`;
+
+const fmtFecha = (d) =>
+  d ? new Intl.DateTimeFormat("es-MX", { day: "2-digit", month: "long", year: "numeric" }).format(new Date(d)) : "—";
+
+const logo = readFileSync(LOGO).toString("base64");
+
+// ---- Armado por grupo guardado ----
+
+function analiza(grupo) {
+  const suyas = items.filter((i) => i.grupo_id === grupo.id);
+  const bloques = GRUPOS.map((g) => ({ ...g, items: [] }));
+  const descartadas = [];
+  const sinGrupo = [];
+
+  for (const k of suyas) {
+    const r = clasifica(k.keyword);
+    if (r.tipo === "grupo") bloques.find((b) => b.nombre === r.grupo).items.push(k);
+    else if (r.tipo === "descarte") descartadas.push({ ...k, motivo: r.motivo });
+    else sinGrupo.push({ ...k, motivo: r.motivo });
+  }
+
+  const conKeywords = bloques.filter((b) => b.items.length);
+  const total = suyas.reduce((a, k) => a + k.volumen, 0);
+  const repartido =
+    conKeywords.reduce((a, b) => a + b.items.reduce((x, k) => x + k.volumen, 0), 0) +
+    descartadas.reduce((a, k) => a + k.volumen, 0) +
+    sinGrupo.reduce((a, k) => a + k.volumen, 0);
+
+  // El reporte no sirve si las cuentas no cierran: mejor fallar que publicar un número mal.
+  if (total !== repartido) {
+    console.error(`El reparto no cuadra en "${grupo.nombre}": ${repartido} contra ${total}.`);
+    process.exit(1);
+  }
+
+  return { grupo, suyas, bloques: conKeywords, descartadas, sinGrupo, total };
+}
+
+const analisis = grupos.map(analiza);
+
+// ---- HTML ----
+
+function tablaKeywords(items, extra = null) {
+  return `<table class="tabla">
+  <thead><tr><th>Palabra clave</th><th class="r">Búsquedas al mes</th><th class="r">Competencia</th><th class="r">Puja alta</th>${extra ? "<th>Por qué queda fuera</th>" : ""}</tr></thead>
+  <tbody>${items
+    .map(
+      (k) => `<tr><td>${esc(k.keyword)}</td><td class="r n">${num(k.volumen)}</td><td class="r">${COMPETENCIA[k.competencia] ?? "Sin dato"}</td><td class="r n">${Number(k.cpc) > 0 ? `$${num(k.cpc, 2)}` : "sin dato"}</td>${extra ? `<td class="motivo">${esc(k.motivo)}</td>` : ""}</tr>`,
+    )
+    .join("")}</tbody></table>`;
+}
+
+function bloqueGrupo(b, i) {
+  const vol = b.items.reduce((a, k) => a + k.volumen, 0);
+  const cpc = cpcPonderado(b.items);
+  const clics = vol * COBERTURA * CTR;
+  const costo = clics * cpc;
+  const leads = CONVERSIONES.map((c) => clics * c);
+  return `<section class="bloque">
+  <div class="bloque-h">
+    <span class="idx">Grupo ${i + 1}</span>
+    <h3>${esc(b.nombre)}</h3>
+  </div>
+  <p class="nota">${esc(b.nota)}</p>
+  <div class="kpis">
+    <div class="kpi"><span>Búsquedas al mes</span><b class="n">${num(vol)}</b></div>
+    <div class="kpi"><span>Puja alta ponderada</span><b class="n">$${num(cpc, 2)} USD</b></div>
+    <div class="kpi"><span>Clics al mes, techo</span><b class="n">${num(clics)}</b></div>
+    <div class="kpi"><span>Costo de ese techo</span><b class="n">$${num(costo * TIPO_CAMBIO)} MXN</b></div>
+    <div class="kpi acento"><span>Leads al mes</span><b class="n">${num(leads[0], 1)} a ${num(leads[2], 1)}</b></div>
+  </div>
+  ${tablaKeywords(b.items)}
+  <div class="pares">
+    <div><span class="rot">Concordancia</span><p>${esc(b.concordancia)}</p></div>
+    <div><span class="rot">Negativas desde el día uno</span><p>${b.negativas.map((n) => `<code>${esc(n)}</code>`).join(" ")}</p></div>
+  </div>
+</section>`;
+}
+
+function documento(a) {
+  const { grupo, bloques, descartadas, sinGrupo, total, suyas } = a;
+  const mayor = suyas[0];
+  const pesoMayor = total ? (mayor.volumen / total) * 100 : 0;
+  const cpcTotal = cpcPonderado(suyas);
+
+  const porPresupuesto = PRESUPUESTO.map((p) => {
+    const usd = p / TIPO_CAMBIO;
+    const clics = cpcTotal > 0 ? usd / cpcTotal : 0;
+    return { p, usd, clics, leads: CONVERSIONES.map((c) => clics * c) };
+  });
+
+  return `<article class="doc">
+  <header class="portada">
+    <img class="logo" src="data:image/png;base64,${logo}" alt="BG Consulting Group">
+    <p class="eyebrow"><span class="dot"></span> Pauta · Palabras clave</p>
+    <h1>Palabras clave de ${esc(grupo.nombre)}</h1>
+    <p class="entrada">Este documento toma las ${num(suyas.length)} palabras clave guardadas en el grupo
+    <b>${esc(grupo.nombre)}</b> y las reparte en grupos de anuncios listos para cargar en Google Ads.
+    Los datos de búsquedas y puja son de Google Keyword Planner y SEMrush, medidos el ${fmtFecha(corrida?.fecha)}.</p>
+  </header>
+
+  <section class="aviso">
+    <h2>Antes de leer las cifras</h2>
+    <ul>
+      <li><b>El volumen es de búsquedas, no de clics.</b> Aunque se domine la subasta, terminan en clic suyo alrededor del 5%. Ese es el techo real: un presupuesto mayor a ese techo sobra, no compra más.</li>
+      <li><b>La puja que se muestra es la alta de primera posición</b>, o sea el techo de la subasta. Lo que se paga suele quedar por debajo.</li>
+      <li><b>La conversión de clic a lead depende del sitio</b>, no de Google. Aquí se calcula con tres supuestos declarados: 1%, 2% y 3.5%.</li>
+      <li><b>La tasa de cierre de lead a cliente es de BG</b> y solo BG la conoce. Este documento no la estima.</li>
+    </ul>
+  </section>
+
+  <section class="bloque">
+    <div class="bloque-h"><span class="idx">Punto de partida</span><h3>El grupo tal como está hoy</h3></div>
+    <div class="kpis">
+      <div class="kpi"><span>Palabras clave</span><b class="n">${num(suyas.length)}</b></div>
+      <div class="kpi"><span>Búsquedas al mes</span><b class="n">${num(total)}</b></div>
+      <div class="kpi"><span>Puja alta ponderada</span><b class="n">$${num(cpcTotal, 2)} USD</b></div>
+      <div class="kpi"><span>Grupos de anuncios que salen</span><b class="n">${num(bloques.length)}</b></div>
+    </div>
+    <p class="nota"><b>Hoy son ${num(bloques.length)} temas dentro de un solo grupo.</b> En Google Ads un grupo de anuncios
+    debe hablar de una sola cosa: así el anuncio repite la búsqueda del usuario, sube el nivel de calidad y baja el precio
+    del clic. Con los ${num(bloques.length)} temas juntos, un solo anuncio tendría que servir para quien busca un agente
+    aduanal y para quien busca entrar a un portal, y encarece las dos.</p>
+    <p class="nota">Además, <code>${esc(mayor.keyword)}</code> aporta ${num(mayor.volumen)} de las ${num(total)} búsquedas,
+    el ${num(pesoMayor)}% del total. Ese peso desbalancea cualquier promedio del grupo completo, y por eso las cifras de
+    abajo van por grupo de anuncios y no todas juntas.</p>
+  </section>
+
+  <h2 class="titulo-seccion">El reparto propuesto</h2>
+  ${bloques.map(bloqueGrupo).join("")}
+
+  ${
+    descartadas.length
+      ? `<section class="bloque">
+    <div class="bloque-h"><span class="idx">Aparte</span><h3>Lo que conviene sacar de la campaña</h3></div>
+    <p class="nota">Estas palabras tienen búsquedas, pero no de quien va a contratar. Dejarlas dentro gasta presupuesto en tráfico que no convierte.</p>
+    ${tablaKeywords(descartadas, true)}
+  </section>`
+      : ""
+  }
+
+  ${
+    sinGrupo.length
+      ? `<section class="bloque">
+    <div class="bloque-h"><span class="idx">Pendiente</span><h3>Sin grupo claro</h3></div>
+    <p class="nota">No encajan en los servicios del reparto. Hay que decidir a mano si entran y en cuál.</p>
+    ${tablaKeywords(sinGrupo, true)}
+  </section>`
+      : ""
+  }
+
+  <section class="bloque">
+    <div class="bloque-h"><span class="idx">Dinero</span><h3>Presupuesto y lo que alcanza a comprar</h3></div>
+    <p class="nota">Con la puja ponderada de todo el grupo ($${num(cpcTotal, 2)} USD) y el tipo de cambio a $${num(TIPO_CAMBIO)},
+    esto es lo que compra la inversión mensual del plan. La columna de leads usa las mismas tres conversiones declaradas arriba.</p>
+    <table class="tabla">
+      <thead><tr><th>Inversión al mes</th><th class="r">En dólares</th><th class="r">Clics</th><th class="r">Leads (1% a 3.5%)</th></tr></thead>
+      <tbody>${porPresupuesto
+        .map(
+          (r) =>
+            `<tr><td class="n">$${num(r.p)} MXN</td><td class="r n">$${num(r.usd)} USD</td><td class="r n">${num(r.clics)}</td><td class="r n">${num(r.leads[0], 1)} a ${num(r.leads[2], 1)}</td></tr>`,
+        )
+        .join("")}</tbody>
+    </table>
+    <p class="nota"><b>Concentrar rinde más que repartir.</b> Ese presupuesto dividido entre los ${num(bloques.length)} grupos
+    deja a cada uno con menos de lo que necesita para aprender: Google necesita clics para saber a quién mostrarle el anuncio.
+    Es mejor arrancar con uno o dos grupos completos y abrir los demás cuando haya datos de qué convierte.</p>
+  </section>
+
+  <section class="bloque">
+    <div class="bloque-h"><span class="idx">Higiene</span><h3>Negativas para toda la campaña</h3></div>
+    <p class="nota">Van desde el primer día, no después de gastar. Este mercado está lleno de estudiantes y de gente buscando trámites personales.</p>
+    <div class="chips">${["curso", "diplomado", "licenciatura", "maestría", "carrera", "universidad", "qué es", "significado", "ejemplos", "formato", "pdf", "gratis", "vacantes", "sueldo", "salario", "bolsa de trabajo", "iniciar sesión", "contraseña", "mi cuenta"]
+      .map((n) => `<code>${esc(n)}</code>`)
+      .join("")}</div>
+    <p class="nota">Las negativas también van por concordancia. Una negativa amplia mal puesta apaga tráfico bueno, así que
+    conviene revisarlas contra el informe de términos de búsqueda en la primera semana.</p>
+  </section>
+
+  <section class="bloque">
+    <div class="bloque-h"><span class="idx">Método</span><h3>Cómo se calculó</h3></div>
+    <table class="tabla">
+      <thead><tr><th>Supuesto</th><th class="r">Valor</th><th>De dónde sale</th></tr></thead>
+      <tbody>
+        <tr><td>Cobertura de la subasta</td><td class="r n">${num(COBERTURA * 100)}%</td><td>De todas las búsquedas del grupo, en cuántas se alcanza a aparecer.</td></tr>
+        <tr><td>Clic por impresión</td><td class="r n">${num(CTR * 100)}%</td><td>De las veces que sale el anuncio, cuántas reciben clic.</td></tr>
+        <tr><td>Conversión del sitio</td><td class="r n">1% a 3.5%</td><td>De cada 100 clics, cuántos dejan sus datos. Depende del sitio, no de Google.</td></tr>
+        <tr><td>Tipo de cambio</td><td class="r n">$${num(TIPO_CAMBIO)}</td><td>Las pujas del research vienen en dólares.</td></tr>
+      </tbody>
+    </table>
+    <p class="nota">Todas las cifras son estimaciones. El costo por clic y el número de leads dependen de la subasta de
+    Google, de la competencia y de la temporada, y pueden variar hacia arriba o hacia abajo. No constituyen una garantía
+    de resultados.</p>
+  </section>
+
+  <footer class="pie">
+    <span>BG Consulting Group</span>
+    <span>Datos de Google Keyword Planner y SEMrush · ${fmtFecha(corrida?.fecha)}</span>
+  </footer>
+</article>`;
+}
+
+const html = `<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BG Consulting Group · Palabras clave para Google Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0f1521; --s1:#18202e; --s2:#1f2838; --s3:#283246;
+  --line:#313c4f; --line-soft:#3a465b;
+  --accent:#00e6a0; --accent-dim:#00c489; --on-accent:#04231a;
+  --chalk:#f6f8fa; --bone:#ccd2dc; --smoke:#a6adbb; --ash:#818996;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --display:'Space Grotesk',var(--sans);
+  --mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--ink);color:var(--chalk);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+.doc{max-width:1080px;margin:0 auto;padding:64px 40px 80px}
+.n{font-family:var(--mono);font-variant-numeric:tabular-nums}
+code{font-family:var(--mono);font-size:12.5px;background:var(--s2);border:1px solid var(--line);border-radius:5px;padding:2px 7px;color:var(--bone);white-space:nowrap}
+
+.portada{border-bottom:1px solid var(--line);padding-bottom:44px;margin-bottom:44px}
+.logo{height:34px;width:auto;display:block;margin-bottom:36px}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px 1px rgba(0,230,160,.7)}
+h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height:1.02;font-size:clamp(34px,5vw,54px);margin-bottom:20px}
+.entrada{color:var(--bone);font-size:16px;max-width:70ch}
+.entrada b{color:var(--chalk);font-weight:500}
+
+.aviso{border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:10px;background:var(--s1);padding:24px 26px;margin-bottom:56px}
+.aviso h2{font-family:var(--display);font-weight:500;font-size:17px;margin-bottom:14px;letter-spacing:-.01em}
+.aviso ul{list-style:none;display:grid;gap:10px}
+.aviso li{color:var(--bone);font-size:14px;padding-left:16px;position:relative}
+.aviso li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent-dim)}
+.aviso b{color:var(--chalk);font-weight:600}
+
+.titulo-seccion{font-family:var(--display);font-weight:500;font-size:26px;letter-spacing:-.02em;margin:64px 0 24px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+
+.bloque{border:1px solid var(--line);border-radius:12px;background:var(--s1);padding:26px 28px;margin-bottom:22px}
+.bloque-h{display:flex;align-items:baseline;gap:14px;margin-bottom:14px;flex-wrap:wrap}
+.idx{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.bloque h3{font-family:var(--display);font-weight:500;font-size:22px;letter-spacing:-.02em}
+.nota{color:var(--smoke);font-size:13.5px;max-width:78ch;margin-bottom:16px}
+.nota b{color:var(--bone);font-weight:600}
+.nota+.nota{margin-top:-6px}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:20px}
+.kpi{background:var(--s2);padding:13px 15px}
+.kpi span{display:block;font-size:11.5px;color:var(--ash);margin-bottom:5px}
+.kpi b{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--chalk)}
+.kpi.acento b{color:var(--accent)}
+
+.tabla{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:18px}
+.tabla th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);font-weight:500;padding:0 12px 9px;border-bottom:1px solid var(--line)}
+.tabla td{padding:9px 12px;border-bottom:1px solid rgba(49,60,79,.45);color:var(--bone)}
+.tabla tr td:first-child{color:var(--chalk)}
+.tabla .r{text-align:right}
+.tabla .motivo{color:var(--smoke);font-size:12.5px}
+
+.pares{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;border-top:1px solid var(--line);padding-top:16px}
+.rot{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);margin-bottom:7px}
+.pares p{color:var(--bone);font-size:13.5px;display:flex;flex-wrap:wrap;gap:6px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px}
+
+.pie{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;border-top:1px solid var(--line);margin-top:56px;padding-top:22px;font-size:12px;color:var(--ash)}
+
+@media (max-width:640px){
+  .doc{padding:40px 20px 60px}
+  .bloque{padding:20px 18px}
+  .tabla{font-size:12.5px}
+  .tabla th,.tabla td{padding-left:8px;padding-right:8px}
+}
+@media print{
+  body{background:#fff;color:#111}
+  .doc{max-width:none;padding:0}
+  .bloque,.aviso{break-inside:avoid;background:#fff;border-color:#ddd}
+  .kpi{background:#f6f8fa}
+  h1,.bloque h3,.kpi b,.tabla tr td:first-child{color:#111}
+  .nota,.entrada,.tabla td{color:#333}
+  .logo{filter:invert(1)}
+}
+</style>
+</head>
+<body>
+${analisis.map(documento).join('<hr style="border:0;border-top:1px solid var(--line);margin:80px 0">')}
+</body>
+</html>`;
+
+writeFileSync(SALIDA, html);
+console.log(`Reporte escrito en ${SALIDA}`);
+for (const a of analisis) {
+  console.log(
+    `  ${a.grupo.nombre}: ${a.suyas.length} keywords, ${num(a.total)} búsquedas, ${a.bloques.length} grupos de anuncios, ${a.descartadas.length} fuera, ${a.sinGrupo.length} sin grupo`,
+  );
+}
