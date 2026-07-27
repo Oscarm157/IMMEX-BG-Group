@@ -49,6 +49,10 @@ type Estado = {
   filtros: Filtros;
   orden: Orden;
   elegidas: Set<string>;
+  /** Sube las seleccionadas al principio: si el asistente elige 8 de 600, que se vean. */
+  subirSeleccionadas: boolean;
+  /** Las que el asistente acaba de marcar: destellan un momento y se limpian. */
+  destello: Set<string>;
   /** Sube al cambiar orden o filtro de servidor para re-animar la cascada. */
   gen: number;
 };
@@ -58,6 +62,8 @@ let estado: Estado = {
   filtros: FILTROS_VACIOS,
   orden: { col: "volumen", desc: true },
   elegidas: new Set(),
+  subirSeleccionadas: false,
+  destello: new Set(),
   gen: 0,
 };
 
@@ -81,7 +87,7 @@ export const keywordsStore = {
   cargarIdeas(ideas: IdeaFila[]) {
     // Al cambiar de servicio o plaza la página trae otras keywords: la selección
     // previa ya no aplica.
-    set({ ideas, elegidas: new Set(), gen: estado.gen + 1 });
+    set({ ideas, elegidas: new Set(), subirSeleccionadas: false, gen: estado.gen + 1 });
   },
   setFiltros(parcial: Partial<Filtros>) {
     set({ filtros: { ...estado.filtros, ...parcial } });
@@ -90,7 +96,8 @@ export const keywordsStore = {
     set({ filtros: FILTROS_VACIOS });
   },
   setOrden(orden: Orden) {
-    set({ orden, gen: estado.gen + 1 });
+    // Si el usuario ordena a mano, manda su orden: deja de subir las seleccionadas.
+    set({ orden, subirSeleccionadas: false, gen: estado.gen + 1 });
   },
   alternar(k: IdeaFila) {
     const next = new Set(estado.elegidas);
@@ -106,7 +113,24 @@ export const keywordsStore = {
     set({ elegidas: next });
   },
   limpiarSeleccion() {
-    set({ elegidas: new Set() });
+    set({ elegidas: new Set(), subirSeleccionadas: false });
+  },
+  /** Selecciona por texto exacto. Es lo que usa el asistente; devuelve cuántas encontró. */
+  seleccionarPorTexto(keywords: string[], reemplazar = true) {
+    const buscadas = new Set(keywords.map((k) => k.trim().toLowerCase()));
+    const encontradas = estado.ideas.filter((k) => buscadas.has(k.keyword.toLowerCase()));
+    const next = reemplazar ? new Set<string>() : new Set(estado.elegidas);
+    const nuevas = new Set<string>();
+    encontradas.forEach((k) => {
+      const c = claveIdea(k);
+      if (!estado.elegidas.has(c)) nuevas.add(c);
+      next.add(c);
+    });
+    set({ elegidas: next, subirSeleccionadas: next.size > 0, destello: nuevas });
+    return encontradas.length;
+  },
+  limpiarDestello() {
+    if (estado.destello.size) set({ destello: new Set() });
   },
 };
 
@@ -128,7 +152,7 @@ export function calcularVisibles(estado: Estado): IdeaFila[] {
     return true;
   });
   const signo = orden.desc ? -1 : 1;
-  return [...filtradas].sort((a, b) => {
+  const ordenadas = [...filtradas].sort((a, b) => {
     switch (orden.col) {
       case "keyword":
         return signo * a.keyword.localeCompare(b.keyword);
@@ -144,6 +168,12 @@ export function calcularVisibles(estado: Estado): IdeaFila[] {
         return signo * (a.volumen - b.volumen);
     }
   });
+
+  if (!estado.subirSeleccionadas || estado.elegidas.size === 0) return ordenadas;
+  // Estable: las elegidas conservan entre sí el orden de la columna activa.
+  const elegidas = ordenadas.filter((k) => estado.elegidas.has(claveIdea(k)));
+  const resto = ordenadas.filter((k) => !estado.elegidas.has(claveIdea(k)));
+  return [...elegidas, ...resto];
 }
 
 /**
@@ -176,6 +206,8 @@ export function useKeywords(iniciales: IdeaFila[] = []) {
     alternar: keywordsStore.alternar,
     alternarTodas: () => keywordsStore.alternarTodas(visibles),
     limpiarSeleccion: keywordsStore.limpiarSeleccion,
+    seleccionarPorTexto: keywordsStore.seleccionarPorTexto,
+    limpiarDestello: keywordsStore.limpiarDestello,
   };
 }
 

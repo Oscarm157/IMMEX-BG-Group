@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/crm-session";
 import { canManageUsers, canViewDashboard, canManageBlog, canManagePosts, canViewAds } from "@/lib/crm-permissions";
 import { logout } from "../actions";
 import { AppSidebar } from "./AppSidebar";
+import { Asistente } from "@/components/crm/Asistente";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import { Toaster } from "@/components/ui/sonner";
@@ -30,7 +31,8 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           showSettings={canManageUsers(me.role)}
           logoutAction={logout}
         />
-        <SidebarInset>
+        {/* crm-inset: el asistente abierto recorre este bloque en vez de taparlo. */}
+        <SidebarInset className="crm-inset">
           <header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b border-[var(--crm-line)] bg-[var(--crm-bg)]/80 px-4 backdrop-blur">
             <SidebarTrigger className="-ml-1" />
             <Separator orientation="vertical" className="mr-1 h-5" />
@@ -38,6 +40,11 @@ export default async function PanelLayout({ children }: { children: React.ReactN
           </header>
           <main className="mx-auto w-full max-w-[1380px] px-4 py-7 sm:px-7 sm:py-8">{children}</main>
         </SidebarInset>
+        {canViewAds(me.role) && (
+          <Suspense fallback={null}>
+            <Asistente puedeGuardar={me.role === "admin"} />
+          </Suspense>
+        )}
         <Toaster position="bottom-right" />
         <Suspense fallback={null}>
           <FlashToaster />

@@ -45,7 +45,9 @@ export function Explorador({
     filtros,
     orden,
     elegidas,
+    destello,
     gen,
+    limpiarDestello,
     setFiltros,
     limpiarFiltros,
     setOrden,
@@ -65,6 +67,13 @@ export function Explorador({
     ? conPuja.reduce((a, k) => a + k.cpc * k.volumen, 0) /
       Math.max(1, conPuja.reduce((a, k) => a + k.volumen, 0))
     : 0;
+
+  // El destello del asistente dura poco: se limpia solo tras la animación.
+  useEffect(() => {
+    if (!destello.size) return;
+    const t = setTimeout(limpiarDestello, 1200);
+    return () => clearTimeout(t);
+  }, [destello, limpiarDestello]);
 
   const todasElegidas = visibles.length > 0 && visibles.every((k) => elegidas.has(claveIdea(k)));
   // Al cambiar filtros/orden vuelve al principio de la lista.
@@ -245,15 +254,19 @@ export function Explorador({
               {enPantalla.map((k, i) => {
                 const clave = claveIdea(k);
                 const elegida = elegidas.has(clave);
+                const destella = destello.has(clave);
                 return (
                   <tr
                     key={clave}
                     onClick={() => alternar(k)}
                     // crm-fade: cascada al re-montar por cambio de orden o de filtro (gen).
-                    className="crm-row crm-fade cursor-pointer border-t border-[var(--crm-line)]"
+                    // crm-flash: destello de lo que el asistente acaba de marcar.
+                    className={`crm-row crm-fade cursor-pointer border-t border-[var(--crm-line)] ${
+                      destella ? "crm-flash" : ""
+                    }`}
                     style={{
                       animationDelay: `${Math.min(i, 16) * 22}ms`,
-                      ...(elegida ? { background: "var(--crm-surface-3)" } : {}),
+                      ...(elegida && !destella ? { background: "var(--crm-surface-3)" } : {}),
                     }}
                   >
                     <td className="crm-td pr-0">

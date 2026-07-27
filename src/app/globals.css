@@ -617,3 +617,24 @@ html[data-crm-theme="light"] .crm-root .crm-badge-teal    { background: rgb(13 1
 .crm-logo-navy { display: none; }
 html[data-crm-theme="light"] .crm-logo-white { display: none; }
 html[data-crm-theme="light"] .crm-logo-navy { display: block; }
+
+/* Destello al seleccionar (lo usa el asistente): la fila brilla en acento y vuelve. */
+@media (prefers-reduced-motion: reduce) {
+  .crm-flash { animation: none !important; }
+}
+.crm-flash { animation: crmFlash 1.1s ease-out both; }
+@keyframes crmFlash {
+  0% { background: color-mix(in srgb, var(--crm-accent) 32%, transparent); }
+  100% { background: var(--crm-surface-3); }
+}
+
+/* Asistente abierto: el panel se recorre para que no le tape el contenido.
+   En móvil el asistente ocupa toda la pantalla, así que ahí no se recorre nada. */
+.crm-inset {
+  transition: padding-right 0.2s ease;
+}
+@media (min-width: 640px) {
+  html[data-asistente="abierto"] .crm-inset {
+    padding-right: var(--asistente-ancho, 400px);
+  }
+}

@@ -127,3 +127,15 @@ export const kwGrupoItems = pgTable(
 
 export type KwGrupo = typeof kwGrupos.$inferSelect;
 export type KwGrupoItem = typeof kwGrupoItems.$inferSelect;
+
+// Una fila por llamada al asistente. El tope vive en la base y no en memoria: el
+// limitador por instancia se reinicia en cada deploy y no sirve con varias instancias.
+export const kwAsistenteUso = pgTable(
+  "kw_asistente_uso",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [index("kw_asistente_uso_user_idx").on(t.userId, t.createdAt)],
+);
