@@ -18,6 +18,7 @@ const CTR = 0.08; // de esas impresiones, cuántas dan clic
 const CONVERSIONES = [0.01, 0.02, 0.035]; // clic a lead: conservador, esperado, optimista
 const TIPO_CAMBIO = 19;
 const PRESUPUESTO = [7500, 10000]; // pesos al mes, el rango del deck de estrategia
+const PRESUPUESTO_BASE = 10000; // el que se usa para las cifras de cada grupo
 
 /**
  * Reparto por intención. Explícito y en orden: la primera regla que apareé manda.
@@ -164,38 +165,28 @@ function tablaKeywords(items, extra = null) {
     .join("")}</tbody></table>`;
 }
 
-function bloqueGrupo(b, i) {
-  const vol = b.items.reduce((a, k) => a + k.volumen, 0);
-  const cpc = cpcPonderado(b.items);
-  const clics = vol * COBERTURA * CTR;
-  const costo = clics * cpc;
-  const leads = CONVERSIONES.map((c) => clics * c);
-  return `<section class="bloque">
-  <div class="bloque-h">
-    <span class="idx">Grupo ${i + 1}</span>
-    <h3>${esc(b.nombre)}</h3>
-  </div>
-  <p class="nota">${esc(b.nota)}</p>
-  <div class="kpis">
-    <div class="kpi"><span>Búsquedas al mes</span><b class="n">${num(vol)}</b></div>
-    <div class="kpi"><span>Puja alta ponderada</span><b class="n">$${num(cpc, 2)} USD</b></div>
-    <div class="kpi"><span>Clics al mes, techo</span><b class="n">${num(clics)}</b></div>
-    <div class="kpi"><span>Costo de ese techo</span><b class="n">$${num(costo * TIPO_CAMBIO)} MXN</b></div>
-    <div class="kpi acento"><span>Leads al mes</span><b class="n">${num(leads[0], 1)} a ${num(leads[2], 1)}</b></div>
-  </div>
-  ${tablaKeywords(b.items)}
-  <div class="pares">
-    <div><span class="rot">Concordancia</span><p>${esc(b.concordancia)}</p></div>
-    <div><span class="rot">Negativas desde el día uno</span><p>${b.negativas.map((n) => `<code>${esc(n)}</code>`).join(" ")}</p></div>
-  </div>
-</section>`;
+/** Una sola tabla con todo lo que se va a usar, con el tema como columna. */
+function tablaConTema(bloques) {
+  const filas = bloques
+    .flatMap((b) => b.items.map((k) => ({ ...k, tema: b.nombre })))
+    .sort((a, b) => b.volumen - a.volumen);
+  return `<table class="tabla">
+  <thead><tr><th>Palabra clave</th><th>Tema</th><th class="r">Búsquedas al mes</th><th class="r">Competencia</th><th class="r">Puja alta</th></tr></thead>
+  <tbody>${filas
+    .map(
+      (k) => `<tr><td>${esc(k.keyword)}</td><td class="tema">${esc(k.tema)}</td><td class="r n">${num(k.volumen)}</td><td class="r">${COMPETENCIA[k.competencia] ?? "Sin dato"}</td><td class="r n">${Number(k.cpc) > 0 ? `$${num(k.cpc, 2)}` : "sin dato"}</td></tr>`,
+    )
+    .join("")}</tbody></table>`;
 }
 
 function documento(a) {
-  const { grupo, bloques, descartadas, sinGrupo, total, suyas } = a;
-  const mayor = suyas[0];
+  const { grupo, bloques, descartadas, sinGrupo, suyas } = a;
+  // Las cifras van sobre lo que de verdad se va a usar, no sobre lo descartado.
+  const usadas = bloques.flatMap((b) => b.items);
+  const total = usadas.reduce((x, k) => x + k.volumen, 0);
+  const mayor = [...usadas].sort((x, y) => y.volumen - x.volumen)[0];
   const pesoMayor = total ? (mayor.volumen / total) * 100 : 0;
-  const cpcTotal = cpcPonderado(suyas);
+  const cpcTotal = cpcPonderado(usadas);
 
   const porPresupuesto = PRESUPUESTO.map((p) => {
     const usd = p / TIPO_CAMBIO;
@@ -208,40 +199,33 @@ function documento(a) {
     <img class="logo" src="data:image/png;base64,${logo}" alt="BG Consulting Group">
     <p class="eyebrow"><span class="dot"></span> Pauta · Palabras clave</p>
     <h1>Palabras clave de ${esc(grupo.nombre)}</h1>
-    <p class="entrada">Este documento toma las ${num(suyas.length)} palabras clave guardadas en el grupo
-    <b>${esc(grupo.nombre)}</b> y las reparte en grupos de anuncios listos para cargar en Google Ads.
-    Los datos de búsquedas y puja son de Google Keyword Planner y SEMrush, medidos el ${fmtFecha(corrida?.fecha)}.</p>
+    <p class="entrada">Estas son las ${num(usadas.length)} palabras clave con las que va a salir la campaña, y las
+    ${num(descartadas.length)} que se dejan fuera a propósito. Los datos de búsquedas y puja son de Google Keyword
+    Planner y SEMrush, medidos el ${fmtFecha(corrida?.fecha)}.</p>
   </header>
 
-  <section class="aviso">
-    <h2>Antes de leer las cifras</h2>
-    <ul>
-      <li><b>El volumen es de búsquedas, no de clics.</b> Aunque se domine la subasta, terminan en clic suyo alrededor del 5%. Ese es el techo real: un presupuesto mayor a ese techo sobra, no compra más.</li>
-      <li><b>La puja que se muestra es la alta de primera posición</b>, o sea el techo de la subasta. Lo que se paga suele quedar por debajo.</li>
-      <li><b>La conversión de clic a lead depende del sitio</b>, no de Google. Aquí se calcula con tres supuestos declarados: 1%, 2% y 3.5%.</li>
-      <li><b>La tasa de cierre de lead a cliente es de BG</b> y solo BG la conoce. Este documento no la estima.</li>
-    </ul>
+  <section class="bloque">
+    <div class="bloque-h"><span class="idx">Punto de partida</span><h3>De qué tamaño es la demanda</h3></div>
+    <div class="caja-cifras">
+      <p class="caja-rot">Lo que suman las palabras seleccionadas</p>
+      <div class="kpis">
+        <div class="kpi"><span>Palabras clave</span><b class="n">${num(usadas.length)}</b></div>
+        <div class="kpi acento"><span>Búsquedas al mes</span><b class="n">${num(total)}</b></div>
+        <div class="kpi"><span>Puja alta ponderada</span><b class="n">$${num(cpcTotal, 2)}</b></div>
+        <div class="kpi"><span>Temas</span><b class="n">${num(bloques.length)}</b></div>
+      </div>
+    </div>
+    <p class="nota"><code>${esc(mayor.keyword)}</code> aporta ${num(mayor.volumen)} de las ${num(total)} búsquedas, el
+    ${num(pesoMayor)}% del total. Es tráfico de quien va al portal a hacer un trámite, no de quien busca contratar, así
+    que sirve para que la marca aparezca temprano, no para cerrar esta semana.</p>
   </section>
 
   <section class="bloque">
-    <div class="bloque-h"><span class="idx">Punto de partida</span><h3>El grupo tal como está hoy</h3></div>
-    <div class="kpis">
-      <div class="kpi"><span>Palabras clave</span><b class="n">${num(suyas.length)}</b></div>
-      <div class="kpi"><span>Búsquedas al mes</span><b class="n">${num(total)}</b></div>
-      <div class="kpi"><span>Puja alta ponderada</span><b class="n">$${num(cpcTotal, 2)} USD</b></div>
-      <div class="kpi"><span>Grupos de anuncios que salen</span><b class="n">${num(bloques.length)}</b></div>
-    </div>
-    <p class="nota"><b>Hoy son ${num(bloques.length)} temas dentro de un solo grupo.</b> En Google Ads un grupo de anuncios
-    debe hablar de una sola cosa: así el anuncio repite la búsqueda del usuario, sube el nivel de calidad y baja el precio
-    del clic. Con los ${num(bloques.length)} temas juntos, un solo anuncio tendría que servir para quien busca un agente
-    aduanal y para quien busca entrar a un portal, y encarece las dos.</p>
-    <p class="nota">Además, <code>${esc(mayor.keyword)}</code> aporta ${num(mayor.volumen)} de las ${num(total)} búsquedas,
-    el ${num(pesoMayor)}% del total. Ese peso desbalancea cualquier promedio del grupo completo, y por eso las cifras de
-    abajo van por grupo de anuncios y no todas juntas.</p>
+    <div class="bloque-h"><span class="idx">La lista</span><h3>Las palabras clave que vamos a usar</h3></div>
+    <p class="nota">Ordenadas por cuánta gente las busca al mes. La columna de tema es cómo se van a separar dentro de
+    Google Ads, para que cada anuncio hable de una sola cosa: eso baja el precio del clic.</p>
+    ${tablaConTema(bloques)}
   </section>
-
-  <h2 class="titulo-seccion">El reparto propuesto</h2>
-  ${bloques.map(bloqueGrupo).join("")}
 
   ${
     descartadas.length
@@ -276,9 +260,9 @@ function documento(a) {
         )
         .join("")}</tbody>
     </table>
-    <p class="nota"><b>Concentrar rinde más que repartir.</b> Ese presupuesto dividido entre los ${num(bloques.length)} grupos
-    deja a cada uno con menos de lo que necesita para aprender: Google necesita clics para saber a quién mostrarle el anuncio.
-    Es mejor arrancar con uno o dos grupos completos y abrir los demás cuando haya datos de qué convierte.</p>
+    <p class="nota"><b>Conviene arrancar concentrado.</b> Repartir este presupuesto entre los ${num(bloques.length)} temas
+    deja a cada uno sin los clics que Google necesita para aprender a quién mostrarle el anuncio. Se empieza por uno o dos,
+    y los demás se abren cuando haya datos de qué convierte.</p>
   </section>
 
   <section class="bloque">
@@ -304,7 +288,8 @@ function documento(a) {
     </table>
     <p class="nota">Todas las cifras son estimaciones. El costo por clic y el número de leads dependen de la subasta de
     Google, de la competencia y de la temporada, y pueden variar hacia arriba o hacia abajo. No constituyen una garantía
-    de resultados.</p>
+    de resultados. <b>La tasa de cierre de lead a cliente es de BG y solo BG la conoce</b>, así que este documento llega
+    hasta el lead y no estima ventas.</p>
   </section>
 
   <footer class="pie">
@@ -347,12 +332,6 @@ h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height
 .entrada{color:var(--bone);font-size:16px;max-width:70ch}
 .entrada b{color:var(--chalk);font-weight:500}
 
-.aviso{border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:10px;background:var(--s1);padding:24px 26px;margin-bottom:56px}
-.aviso h2{font-family:var(--display);font-weight:500;font-size:17px;margin-bottom:14px;letter-spacing:-.01em}
-.aviso ul{list-style:none;display:grid;gap:10px}
-.aviso li{color:var(--bone);font-size:14px;padding-left:16px;position:relative}
-.aviso li::before{content:"";position:absolute;left:0;top:9px;width:5px;height:5px;border-radius:50%;background:var(--accent-dim)}
-.aviso b{color:var(--chalk);font-weight:600}
 
 .titulo-seccion{font-family:var(--display);font-weight:500;font-size:26px;letter-spacing:-.02em;margin:64px 0 24px;padding-bottom:12px;border-bottom:1px solid var(--line)}
 
@@ -364,11 +343,16 @@ h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height
 .nota b{color:var(--bone);font-weight:600}
 .nota+.nota{margin-top:-6px}
 
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:20px}
-.kpi{background:var(--s2);padding:13px 15px}
-.kpi span{display:block;font-size:11.5px;color:var(--ash);margin-bottom:5px}
-.kpi b{font-size:20px;font-weight:600;letter-spacing:-.02em;color:var(--chalk)}
+/* Caja de cifras: una sola pregunta arriba y las tres respuestas debajo, para que
+   se lea de corrido en vez de como un tablero de números sueltos. */
+.caja-cifras{border:1px solid var(--line);border-radius:10px;background:var(--s2);padding:16px 18px 14px;margin-bottom:20px}
+.caja-rot{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:14px}
+.caja-pie{font-size:12.5px;color:var(--smoke);border-top:1px solid var(--line);margin-top:14px;padding-top:12px}
+.kpis{display:flex;flex-wrap:wrap;gap:34px}
+.kpi span{display:block;font-size:11.5px;color:var(--ash);margin-bottom:3px}
+.kpi b{font-size:26px;font-weight:600;letter-spacing:-.03em;color:var(--chalk);line-height:1.1}
 .kpi.acento b{color:var(--accent)}
+.dato-suave{font-family:var(--mono);font-size:12px;color:var(--ash);margin-left:auto}
 
 .tabla{width:100%;border-collapse:collapse;font-size:13.5px;margin-bottom:18px}
 .tabla th{text-align:left;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ash);font-weight:500;padding:0 12px 9px;border-bottom:1px solid var(--line)}
@@ -376,6 +360,7 @@ h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height
 .tabla tr td:first-child{color:var(--chalk)}
 .tabla .r{text-align:right}
 .tabla .motivo{color:var(--smoke);font-size:12.5px}
+.tabla .tema{color:var(--smoke);font-size:12.5px;white-space:nowrap}
 
 .pares{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;border-top:1px solid var(--line);padding-top:16px}
 .rot{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);margin-bottom:7px}
@@ -393,7 +378,7 @@ h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height
 @media print{
   body{background:#fff;color:#111}
   .doc{max-width:none;padding:0}
-  .bloque,.aviso{break-inside:avoid;background:#fff;border-color:#ddd}
+  .bloque{break-inside:avoid;background:#fff;border-color:#ddd}
   .kpi{background:#f6f8fa}
   h1,.bloque h3,.kpi b,.tabla tr td:first-child{color:#111}
   .nota,.entrada,.tabla td{color:#333}
