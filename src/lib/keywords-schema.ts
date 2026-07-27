@@ -128,6 +128,40 @@ export const kwGrupoItems = pgTable(
 export type KwGrupo = typeof kwGrupos.$inferSelect;
 export type KwGrupoItem = typeof kwGrupoItems.$inferSelect;
 
+// Conversaciones del asistente. Persisten en la base y no en el navegador: el
+// historial se perdía al recargar, y el cliente no debe ser la fuente de verdad de
+// lo que se le manda al modelo.
+export const kwAsistenteChats = pgTable(
+  "kw_asistente_chats",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    userId: uuid("user_id").notNull(),
+    titulo: text("titulo").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+    updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [index("kw_asistente_chats_user_idx").on(t.userId, t.updatedAt)],
+);
+
+export const kwAsistenteMensajes = pgTable(
+  "kw_asistente_mensajes",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    chatId: uuid("chat_id")
+      .notNull()
+      .references(() => kwAsistenteChats.id, { onDelete: "cascade" }),
+    rol: text("rol").$type<"user" | "assistant">().notNull(),
+    // Los bloques de Anthropic tal cual: sin ellos los tool_use y sus tool_result
+    // no quedan emparejados al retomar la conversación.
+    contenido: jsonb("contenido").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [index("kw_asistente_mensajes_chat_idx").on(t.chatId, t.createdAt)],
+);
+
+export type KwAsistenteChat = typeof kwAsistenteChats.$inferSelect;
+export type KwAsistenteMensaje = typeof kwAsistenteMensajes.$inferSelect;
+
 // Una fila por llamada al asistente. El tope vive en la base y no en memoria: el
 // limitador por instancia se reinicia en cada deploy y no sirve con varias instancias.
 export const kwAsistenteUso = pgTable(

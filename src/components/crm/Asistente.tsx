@@ -15,6 +15,9 @@ import {
   FolderPlus,
   Database,
   AlertTriangle,
+  History,
+  SquarePen,
+  Trash2,
 } from "lucide-react";
 import {
   keywordsStore,
@@ -23,6 +26,7 @@ import {
   type Columna,
 } from "@/app/admin/(panel)/keywords/KeywordsContext";
 import { crearGrupoPropuesto } from "@/app/admin/(panel)/keywords/actions";
+import { abrirChat, eliminarChat, misChats } from "@/app/admin/(panel)/keywords/chat-actions";
 import { etiquetaServicio, type KwServicio } from "@/lib/keywords-schema";
 import { Markdown } from "./Markdown";
 
@@ -64,6 +68,30 @@ type Propuesta = {
 
 type Turno = { rol: "yo" | "asistente"; texto: string; avance: string; tarjetas: Tarjeta[] };
 
+type ChatBreve = { id: string; titulo: string; updatedAt: string };
+
+/** Reconstruye la conversación guardada: solo el texto, sin las tarjetas de acción. */
+function turnosDesdeMensajes(mensajes: Array<{ rol: string; contenido: unknown }>): Turno[] {
+  const salida: Turno[] = [];
+  for (const m of mensajes) {
+    const bloques = Array.isArray(m.contenido) ? (m.contenido as Bloque[]) : null;
+    const texto = bloques
+      ? bloques
+          .filter((b) => b.type === "text")
+          .map((b) => String(b.text ?? ""))
+          .join("")
+      : String(m.contenido ?? "");
+    if (!texto.trim()) continue;
+    salida.push({
+      rol: m.rol === "user" ? "yo" : "asistente",
+      texto,
+      avance: "",
+      tarjetas: [],
+    });
+  }
+  return salida;
+}
+
 const SUGERENCIAS = [
   "¿Por dónde entro con 10,000 pesos al mes?",
   "Selecciona las mejores keywords de IMMEX con intención de contratar",
@@ -71,6 +99,11 @@ const SUGERENCIAS = [
 ];
 
 const num = (n: number) => n.toLocaleString("es-MX", { maximumFractionDigits: 0 });
+
+const fmtCuando = (iso: string) =>
+  new Intl.DateTimeFormat("es-MX", { day: "2-digit", month: "short", hour: "2-digit", minute: "2-digit" }).format(
+    new Date(iso),
+  );
 
 /** La última frase completa del razonamiento: ni el párrafo entero ni tres palabras sueltas. */
 function ultimaFrase(texto: string) {
@@ -94,6 +127,11 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
   const [pensando, setPensando] = useState(false);
   const historial = useRef<Mensaje[]>([]);
   const finRef = useRef<HTMLDivElement>(null);
+
+  // Conversaciones guardadas: el hilo vive en la base, no en esta pestaña.
+  const [chatId, setChatId] = useState<string | null>(null);
+  const [chats, setChats] = useState<ChatBreve[]>([]);
+  const [verLista, setVerLista] = useState(false);
 
   useEffect(() => {
     try {
@@ -123,6 +161,55 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
   useEffect(() => {
     finRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
   }, [turnos, pensando]);
+
+  // Al abrir se retoma la última conversación: el hilo sobrevive a la recarga.
+  useEffect(() => {
+    if (!abierto || chatId || turnos.length) return;
+    let vigente = true;
+    (async () => {
+      const lista = await misChats();
+      if (!vigente) return;
+      setChats(lista);
+      const ultima = lista[0];
+      if (!ultima) return;
+      const datos = await abrirChat(ultima.id);
+      if (!vigente || !datos) return;
+      setChatId(datos.id);
+      setTurnos(turnosDesdeMensajes(datos.mensajes));
+      historial.current = datos.mensajes.map((m) => ({
+        role: m.rol,
+        content: m.contenido as string | Bloque[],
+      }));
+    })();
+    return () => {
+      vigente = false;
+    };
+  }, [abierto, chatId, turnos.length]);
+
+  async function cambiarChat(id: string) {
+    const datos = await abrirChat(id);
+    if (!datos) return;
+    setChatId(datos.id);
+    setTurnos(turnosDesdeMensajes(datos.mensajes));
+    historial.current = datos.mensajes.map((m) => ({
+      role: m.rol,
+      content: m.contenido as string | Bloque[],
+    }));
+    setVerLista(false);
+  }
+
+  function nuevaConversacion() {
+    setChatId(null);
+    setTurnos([]);
+    historial.current = [];
+    setVerLista(false);
+  }
+
+  async function quitarChat(id: string) {
+    await eliminarChat(id);
+    setChats((cs) => cs.filter((c) => c.id !== id));
+    if (id === chatId) nuevaConversacion();
+  }
 
   function arrastrar(e: React.MouseEvent) {
     e.preventDefault();
@@ -270,7 +357,7 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
       const res = await fetch("/api/asistente", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ messages: historial.current, contexto: contextoActual() }),
+        body: JSON.stringify({ messages: historial.current, contexto: contextoActual(), chatId }),
         signal: corte.signal,
       });
 
@@ -343,6 +430,14 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
             });
           } else if (evento.type === "fin") {
             finalContent = evento.mensaje as Bloque[];
+            if (evento.chat) {
+              // El servidor abrió la conversación en este turno.
+              setChatId(evento.chat.id);
+              setChats((cs) => [
+                { ...evento.chat, updatedAt: new Date().toISOString() },
+                ...cs.filter((c) => c.id !== evento.chat.id),
+              ]);
+            }
             if (evento.stop === "max_tokens") {
               actualizarUltimo((tu) => ({
                 ...tu,
@@ -510,6 +605,24 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
         </div>
         <button
           type="button"
+          onClick={() => setVerLista((v) => !v)}
+          aria-label="Conversaciones guardadas"
+          className={`transition-colors hover:text-[var(--crm-ink)] ${
+            verLista ? "text-[var(--crm-ink)]" : "text-[var(--crm-ink-faint)]"
+          }`}
+        >
+          <History className="size-4" />
+        </button>
+        <button
+          type="button"
+          onClick={nuevaConversacion}
+          aria-label="Nueva conversación"
+          className="text-[var(--crm-ink-faint)] transition-colors hover:text-[var(--crm-ink)]"
+        >
+          <SquarePen className="size-4" />
+        </button>
+        <button
+          type="button"
           onClick={() => setAbierto(false)}
           aria-label="Cerrar asistente"
           className="text-[var(--crm-ink-faint)] transition-colors hover:text-[var(--crm-ink)]"
@@ -517,6 +630,46 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
           <PanelRightClose className="size-4" />
         </button>
       </header>
+
+      {verLista && (
+        <div className="crm-scroll max-h-[45%] overflow-y-auto border-b border-[var(--crm-line)] bg-[var(--crm-surface-2)] px-2 py-2">
+          {chats.length === 0 ? (
+            <p className="px-2 py-1.5 text-[12.5px] text-[var(--crm-ink-mute)]">
+              Todavía no hay conversaciones guardadas.
+            </p>
+          ) : (
+            chats.map((c) => (
+              <div
+                key={c.id}
+                className={`group flex items-center gap-1 rounded-[var(--crm-r-md)] px-2 ${
+                  c.id === chatId ? "bg-[var(--crm-surface-3)]" : ""
+                }`}
+              >
+                <button
+                  type="button"
+                  onClick={() => cambiarChat(c.id)}
+                  className="min-w-0 flex-1 py-1.5 text-left"
+                >
+                  <span className="block truncate text-[13px] text-[var(--crm-ink)]">
+                    {c.titulo}
+                  </span>
+                  <span className="block text-[11.5px] text-[var(--crm-ink-faint)]">
+                    {fmtCuando(c.updatedAt)}
+                  </span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => quitarChat(c.id)}
+                  aria-label={`Borrar ${c.titulo}`}
+                  className="shrink-0 p-1 text-[var(--crm-ink-faint)] opacity-0 transition-opacity group-hover:opacity-100 hover:text-[var(--crm-ink)]"
+                >
+                  <Trash2 className="size-3.5" />
+                </button>
+              </div>
+            ))
+          )}
+        </div>
+      )}
 
       <div className="crm-scroll flex-1 space-y-4 overflow-y-auto px-4 py-4">
         {turnos.length === 0 && (

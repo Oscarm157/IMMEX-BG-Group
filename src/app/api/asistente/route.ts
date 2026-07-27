@@ -6,6 +6,7 @@ import { db } from "@/lib/db";
 import { getCurrentUser } from "@/lib/crm-session";
 import { canViewAds } from "@/lib/crm-permissions";
 import { kwAsistenteUso } from "@/lib/keywords-schema";
+import { crearChat, guardarTurno } from "@/lib/asistente/chats";
 import { getGrupos, getServicios } from "@/lib/keywords-data";
 import { SYSTEM_ASISTENTE } from "@/lib/asistente/prompt";
 import { TOOLS, esToolCliente } from "@/lib/asistente/tools";
@@ -21,6 +22,8 @@ const bodySchema = z.object({
   // El historial va en formato Anthropic: el cliente conserva los bloques tal cual
   // los devolvimos, para que los tool_use y sus tool_result queden emparejados.
   messages: z.array(z.object({ role: z.enum(["user", "assistant"]), content: z.unknown() })).min(1),
+  /** Conversación a la que pertenece el turno. Sin él se crea una nueva. */
+  chatId: z.string().uuid().nullish(),
   contexto: z
     .object({
       pantalla: z.string().max(40),
@@ -111,6 +114,21 @@ export async function POST(req: Request) {
 
   await db.insert(kwAsistenteUso).values({ userId: me.id });
 
+  // El turno del usuario se guarda al entrar y el del asistente al cerrar el stream:
+  // así una respuesta cortada a media no deja la conversación descuadrada.
+  const ultimo = messages.at(-1);
+  let chatId = parsed.data.chatId ?? null;
+  let chatNuevo: { id: string; titulo: string } | null = null;
+  if (!chatId && ultimo?.role === "user" && typeof ultimo.content === "string") {
+    chatNuevo = await crearChat(me.id, ultimo.content);
+    chatId = chatNuevo.id;
+  }
+  if (chatId && ultimo) {
+    const guardado = await guardarTurno(me.id, chatId, ultimo.role, ultimo.content);
+    // El chat es de otro usuario: se sigue respondiendo, pero sin escribir en su hilo.
+    if (!guardado) chatId = null;
+  }
+
   const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
   const encoder = new TextEncoder();
 
@@ -199,11 +217,14 @@ export async function POST(req: Request) {
           }
         }
 
+        if (chatId) await guardarTurno(me.id, chatId, "assistant", final.content);
+
         emit({
           type: "fin",
           mensaje: final.content,
           stop: final.stop_reason,
           resultadosServidor,
+          chat: chatNuevo,
         });
 
         console.info(
