@@ -20,6 +20,27 @@ import {
 // aduanera se toma desde la matriz, no desde la frontera.
 // ============================================================
 
+/** Líneas de servicio de BG. Es el mismo diccionario que clasifica el research
+ *  en /root/google-ads-automation/brief_kw_bg_es.json: si cambia allá, cambia aquí. */
+export const SERVICIOS = [
+  "IMMEX",
+  "Aduanal",
+  "VUCEM",
+  "Certificaciones",
+  "Clasificacion",
+  "Compliance",
+  "T-MEC",
+  "Sin clasificar",
+] as const;
+export type KwServicio = (typeof SERVICIOS)[number];
+
+/** Cómo se escribe cada servicio en pantalla. El valor guardado va sin acentos
+ *  porque viene del clasificador, que normaliza. */
+export const ETIQUETA_SERVICIO: Record<string, string> = {
+  Clasificacion: "Clasificación",
+};
+export const etiquetaServicio = (s: string) => ETIQUETA_SERVICIO[s] ?? s;
+
 export type KwMercado = "nacional_es" | "extranjero_en";
 /** De dónde salió la fila: cambia cómo se lee la competencia. */
 export type KwFuente = "planner" | "semrush";

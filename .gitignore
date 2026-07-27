@@ -48,3 +48,6 @@ _junk/
 /pnpm-workspace.yaml
 scripts/_*.mjs
 /public/1e2742f7-9f79-4af9-8d8f-6b6227c264ac.png
+
+# Research de keywords: repo publico, no se sube (vive en la DB y en /root/google-ads-automation)
+/public/*.csv

@@ -6,7 +6,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import {
   Users, KanbanSquare, ListFilter, UserRound, LayoutDashboard, Newspaper,
-  Megaphone, Share2, LogOut, Sun, Moon, MessageSquare, Settings,
+  Megaphone, Share2, LogOut, Sun, Moon, MessageSquare, Settings, Search,
 } from "lucide-react";
 import {
   Sidebar, SidebarHeader, SidebarContent, SidebarFooter, SidebarGroup,
@@ -64,6 +64,7 @@ export function AppSidebar({
   comercial.push({ href: "/admin", label: "Leads", icon: ListFilter });
   comercial.push({ href: "/admin/board", label: "Pipeline", icon: KanbanSquare });
   if (showAds) comercial.push({ href: "/admin/ads", label: "Campañas", icon: Megaphone });
+  if (showAds) comercial.push({ href: "/admin/keywords", label: "Keywords", icon: Search });
 
   const contenido: Item[] = [];
   if (showBlog) contenido.push({ href: "/admin/blog", label: "Blog", icon: Newspaper });
