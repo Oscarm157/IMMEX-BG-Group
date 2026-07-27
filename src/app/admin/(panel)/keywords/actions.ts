@@ -1,11 +1,12 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { and, eq, inArray } from "drizzle-orm";
+import { and, desc, eq, inArray } from "drizzle-orm";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { requireAdmin } from "@/lib/crm-session";
-import { kwGrupoItems, kwGrupos, SERVICIOS } from "@/lib/keywords-schema";
+import { kwGrupoItems, kwGrupos, kwIdeas, SERVICIOS } from "@/lib/keywords-schema";
+import { normaliza } from "@/lib/keywords-data";
 
 // Grupos de keywords. Todo entra validado y los ids se verifican contra la DB:
 // nunca se confía en lo que manda el cliente.
@@ -61,6 +62,88 @@ export async function crearGrupo(input: z.infer<typeof crearSchema>) {
   revalidatePath("/admin/keywords");
   revalidatePath("/admin/keywords/grupos");
   return { ok: true as const, id: grupo.id, nombre: grupo.nombre };
+}
+
+const propuestaSchema = z.object({
+  nombre: z.string().min(1).max(80),
+  servicio: z.enum(SERVICIOS),
+  plaza: z.string().max(80).nullable().optional(),
+  mercado: z.enum(MERCADOS),
+  keywords: z.array(z.string().min(1).max(200)).min(1).max(200),
+});
+
+/**
+ * Crea un grupo a partir de los textos que propuso el asistente. La resolución es aquí
+ * y no en el navegador a propósito: el navegador solo tiene las keywords del filtro
+ * activo (con tope), así que una propuesta de fuera de esa tanda se perdía en silencio.
+ * Devuelve qué se guardó y qué no existía, para poder decirlo en pantalla.
+ */
+export async function crearGrupoPropuesto(input: z.infer<typeof propuestaSchema>) {
+  await requireAdmin();
+  const datos = propuestaSchema.parse(input);
+
+  const pedidas = new Map<string, string>(); // normalizada -> texto tal como la pidió
+  for (const k of datos.keywords) pedidas.set(normaliza(k), k);
+
+  // El apareo por texto sin acentos no lo hace Postgres sin extensiones, y el research
+  // son ~1,000 filas: se traen y se resuelven aquí. De mayor volumen a menor, para que
+  // una keyword repetida en dos corridas se quede con la cifra más alta.
+  const filas = await db
+    .select({
+      keyword: kwIdeas.keyword,
+      volumen: kwIdeas.volumen,
+      competencia: kwIdeas.competencia,
+      cpc: kwIdeas.pujaAltaUsd,
+    })
+    .from(kwIdeas)
+    .orderBy(desc(kwIdeas.volumen));
+
+  const encontradas: typeof filas = [];
+  const vistas = new Set<string>();
+  for (const f of filas) {
+    const clave = normaliza(f.keyword);
+    if (!pedidas.has(clave) || vistas.has(clave)) continue;
+    vistas.add(clave);
+    encontradas.push(f);
+  }
+
+  const noEncontradas = [...pedidas.entries()]
+    .filter(([clave]) => !vistas.has(clave))
+    .map(([, texto]) => texto);
+
+  if (!encontradas.length) {
+    return { ok: false as const, guardadas: 0, noEncontradas };
+  }
+
+  const [grupo] = await db
+    .insert(kwGrupos)
+    .values({
+      nombre: datos.nombre,
+      servicio: datos.servicio,
+      plaza: datos.plaza ?? null,
+      mercado: datos.mercado,
+    })
+    .returning();
+
+  await db.insert(kwGrupoItems).values(
+    encontradas.map((k) => ({
+      grupoId: grupo.id,
+      keyword: k.keyword,
+      volumen: k.volumen,
+      cpc: k.cpc ?? "0",
+      competencia: k.competencia,
+    })),
+  );
+
+  revalidatePath("/admin/keywords");
+  revalidatePath("/admin/keywords/grupos");
+  return {
+    ok: true as const,
+    id: grupo.id,
+    nombre: grupo.nombre,
+    guardadas: encontradas.length,
+    noEncontradas,
+  };
 }
 
 const agregarSchema = z.object({

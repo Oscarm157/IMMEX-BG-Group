@@ -13,6 +13,17 @@ import {
 // /root/google-ads-automation y lo carga scripts/import-keywords.mjs; aquí solo se lee.
 // El eje es el servicio; la plaza es filtro.
 
+/**
+ * Para aparear keywords escritas a mano (las que propone el asistente) contra las
+ * guardadas: "despacho de mercancías" y "despacho de mercancias" son la misma.
+ */
+export const normaliza = (t: string) =>
+  t
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[̀-ͯ]/g, "");
+
 export type ServicioResumen = {
   servicio: string;
   nacional: number;

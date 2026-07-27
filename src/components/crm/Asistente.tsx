@@ -14,6 +14,7 @@ import {
   Compass,
   FolderPlus,
   Database,
+  AlertTriangle,
 } from "lucide-react";
 import {
   keywordsStore,
@@ -21,7 +22,7 @@ import {
   claveIdea,
   type Columna,
 } from "@/app/admin/(panel)/keywords/KeywordsContext";
-import { crearGrupo } from "@/app/admin/(panel)/keywords/actions";
+import { crearGrupoPropuesto } from "@/app/admin/(panel)/keywords/actions";
 import { etiquetaServicio, type KwServicio } from "@/lib/keywords-schema";
 import { Markdown } from "./Markdown";
 
@@ -42,7 +43,15 @@ type Mensaje = { role: "user" | "assistant"; content: string | Bloque[] };
 
 type Tarjeta =
   | { tipo: "accion"; texto: string; herramienta: string }
-  | { tipo: "propuesta"; id: string; input: Propuesta; resuelta?: "si" | "no" };
+  | {
+      tipo: "propuesta";
+      id: string;
+      input: Propuesta;
+      /** si = guardado, no = lo descartó él, error = no se pudo (con su motivo) */
+      resuelta?: "si" | "no" | "error";
+      detalle?: string;
+      guardando?: boolean;
+    };
 
 type Propuesta = {
   nombre: string;
@@ -397,41 +406,65 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
     });
   }
 
+  /**
+   * Las keywords se resuelven en el servidor contra el research completo: aquí solo
+   * están las del filtro activo, así que una propuesta de fuera de esa tanda se perdía.
+   */
   async function aceptarPropuesta(idx: number, tIdx: number, p: Propuesta) {
-    const estado = keywordsStore.leer();
-    const porTexto = new Map(estado.ideas.map((k) => [k.keyword.toLowerCase(), k]));
-    const keywords = p.keywords
-      .map((t) => porTexto.get(t.trim().toLowerCase()))
-      .filter((k): k is NonNullable<typeof k> => Boolean(k))
-      .map((k) => ({
-        keyword: k.keyword,
-        volumen: k.volumen,
-        cpc: k.cpc,
-        competencia: k.competencia,
-      }));
+    marcarPropuesta(idx, tIdx, undefined, undefined, true);
+    try {
+      const r = await crearGrupoPropuesto({
+        nombre: p.nombre,
+        servicio: p.servicio,
+        plaza: p.plaza ?? null,
+        mercado: p.mercado,
+        keywords: p.keywords,
+      });
 
-    if (!keywords.length) {
-      marcarPropuesta(idx, tIdx, "no");
-      return;
+      if (!r.ok) {
+        marcarPropuesta(
+          idx,
+          tIdx,
+          "error",
+          "Ninguna de estas keywords está en el research. Pídeme otras y lo intento de nuevo.",
+        );
+        return;
+      }
+
+      const faltaron = r.noEncontradas.length;
+      marcarPropuesta(
+        idx,
+        tIdx,
+        "si",
+        faltaron
+          ? `Guardado con ${r.guardadas} de ${r.guardadas + faltaron} keywords. No están en el research: ${r.noEncontradas.join(", ")}.`
+          : undefined,
+      );
+      router.refresh();
+    } catch (e) {
+      marcarPropuesta(
+        idx,
+        tIdx,
+        "error",
+        e instanceof Error && e.message === "forbidden"
+          ? "Guardar grupos es de administrador."
+          : "No se pudo guardar el grupo. Intenta otra vez.",
+      );
     }
-
-    await crearGrupo({
-      nombre: p.nombre,
-      servicio: p.servicio,
-      plaza: p.plaza ?? null,
-      mercado: p.mercado,
-      keywords,
-    });
-    marcarPropuesta(idx, tIdx, "si");
-    router.refresh();
   }
 
-  function marcarPropuesta(idx: number, tIdx: number, r: "si" | "no") {
+  function marcarPropuesta(
+    idx: number,
+    tIdx: number,
+    r?: "si" | "no" | "error",
+    detalle?: string,
+    guardando = false,
+  ) {
     setTurnos((prev) => {
       const next = [...prev];
       const tarjetas = [...next[idx].tarjetas];
       const t = tarjetas[tIdx];
-      if (t?.tipo === "propuesta") tarjetas[tIdx] = { ...t, resuelta: r };
+      if (t?.tipo === "propuesta") tarjetas[tIdx] = { ...t, resuelta: r, detalle, guardando };
       next[idx] = { ...next[idx], tarjetas };
       return next;
     });
@@ -551,28 +584,41 @@ export function Asistente({ puedeGuardar }: { puedeGuardar: boolean }) {
                           </p>
                         )}
                         {c.resuelta ? (
-                          <p className="mt-2.5 flex items-center gap-1.5 text-[12.5px] font-medium text-[var(--crm-ink)]">
-                            {c.resuelta === "si" ? (
-                              <>
-                                <Check className="size-3.5 text-[var(--crm-accent-strong)]" />
-                                Grupo creado
-                              </>
-                            ) : (
-                              <>
-                                <X className="size-3.5" />
-                                Descartado
-                              </>
+                          <div className="mt-2.5 space-y-1">
+                            <p className="flex items-center gap-1.5 text-[12.5px] font-medium text-[var(--crm-ink)]">
+                              {c.resuelta === "si" ? (
+                                <>
+                                  <Check className="size-3.5 text-[var(--crm-accent-strong)]" />
+                                  Grupo creado
+                                </>
+                              ) : c.resuelta === "error" ? (
+                                <>
+                                  <AlertTriangle className="size-3.5" />
+                                  No se guardó
+                                </>
+                              ) : (
+                                <>
+                                  <X className="size-3.5" />
+                                  Descartado
+                                </>
+                              )}
+                            </p>
+                            {c.detalle && (
+                              <p className="text-[12px] leading-relaxed text-[var(--crm-ink-soft)]">
+                                {c.detalle}
+                              </p>
                             )}
-                          </p>
+                          </div>
                         ) : puedeGuardar ? (
                           <div className="mt-3 flex gap-2">
                             <button
                               type="button"
+                              disabled={c.guardando}
                               onClick={() => aceptarPropuesta(i, j, c.input)}
                               className="crm-btn crm-btn-primary flex-1"
                             >
                               <Check className="size-4" />
-                              Crear grupo
+                              {c.guardando ? "Guardando..." : "Crear grupo"}
                             </button>
                             <button
                               type="button"
