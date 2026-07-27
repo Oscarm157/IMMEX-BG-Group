@@ -16,9 +16,8 @@ const sql = neon(process.env.DATABASE_URL);
 const COBERTURA = 0.65; // de las búsquedas del grupo, en cuántas se alcanza a aparecer
 const CTR = 0.08; // de esas impresiones, cuántas dan clic
 const CONVERSIONES = [0.01, 0.02, 0.035]; // clic a lead: conservador, esperado, optimista
-const TIPO_CAMBIO = 19;
-const PRESUPUESTO = [7500, 10000]; // pesos al mes, el rango del deck de estrategia
-const PRESUPUESTO_BASE = 10000; // el que se usa para las cifras de cada grupo
+const TIPO_CAMBIO = 18.5;
+const PRESUPUESTO = 10000; // pesos al mes
 
 /**
  * Reparto por intención. Explícito y en orden: la primera regla que apareé manda.
@@ -184,30 +183,26 @@ function documento(a) {
   // Las cifras van sobre lo que de verdad se va a usar, no sobre lo descartado.
   const usadas = bloques.flatMap((b) => b.items);
   const total = usadas.reduce((x, k) => x + k.volumen, 0);
-  const mayor = [...usadas].sort((x, y) => y.volumen - x.volumen)[0];
-  const pesoMayor = total ? (mayor.volumen / total) * 100 : 0;
   const cpcTotal = cpcPonderado(usadas);
 
-  const porPresupuesto = PRESUPUESTO.map((p) => {
-    const usd = p / TIPO_CAMBIO;
-    const clics = cpcTotal > 0 ? usd / cpcTotal : 0;
-    return { p, usd, clics, leads: CONVERSIONES.map((c) => clics * c) };
-  });
+  const usd = PRESUPUESTO / TIPO_CAMBIO;
+  const clics = cpcTotal > 0 ? usd / cpcTotal : 0;
+  const leads = CONVERSIONES.map((c) => clics * c);
 
   return `<article class="doc">
   <header class="portada">
     <img class="logo" src="data:image/png;base64,${logo}" alt="BG Consulting Group">
     <p class="eyebrow"><span class="dot"></span> Pauta · Palabras clave</p>
     <h1>Palabras clave de ${esc(grupo.nombre)}</h1>
-    <p class="entrada">Estas son las ${num(usadas.length)} palabras clave con las que va a salir la campaña, y las
-    ${num(descartadas.length)} que se dejan fuera a propósito. Los datos de búsquedas y puja son de Google Keyword
-    Planner y SEMrush, medidos el ${fmtFecha(corrida?.fecha)}.</p>
+    <p class="entrada">Relación de las ${num(usadas.length)} palabras clave seleccionadas para la campaña de Google Ads,
+    con su volumen de búsqueda, nivel de competencia y puja estimada. Los datos provienen de Google Keyword Planner y
+    SEMrush, con medición al ${fmtFecha(corrida?.fecha)}.</p>
   </header>
 
   <section class="bloque">
-    <div class="bloque-h"><span class="idx">Punto de partida</span><h3>De qué tamaño es la demanda</h3></div>
+    <div class="bloque-h"><span class="idx">Alcance</span><h3>Tamaño de la demanda</h3></div>
     <div class="caja-cifras">
-      <p class="caja-rot">Lo que suman las palabras seleccionadas</p>
+      <p class="caja-rot">Total de las palabras seleccionadas</p>
       <div class="kpis">
         <div class="kpi"><span>Palabras clave</span><b class="n">${num(usadas.length)}</b></div>
         <div class="kpi acento"><span>Búsquedas al mes</span><b class="n">${num(total)}</b></div>
@@ -215,32 +210,21 @@ function documento(a) {
         <div class="kpi"><span>Temas</span><b class="n">${num(bloques.length)}</b></div>
       </div>
     </div>
-    <p class="nota"><code>${esc(mayor.keyword)}</code> aporta ${num(mayor.volumen)} de las ${num(total)} búsquedas, el
-    ${num(pesoMayor)}% del total. Es tráfico de quien va al portal a hacer un trámite, no de quien busca contratar, así
-    que sirve para que la marca aparezca temprano, no para cerrar esta semana.</p>
   </section>
 
   <section class="bloque">
-    <div class="bloque-h"><span class="idx">La lista</span><h3>Las palabras clave que vamos a usar</h3></div>
-    <p class="nota">Ordenadas por cuánta gente las busca al mes. La columna de tema es cómo se van a separar dentro de
-    Google Ads, para que cada anuncio hable de una sola cosa: eso baja el precio del clic.</p>
+    <div class="bloque-h"><span class="idx">Selección</span><h3>Palabras clave seleccionadas</h3></div>
+    <p class="nota">Ordenadas por volumen de búsqueda mensual. La columna de tema indica cómo se agruparán dentro de la
+    campaña: cada grupo de anuncios atiende un solo tema, lo que mejora la relevancia del anuncio y reduce el costo por
+    clic.</p>
     ${tablaConTema(bloques)}
   </section>
 
-  ${
-    descartadas.length
-      ? `<section class="bloque">
-    <div class="bloque-h"><span class="idx">Aparte</span><h3>Lo que conviene sacar de la campaña</h3></div>
-    <p class="nota">Estas palabras tienen búsquedas, pero no de quien va a contratar. Dejarlas dentro gasta presupuesto en tráfico que no convierte.</p>
-    ${tablaKeywords(descartadas, true)}
-  </section>`
-      : ""
-  }
 
   ${
     sinGrupo.length
       ? `<section class="bloque">
-    <div class="bloque-h"><span class="idx">Pendiente</span><h3>Sin grupo claro</h3></div>
+    <div class="bloque-h"><span class="idx">Pendiente</span><h3>Palabras clave sin tema asignado</h3></div>
     <p class="nota">No encajan en los servicios del reparto. Hay que decidir a mano si entran y en cuál.</p>
     ${tablaKeywords(sinGrupo, true)}
   </section>`
@@ -248,48 +232,48 @@ function documento(a) {
   }
 
   <section class="bloque">
-    <div class="bloque-h"><span class="idx">Dinero</span><h3>Presupuesto y lo que alcanza a comprar</h3></div>
-    <p class="nota">Con la puja ponderada de todo el grupo ($${num(cpcTotal, 2)} USD) y el tipo de cambio a $${num(TIPO_CAMBIO)},
-    esto es lo que compra la inversión mensual del plan. La columna de leads usa las mismas tres conversiones declaradas arriba.</p>
-    <table class="tabla">
-      <thead><tr><th>Inversión al mes</th><th class="r">En dólares</th><th class="r">Clics</th><th class="r">Leads (1% a 3.5%)</th></tr></thead>
-      <tbody>${porPresupuesto
-        .map(
-          (r) =>
-            `<tr><td class="n">$${num(r.p)} MXN</td><td class="r n">$${num(r.usd)} USD</td><td class="r n">${num(r.clics)}</td><td class="r n">${num(r.leads[0], 1)} a ${num(r.leads[2], 1)}</td></tr>`,
-        )
-        .join("")}</tbody>
-    </table>
-    <p class="nota"><b>Conviene arrancar concentrado.</b> Repartir este presupuesto entre los ${num(bloques.length)} temas
-    deja a cada uno sin los clics que Google necesita para aprender a quién mostrarle el anuncio. Se empieza por uno o dos,
-    y los demás se abren cuando haya datos de qué convierte.</p>
+    <div class="bloque-h"><span class="idx">Inversión</span><h3>Presupuesto y resultados esperados</h3></div>
+    <p class="nota">Estimación mensual con una inversión de $${num(PRESUPUESTO)} MXN, la puja alta ponderada de las
+    palabras seleccionadas ($${num(cpcTotal, 2)} USD) y un tipo de cambio de $${num(TIPO_CAMBIO, 2)}. El rango de
+    oportunidades corresponde a las tres tasas de conversión indicadas en los supuestos.</p>
+    <div class="caja-cifras">
+      <p class="caja-rot">Con $${num(PRESUPUESTO)} MXN al mes</p>
+      <div class="kpis">
+        <div class="kpi"><span>Equivalente en dólares</span><b class="n">$${num(usd)}</b></div>
+        <div class="kpi"><span>Clics al mes</span><b class="n">${num(clics)}</b></div>
+        <div class="kpi acento"><span>Oportunidades al mes</span><b class="n">${num(leads[0], 1)} a ${num(leads[2], 1)}</b></div>
+      </div>
+    </div>
+    <p class="nota">Se recomienda concentrar la inversión inicial en uno o dos temas. Distribuirla entre los
+    ${num(bloques.length)} reduce el volumen de clics por debajo del que Google requiere para optimizar la entrega de los
+    anuncios. Los temas restantes se incorporan una vez que existan datos de desempeño.</p>
   </section>
 
   <section class="bloque">
-    <div class="bloque-h"><span class="idx">Higiene</span><h3>Negativas para toda la campaña</h3></div>
-    <p class="nota">Van desde el primer día, no después de gastar. Este mercado está lleno de estudiantes y de gente buscando trámites personales.</p>
+    <div class="bloque-h"><span class="idx">Exclusiones</span><h3>Palabras clave negativas</h3></div>
+    <p class="nota">Se cargan desde el inicio de la campaña. Una parte relevante de las búsquedas del sector proviene de
+    estudiantes y de personas que resuelven trámites por cuenta propia, y no corresponde al perfil de cliente de BG.</p>
     <div class="chips">${["curso", "diplomado", "licenciatura", "maestría", "carrera", "universidad", "qué es", "significado", "ejemplos", "formato", "pdf", "gratis", "vacantes", "sueldo", "salario", "bolsa de trabajo", "iniciar sesión", "contraseña", "mi cuenta"]
       .map((n) => `<code>${esc(n)}</code>`)
       .join("")}</div>
-    <p class="nota">Las negativas también van por concordancia. Una negativa amplia mal puesta apaga tráfico bueno, así que
-    conviene revisarlas contra el informe de términos de búsqueda en la primera semana.</p>
+    <p class="nota">Las palabras negativas también operan por concordancia. Una exclusión demasiado amplia puede bloquear
+    tráfico válido, por lo que se revisan contra el informe de términos de búsqueda durante la primera semana de operación.</p>
   </section>
 
   <section class="bloque">
-    <div class="bloque-h"><span class="idx">Método</span><h3>Cómo se calculó</h3></div>
+    <div class="bloque-h"><span class="idx">Metodología</span><h3>Supuestos de cálculo</h3></div>
     <table class="tabla">
       <thead><tr><th>Supuesto</th><th class="r">Valor</th><th>De dónde sale</th></tr></thead>
       <tbody>
-        <tr><td>Cobertura de la subasta</td><td class="r n">${num(COBERTURA * 100)}%</td><td>De todas las búsquedas del grupo, en cuántas se alcanza a aparecer.</td></tr>
-        <tr><td>Clic por impresión</td><td class="r n">${num(CTR * 100)}%</td><td>De las veces que sale el anuncio, cuántas reciben clic.</td></tr>
-        <tr><td>Conversión del sitio</td><td class="r n">1% a 3.5%</td><td>De cada 100 clics, cuántos dejan sus datos. Depende del sitio, no de Google.</td></tr>
-        <tr><td>Tipo de cambio</td><td class="r n">$${num(TIPO_CAMBIO)}</td><td>Las pujas del research vienen en dólares.</td></tr>
+        <tr><td>Cobertura de la subasta</td><td class="r n">${num(COBERTURA * 100)}%</td><td>Proporción de las búsquedas en las que el anuncio alcanza a mostrarse.</td></tr>
+        <tr><td>Clic por impresión</td><td class="r n">${num(CTR * 100)}%</td><td>Proporción de impresiones que se traducen en clic.</td></tr>
+        <tr><td>Conversión del sitio</td><td class="r n">1% a 3.5%</td><td>Proporción de clics que dejan sus datos de contacto.</td></tr>
+        <tr><td>Tipo de cambio</td><td class="r n">$${num(TIPO_CAMBIO, 2)}</td><td>Las pujas de Google Keyword Planner se reportan en dólares.</td></tr>
       </tbody>
     </table>
     <p class="nota">Todas las cifras son estimaciones. El costo por clic y el número de leads dependen de la subasta de
     Google, de la competencia y de la temporada, y pueden variar hacia arriba o hacia abajo. No constituyen una garantía
-    de resultados. <b>La tasa de cierre de lead a cliente es de BG y solo BG la conoce</b>, así que este documento llega
-    hasta el lead y no estima ventas.</p>
+    de resultados.</p>
   </section>
 
   <footer class="pie">
