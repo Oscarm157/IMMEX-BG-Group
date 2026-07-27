@@ -123,7 +123,7 @@ export function Explorador({
           )}
         </div>
 
-        <div className="mt-3 flex flex-wrap items-end gap-x-6 gap-y-3 border-t border-[var(--crm-line)] pt-3">
+        <div className="mt-3 grid grid-cols-1 items-start gap-x-8 gap-y-3 border-t border-[var(--crm-line)] pt-3 sm:grid-cols-[auto_auto_1fr]">
           <Grupo titulo="Búsquedas al mes">
             <Rango
               desde={filtros.minVolumen}
@@ -360,7 +360,7 @@ export function Explorador({
 function Grupo({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
     <div>
-      <span className="mb-1.5 block text-[11.5px] font-medium uppercase tracking-wide text-[var(--crm-ink-mute)]">
+      <span className="mb-1.5 block whitespace-nowrap text-[11.5px] font-medium uppercase tracking-wide text-[var(--crm-ink-mute)]">
         {titulo}
       </span>
       {children}
