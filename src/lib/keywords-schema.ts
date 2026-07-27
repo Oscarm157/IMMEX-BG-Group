@@ -30,6 +30,8 @@ export const SERVICIOS = [
   "Clasificacion",
   "Compliance",
   "T-MEC",
+  "Tecnologia",
+  "Fiscal y legal",
   "Sin clasificar",
 ] as const;
 export type KwServicio = (typeof SERVICIOS)[number];
@@ -38,6 +40,7 @@ export type KwServicio = (typeof SERVICIOS)[number];
  *  porque viene del clasificador, que normaliza. */
 export const ETIQUETA_SERVICIO: Record<string, string> = {
   Clasificacion: "Clasificación",
+  Tecnologia: "Tecnología",
 };
 export const etiquetaServicio = (s: string) => ETIQUETA_SERVICIO[s] ?? s;
 

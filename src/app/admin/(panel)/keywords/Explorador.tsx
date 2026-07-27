@@ -6,7 +6,7 @@ import type { IdeaFila } from "@/lib/keywords-data";
 import { AgregarAGrupo } from "./AgregarAGrupo";
 import { Calculadora } from "./Calculadora";
 import { etiquetaServicio } from "@/lib/keywords-schema";
-import { claveIdea, useKeywords, type Columna, type Orden } from "./KeywordsContext";
+import { claveIdea, hayFiltros, useKeywords, type Columna, type Orden } from "./KeywordsContext";
 import { Plegable } from "@/components/crm/Plegable";
 
 /**
@@ -47,6 +47,7 @@ export function Explorador({
     elegidas,
     gen,
     setFiltros,
+    limpiarFiltros,
     setOrden,
     alternar,
     alternarTodas,
@@ -89,61 +90,86 @@ export function Explorador({
 
   return (
     <>
-      {/* Filtros */}
-      <div className="crm-card mb-3 flex flex-wrap items-center gap-2.5 p-3">
-        <input
-          type="search"
-          value={filtros.busqueda}
-          onChange={(ev) => setFiltros({ busqueda: ev.target.value })}
-          placeholder="Buscar en las keywords"
-          className="crm-input w-full sm:w-[260px]"
-        />
-        <label className="flex items-center gap-2 text-[13px] text-[var(--crm-ink-soft)]">
-          Volumen mínimo
-          <select
-            value={filtros.minVolumen}
-            onChange={(ev) => setFiltros({ minVolumen: Number(ev.target.value) })}
-            className="crm-select w-[100px]"
-          >
-            {[0, 50, 100, 500, 1000].map((v) => (
-              <option key={v} value={v}>
-                {v === 0 ? "Cualquiera" : num(v)}
-              </option>
-            ))}
-          </select>
-        </label>
-        <div className="flex items-center gap-1.5">
-          {(["LOW", "MEDIUM", "HIGH"] as const).map((c) => (
-            <button
-              key={c}
-              type="button"
-              onClick={() =>
-                setFiltros({
-                  competencias: filtros.competencias.includes(c)
-                    ? filtros.competencias.filter((x) => x !== c)
-                    : [...filtros.competencias, c],
-                })
-              }
-              className={`crm-btn crm-btn-sm ${
-                filtros.competencias.includes(c) ? "crm-btn-primary" : "crm-btn-secondary"
-              }`}
-            >
-              {COMPETENCIA[c]}
-            </button>
-          ))}
-        </div>
-        <label className="flex items-center gap-2 text-[13px] text-[var(--crm-ink-soft)]">
+      {/* Filtros: buscador arriba, rangos y competencia abajo */}
+      <div className="crm-card mb-3 p-3">
+        <div className="flex flex-wrap items-center gap-2.5">
           <input
-            type="checkbox"
-            checked={filtros.soloConPuja}
-            onChange={(ev) => setFiltros({ soloConPuja: ev.target.checked })}
-            className="size-3.5 accent-[var(--crm-accent)]"
+            type="search"
+            value={filtros.busqueda}
+            onChange={(ev) => setFiltros({ busqueda: ev.target.value })}
+            placeholder="Buscar en las keywords"
+            className="crm-input w-full sm:w-[260px]"
           />
-          Solo con puja
-        </label>
-        <span className="ml-auto text-[12.5px] text-[var(--crm-ink-faint)]">
-          {num(visibles.length)} de {num(total)} keywords
-        </span>
+          <span className="text-[12.5px] text-[var(--crm-ink-faint)] sm:ml-auto">
+            {num(visibles.length)} de {num(total)} keywords
+          </span>
+          {hayFiltros(filtros) && (
+            <button
+              type="button"
+              onClick={limpiarFiltros}
+              className="crm-btn crm-btn-sm crm-btn-ghost"
+            >
+              Limpiar filtros
+            </button>
+          )}
+        </div>
+
+        <div className="mt-3 flex flex-wrap items-end gap-x-6 gap-y-3 border-t border-[var(--crm-line)] pt-3">
+          <Grupo titulo="Búsquedas al mes">
+            <Rango
+              desde={filtros.minVolumen}
+              hasta={filtros.maxVolumen}
+              paso={50}
+              onDesde={(v) => setFiltros({ minVolumen: v })}
+              onHasta={(v) => setFiltros({ maxVolumen: v })}
+            />
+          </Grupo>
+
+          <Grupo titulo="Puja alta (USD)">
+            <div className="flex flex-col gap-1.5">
+              <Rango
+                desde={filtros.minCpc}
+                hasta={filtros.maxCpc}
+                paso={0.5}
+                decimales
+                onDesde={(v) => setFiltros({ minCpc: v })}
+                onHasta={(v) => setFiltros({ maxCpc: v })}
+              />
+              <label className="flex items-center gap-2 text-[12.5px] text-[var(--crm-ink-soft)]">
+                <input
+                  type="checkbox"
+                  checked={filtros.soloConPuja}
+                  onChange={(ev) => setFiltros({ soloConPuja: ev.target.checked })}
+                  className="size-3.5 accent-[var(--crm-accent)]"
+                />
+                Solo las que Google reporta puja
+              </label>
+            </div>
+          </Grupo>
+
+          <Grupo titulo="Competencia en la subasta">
+            <div className="flex items-center gap-1.5">
+              {(["LOW", "MEDIUM", "HIGH"] as const).map((c) => (
+                <button
+                  key={c}
+                  type="button"
+                  onClick={() =>
+                    setFiltros({
+                      competencias: filtros.competencias.includes(c)
+                        ? filtros.competencias.filter((x) => x !== c)
+                        : [...filtros.competencias, c],
+                    })
+                  }
+                  className={`crm-btn crm-btn-sm ${
+                    filtros.competencias.includes(c) ? "crm-btn-primary" : "crm-btn-secondary"
+                  }`}
+                >
+                  {COMPETENCIA[c]}
+                </button>
+              ))}
+            </div>
+          </Grupo>
+        </div>
       </div>
 
       {/* Barra de selección */}
@@ -314,6 +340,62 @@ export function Explorador({
         />
       </Plegable>
     </>
+  );
+}
+
+/** Etiqueta encima de un control, para que se sepa qué está filtrando. */
+function Grupo({ titulo, children }: { titulo: string; children: React.ReactNode }) {
+  return (
+    <div>
+      <span className="mb-1.5 block text-[11.5px] font-medium uppercase tracking-wide text-[var(--crm-ink-mute)]">
+        {titulo}
+      </span>
+      {children}
+    </div>
+  );
+}
+
+/** Par desde/hasta. Vacío es sin tope por ese lado, no cero. */
+function Rango({
+  desde,
+  hasta,
+  paso,
+  decimales,
+  onDesde,
+  onHasta,
+}: {
+  desde: number | null;
+  hasta: number | null;
+  paso: number;
+  decimales?: boolean;
+  onDesde: (v: number | null) => void;
+  onHasta: (v: number | null) => void;
+}) {
+  const leer = (v: string) => (v.trim() === "" ? null : Number(v));
+  return (
+    <div className="flex items-center gap-1.5">
+      <input
+        type="number"
+        min={0}
+        step={paso}
+        value={desde ?? ""}
+        onChange={(ev) => onDesde(leer(ev.target.value))}
+        placeholder={decimales ? "0.00" : "desde"}
+        className="crm-input crm-num w-[92px]"
+        aria-label="Desde"
+      />
+      <span className="text-[13px] text-[var(--crm-ink-faint)]">a</span>
+      <input
+        type="number"
+        min={0}
+        step={paso}
+        value={hasta ?? ""}
+        onChange={(ev) => onHasta(leer(ev.target.value))}
+        placeholder={decimales ? "sin tope" : "sin tope"}
+        className="crm-input crm-num w-[92px]"
+        aria-label="Hasta"
+      />
+    </div>
   );
 }
 

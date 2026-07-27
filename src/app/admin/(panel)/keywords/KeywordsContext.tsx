@@ -9,9 +9,13 @@ import type { IdeaFila } from "@/lib/keywords-data";
  */
 
 export type Columna = "keyword" | "servicio" | "volumen" | "competencia" | "cpc";
+/** Los topes van como number | null: null es "sin tope por ese lado", que no es lo mismo que 0. */
 export type Filtros = {
   busqueda: string;
-  minVolumen: number;
+  minVolumen: number | null;
+  maxVolumen: number | null;
+  minCpc: number | null;
+  maxCpc: number | null;
   competencias: string[];
   soloConPuja: boolean;
 };
@@ -20,12 +24,25 @@ export type Orden = { col: Columna; desc: boolean };
 const PESO: Record<string, number> = { LOW: 1, MEDIUM: 2, HIGH: 3 };
 export const claveIdea = (k: IdeaFila) => `${k.keyword}·${k.mercado}`;
 
-const FILTROS_VACIOS: Filtros = {
+export const FILTROS_VACIOS: Filtros = {
   busqueda: "",
-  minVolumen: 0,
+  minVolumen: null,
+  maxVolumen: null,
+  minCpc: null,
+  maxCpc: null,
   competencias: [],
   soloConPuja: false,
 };
+
+/** Si hay algo que limpiar. Lo usa el botón de limpiar filtros. */
+export const hayFiltros = (f: Filtros) =>
+  f.busqueda.trim() !== "" ||
+  f.minVolumen != null ||
+  f.maxVolumen != null ||
+  f.minCpc != null ||
+  f.maxCpc != null ||
+  f.competencias.length > 0 ||
+  f.soloConPuja;
 
 type Estado = {
   ideas: IdeaFila[];
@@ -69,6 +86,9 @@ export const keywordsStore = {
   setFiltros(parcial: Partial<Filtros>) {
     set({ filtros: { ...estado.filtros, ...parcial } });
   },
+  limpiarFiltros() {
+    set({ filtros: FILTROS_VACIOS });
+  },
   setOrden(orden: Orden) {
     set({ orden, gen: estado.gen + 1 });
   },
@@ -96,7 +116,13 @@ export function calcularVisibles(estado: Estado): IdeaFila[] {
   const q = filtros.busqueda.trim().toLowerCase();
   const filtradas = ideas.filter((k) => {
     if (q && !k.keyword.toLowerCase().includes(q)) return false;
-    if (k.volumen < filtros.minVolumen) return false;
+    if (filtros.minVolumen != null && k.volumen < filtros.minVolumen) return false;
+    if (filtros.maxVolumen != null && k.volumen > filtros.maxVolumen) return false;
+    // El CPC filtra sobre la puja alta, que es la que se muestra en la tabla. Las keywords
+    // sin puja reportada (0) solo pasan si no hay filtro de CPC: si no, un "desde $1"
+    // las dejaría fuera por baratas cuando en realidad no hay dato.
+    if (filtros.minCpc != null && (k.cpc <= 0 || k.cpc < filtros.minCpc)) return false;
+    if (filtros.maxCpc != null && (k.cpc <= 0 || k.cpc > filtros.maxCpc)) return false;
     if (filtros.competencias.length && !filtros.competencias.includes(k.competencia)) return false;
     if (filtros.soloConPuja && k.cpc <= 0) return false;
     return true;
@@ -145,6 +171,7 @@ export function useKeywords(iniciales: IdeaFila[] = []) {
     visibles,
     seleccion,
     setFiltros: keywordsStore.setFiltros,
+    limpiarFiltros: keywordsStore.limpiarFiltros,
     setOrden: keywordsStore.setOrden,
     alternar: keywordsStore.alternar,
     alternarTodas: () => keywordsStore.alternarTodas(visibles),
