@@ -137,7 +137,8 @@ const AREAS = [
 // Alcance de la primera revisión. Vive dentro del formulario, no como sección.
 const REVISION = ["Causa del rechazo del COVE.", "Correspondencia con la factura y el pedimento.", "Sustento del valor declarado."];
 
-const seccion = "px-5 sm:px-8 lg:px-12";
+// Mismo ancho y padding que el resto del sitio (ver src/app/[lang]/page.tsx).
+const contenedor = "mx-auto w-full max-w-[1280px] px-5 sm:px-8";
 
 // Escalón por eslabón de la cadena de consecuencias. Solo desde sm: en 375px la
 // sangría dejaría el texto en una columna inservible.
@@ -145,10 +146,11 @@ const SANGRIA = ["", "sm:pl-5", "sm:pl-10"];
 
 export default function LpCovePage() {
   return (
-    <div className="mx-auto w-full max-w-[1560px] lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
-      <div className="min-w-0">
-        {/* 1 · Entrada: tipográfica, con la tira de credenciales en mono */}
-        <section className={`grid-field ${seccion} pb-14 pt-14 sm:pb-20 sm:pt-20`}>
+    <>
+      {/* 1 · Entrada: tipográfica, con la tira de credenciales en mono. El pt
+          superior deja pasar la nav fija (h-20 en móvil, h-[100px] desde sm). */}
+      <section className="grid-field">
+        <div className={`${contenedor} pb-14 pt-32 sm:pb-20 sm:pt-40`}>
           <Reveal>
             <span className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-accent">
               <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
@@ -162,8 +164,8 @@ export default function LpCovePage() {
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-7 max-w-xl border-l-2 border-accent pl-5 text-[18px] leading-relaxed text-bone/90">
-              Revisión del valor transmitido, su correspondencia con el pedimento y lo que la operación expone frente
-              a la autoridad.
+              Revisión del valor transmitido, su correspondencia con el pedimento y lo que la operación expone frente a
+              la autoridad.
             </p>
           </Reveal>
           <Reveal delay={0.22}>
@@ -179,160 +181,172 @@ export default function LpCovePage() {
               <li>Tijuana y San Diego</li>
             </ul>
           </Reveal>
-        </section>
+        </div>
+      </section>
 
-        {/* 2 · Causas: filas de expediente, título y fundamento a la izquierda,
-            los dos renglones operativos a la derecha */}
-        <section className={`${seccion} pb-20 pt-16 sm:pt-24`}>
-          <SectionHeading
-            eyebrow="Transmisión"
-            index="01"
-            title="Causas frecuentes de rechazo"
-            lead="Cuatro causas concentran la mayoría de los rechazos y las observaciones al COVE."
-            className="mb-14"
-          />
-          <div className="border-t border-line">
-            {CAUSAS.map((c, i) => (
-              <div
-                key={c.titulo}
-                className="grid gap-6 border-b border-line py-9 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-12"
-              >
-                <div>
-                  <div className="flex items-baseline gap-4">
-                    <span className="font-mono text-[12px] tabular-nums text-accent">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="font-display text-[20px] font-medium leading-snug tracking-[-0.02em] text-chalk sm:text-[22px]">
-                      {c.titulo}
-                    </h3>
-                  </div>
-                  <p className="mt-4 pl-8 font-mono text-[12px] leading-relaxed text-smoke">{c.fundamento}</p>
-                </div>
-                <dl className="flex flex-col gap-4 pl-8 lg:pl-0">
-                  {(
-                    [
-                      ["Qué ocurre", c.ocurre],
-                      ["Qué se hace", c.hace],
-                    ] as const
-                  ).map(([etiqueta, texto]) => (
-                    <div key={etiqueta} className="grid gap-1 sm:grid-cols-[9.5rem_minmax(0,1fr)] sm:gap-5">
-                      <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ash sm:pt-1">
-                        {etiqueta}
-                      </dt>
-                      <dd className="text-[16px] leading-relaxed text-bone/90">{texto}</dd>
+      {/* 2 · Causas y captura, sobre banda de fondo propia. Las causas son filas
+          de expediente en la columna ancha; el formulario ocupa la angosta y es
+          sticky dentro de su columna, no a la altura de la página. */}
+      <section className="border-y border-line bg-surface-1/40">
+        <div className={`${contenedor} pb-20 pt-16 sm:pt-20`}>
+          <div className="grid grid-cols-12 gap-x-6 gap-y-14 lg:gap-x-12">
+            <div className="col-span-12 lg:col-span-8">
+              <SectionHeading
+                eyebrow="Transmisión"
+                index="01"
+                title="Causas frecuentes de rechazo"
+                lead="Cuatro causas concentran la mayoría de los rechazos y las observaciones al COVE."
+                className="mb-14"
+              />
+              <div className="border-t border-line">
+                {CAUSAS.map((c, i) => (
+                  <div key={c.titulo} className="grid gap-6 border-b border-line py-9">
+                    <div>
+                      <div className="flex items-baseline gap-4">
+                        <span className="font-mono text-[12px] tabular-nums text-accent">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <h3 className="font-display text-[20px] font-medium leading-snug tracking-[-0.02em] text-chalk sm:text-[22px]">
+                          {c.titulo}
+                        </h3>
+                      </div>
+                      <p className="mt-4 pl-8 font-mono text-[12px] leading-relaxed text-smoke">{c.fundamento}</p>
                     </div>
-                  ))}
-                </dl>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 3 · COVE contra factura y contra pedimento: dos tarjetas lado a lado con
-            un separador "≠", familia de layout propia que no existe en /lp/vucem */}
-        <section className={`${seccion} pb-20`}>
-          <SectionHeading
-            eyebrow="Distinción"
-            index="02"
-            title="COVE contra factura y contra pedimento"
-            lead="El ancla de esta página: el COVE es un dato que se transmite, no el canal ni el documento comercial."
-            className="mb-14"
-          />
-          <div className="grid gap-px overflow-hidden rounded-[16px] border border-line bg-line sm:grid-cols-2">
-            {DISTINCIONES.map((d) => (
-              <div key={d.b} className="flex flex-col gap-6 bg-ink px-7 py-10 sm:px-9">
-                <div className="flex items-baseline gap-3 font-mono text-[13px] uppercase tracking-[0.14em]">
-                  <span className="text-chalk">{d.a}</span>
-                  <span aria-hidden className="text-ash">
-                    ≠
-                  </span>
-                  <span className="text-smoke">{d.b}</span>
-                </div>
-                <p className="text-[16px] leading-relaxed text-bone/90">{d.texto}</p>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* 4 · Consecuencias: cadena vertical escalonada sobre panel de consola */}
-        <section className={`${seccion} pb-20`}>
-          <div className="console-panel rounded-[16px] bg-surface-1 px-6 py-12 sm:px-10 sm:py-14">
-            <SectionHeading
-              eyebrow="Riesgo"
-              index="03"
-              title="Consecuencias de un valor sin sustento"
-              lead="Un rechazo se corrige el mismo día. Lo que se declaró mal escala."
-              rule={false}
-              className="mb-12"
-            />
-            <ol className="relative border-l border-line pl-7 sm:pl-9">
-              {ESCALADA.map((e, i) => (
-                <Reveal key={e.paso} delay={i * 0.06} as="li" className="relative pb-9 last:pb-0">
-                  <span
-                    aria-hidden
-                    className="absolute -left-[calc(1.75rem+3.5px)] top-2 h-1.5 w-1.5 rounded-full bg-accent sm:-left-[calc(2.25rem+3.5px)]"
-                  />
-                  <div className={SANGRIA[i]}>
-                    <div className="flex items-baseline gap-3">
-                      <span className="font-mono text-[12px] tabular-nums text-ash">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <h3 className="font-display text-[19px] font-medium tracking-[-0.015em] text-chalk">{e.paso}</h3>
-                    </div>
-                    <p className="mt-2 max-w-xl text-[16px] leading-relaxed text-bone/85">{e.desc}</p>
+                    <dl className="flex flex-col gap-4 pl-8">
+                      {(
+                        [
+                          ["Qué ocurre", c.ocurre],
+                          ["Qué se hace", c.hace],
+                        ] as const
+                      ).map(([etiqueta, texto]) => (
+                        <div key={etiqueta} className="grid gap-1 sm:grid-cols-[9.5rem_minmax(0,1fr)] sm:gap-5">
+                          <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-ash sm:pt-1">
+                            {etiqueta}
+                          </dt>
+                          <dd className="text-[16px] leading-relaxed text-bone/90">{texto}</dd>
+                        </div>
+                      ))}
+                    </dl>
                   </div>
-                </Reveal>
-              ))}
-            </ol>
-          </div>
-        </section>
+                ))}
+              </div>
+            </div>
 
-        {/* 5 · Servicios: interludio claro, servicio en display grande con sus
-            sub-puntos reales en línea */}
-        <section className="grid-field-light bg-paper">
-          <div className={`${seccion} py-20 sm:py-24`}>
-            <SectionHeading
-              eyebrow="Firma"
-              index="04"
-              title="Servicios"
-              lead="Ordenados por el momento de la operación en que se necesitan."
-              tone="light"
-              className="mb-14"
-            />
-            <div className="flex flex-col gap-11">
-              {SERVICIOS.map((s, i) => (
-                <Reveal key={s.servicio} delay={i * 0.05}>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-ink">{s.momento}</span>
-                  <h3 className="mt-3 font-display text-[clamp(1.5rem,3vw,2.1rem)] font-medium leading-tight tracking-[-0.025em] text-ink">
-                    {s.servicio}
-                  </h3>
-                  <ul className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-[16px] leading-relaxed text-graphite">
-                    {s.puntos.map((p, j) => (
-                      <li key={p} className="flex items-center gap-3">
-                        {j > 0 && (
-                          <span aria-hidden className="text-line-soft">
-                            ·
-                          </span>
-                        )}
-                        {p}
-                      </li>
-                    ))}
-                  </ul>
-                </Reveal>
-              ))}
+            {/* scroll-mt: la nav es fija, el ancla #form de la barra móvil tiene
+                que caer por debajo de ella. */}
+            <div id="form" className="col-span-12 scroll-mt-28 sm:scroll-mt-32 lg:col-span-4">
+              <div className="lg:sticky lg:top-28">
+                <LeadPanel campaign="Landing COVE (pauta)" alcance={REVISION} />
+              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* 6 · Preguntas frecuentes: acordeón */}
-        <section className={`${seccion} pb-20 pt-24`}>
-          <SectionHeading eyebrow="Preguntas" index="05" title="Preguntas frecuentes" className="mb-12" />
-          <Faq items={PREGUNTAS} />
-        </section>
+      {/* 3 · COVE contra factura y contra pedimento: dos tarjetas lado a lado con
+          un separador "≠", familia de layout propia que no existe en /lp/vucem */}
+      <section className={`${contenedor} py-20`}>
+        <SectionHeading
+          eyebrow="Distinción"
+          index="02"
+          title="COVE contra factura y contra pedimento"
+          lead="El ancla de esta página: el COVE es un dato que se transmite, no el canal ni el documento comercial."
+          className="mb-14"
+        />
+        <div className="grid gap-px overflow-hidden rounded-[16px] border border-line bg-line sm:grid-cols-2">
+          {DISTINCIONES.map((d) => (
+            <div key={d.b} className="flex flex-col gap-6 bg-ink px-7 py-10 sm:px-9">
+              <div className="flex items-baseline gap-3 font-mono text-[13px] uppercase tracking-[0.14em]">
+                <span className="text-chalk">{d.a}</span>
+                <span aria-hidden className="text-ash">
+                  ≠
+                </span>
+                <span className="text-smoke">{d.b}</span>
+              </div>
+              <p className="text-[16px] leading-relaxed text-bone/90">{d.texto}</p>
+            </div>
+          ))}
+        </div>
+      </section>
 
-        {/* 7 · Identidad de la firma: banda horizontal, igual que la v4 de
-            /lp/vucem. Sin SectionHeading ni número: es una banda, no un capítulo. */}
-        <section className={`${seccion} border-t border-line bg-surface-1/40 py-14 sm:py-16`}>
+      {/* 4 · Consecuencias: cadena vertical escalonada sobre panel de consola */}
+      <section className={`${contenedor} pb-20`}>
+        <div className="console-panel rounded-[16px] bg-surface-1 px-6 py-12 sm:px-10 sm:py-14">
+          <SectionHeading
+            eyebrow="Riesgo"
+            index="03"
+            title="Consecuencias de un valor sin sustento"
+            lead="Un rechazo se corrige el mismo día. Lo que se declaró mal escala."
+            rule={false}
+            className="mb-12"
+          />
+          <ol className="relative border-l border-line pl-7 sm:pl-9">
+            {ESCALADA.map((e, i) => (
+              <Reveal key={e.paso} delay={i * 0.06} as="li" className="relative pb-9 last:pb-0">
+                <span
+                  aria-hidden
+                  className="absolute -left-[calc(1.75rem+3.5px)] top-2 h-1.5 w-1.5 rounded-full bg-accent sm:-left-[calc(2.25rem+3.5px)]"
+                />
+                <div className={SANGRIA[i]}>
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-mono text-[12px] tabular-nums text-ash">{String(i + 1).padStart(2, "0")}</span>
+                    <h3 className="font-display text-[19px] font-medium tracking-[-0.015em] text-chalk">{e.paso}</h3>
+                  </div>
+                  <p className="mt-2 max-w-xl text-[16px] leading-relaxed text-bone/85">{e.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      {/* 5 · Servicios: interludio claro, servicio en display grande con sus
+          sub-puntos reales en línea */}
+      <section className="grid-field-light bg-paper">
+        <div className={`${contenedor} py-20 sm:py-24`}>
+          <SectionHeading
+            eyebrow="Firma"
+            index="04"
+            title="Servicios"
+            lead="Ordenados por el momento de la operación en que se necesitan."
+            tone="light"
+            className="mb-14"
+          />
+          <div className="flex flex-col gap-11">
+            {SERVICIOS.map((s, i) => (
+              <Reveal key={s.servicio} delay={i * 0.05}>
+                <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-accent-ink">{s.momento}</span>
+                <h3 className="mt-3 font-display text-[clamp(1.5rem,3vw,2.1rem)] font-medium leading-tight tracking-[-0.025em] text-ink">
+                  {s.servicio}
+                </h3>
+                <ul className="mt-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-[16px] leading-relaxed text-graphite">
+                  {s.puntos.map((p, j) => (
+                    <li key={p} className="flex items-center gap-3">
+                      {j > 0 && (
+                        <span aria-hidden className="text-line-soft">
+                          ·
+                        </span>
+                      )}
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 6 · Preguntas frecuentes: acordeón */}
+      <section className={`${contenedor} pb-20 pt-24`}>
+        <SectionHeading eyebrow="Preguntas" index="05" title="Preguntas frecuentes" className="mb-12" />
+        <Faq items={PREGUNTAS} />
+      </section>
+
+      {/* 7 · Identidad de la firma: banda horizontal, igual que la v4 de
+          /lp/vucem. Sin SectionHeading ni número: es una banda, no un capítulo. */}
+      <section className="border-t border-line bg-surface-1/40">
+        <div className={`${contenedor} py-14 sm:py-16`}>
           <div className="flex flex-col gap-9 border-b border-line pb-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
             <Logo variant="bg" tone="light" size="lg" className="h-14 w-auto self-start sm:h-16" />
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-4 gap-y-6 sm:grid-cols-3 sm:gap-x-10 lg:gap-x-16">
@@ -365,19 +379,11 @@ export default function LpCovePage() {
               </ul>
             </div>
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
 
-      {/* Sidebar de captura: columna propia del grid, así que empuja el contenido
-          en vez de taparlo. En móvil el grid colapsa y queda al final del flujo. */}
-      <aside
-        id="form"
-        className="scroll-mt-4 border-t border-line px-5 pb-12 pt-12 sm:px-8 lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto lg:border-l lg:border-t-0 lg:px-6 lg:pb-8 lg:pt-8"
-      >
-        <LeadPanel campaign="Landing COVE (pauta)" alcance={REVISION} />
-      </aside>
-
-      {/* Barra inferior en móvil: no hay sidebar, así que el CTA vive fijo abajo */}
+      {/* Barra inferior en móvil: el formulario queda arriba en el flujo, así que
+          el CTA que lleva a él vive fijo abajo */}
       <div className="fixed inset-x-0 bottom-0 z-50 border-t border-line bg-ink/95 backdrop-blur lg:hidden">
         <div className="flex items-center gap-3 px-4 py-3">
           <a
@@ -394,6 +400,6 @@ export default function LpCovePage() {
           </a>
         </div>
       </div>
-    </div>
+    </>
   );
 }

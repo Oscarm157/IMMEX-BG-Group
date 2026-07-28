@@ -1,35 +1,40 @@
-import Link from "next/link";
-import { Logo } from "@/components/Logo";
+import { Nav } from "@/components/site/Nav";
+import { Footer } from "@/components/site/Footer";
 import { LangSetter } from "@/components/site/LangSetter";
+import { ChatWidget } from "@/components/site/ChatWidget";
+import { getDictionary } from "@/content/dictionaries";
+import { SERVICE_SLUGS } from "@/content/service-slugs";
 
-// Shell de las landings de pauta. Sin navegación del sitio: el clic viene de un
-// anuncio y la única salida es el formulario. Solo marca, teléfono y lo legal.
+// Shell corporativo, el mismo del corpus SEO: las landings de pauta se leen como
+// parte del sitio. Sin FeedbackWidget, que es de calidad interna y no va en
+// tráfico pagado. El teléfono ya vive en la nav y en la barra fija de móvil.
 export default function LpLayout({ children }: { children: React.ReactNode }) {
+  const dict = getDictionary("es");
+
   return (
     <>
       <LangSetter lang="es" />
       <div className="grain" aria-hidden />
-      <header className="border-b border-line">
-        <div className="mx-auto flex max-w-[1560px] items-center justify-between gap-4 px-5 py-4 sm:px-8">
-          <Logo variant="bg" tone="light" size="sm" className="h-9 w-auto sm:h-11" />
-          <a
-            href="tel:+526646079642"
-            className="font-mono text-[13px] tabular-nums text-bone transition-colors hover:text-accent sm:text-[14px]"
-          >
-            +52 (664) 607 9642
-          </a>
-        </div>
-      </header>
+      <Nav
+        lang="es"
+        dict={dict.nav}
+        langSwitch={dict.langSwitch}
+        services={dict.services.items}
+        slugs={SERVICE_SLUGS}
+        servicesCta={dict.servicesPreview.cta}
+        software={{
+          items: dict.software.capabilities.map((c) => c.title),
+          cta: dict.software.cta,
+          external: dict.software.ctaHref,
+        }}
+        hideLangSwitch
+      />
       <main>{children}</main>
-      <footer className="border-t border-line">
-        {/* pb extra en móvil: la barra fija de CTA se monta sobre el pie */}
-        <div className="mx-auto flex max-w-[1560px] flex-col gap-2 px-5 pb-28 pt-8 text-[13px] leading-relaxed text-smoke sm:flex-row sm:items-center sm:justify-between sm:px-8 lg:pb-8">
-          <p>BG Consulting Group · Miguel Alemán 3231 B, Col. Gabilondo, Tijuana, B.C. 22044</p>
-          <Link href="/es/privacy" className="text-bone underline underline-offset-2 hover:text-accent">
-            Aviso de privacidad
-          </Link>
-        </div>
-      </footer>
+      <Footer lang="es" dict={dict} />
+      {/* La barra fija de CTA en móvil se monta sobre el pie: este hueco evita
+          que le tape la última línea. */}
+      <div aria-hidden className="h-[68px] lg:hidden" />
+      <ChatWidget />
     </>
   );
 }
