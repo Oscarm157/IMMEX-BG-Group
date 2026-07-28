@@ -9,7 +9,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 import { neon } from "@neondatabase/serverless";
 
 const SALIDA = "/root/BG-reporte-keywords.html";
-const LOGO = "/root/bg-group/public/BG_Logotipo_Blanco.png";
+const LOGO = "/root/bg-group/public/BG_Logotipo.png"; // el original a color, va sobre blanco
 const sql = neon(process.env.DATABASE_URL);
 
 // Supuestos, todos declarados en el propio reporte para que las cuentas se puedan rehacer.
@@ -230,7 +230,7 @@ function documento(a) {
 
   return `<article class="doc">
   <header class="portada">
-    <img class="logo" src="data:image/png;base64,${logo}" alt="BG Consulting Group">
+    <div class="marca"><img class="logo" src="data:image/png;base64,${logo}" alt="BG Consulting Group"></div>
     <p class="eyebrow"><span class="dot"></span> Pauta · Palabras clave</p>
     <h1>Palabras clave de ${esc(grupo.nombre)}</h1>
     <p class="entrada">Relación de las ${num(usadas.length)} palabras clave seleccionadas para la campaña de Google Ads,
@@ -348,7 +348,8 @@ body{background:var(--ink);color:var(--chalk);font-family:var(--sans);line-heigh
 code{font-family:var(--mono);font-size:12.5px;background:var(--s2);border:1px solid var(--line);border-radius:5px;padding:2px 7px;color:var(--bone);white-space:nowrap}
 
 .portada{border-bottom:1px solid var(--line);padding-bottom:44px;margin-bottom:44px}
-.logo{height:34px;width:auto;display:block;margin-bottom:36px}
+.marca{width:fit-content;background:#fff;border-radius:8px;padding:12px 18px;margin-bottom:36px}
+.logo{height:30px;width:auto;display:block}
 .eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
 .eyebrow .dot{width:6px;height:6px;border-radius:50%;background:var(--accent);box-shadow:0 0 14px 1px rgba(0,230,160,.7)}
 h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height:1.02;font-size:clamp(34px,5vw,54px);margin-bottom:20px}
@@ -405,7 +406,7 @@ h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height
   .kpi{background:#f6f8fa}
   h1,.bloque h3,.kpi b,.tabla tr td:first-child{color:#111}
   .nota,.entrada,.tabla td{color:#333}
-  .logo{filter:invert(1)}
+  .marca{padding:0}
 }
 </style>
 </head>
