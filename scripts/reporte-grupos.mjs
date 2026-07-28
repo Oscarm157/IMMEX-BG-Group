@@ -121,8 +121,47 @@ const logo = readFileSync(LOGO).toString("base64");
 
 // ---- Armado por grupo guardado ----
 
+/**
+ * Une variantes de escritura de la misma búsqueda: "agente aduanal" y "agenteaduanal",
+ * "agencia aduanal" y "agencias aduanales". Google las reporta con el MISMO volumen
+ * porque son el mismo cluster, así que sumarlas contaba doble la demanda.
+ * Solo se unen si además coincide el volumen: si difiere, son búsquedas distintas.
+ */
+function claveVariante(keyword) {
+  return normaliza(keyword)
+    .split(/\s+/)
+    .map((w) => (w.length > 4 && w.endsWith("es") ? w.slice(0, -2) : w.length > 3 && w.endsWith("s") ? w.slice(0, -1) : w))
+    .join("");
+}
+
+function uneVariantes(items) {
+  const porClave = new Map();
+  for (const k of items) {
+    const clave = `${claveVariante(k.keyword)}·${k.volumen}`;
+    const ya = porClave.get(clave);
+    if (!ya) {
+      porClave.set(clave, { ...k, variantes: 1 });
+      continue;
+    }
+    ya.variantes += 1;
+    // Gana la escritura bien separada ("agente aduanal" sobre "agenteaduanal"), y a
+    // igualdad de palabras, la más corta. La puja que se conserva es la más alta: para
+    // presupuestar, quedarse con la barata subestima lo que va a costar el clic.
+    const palabras = (t) => t.trim().split(/\s+/).length;
+    const mejor =
+      palabras(k.keyword) > palabras(ya.keyword) ||
+      (palabras(k.keyword) === palabras(ya.keyword) && k.keyword.length < ya.keyword.length);
+    if (mejor) ya.keyword = k.keyword;
+    if (Number(k.cpc) > Number(ya.cpc)) ya.cpc = k.cpc;
+    if (k.competencia === "HIGH" || (k.competencia === "MEDIUM" && ya.competencia === "LOW")) {
+      ya.competencia = k.competencia;
+    }
+  }
+  return [...porClave.values()];
+}
+
 function analiza(grupo) {
-  const suyas = items.filter((i) => i.grupo_id === grupo.id);
+  const suyas = uneVariantes(items.filter((i) => i.grupo_id === grupo.id));
   const bloques = GRUPOS.map((g) => ({ ...g, items: [] }));
   const descartadas = [];
   const sinGrupo = [];
@@ -156,7 +195,7 @@ const analisis = grupos.map(analiza);
 
 function tablaKeywords(items, extra = null) {
   return `<table class="tabla">
-  <thead><tr><th>Palabra clave</th><th class="r">Búsquedas al mes</th><th class="r">Competencia</th><th class="r">Puja alta</th>${extra ? "<th>Por qué queda fuera</th>" : ""}</tr></thead>
+  <thead><tr><th>Palabra clave</th><th class="r">Búsquedas al mes</th><th class="r">Competencia</th><th class="r">Puja alta (USD)</th>${extra ? "<th>Por qué queda fuera</th>" : ""}</tr></thead>
   <tbody>${items
     .map(
       (k) => `<tr><td>${esc(k.keyword)}</td><td class="r n">${num(k.volumen)}</td><td class="r">${COMPETENCIA[k.competencia] ?? "Sin dato"}</td><td class="r n">${Number(k.cpc) > 0 ? `$${num(k.cpc, 2)}` : "sin dato"}</td>${extra ? `<td class="motivo">${esc(k.motivo)}</td>` : ""}</tr>`,
@@ -170,10 +209,10 @@ function tablaConTema(bloques) {
     .flatMap((b) => b.items.map((k) => ({ ...k, tema: b.nombre })))
     .sort((a, b) => b.volumen - a.volumen);
   return `<table class="tabla">
-  <thead><tr><th>Palabra clave</th><th>Tema</th><th class="r">Búsquedas al mes</th><th class="r">Competencia</th><th class="r">Puja alta</th></tr></thead>
+  <thead><tr><th>Palabra clave</th><th>Tema</th><th class="r">Búsquedas al mes</th><th class="r">Competencia</th><th class="r">Puja alta (USD)</th></tr></thead>
   <tbody>${filas
     .map(
-      (k) => `<tr><td>${esc(k.keyword)}</td><td class="tema">${esc(k.tema)}</td><td class="r n">${num(k.volumen)}</td><td class="r">${COMPETENCIA[k.competencia] ?? "Sin dato"}</td><td class="r n">${Number(k.cpc) > 0 ? `$${num(k.cpc, 2)}` : "sin dato"}</td></tr>`,
+      (k) => `<tr><td>${esc(k.keyword)}${k.variantes > 1 ? `<span class="var">+${k.variantes - 1} variante${k.variantes > 2 ? "s" : ""}</span>` : ""}</td><td class="tema">${esc(k.tema)}</td><td class="r n">${num(k.volumen)}</td><td class="r">${COMPETENCIA[k.competencia] ?? "Sin dato"}</td><td class="r n">${Number(k.cpc) > 0 ? `$${num(k.cpc, 2)}` : "sin dato"}</td></tr>`,
     )
     .join("")}</tbody></table>`;
 }
@@ -206,7 +245,7 @@ function documento(a) {
       <div class="kpis">
         <div class="kpi"><span>Palabras clave</span><b class="n">${num(usadas.length)}</b></div>
         <div class="kpi acento"><span>Búsquedas al mes</span><b class="n">${num(total)}</b></div>
-        <div class="kpi"><span>Puja alta ponderada</span><b class="n">$${num(cpcTotal, 2)}</b></div>
+        <div class="kpi"><span>Puja alta ponderada</span><b class="n">$${num(cpcTotal, 2)} USD</b></div>
         <div class="kpi"><span>Temas</span><b class="n">${num(bloques.length)}</b></div>
       </div>
     </div>
@@ -239,7 +278,7 @@ function documento(a) {
     <div class="caja-cifras">
       <p class="caja-rot">Con $${num(PRESUPUESTO)} MXN al mes</p>
       <div class="kpis">
-        <div class="kpi"><span>Equivalente en dólares</span><b class="n">$${num(usd)}</b></div>
+        <div class="kpi"><span>Equivalente</span><b class="n">$${num(usd)} USD</b></div>
         <div class="kpi"><span>Clics al mes</span><b class="n">${num(clics)}</b></div>
         <div class="kpi acento"><span>Oportunidades al mes</span><b class="n">${num(leads[0], 1)} a ${num(leads[2], 1)}</b></div>
       </div>
@@ -344,7 +383,7 @@ h1{font-family:var(--display);font-weight:500;letter-spacing:-.035em;line-height
 .tabla tr td:first-child{color:var(--chalk)}
 .tabla .r{text-align:right}
 .tabla .motivo{color:var(--smoke);font-size:12.5px}
-.tabla .tema{color:var(--smoke);font-size:12.5px;white-space:nowrap}
+.tabla .tema{color:var(--smoke);font-size:12.5px;white-space:nowrap}\n.tabla .var{color:var(--ash);font-size:11.5px;margin-left:8px;white-space:nowrap}
 
 .pares{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;border-top:1px solid var(--line);padding-top:16px}
 .rot{display:block;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--ash);margin-bottom:7px}
