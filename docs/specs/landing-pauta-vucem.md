@@ -331,3 +331,59 @@ detienen la transmisión: se ven en revisión posterior. Poner "qué lo detiene"
 **El cierre se fusionó con el formulario:** los tres puntos del alcance de la primera revisión viven
 dentro del `LeadPanel`, arriba de los campos, y sustituyen al párrafo introductorio que tenía.
 Quedan visibles sin abrir nada y sin scroll dentro del sidebar.
+
+---
+
+# Ajuste v3: bloque de identidad de la firma
+
+Oscar aprobó la v2 el 2026-07-28 ("ya quedó mejor, la dejaría así") y pidió una sola cosa más.
+
+## El problema que resuelve
+
+El visitante llega desde un anuncio de Google. No conoce BG, no sabe si es un despacho de trámites,
+una agencia aduanal o una firma legal. Antes de dejar sus datos necesita saber a quién le habla.
+Hoy la página no lo dice en ningún lado: se da por sabido.
+
+## Qué se agrega, en dos lugares
+
+**1. Banda en el cuerpo, ANTES de "Preguntas frecuentes".** No al final. Va cuando el visitante ya
+leyó las causas y las consecuencias, justo antes de resolver sus dudas.
+
+Contenido: qué es BG en una o dos líneas, y las áreas de práctica juntas, compactas. Muy sencilla,
+sin florituras. Es una banda de identidad, no una sección de "nosotros" con historia.
+
+**2. Ficha compacta en la columna del formulario, debajo del botón de enviar.** Tres o cuatro
+líneas, no más. Lo mínimo para que quien está por escribir sus datos sepa a quién se los deja.
+
+Las dos comparten fuente y mensaje, pero no el mismo texto palabra por palabra: la del sidebar es
+la versión corta, no un recorte literal de la banda.
+
+## Fuente de verdad, y el límite
+
+Solo lo verificable en el repo: `src/content/dictionaries.ts` (bloque `about`), `services-detail.ts`,
+`service-slugs.ts` y `team.ts`.
+
+**Sin cifras de resultado.** Nada de número de clientes, operaciones atendidas, casos ganados,
+montos recuperados ni porcentajes de éxito. Oscar lo aclaró expresamente: no pidió resultados. Lo
+que se puede afirmar hoy es lo que ya dice el sitio: consultoría legal especializada en comercio
+exterior, socios con cerca de veinte años de experiencia en materia fiscal, aduanera y de TI,
+oficinas en Tijuana y San Diego, las áreas de práctica reales y el software propio BMS.
+
+Si un dato no está en esas fuentes, no entra. Igual que en todo el resto de esta página.
+
+## Diseño
+
+- Las dos piezas heredan el sistema del sitio. Ninguna introduce un componente nuevo de marca.
+- La banda no puede repetir la familia de layout de la sección de Servicios que ya existe arriba.
+  Es una banda de identidad, corta y horizontal, no otra lista de bloques.
+- No se toca nada más de la página: la v2 está aprobada tal cual.
+- El recorte de texto de la v2 no se revierte. Lo que se agrega es poco y compacto por diseño.
+
+## Criterios de aceptación
+
+1. La banda queda inmediatamente antes de "Preguntas frecuentes", no al final de la página.
+2. La ficha del sidebar queda debajo del botón de enviar, dentro de la misma columna.
+3. Ninguna cifra de resultado en ninguna de las dos.
+4. La banda no repite la familia de layout de Servicios.
+5. El texto visible total de la página no crece más de 90 palabras respecto de la v2 (669).
+6. Build limpio, 200 y noindex. Capturas nuevas a 1440 y 375.
