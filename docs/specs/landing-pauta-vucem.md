@@ -418,3 +418,57 @@ compliance e IT". Traducirlo solo aquí rompería la consistencia.
 **Fuentes de las dos piezas.** `dictionaries.ts` (`about.intro` para el párrafo, `services.items`
 para los nombres de las ocho áreas). Sin cifras de resultado. Fuera quedó el software BMS: cabía en
 la fuente pero no en el presupuesto de palabras, y esta landing no vende software.
+
+---
+
+# Ajuste v4: logo y cifras en la banda de identidad
+
+Oscar, el 2026-07-28, sobre la banda de la v3: "Faltó el logo y algún número en grande, como 20
+años de experiencia".
+
+La banda dice quién es BG pero se lee como un párrafo más. Le falta el ancla visual que hace que
+alguien que llega de un anuncio reconozca la firma sin leer.
+
+## Qué se agrega
+
+**1. El logo.** Reusar el componente `Logo` que ya existe (`@/components/Logo`), el mismo del
+encabezado de la landing, en un tamaño mayor que ahí. No se importa una imagen suelta de `public/`
+ni se crea un componente nuevo.
+
+**2. Tres cifras grandes**, en tipografía display y con números tabulares. Son las tres que el
+repo sostiene, y no hay más:
+
+| Cifra | Pie exacto | Fuente |
+|---|---|---|
+| 20 | años en promedio entre los socios | `dictionaries.ts`, bloque `about` |
+| 8 | áreas de práctica | `services.items`, contadas |
+| 2 | oficinas: Tijuana y San Diego | `dictionaries.ts`, contacto |
+
+**La precisión del pie no se negocia.** El número grande es "20", pero el pie dice "años en
+promedio entre los socios", no "años de experiencia" a secas. Esa imprecisión ya se corrigió en la
+v2 y no se reintroduce por hacer la cifra más vistosa. Un número redondo sin su matiz, en una firma
+legal, es exactamente el problema.
+
+Prohibido inventar una cuarta cifra. Nada de clientes, operaciones, casos ni montos: no existen en
+las fuentes.
+
+## Diseño
+
+- La banda sigue siendo una banda: horizontal y compacta. Al agregar logo y cifras no se convierte
+  en una sección de "nosotros" a página completa.
+- Las cifras se leen como cifras: display grande, tabulares, con su pie corto debajo. No son
+  tarjetas con borde.
+- Sigue sin repetir la familia de layout de Servicios.
+- Responsive a 375px: las tres cifras caben en fila o se apilan de forma legible, sin encogerse a
+  un tamaño que ya no sea "grande".
+- El párrafo de la firma puede acortarse si al entrar el logo y las cifras la banda queda apretada.
+  Es preferible un párrafo más corto que una banda saturada.
+
+## Criterios de aceptación
+
+1. El logo aparece en la banda, con el componente existente, no con una imagen suelta.
+2. Las tres cifras aparecen en display grande, con números tabulares.
+3. El pie de la cifra 20 dice "en promedio entre los socios". Sin esa precisión, no pasa.
+4. Ninguna cifra fuera de las tres autorizadas.
+5. El texto visible total no pasa de 780 palabras (hoy 740).
+6. Build limpio, 200 y noindex. Capturas nuevas a 1440 y 375, con la banda encuadrada.
