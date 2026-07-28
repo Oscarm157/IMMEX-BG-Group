@@ -83,8 +83,19 @@ Sin bloque de "qué es VUCEM". Sin testimonios. Sin logos de clientes.
 
 ## Copy
 
+Es el punto donde esta página se gana o se pierde. Oscar lo subrayó aparte del resto del spec.
+
+**El registro: formal y serio, con un toque de camaradería.** Un especialista de BG hablándole a
+otro profesional que ya sabe de lo que se trata. De colega a colega, no de vendedor a prospecto ni
+de profesor a alumno. Se puede reconocer que un trámite es un dolor de cabeza; no se puede prometer
+que desaparece.
+
 - De usted. Registro institucional, igual que el resto del sitio.
-- Cero AI slop: nada de "solución integral", "transforma", "potencia", "sin fricciones".
+- **Cero AI slop, sin excepción.** Prohibido: "solución integral", "transforma tu operación",
+  "potencia", "sin fricciones", "lleva tu X al siguiente nivel", "de clase mundial", "empodera".
+- **Prohibida la promesa mágica.** Nada de "olvídese de sus problemas", "despreocúpese",
+  "nosotros nos encargamos de todo", "deje de preocuparse por la aduana". Si algo es complejo, se
+  dice que es complejo. Lo que se ofrece es criterio y respaldo, no que el problema se evapore.
 - Sin em-dashes.
 - Títulos planos y descriptivos. Dicen el tema, no juegan con él. Prohibida la frase paralela de
   consultor tipo "Autoridad que compone".
@@ -112,6 +123,8 @@ Se verifican uno por uno antes de reportar. Los cuatro primeros son ejecutables.
 5. Ningún dato que no salga de las fuentes listadas arriba.
 6. Ninguna sección repite la familia de layout de su hermana.
 7. Las tres variantes de anuncio caben en los límites de Google Ads, contados carácter por carácter.
+8. Todo el texto, incluidos los anuncios, pasa `critico-anti-slop` sin violaciones. Ni una promesa
+   mágica, ni una frase hueca, ni un em-dash.
 
 ## Riesgo principal
 
