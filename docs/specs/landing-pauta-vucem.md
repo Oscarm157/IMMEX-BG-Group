@@ -26,7 +26,7 @@ primeros diez segundos, o el visitante se va al portal de gobierno que está jus
 ## Alcance
 
 1. Ruta nueva `/lp/vucem`, en español, `noindex` (es tráfico pagado, no debe competir con `/guias`).
-2. Contenido de nivel especialista sobre operar en VUCEM: qué se atora, por qué se rechaza, qué
+2. Contenido de nivel especialista sobre operar en VUCEM: qué detiene una operación, por qué se rechaza, qué
    consecuencia legal tiene y cómo se previene.
 3. Formulario de captura en **sidebar fijo** en escritorio, que acompaña el scroll sin tapar el
    contenido. En móvil no hay sidebar: barra inferior con ancla al formulario, que va al final.
@@ -61,7 +61,7 @@ El orden importa: arriba lo que resuelve, abajo lo que convence.
 
 1. **Entrada.** Título que nombra el problema operativo, no la marca. Una línea de apoyo y el
    formulario a la vista en escritorio.
-2. **Lo que se atora en VUCEM.** El bloque de mayor valor. Cada caso: qué pasa, por qué la
+2. **Causas frecuentes de rechazo.** El bloque de mayor valor. Cada caso: qué pasa, por qué la
    autoridad lo rechaza, qué se hace. Con fundamento legal donde exista en el corpus.
 3. **Consecuencias.** Qué cuesta cada error: rechazo, crédito fiscal, multa, operación detenida.
    Es el ángulo que distingue a una firma legal de un despacho de trámites.
@@ -211,13 +211,13 @@ Lo que fija este piloto, para las 37 restantes:
   del sitio: la única salida es el formulario).
 - `noindex` por dos vías: `metadata.robots` en la página y la cabecera `X-Robots-Tag` que
   `next.config.ts` aplica a `/lp/:path*`.
-- El contenido vive en la propia página, en arreglos con nombre (`ATORONES`, `ESCALADA`,
+- El contenido vive en la propia página, en arreglos con nombre (`CAUSAS`, `ESCALADA`,
   `SERVICIOS`, `PREGUNTAS`). No hay motor genérico: cada landing es su propio archivo.
 - Captura de leads con `src/components/lp/LeadPanel.tsx`, que recibe `campaign` y lo manda como
   `service` a `/api/leads`. Así el CRM distingue de qué landing vino cada lead.
 - Grid de dos columnas `[1fr_380px]`: el sidebar es columna del grid, así que empuja el contenido.
   En móvil el grid colapsa, el formulario queda al final y el CTA vive en la barra fija inferior.
-- Las seis secciones no comparten familia de layout. Al replicar, conviene conservar esa regla y
+- Las secciones no comparten familia de layout. Al replicar, conviene conservar esa regla y
   cambiar el contenido, no aplanar todo a tarjetas.
 
 ---
@@ -304,3 +304,30 @@ Ningún párrafo de más de 3 líneas en escritorio. Si una idea no cabe, se cor
 3. Ningún párrafo de más de 3 líneas a 1440px.
 4. Build limpio, 200 y noindex, como antes.
 5. Capturas nuevas a 1440 y 375.
+
+## Resultado de la pasada v2
+
+**H1 entregado:** "Asesoría legal para operaciones detenidas en la VUCEM". Nominal, dice el servicio
+y el momento en que se necesita.
+**Alternativa considerada:** "Rechazos en la VUCEM: causas, riesgo fiscal y corrección". Describe el
+contenido de la página en lugar del servicio, así que lee más a artículo que a landing de pauta.
+
+**Medición del texto visible** (`document.body.innerText`, 1440px, misma página y mismo mecanismo
+antes y después, con la primera pregunta del acordeón abierta):
+
+| | Palabras |
+|---|---|
+| Antes (commit `ea2e7e7`) | 1188 |
+| Después | 648 |
+| Diferencia | **-45.5%** |
+
+**Sobre "atorar":** cero apariciones en la página. En este spec quedan solo las de la sección
+"Formalidad", que son la cita de la propia regla.
+
+**Etiquetas de las causas:** el spec pedía "qué lo detiene / qué se hace". Se entregó "Qué ocurre /
+Qué se hace" porque dos de las cuatro causas (manifestación de valor y fracción arancelaria) no
+detienen la transmisión: se ven en revisión posterior. Poner "qué lo detiene" ahí sería inexacto.
+
+**El cierre se fusionó con el formulario:** los tres puntos del alcance de la primera revisión viven
+dentro del `LeadPanel`, arriba de los campos, y sustituyen al párrafo introductorio que tenía.
+Quedan visibles sin abrir nada y sin scroll dentro del sidebar.

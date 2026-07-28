@@ -7,7 +7,7 @@ type Status = "idle" | "sending" | "sent" | "error";
 
 // Formulario de la landing de pauta. Entra por /api/leads con source "form",
 // que exige teléfono válido; el campo "service" identifica de qué landing viene.
-export function LeadPanel({ campaign }: { campaign: string }) {
+export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: readonly string[] }) {
   const [status, setStatus] = useState<Status>("idle");
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -76,9 +76,15 @@ export function LeadPanel({ campaign }: { campaign: string }) {
       <h2 className="mt-3 font-display text-[21px] font-medium leading-snug tracking-[-0.015em] text-chalk">
         Deje sus datos
       </h2>
-      <p className="mt-2.5 text-[14px] leading-relaxed text-bone/85">
-        Un especialista en comercio exterior revisa qué se atoró en su operación y qué expone a la empresa.
-      </p>
+      <p className="mt-2.5 text-[13.5px] leading-relaxed text-smoke">Alcance de la primera revisión:</p>
+      <ol className="mt-2 flex flex-col gap-1.5">
+        {alcance.map((t, i) => (
+          <li key={t} className="flex gap-2.5 text-[13.5px] leading-relaxed text-bone/85">
+            <span className="font-mono text-[12px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
+            {t}
+          </li>
+        ))}
+      </ol>
 
       {/* Honeypot anti-bot: fuera de pantalla, los humanos no lo ven ni lo tabulan. */}
       <div aria-hidden className="pointer-events-none absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
@@ -121,7 +127,7 @@ export function LeadPanel({ campaign }: { campaign: string }) {
         </div>
         <div>
           <label htmlFor="lp-message" className={label}>
-            Qué se atoró
+            Motivo de la consulta
           </label>
           <textarea
             id="lp-message"
