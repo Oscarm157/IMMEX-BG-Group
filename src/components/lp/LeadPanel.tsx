@@ -46,8 +46,8 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
   }
 
   const field =
-    "w-full rounded-[8px] border border-line bg-ink px-3.5 py-3 text-[15px] text-chalk outline-none transition-colors placeholder:text-ash focus:border-accent";
-  const label = "mb-1.5 block text-[12px] uppercase tracking-[0.12em] text-smoke";
+    "w-full rounded-[8px] border border-line bg-ink px-3.5 py-2.5 text-[15px] leading-snug text-chalk outline-none transition-colors placeholder:text-ash focus:border-accent";
+  const label = "mb-1 block text-[11px] uppercase tracking-[0.12em] text-smoke";
 
   if (status === "sent") {
     return (
@@ -71,15 +71,15 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
   }
 
   return (
-    <form onSubmit={onSubmit} className="console-panel rounded-[14px] bg-surface-1 px-6 py-7">
+    <form onSubmit={onSubmit} className="console-panel rounded-[14px] bg-surface-1 px-6 py-6">
       <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">Revisión de su caso</span>
-      <h2 className="mt-3 font-display text-[21px] font-medium leading-snug tracking-[-0.015em] text-chalk">
+      <h2 className="mt-2.5 font-display text-[21px] font-medium leading-snug tracking-[-0.015em] text-chalk">
         Deje sus datos
       </h2>
-      <p className="mt-2.5 text-[13.5px] leading-relaxed text-smoke">Alcance de la primera revisión:</p>
-      <ol className="mt-2 flex flex-col gap-1.5">
+      <p className="mt-2 text-[13.5px] leading-snug text-smoke">Alcance de la primera revisión:</p>
+      <ol className="mt-2 flex flex-col gap-1">
         {alcance.map((t, i) => (
-          <li key={t} className="flex gap-2.5 text-[13.5px] leading-relaxed text-bone/85">
+          <li key={t} className="flex gap-2.5 text-[13.5px] leading-snug text-bone/85">
             <span className="font-mono text-[12px] tabular-nums text-accent">{String(i + 1).padStart(2, "0")}</span>
             {t}
           </li>
@@ -92,7 +92,7 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
         <input id="lp-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
       </div>
 
-      <div className="mt-6 flex flex-col gap-4">
+      <div className="mt-5 flex flex-col gap-3">
         <div>
           <label htmlFor="lp-name" className={label}>
             Nombre
@@ -139,7 +139,7 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
         </div>
       </div>
 
-      <label className="mt-5 flex items-start gap-2.5 text-[12.5px] leading-relaxed text-smoke">
+      <label className="mt-4 flex items-start gap-2.5 text-[12.5px] leading-snug text-smoke">
         <input type="checkbox" name="consent" required className="mt-0.5 h-4 w-4 shrink-0 accent-accent" />
         <span>
           Acepto el{" "}
@@ -155,7 +155,7 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
         </span>
       </label>
 
-      <SubmitPill type="submit" variant="accent" arrow disabled={status === "sending"} className="mt-6 w-full">
+      <SubmitPill type="submit" variant="accent" arrow disabled={status === "sending"} className="mt-5 w-full">
         {status === "sending" ? "Enviando" : "Enviar"}
       </SubmitPill>
 
@@ -166,15 +166,15 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
       )}
 
       {/* Ficha de identidad: quién recibe los datos, en la versión corta. */}
-      <div className="mt-6 border-t border-line pt-5">
+      <div className="mt-5 border-t border-line pt-4">
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ash">BG Consulting Group</p>
-        <p className="mt-2 text-[13px] leading-relaxed text-smoke">
+        <p className="mt-1.5 text-[13px] leading-snug text-smoke">
           Consultoría legal en comercio exterior. Legal, trade compliance, fiscal y TI en una sola firma. 20 años de
           práctica en promedio entre los socios. Tijuana y San Diego.
         </p>
       </div>
 
-      <div className="mt-5 border-t border-line pt-5 text-[13px] leading-relaxed text-smoke">
+      <div className="mt-4 border-t border-line pt-4 text-[13px] leading-snug text-smoke">
         <p>
           Tijuana{" "}
           <a href="tel:+526646079642" className="font-mono tabular-nums text-bone hover:text-accent">
