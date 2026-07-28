@@ -136,7 +136,7 @@ export default function LpVucemPage() {
           </Reveal>
           <Reveal delay={0.22}>
             <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[12px] uppercase tracking-[0.12em] text-smoke">
-              <li>Más de 20 años en comercio exterior</li>
+              <li>Socios con cerca de 20 años de experiencia</li>
               <li aria-hidden className="text-line">
                 /
               </li>
