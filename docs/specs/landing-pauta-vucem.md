@@ -219,3 +219,88 @@ Lo que fija este piloto, para las 37 restantes:
   En móvil el grid colapsa, el formulario queda al final y el CTA vive en la barra fija inferior.
 - Las seis secciones no comparten familia de layout. Al replicar, conviene conservar esa regla y
   cambiar el contenido, no aplanar todo a tarjetas.
+
+---
+
+# Ajuste tras la primera revisión (v2)
+
+Oscar vio el piloto el 2026-07-28 y pidió dos cosas: **que pese menos** y **que sea más formal**.
+Además pidió mirar cómo escribe la competencia, en concreto OneCore.
+
+Esto reemplaza lo que contradiga de arriba. Todo lo demás sigue vigente: fuente de verdad, cero
+datos inventados, sidebar que empuja, estados del formulario, anuncios ya escritos.
+
+## Lo que se encontró en la competencia
+
+**OneCore** (`onecore.mx`, software de compliance de comercio exterior). Escribe de tú, semiformal,
+con exclamaciones del tipo "¡Descubre lo que un sistema de compliance puede hacer por tu empresa!".
+**Ese registro no se copia.** Lo que sí se copia es su densidad: 2 a 4 líneas por sección, titulares
+cortos y descriptivos, y el peso puesto en lo visual, no en el párrafo. Su titular es
+"Sistema para evitar multas en auditorías de Comercio Exterior": dice qué es, sin adornarlo.
+
+Ya tienen publicado "¿Qué es la Ventanilla Única de Comercio Exterior Mexicano (VUCEM)?" y otro de
+trámites de la ventanilla. Confirma la decisión de origen: el ángulo básico está ocupado y no es
+por ahí.
+
+**VTZ** (`vtz.mx`, firma de abogados de comercio exterior, el par real de BG). Registro formal alto,
+de usted e impersonal, tercera persona, títulos secos: "Comercio Exterior y Aduanas".
+
+La receta: **densidad de OneCore, registro de VTZ.**
+
+## Formalidad: qué cambia en el lenguaje
+
+El texto actual usa un registro coloquial que hay que subir.
+
+- Fuera "atorar", "atorón", "se atora", "lo que se atora". Es coloquial mexicano. Entra: **rechazo,
+  detención, observación, inconsistencia**.
+- Títulos secos y nominales, no narrativos ni en primera persona del plural:
+  - "Lo que se atora en la VUCEM" → "Causas frecuentes de rechazo"
+  - "A qué escala un error que no se corrige" → "Consecuencias de una operación mal documentada"
+  - "Cómo entra BG en la operación" → "Servicios"
+  - "Lo que preguntan quienes ya operan" → "Preguntas frecuentes"
+  - "Qué se revisa en la primera conversación" → "Alcance de la primera revisión"
+- El H1 actual, "Cuando la ventanilla rechaza la transmisión y la mercancía ya está en la aduana",
+  es narrativo y largo. Se sustituye por uno nominal y descriptivo. Entregar la página con el que
+  se elija y anotar la alternativa en este spec.
+- Tercera persona o de usted, nunca "nosotros" como protagonista. "Se revisa el valor declarado",
+  no "revisamos su operación".
+- Ni una exclamación. Ni una pregunta retórica como título.
+
+## Volumen: qué se recorta
+
+Meta: **alrededor del 40% menos de texto visible** y una sección menos. Se recorta por número de
+elementos y por longitud de cada uno, no encogiendo la tipografía.
+
+| Bloque | Ahora | Queda |
+|---|---|---|
+| Causas de rechazo | 6 casos, 3 renglones cada uno | **4 casos, 2 renglones**: qué lo detiene y qué se hace |
+| Consecuencias | 5 escalones | **3 escalones** |
+| Servicios | 5 bloques con 4 puntos | **4 bloques con 3 puntos**, una línea cada uno |
+| Preguntas | 5 | **3** |
+| Cierre | sección propia + formulario | **se fusiona con el formulario**, deja de ser sección |
+
+Las cuatro causas que se conservan, por peso legal: COVE contra pedimento, manifestación de valor,
+fracción arancelaria o clave equivocada, y e.firma o sellos vencidos. Se van "e-document ilegible"
+y "usuarios y accesos sin control".
+
+Los tres escalones que se conservan: operación detenida, valor en aduana recalculado, crédito
+fiscal y multas. Se van "rechazo en la ventanilla" (es el punto de partida, no una consecuencia) y
+"controversia".
+
+Ningún párrafo de más de 3 líneas en escritorio. Si una idea no cabe, se corta, no se encoge.
+
+## Lo que NO se toca
+
+- La estructura de layout: cada sección con su propia familia sigue siendo correcta y aprobada.
+- El sidebar de captura y su formulario.
+- Los anuncios y el mapa de keywords, ya escritos y contados.
+- El contenido técnico que se conserve: mismo fundamento legal, misma exactitud.
+
+## Criterios de aceptación de esta pasada
+
+1. El texto visible baja al menos 35% en número de palabras contra la versión anterior. Se mide y
+   se reporta el número.
+2. Cero apariciones de "atorar" y sus formas, en la página y en el spec.
+3. Ningún párrafo de más de 3 líneas a 1440px.
+4. Build limpio, 200 y noindex, como antes.
+5. Capturas nuevas a 1440 y 375.
