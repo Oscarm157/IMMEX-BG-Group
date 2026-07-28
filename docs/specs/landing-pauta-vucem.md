@@ -120,4 +120,102 @@ no aprende nada en el segundo bloque, la landing no sirve por más que convierta
 
 ## Por confirmar con BG
 
-Se llena durante la construcción con lo que hizo falta y no estaba en las fuentes.
+Datos que la página pedía y no están en las fuentes. Se entregó sin ellos.
+
+1. **Plazo de respuesta a un lead.** El formulario dice que un especialista se pone en contacto, sin
+   prometer cuándo. El sitio declara "disponibilidad 24 horas, 7 días" como valor de la firma, que no
+   es lo mismo que un tiempo de respuesta comprometido.
+2. **Costo de la primera revisión.** No se dice si tiene costo. Mientras no se confirme, la página no
+   afirma que sea gratuita.
+3. **Casos y cifras de resultado.** Sin número de operaciones atendidas, clientes ni recuperaciones.
+   Por eso no hay bloque de prueba social.
+4. **Tiempos del portal.** Nada sobre cuánto tarda la VUCEM en resolver un trámite o un rechazo.
+5. **Revisión jurídica del contenido.** Los fundamentos citados vienen del corpus de `/guias`, que en
+   su encabezado ya advierte que al escalar requiere revisión de un experto de BG. Esta landing
+   hereda ese pendiente.
+
+## Entregable de texto: anuncios de Google Ads
+
+Conteo hecho carácter por carácter con `node` sobre el texto exacto (títulos ≤ 30, descripciones
+≤ 90). El número entre paréntesis es la longitud real.
+
+### Variante 1 · Prevención
+Pain point: un trámite mal presentado que termina en crédito fiscal.
+
+Títulos:
+- Antes del crédito fiscal (24)
+- Revisión de valor en aduana (27)
+- Auditoría preventiva aduanal (28)
+
+Descripciones:
+- Un valor sin sustento se convierte en crédito fiscal. Lo revisamos antes que la autoridad. (90)
+- Firma legal de comercio exterior: manifestación de valor, pedimentos y Anexo 24. (80)
+
+### Variante 2 · Operación
+Pain point: trámite detenido y mercancía parada en la aduana.
+
+Títulos:
+- Trámite detenido en VUCEM (25)
+- Rechazo de COVE o e.firma (25)
+- Mercancía parada en aduana (26)
+
+Descripciones:
+- Revisamos por qué la ventanilla rechaza su transmisión y qué se corrige hoy. (76)
+- Especialistas en COVE, pedimentos y valor en aduana. Tijuana y San Diego. (73)
+
+### Variante 3 · Autoridad
+Pain point: una firma legal frente a un gestor de trámites.
+
+Títulos:
+- Firma legal, no un gestor (25)
+- 20 años en comercio exterior (28)
+- Consultoría legal aduanal (25)
+
+Descripciones:
+- Recursos administrativos, acuerdos conclusivos y juicio ante el TFJA. (69)
+- Legal, trade compliance e IT en una sola firma. Tijuana y San Diego. (68)
+
+## Entregable de texto: mapa de keywords
+
+Grupo de anuncios que apunta a `/lp/vucem`. Volumen, dificultad y CPC salen de
+`public/BG-estrategia-sem-seo.html` (SEMrush, base México, julio de 2026). El CPC va en dólares.
+
+| Palabra clave | Volumen/mes | Dificultad | CPC | Concordancia |
+|---|---|---|---|---|
+| VUCEM | 90,500 | 36 % | $0.45 | Frase |
+| Ingreso VUCEM | 1,900 | 36 % | $0.00 | Exacta |
+| VUCEM SAT | 1,600 | 35 % | $0.44 | Exacta |
+| Ventanilla Única VUCEM | 1,300 | 31 % | $0.42 | Exacta |
+| VUCEM Ventanilla Única | 1,300 | 30 % | $0.42 | Exacta |
+| Sellos VUCEM | 1,000 | 31 % | $0.00 | Exacta |
+| Manifestación de Valor VUCEM | 480 | 26 % | $0.38 | Exacta |
+
+Suma del grupo: 98,080 búsquedas al mes.
+
+La cabecera va en frase y no en amplia porque el término solo tiene mucho volumen informativo y de
+empleo alrededor: 1,951 variantes con 104,600 búsquedas al mes en conjunto, según el mismo reporte.
+Las variantes van en exacta porque ya traen la intención completa.
+
+Negativas, las mismas que el reporte fija desde el día 1: qué es, gratis, pdf, curso, diplomado,
+sueldo, cuánto gana, empleo, vacante, carrera, ejemplo.
+
+Correspondencia entre variante de anuncio y keyword: "Sellos VUCEM" e "Ingreso VUCEM" son de acceso
+al portal, así que llevan la variante 2 (Operación). "Manifestación de Valor VUCEM" lleva la 1
+(Prevención). La cabecera "VUCEM" rota las tres.
+
+## Cómo se propaga a las otras keywords
+
+Lo que fija este piloto, para las 37 restantes:
+
+- Ruta `/lp/<keyword>` bajo `src/app/lp/`, con el shell de `src/app/lp/layout.tsx` (sin navegación
+  del sitio: la única salida es el formulario).
+- `noindex` por dos vías: `metadata.robots` en la página y la cabecera `X-Robots-Tag` que
+  `next.config.ts` aplica a `/lp/:path*`.
+- El contenido vive en la propia página, en arreglos con nombre (`ATORONES`, `ESCALADA`,
+  `SERVICIOS`, `PREGUNTAS`). No hay motor genérico: cada landing es su propio archivo.
+- Captura de leads con `src/components/lp/LeadPanel.tsx`, que recibe `campaign` y lo manda como
+  `service` a `/api/leads`. Así el CRM distingue de qué landing vino cada lead.
+- Grid de dos columnas `[1fr_380px]`: el sidebar es columna del grid, así que empuja el contenido.
+  En móvil el grid colapsa, el formulario queda al final y el CTA vive en la barra fija inferior.
+- Las seis secciones no comparten familia de layout. Al replicar, conviene conservar esa regla y
+  cambiar el contenido, no aplanar todo a tarjetas.
