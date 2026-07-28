@@ -472,3 +472,17 @@ las fuentes.
 4. Ninguna cifra fuera de las tres autorizadas.
 5. El texto visible total no pasa de 780 palabras (hoy 740).
 6. Build limpio, 200 y noindex. Capturas nuevas a 1440 y 375, con la banda encuadrada.
+
+## Cómo quedó (v4)
+
+La banda ganó un renglón de identidad arriba: el logo (`Logo variant="bg" size="lg"`, 64px en
+escritorio contra 44px del encabezado) a la izquierda y las tres cifras a la derecha, separado por
+una regla del renglón de texto y áreas que ya existía. Sigue siendo una banda: 1440px la resuelve
+en dos renglones, sin convertirse en sección de "nosotros".
+
+El párrafo de la firma se acortó de 40 a 19 palabras. Al entrar el logo y las cifras, "BG
+Consulting Group", "oficinas en Tijuana y San Diego" y "veinte años en promedio" quedaban dichos
+dos veces en el mismo bloque. Texto visible: 714 palabras.
+
+En 375px las tres cifras se apilan, cada una con su pie al lado, compartiendo columna para que los
+pies arranquen a la misma altura pese a que "20" es más ancho que "8".
