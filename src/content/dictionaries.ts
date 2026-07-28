@@ -68,7 +68,7 @@ export const dictionaries = {
     },
     frameworks: {
       label: "Operamos sobre",
-      items: ["Anexo 24", "Anexo 30", "IMMEX", "T-MEC / USMCA", "EDI", "NOM"],
+      items: ["Anexo 24", "Anexo 30", "Programa IMMEX", "T-MEC / USMCA", "EDI", "NOM"],
     },
     about: {
       eyebrow: "Nosotros",
@@ -372,7 +372,7 @@ export const dictionaries = {
     },
     frameworks: {
       label: "We operate across",
-      items: ["Annex 24", "Annex 30", "IMMEX", "USMCA", "EDI", "NOM"],
+      items: ["Annex 24", "Annex 30", "IMMEX Program", "USMCA", "EDI", "NOM"],
     },
     about: {
       eyebrow: "About",
