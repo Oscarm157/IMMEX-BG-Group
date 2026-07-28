@@ -169,7 +169,7 @@ Títulos:
 - Mercancía detenida por COVE (27)
 
 Descripciones:
-- Revisamos por qué se rechazó su COVE y qué se corrige antes de pagar el pedimento. (82)
+- Se revisa por qué se rechazó su COVE y qué se corrige antes de pagar el pedimento. (82)
 - Firma legal de comercio exterior: valor declarado, COVE y pedimentos. (69)
 
 ### Variante 2 · Correspondencia
@@ -252,3 +252,15 @@ lead. No se tocó `LeadPanel` ni `/api/leads`.
 
 Sin leads de prueba en Neon: la prueba del estado de error se hizo interceptando la
 petición a `/api/leads` con Playwright (`route.abort()`), sin llegar a la base de datos.
+
+**Revisión de copy (`critico-anti-slop`).** Corrigió el título del ad Variante 1: decía
+"Revisamos por qué..." (nosotros como protagonista), va "Se revisa por qué..." (82
+caracteres), consistente con la regla del spec de VUCEM de nunca usar "nosotros" en
+primera persona. El título de la Variante 3 "20 años en comercio exterior" se marcó por
+ser menos preciso que la cifra autorizada ("en promedio entre los socios"); se conserva
+tal cual porque es el mismo texto, carácter por carácter, ya aprobado y publicado en el
+ad de `/lp/vucem` (spec VUCEM, Variante 3 · Autoridad), y el límite de 30 caracteres de
+Google Ads no permite el matiz completo en un título. La página misma, donde sí hay
+espacio, mantiene la precisión completa en `CIFRAS`. "Legal, trade compliance e IT" se
+revisó y se dejó igual: es el mismo anglicismo ya aceptado en el spec de VUCEM por ser el
+nombre real del área en `dictionaries.ts`.
