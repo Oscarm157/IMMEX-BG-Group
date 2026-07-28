@@ -169,8 +169,8 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
       <div className="mt-6 border-t border-line pt-5">
         <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ash">BG Consulting Group</p>
         <p className="mt-2 text-[13px] leading-relaxed text-smoke">
-          Consultoría legal en comercio exterior. Legal, trade compliance, fiscal y TI en una sola firma. Socios con
-          cerca de 20 años de práctica. Tijuana y San Diego.
+          Consultoría legal en comercio exterior. Legal, trade compliance, fiscal y TI en una sola firma. 20 años de
+          práctica en promedio entre los socios. Tijuana y San Diego.
         </p>
       </div>
 

@@ -27,7 +27,7 @@ const CAUSAS = [
     fundamento: "Art. 59 fracción III y art. 81 Ley Aduanera",
     ocurre:
       "Manifestación de valor sin integrar, o incrementables fuera: fletes hasta la aduana, seguros, comisiones, regalías.",
-    hace: "La obligación de sustentar el valor es del importador, no del agente aduanal.",
+    hace: "Integrar la manifestación de valor y sus incrementables antes de transmitir. La obligación de sustentarlo es del importador, no del agente aduanal.",
   },
   {
     titulo: "El e-document que soporta el COVE, ilegible o incompleto",
@@ -168,7 +168,7 @@ export default function LpCovePage() {
           </Reveal>
           <Reveal delay={0.22}>
             <ul className="mt-9 flex flex-wrap gap-x-6 gap-y-2 font-mono text-[12px] uppercase tracking-[0.12em] text-smoke">
-              <li>Socios con cerca de 20 años de experiencia</li>
+              <li>20 años de experiencia en promedio entre los socios</li>
               <li aria-hidden className="text-line">
                 /
               </li>
@@ -374,7 +374,7 @@ export default function LpCovePage() {
         id="form"
         className="scroll-mt-4 border-t border-line px-5 pb-12 pt-12 sm:px-8 lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto lg:border-l lg:border-t-0 lg:px-6 lg:pb-8 lg:pt-8"
       >
-        <LeadPanel campaign="cove" alcance={REVISION} />
+        <LeadPanel campaign="Landing COVE (pauta)" alcance={REVISION} />
       </aside>
 
       {/* Barra inferior en móvil: no hay sidebar, así que el CTA vive fijo abajo */}
