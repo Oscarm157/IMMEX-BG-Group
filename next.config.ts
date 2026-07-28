@@ -15,7 +15,12 @@ const securityHeaders = [
 const nextConfig: NextConfig = {
   serverExternalPackages: ["pdf-parse"],
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [
+      { source: "/:path*", headers: securityHeaders },
+      // Landings de pauta: tráfico pagado, fuera del índice para no competir
+      // con /guias. La cabecera cubre lo que un meta tag no alcanza.
+      { source: "/lp/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] },
+    ];
   },
   async redirects() {
     return [
