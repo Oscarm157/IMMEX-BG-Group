@@ -119,9 +119,23 @@ export function Nav({
         menu ? "border-b border-line bg-ink" : scrolled ? "border-b border-white/[0.06] bg-ink/85 backdrop-blur-xl" : "border-b border-transparent bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex h-20 max-w-[1280px] items-center justify-between px-5 sm:h-[100px] sm:px-8">
+      {/* Al pasar del umbral de scroll la barra pierde 30% de alto (100 → 70 en
+          escritorio, 80 → 56 en móvil) y el logo baja en la misma proporción para
+          no comerse el aire que queda. */}
+      <nav
+        className={`mx-auto flex max-w-[1280px] items-center justify-between px-5 transition-[height] duration-300 motion-reduce:transition-none sm:px-8 ${
+          scrolled ? "h-14 sm:h-[70px]" : "h-20 sm:h-[100px]"
+        }`}
+      >
         <Link href={`/${lang}`} aria-label="BG Consulting Group" className="shrink-0">
-          <Logo variant="bg" tone="light" size="sm" className="h-12 w-auto sm:h-[72px]" />
+          <Logo
+            variant="bg"
+            tone="light"
+            size="sm"
+            className={`w-auto transition-[height] duration-300 motion-reduce:transition-none ${
+              scrolled ? "h-9 sm:h-[50px]" : "h-12 sm:h-[72px]"
+            }`}
+          />
         </Link>
 
         <div className="hidden items-center gap-5 md:flex">
