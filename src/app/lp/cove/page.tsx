@@ -7,42 +7,56 @@ import { Logo } from "@/components/Logo";
 
 // Tráfico pagado: fuera del índice para no competir con /guias.
 export const metadata: Metadata = {
-  title: "Operación en VUCEM: rechazos, valor y cumplimiento | BG Consulting Group",
+  title: "COVE rechazado o que no coincide: revisión legal | BG Consulting Group",
   description:
-    "Causas frecuentes de rechazo en la VUCEM, lo que exponen frente a la autoridad y cómo se corrigen. Firma de consultoría legal en comercio exterior.",
+    "Causas frecuentes de rechazo del COVE, su diferencia con la factura y el pedimento, y qué expone frente a la autoridad. Firma de consultoría legal en comercio exterior.",
   robots: { index: false, follow: false },
 };
 
-// Contenido derivado del corpus de /guias (vucem, pedimento, manifestacion-de-valor,
-// valoracion-aduanera, anexo-24, encargo-conferido) y de docs/bgcg-source.md.
+// Contenido derivado del corpus de /guias (guía vucem: puntosClave, distincion y
+// errores de COVE, e-document y e.firma) y de docs/bgcg-source.md. Nada fuera de ahí.
 const CAUSAS = [
   {
     titulo: "El COVE no coincide con el pedimento",
     fundamento: "Arts. 36 y 36-A Ley Aduanera · Anexo 22 de las RGCE",
-    ocurre:
-      "Diferencias de valor, cantidades o datos del proveedor entre el COVE y el pedimento impiden que la operación avance.",
-    hace: "Verificar la captura del COVE antes de pagar el pedimento. Corregir después cuesta más que revisar antes.",
+    ocurre: "Diferencias de valor, cantidades o datos del proveedor entre el COVE y el pedimento.",
+    hace: "Se revisa la captura del COVE antes de pagar el pedimento.",
   },
   {
-    titulo: "La manifestación de valor no está integrada",
+    titulo: "El valor transmitido no tiene sustento",
     fundamento: "Art. 59 fracción III y art. 81 Ley Aduanera",
     ocurre:
-      "El valor declarado queda sin respaldo documental. La obligación de sustentarlo es del importador, no del agente aduanal.",
-    hace: "Integrar la manifestación y sus incrementables antes de cada operación: fletes hasta la aduana, seguros, comisiones y regalías.",
+      "Manifestación de valor sin integrar, o incrementables fuera: fletes hasta la aduana, seguros, comisiones, regalías.",
+    hace: "Integrar la manifestación de valor y sus incrementables antes de transmitir. La obligación de sustentarlo es del importador, no del agente aduanal.",
   },
   {
-    titulo: "Fracción arancelaria o clave de pedimento equivocada",
-    fundamento: "Arts. 35 a 37 Ley Aduanera · Anexo 22 de las RGCE",
+    titulo: "El e-document que soporta el COVE, ilegible o incompleto",
+    fundamento: "Decreto de la Ventanilla Digital Mexicana de Comercio Exterior",
     ocurre:
-      "La operación pasa con el trato fiscal incorrecto: la fracción determina los impuestos y la clave, el régimen.",
-    hace: "Dictaminar la clasificación antes de operar y verificar que la clave corresponda al régimen real de la mercancía.",
+      "La ventanilla genera un acuse que se declara en el pedimento; un documento borroso o que no corresponde genera rechazos y observaciones.",
+    hace: "La digitalización se cuida como parte del expediente, no como un requisito de forma.",
   },
   {
     titulo: "e.firma o sellos vencidos",
     fundamento: "Arts. 36 y 36-A Ley Aduanera",
-    ocurre:
-      "Sin certificado vigente no hay transmisión y el despacho se detiene con la mercancía ya en la aduana.",
+    ocurre: "Sin certificado vigente no hay transmisión, y la mercancía ya está en la aduana.",
     hace: "Renovar antes del vencimiento y llevar esas fechas en el calendario de la operación.",
+  },
+];
+
+// Ancla de especialista de la página: distinción que no aparece en /lp/vucem.
+const DISTINCIONES = [
+  {
+    a: "COVE",
+    b: "Factura",
+    texto:
+      "La factura es el documento comercial. El COVE es su representación electrónica en la ventanilla, con los datos de valor que se ligan al pedimento. El COVE no sustituye a la factura, la declara.",
+  },
+  {
+    a: "COVE",
+    b: "Pedimento",
+    texto:
+      "El COVE se transmite antes, con los datos de valor de la factura. El pedimento se liga a ese COVE: si no coinciden entre sí, la operación no avanza.",
   },
 ];
 
@@ -61,6 +75,7 @@ const ESCALADA = [
   },
 ];
 
+// Mismos cuatro momentos y servicios reales del piloto. Ningún servicio nuevo.
 const SERVICIOS = [
   {
     momento: "Antes de operar",
@@ -86,21 +101,21 @@ const SERVICIOS = [
 
 const PREGUNTAS = [
   {
-    q: "¿Por dónde se empieza cuando la ventanilla rechaza la transmisión?",
-    a: "Por la vigencia de la e.firma y los sellos, y por la correspondencia entre el COVE y el pedimento.",
+    q: "¿Qué se revisa primero cuando la ventanilla rechaza el COVE?",
+    a: "Primero la vigencia de la e.firma y los sellos, y después la correspondencia entre el COVE y el pedimento en valor, cantidades y datos del proveedor.",
   },
   {
     q: "¿Quién responde si el agente aduanal capturó mal el valor?",
-    a: "El importador. La obligación de manifestar y sustentar el valor en aduana es de la empresa, aunque el agente aduanal presente el pedimento bajo el encargo conferido.",
+    a: "El importador. La obligación de manifestar y sustentar el valor en aduana es de la empresa; el encargo conferido permite que el agente aduanal presente el pedimento, no traslada esa obligación.",
   },
   {
-    q: "¿BG tramita en la VUCEM o solo asesora?",
-    a: "BG es una firma de consultoría legal. El despacho se tramita a través de agentes aduanales; la asesoría revisa el valor, la clasificación y el control interno, y representa a la empresa ante una determinación.",
+    q: "¿BG transmite el COVE o solo asesora?",
+    a: "BG es una firma de consultoría legal. El COVE y el despacho se tramitan a través de agentes aduanales; la asesoría revisa el valor, la clasificación y el control interno antes de la transmisión.",
   },
 ];
 
-// Las tres cifras que el repo sostiene. El pie de la primera dice "en promedio
-// entre los socios" porque eso es lo que dice la fuente, no "años de experiencia".
+// Las tres cifras que el repo sostiene, igual que en /lp/vucem v4. El pie de la
+// primera dice "en promedio entre los socios", no "años de experiencia" a secas.
 const CIFRAS = [
   { cifra: "20", pie: "años en promedio entre los socios" },
   { cifra: "8", pie: "áreas de práctica" },
@@ -120,11 +135,7 @@ const AREAS = [
 ];
 
 // Alcance de la primera revisión. Vive dentro del formulario, no como sección.
-const REVISION = [
-  "Causa del rechazo en la ventanilla.",
-  "Sustento del valor declarado.",
-  "Control de inventarios contra pedimentos.",
-];
+const REVISION = ["Causa del rechazo del COVE.", "Correspondencia con la factura y el pedimento.", "Sustento del valor declarado."];
 
 const seccion = "px-5 sm:px-8 lg:px-12";
 
@@ -132,7 +143,7 @@ const seccion = "px-5 sm:px-8 lg:px-12";
 // sangría dejaría el texto en una columna inservible.
 const SANGRIA = ["", "sm:pl-5", "sm:pl-10"];
 
-export default function LpVucemPage() {
+export default function LpCovePage() {
   return (
     <div className="mx-auto w-full max-w-[1560px] lg:grid lg:grid-cols-[minmax(0,1fr)_380px] lg:items-start">
       <div className="min-w-0">
@@ -141,17 +152,17 @@ export default function LpVucemPage() {
           <Reveal>
             <span className="flex items-center gap-3 font-mono text-[12px] uppercase tracking-[0.18em] text-accent">
               <span aria-hidden className="inline-block h-1.5 w-1.5 rounded-full bg-accent signal-glow" />
-              VUCEM · Operación y cumplimiento
+              COVE · Valor declarado y correspondencia
             </span>
           </Reveal>
           <Reveal delay={0.08}>
-            <h1 className="mt-6 max-w-[18ch] text-balance font-display text-[clamp(2.1rem,4.4vw,3.5rem)] font-medium leading-[1.05] tracking-[-0.03em] text-chalk">
-              Asesoría legal para operaciones detenidas en la VUCEM
+            <h1 className="mt-6 max-w-[19ch] text-balance font-display text-[clamp(2.1rem,4.4vw,3.5rem)] font-medium leading-[1.05] tracking-[-0.03em] text-chalk">
+              Asesoría legal para un COVE rechazado o que no cuadra
             </h1>
           </Reveal>
           <Reveal delay={0.16}>
             <p className="mt-7 max-w-xl border-l-2 border-accent pl-5 text-[18px] leading-relaxed text-bone/90">
-              Revisión de la causa del rechazo, del sustento del valor declarado y de lo que la operación expone frente
+              Revisión del valor transmitido, su correspondencia con el pedimento y lo que la operación expone frente
               a la autoridad.
             </p>
           </Reveal>
@@ -174,10 +185,10 @@ export default function LpVucemPage() {
             los dos renglones operativos a la derecha */}
         <section className={`${seccion} pb-20 pt-16 sm:pt-24`}>
           <SectionHeading
-            eyebrow="Operación"
+            eyebrow="Transmisión"
             index="01"
             title="Causas frecuentes de rechazo"
-            lead="Cuatro causas concentran la mayoría de los rechazos y las observaciones."
+            lead="Cuatro causas concentran la mayoría de los rechazos y las observaciones al COVE."
             className="mb-14"
           />
           <div className="border-t border-line">
@@ -217,14 +228,40 @@ export default function LpVucemPage() {
           </div>
         </section>
 
-        {/* 3 · Consecuencias: cadena vertical escalonada sobre panel de consola */}
+        {/* 3 · COVE contra factura y contra pedimento: dos tarjetas lado a lado con
+            un separador "≠", familia de layout propia que no existe en /lp/vucem */}
+        <section className={`${seccion} pb-20`}>
+          <SectionHeading
+            eyebrow="Distinción"
+            index="02"
+            title="COVE contra factura y contra pedimento"
+            lead="El ancla de esta página: el COVE es un dato que se transmite, no el canal ni el documento comercial."
+            className="mb-14"
+          />
+          <div className="grid gap-px overflow-hidden rounded-[16px] border border-line bg-line sm:grid-cols-2">
+            {DISTINCIONES.map((d) => (
+              <div key={d.b} className="flex flex-col gap-6 bg-ink px-7 py-10 sm:px-9">
+                <div className="flex items-baseline gap-3 font-mono text-[13px] uppercase tracking-[0.14em]">
+                  <span className="text-chalk">{d.a}</span>
+                  <span aria-hidden className="text-ash">
+                    ≠
+                  </span>
+                  <span className="text-smoke">{d.b}</span>
+                </div>
+                <p className="text-[16px] leading-relaxed text-bone/90">{d.texto}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* 4 · Consecuencias: cadena vertical escalonada sobre panel de consola */}
         <section className={`${seccion} pb-20`}>
           <div className="console-panel rounded-[16px] bg-surface-1 px-6 py-12 sm:px-10 sm:py-14">
             <SectionHeading
               eyebrow="Riesgo"
-              index="02"
-              title="Consecuencias de una operación mal documentada"
-              lead="Un rechazo se resuelve el mismo día. Lo que se declaró mal escala."
+              index="03"
+              title="Consecuencias de un valor sin sustento"
+              lead="Un rechazo se corrige el mismo día. Lo que se declaró mal escala."
               rule={false}
               className="mb-12"
             />
@@ -247,20 +284,16 @@ export default function LpVucemPage() {
                 </Reveal>
               ))}
             </ol>
-            <p className="mt-10 max-w-2xl border-l-2 border-accent pl-5 text-[16px] leading-relaxed text-bone/90">
-              El control de inventarios es la primera puerta que revisa la autoridad en una visita domiciliaria: un
-              Anexo 24 que no cuadra con los pedimentos deriva en crédito fiscal.
-            </p>
           </div>
         </section>
 
-        {/* 4 · Servicios: interludio claro, servicio en display grande con sus
+        {/* 5 · Servicios: interludio claro, servicio en display grande con sus
             sub-puntos reales en línea */}
         <section className="grid-field-light bg-paper">
           <div className={`${seccion} py-20 sm:py-24`}>
             <SectionHeading
               eyebrow="Firma"
-              index="03"
+              index="04"
               title="Servicios"
               lead="Ordenados por el momento de la operación en que se necesitan."
               tone="light"
@@ -291,18 +324,17 @@ export default function LpVucemPage() {
           </div>
         </section>
 
-        {/* 5 · Identidad de la firma: banda horizontal. Arriba el renglón de
-            identidad (logo y las tres cifras), abajo el texto y las áreas. Sin
-            títulos display ni tarjetas: no repite la familia de Servicios, que es
-            la lista vertical en claro de arriba. */}
-        <section className={`${seccion} border-y border-line bg-surface-1/40 py-14 sm:py-16`}>
+        {/* 6 · Preguntas frecuentes: acordeón */}
+        <section className={`${seccion} pb-20 pt-24`}>
+          <SectionHeading eyebrow="Preguntas" index="05" title="Preguntas frecuentes" className="mb-12" />
+          <Faq items={PREGUNTAS} />
+        </section>
+
+        {/* 7 · Identidad de la firma: banda horizontal, igual que la v4 de
+            /lp/vucem. Sin SectionHeading ni número: es una banda, no un capítulo. */}
+        <section className={`${seccion} border-t border-line bg-surface-1/40 py-14 sm:py-16`}>
           <div className="flex flex-col gap-9 border-b border-line pb-10 lg:flex-row lg:items-start lg:justify-between lg:gap-16">
-            {/* self-start: sin él, el flex en columna estira la imagen a lo ancho
-                del contenedor y la deforma en móvil. */}
             <Logo variant="bg" tone="light" size="lg" className="h-14 w-auto self-start sm:h-16" />
-            {/* En móvil las tres cifras se apilan y comparten columna (contents),
-                para que los pies arranquen a la misma altura pese a que "20" es
-                más ancho que "8". Desde sm quedan en fila. */}
             <div className="grid grid-cols-[auto_minmax(0,1fr)] items-baseline gap-x-4 gap-y-6 sm:grid-cols-3 sm:gap-x-10 lg:gap-x-16">
               {CIFRAS.map((c) => (
                 <div key={c.cifra} className="contents sm:block">
@@ -324,8 +356,6 @@ export default function LpVucemPage() {
             </div>
             <div className="lg:pt-1">
               <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ash">Áreas de práctica</span>
-              {/* Flujo por columna para que las reglas de las dos columnas queden
-                  a la misma altura aunque un área ocupe dos renglones. */}
               <ul className="mt-5 grid gap-x-10 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-4">
                 {AREAS.map((a) => (
                   <li key={a} className="border-t border-line py-2.5 text-[15px] leading-snug text-bone/85">
@@ -336,12 +366,6 @@ export default function LpVucemPage() {
             </div>
           </div>
         </section>
-
-        {/* 6 · Preguntas frecuentes: acordeón */}
-        <section className={`${seccion} pb-20 pt-24`}>
-          <SectionHeading eyebrow="Preguntas" index="04" title="Preguntas frecuentes" className="mb-12" />
-          <Faq items={PREGUNTAS} />
-        </section>
       </div>
 
       {/* Sidebar de captura: columna propia del grid, así que empuja el contenido
@@ -350,7 +374,7 @@ export default function LpVucemPage() {
         id="form"
         className="scroll-mt-4 border-t border-line px-5 pb-12 pt-12 sm:px-8 lg:sticky lg:top-0 lg:max-h-screen lg:overflow-y-auto lg:border-l lg:border-t-0 lg:px-6 lg:pb-8 lg:pt-8"
       >
-        <LeadPanel campaign="Landing VUCEM (pauta)" alcance={REVISION} />
+        <LeadPanel campaign="Landing COVE (pauta)" alcance={REVISION} />
       </aside>
 
       {/* Barra inferior en móvil: no hay sidebar, así que el CTA vive fijo abajo */}
