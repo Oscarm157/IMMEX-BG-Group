@@ -98,6 +98,18 @@ const PREGUNTAS = [
   },
 ];
 
+// Áreas de práctica reales, tal cual en src/content/dictionaries.ts (services.items).
+const AREAS = [
+  "Consultoría legal",
+  "Compliance y aseguramiento",
+  "Comercio exterior",
+  "Expertos en comercio internacional",
+  "Tecnología de la información",
+  "Servicios fiscales",
+  "Acuerdos comerciales",
+  "Servicios de importación",
+];
+
 // Alcance de la primera revisión. Vive dentro del formulario, no como sección.
 const REVISION = [
   "Causa del rechazo en la ventanilla.",
@@ -267,14 +279,38 @@ export default function LpVucemPage() {
                 </Reveal>
               ))}
             </div>
-            <p className="mt-14 max-w-2xl border-t border-line-soft pt-7 text-[16px] leading-relaxed text-graphite">
-              BG es una firma de consultoría legal especializada en comercio exterior, con oficinas en Tijuana y San
-              Diego. El despacho se tramita a través de agentes aduanales.
-            </p>
           </div>
         </section>
 
-        {/* 5 · Preguntas frecuentes: acordeón */}
+        {/* 5 · Identidad de la firma: banda horizontal, dos columnas, sin títulos
+            display ni tarjetas. No repite la familia de Servicios, que es la lista
+            vertical en claro de arriba. */}
+        <section className={`${seccion} border-y border-line bg-surface-1/40 py-14 sm:py-16`}>
+          <div className="grid gap-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,9fr)] lg:gap-16">
+            <div>
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-accent">La firma</span>
+              <p className="mt-5 text-[17px] leading-relaxed text-bone/90">
+                BG Consulting Group es una firma de consultoría legal especializada en comercio exterior, con oficinas
+                en Tijuana y San Diego. Entre sus socios se acumulan, en promedio, veinte años de experiencia en materia
+                fiscal, aduanera y de tecnologías de la información.
+              </p>
+            </div>
+            <div className="lg:pt-1">
+              <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-ash">Áreas de práctica</span>
+              {/* Flujo por columna para que las reglas de las dos columnas queden
+                  a la misma altura aunque un área ocupe dos renglones. */}
+              <ul className="mt-5 grid gap-x-10 sm:grid-flow-col sm:grid-cols-2 sm:grid-rows-4">
+                {AREAS.map((a) => (
+                  <li key={a} className="border-t border-line py-2.5 text-[15px] leading-snug text-bone/85">
+                    {a}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* 6 · Preguntas frecuentes: acordeón */}
         <section className={`${seccion} pb-20 pt-24`}>
           <SectionHeading eyebrow="Preguntas" index="04" title="Preguntas frecuentes" className="mb-12" />
           <Faq items={PREGUNTAS} />

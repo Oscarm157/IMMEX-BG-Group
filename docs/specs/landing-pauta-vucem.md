@@ -387,3 +387,34 @@ Si un dato no está en esas fuentes, no entra. Igual que en todo el resto de est
 4. La banda no repite la familia de layout de Servicios.
 5. El texto visible total de la página no crece más de 90 palabras respecto de la v2 (669).
 6. Build limpio, 200 y noindex. Capturas nuevas a 1440 y 375.
+
+## Resultado de la pasada v3
+
+**Banda de identidad.** Va entre Servicios y Preguntas frecuentes. Dos columnas: a la izquierda el
+párrafo de qué es BG, a la derecha las ocho áreas de práctica como índice de dos columnas con regla
+fina, en flujo por columna para que las reglas queden alineadas aunque un área ocupe dos renglones.
+No lleva `SectionHeading` ni número de sección: es una banda, no un capítulo, y así no obliga a
+renumerar el acordeón. Familia de layout distinta de Servicios, que arriba es lista vertical en
+claro con títulos display grandes.
+
+**Ficha del sidebar.** Tres renglones bajo el botón de enviar, separados por regla, antes del
+bloque de teléfonos. Solo en el formulario: el estado de éxito no la lleva porque ahí ya no hay
+botón. Texto propio, no recorte literal de la banda.
+
+**Se quitó el párrafo de cierre de Servicios** ("BG es una firma de consultoría legal especializada
+en comercio exterior, con oficinas en Tijuana y San Diego. El despacho se tramita a través de
+agentes aduanales."). La banda nueva va inmediatamente después y decía lo mismo con otras palabras.
+La aclaración sobre agentes aduanales sigue en la pregunta frecuente "¿BG tramita en la VUCEM o
+solo asesora?". Es la única línea de la v2 que se tocó.
+
+**Texto visible** (misma medición que la v2: `document.body.innerText` a 1440px con la primera
+pregunta del acordeón abierta): 669 → **701 palabras**, +32. El tope del criterio era +90.
+
+**Sobre "trade compliance" en la ficha.** `critico-anti-slop` lo marcó como anglicismo dentro de
+una frase en español. Se conserva: es el nombre del área tal cual lo usa el sitio
+(`dictionaries.ts`, `team.ts`) y la tira de credenciales del hero de la v2 ya dice "Legal, trade
+compliance e IT". Traducirlo solo aquí rompería la consistencia.
+
+**Fuentes de las dos piezas.** `dictionaries.ts` (`about.intro` para el párrafo, `services.items`
+para los nombres de las ocho áreas). Sin cifras de resultado. Fuera quedó el software BMS: cabía en
+la fuente pero no en el presupuesto de palabras, y esta landing no vende software.

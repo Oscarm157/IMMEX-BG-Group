@@ -165,7 +165,16 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
         </p>
       )}
 
-      <div className="mt-6 border-t border-line pt-5 text-[13px] leading-relaxed text-smoke">
+      {/* Ficha de identidad: quién recibe los datos, en la versión corta. */}
+      <div className="mt-6 border-t border-line pt-5">
+        <p className="font-mono text-[11px] uppercase tracking-[0.16em] text-ash">BG Consulting Group</p>
+        <p className="mt-2 text-[13px] leading-relaxed text-smoke">
+          Consultoría legal en comercio exterior. Legal, trade compliance, fiscal y TI en una sola firma. Socios con
+          cerca de 20 años de práctica. Tijuana y San Diego.
+        </p>
+      </div>
+
+      <div className="mt-5 border-t border-line pt-5 text-[13px] leading-relaxed text-smoke">
         <p>
           Tijuana{" "}
           <a href="tel:+526646079642" className="font-mono tabular-nums text-bone hover:text-accent">
