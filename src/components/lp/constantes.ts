@@ -9,8 +9,11 @@ import type { Servicio } from "./tipos";
 export const CONTENEDOR = "mx-auto w-full max-w-[1280px] px-5 sm:px-8";
 
 // Escalón por eslabón de la cadena de consecuencias. Solo desde sm: en 375px
-// la sangría dejaría el texto en una columna inservible.
-export const SANGRIA = ["", "sm:pl-5", "sm:pl-10"];
+// la sangría dejaría el texto en una columna inservible. Cuatro niveles porque
+// hay landings con cuatro eslabones; a partir del quinto se mantiene el último
+// escalón en vez de devolver undefined y dejar el eslabón sin sangrar.
+const ESCALONES = ["", "sm:pl-5", "sm:pl-10", "sm:pl-15"];
+export const sangria = (i: number) => ESCALONES[Math.min(i, ESCALONES.length - 1)];
 
 // Tira de credenciales del hero: idéntica en las dos landings hoy, es un dato
 // de la firma, no de la campaña.

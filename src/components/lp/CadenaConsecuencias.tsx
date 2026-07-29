@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { Seccion } from "./Seccion";
-import { SANGRIA } from "./constantes";
+import { sangria } from "./constantes";
 import type { Paso } from "./tipos";
 
 // 3 · Consecuencias: cadena vertical escalonada sobre panel de consola.
@@ -35,7 +35,7 @@ export function CadenaConsecuencias({
                 aria-hidden
                 className="absolute -left-[calc(1.75rem+3.5px)] top-2 h-1.5 w-1.5 rounded-full bg-accent sm:-left-[calc(2.25rem+3.5px)]"
               />
-              <div className={SANGRIA[i]}>
+              <div className={sangria(i)}>
                 <div className="flex items-baseline gap-3">
                   <span className="font-mono text-[12px] tabular-nums text-ash">{String(i + 1).padStart(2, "0")}</span>
                   <h3 className="font-display text-[19px] font-medium tracking-[-0.015em] text-chalk">{e.paso}</h3>
