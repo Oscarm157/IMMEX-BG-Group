@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { SubmitPill } from "@/components/site/PillButton";
+import { telefonos } from "@/lib/site-config";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
@@ -61,10 +62,10 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
           directamente.
         </p>
         <a
-          href="tel:+526646079642"
+          href={telefonos.tijuana.href}
           className="mt-5 inline-block font-mono text-[14px] tabular-nums text-accent transition-colors hover:text-accent-dim"
         >
-          +52 (664) 607 9642
+          {telefonos.tijuana.display}
         </a>
       </div>
     );
@@ -161,7 +162,7 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
 
       {status === "error" && (
         <p role="alert" className="mt-4 text-[13px] leading-relaxed text-accent">
-          No se pudo enviar. Intente de nuevo o marque al +52 (664) 607 9642.
+          No se pudo enviar. Intente de nuevo o marque al {telefonos.tijuana.display}.
         </p>
       )}
 
@@ -177,11 +178,13 @@ export function LeadPanel({ campaign, alcance }: { campaign: string; alcance: re
       <div className="mt-4 border-t border-line pt-4 text-[13px] leading-snug text-smoke">
         <p>
           Tijuana{" "}
-          <a href="tel:+526646079642" className="font-mono tabular-nums text-bone hover:text-accent">
-            +52 (664) 607 9642
+          <a href={telefonos.tijuana.href} className="font-mono tabular-nums text-bone hover:text-accent">
+            {telefonos.tijuana.display}
           </a>
         </p>
         <p className="mt-1.5">
+          {/* Deuda declarada: el nacional 01 800 no vive en site-config (solo
+              está el NAP de Tijuana/San Diego), se deja literal. */}
           Nacional{" "}
           <a href="tel:+528007880232" className="font-mono tabular-nums text-bone hover:text-accent">
             01 800 788 0232

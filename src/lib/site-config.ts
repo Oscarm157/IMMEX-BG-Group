@@ -39,6 +39,15 @@ export const siteConfig = {
   ],
 } as const;
 
+// Teléfono derivado del NAP (una sola fuente): nunca escribirlo literal en un
+// componente. offices[0] es Tijuana.
+export const telefonos = {
+  tijuana: {
+    display: siteConfig.offices[0].phone,
+    href: `tel:${siteConfig.offices[0].phone.replace(/[^\d+]/g, "")}`,
+  },
+} as const;
+
 // Destinatario de las notificaciones de leads (form y chatbot).
 // Override con LEAD_RECIPIENT en env si se quiere enrutar a otra bandeja.
 export const leadRecipient = process.env.LEAD_RECIPIENT || siteConfig.email;
