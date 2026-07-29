@@ -110,7 +110,15 @@ mueve al menos dos de estas palancas:
 
 Criterio duro, heredado del spec de cove: **si un párrafo de esta página funciona igual en otra
 landing, está mal escrito.** Verificable: ningún literal de más de 60 caracteres puede aparecer en
-dos `page.tsx` distintos fuera de `constantes.ts`.
+dos `page.tsx` distintos fuera de `constantes.ts`. Aplica también a los textos de anuncio del spec.
+
+**El bloque propio cubre un tema que las causas no tocan.** Salió en la revisión del lote A: la
+trampa es construirlo reformulando en positivo las mismas causas que ya se listaron arriba ("esto
+falla" y sesenta líneas después "esto sostiene"). No repite literales, así que pasa el script, pero
+el lector recibe lo mismo dos veces y la página se infla sin decir nada nuevo. Las familias
+`EscaleraNiveles` y `TablaCriterios` invitan especialmente a ese error, porque por forma piden una
+lista. Referencias de lo que sí es un ancla: `cove` (COVE contra factura, que no es una causa),
+`agencia-aduanal` (la cita del art. 59-III) e `immex` (de qué norma cuelga cada obligación).
 
 ## Fuente de verdad del contenido
 
