@@ -6,6 +6,8 @@ import { leadRecipient, siteConfig } from '@/lib/site-config';
 import { sendLeadEmail } from '@/lib/composio-mail';
 import { getLeadNotifyEmails } from '@/lib/settings';
 import { assignNextLead } from '@/lib/lead-rotation';
+import { checkBotId } from 'botid/server';
+import { checkDurableRateLimit } from '@/lib/rate-limit-durable';
 
 const QUAL_KEYS = [
   'service',
@@ -95,6 +97,19 @@ export async function POST(req: Request) {
   // silencio (200 ok) sin guardar ni notificar, para no darle señal al bot.
   if (typeof body.website === 'string' && body.website.trim()) {
     return Response.json({ ok: true });
+  }
+
+  const botVerification = await checkBotId();
+  if (botVerification.isBot) {
+    return Response.json({ ok: false, error: 'verification_failed' }, { status: 403 });
+  }
+
+  // A diferencia del límite en memoria de arriba (best-effort, se resetea en
+  // cada cold start), esto cuenta filas ya persistidas en Neon y sobrevive
+  // múltiples instancias serverless: máx 10 leads guardados por IP en 1 hora.
+  const durable = await checkDurableRateLimit('/api/leads', ip, 60 * 60 * 1000, 10);
+  if (durable.limited) {
+    return Response.json({ ok: false, error: 'rate_limited' }, { status: 429 });
   }
 
   const name = cap(body.name, 200);

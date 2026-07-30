@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import { withBotId } from "botid/next/config";
 
 // Headers de seguridad seguros para todo el sitio (no alteran el render).
 // Nota: el Content-Security-Policy queda pendiente de afinar y probar EN VIVO
@@ -40,4 +41,4 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+export default withBotId(nextConfig);

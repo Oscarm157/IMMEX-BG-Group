@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, timestamp, jsonb, integer, boolean, date } from "drizzle-orm/pg-core";
+import { pgTable, uuid, text, timestamp, jsonb, integer, boolean, date, index } from "drizzle-orm/pg-core";
 
 export type LeadQualification = {
   service?: string;
@@ -181,6 +181,21 @@ export const articles = pgTable("articles", {
   createdAt: timestamp("created_at", { withTimezone: true }).defaultNow(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).defaultNow(),
 });
+
+// Rate limit durable contra Neon para /api/leads y /api/chat: sobrevive cold
+// starts y múltiples instancias serverless (a diferencia del límite en memoria
+// de rate-limit.ts). Una fila por intento; checkDurableRateLimit() cuenta las
+// de la misma route+ip dentro de la ventana y borra las de más de 24h.
+export const rateLimitHits = pgTable(
+  "rate_limit_hits",
+  {
+    id: uuid("id").primaryKey().defaultRandom(),
+    route: text("route").notNull(),
+    ip: text("ip").notNull(),
+    createdAt: timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
+  },
+  (t) => [index("rate_limit_hits_route_ip_idx").on(t.route, t.ip, t.createdAt)]
+);
 
 export type FeedbackStatus = "open" | "resolved";
 

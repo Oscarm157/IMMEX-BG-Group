@@ -48,6 +48,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
   const [leadName, setLeadName] = useState("");
   const [leadEmail, setLeadEmail] = useState("");
   const [leadPhone, setLeadPhone] = useState("");
+  const [website, setWebsite] = useState(""); // honeypot: /api/leads lo rechaza en silencio si viene lleno
   const [fieldErrors, setFieldErrors] = useState<{ name?: string; email?: string; phone?: string }>({});
 
   if (!data) return null;
@@ -71,6 +72,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
     setLeadName("");
     setLeadEmail("");
     setLeadPhone("");
+    setWebsite("");
     setFieldErrors({});
   }
 
@@ -103,6 +105,7 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
         sourceUrl: typeof window !== "undefined" ? window.location.href : "",
       };
       payload.phone = leadPhone.trim();
+      payload.website = website;
       const res = await fetch("/api/leads", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -304,6 +307,18 @@ export function ServiceDiagnostic({ slug, lang }: { slug: string; lang: Lang }) 
                         <p className="mb-5 font-mono text-[13px] uppercase tracking-[0.16em] text-smoke">
                           {c.form.heading}
                         </p>
+                        {/* Honeypot anti-bot: fuera de pantalla, los humanos no lo ven ni lo tabulan. */}
+                        <div aria-hidden className="pointer-events-none absolute left-[-9999px] top-[-9999px] h-0 w-0 overflow-hidden">
+                          <label htmlFor="service-diagnostic-website">No llenar</label>
+                          <input
+                            id="service-diagnostic-website"
+                            type="text"
+                            tabIndex={-1}
+                            autoComplete="off"
+                            value={website}
+                            onChange={(e) => setWebsite(e.target.value)}
+                          />
+                        </div>
                         <div className="grid gap-3 sm:grid-cols-2">
                           <div className="flex flex-col gap-1">
                             <input

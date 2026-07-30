@@ -3,6 +3,8 @@ import type { Tool } from '@anthropic-ai/sdk/resources';
 import { buildPersona } from '@/lib/chat/persona';
 import { buildKnowledge } from '@/lib/chat/knowledge';
 import { visibleServices } from '@/lib/services';
+import { checkBotId } from 'botid/server';
+import { checkDurableRateLimit } from '@/lib/rate-limit-durable';
 
 export const runtime = 'nodejs';
 
@@ -105,6 +107,24 @@ const MAX_CONTENT_CHARS = 4000;
 export async function POST(req: Request) {
   const ip = req.headers.get('x-forwarded-for')?.split(',')[0]?.trim() || 'unknown';
   if (rateLimited(ip)) {
+    return new Response(JSON.stringify({ error: 'rate_limited' }), {
+      status: 429,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  const botVerification = await checkBotId();
+  if (botVerification.isBot) {
+    return new Response(JSON.stringify({ error: 'verification_failed' }), {
+      status: 403,
+      headers: { 'Content-Type': 'application/json' },
+    });
+  }
+
+  // Igual que en /api/leads: el límite en memoria de arriba se resetea en cada
+  // cold start, esto sobrevive múltiples instancias serverless.
+  const durable = await checkDurableRateLimit('/api/chat', ip, RATE_WINDOW_MS, RATE_MAX);
+  if (durable.limited) {
     return new Response(JSON.stringify({ error: 'rate_limited' }), {
       status: 429,
       headers: { 'Content-Type': 'application/json' },
