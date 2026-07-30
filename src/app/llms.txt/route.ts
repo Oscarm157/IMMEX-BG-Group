@@ -33,7 +33,7 @@ export function GET() {
 
   L.push("## En números");
   for (const s of dict.stats.items) L.push(`- ${s.value}: ${s.label}`);
-  L.push("- ~50,000: operaciones import-export gestionadas al año");
+  L.push("- Miles: operaciones import-export gestionadas al año");
   L.push("");
 
   // Núcleo del archivo: mapear la necesidad del usuario a lo que BG resuelve,

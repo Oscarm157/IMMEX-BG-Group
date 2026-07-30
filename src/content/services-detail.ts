@@ -2579,11 +2579,11 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "faq": [
         {
           "q": "¿Cómo se determina el valor en aduana de mi mercancía?",
-          "a": "La regla general es el método de valor de transacción: el precio pagado o por pagar por la mercancía, más los ajustes incrementables que correspondan, como fletes, seguros, comisiones, regalías o materiales aportados al proveedor. Cuando existe vinculación entre comprador y vendedor, o cuando el valor de transacción no es aplicable, se acude a los métodos secundarios en el orden que marca la ley. Revisamos su estructura de costos y contratos para fijar la base gravable correcta y documentarla."
+          "a": "La regla general es el método de valor de transacción: el precio pagado o por pagar por la mercancía, más los ajustes incrementables que correspondan, como fletes, seguros, comisiones, regalías o materiales aportados al proveedor. Cuando existe vinculación entre comprador y vendedor, o cuando el valor de transacción no es aplicable, se acude a los métodos secundarios en el orden que marca la ley. Revisamos tu estructura de costos y contratos para fijar la base gravable correcta y documentarla."
         },
         {
           "q": "¿Qué diferencia hay entre Drawback, PROSEC e IMMEX?",
-          "a": "Son figuras distintas que pueden coexistir. IMMEX permite la importación temporal de insumos para producir bienes destinados a la exportación, difiriendo el pago de contribuciones mientras se cumplan los plazos de retorno. PROSEC reduce el arancel de importación de ciertos insumos y maquinaria por sector productivo. Drawback es la devolución del impuesto general de importación pagado por insumos que se incorporan a mercancías exportadas. Cuál aplica depende de su operación, sus insumos y sus mercados; lo definimos a partir de su caso."
+          "a": "Son figuras distintas que pueden coexistir. IMMEX permite la importación temporal de insumos para producir bienes destinados a la exportación, difiriendo el pago de contribuciones mientras se cumplan los plazos de retorno. PROSEC reduce el arancel de importación de ciertos insumos y maquinaria por sector productivo. Drawback es la devolución del impuesto general de importación pagado por insumos que se incorporan a mercancías exportadas. Cuál aplica depende de tu operación, tus insumos y tus mercados; lo definimos a partir de tu caso."
         },
         {
           "q": "Recibí un requerimiento del SAT sobre comercio exterior, ¿qué hacen ustedes?",
@@ -2948,11 +2948,11 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       "faq": [
         {
           "q": "¿Qué necesito para importar un producto a México?",
-          "a": "Como mínimo, estar inscrito en el Padrón de Importadores, contar con la clasificación arancelaria correcta de la mercancía y cumplir las regulaciones que correspondan a esa fracción: contribuciones como el IGI y el IVA, las NOM aplicables y, en su caso, permisos previos. Revisamos su producto para determinar qué requisitos activa antes de mover el embarque."
+          "a": "Como mínimo, estar inscrito en el Padrón de Importadores, contar con la clasificación arancelaria correcta de la mercancía y cumplir las regulaciones que correspondan a esa fracción: contribuciones como el IGI y el IVA, las NOM aplicables y, en su caso, permisos previos. Revisamos tu producto para determinar qué requisitos activa antes de mover el embarque."
         },
         {
           "q": "¿Cómo sé si mi producto requiere una NOM?",
-          "a": "Depende de la fracción arancelaria y de la naturaleza del producto. Hay NOM de etiquetado e información comercial y otras de seguridad que la aduana verifica al momento del despacho. Revisamos la clasificación de su mercancía e identificamos qué normas aplican y cómo acreditarlas para que no detengan el embarque."
+          "a": "Depende de la fracción arancelaria y de la naturaleza del producto. Hay NOM de etiquetado e información comercial y otras de seguridad que la aduana verifica al momento del despacho. Revisamos la clasificación de tu mercancía e identificamos qué normas aplican y cómo acreditarlas para que no detengan el embarque."
         },
         {
           "q": "¿Por qué se queda detenida la mercancía en la aduana?",

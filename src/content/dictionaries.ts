@@ -52,7 +52,7 @@ export const dictionaries = {
       metrics: [
         { value: "20+", label: "Años activos" },
         { value: "180+", label: "Empresas" },
-        { value: "50K", label: "Operaciones / año" },
+        { value: "Miles", label: "Operaciones al año" },
       ],
     },
     bandCta: { title: "Opera sin sorpresas.", sub: "Cada cruce, con el criterio legal y el rastro documental en su sitio." },
@@ -109,7 +109,7 @@ export const dictionaries = {
         kicker: "BMS Software",
         title: "Software aduanero",
         body: "El sistema que automatiza el cumplimiento: Anexo 24, Anexo 30 y la trazabilidad de cada operación.",
-        points: ["Anexo 24 y Anexo 30", "EDI y +100 reportes", "Hasta 150 usuarios"],
+        points: ["Anexo 24 y Anexo 30", "EDI y reportería extensa", "Hasta 150 usuarios"],
       },
     },
     servicesPreview: {
@@ -216,7 +216,7 @@ export const dictionaries = {
       capabilities: [
         { title: "Anexo 24 y Anexo 30", body: "Cumple los requisitos de control de inventarios IMMEX y deja cada movimiento registrado.", use: "Ej.: reportes de descargo listos para una auditoría del SAT." },
         { title: "Conectividad EDI", body: "Intercambio electrónico de archivos con la autoridad a través de web services.", use: "Ej.: transmisión de pedimentos y archivos sin captura manual." },
-        { title: "Más de 100 reportes", body: "Reportería operativa y Crystal Report para el análisis a detalle.", use: "Ej.: saldos de inventario y discrepancias en tiempo real." },
+        { title: "Reportería extensa", body: "Reportería operativa y Crystal Report para el análisis a detalle.", use: "Ej.: saldos de inventario y discrepancias en tiempo real." },
         { title: "Integración MRP y ERP", body: "Se conecta con tu sistema con transacciones automáticas, sin doble captura.", use: "Ej.: alta de materiales sincronizada con tu ERP." },
         { title: "Certificados de origen", body: "Gestión, auditoría y trazabilidad de la documentación de origen.", use: "Ej.: soporte de origen listo para un requerimiento de EE.UU." },
         { title: "TLCAN / T-MEC", body: "Módulo de cumplimiento para los requisitos de la aduana estadounidense.", use: "Ej.: histórico para responder un CF28." },
@@ -224,7 +224,7 @@ export const dictionaries = {
       ],
       stats: [
         { value: "180+", label: "empresas confían en BMS" },
-        { value: "50K", label: "operaciones import-export" },
+        { value: "Miles", label: "operaciones import-export" },
         { value: "1–150", label: "usuarios por licencia" },
       ],
       modes: { label: "Disponible en", items: ["Escritorio", "Web", "App"] },
@@ -248,7 +248,7 @@ export const dictionaries = {
         { q: "¿Se integra con mi ERP?", a: "Sí. BMS se conecta con sistemas MRP y ERP mediante transacciones automáticas para evitar la doble captura entre tu sistema y la operación aduanera." },
         { q: "¿Cubre los requisitos de la aduana de Estados Unidos (T-MEC)?", a: "Sí. Incluye un módulo TLCAN/T-MEC con histórico para los requerimientos de la aduana estadounidense, con soporte para el CF28." },
         { q: "¿Gestiona los certificados de origen?", a: "Sí. Incluye módulos para la gestión, auditoría y trazabilidad de los certificados y la documentación de origen." },
-        { q: "¿Qué reportes incluye?", a: "Más de 100 reportes operativos, además de Crystal Report para construir análisis a la medida en tiempo real." },
+        { q: "¿Qué reportes incluye?", a: "Reportería operativa extensa, además de Crystal Report para construir análisis a la medida en tiempo real." },
         { q: "¿Cuántos usuarios soporta y cómo se licencia?", a: "Licenciamiento on-demand de 1 a 150 usuarios, con acceso a los módulos según la solución contratada." },
         { q: "¿Maneja varias bases de datos o RFC?", a: "Sí. BMS es multi-base por RFC, para grupos que operan con más de una razón social." },
         { q: "¿Qué tan segura y auditable es la información?", a: "La operación se centraliza en una sola fuente con trazabilidad documental de cada movimiento, disponible para auditoría interna o de la autoridad." },
@@ -294,11 +294,11 @@ export const dictionaries = {
         { value: "24/7", label: "acompañamiento" },
         { value: "2", label: "países, una operación" },
       ],
-      processTitle: "Qué ocurre cuando nos contacta",
+      processTitle: "Qué ocurre cuando nos contactas",
       process: [
-        { step: "01", title: "Recibimos su mensaje", desc: "Su consulta llega directamente al equipo, con el contexto de su operación." },
-        { step: "02", title: "Un abogado analiza su caso", desc: "Identificamos el riesgo y las medidas que conviene atender." },
-        { step: "03", title: "Le respondemos", desc: "En menos de un día hábil, en español o inglés." },
+        { step: "01", title: "Recibimos tu mensaje", desc: "Tu consulta llega directamente al equipo, con el contexto de tu operación." },
+        { step: "02", title: "Un abogado analiza tu caso", desc: "Identificamos el riesgo y las medidas que conviene atender." },
+        { step: "03", title: "Te respondemos", desc: "En menos de un día hábil, en español o inglés." },
       ],
     },
     footer: {
@@ -356,7 +356,7 @@ export const dictionaries = {
       metrics: [
         { value: "20+", label: "Years active" },
         { value: "180+", label: "Companies" },
-        { value: "50K", label: "Operations / yr" },
+        { value: "Thousands", label: "Operations / yr" },
       ],
     },
     bandCta: { title: "Operate without surprises.", sub: "Every crossing, with the legal criteria and the document trail in place." },
@@ -413,7 +413,7 @@ export const dictionaries = {
         kicker: "BMS Software",
         title: "Customs software",
         body: "The system that automates compliance: Annex 24, Annex 30 and full traceability of every operation.",
-        points: ["Annex 24 and Annex 30", "EDI and 100+ reports", "Up to 150 users"],
+        points: ["Annex 24 and Annex 30", "EDI and extensive reporting", "Up to 150 users"],
       },
     },
     servicesPreview: {
@@ -520,7 +520,7 @@ export const dictionaries = {
       capabilities: [
         { title: "Annex 24 and Annex 30", body: "Meets IMMEX inventory control requirements and keeps every movement on record.", use: "E.g.: discharge reports ready for a SAT audit." },
         { title: "EDI connectivity", body: "Electronic file exchange with the authority through web services.", use: "E.g.: transmit entries and files with no manual capture." },
-        { title: "Over 100 reports", body: "Operational reporting and Crystal Report for detailed analysis.", use: "E.g.: inventory balances and discrepancies in real time." },
+        { title: "Extensive reporting", body: "Operational reporting and Crystal Report for detailed analysis.", use: "E.g.: inventory balances and discrepancies in real time." },
         { title: "MRP and ERP integration", body: "Connects to your system with automatic transactions, no double entry.", use: "E.g.: material setup synced with your ERP." },
         { title: "Origin certificates", body: "Management, audit and traceability of origin documentation.", use: "E.g.: origin support ready for a U.S. request." },
         { title: "NAFTA / USMCA", body: "Compliance module for U.S. customs requirements.", use: "E.g.: history to answer a CF28." },
@@ -528,7 +528,7 @@ export const dictionaries = {
       ],
       stats: [
         { value: "180+", label: "companies trust BMS" },
-        { value: "50K", label: "import-export operations" },
+        { value: "Thousands", label: "import-export operations" },
         { value: "1–150", label: "users per license" },
       ],
       modes: { label: "Available on", items: ["Desktop", "Web", "App"] },
@@ -552,7 +552,7 @@ export const dictionaries = {
         { q: "Does it integrate with my ERP?", a: "Yes. BMS connects with MRP and ERP systems through automatic transactions to avoid double entry between your system and the customs operation." },
         { q: "Does it cover U.S. customs (USMCA) requirements?", a: "Yes. It includes a NAFTA/USMCA module with history for U.S. customs requirements, with support for the CF28." },
         { q: "Does it manage origin certificates?", a: "Yes. It includes modules for the management, audit and traceability of origin certificates and documentation." },
-        { q: "What reports does it include?", a: "Over 100 operational reports, plus Crystal Report to build custom analysis in real time." },
+        { q: "What reports does it include?", a: "An extensive library of operational reports, plus Crystal Report to build custom analysis in real time." },
         { q: "How many users does it support and how is it licensed?", a: "On-demand licensing from 1 to 150 users, with access to the modules according to the solution you contract." },
         { q: "Does it handle multiple databases or Tax IDs?", a: "Yes. BMS is multi-database per Tax ID, for groups operating under more than one legal entity." },
         { q: "How secure and auditable is the information?", a: "The operation is centralized in a single source with a documentary trail of every movement, available for internal or authority audit." },
