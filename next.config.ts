@@ -24,6 +24,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // www no es el dominio canónico: todo el tráfico se consolida en el apex.
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.bgconsultingroup.com" }],
+        destination: "https://bgconsultingroup.com/:path*",
+        permanent: true,
+      },
       // El panel vive en /admin (no bajo el prefijo de idioma). Alias por memoria muscular.
       { source: "/crm", destination: "/admin/login", permanent: false },
       { source: "/crm/:path*", destination: "/admin/login", permanent: false },
