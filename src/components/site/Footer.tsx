@@ -19,7 +19,7 @@ export function Footer({ lang, dict }: { lang: Locale; dict: Dictionary }) {
       <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8">
         <div className="grid gap-14 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div className="max-w-sm">
-            <Logo variant="bg" tone="light" size="md" className="h-14 w-auto sm:h-[76px]" />
+            <Logo variant="bg" tone="light" size="xl" className="h-14 w-auto sm:h-[76px]" />
             <p className="mt-7 text-[15px] leading-relaxed text-bone/90">{dict.footer.tagline}</p>
             <a
               href={`mailto:${dict.contact.email}`}

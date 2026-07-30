@@ -131,7 +131,7 @@ export function Nav({
           <Logo
             variant="bg"
             tone="light"
-            size="sm"
+            size="xl"
             className={`w-auto transition-[height] duration-300 motion-reduce:transition-none ${
               scrolled ? "h-9 sm:h-[50px]" : "h-12 sm:h-[72px]"
             }`}

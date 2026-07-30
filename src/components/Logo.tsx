@@ -2,12 +2,13 @@ import Image from "next/image";
 
 type LogoVariant = "bg" | "bms";
 type LogoTone = "light" | "dark";
-type LogoSize = "sm" | "md" | "lg";
+type LogoSize = "sm" | "md" | "lg" | "xl";
 
 const heights: Record<LogoSize, number> = {
   sm: 24,
   md: 38,
   lg: 54,
+  xl: 160,
 };
 
 const ratios: Record<LogoVariant, number> = {

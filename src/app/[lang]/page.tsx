@@ -120,7 +120,7 @@ export default async function HomePage({
                     <Logo
                       variant={i === 0 ? "bg" : "bms"}
                       tone="dark"
-                      size="sm"
+                      size={i === 0 ? "lg" : "sm"}
                       className={i === 0 ? "h-12 w-auto" : undefined}
                     />
                     <span aria-hidden className="font-mono text-[11px] tabular-nums text-graphite/60">
