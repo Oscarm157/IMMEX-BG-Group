@@ -16,7 +16,13 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const title = lang === "es" ? "Aviso de privacidad" : "Privacy notice";
-  return { title, alternates: { canonical: `/${lang}/privacy` } };
+  return {
+    title,
+    alternates: {
+      canonical: `/${lang}/privacy`,
+      languages: { es: "/es/privacy", en: "/en/privacy" },
+    },
+  };
 }
 
 const ACTUALIZADO = { es: "10 de julio de 2026", en: "July 10, 2026" };

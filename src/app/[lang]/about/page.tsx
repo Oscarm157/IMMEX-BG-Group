@@ -9,6 +9,11 @@ import { SectionHeading } from "@/components/site/SectionHeading";
 import { MediaFrame } from "@/components/site/MediaFrame";
 import { ContactCta } from "@/components/site/ContactCta";
 
+const DESCRIPTIONS: Record<"es" | "en", string> = {
+  es: "Firma de consultoría legal en comercio exterior con más de 20 años de experiencia fiscal, aduanera y en tecnología, entre Tijuana y San Diego.",
+  en: "Foreign trade legal consulting firm with over 20 years of tax, customs and technology experience, based between Tijuana and San Diego.",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -17,7 +22,16 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const d = getDictionary(lang);
-  return { title: d.about.title };
+  const description = DESCRIPTIONS[lang];
+  return {
+    title: d.about.title,
+    description,
+    alternates: {
+      canonical: `/${lang}/about`,
+      languages: { es: "/es/about", en: "/en/about" },
+    },
+    openGraph: { title: d.about.title, description, url: `/${lang}/about` },
+  };
 }
 
 export default async function AboutPage({

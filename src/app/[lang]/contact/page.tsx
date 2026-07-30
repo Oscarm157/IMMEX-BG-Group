@@ -4,6 +4,11 @@ import { getDictionary, isLocale } from "@/content/dictionaries";
 import { Reveal } from "@/components/site/Reveal";
 import { ContactForm } from "@/components/site/ContactForm";
 
+const DESCRIPTIONS: Record<"es" | "en", string> = {
+  es: "Contacta a BG Consulting Group en Tijuana o San Diego. Asesoría legal, aduanera y fiscal en comercio exterior, respuesta en menos de un día hábil.",
+  en: "Contact BG Consulting Group in Tijuana or San Diego. Legal, customs and tax advisory for foreign trade, we respond within one business day.",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -12,7 +17,16 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const d = getDictionary(lang);
-  return { title: d.contact.title };
+  const description = DESCRIPTIONS[lang];
+  return {
+    title: d.contact.title,
+    description,
+    alternates: {
+      canonical: `/${lang}/contact`,
+      languages: { es: "/es/contact", en: "/en/contact" },
+    },
+    openGraph: { title: d.contact.title, description, url: `/${lang}/contact` },
+  };
 }
 
 export default async function ContactPage({

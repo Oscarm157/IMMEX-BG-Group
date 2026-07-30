@@ -9,6 +9,11 @@ import { GovernanceFramework } from "@/components/site/GovernanceFramework";
 import { Faq } from "@/components/site/Faq";
 import { ContactCta } from "@/components/site/ContactCta";
 
+const DESCRIPTIONS: Record<"es" | "en", string> = {
+  es: "BMS Custom System, el ERP aduanero con el que opera BG y más de 180 empresas: control de inventarios IMMEX, Anexo 24/30, conectividad EDI y reportería.",
+  en: "BMS Custom System, the customs ERP that BG and more than 180 companies run on: IMMEX inventory control, Annex 24/30, EDI connectivity and reporting.",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -17,7 +22,16 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const d = getDictionary(lang);
-  return { title: d.software.title };
+  const description = DESCRIPTIONS[lang];
+  return {
+    title: d.software.title,
+    description,
+    alternates: {
+      canonical: `/${lang}/software`,
+      languages: { es: "/es/software", en: "/en/software" },
+    },
+    openGraph: { title: d.software.title, description, url: `/${lang}/software` },
+  };
 }
 
 export default async function SoftwarePage({

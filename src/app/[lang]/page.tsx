@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getDictionary, isLocale } from "@/content/dictionaries";
 import { SERVICE_SLUGS } from "@/content/service-slugs";
 import { siteConfig } from "@/lib/site-config";
@@ -11,6 +12,35 @@ import { CustomsFlow } from "@/components/site/CustomsFlow";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { OperationViz } from "@/components/site/OperationViz";
 import { Logo } from "@/components/Logo";
+
+const TITLES: Record<"es" | "en", string> = {
+  es: "Comercio Exterior, Aduanas y Cumplimiento en Tijuana y San Diego",
+  en: "Foreign Trade, Customs and Compliance in Tijuana and San Diego",
+};
+
+const DESCRIPTIONS: Record<"es" | "en", string> = {
+  es: "Firma de comercio exterior, aduanas, legal, compliance y fiscal entre Tijuana y San Diego. Más de 20 años de experiencia.",
+  en: "Foreign trade, customs, legal, compliance and tax firm based in Tijuana and San Diego. Over 20 years of experience.",
+};
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLocale(lang)) return {};
+  const description = DESCRIPTIONS[lang];
+  return {
+    title: TITLES[lang],
+    description,
+    alternates: {
+      canonical: `/${lang}`,
+      languages: { es: "/es", en: "/en" },
+    },
+    openGraph: { title: TITLES[lang], description, url: `/${lang}` },
+  };
+}
 
 export default async function HomePage({
   params,

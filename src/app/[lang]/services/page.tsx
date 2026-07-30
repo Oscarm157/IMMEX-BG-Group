@@ -8,6 +8,11 @@ import { Reveal } from "@/components/site/Reveal";
 import { SectionHeading } from "@/components/site/SectionHeading";
 import { ContactCta } from "@/components/site/ContactCta";
 
+const DESCRIPTIONS: Record<"es" | "en", string> = {
+  es: "Ocho áreas de práctica en comercio exterior: legal aduanero, compliance, valoración, clasificación, IMMEX, fiscal y software, en Tijuana y San Diego.",
+  en: "Eight practice areas in foreign trade: customs law, compliance, valuation, classification, IMMEX, tax and software, based in Tijuana and San Diego.",
+};
+
 export async function generateMetadata({
   params,
 }: {
@@ -16,7 +21,16 @@ export async function generateMetadata({
   const { lang } = await params;
   if (!isLocale(lang)) return {};
   const d = getDictionary(lang);
-  return { title: d.services.title };
+  const description = DESCRIPTIONS[lang];
+  return {
+    title: d.services.title,
+    description,
+    alternates: {
+      canonical: `/${lang}/services`,
+      languages: { es: "/es/services", en: "/en/services" },
+    },
+    openGraph: { title: d.services.title, description, url: `/${lang}/services` },
+  };
 }
 
 export default async function ServicesPage({
