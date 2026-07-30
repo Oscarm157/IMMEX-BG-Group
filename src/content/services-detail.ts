@@ -2823,7 +2823,7 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       bandCaption: "Servicios fiscales para la operación aduanera",
     },
     {
-      "overview": "México mantiene una de las redes de tratados comerciales más amplias del mundo, y cada acuerdo abre acceso preferencial siempre que la mercancía cumpla las reglas de origen y la documentación resista una verificación. El problema rara vez es la tarifa preferencial en sí, sino acreditarla: registros incompletos, certificados mal sustentados y proveedores que no documentan su aporte regional. BG Consulting Group estructura la determinación y certificación de origen para que el beneficio arancelario se aplique con respaldo y se sostenga frente a la autoridad.",
+      "overview": "México tiene una amplia red de tratados comerciales, y cada acuerdo abre acceso preferencial siempre que la mercancía cumpla las reglas de origen y la documentación resista una verificación. El problema rara vez es la tarifa preferencial en sí, sino acreditarla: registros incompletos, certificados mal sustentados y proveedores que no documentan su aporte regional. BG Consulting Group estructura la determinación y certificación de origen para que el beneficio arancelario se aplique con respaldo y se sostenga frente a la autoridad.",
       "pains": [
         {
           "title": "El cliente exige certificado y el origen no está sustentado",
@@ -3431,7 +3431,7 @@ export const SERVICE_DETAIL: Record<"es" | "en", readonly ServiceDetail[]> = {
       bandCaption: "Fiscal services for customs operations",
     },
     {
-      "overview": "Mexico holds one of the widest networks of trade agreements in the world, and each one opens preferential access as long as the goods meet the rules of origin and the paperwork survives a verification. The hard part is rarely the preferential rate itself, it is proving entitlement to it: incomplete records, weakly supported certificates, and suppliers who never document their regional content. BG Consulting Group structures origin determination and certification so the tariff benefit is applied with backing and holds up before the authority.",
+      "overview": "Mexico has a broad network of trade agreements, and each one opens preferential access as long as the goods meet the rules of origin and the paperwork survives a verification. The hard part is rarely the preferential rate itself, it is proving entitlement to it: incomplete records, weakly supported certificates, and suppliers who never document their regional content. BG Consulting Group structures origin determination and certification so the tariff benefit is applied with backing and holds up before the authority.",
       "pains": [
         {
           "title": "The buyer demands a certificate and origin is not supported",

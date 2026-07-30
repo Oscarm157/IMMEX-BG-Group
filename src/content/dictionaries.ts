@@ -142,7 +142,7 @@ export const dictionaries = {
           points: ["Recursos administrativos", "Juicio de amparo", "Tribunal Federal de Justicia Administrativa", "Acuerdos conclusivos"],
         },
         {
-          name: "Compliance y aseguramiento",
+          name: "Cumplimiento y aseguramiento",
           summary: "Estructuras para identificar y controlar el riesgo antes de que llegue la revisión.",
           points: ["Evaluación de riesgos de comercio exterior", "NAFTA 303", "Auditorías preventivas", "Análisis de control interno"],
         },
@@ -297,7 +297,7 @@ export const dictionaries = {
       processTitle: "Qué ocurre cuando nos contactas",
       process: [
         { step: "01", title: "Recibimos tu mensaje", desc: "Tu consulta llega directamente al equipo, con el contexto de tu operación." },
-        { step: "02", title: "Un abogado analiza tu caso", desc: "Identificamos el riesgo y las medidas que conviene atender." },
+        { step: "02", title: "El equipo revisa tu caso", desc: "Identificamos el riesgo y las medidas que conviene atender." },
         { step: "03", title: "Te respondemos", desc: "En menos de un día hábil, en español o inglés." },
       ],
     },
@@ -601,7 +601,7 @@ export const dictionaries = {
       processTitle: "What happens when you contact us",
       process: [
         { step: "01", title: "We receive your message", desc: "Your inquiry reaches the team directly, with the context of your operation." },
-        { step: "02", title: "A lawyer reviews your case", desc: "We identify the risk and the steps worth addressing." },
+        { step: "02", title: "The team reviews your case", desc: "We identify the risk and the steps worth addressing." },
         { step: "03", title: "We reply", desc: "Within one business day, in English or Spanish." },
       ],
     },
