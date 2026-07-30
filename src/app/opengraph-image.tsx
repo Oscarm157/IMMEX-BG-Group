@@ -36,7 +36,7 @@ export default function OpengraphImage() {
             y cumplimiento
           </div>
           <div style={{ color: "#ccd2dc", fontSize: 30, marginTop: 28, maxWidth: 900 }}>
-            Más de 20 años entre Tijuana y San Diego. Asesoría legal, fiscal y de cumplimiento IMMEX.
+            Más de 20 años de trayectoria, con oficinas en Tijuana, Monterrey y San Diego. Asesoría legal, fiscal y de cumplimiento IMMEX a nivel nacional.
           </div>
         </div>
 

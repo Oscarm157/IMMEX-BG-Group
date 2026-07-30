@@ -130,7 +130,7 @@ export function CustomsFlow({
   }
 
   return (
-    <section ref={wrap} className="relative" style={{ height: `${stages.length * 100}vh` }}>
+    <section ref={wrap} className="relative" style={{ height: `${stages.length * 60}vh` }}>
       <div className="sticky top-0 flex min-h-[100dvh] flex-col justify-center pb-10 pt-[88px] sm:pt-[112px]">
         <div className="mx-auto w-full max-w-[1280px] px-5 sm:px-8">
           <Header eyebrow={eyebrow} title={title} lead={lead} />
